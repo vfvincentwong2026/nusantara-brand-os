@@ -1,0 +1,3 @@
+id,name,category,barcode,internal_code,halal_certified,bpom_no,shelf_life_days,fresh_ratio
+SKU001,辣味薯片,零食,1234567890123,FOOD-SNACK-001,true,BPOM123456,180,0.1
+SKU002,巧克力饼干,零食,1234567890124,FOOD-SNACK-002,true,BPOM123457,365,0.05
