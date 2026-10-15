@@ -1,0 +1,13 @@
+{
+  "id": "store-jkt-2000",
+  "name": "Jakarta Supermarket 2000",
+  "size_sqm": 2000,
+  "island_region": "java",
+  "mudik_offset": 0,
+  "qris_enabled": true,
+  "fresh_ratio": 0.28,
+  "shelves": [
+    { "id": "s1", "zone": "food", "layer_count": 6, "facing_width_m": 0.4, "heat_value": 0.9 },
+    { "id": "s2", "zone": "non-food", "layer_count": 5, "facing_width_m": 0.4, "heat_value": 0.6 }
+  ]
+}
