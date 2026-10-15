@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SKU",
+  "type": "object",
+  "required": ["id", "name", "category", "barcode", "internal_code"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "category": { "type": "string" },
+    "barcode": { "type": "string" },
+    "internal_code": { "type": "string" },
+    "halal_certified": { "type": "boolean" },
+    "bpom_no": { "type": "string" },
+    "shelf_life_days": { "type": "number" },
+    "fresh_ratio": { "type": "number" }
+  }
+}
