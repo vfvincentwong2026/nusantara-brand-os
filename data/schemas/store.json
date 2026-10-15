@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Store",
+  "type": "object",
+  "required": ["id", "name", "size_sqm", "island_region"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "size_sqm": { "type": "number" },
+    "island_region": { "type": "string", "enum": ["java", "sumatra", "kalimantan", "sulawesi", "papua"] },
+    "mudik_offset": { "type": "number" },
+    "qris_enabled": { "type": "boolean" },
+    "fresh_ratio": { "type": "number" }
+  }
+}
