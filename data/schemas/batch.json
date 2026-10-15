@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Batch",
+  "type": "object",
+  "required": ["id", "sku_id", "store_id", "qty", "receive_date", "expiry_date"],
+  "properties": {
+    "id": { "type": "string" },
+    "sku_id": { "type": "string" },
+    "store_id": { "type": "string" },
+    "qty": { "type": "number" },
+    "receive_date": { "type": "string", "format": "date" },
+    "expiry_date": { "type": "string", "format": "date" },
+    "location": { "type": "string" }
+  }
+}
