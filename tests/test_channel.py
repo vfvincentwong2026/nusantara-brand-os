@@ -45,3 +45,25 @@ def test_build_map_from_seeded_db(tmp_path):
     assert "Jakarta" in m["by_city"] and "Bandung" in m["by_city"]
     warung_pts = [p for p in m["points"] if p["type"] == "warung"]
     assert all("competitors_within" in p for p in warung_pts)
+
+
+def test_synth_dims_deterministic_and_clamped():
+    from nbo.channel import synth_dims, DIM_OFFSETS
+    a = synth_dims("W-JKT-001", 88)
+    b = synth_dims("W-JKT-001", 88)
+    assert a == b  # 同 id 同分 → 稳定
+    assert set(a) == set(DIM_OFFSETS)
+    assert all(0 <= v <= 100 for v in a.values())
+    # clamp 边界：极低分不出负数，极高分不出 >100
+    assert all(0 <= v <= 100 for v in synth_dims("X", 0).values())
+    assert all(0 <= v <= 100 for v in synth_dims("X", 100).values())
+
+
+def test_points_and_gaps_carry_dims(tmp_path):
+    from nbo.channel import build_map
+    db = tmp_path / "t.db"
+    seed(db)
+    m = build_map(db, radius_m=500)
+    warung_pts = [p for p in m["points"] if p["type"] == "warung"]
+    assert all("dims" in p and len(p["dims"]) == 7 for p in warung_pts)
+    assert all("dims" in g for g in m["gaps"])

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-19T01:42:00",
+  "generated_at": "2026-10-19T02:00:38",
   "params": {
     "radius_m": 500
   },
@@ -35,7 +35,16 @@
       "sales_step": 4,
       "lat": -6.1437,
       "lon": 106.8135,
-      "city": "Jakarta"
+      "city": "Jakarta",
+      "dims": {
+        "location": 91,
+        "activity": 94,
+        "competition": 85,
+        "cooperation": 95,
+        "digital": 100,
+        "owner": 98,
+        "region": 77
+      }
     },
     {
       "id": "W01",
@@ -45,7 +54,16 @@
       "sales_step": 3,
       "lat": -6.2088,
       "lon": 106.8456,
-      "city": "Jakarta"
+      "city": "Jakarta",
+      "dims": {
+        "location": 84,
+        "activity": 90,
+        "competition": 82,
+        "cooperation": 92,
+        "digital": 100,
+        "owner": 95,
+        "region": 74
+      }
     },
     {
       "id": "W08",
@@ -55,7 +73,16 @@
       "sales_step": 2,
       "lat": -6.2608,
       "lon": 106.8105,
-      "city": "Jakarta"
+      "city": "Jakarta",
+      "dims": {
+        "location": 88,
+        "activity": 88,
+        "competition": 79,
+        "cooperation": 89,
+        "digital": 100,
+        "owner": 92,
+        "region": 71
+      }
     },
     {
       "id": "W02",
@@ -65,7 +92,16 @@
       "sales_step": 2,
       "lat": -6.2146,
       "lon": 106.8451,
-      "city": "Jakarta"
+      "city": "Jakarta",
+      "dims": {
+        "location": 78,
+        "activity": 83,
+        "competition": 75,
+        "cooperation": 85,
+        "digital": 96,
+        "owner": 88,
+        "region": 67
+      }
     },
     {
       "id": "W11",
@@ -75,7 +111,16 @@
       "sales_step": 2,
       "lat": -6.9175,
       "lon": 107.6191,
-      "city": "Bandung"
+      "city": "Bandung",
+      "dims": {
+        "location": 80,
+        "activity": 77,
+        "competition": 75,
+        "cooperation": 83,
+        "digital": 94,
+        "owner": 86,
+        "region": 65
+      }
     },
     {
       "id": "W03",
@@ -85,7 +130,16 @@
       "sales_step": 1,
       "lat": -6.1986,
       "lon": 106.8404,
-      "city": "Jakarta"
+      "city": "Jakarta",
+      "dims": {
+        "location": 73,
+        "activity": 77,
+        "competition": 69,
+        "cooperation": 79,
+        "digital": 90,
+        "owner": 82,
+        "region": 61
+      }
     },
     {
       "id": "W10",
@@ -95,7 +149,16 @@
       "sales_step": 1,
       "lat": -6.2294,
       "lon": 106.8542,
-      "city": "Jakarta"
+      "city": "Jakarta",
+      "dims": {
+        "location": 69,
+        "activity": 66,
+        "competition": 65,
+        "cooperation": 73,
+        "digital": 84,
+        "owner": 76,
+        "region": 55
+      }
     },
     {
       "id": "W06",
@@ -105,7 +168,16 @@
       "sales_step": 0,
       "lat": -6.2356,
       "lon": 106.8025,
-      "city": "Jakarta"
+      "city": "Jakarta",
+      "dims": {
+        "location": 65,
+        "activity": 67,
+        "competition": 58,
+        "cooperation": 68,
+        "digital": 79,
+        "owner": 71,
+        "region": 50
+      }
     }
   ],
   "points": [
@@ -122,7 +194,16 @@
       "sales_step": 3,
       "source": "manual",
       "competitors_within": 0,
-      "grade_label": "黄金"
+      "grade_label": "黄金",
+      "dims": {
+        "location": 84,
+        "activity": 90,
+        "competition": 82,
+        "cooperation": 92,
+        "digital": 100,
+        "owner": 95,
+        "region": 74
+      }
     },
     {
       "id": "W02",
@@ -137,7 +218,16 @@
       "sales_step": 2,
       "source": "manual",
       "competitors_within": 0,
-      "grade_label": "白银"
+      "grade_label": "白银",
+      "dims": {
+        "location": 78,
+        "activity": 83,
+        "competition": 75,
+        "cooperation": 85,
+        "digital": 96,
+        "owner": 88,
+        "region": 67
+      }
     },
     {
       "id": "W03",
@@ -152,7 +242,16 @@
       "sales_step": 1,
       "source": "google_maps",
       "competitors_within": 0,
-      "grade_label": "白银"
+      "grade_label": "白银",
+      "dims": {
+        "location": 73,
+        "activity": 77,
+        "competition": 69,
+        "cooperation": 79,
+        "digital": 90,
+        "owner": 82,
+        "region": 61
+      }
     },
     {
       "id": "W04",
@@ -167,7 +266,16 @@
       "sales_step": 1,
       "source": "google_maps",
       "competitors_within": 0,
-      "grade_label": "潜力"
+      "grade_label": "潜力",
+      "dims": {
+        "location": 57,
+        "activity": 61,
+        "competition": 52,
+        "cooperation": 62,
+        "digital": 73,
+        "owner": 65,
+        "region": 44
+      }
     },
     {
       "id": "W05",
@@ -182,7 +290,16 @@
       "sales_step": 4,
       "source": "manual",
       "competitors_within": 0,
-      "grade_label": "黄金"
+      "grade_label": "黄金",
+      "dims": {
+        "location": 91,
+        "activity": 94,
+        "competition": 85,
+        "cooperation": 95,
+        "digital": 100,
+        "owner": 98,
+        "region": 77
+      }
     },
     {
       "id": "W06",
@@ -197,7 +314,16 @@
       "sales_step": 0,
       "source": "google_maps",
       "competitors_within": 0,
-      "grade_label": "白银"
+      "grade_label": "白银",
+      "dims": {
+        "location": 65,
+        "activity": 67,
+        "competition": 58,
+        "cooperation": 68,
+        "digital": 79,
+        "owner": 71,
+        "region": 50
+      }
     },
     {
       "id": "W07",
@@ -212,7 +338,16 @@
       "sales_step": 0,
       "source": "google_maps",
       "competitors_within": 1,
-      "grade_label": "潜力"
+      "grade_label": "潜力",
+      "dims": {
+        "location": 50,
+        "activity": 51,
+        "competition": 42,
+        "cooperation": 52,
+        "digital": 63,
+        "owner": 55,
+        "region": 34
+      }
     },
     {
       "id": "W08",
@@ -227,7 +362,16 @@
       "sales_step": 2,
       "source": "manual",
       "competitors_within": 0,
-      "grade_label": "黄金"
+      "grade_label": "黄金",
+      "dims": {
+        "location": 88,
+        "activity": 88,
+        "competition": 79,
+        "cooperation": 89,
+        "digital": 100,
+        "owner": 92,
+        "region": 71
+      }
     },
     {
       "id": "W09",
@@ -242,7 +386,16 @@
       "sales_step": 0,
       "source": "google_maps",
       "competitors_within": 1,
-      "grade_label": "普通"
+      "grade_label": "普通",
+      "dims": {
+        "location": 45,
+        "activity": 44,
+        "competition": 35,
+        "cooperation": 45,
+        "digital": 56,
+        "owner": 48,
+        "region": 27
+      }
     },
     {
       "id": "W10",
@@ -257,7 +410,16 @@
       "sales_step": 1,
       "source": "google_maps",
       "competitors_within": 0,
-      "grade_label": "白银"
+      "grade_label": "白银",
+      "dims": {
+        "location": 69,
+        "activity": 66,
+        "competition": 65,
+        "cooperation": 73,
+        "digital": 84,
+        "owner": 76,
+        "region": 55
+      }
     },
     {
       "id": "W11",
@@ -272,7 +434,16 @@
       "sales_step": 2,
       "source": "manual",
       "competitors_within": 0,
-      "grade_label": "白银"
+      "grade_label": "白银",
+      "dims": {
+        "location": 80,
+        "activity": 77,
+        "competition": 75,
+        "cooperation": 83,
+        "digital": 94,
+        "owner": 86,
+        "region": 65
+      }
     },
     {
       "id": "W12",
@@ -287,7 +458,16 @@
       "sales_step": 0,
       "source": "google_maps",
       "competitors_within": 0,
-      "grade_label": "潜力"
+      "grade_label": "潜力",
+      "dims": {
+        "location": 63,
+        "activity": 59,
+        "competition": 57,
+        "cooperation": 65,
+        "digital": 76,
+        "owner": 68,
+        "region": 47
+      }
     },
     {
       "id": "W13",
@@ -302,7 +482,16 @@
       "sales_step": 3,
       "source": "manual",
       "competitors_within": 2,
-      "grade_label": "黄金"
+      "grade_label": "黄金",
+      "dims": {
+        "location": 96,
+        "activity": 91,
+        "competition": 89,
+        "cooperation": 97,
+        "digital": 100,
+        "owner": 100,
+        "region": 79
+      }
     },
     {
       "id": "W14",
@@ -317,7 +506,16 @@
       "sales_step": 1,
       "source": "google_maps",
       "competitors_within": 0,
-      "grade_label": "潜力"
+      "grade_label": "潜力",
+      "dims": {
+        "location": 49,
+        "activity": 43,
+        "competition": 41,
+        "cooperation": 49,
+        "digital": 60,
+        "owner": 52,
+        "region": 31
+      }
     },
     {
       "id": "C01",

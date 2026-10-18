@@ -249,7 +249,7 @@ function buildStore(data) {
     const zone = ZONE[s.zone] || { color: 0x888888 };
     const bodyMat = new THREE.MeshStandardMaterial({
       color: heatOn ? heatColor(s.heat_value) : zone.color,
-      roughness: 0.75, metalness: 0.15,
+      roughness: 0.7, metalness: 0.12,
     });
     const body = new THREE.Mesh(shelfGeo, bodyMat);
     body.scale.set(s.w * 0.94, hgt, s.h * 0.88);
@@ -258,6 +258,14 @@ function buildStore(data) {
     body.userData = s;
     G.add(body);
     shelfMeshes.push(body);
+
+    // 层板线条（白色细条，强化"货架"识别度与层数感；纯装饰不入 raycast/着色列表）
+    for (let l = 1; l < s.layer_count; l++) {
+      const slab = new THREE.Mesh(shelfGeo, new THREE.MeshStandardMaterial({ color: 0xc9d1d9, roughness: 0.55 }));
+      slab.scale.set(s.w * 0.96, 0.02, s.h * 0.92);
+      slab.position.set(s.x + s.w / 2, l * LAYER_H, s.y);
+      G.add(slab);
+    }
 
     const cap = new THREE.Mesh(shelfGeo, new THREE.MeshStandardMaterial({ color: 0xd8dee6, roughness: 0.5, metalness: 0.35 }));
     cap.scale.set(s.w, 0.05, s.h);
@@ -288,15 +296,25 @@ async function load(store) {
     const d = document.createElement('div'); d.id = 'loading'; d.textContent = '切换门店 …';
     document.body.appendChild(d);
   } else { l.style.opacity = 1; }
-  const [pl, fl, op] = await Promise.all([
-    fetch(`../twin/data/planogram-${store}.json`).then(r => r.json()),
-    fetch(`../twin/data/flow-${store}.json`).then(r => r.json()),
-    fetch(`../twin/data/optimize-${store}.json`).then(r => r.json()),
-  ]);
-  plano = pl; flow = fl; opt = op;
+  // 主数据（planogram）失败才阻断；flow/optimize 失败仅降级对应功能
+  let pl;
+  try {
+    pl = await (await fetch(`../twin/data/planogram-${store}.json`)).json();
+  } catch (e) {
+    const el = document.getElementById('loading');
+    el.textContent = `布局数据加载失败（${e.message || e}）— 请确认已运行 python -m nbo.twin`;
+    el.style.color = '#f85149';
+    return;
+  }
+  plano = pl;
   buildStore(plano);
-  buildFlow();
-  if (optOn) applyOptColors();
+  const [fl, op] = await Promise.all([
+    fetch(`../twin/data/flow-${store}.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch(`../twin/data/optimize-${store}.json`).then(r => r.ok ? r.json() : null).catch(() => null),
+  ]);
+  flow = fl; opt = op;
+  if (flow) buildFlow();
+  if (optOn && opt) applyOptColors();
 }
 
 /* ---------- 客流：地面热力叠加 + 寻路顾客点 ---------- */

@@ -16,6 +16,29 @@ from pathlib import Path
 COMPETITOR_TYPES = ("alfamart", "indomaret")
 GRADE_LABEL = {"gold": "黄金", "silver": "白银", "potential": "潜力", "normal": "普通"}
 
+# 7 维评分维度（对齐 WarungScout schema），演示种子无真实子分 → 按 final_score 确定性合成
+DIM_OFFSETS = {"location": 6, "activity": 10, "competition": -4, "cooperation": 8,
+               "digital": 12, "owner": 5, "region": -2}
+DIM_LABEL = {"location": "位置", "activity": "活跃度", "competition": "竞争",
+             "cooperation": "合作", "digital": "数字化", "owner": "店主", "region": "区域"}
+
+
+def _seed_int(s: str) -> int:
+    h = 0
+    for ch in s:
+        h = (h * 131 + ord(ch)) % 1_000_003
+    return h
+
+
+def synth_dims(warung_id: str, final_score: float) -> dict:
+    """同一 warung 每次输出相同；各维度 = final_score + 固定偏移 ± 确定性抖动，clamp 0-100。"""
+    seed = _seed_int(warung_id)
+    dims = {}
+    for i, (name, off) in enumerate(DIM_OFFSETS.items()):
+        jitter = ((seed >> (i * 3)) % 21) - 10  # -10..+10
+        dims[name] = max(0, min(100, int(round(final_score + off + jitter))))
+    return dims
+
 
 def haversine_m(lat1, lon1, lat2, lon2) -> float:
     R = 6371000.0
@@ -45,7 +68,8 @@ def coverage_gaps(points: list[dict], density: dict[str, int], min_grade: str = 
         keep = {"gold", "silver"}
     gaps = [{"id": p["id"], "name": p["name"], "grade": p["grade"],
              "final_score": p["final_score"], "sales_step": p["sales_step"],
-             "lat": p["lat"], "lon": p["lon"], "city": p["city"]}
+             "lat": p["lat"], "lon": p["lon"], "city": p["city"],
+             "dims": synth_dims(p["id"], p["final_score"])}
             for p in points
             if p["type"] == "warung" and p["grade"] in keep and density.get(p["id"], 0) == 0]
     return sorted(gaps, key=lambda g: (rank.get(g["grade"], 9), -g["final_score"]))
@@ -63,6 +87,7 @@ def build_map(db_path: str | Path, radius_m: float = 500) -> dict:
         if p["type"] == "warung":
             p["competitors_within"] = density.get(p["id"], 0)
             p["grade_label"] = GRADE_LABEL.get(p["grade"], p["grade"])
+            p["dims"] = synth_dims(p["id"], p["final_score"])
     warungs = [p for p in points if p["type"] == "warung"]
     gaps = coverage_gaps(points, density)
     by_city = {}

@@ -196,9 +196,9 @@ function drawShelf(s) {
     offsetX: (s.rotation ? s.w * SCALE / 2 : 0), offsetY: (s.rotation ? s.h * SCALE / 2 : 0) });
   const baseColor = heatOn ? HEAT_COLOR(s.heat_value) : ZONE_COLOR[s.zone];
   const wPx = s.w * SCALE, hPx = s.h * SCALE;
-  g.add(new Konva.Rect({ width: wPx, height: hPx, fill: baseColor, opacity: 0.28, cornerRadius: 1.5,
-    stroke: isSel ? '#e4022b' : 'rgba(230,237,243,.35)', strokeWidth: isSel ? 2.5 : 1,
-    dash: isSel ? [6, 3] : undefined, shadowColor: '#000', shadowBlur: 6, shadowOpacity: 0.35 }));
+  g.add(new Konva.Rect({ width: wPx, height: hPx, fill: baseColor, opacity: 0.55, cornerRadius: 1.5,
+    stroke: isSel ? '#e4022b' : 'rgba(230,237,243,.6)', strokeWidth: isSel ? 2.5 : 1.4,
+    dash: isSel ? [6, 3] : undefined, shadowColor: '#000', shadowBlur: 8, shadowOpacity: 0.45 }));
   g.add(new Konva.Rect({ width: wPx, height: 5, y: hPx - 5, fill: baseColor, opacity: 0.85, cornerRadius: [0, 0, 1.5, 1.5] })); // 正面
   if (isSel) {
     g.add(new Konva.Text({ text: `${s.id}`, fontSize: 11, fill: '#e4022b', y: -16, fontStyle: 'bold' }));
