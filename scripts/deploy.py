@@ -55,7 +55,7 @@ def main():
     shutil.copy(ROOT / "web/index.html", SITE / "index.html")
     shutil.copy(ROOT / "web/floorplan/index.html", SITE / "floorplan")
     shutil.copy(ROOT / "web/floorplan/konva.min.js", SITE / "floorplan")
-    for f in ("index.html", "three.module.min.js", "OrbitControls.js"):
+    for f in ("index.html", "three.module.min.js", "OrbitControls.js", "RoomEnvironment.js"):
         shutil.copy(ROOT / "web/three" / f, SITE / "three")
     print(f"assembled: {SITE}")
 

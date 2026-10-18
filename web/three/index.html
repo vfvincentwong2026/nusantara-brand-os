@@ -5,141 +5,305 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>3D 数字孪生 · Nusantara Brand OS</title>
 <style>
-  :root { --bg:#0d1117; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#8b949e; --accent:#e4022b; }
+  :root { --bg:#0b0e13; --panel:#161b22cc; --line:#2d333b; --text:#e6edf3; --dim:#8b949e; --accent:#e4022b; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); color:var(--text); font:13px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; margin:0; overflow:hidden; }
+  body { background:var(--bg); color:var(--text); font:13px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; overflow:hidden; }
   #canvas-wrap { position:fixed; inset:0; }
-  #hud { position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center;
-         padding:12px 18px; background:linear-gradient(rgba(13,17,23,.9),transparent); pointer-events:none; z-index:10; }
+  #hud { position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:flex-start;
+         padding:14px 18px; background:linear-gradient(rgba(11,14,19,.92),transparent); pointer-events:none; z-index:10; }
   #hud > * { pointer-events:auto; }
-  h1 { font-size:15px; }
-  #info { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--dim); min-width:200px; }
-  #info b { color:var(--text); }
-  select, button { background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; }
-  button.on { border-color:var(--accent); color:var(--accent); }
+  h1 { font-size:15px; text-shadow:0 1px 4px #000; }
+  .controls { margin-top:8px; display:flex; gap:8px; }
+  select, button { background:#161b22; color:var(--text); border:1px solid var(--line); border-radius:6px;
+                   padding:6px 12px; font-size:13px; cursor:pointer; backdrop-filter:blur(6px); transition:.15s; }
+  button:hover, select:hover { border-color:#e4022b; }
+  button.on { border-color:var(--accent); color:#ff5c73; box-shadow:0 0 10px #e4022b33; }
+  #info { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 16px;
+          font-size:12px; color:var(--dim); min-width:220px; backdrop-filter:blur(8px); box-shadow:0 4px 20px #0008; }
+  #info b { color:var(--text); font-size:13px; }
+  #loading { position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+             background:var(--bg); z-index:100; color:var(--dim); font-size:14px; letter-spacing:.15em; transition:opacity .6s; }
 </style>
 <script type="importmap">
 { "imports": { "three": "./three.module.min.js" } }
 </script>
 </head>
 <body>
+<div id="loading">正在构建数字孪生 …</div>
 <div id="canvas-wrap"></div>
 <div id="hud">
   <div>
     <h1>3D 数字孪生 · <span id="store-name">…</span></h1>
-    <div style="margin-top:8px; display:flex; gap:8px;">
+    <div class="controls">
       <select id="store-sel">
         <option value="500">500㎡ 社区店</option>
         <option value="2000" selected>2,000㎡ 标准店</option>
         <option value="5000">5,000㎡ 大卖场</option>
       </select>
       <button id="toggle-heat">热力图</button>
-      <button id="toggle-spin">自动旋转</button>
+      <button id="toggle-spin">自动漫游</button>
+      <button id="toggle-roof">屋顶</button>
     </div>
   </div>
-  <div id="info">点击货架查看详情 · 拖拽旋转 / 滚轮缩放</div>
+  <div id="info">点击货架查看详情 · 拖拽旋转 / 滚轮缩放 / 右键平移</div>
 </div>
 
 <script type="module">
 import * as THREE from 'three';
 import { OrbitControls } from './OrbitControls.js';
+import { RoomEnvironment } from './RoomEnvironment.js';
 
-const ZONE_COLOR = { fresh:0x2ea043, food:0xd29922, 'non-food':0x8b949e, apparel:0xbc8cff };
-const LAYER_H = 0.35;
-let scene, camera, renderer, controls, shelfMeshes = [], heatOn = false, plano = null;
+const ZONE = {
+  fresh:    { color: 0x2ea043, label: '生鲜' },
+  food:     { color: 0xd29922, label: '食品' },
+  'non-food': { color: 0x8b949e, label: '非食品' },
+  apparel:  { color: 0xbc8cff, label: '服装' },
+};
+const LAYER_H = 0.35, WALL_H = 3.4;
+let scene, camera, renderer, controls, clock;
+let shelfMeshes = [], roofGroup = null, lightStrips = [];
+let heatOn = false, plano = null, introT = 0;
 
-function heatColor(v) {
-  return new THREE.Color(0.97 - 0.78 * v, 0.32 + 0.39 * v, 0.29);
+/* ---------- 程序化纹理 ---------- */
+function floorTexture() {
+  const c = document.createElement('canvas'); c.width = c.height = 256;
+  const g = c.getContext('2d');
+  g.fillStyle = '#20242c'; g.fillRect(0, 0, 256, 256);
+  for (let i = 0; i < 4; i++) {                       // 木地板条
+    g.fillStyle = i % 2 ? '#232833' : '#1f232d';
+    g.fillRect(0, i * 64, 256, 62);
+    g.strokeStyle = 'rgba(0,0,0,.35)'; g.strokeRect(-1, i * 64, 258, 63);
+  }
+  for (let i = 0; i < 400; i++) {                     // 噪点
+    g.fillStyle = `rgba(255,255,255,${Math.random() * 0.025})`;
+    g.fillRect(Math.random() * 256, Math.random() * 256, 2, 2);
+  }
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  t.repeat.set(8, 8);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+function zoneLabelTexture(text, colorCss) {
+  const c = document.createElement('canvas'); c.width = 512; c.height = 128;
+  const g = c.getContext('2d');
+  g.font = '600 72px "Segoe UI","Microsoft YaHei",sans-serif';
+  g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = colorCss; g.globalAlpha = 0.9;
+  g.fillText(text, 256, 64);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+}
+function signTexture(text) {
+  const c = document.createElement('canvas'); c.width = 1024; c.height = 128;
+  const g = c.getContext('2d');
+  g.fillStyle = '#10131a'; g.fillRect(0, 0, 1024, 128);
+  g.font = '700 84px "Segoe UI","Microsoft YaHei",sans-serif';
+  g.textAlign = 'center'; g.textBaseline = 'middle';
+  g.fillStyle = '#e4022b';
+  g.shadowColor = '#e4022b'; g.shadowBlur = 26;
+  g.fillText(text, 512, 66);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
 }
 
+/* ---------- 场景 ---------- */
 function init() {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0d1117);
-  camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 1000);
+  scene.background = new THREE.Color(0x0b0e13);
+  scene.fog = new THREE.Fog(0x0b0e13, 120, 420);
+  clock = new THREE.Clock();
+
+  camera = new THREE.PerspectiveCamera(52, innerWidth / innerHeight, 0.1, 800);
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(innerWidth, innerHeight);
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
   document.getElementById('canvas-wrap').appendChild(renderer.domElement);
+
+  // 环境反射（金属/塑料质感来源）
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
   controls = new OrbitControls(camera, renderer.domElement);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-  const sun = new THREE.DirectionalLight(0xffffff, 1.2);
-  sun.position.set(30, 50, 20);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.06;
+  controls.maxPolarAngle = Math.PI * 0.495;
+
+  // 灯光：半球底光 + 主阳光（投影）+ 入口补光
+  scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x30281e, 0.5));
+  const sun = new THREE.DirectionalLight(0xfff2e0, 2.2);
+  sun.position.set(40, 60, 25);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.bias = -0.0004;
   scene.add(sun);
-  scene.add(new THREE.GridHelper(200, 40, 0x2d333b, 0x1c2128));
-  animate();
+  scene.sun = sun;
+  const doorLight = new THREE.PointLight(0x9ecbff, 30, 40);
+  scene.add(doorLight);
+  scene.doorLight = doorLight;
+
+  scene.add(new THREE.GridHelper(300, 60, 0x1c2128, 0x14181e));
+
+  renderer.domElement.addEventListener('click', onClick);
   window.addEventListener('resize', () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
   });
-  renderer.domElement.addEventListener('click', onClick);
+  animate();
 }
 
-function animate() {
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
+function heatColor(v) {  // 冷蓝 -> 火红
+  return new THREE.Color().setHSL(0.62 - 0.62 * v, 0.85, 0.5);
 }
 
-async function load(store) {
-  plano = await (await fetch(`../twin/data/planogram-${store}.json`)).json();
+function buildStore(data) {
+  // 清场
+  if (scene.storeGroup) scene.remove(scene.storeGroup);
+  shelfMeshes = []; lightStrips = [];
+  const G = scene.storeGroup = new THREE.Group();
+  scene.add(G);
+
+  const W = data.footprint.w, H = data.footprint.h;
   document.getElementById('store-name').textContent =
-    `${plano.store_name}（${plano.footprint.w}×${plano.footprint.h}m）`;
-  // 清旧货架
-  shelfMeshes.forEach(m => scene.remove(m));
-  shelfMeshes = [];
-  const W = plano.footprint.w, H = plano.footprint.h;
+    `${data.store_name}（${W} × ${H} m）`;
 
   // 地板
   const floor = new THREE.Mesh(
-    new THREE.BoxGeometry(W, 0.1, H),
-    new THREE.MeshStandardMaterial({ color: 0x161b22 }));
-  floor.position.set(W / 2, -0.05, H / 2);
-  scene.add(floor);
-  // 四面墙（入口南边留口）
-  const wallMat = new THREE.MeshStandardMaterial({ color: 0x30363d });
-  const mkWall = (w, h, d, x, y, z) => {
-    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), wallMat);
-    m.position.set(x, y, z);
-    scene.add(m);
-  };
-  const WH = 3.2;
-  mkWall(W, WH, 0.15, W / 2, WH / 2, 0.075);
-  mkWall(W, WH, 0.15, W / 2, WH / 2, H - 0.075);
-  mkWall(0.15, WH, H, 0.075, WH / 2, H / 2);
-  mkWall(0.15, WH, H, W - 0.075, WH / 2, H / 2);
+    new THREE.BoxGeometry(W, 0.12, H),
+    new THREE.MeshStandardMaterial({ map: floorTexture(), roughness: 0.9, metalness: 0.05 }));
+  floor.position.set(W / 2, -0.06, H / 2);
+  floor.receiveShadow = true;
+  G.add(floor);
 
-  // 货架（InstancedMesh 按 zone+layer 分桶，千级货架一次 drawcall/桶）
-  plano.shelves.forEach(s => {
-    const hgt = s.layer_count * LAYER_H;
-    const mat = new THREE.MeshStandardMaterial({
-      color: heatOn ? heatColor(s.heat_value) : (ZONE_COLOR[s.zone] || 0x888888) });
-    const m = new THREE.Mesh(new THREE.BoxGeometry(s.w, hgt, s.h), mat);
-    m.position.set(s.x + s.w / 2, hgt / 2, s.y);
-    m.userData = s;
-    scene.add(m);
-    shelfMeshes.push(m);
+  // 外墙（南墙留入口）
+  const wallMat = new THREE.MeshStandardMaterial({ color: 0x39404c, roughness: 0.85 });
+  const mk = (w, h, d, x, y, z, mat) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat || wallMat);
+    m.position.set(x, y, z);
+    m.castShadow = m.receiveShadow = true;
+    G.add(m); return m;
+  };
+  const t = 0.18, doorW = 6;
+  const ex = data.entrance.x;
+  mk(W, WALL_H, t, W / 2, WALL_H / 2, t / 2);                       // 北
+  mk(ex - doorW / 2, WALL_H, t, (ex - doorW / 2) / 2, WALL_H / 2, H - t / 2);  // 南左
+  mk(W - ex - doorW / 2, WALL_H, t, (W + ex + doorW / 2) / 2, WALL_H / 2, H - t / 2); // 南右
+  mk(t, WALL_H, H, t / 2, WALL_H / 2, H / 2);                       // 西
+  mk(t, WALL_H, H, W - t / 2, WALL_H / 2, H / 2);                   // 东
+
+  // 入口玻璃门 + 门头招牌
+  const glass = new THREE.Mesh(new THREE.BoxGeometry(doorW, 2.6, 0.06),
+    new THREE.MeshStandardMaterial({ color: 0x88bbee, transparent: true, opacity: 0.28, roughness: 0.05, metalness: 0.9 }));
+  glass.position.set(ex, 1.3, H - t / 2);
+  G.add(glass);
+  const sign = new THREE.Mesh(new THREE.PlaneGeometry(doorW + 2, 0.9),
+    new THREE.MeshBasicMaterial({ map: signTexture(data.store_name), transparent: true }));
+  sign.position.set(ex, 3.0, H + 0.12);
+  sign.rotation.y = Math.PI;
+  G.add(sign);
+
+  // 天花灯带
+  const stripMat = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xfff4d6, emissiveIntensity: 1.6 });
+  const rows = Math.max(2, Math.floor(H / 8));
+  for (let i = 0; i < rows; i++) {
+    const s = new THREE.Mesh(new THREE.BoxGeometry(W * 0.9, 0.06, 0.35), stripMat.clone());
+    s.position.set(W / 2, WALL_H - 0.05, H * (i + 0.5) / rows);
+    G.add(s); lightStrips.push(s);
+  }
+
+  // 屋顶（可切换）
+  roofGroup = new THREE.Group();
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(W + 0.4, 0.15, H + 0.4),
+    new THREE.MeshStandardMaterial({ color: 0x232830, roughness: 0.95, transparent: true, opacity: 0.0 }));
+  roof.position.set(W / 2, WALL_H + 0.08, H / 2);
+  roofGroup.add(roof);
+  roofGroup.userData.roof = roof;
+  G.add(roofGroup);
+
+  // 区域地标 + 通道感
+  Object.entries(data.zones).forEach(([z, zr]) => {
+    const zone = ZONE[z] || { color: 0x666666, label: z };
+    const label = new THREE.Mesh(new THREE.PlaneGeometry(Math.min(zr.w * 0.8, 14), 2.2),
+      new THREE.MeshBasicMaterial({ map: zoneLabelTexture(zone.label, '#' + zone.color.toString(16).padStart(6, '0')), transparent: true, opacity: 0.55 }));
+    label.rotation.x = -Math.PI / 2;
+    label.position.set(zr.x + zr.w / 2, 0.02, 1.4);
+    G.add(label);
   });
 
-  camera.position.set(W * 1.1, Math.max(W, H) * 0.9, H * 1.4);
+  // 货架：主体 + 顶帽沿，双材质层次
+  const shelfGeo = new THREE.BoxGeometry(1, 1, 1);
+  data.shelves.forEach(s => {
+    const hgt = s.layer_count * LAYER_H;
+    const zone = ZONE[s.zone] || { color: 0x888888 };
+    const bodyMat = new THREE.MeshStandardMaterial({
+      color: heatOn ? heatColor(s.heat_value) : zone.color,
+      roughness: 0.75, metalness: 0.15,
+    });
+    const body = new THREE.Mesh(shelfGeo, bodyMat);
+    body.scale.set(s.w * 0.94, hgt, s.h * 0.88);
+    body.position.set(s.x + s.w / 2, hgt / 2, s.y);
+    body.castShadow = body.receiveShadow = true;
+    body.userData = s;
+    G.add(body);
+    shelfMeshes.push(body);
+
+    const cap = new THREE.Mesh(shelfGeo, new THREE.MeshStandardMaterial({ color: 0xd8dee6, roughness: 0.5, metalness: 0.35 }));
+    cap.scale.set(s.w, 0.05, s.h);
+    cap.position.set(s.x + s.w / 2, hgt + 0.025, s.y);
+    cap.castShadow = true;
+    cap.userData = s;
+    G.add(cap);
+    shelfMeshes.push(cap);
+  });
+
+  // 灯光与相机定位
+  scene.sun.target = floor;
+  scene.sun.shadow.camera.left = -W; scene.sun.shadow.camera.right = W;
+  scene.sun.shadow.camera.top = H; scene.sun.shadow.camera.bottom = -H;
+  scene.doorLight.position.set(ex, 2.8, H + 2);
+
+  camera.position.set(W / 2, Math.max(W, H) * 1.6, H * 2.2);
   controls.target.set(W / 2, 1, H / 2);
+  introT = 0; // 触发开场运镜
+
+  const l = document.getElementById('loading');
+  l.style.opacity = 0; setTimeout(() => l.remove(), 700);
 }
 
+async function load(store) {
+  const l = document.getElementById('loading');
+  if (!l) {
+    const d = document.createElement('div'); d.id = 'loading'; d.textContent = '切换门店 …';
+    document.body.appendChild(d);
+  } else { l.style.opacity = 1; }
+  plano = await (await fetch(`../twin/data/planogram-${store}.json`)).json();
+  buildStore(plano);
+}
+
+/* ---------- 交互 ---------- */
 const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
 function onClick(e) {
   mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
   ray.setFromCamera(mouse, camera);
   const hit = ray.intersectObjects(shelfMeshes)[0];
   const info = document.getElementById('info');
+  shelfMeshes.forEach(m => { if (m.material.emissive) m.material.emissive.setHex(0x000000); });
   if (hit) {
     const s = hit.object.userData;
-    shelfMeshes.forEach(m => m.material.emissive?.set(0x000000));
-    hit.object.material.emissive.set(0xe4022b);
-    hit.object.material.emissiveIntensity = 0.35;
-    info.innerHTML = `<b>${s.id}</b><br>区域 ${s.zone} · ${s.layer_count} 层<br>热力 ${s.heat_value} · 位置 (${s.x}, ${s.y})m`;
+    if (hit.object.material.emissive) {
+      hit.object.material.emissive.setHex(0xe4022b);
+      hit.object.material.emissiveIntensity = 0.4;
+    }
+    info.innerHTML = `<b>${s.id}</b><br>区域 ${ZONE[s.zone]?.label || s.zone} · ${s.layer_count} 层 × 0.35m<br>热力 ${s.heat_value} · 面宽 ${s.facing_width_m}m<br>坐标 (${s.x}, ${s.y}) m`;
   } else {
-    shelfMeshes.forEach(m => m.material.emissive?.set(0x000000));
-    info.textContent = '点击货架查看详情 · 拖拽旋转 / 滚轮缩放';
+    info.textContent = '点击货架查看详情 · 拖拽旋转 / 滚轮缩放 / 右键平移';
   }
 }
 
@@ -149,14 +313,44 @@ document.getElementById('toggle-heat').onclick = e => {
   e.target.classList.toggle('on', heatOn);
   shelfMeshes.forEach(m => {
     const s = m.userData;
-    m.material.color.set(heatOn ? heatColor(s.heat_value) : (ZONE_COLOR[s.zone] || 0x888888));
+    if (!s || !m.material.color) return;
+    if (heatOn) m.material.color.copy(heatColor(s.heat_value));
+    else m.material.color.setHex(ZONE[s.zone]?.color || 0x888888);
   });
 };
 document.getElementById('toggle-spin').onclick = e => {
   controls.autoRotate = !controls.autoRotate;
-  controls.autoRotateSpeed = 1.2;
+  controls.autoRotateSpeed = 0.9;
   e.target.classList.toggle('on', controls.autoRotate);
 };
+document.getElementById('toggle-roof').onclick = e => {
+  const roof = roofGroup.userData.roof;
+  roof.material.opacity = roof.material.opacity > 0.05 ? 0.0 : 0.92;
+  e.target.classList.toggle('on', roof.material.opacity > 0.05);
+};
+
+/* ---------- 主循环：阻尼 + 热力脉冲 + 开场运镜 + 灯带闪烁 ---------- */
+function animate() {
+  requestAnimationFrame(animate);
+  const dt = clock.getDelta(), time = clock.elapsedTime;
+  if (introT < 1 && plano) {                      // 2 秒开场推镜
+    introT = Math.min(1, introT + dt / 2.2);
+    const k = 1 - Math.pow(1 - introT, 3);
+    const W = plano.footprint.w, H = plano.footprint.h;
+    camera.position.lerp(new THREE.Vector3(W * 1.05, Math.max(W, H) * 0.75, H * 1.5), k * 0.12);
+  }
+  if (heatOn) {
+    const pulse = 0.25 + 0.18 * Math.sin(time * 2.2);
+    shelfMeshes.forEach(m => {
+      if (m.material.emissive && m.userData) {
+        m.material.emissive.copy(m.material.color).multiplyScalar(pulse);
+      }
+    });
+  }
+  lightStrips.forEach((s, i) => { s.material.emissiveIntensity = 1.55 + 0.08 * Math.sin(time * 3 + i * 1.7); });
+  controls.update();
+  renderer.render(scene, camera);
+}
 
 init();
 load('2000');
