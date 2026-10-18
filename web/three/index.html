@@ -40,6 +40,7 @@
         <option value="2000" selected>2,000㎡ 标准店</option>
         <option value="5000">5,000㎡ 大卖场</option>
       </select>
+      <button id="toggle-opt">空间优化对比</button>
       <button id="toggle-flow">客流模拟</button>
       <button id="toggle-heat">热力图</button>
       <button id="toggle-spin">自动漫游</button>
@@ -65,6 +66,8 @@ let scene, camera, renderer, controls, clock;
 let shelfMeshes = [], roofGroup = null, lightStrips = [];
 let heatOn = false, plano = null, introT = 0;
 let flow = null, flowOn = false, flowGroup = null, dots = null, dotState = [];
+let opt = null, optOn = false;
+const SKU_PALETTE = [0xff6b6b, 0xffd166, 0x06d6a0, 0x4cc9f0, 0xb388ff, 0xf783ac, 0x90e000, 0xff9e00];
 
 /* ---------- 程序化纹理 ---------- */
 function floorTexture() {
@@ -260,7 +263,7 @@ function buildStore(data) {
     cap.scale.set(s.w, 0.05, s.h);
     cap.position.set(s.x + s.w / 2, hgt + 0.025, s.y);
     cap.castShadow = true;
-    cap.userData = s;
+    cap.userData = { ...s, isCap: true };
     G.add(cap);
     shelfMeshes.push(cap);
   });
@@ -285,13 +288,15 @@ async function load(store) {
     const d = document.createElement('div'); d.id = 'loading'; d.textContent = '切换门店 …';
     document.body.appendChild(d);
   } else { l.style.opacity = 1; }
-  const [pl, fl] = await Promise.all([
+  const [pl, fl, op] = await Promise.all([
     fetch(`../twin/data/planogram-${store}.json`).then(r => r.json()),
     fetch(`../twin/data/flow-${store}.json`).then(r => r.json()),
+    fetch(`../twin/data/optimize-${store}.json`).then(r => r.json()),
   ]);
-  plano = pl; flow = fl;
+  plano = pl; flow = fl; opt = op;
   buildStore(plano);
   buildFlow();
+  if (optOn) applyOptColors();
 }
 
 /* ---------- 客流：地面热力叠加 + 寻路顾客点 ---------- */
@@ -426,6 +431,42 @@ document.getElementById('toggle-flow').onclick = e => {
   flowOn = !flowOn;
   e.target.classList.toggle('on', flowOn);
   if (flowGroup) flowGroup.visible = flowOn;
+};
+
+/* ---------- 空间优化对比：MILP 分配着色 + 收益面板 ---------- */
+function applyOptColors() {
+  const domMap = {};
+  (opt.alloc || []).forEach(r => { if (r.dominant_sku) domMap[r.shelf_id] = r.dominant_sku; });
+  const skuIndex = {};
+  (opt.skus || []).forEach((s, i) => skuIndex[s.id] = SKU_PALETTE[i % SKU_PALETTE.length]);
+  const unalloc = new THREE.Color(0x2a2f38);
+  shelfMeshes.forEach(m => {
+    const s = m.userData;
+    if (!s || !m.material.color) return;
+    if (!m.userData.isCap) {   // 只染货架主体，不染顶帽沿
+      const sku = domMap[s.id];
+      m.material.color.set(sku ? skuIndex[sku] : unalloc);
+    }
+  });
+  const fmt = v => Math.round(v / 1000) + 'K';
+  document.getElementById('info').innerHTML =
+    `<b>MILP 空间优化结果（${opt.status}）</b><br>` +
+    `预期日毛利 ${fmt(opt.profit_before_idr)} → <b>${fmt(opt.profit_after_idr)} IDR</b>` +
+    `（${opt.uplift > 0 ? '+' : ''}${(opt.uplift * 100).toFixed(1)}%）<br>` +
+    `着色 = 各货架主导 SKU · 深灰 = 优化后空置面位<br>` +
+    `<span style="color:#8b949e">再次点击按钮回到区域配色</span>`;
+}
+function revertColors() {
+  shelfMeshes.forEach(m => {
+    const s = m.userData;
+    if (s && m.material.color) m.material.color.setHex(ZONE[s.zone]?.color || 0x888888);
+  });
+  document.getElementById('info').textContent = '点击货架查看详情 · 拖拽旋转 / 滚轮缩放 / 右键平移';
+}
+document.getElementById('toggle-opt').onclick = e => {
+  optOn = !optOn;
+  e.target.classList.toggle('on', optOn);
+  if (optOn) applyOptColors(); else revertColors();
 };
 document.getElementById('toggle-heat').onclick = e => {
   heatOn = !heatOn;

@@ -7,7 +7,7 @@ name = "nbo"
 version = "0.1.0"
 description = "Nusantara Brand OS - 印尼品牌落地作战平台引擎层"
 requires-python = ">=3.10"
-dependencies = []
+dependencies = ["ortools>=9.7"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]

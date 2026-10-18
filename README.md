@@ -251,7 +251,7 @@ nusantara-brand-os/
 │       ├── model/                # 实体与数据模型（StoreProfile / SKU / Batch）
 │       ├── forecast/             # 需求预测引擎（移动平均 × 斋月因子，v1）
 │       ├── replenishment/        # 补货引擎（安全库存 / ROP / 有效提前期）✅ 有测试
-│       ├── space/                # 空间-存量优化（MILP 占位，P2 接 OR-Tools）
+│       ├── space/                # MILP 空间优化（OR-Tools CP-SAT 面位分配）✅ 有测试
 │       ├── lifecycle/            # FEFO / 临期预警 ✅ 有测试
 │       ├── compliance/           # 三证状态机 + 到期预警（BPOM/Halal/SNI）✅ 有测试
 │       ├── calendar/             # 印尼节庆日历 ✅ 有测试

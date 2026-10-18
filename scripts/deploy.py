@@ -35,6 +35,8 @@ def main():
             "--out-dir", "web/twin/data"])
         sh([sys.executable, "-m", "nbo.flow", "--db", "nbo.db",
             "--out-dir", "web/twin/data"])
+        sh([sys.executable, "-m", "nbo.space", "--db", "nbo.db",
+            "--store", a.store, "--out-dir", "web/twin/data"])
 
     # 组装部署目录
     if SITE.exists():
@@ -52,7 +54,7 @@ def main():
     (SITE / "floorplan").mkdir(parents=True)
     (SITE / "three").mkdir(parents=True)
     out_dir = ROOT / "web/twin/data"
-    for f in list(out_dir.glob("planogram-*.json")) + list(out_dir.glob("flow-*.json")):
+    for f in list(out_dir.glob("planogram-*.json")) + list(out_dir.glob("flow-*.json")) + list(out_dir.glob("optimize-*.json")):
         shutil.copy(f, SITE / "twin/data")
     shutil.copy(ROOT / "web/index.html", SITE / "index.html")
     shutil.copy(ROOT / "web/floorplan/index.html", SITE / "floorplan")

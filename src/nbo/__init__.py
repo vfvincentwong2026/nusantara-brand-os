@@ -1,7 +1,7 @@
 from .model import StoreProfile, SKU, Batch
 from .replenishment import ReplenishmentEngine
 from .forecast import ForecastEngine
-from .space import SpaceOptimizer
+from .space import solve_allocation, dominant_map
 from .lifecycle import FEFOManager
 from .calendar import IndonesiaCalendar
 
@@ -11,7 +11,8 @@ __all__ = [
     "Batch",
     "ReplenishmentEngine",
     "ForecastEngine",
-    "SpaceOptimizer",
+    "solve_allocation",
+    "dominant_map",
     "FEFOManager",
     "IndonesiaCalendar",
 ]
