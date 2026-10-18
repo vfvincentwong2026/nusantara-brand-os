@@ -55,7 +55,7 @@
 <table>
   <thead><tr>
     <th>SKU</th><th>名称</th><th class="num">在库</th><th class="num">日均销量</th>
-    <th class="num">可售天数</th><th>最近到期</th><th class="num">近效期(30d)</th>
+    <th class="num">预测日均</th><th class="num">回测MAPE</th><th class="num">可售天数</th><th>最近到期</th><th class="num">近效期(30d)</th>
     <th class="num">ROP</th><th class="num">建议补货</th><th>状态</th><th>合规</th>
   </tr></thead>
   <tbody id="tbody"></tbody>
@@ -125,6 +125,7 @@ fetch('./data/dashboard.json').then(r => {
     <tr>
       <td>${s.id}</td><td>${s.name}</td>
       <td class="num">${s.on_hand}</td><td class="num">${s.avg_daily || '—'}</td>
+      <td class="num">${s.forecast_daily || '—'}</td><td class="num">${s.backtest_mape ?? '—'}</td>
       <td class="num">${s.days_of_supply ?? '—'}</td>
       <td>${s.next_expiry ?? '—'}</td><td class="num">${s.near_expiry_qty || ''}</td>
       <td class="num">${s.rop}</td><td class="num">${s.suggest_qty || ''}</td>
