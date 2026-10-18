@@ -13,13 +13,15 @@ CREATE TABLE IF NOT EXISTS sales (
 
 def test_seed_loads_all_three_stores(tmp_path):
     db = tmp_path / "t.db"
-    assert seed(db) == 3
+    assert seed(db) >= 3
     conn = sqlite3.connect(db)
     sizes = dict(conn.execute("SELECT id, size_sqm FROM stores").fetchall())
+    n_skus = conn.execute("SELECT COUNT(*) FROM skus").fetchone()[0]
     conn.close()
     assert sizes["store-jkt-500"] == 500
     assert sizes["store-jkt-2000"] == 2000
     assert sizes["store-jkt-5000"] == 5000
+    assert n_skus == 8  # 零食演示数据
 
 
 def test_validate_row_missing_required():

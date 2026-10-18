@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SKU 去化大屏 · Nusantara Brand OS</title>
+<script src="./echarts.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --line: #2d333b;
+    --text: #e6edf3; --dim: #8b949e;
+    --ok: #3fb950; --watch: #d29922; --high: #f0883e; --out: #f85149;
+    --cert-bad: #f85149; --cert-warn: #d29922;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font: 14px/1.6 -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 28px 10px; border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 18px; }
+  header .meta { color: var(--dim); font-size: 12px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; padding: 16px 28px; }
+  .kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+  .kpi .v { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kpi .l { color: var(--dim); font-size: 12px; margin-top: 2px; }
+  .charts { display: grid; grid-template-columns: 1fr 2fr; gap: 12px; padding: 0 28px 12px; }
+  .chart { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; height: 300px; }
+  @media (max-width: 900px) { .charts { grid-template-columns: 1fr; } }
+  table { width: calc(100% - 56px); margin: 0 28px 24px; border-collapse: collapse; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  th { color: var(--dim); font-weight: 500; font-size: 12px; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 10px; font-size: 12px; }
+  .b-ok { background: rgba(63,185,80,.15); color: var(--ok); }
+  .b-watch { background: rgba(210,153,34,.15); color: var(--watch); }
+  .b-high { background: rgba(240,136,62,.15); color: var(--high); }
+  .b-out { background: rgba(248,81,73,.15); color: var(--out); }
+  .b-cert-bad { background: rgba(248,81,73,.15); color: var(--cert-bad); }
+  .b-cert-warn { background: rgba(210,153,34,.15); color: var(--cert-warn); }
+  .b-cert-ok { background: rgba(63,185,80,.15); color: var(--ok); }
+  .num { text-align: right; }
+  footer { padding: 0 28px 20px; color: var(--dim); font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>SKU 去化大屏 · <span id="store-name">…</span></h1>
+  <div class="meta" id="generated-at"></div>
+</header>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="charts">
+  <div class="chart" id="status-chart"></div>
+  <div class="chart" id="dos-chart"></div>
+</div>
+
+<table>
+  <thead><tr>
+    <th>SKU</th><th>名称</th><th class="num">在库</th><th class="num">日均销量</th>
+    <th class="num">可售天数</th><th>最近到期</th><th class="num">近效期(30d)</th>
+    <th class="num">ROP</th><th class="num">建议补货</th><th>状态</th><th>合规</th>
+  </tr></thead>
+  <tbody id="tbody"></tbody>
+</table>
+
+<footer>口径：LT_eff 含跨岛系数 · 日均销量=近 14 天均值(≥3 天记录) · 近效期=30 天内到期批次 · 建议补货=ROP+提前期需求-在库（仅缺货/高风险输出） · 数据文件：<code>data/dashboard.json</code>（由 <code>python -m nbo.dashboard</code> 生成）</footer>
+
+<script>
+const STATUS_LABEL = { ok: '正常', watch: '关注', high: '高风险', out_of_stock: '缺货' };
+const STATUS_COLOR = { ok: '#3fb950', watch: '#d29922', high: '#f0883e', out_of_stock: '#f85149' };
+const badge = s => `b-${s}`;
+
+fetch('./data/dashboard.json').then(r => {
+  if (!r.ok) throw new Error(`dashboard.json 加载失败: ${r.status}（请先用 python -m nbo.dashboard --out web/dashboard/data/dashboard.json 生成）`);
+  return r.json();
+}).then(d => {
+  document.getElementById('store-name').textContent = `${d.store.name}（${d.store.island_region}）`;
+  document.getElementById('generated-at').textContent = `生成时间 ${d.generated_at} · LT_eff ${d.params.lt_eff} 天`;
+
+  const k = d.kpis;
+  document.getElementById('kpis').innerHTML = [
+    [k.on_hand_total, '总在库（件）'],
+    [k.near_expiry_qty, '近效期库存（30 天内到期）'],
+    [k.out_of_stock, '缺货 SKU'],
+    [k.risk_count, '风险 SKU（高风险+关注）'],
+    [k.cert_alert, '合规预警（过期/临期/撤证）'],
+  ].map(([v, l]) => `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
+
+  // 状态分布环图
+  const counts = { ok: 0, watch: 0, high: 0, out_of_stock: 0 };
+  d.skus.forEach(s => counts[s.status]++);
+  echarts.init(document.getElementById('status-chart')).setOption({
+    title: { text: '库存状态分布', textStyle: { color: '#e6edf3', fontSize: 14 }, left: 12, top: 10 },
+    tooltip: {},
+    series: [{
+      type: 'pie', radius: ['45%', '70%'],
+      data: Object.keys(counts).filter(s => counts[s] > 0).map(s => ({
+        name: STATUS_LABEL[s], value: counts[s], itemStyle: { color: STATUS_COLOR[s] }
+      })),
+      label: { color: '#8b949e' }
+    }]
+  });
+
+  // 可售天数条形图（升序=最危险在前）
+  const sorted = [...d.skus].sort((a, b) =>
+    (a.days_of_supply ?? 999) - (b.days_of_supply ?? 999));
+  echarts.init(document.getElementById('dos-chart')).setOption({
+    title: { text: `可售天数（补货线 = LT_eff ${d.params.lt_eff} 天）`, textStyle: { color: '#e6edf3', fontSize: 14 }, left: 12, top: 10 },
+    tooltip: { trigger: 'axis' },
+    grid: { left: 90, right: 30, top: 45, bottom: 25 },
+    xAxis: { type: 'value', axisLabel: { color: '#8b949e' }, splitLine: { lineStyle: { color: '#2d333b' } } },
+    yAxis: { type: 'category', data: sorted.map(s => s.name), axisLabel: { color: '#e6edf3' } },
+    series: [{
+      type: 'bar', barMaxWidth: 16,
+      data: sorted.map(s => ({
+        value: s.days_of_supply ?? 0,
+        itemStyle: { color: STATUS_COLOR[s.status], borderRadius: [0, 4, 4, 0] }
+      })),
+      markLine: { symbol: 'none', lineStyle: { color: '#58a6ff', type: 'dashed' },
+        label: { color: '#58a6ff', formatter: 'LT_eff' },
+        data: [{ xAxis: d.params.lt_eff }] }
+    }]
+  });
+
+  // 明细表
+  document.getElementById('tbody').innerHTML = d.skus.map(s => `
+    <tr>
+      <td>${s.id}</td><td>${s.name}</td>
+      <td class="num">${s.on_hand}</td><td class="num">${s.avg_daily || '—'}</td>
+      <td class="num">${s.days_of_supply ?? '—'}</td>
+      <td>${s.next_expiry ?? '—'}</td><td class="num">${s.near_expiry_qty || ''}</td>
+      <td class="num">${s.rop}</td><td class="num">${s.suggest_qty || ''}</td>
+      <td><span class="badge ${badge(s.status)}">${STATUS_LABEL[s.status]}</span></td>
+      <td><span class="badge b-cert-${s.cert_status === 'valid' ? 'ok' : s.cert_status === 'none' ? 'warn' : 'bad'}">${s.cert_label}</span></td>
+    </tr>`).join('');
+}).catch(e => {
+  document.body.innerHTML = `<div style="padding:40px;color:#f85149">加载失败：${e.message}</div>`;
+});
+</script>
+</body>
+</html>

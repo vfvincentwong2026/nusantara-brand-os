@@ -1,0 +1,59 @@
+{
+  "skus": [
+    { "id": "SKU001", "name": "辣味薯片 65g", "category": "零食", "barcode": "8991002100011", "internal_code": "SNK-CHIP-001", "halal_certified": true, "bpom_no": "MD 272831023097", "shelf_life_days": 270, "fresh_ratio": 0, "cost_idr": 5200, "sell_price_idr": 10000 },
+    { "id": "SKU002", "name": "烧烤味薯片 68g", "category": "零食", "barcode": "8991002100028", "internal_code": "SNK-CHIP-002", "halal_certified": true, "bpom_no": "MD 272831023098", "shelf_life_days": 270, "fresh_ratio": 0, "cost_idr": 5200, "sell_price_idr": 10000 },
+    { "id": "SKU003", "name": "虾条 60g", "category": "零食", "barcode": "8991002100035", "internal_code": "SNK-STR-003", "halal_certified": true, "bpom_no": "MD 272831023099", "shelf_life_days": 240, "fresh_ratio": 0, "cost_idr": 6100, "sell_price_idr": 12000 },
+    { "id": "SKU004", "name": "干脆面 40g", "category": "零食", "barcode": "8991002100042", "internal_code": "SNK-NOD-004", "halal_certified": true, "bpom_no": "MD 272831023100", "shelf_life_days": 180, "fresh_ratio": 0, "cost_idr": 2100, "sell_price_idr": 5000 },
+    { "id": "SKU005", "name": "香辣小鱼干 35g", "category": "零食", "barcode": "8991002100059", "internal_code": "SNK-FISH-005", "halal_certified": true, "bpom_no": "MD 272831023101", "shelf_life_days": 200, "fresh_ratio": 0, "cost_idr": 7800, "sell_price_idr": 15000 },
+    { "id": "SKU006", "name": "海苔脆片 20g", "category": "零食", "barcode": "8991002100066", "internal_code": "SNK-SEAW-006", "halal_certified": true, "bpom_no": "MD 272831023102", "shelf_life_days": 365, "fresh_ratio": 0, "cost_idr": 3900, "sell_price_idr": 8000 },
+    { "id": "SKU007", "name": "豆干 50g", "category": "零食", "barcode": "8991002100073", "internal_code": "SNK-TOFU-007", "halal_certified": true, "bpom_no": "MD 272831023103", "shelf_life_days": 150, "fresh_ratio": 0, "cost_idr": 3300, "sell_price_idr": 7000 },
+    { "id": "SKU008", "name": "坚果混合 100g", "category": "零食", "barcode": "8991002100080", "internal_code": "SNK-NUT-008", "halal_certified": false, "bpom_no": "MD 272831023104", "shelf_life_days": 300, "fresh_ratio": 0, "cost_idr": 15600, "sell_price_idr": 28000 }
+  ],
+  "batches": [
+    { "id": "B001", "sku_id": "SKU001", "store_id": "store-jkt-2000", "qty": 420, "receive_date": "2026-08-01", "expiry_date": "2026-11-15" },
+    { "id": "B002", "sku_id": "SKU001", "store_id": "store-jkt-2000", "qty": 200, "receive_date": "2026-09-01", "expiry_date": "2027-04-01" },
+    { "id": "B003", "sku_id": "SKU002", "store_id": "store-jkt-2000", "qty": 380, "receive_date": "2026-07-15", "expiry_date": "2026-10-28" },
+    { "id": "B004", "sku_id": "SKU003", "store_id": "store-jkt-2000", "qty": 650, "receive_date": "2026-09-10", "expiry_date": "2027-05-10" },
+    { "id": "B005", "sku_id": "SKU004", "store_id": "store-jkt-2000", "qty": 180, "receive_date": "2026-08-20", "expiry_date": "2027-01-20" },
+    { "id": "B006", "sku_id": "SKU005", "store_id": "store-jkt-2000", "qty": 0, "receive_date": "2026-06-01", "expiry_date": "2026-12-01" },
+    { "id": "B007", "sku_id": "SKU006", "store_id": "store-jkt-2000", "qty": 900, "receive_date": "2026-09-20", "expiry_date": "2027-08-01" },
+    { "id": "B008", "sku_id": "SKU007", "store_id": "store-jkt-2000", "qty": 260, "receive_date": "2026-09-05", "expiry_date": "2027-01-15" },
+    { "id": "B009", "sku_id": "SKU008", "store_id": "store-jkt-2000", "qty": 150, "receive_date": "2026-10-01", "expiry_date": "2027-06-01" }
+  ],
+  "sales": [
+    { "sku_id": "SKU001", "store_id": "store-jkt-2000", "date": "2026-10-06", "qty": 25, "revenue_idr": 250000 },
+    { "sku_id": "SKU001", "store_id": "store-jkt-2000", "date": "2026-10-07", "qty": 31, "revenue_idr": 310000 },
+    { "sku_id": "SKU001", "store_id": "store-jkt-2000", "date": "2026-10-08", "qty": 28, "revenue_idr": 280000 },
+    { "sku_id": "SKU001", "store_id": "store-jkt-2000", "date": "2026-10-09", "qty": 35, "revenue_idr": 350000 },
+    { "sku_id": "SKU001", "store_id": "store-jkt-2000", "date": "2026-10-10", "qty": 22, "revenue_idr": 220000 },
+    { "sku_id": "SKU002", "store_id": "store-jkt-2000", "date": "2026-10-06", "qty": 18, "revenue_idr": 180000 },
+    { "sku_id": "SKU002", "store_id": "store-jkt-2000", "date": "2026-10-07", "qty": 20, "revenue_idr": 200000 },
+    { "sku_id": "SKU002", "store_id": "store-jkt-2000", "date": "2026-10-08", "qty": 16, "revenue_idr": 160000 },
+    { "sku_id": "SKU002", "store_id": "store-jkt-2000", "date": "2026-10-09", "qty": 19, "revenue_idr": 190000 },
+    { "sku_id": "SKU002", "store_id": "store-jkt-2000", "date": "2026-10-10", "qty": 21, "revenue_idr": 210000 },
+    { "sku_id": "SKU003", "store_id": "store-jkt-2000", "date": "2026-10-06", "qty": 8, "revenue_idr": 96000 },
+    { "sku_id": "SKU003", "store_id": "store-jkt-2000", "date": "2026-10-07", "qty": 9, "revenue_idr": 108000 },
+    { "sku_id": "SKU003", "store_id": "store-jkt-2000", "date": "2026-10-08", "qty": 7, "revenue_idr": 84000 },
+    { "sku_id": "SKU003", "store_id": "store-jkt-2000", "date": "2026-10-09", "qty": 10, "revenue_idr": 120000 },
+    { "sku_id": "SKU003", "store_id": "store-jkt-2000", "date": "2026-10-10", "qty": 8, "revenue_idr": 96000 },
+    { "sku_id": "SKU004", "store_id": "store-jkt-2000", "date": "2026-10-06", "qty": 40, "revenue_idr": 200000 },
+    { "sku_id": "SKU004", "store_id": "store-jkt-2000", "date": "2026-10-07", "qty": 45, "revenue_idr": 225000 },
+    { "sku_id": "SKU004", "store_id": "store-jkt-2000", "date": "2026-10-08", "qty": 38, "revenue_idr": 190000 },
+    { "sku_id": "SKU004", "store_id": "store-jkt-2000", "date": "2026-10-09", "qty": 42, "revenue_idr": 210000 },
+    { "sku_id": "SKU004", "store_id": "store-jkt-2000", "date": "2026-10-10", "qty": 44, "revenue_idr": 220000 },
+    { "sku_id": "SKU005", "store_id": "store-jkt-2000", "date": "2026-10-06", "qty": 12, "revenue_idr": 180000 },
+    { "sku_id": "SKU005", "store_id": "store-jkt-2000", "date": "2026-10-07", "qty": 14, "revenue_idr": 210000 },
+    { "sku_id": "SKU006", "store_id": "store-jkt-2000", "date": "2026-10-06", "qty": 6, "revenue_idr": 48000 },
+    { "sku_id": "SKU006", "store_id": "store-jkt-2000", "date": "2026-10-07", "qty": 5, "revenue_idr": 40000 },
+    { "sku_id": "SKU007", "store_id": "store-jkt-2000", "date": "2026-10-06", "qty": 15, "revenue_idr": 105000 },
+    { "sku_id": "SKU007", "store_id": "store-jkt-2000", "date": "2026-10-07", "qty": 13, "revenue_idr": 91000 },
+    { "sku_id": "SKU008", "store_id": "store-jkt-2000", "date": "2026-10-06", "qty": 3, "revenue_idr": 84000 },
+    { "sku_id": "SKU008", "store_id": "store-jkt-2000", "date": "2026-10-07", "qty": 2, "revenue_idr": 56000 }
+  ],
+  "certifications": [
+    { "sku_id": "SKU001", "cert_type": "BPOM", "cert_no": "MD 272831023097", "holder": "PT Nusantara Snack Indo", "issue_date": "2025-07-14", "expiry_date": "2027-08-15", "status": "valid" },
+    { "sku_id": "SKU002", "cert_type": "BPOM", "cert_no": "MD 272831023098", "holder": "PT Nusantara Snack Indo", "issue_date": "2024-11-01", "expiry_date": "2026-11-20", "status": "valid" },
+    { "sku_id": "SKU003", "cert_type": "BPOM", "cert_no": "MD 272831023099", "holder": "PT Nusantara Snack Indo", "issue_date": "2024-06-01", "expiry_date": "2026-06-01", "status": "expired" },
+    { "sku_id": "SKU008", "cert_type": "HALAL", "cert_no": "ID00110012345", "holder": "PT Nusantara Snack Indo", "issue_date": "2025-01-01", "expiry_date": "2027-12-31", "status": "valid" }
+  ]
+}

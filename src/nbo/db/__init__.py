@@ -64,6 +64,32 @@ def seed(db_path: Path = DB_PATH) -> int:
                     (s["id"], store["id"], s["zone"], s["layer_count"],
                      s["facing_width_m"], s["heat_value"]))
             n += 1
+        # 零食演示数据（P1 SKU 去化大屏开发用）
+        demo_file = SEED_DIR / "snack_demo.json"
+        if demo_file.exists():
+            demo = json.loads(demo_file.read_text(encoding="utf-8"))
+            for s in demo.get("skus", []):
+                conn.execute(
+                    "INSERT OR REPLACE INTO skus VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    (s["id"], s["name"], s["category"], s["barcode"], s["internal_code"],
+                     int(s.get("halal_certified", False)), s.get("bpom_no"),
+                     s.get("shelf_life_days", 365), s.get("fresh_ratio", 0),
+                     s.get("cost_idr"), s.get("sell_price_idr")))
+            for b in demo.get("batches", []):
+                conn.execute(
+                    "INSERT OR REPLACE INTO batches VALUES (?,?,?,?,?,?,?)",
+                    (b["id"], b["sku_id"], b["store_id"], b["qty"],
+                     b["receive_date"], b["expiry_date"], b.get("location")))
+            for c in demo.get("certifications", []):
+                conn.execute(
+                    "INSERT INTO certifications (sku_id, cert_type, cert_no, holder, issue_date, expiry_date, status) VALUES (?,?,?,?,?,?,?)",
+                    (c["sku_id"], c["cert_type"], c["cert_no"], c["holder"],
+                     c.get("issue_date"), c.get("expiry_date"), c.get("status", "valid")))
+            for s in demo.get("sales", []):
+                conn.execute(
+                    "INSERT INTO sales (sku_id, store_id, date, qty, revenue_idr) VALUES (?,?,?,?,?)",
+                    (s["sku_id"], s["store_id"], s["date"], s["qty"], s.get("revenue_idr")))
+            n += 1
         conn.commit()
         return n
     finally:
