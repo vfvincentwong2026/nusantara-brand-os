@@ -73,3 +73,16 @@ def test_bad_suffix_raises(tmp_path):
     bad.write_text("x", encoding="utf-8")
     with pytest.raises(ValueError):
         import_warungs(bad, tmp_path / "t.db")
+
+
+def test_import_from_sql_dump(tmp_path):
+    src = tmp_path / "ws.sql"
+    src.write_text(
+        "CREATE TABLE warungs (id TEXT, name TEXT, latitude REAL, longitude REAL, city TEXT,"
+        " region TEXT, sales_step INTEGER, final_score INTEGER, grade TEXT);\n"
+        "INSERT INTO warungs VALUES ('WS-7','Warung S',-6.1,106.9,'Jakarta','DKI',4,88,'gold');\n",
+        encoding="utf-8")
+    db = tmp_path / "t.db"
+    seed(db)
+    r = import_warungs(src, db)
+    assert r["imported"] == 1

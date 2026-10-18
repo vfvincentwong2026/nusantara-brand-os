@@ -41,7 +41,16 @@ def load_rows(src: Path) -> list[dict]:
             return [dict(r) for r in conn.execute("SELECT * FROM warungs")]
         finally:
             conn.close()
-    raise ValueError(f"不支持的数据源格式：{src.suffix}（仅 .json / .sqlite / .db）")
+    if src.suffix.lower() == ".sql":
+        # wrangler d1 export 产物：CREATE TABLE + INSERT，灌进内存库再读
+        conn = sqlite3.connect(":memory:")
+        conn.row_factory = sqlite3.Row
+        try:
+            conn.executescript(src.read_text(encoding="utf-8"))
+            return [dict(r) for r in conn.execute("SELECT * FROM warungs")]
+        finally:
+            conn.close()
+    raise ValueError(f"不支持的数据源格式：{src.suffix}（仅 .json / .sqlite / .db / .sql）")
 
 
 def map_row(row: dict) -> tuple | None:
