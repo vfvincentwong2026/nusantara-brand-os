@@ -38,3 +38,6 @@ data/templates/*.local.csv
 # 本地 SQLite 开发库
 nbo.db
 *.egg-info/
+
+# Pages 部署产物（由 web/ 组装生成）
+site/
