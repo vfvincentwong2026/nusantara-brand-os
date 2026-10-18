@@ -33,6 +33,11 @@ CREATE TABLE IF NOT EXISTS certifications (
     id INTEGER PRIMARY KEY AUTOINCREMENT, sku_id TEXT, cert_type TEXT,
     cert_no TEXT, holder TEXT, issue_date TEXT, expiry_date TEXT, status TEXT
 );
+CREATE TABLE IF NOT EXISTS channel_points (
+    id TEXT PRIMARY KEY, name TEXT, type TEXT, lat REAL, lon REAL,
+    city TEXT, region TEXT, final_score INTEGER, grade TEXT,
+    sales_step INTEGER DEFAULT 0, source TEXT DEFAULT 'manual'
+);
 """
 
 
@@ -89,6 +94,16 @@ def seed(db_path: Path = DB_PATH) -> int:
                 conn.execute(
                     "INSERT INTO sales (sku_id, store_id, date, qty, revenue_idr) VALUES (?,?,?,?,?)",
                     (s["sku_id"], s["store_id"], s["date"], s["qty"], s.get("revenue_idr")))
+            n += 1
+        # 渠道点位演示数据（字段对齐 WarungScout warungs 表，见 warungscout docs/DATABASE_SCHEMA.md）
+        ch_file = SEED_DIR / "channel_demo.json"
+        if ch_file.exists():
+            for p in json.loads(ch_file.read_text(encoding="utf-8")).get("channel_points", []):
+                conn.execute(
+                    "INSERT OR REPLACE INTO channel_points VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    (p["id"], p["name"], p["type"], p["lat"], p["lon"], p.get("city"),
+                     p.get("region"), p.get("final_score", 0), p.get("grade", "normal"),
+                     p.get("sales_step", 0), p.get("source", "manual")))
             n += 1
         conn.commit()
         return n

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>渠道地图 · Nusantara Brand OS</title>
+<link rel="stylesheet" href="./leaflet.css">
+<script src="./leaflet.js"></script>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#8b949e;
+          --gold:#ffd700; --silver:#c0c0c0; --potential:#d29922; --normal:#6e7681; --comp:#58a6ff; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; display:flex; height:100vh; }
+  #map { flex:1; background:#111; }
+  #side { width:340px; min-width:340px; overflow-y:auto; border-left:1px solid var(--line); padding:16px; }
+  h1 { font-size:17px; margin-bottom:2px; }
+  .meta { color:var(--dim); font-size:12px; margin-bottom:14px; }
+  .kpi { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:16px; }
+  .kpi .item { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 12px; }
+  .kpi .v { font-size:20px; font-weight:700; }
+  .kpi .l { color:var(--dim); font-size:12px; }
+  h2 { font-size:13px; color:var(--dim); margin:14px 0 8px; }
+  .city { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-bottom:8px; font-size:13px; }
+  .city b { font-size:14px; }
+  .city .row { color:var(--dim); }
+  .gap { background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:6px; padding:8px 10px; margin-bottom:6px; font-size:13px; }
+  .gap.silver { border-left-color:var(--silver); }
+  .gap .s { color:var(--dim); font-size:12px; }
+  .legend { position:absolute; bottom:20px; left:12px; z-index:1000; background:var(--panel); border:1px solid var(--line);
+            border-radius:8px; padding:10px 12px; font-size:12px; color:var(--dim); }
+  .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="legend" id="legend"></div>
+<div id="side">
+  <h1>渠道地图</h1>
+  <div class="meta" id="meta"></div>
+  <div class="kpi" id="kpis"></div>
+  <h2>城市概览</h2>
+  <div id="cities"></div>
+  <h2>覆盖缺口（高评分 Warung · 周边无现代渠道竞品 → 优先铺货）</h2>
+  <div id="gaps"></div>
+</div>
+
+<script>
+const GRADE_COLOR = { gold: '#ffd700', silver: '#c0c0c0', potential: '#d29922', normal: '#6e7681' };
+const COMP_COLOR = { alfamart: '#58a6ff', indomaret: '#bc8cff' };
+const GRADE_LABEL = { gold: '黄金', silver: '白银', potential: '潜力', normal: '普通' };
+
+document.getElementById('legend').innerHTML =
+  ['gold','silver','potential','normal'].map(g => `<div><i style="background:${GRADE_COLOR[g]}"></i>Warung ${GRADE_LABEL[g]}</div>`).join('') +
+  `<div><i style="background:${COMP_COLOR.alfamart}"></i>Alfamart / Indomaret（竞品）</div>`;
+
+fetch('./data/channel_map.json').then(r => {
+  if (!r.ok) throw new Error(`channel_map.json 加载失败: ${r.status}（请先生成：python -m nbo.channel --out web/map/data/channel_map.json）`);
+  return r.json();
+}).then(d => {
+  document.getElementById('meta').textContent =
+    `生成 ${d.generated_at} · 竞品半径 ${d.params.radius_m}m · 数据模型对齐 WarungScout`;
+
+  const k = d.kpis;
+  document.getElementById('kpis').innerHTML = [
+    [k.warung_count, 'Warung 点位'], [k.gold_silver, '黄金+白银'],
+    [k.competitor_count, '现代渠道竞品'], [k.gap_count, '覆盖缺口'],
+  ].map(([v, l]) => `<div class="item"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
+
+  document.getElementById('cities').innerHTML = Object.entries(d.by_city).map(([city, s]) =>
+    `<div class="city"><b>${city}</b><div class="row">Warung ${s.warung} · 金/银 ${s.gold}/${s.silver} · 均分 ${s.avg_score} · 竞品 ${s.competitor}</div></div>`
+  ).join('');
+
+  document.getElementById('gaps').innerHTML = d.gaps.map(g =>
+    `<div class="gap ${g.grade === 'silver' ? 'silver' : ''}"><b>${g.name}</b> <span class="s">${GRADE_LABEL[g.grade]} ${g.final_score} 分 · 步骤 ${g.sales_step} · ${g.city}</span></div>`
+  ).join('') || '<div class="meta">无缺口</div>';
+
+  const warungs = d.points.filter(p => p.type === 'warung');
+  const map = L.map('map').setView(
+    [warungs.reduce((a, p) => a + p.lat, 0) / warungs.length, warungs.reduce((a, p) => a + p.lon, 0) / warungs.length], 12);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19, attribution: '© OpenStreetMap（正式环境切 Mapbox/自托管切片）'
+  }).addTo(map);
+
+  d.points.forEach(p => {
+    if (p.type === 'warung') {
+      L.circleMarker([p.lat, p.lon], {
+        radius: 5 + p.final_score / 20, color: GRADE_COLOR[p.grade], weight: 2,
+        fillColor: GRADE_COLOR[p.grade], fillOpacity: 0.35
+      }).addTo(map).bindPopup(
+        `<b>${p.name}</b><br>等级 ${p.grade_label} · ${p.final_score} 分<br>销售步骤 ${p.sales_step} · 来源 ${p.source}<br>500m 内竞品 ${p.competitors_within} 家`);
+    } else {
+      L.circleMarker([p.lat, p.lon], {
+        radius: 4, color: COMP_COLOR[p.type] || '#58a6ff', weight: 1.5,
+        fillColor: COMP_COLOR[p.type] || '#58a6ff', fillOpacity: 0.5
+      }).addTo(map).bindPopup(`<b>${p.name}</b><br>现代渠道竞品（${p.type}）`);
+    }
+  });
+}).catch(e => {
+  document.getElementById('side').innerHTML = `<div style="color:#f85149;padding:20px">加载失败：${e.message}</div>`;
+});
+</script>
+</body>
+</html>
