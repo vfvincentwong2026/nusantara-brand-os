@@ -21,6 +21,9 @@ class SKU:
     bpom_no: Optional[str] = None
     shelf_life_days: int = 365
     fresh_ratio: float = 0.0
+    cost_idr: Optional[float] = None      # 采购成本（IDR）
+    sell_price_idr: Optional[float] = None  # 售价（IDR，含 PPN 11% 口径见 docs/compliance.md）
+    ppn_rate: float = 0.11                 # PPN 增值税率
 
 @dataclass
 class Batch:

@@ -1,0 +1,16 @@
+{
+  "id": "store-jkt-5000",
+  "name": "Jakarta Hypermart 5000",
+  "size_sqm": 5000,
+  "island_region": "java",
+  "mudik_offset": 0,
+  "qris_enabled": true,
+  "fresh_ratio": 0.33,
+  "target_sku_count": 32000,
+  "shelves": [
+    { "id": "s1", "zone": "food", "layer_count": 6, "facing_width_m": 0.4, "heat_value": 0.9 },
+    { "id": "s2", "zone": "non-food", "layer_count": 6, "facing_width_m": 0.4, "heat_value": 0.6 },
+    { "id": "s3", "zone": "fresh", "layer_count": 7, "facing_width_m": 0.45, "heat_value": 0.95 },
+    { "id": "s4", "zone": "apparel", "layer_count": 6, "facing_width_m": 0.4, "heat_value": 0.7 }
+  ]
+}

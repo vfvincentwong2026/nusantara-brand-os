@@ -13,12 +13,12 @@ Brand Landing OS for Indonesia · 食品 · 服装 · 新零食 · 快消
   <img src="https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React" />
   <img src="https://img.shields.io/badge/Three.js-r160-000000?style=flat-square&logo=three.js&logoColor=white" alt="Three.js" />
   <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/PostgreSQL-15+-336791?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/DB-SQLite_→_D1-336791?style=flat-square&logo=sqlite&logoColor=white" alt="DB" />
   <img src="https://img.shields.io/badge/AI-Open_Source-8B5CF6?style=flat-square&logo=opensourceinitiative&logoColor=white" alt="AI Open Source" />
 </p>
 
 <p>
-  <img src="./docs/assets/demo.gif" alt="Nusantara Brand OS — 3D 数字孪生 · 渠道地图 · SKU 去化 · 补货模拟 · 斋月需求曲线" width="880" />
+  <i>📺 Demo 动图（P1 可视化阶段补齐）：数字孪生 · 渠道地图 · SKU 去化 · 补货模拟 · 斋月需求曲线</i>
 </p>
 
 </div>
@@ -136,17 +136,20 @@ graph TD
 
 ## 🤖 开源 AI 工具接入
 
-| 工具 | 用途 | 接入方式 |
-|------|------|----------|
-| **supply-chain-mcp-server** | UN Comtrade / 世界银行数据 | MCP |
-| **OmniSupply** | 多智能体供应链分析 | API / 自部署 |
-| **GraphRAG** | 供应商-产品-合规知识图谱 | Neo4j |
-| **Scope.Vantage** | HHI 集中度风险 | AWS Bedrock |
-| **Keel** | AI 交付风险情报 | 多智能体 |
-| **ChainScope** | 全球供应链可视化 | 仪表盘组件 |
-| **SentinelSCM** | 多智能体控制塔 | LangGraph |
-| **SynthFirm** | 货运需求模拟 | 基于 Agent |
-| **InventOpt / SupplyNetPy** | 物流网络仿真 | 离散事件 |
+| 工具 | 用途 | 接入方式 | 状态 |
+|------|------|----------|------|
+| **BPOM 公开数据** | 食品注册状态/到期日/持证人链路 | cekbpom.pom.go.id 接口（已验证可爬，见 docs/BPOM_DATA_SOURCE.md） | ✅ 已验证，客户端在 `src/nbo/bpom/` |
+| **supply-chain-mcp-server** | UN Comtrade / 世界银行数据 | MCP | ⏳ 待接入 |
+| **OmniSupply** | 多智能体供应链分析 | API / 自部署 | ⏳ 待接入 |
+| **GraphRAG** | 供应商-产品-合规知识图谱 | Neo4j（先用 NetworkX 起步） | ⏳ V2 |
+| **Scope.Vantage** | HHI 集中度风险 | AWS Bedrock | 🧊 V2 冻结 |
+| **Keel** | AI 交付风险情报 | 多智能体 | 🧊 V2 冻结 |
+| **ChainScope** | 全球供应链可视化 | 仪表盘组件 | 🧊 V2 冻结 |
+| **SentinelSCM** | 多智能体控制塔 | LangGraph | 🧊 V2 冻结 |
+| **SynthFirm** | 货运需求模拟 | 基于 Agent | 🧊 V2 冻结 |
+| **InventOpt / SupplyNetPy** | 物流网络仿真 | 离散事件 | 🧊 V2 冻结 |
+
+> AI 工具接入层整体冻结至 V2（PM 评估决策 #3）：当前阶段先把引擎层与可视化做扎实。
 
 ---
 
@@ -161,9 +164,9 @@ graph TD
 | 图表 | ECharts / D3 |
 | 网络图 | VisuallyJs |
 | 状态管理 | Zustand / Redux |
-| 后端 | FastAPI |
-| 数据库 | PostgreSQL + PostGIS |
-| 缓存 | Redis |
+| 后端 | FastAPI → 已定 Cloudflare：Python 引擎层批处理 → D1 → Pages（P1 落地，见 docs/PM_EVALUATION.md） |
+| 数据库 | PostgreSQL + PostGIS → D1（本地开发用 SQLite，表结构同源） |
+| 缓存 | Redis（P1 按需） |
 | 优化求解 | OR-Tools (MILP) |
 | 需求预测 | Prophet / LightGBM |
 | 部署 | Cloudflare Pages + Railway / Fly.io |
@@ -183,42 +186,52 @@ graph TD
 
 ```bash
 # 1. 克隆仓库
-git clone https://github.com/YOUR_ORG/nusantara-brand-os.git
+git clone https://github.com/vfvincentwong2026/nusantara-brand-os.git
 cd nusantara-brand-os
 
-# 2. 初始化环境
-cp .env.example .env
-docker compose up -d db
+# 2. 安装（引擎层纯 Python 标准库 + pytest）
+pip install -e ".[dev]"
 
-# 3. 安装依赖并初始化
-make install
-make migrate
-make seed
+# 3. 初始化本地 SQLite 并灌入三档门店种子数据
+python -m nbo.db migrate && python -m nbo.db seed
 
-# 4. 启动前后端
-make dev
+# 4. 跑测试（Windows 无 make 可直接用本组命令；make install/test 等价）
 ```
 
-打开浏览器访问 `http://localhost:5173` 即可体验 Demo。
+> 原 README 中的 `docker compose up` / `make dev`（FastAPI + PostGIS + 前端）为 P1 目标形态，
+> 已按 PM 评估（docs/PM_EVALUATION.md）改为 Cloudflare 栈：Python 引擎层本地批处理 → D1 → Pages 渲染。
+> 当前可运行的是引擎层 + 数据管线；API 与前端骨架在 P1 搭建。
 
-### 生成一个 2,000㎡ 雅加达门店
+### 引擎层示例（已可运行）
 
 ```python
-from nbo import StoreProfile, BrandTwin
+from datetime import date
+from nbo import StoreProfile, Batch
+from nbo.replenishment import ReplenishmentEngine
+from nbo.lifecycle import FEFOManager
+from nbo.compliance import Certification, ComplianceEngine
 
-store = StoreProfile(
-    store_size_sqm=2000,
-    island_region="java",
-    target_sku_count=12000,
-    fresh_ratio=0.28,
-    qris_enabled=True,
-)
+# 补货建议：Java 岛门店
+eng = ReplenishmentEngine()
+print(eng.suggest(avg_daily_demand=10, demand_std=5, lt_mean=10, lt_std=2, island_region="java"))
 
-twin = BrandTwin(store)
-twin.load_planogram()
-twin.forecast(horizon_days=30, include_ramadan=True)
-twin.replenish()
-twin.render_3d()
+# FEFO：先到期先出
+m = FEFOManager()
+batches = [Batch("b1", "sku1", "s1", 10, "2026-01-01", "2026-11-01")]
+print(m.near_expiry(batches[0], days_threshold=90))
+
+# 合规：三证状态机 + 到期预警
+comp = ComplianceEngine(warn_days=90)
+comp.add(Certification(cert_type="BPOM", cert_no="MD 123", holder="PT Contoh",
+                       sku_id="sku1", expiry_date="2026-12-01", status="valid"))
+print([w.cert_no for w in comp.warnings(date(2026, 10, 19))])
+```
+
+### 数据导入管线（已可运行）
+
+```bash
+# CSV -> schema 校验 -> SQLite；模板见 data/templates/
+python -c "from nbo.importer import import_csv; print(import_csv('data/templates/sales_import.csv', 'sales', 'nbo.db', 'sales'))"
 ```
 
 ---
@@ -235,30 +248,35 @@ nusantara-brand-os/
 │       └── store_5000sqm.json
 ├── src/
 │   └── nbo/
-│       ├── model/                # 实体与数据模型
-│       ├── forecast/             # 需求预测引擎
-│       ├── replenishment/        # 补货引擎
-│       ├── space/                # 空间-存量优化
-│       ├── lifecycle/            # FEFO / 促销触发
-│       ├── sentiment/            # 舆情信号适配器
-│       └── calendar/             # 印尼节庆日历
+│       ├── model/                # 实体与数据模型（StoreProfile / SKU / Batch）
+│       ├── forecast/             # 需求预测引擎（移动平均 × 斋月因子，v1）
+│       ├── replenishment/        # 补货引擎（安全库存 / ROP / 有效提前期）✅ 有测试
+│       ├── space/                # 空间-存量优化（MILP 占位，P2 接 OR-Tools）
+│       ├── lifecycle/            # FEFO / 临期预警 ✅ 有测试
+│       ├── compliance/           # 三证状态机 + 到期预警（BPOM/Halal/SNI）✅ 有测试
+│       ├── calendar/             # 印尼节庆日历 ✅ 有测试
+│       ├── bpom/                 # BPOM 公开数据客户端 ✅ 有测试
+│       ├── importer/             # CSV → schema 校验 → SQLite ✅ 有测试
+│       └── db/                   # SQLite 本地库：migrate / seed ✅
 ├── web/
-│   ├── floorplan/                # 2D 平面图编辑器
-│   ├── three/                    # 3D 数字孪生渲染
-│   └── dashboard/                # SKU 去化大屏
+│   ├── floorplan/                # 2D 平面图编辑器（P2，README 为规格）
+│   ├── three/                    # 3D 数字孪生渲染（P2，README 为规格）
+│   └── dashboard/                # SKU 去化大屏（P1，README 为规格）
 ├── integrations/
 │   ├── mcp/                      # supply-chain-mcp-server
 │   ├── omnisupply/
-│   ├── graphrag/
-│   ├── keel/
-│   └── chainscope/
+│   └── graphrag/
 ├── tests/
 ├── docs/
-│   ├── assets/                   # README 图像与 GIF
+│   ├── assets/                   # README 图像与 GIF（P1 补齐）
 │   ├── architecture.md
 │   ├── store-scale-benchmarks.md
 │   ├── indonesia-market-notes.md
-│   └── data-model.md
+│   ├── data-model.md
+│   ├── compliance.md
+│   ├── PM_EVALUATION.md          # PM 评估与 P0-P2 修订计划
+│   ├── BPOM_DATA_SOURCE.md       # BPOM 公开数据接口验证报告
+│   └── playbooks/                # 零食/快消/服装落地手册
 ├── .github/workflows/
 ├── docker-compose.yml
 ├── Makefile
@@ -271,10 +289,10 @@ nusantara-brand-os/
 
 | 阶段 | 时间 | 内容 | 状态 |
 |------|------|------|------|
-| **MVP** | 0–3 月 | 地图 + 合规 + 渠道 + 库存 + 补货建议 | 🔄 进行中 |
-| **V1** | 3–6 月 | 2D 平面图 + 3D 数字孪生 + 预测引擎 + 斋月因子 | ⏳ 计划中 |
-| **V2** | 6–9 月 | MILP 空间优化 + 风险监控 + 开源 AI 工具接入 | ⏳ 计划中 |
-| **V3** | 9–12 月 | 多智能体 + 全量工具矩阵 + 印尼试点 | ⏳ 计划中 |
+| **P0** | 0–0.5 月 | 工程骨架可跑 + 数据导入管线 + 合规引擎 v1 + BPOM 数据验证 | ✅ 完成（2026-10-19） |
+| **MVP** | 0.5–3 月 | SKU 去化大屏 + 渠道地图 v1 + 预测引擎 v1（Cloudflare 栈） | 🔄 进行中 |
+| **V1** | 3–6 月 | 2D 平面图 + 3D 数字孪生 + 品类×节庆因子校准 | ⏳ 计划中 |
+| **V2** | 6–12 月 | MILP 空间优化 + AI 工具矩阵接入 + 印尼试点 | ⏳ 计划中 |
 
 ---
 

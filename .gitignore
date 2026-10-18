@@ -34,3 +34,7 @@ data/templates/*.local.csv
 
 # Docker
 .docker/
+
+# 本地 SQLite 开发库
+nbo.db
+*.egg-info/

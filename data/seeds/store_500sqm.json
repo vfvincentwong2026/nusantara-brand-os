@@ -1,0 +1,15 @@
+{
+  "id": "store-jkt-500",
+  "name": "Jakarta Community Store 500",
+  "size_sqm": 500,
+  "island_region": "java",
+  "mudik_offset": 0,
+  "qris_enabled": true,
+  "fresh_ratio": 0.18,
+  "target_sku_count": 5000,
+  "shelves": [
+    { "id": "s1", "zone": "food", "layer_count": 4, "facing_width_m": 0.35, "heat_value": 0.85 },
+    { "id": "s2", "zone": "non-food", "layer_count": 4, "facing_width_m": 0.35, "heat_value": 0.5 },
+    { "id": "s3", "zone": "fresh", "layer_count": 5, "facing_width_m": 0.4, "heat_value": 0.9 }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Sales",
+  "type": "object",
+  "required": ["sku_id", "store_id", "date", "qty"],
+  "properties": {
+    "sku_id": { "type": "string" },
+    "store_id": { "type": "string" },
+    "date": { "type": "string" },
+    "qty": { "type": "integer" },
+    "revenue_idr": { "type": "number" }
+  }
+}

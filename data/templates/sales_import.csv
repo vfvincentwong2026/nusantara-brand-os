@@ -1,3 +1,4 @@
-date,store_id,sku_id,qty,price
+date,store_id,sku_id,qty,revenue_idr
 2026-01-01,store-jkt-2000,SKU001,120,15000
-2026-01-01,store-jkt-2000,SKU002,80,22000
+2026-01-02,store-jkt-2000,SKU001,95,11875
+2026-01-03,store-jkt-2000,SKU002,210,31500

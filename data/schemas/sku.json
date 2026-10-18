@@ -12,6 +12,9 @@
     "halal_certified": { "type": "boolean" },
     "bpom_no": { "type": "string" },
     "shelf_life_days": { "type": "number" },
-    "fresh_ratio": { "type": "number" }
+    "fresh_ratio": { "type": "number" },
+    "cost_idr": { "type": "number" },
+    "sell_price_idr": { "type": "number" },
+    "ppn_rate": { "type": "number" }
   }
 }
