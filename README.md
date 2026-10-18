@@ -233,6 +233,9 @@ print([w.cert_no for w in comp.warnings(date(2026, 10, 19))])
 ```bash
 # CSV -> schema 校验 -> SQLite；模板见 data/templates/
 python -c "from nbo.importer import import_csv; print(import_csv('data/templates/sales_import.csv', 'sales', 'nbo.db', 'sales'))"
+
+# WarungScout D1 导出 -> 渠道点位（.json 数组 或 .sqlite/.db 的 warungs 表；--replace 重灌）
+python -m nbo.importer.warungscout --src warungs_export.json --db nbo.db --replace
 ```
 
 ---
