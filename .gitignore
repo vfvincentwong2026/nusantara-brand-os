@@ -41,3 +41,6 @@ nbo.db
 
 # Pages 部署产物（由 web/ 组装生成）
 site/
+
+# wrangler 本地缓存
+.wrangler/
