@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D 数字孪生 · Nusantara Brand OS</title>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#8b949e; --accent:#e4022b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font:13px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; margin:0; overflow:hidden; }
+  #canvas-wrap { position:fixed; inset:0; }
+  #hud { position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center;
+         padding:12px 18px; background:linear-gradient(rgba(13,17,23,.9),transparent); pointer-events:none; z-index:10; }
+  #hud > * { pointer-events:auto; }
+  h1 { font-size:15px; }
+  #info { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:12px; color:var(--dim); min-width:200px; }
+  #info b { color:var(--text); }
+  select, button { background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; }
+  button.on { border-color:var(--accent); color:var(--accent); }
+</style>
+<script type="importmap">
+{ "imports": { "three": "./three.module.min.js" } }
+</script>
+</head>
+<body>
+<div id="canvas-wrap"></div>
+<div id="hud">
+  <div>
+    <h1>3D 数字孪生 · <span id="store-name">…</span></h1>
+    <div style="margin-top:8px; display:flex; gap:8px;">
+      <select id="store-sel">
+        <option value="500">500㎡ 社区店</option>
+        <option value="2000" selected>2,000㎡ 标准店</option>
+        <option value="5000">5,000㎡ 大卖场</option>
+      </select>
+      <button id="toggle-heat">热力图</button>
+      <button id="toggle-spin">自动旋转</button>
+    </div>
+  </div>
+  <div id="info">点击货架查看详情 · 拖拽旋转 / 滚轮缩放</div>
+</div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from './OrbitControls.js';
+
+const ZONE_COLOR = { fresh:0x2ea043, food:0xd29922, 'non-food':0x8b949e, apparel:0xbc8cff };
+const LAYER_H = 0.35;
+let scene, camera, renderer, controls, shelfMeshes = [], heatOn = false, plano = null;
+
+function heatColor(v) {
+  return new THREE.Color(0.97 - 0.78 * v, 0.32 + 0.39 * v, 0.29);
+}
+
+function init() {
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x0d1117);
+  camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 1000);
+  renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  document.getElementById('canvas-wrap').appendChild(renderer.domElement);
+  controls = new OrbitControls(camera, renderer.domElement);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+  const sun = new THREE.DirectionalLight(0xffffff, 1.2);
+  sun.position.set(30, 50, 20);
+  scene.add(sun);
+  scene.add(new THREE.GridHelper(200, 40, 0x2d333b, 0x1c2128));
+  animate();
+  window.addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+  });
+  renderer.domElement.addEventListener('click', onClick);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  controls.update();
+  renderer.render(scene, camera);
+}
+
+async function load(store) {
+  plano = await (await fetch(`../twin/data/planogram-${store}.json`)).json();
+  document.getElementById('store-name').textContent =
+    `${plano.store_name}（${plano.footprint.w}×${plano.footprint.h}m）`;
+  // 清旧货架
+  shelfMeshes.forEach(m => scene.remove(m));
+  shelfMeshes = [];
+  const W = plano.footprint.w, H = plano.footprint.h;
+
+  // 地板
+  const floor = new THREE.Mesh(
+    new THREE.BoxGeometry(W, 0.1, H),
+    new THREE.MeshStandardMaterial({ color: 0x161b22 }));
+  floor.position.set(W / 2, -0.05, H / 2);
+  scene.add(floor);
+  // 四面墙（入口南边留口）
+  const wallMat = new THREE.MeshStandardMaterial({ color: 0x30363d });
+  const mkWall = (w, h, d, x, y, z) => {
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), wallMat);
+    m.position.set(x, y, z);
+    scene.add(m);
+  };
+  const WH = 3.2;
+  mkWall(W, WH, 0.15, W / 2, WH / 2, 0.075);
+  mkWall(W, WH, 0.15, W / 2, WH / 2, H - 0.075);
+  mkWall(0.15, WH, H, 0.075, WH / 2, H / 2);
+  mkWall(0.15, WH, H, W - 0.075, WH / 2, H / 2);
+
+  // 货架（InstancedMesh 按 zone+layer 分桶，千级货架一次 drawcall/桶）
+  plano.shelves.forEach(s => {
+    const hgt = s.layer_count * LAYER_H;
+    const mat = new THREE.MeshStandardMaterial({
+      color: heatOn ? heatColor(s.heat_value) : (ZONE_COLOR[s.zone] || 0x888888) });
+    const m = new THREE.Mesh(new THREE.BoxGeometry(s.w, hgt, s.h), mat);
+    m.position.set(s.x + s.w / 2, hgt / 2, s.y);
+    m.userData = s;
+    scene.add(m);
+    shelfMeshes.push(m);
+  });
+
+  camera.position.set(W * 1.1, Math.max(W, H) * 0.9, H * 1.4);
+  controls.target.set(W / 2, 1, H / 2);
+}
+
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
+function onClick(e) {
+  mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+  ray.setFromCamera(mouse, camera);
+  const hit = ray.intersectObjects(shelfMeshes)[0];
+  const info = document.getElementById('info');
+  if (hit) {
+    const s = hit.object.userData;
+    shelfMeshes.forEach(m => m.material.emissive?.set(0x000000));
+    hit.object.material.emissive.set(0xe4022b);
+    hit.object.material.emissiveIntensity = 0.35;
+    info.innerHTML = `<b>${s.id}</b><br>区域 ${s.zone} · ${s.layer_count} 层<br>热力 ${s.heat_value} · 位置 (${s.x}, ${s.y})m`;
+  } else {
+    shelfMeshes.forEach(m => m.material.emissive?.set(0x000000));
+    info.textContent = '点击货架查看详情 · 拖拽旋转 / 滚轮缩放';
+  }
+}
+
+document.getElementById('store-sel').onchange = e => load(e.target.value);
+document.getElementById('toggle-heat').onclick = e => {
+  heatOn = !heatOn;
+  e.target.classList.toggle('on', heatOn);
+  shelfMeshes.forEach(m => {
+    const s = m.userData;
+    m.material.color.set(heatOn ? heatColor(s.heat_value) : (ZONE_COLOR[s.zone] || 0x888888));
+  });
+};
+document.getElementById('toggle-spin').onclick = e => {
+  controls.autoRotate = !controls.autoRotate;
+  controls.autoRotateSpeed = 1.2;
+  e.target.classList.toggle('on', controls.autoRotate);
+};
+
+init();
+load('2000');
+</script>
+</body>
+</html>

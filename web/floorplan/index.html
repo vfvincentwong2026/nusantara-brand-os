@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2D 平面图编辑器 · Nusantara Brand OS</title>
+<script src="./konva.min.js"></script>
+<style>
+  :root { --bg:#0d1117; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#8b949e; --accent:#e4022b; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font:13px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; display:flex; height:100vh; overflow:hidden; }
+  #stage { flex:1; overflow:hidden; }
+  #side { width:280px; min-width:280px; border-left:1px solid var(--line); padding:14px; overflow-y:auto; }
+  h1 { font-size:15px; margin-bottom:2px; }
+  .meta { color:var(--dim); font-size:12px; margin-bottom:12px; }
+  h2 { font-size:12px; color:var(--dim); margin:14px 0 6px; }
+  select, button, input[type=file]::file-selector-button {
+    background:var(--panel); color:var(--text); border:1px solid var(--line); border-radius:6px; padding:6px 10px; font-size:13px; cursor:pointer; }
+  button:hover, select:hover { border-color:var(--accent); }
+  .row { display:flex; gap:6px; margin-bottom:8px; flex-wrap:wrap; }
+  label.field { display:block; font-size:12px; color:var(--dim); margin-bottom:8px; }
+  label.field input { width:100%; background:var(--panel); border:1px solid var(--line); border-radius:6px; color:var(--text); padding:5px 8px; font-size:13px; }
+  .stat { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:8px 10px; font-size:12px; color:var(--dim); }
+  .stat b { color:var(--text); }
+  .hint { color:var(--dim); font-size:12px; margin-top:10px; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div id="side">
+  <h1>2D 平面图编辑器</h1>
+  <div class="meta">与 3D 视图共享同一份 planogram JSON</div>
+
+  <h2>门店</h2>
+  <div class="row">
+    <select id="store-sel">
+      <option value="500">500㎡ 社区店</option>
+      <option value="2000" selected>2,000㎡ 标准店</option>
+      <option value="5000">5,000㎡ 大卖场</option>
+    </select>
+  </div>
+
+  <h2>视图</h2>
+  <div class="row">
+    <button id="toggle-heat">热力图：关</button>
+    <button id="reset-view">重置视图</button>
+  </div>
+
+  <h2>选中货架</h2>
+  <div id="sel-info" class="stat">未选中（点击货架）</div>
+  <div id="sel-form" style="display:none">
+    <label class="field">X (m)<input id="f-x" type="number" step="0.1"></label>
+    <label class="field">Y (m)<input id="f-y" type="number" step="0.1"></label>
+    <label class="field">宽 (m)<input id="f-w" type="number" step="0.1"></label>
+    <label class="field">高 (m)<input id="f-h" type="number" step="0.1"></label>
+    <label class="field">层数<input id="f-layers" type="number" min="1" max="10"></label>
+    <div class="row"><button id="apply-btn">应用修改</button></div>
+  </div>
+
+  <h2>导入 / 导出</h2>
+  <div class="row">
+    <button id="export-btn">导出 JSON</button>
+    <label><input type="file" id="import-file" accept=".json" style="display:none"><button onclick="document.getElementById('import-file').click()">导入 JSON</button></label>
+  </div>
+
+  <h2>统计</h2>
+  <div class="stat" id="stats"></div>
+  <div class="hint">操作：拖拽移动货架 · 滚轮缩放 · 点击选中 · 修改后 3D 页重新加载同一 JSON 即同步</div>
+</div>
+
+<script>
+const ZONE_COLOR = { fresh:'#2ea043', food:'#d29922', 'non-food':'#8b949e', apparel:'#bc8cff' };
+const HEAT_COLOR = v => `rgb(${Math.round(248 - 200 * v)},${Math.round(81 + 100 * v)},${Math.round(73 + 20 * v)})`;
+const SCALE = 18; // px/m
+let plano, stage, layer, shelfNodes = new Map(), selected = null, heatOn = false;
+
+function load(store) {
+  fetch(`../twin/data/planogram-${store}.json`).then(r => r.json()).then(render);
+}
+
+function render(data) {
+  plano = data;
+  document.getElementById('stage').innerHTML = '';
+  const W = data.footprint.w * SCALE, H = data.footprint.h * SCALE;
+  stage = new Konva.Stage({ container: 'stage', width: window.innerWidth - 280, height: window.innerHeight, draggable: true });
+  layer = new Konva.Layer();
+  stage.add(layer);
+
+  // 区域色带
+  Object.entries(data.zones).forEach(([z, zr]) => {
+    layer.add(new Konva.Rect({ x: zr.x * SCALE, y: 0, width: zr.w * SCALE, height: H,
+      fill: ZONE_COLOR[z] || '#444', opacity: 0.12, listening: false }));
+    layer.add(new Konva.Text({ x: zr.x * SCALE + 6, y: 6, text: z, fontSize: 13,
+      fill: ZONE_COLOR[z] || '#888', listening: false }));
+  });
+
+  // 外墙与入口
+  layer.add(new Konva.Rect({ x: 0, y: 0, width: W, height: H, stroke: '#e6edf3', strokeWidth: 3, listening: false }));
+  const ex = data.entrance.x * SCALE;
+  layer.add(new Konva.Rect({ x: ex - 24, y: H - 2, width: 48, height: 6, fill: '#58a6ff', listening: false }));
+  layer.add(new Konva.Text({ x: ex - 20, y: H + 8, text: '入口', fill: '#58a6ff', fontSize: 12, listening: false }));
+
+  // 货架
+  shelfNodes.clear();
+  data.shelves.forEach(s => {
+    const node = new Konva.Rect({
+      x: s.x * SCALE, y: (s.y - s.h / 2) * SCALE,
+      width: s.w * SCALE, height: s.h * SCALE,
+      fill: heatOn ? HEAT_COLOR(s.heat_value) : (ZONE_COLOR[s.zone] || '#888'),
+      opacity: 0.85, stroke: selected === s.id ? '#e4022b' : 'rgba(0,0,0,.4)', strokeWidth: selected === s.id ? 3 : 1,
+      draggable: true,
+    });
+    node.on('click', e => { e.cancelBubble = true; select(s.id); });
+    node.on('dragend', () => {
+      s.x = +(node.x() / SCALE).toFixed(2);
+      s.y = +((node.y() + node.height() / 2) / SCALE).toFixed(2);
+      updateStats();
+    });
+    node.on('mouseenter', () => { node.opacity(1); });
+    node.on('mouseleave', () => { node.opacity(0.85); });
+    layer.add(node);
+    shelfNodes.set(s.id, node);
+  });
+  layer.draw();
+  updateStats();
+}
+
+function select(id) {
+  selected = id;
+  shelfNodes.forEach((n, sid) => { n.stroke(sid === id ? '#e4022b' : 'rgba(0,0,0,.4)'); n.strokeWidth(sid === id ? 3 : 1); });
+  layer.draw();
+  const s = plano.shelves.find(x => x.id === id);
+  document.getElementById('sel-info').innerHTML = `<b>${s.id}</b><br>${s.zone} · ${s.layer_count} 层 · 热力 ${s.heat_value}`;
+  document.getElementById('sel-form').style.display = 'block';
+  ['x','y','w','h'].forEach(k => document.getElementById('f-' + k).value = s[k]);
+  document.getElementById('f-layers').value = s.layer_count;
+}
+
+document.getElementById('apply-btn').onclick = () => {
+  if (!selected) return;
+  const s = plano.shelves.find(x => x.id === selected);
+  ['x','y','w','h'].forEach(k => s[k] = +document.getElementById('f-' + k).value || s[k]);
+  s.layer_count = +document.getElementById('f-layers').value || s.layer_count;
+  const n = shelfNodes.get(selected);
+  n.x(s.x * SCALE); n.y((s.y - s.h / 2) * SCALE);
+  n.width(s.w * SCALE); n.height(s.h * SCALE);
+  layer.draw(); updateStats();
+};
+
+document.getElementById('toggle-heat').onclick = e => {
+  heatOn = !heatOn;
+  e.target.textContent = '热力图：' + (heatOn ? '开' : '关');
+  shelfNodes.forEach((n, sid) => {
+    const s = plano.shelves.find(x => x.id === sid);
+    n.fill(heatOn ? HEAT_COLOR(s.heat_value) : (ZONE_COLOR[s.zone] || '#888'));
+  });
+  layer.draw();
+};
+
+document.getElementById('reset-view').onclick = () => { stage.position({ x: 40, y: 40 }); stage.scale({ x: 1, y: 1 }); layer.draw(); };
+
+document.getElementById('export-btn').onclick = () => {
+  const blob = new Blob([JSON.stringify(plano, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `planogram-${plano.size_sqm}.json`;
+  a.click();
+};
+
+document.getElementById('import-file').onchange = e => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => { selected = null; document.getElementById('sel-form').style.display = 'none'; render(JSON.parse(r.result)); };
+  r.readAsText(f);
+};
+
+document.getElementById('store-sel').onchange = e => { selected = null; document.getElementById('sel-form').style.display = 'none'; load(e.target.value); };
+
+function updateStats() {
+  const n = plano.shelves.length;
+  const layers = plano.shelves.reduce((a, s) => a + s.layer_count, 0);
+  const area = (plano.shelves.reduce((a, s) => a + s.w * s.h, 0)).toFixed(0);
+  document.getElementById('stats').innerHTML =
+    `货架 <b>${n}</b> 组 · 总层数 <b>${layers}</b><br>占地 <b>${area}㎡</b> / ${plano.size_sqm}㎡<br>主通道 <b>${plano.aisle_width_m}m</b>`;
+}
+
+window.addEventListener('resize', () => { if (stage) stage.size({ width: window.innerWidth - 280, height: window.innerHeight }); });
+load('2000');
+</script>
+</body>
+</html>

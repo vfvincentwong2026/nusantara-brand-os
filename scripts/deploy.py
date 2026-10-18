@@ -31,6 +31,8 @@ def main():
             "--store", a.store, "--out", "web/dashboard/data/dashboard.json"])
         sh([sys.executable, "-m", "nbo.channel", "--db", "nbo.db",
             "--out", "web/map/data/channel_map.json"])
+        sh([sys.executable, "-m", "nbo.twin", "--db", "nbo.db",
+            "--out-dir", "web/twin/data"])
 
     # 组装部署目录
     if SITE.exists():
@@ -43,6 +45,18 @@ def main():
     for f in ("index.html", "leaflet.js", "leaflet.css"):
         shutil.copy(ROOT / "web/map" / f, SITE / "map")
     shutil.copy(ROOT / "web/map/data/channel_map.json", SITE / "map/data")
+    # 数字孪生（2D/3D 共享 planogram JSON）
+    (SITE / "twin/data").mkdir(parents=True)
+    (SITE / "floorplan").mkdir(parents=True)
+    (SITE / "three").mkdir(parents=True)
+    out_dir = ROOT / "web/twin/data"
+    for f in out_dir.glob("planogram-*.json"):
+        shutil.copy(f, SITE / "twin/data")
+    shutil.copy(ROOT / "web/index.html", SITE / "index.html")
+    shutil.copy(ROOT / "web/floorplan/index.html", SITE / "floorplan")
+    shutil.copy(ROOT / "web/floorplan/konva.min.js", SITE / "floorplan")
+    for f in ("index.html", "three.module.min.js", "OrbitControls.js"):
+        shutil.copy(ROOT / "web/three" / f, SITE / "three")
     print(f"assembled: {SITE}")
 
     # wrangler 是 POSIX shim，Windows 下直接调 node + wrangler.js 入口（绕开 cmd 崩溃）
