@@ -40,6 +40,7 @@
         <option value="2000" selected>2,000㎡ 标准店</option>
         <option value="5000">5,000㎡ 大卖场</option>
       </select>
+      <button id="toggle-flow">客流模拟</button>
       <button id="toggle-heat">热力图</button>
       <button id="toggle-spin">自动漫游</button>
       <button id="toggle-roof">屋顶</button>
@@ -63,6 +64,7 @@ const LAYER_H = 0.35, WALL_H = 3.4;
 let scene, camera, renderer, controls, clock;
 let shelfMeshes = [], roofGroup = null, lightStrips = [];
 let heatOn = false, plano = null, introT = 0;
+let flow = null, flowOn = false, flowGroup = null, dots = null, dotState = [];
 
 /* ---------- 程序化纹理 ---------- */
 function floorTexture() {
@@ -283,8 +285,120 @@ async function load(store) {
     const d = document.createElement('div'); d.id = 'loading'; d.textContent = '切换门店 …';
     document.body.appendChild(d);
   } else { l.style.opacity = 1; }
-  plano = await (await fetch(`../twin/data/planogram-${store}.json`)).json();
+  const [pl, fl] = await Promise.all([
+    fetch(`../twin/data/planogram-${store}.json`).then(r => r.json()),
+    fetch(`../twin/data/flow-${store}.json`).then(r => r.json()),
+  ]);
+  plano = pl; flow = fl;
   buildStore(plano);
+  buildFlow();
+}
+
+/* ---------- 客流：地面热力叠加 + 寻路顾客点 ---------- */
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+function buildFlow() {
+  if (flowGroup) { scene.remove(flowGroup); flowGroup = null; dots = null; }
+  if (!flow) return;
+  flowGroup = new THREE.Group();
+  flowGroup.visible = flowOn;
+  const W = plano.footprint.w, H = plano.footprint.h;
+
+  // 地面热力：grid counts -> canvas 纹理
+  const g = flow.grid;
+  const c = document.createElement('canvas');
+  c.width = g.cols; c.height = g.rows;
+  const ctx = c.getContext('2d');
+  const img = ctx.createImageData(g.cols, g.rows);
+  const max = Math.max(...g.counts, 1);
+  for (let i = 0; i < g.counts.length; i++) {
+    const v = Math.pow(g.counts[i] / max, 0.55);       // 伽马提亮暗部
+    const hue = 210 - 210 * v;
+    const rgb = hslToRgb(hue / 360, 0.9, 0.35 + 0.25 * v);
+    img.data[i * 4] = rgb[0]; img.data[i * 4 + 1] = rgb[1]; img.data[i * 4 + 2] = rgb[2];
+    img.data[i * 4 + 3] = g.counts[i] > 0 ? 200 : 0;
+  }
+  ctx.putImageData(img, 0, 0);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  const heatPlane = new THREE.Mesh(new THREE.PlaneGeometry(W, H),
+    new THREE.MeshBasicMaterial({ map: tex, transparent: true, blending: THREE.AdditiveBlending, depthWrite: false }));
+  heatPlane.rotation.x = -Math.PI / 2;
+  heatPlane.position.set(W / 2, 0.03, H / 2);
+  flowGroup.add(heatPlane);
+
+  // 顾客点：L 型寻路游走（与引擎同几何），到出口后重生
+  const N = Math.min(90, Math.max(40, flow.waypoints.length));
+  const rng = mulberry32(20261019);
+  const pos = new Float32Array(N * 3);
+  dotState = [];
+  const pick = () => {
+    const zones = Object.keys(flow.zone_weights);
+    const z = zones[Math.floor(rng() * zones.length)];
+    const cands = flow.waypoints.filter(w => w.zone === z);
+    return cands[Math.floor(rng() * cands.length)] || flow.waypoints[0];
+  };
+  for (let i = 0; i < N; i++) {
+    const st = { x: flow.entrance.x, y: flow.entrance.y, tgt: pick(), speed: 1.0 + rng() * 0.7, phase: rng() };
+    dotState.push(st);
+    pos[i * 3] = st.x; pos[i * 3 + 1] = 1.1; pos[i * 3 + 2] = st.y;
+  }
+  const geo = new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  dots = new THREE.Points(geo, new THREE.PointsMaterial({
+    color: 0x7fd4ff, size: 0.32, transparent: true, opacity: 0.95,
+    blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true }));
+  flowGroup.add(dots);
+  scene.add(flowGroup);
+}
+
+function hslToRgb(h, s, l) {
+  const f = n => {
+    const k = (n + h * 12) % 12;
+    return l - s * Math.min(l, 1 - l) * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+  };
+  return [Math.round(f(0) * 255), Math.round(f(8) * 255), Math.round(f(4) * 255)];
+}
+
+function updateFlow(dt, time) {
+  if (!flowOn || !dots) return;
+  const pos = dots.geometry.attributes.position;
+  for (let i = 0; i < dotState.length; i++) {
+    const st = dotState[i];
+    let dx = st.tgt.x - st.x, dy = st.tgt.y - st.y;
+    const step = st.speed * dt;
+    if (Math.abs(dy) > 0.06) {                          // L 型：先竖后横，不穿货架
+      st.y += Math.sign(dy) * Math.min(Math.abs(dy), step);
+    } else if (Math.abs(dx) > 0.06) {
+      st.x += Math.sign(dx) * Math.min(Math.abs(dx), step);
+    } else {
+      // 到达 waypoint：标记离场则重生，否则按区域权重继续逛
+      if (st.exiting) {
+        st.exiting = false;
+        st.x = flow.entrance.x; st.y = flow.entrance.y;
+      }
+      if (Math.random() < 0.06) {
+        st.tgt = { x: flow.entrance.x, y: flow.entrance.y };
+        st.exiting = true;
+      } else {
+        const zones = Object.keys(flow.zone_weights);
+        const z = zones[Math.floor(Math.random() * zones.length)];
+        const cands = flow.waypoints.filter(w => w.zone === z);
+        st.tgt = cands[Math.floor(Math.random() * cands.length)];
+      }
+    }
+    pos.array[i * 3] = st.x;
+    pos.array[i * 3 + 1] = 1.05 + 0.12 * Math.sin(time * 6 + st.phase * 6.28);  // 行走起伏
+    pos.array[i * 3 + 2] = st.y;
+  }
+  pos.needsUpdate = true;
 }
 
 /* ---------- 交互 ---------- */
@@ -308,6 +422,11 @@ function onClick(e) {
 }
 
 document.getElementById('store-sel').onchange = e => load(e.target.value);
+document.getElementById('toggle-flow').onclick = e => {
+  flowOn = !flowOn;
+  e.target.classList.toggle('on', flowOn);
+  if (flowGroup) flowGroup.visible = flowOn;
+};
 document.getElementById('toggle-heat').onclick = e => {
   heatOn = !heatOn;
   e.target.classList.toggle('on', heatOn);
@@ -347,6 +466,7 @@ function animate() {
       }
     });
   }
+  updateFlow(dt, time);
   lightStrips.forEach((s, i) => { s.material.emissiveIntensity = 1.55 + 0.08 * Math.sin(time * 3 + i * 1.7); });
   controls.update();
   renderer.render(scene, camera);
