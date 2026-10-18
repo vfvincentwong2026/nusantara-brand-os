@@ -68,8 +68,7 @@ def coverage_gaps(points: list[dict], density: dict[str, int], min_grade: str = 
         keep = {"gold", "silver"}
     gaps = [{"id": p["id"], "name": p["name"], "grade": p["grade"],
              "final_score": p["final_score"], "sales_step": p["sales_step"],
-             "lat": p["lat"], "lon": p["lon"], "city": p["city"],
-             "dims": synth_dims(p["id"], p["final_score"])}
+             "lat": p["lat"], "lon": p["lon"], "city": p["city"], "dims": p.get("dims")}
             for p in points
             if p["type"] == "warung" and p["grade"] in keep and density.get(p["id"], 0) == 0]
     return sorted(gaps, key=lambda g: (rank.get(g["grade"], 9), -g["final_score"]))
@@ -87,7 +86,10 @@ def build_map(db_path: str | Path, radius_m: float = 500) -> dict:
         if p["type"] == "warung":
             p["competitors_within"] = density.get(p["id"], 0)
             p["grade_label"] = GRADE_LABEL.get(p["grade"], p["grade"])
-            p["dims"] = synth_dims(p["id"], p["final_score"])
+            # 优先用 WarungScout 评分模型落库的 7 维（channel_points 表 {dim}_score 列），缺失才回退合成
+            stored = {n: p.get(f"{n}_score") for n in DIM_OFFSETS}
+            p["dims"] = ({n: v for n, v in stored.items() if v is not None} or None) \
+                or synth_dims(p["id"], p["final_score"])
     warungs = [p for p in points if p["type"] == "warung"]
     gaps = coverage_gaps(points, density)
     by_city = {}

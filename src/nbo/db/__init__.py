@@ -36,15 +36,30 @@ CREATE TABLE IF NOT EXISTS certifications (
 CREATE TABLE IF NOT EXISTS channel_points (
     id TEXT PRIMARY KEY, name TEXT, type TEXT, lat REAL, lon REAL,
     city TEXT, region TEXT, final_score INTEGER, grade TEXT,
-    sales_step INTEGER DEFAULT 0, source TEXT DEFAULT 'manual'
+    sales_step INTEGER DEFAULT 0, source TEXT DEFAULT 'manual',
+    location_score INTEGER DEFAULT 50, activity_score INTEGER DEFAULT 50,
+    competition_score INTEGER DEFAULT 50, cooperation_score INTEGER DEFAULT 50,
+    digital_score INTEGER DEFAULT 50, owner_score INTEGER DEFAULT 50,
+    region_score INTEGER DEFAULT 50, signals TEXT
 );
 """
+
+# 既有库增量补列（ WarungScout warungs 表同源，未来直接灌 D1 导出 ）
+_CHANNEL_NEW_COLS = ["location_score INTEGER DEFAULT 50", "activity_score INTEGER DEFAULT 50",
+                     "competition_score INTEGER DEFAULT 50", "cooperation_score INTEGER DEFAULT 50",
+                     "digital_score INTEGER DEFAULT 50", "owner_score INTEGER DEFAULT 50",
+                     "region_score INTEGER DEFAULT 50", "signals TEXT"]
 
 
 def migrate(db_path: Path = DB_PATH) -> None:
     conn = sqlite3.connect(db_path)
     try:
         conn.executescript(DDL)
+        existing = {r[1] for r in conn.execute("PRAGMA table_info(channel_points)")}
+        for col in _CHANNEL_NEW_COLS:
+            name = col.split()[0]
+            if name not in existing:
+                conn.execute(f"ALTER TABLE channel_points ADD COLUMN {col}")
         conn.commit()
     finally:
         conn.close()
@@ -96,14 +111,30 @@ def seed(db_path: Path = DB_PATH) -> int:
                     (s["sku_id"], s["store_id"], s["date"], s["qty"], s.get("revenue_idr")))
             n += 1
         # 渠道点位演示数据（字段对齐 WarungScout warungs 表，见 warungscout docs/DATABASE_SCHEMA.md）
+        # warung 带原始信号时走 WarungScout 评分模型（nbo.scoring）计算 7 维+总分+等级
+        from nbo.scoring import score_warung
         ch_file = SEED_DIR / "channel_demo.json"
         if ch_file.exists():
             for p in json.loads(ch_file.read_text(encoding="utf-8")).get("channel_points", []):
+                dims = {k: None for k in
+                        ("location", "activity", "competition", "cooperation", "digital", "owner", "region")}
+                signals = p.get("signals")
+                if p["type"] == "warung" and signals is not None:
+                    r = score_warung({**signals, "city": p.get("city")})
+                    p["final_score"], p["grade"] = r["final_score"], r["grade"]
+                    dims = r["dims"]
+                elif p["type"] == "warung" and "final_score" not in p:
+                    r = score_warung({"no_history": True, "city": p.get("city")})
+                    p["final_score"], p["grade"] = r["final_score"], r["grade"]
+                    dims = r["dims"]
                 conn.execute(
-                    "INSERT OR REPLACE INTO channel_points VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    "INSERT OR REPLACE INTO channel_points VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                     (p["id"], p["name"], p["type"], p["lat"], p["lon"], p.get("city"),
                      p.get("region"), p.get("final_score", 0), p.get("grade", "normal"),
-                     p.get("sales_step", 0), p.get("source", "manual")))
+                     p.get("sales_step", 0), p.get("source", "manual"),
+                     dims["location"], dims["activity"], dims["competition"], dims["cooperation"],
+                     dims["digital"], dims["owner"], dims["region"],
+                     json.dumps(signals, ensure_ascii=False) if signals else None))
             n += 1
         conn.commit()
         return n
