@@ -45,3 +45,4 @@ site/
 # wrangler 本地缓存
 .wrangler/
 .shots/
+nusantara-store-site-assets.zip
