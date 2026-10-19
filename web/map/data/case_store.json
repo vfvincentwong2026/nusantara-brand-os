@@ -1,0 +1,13 @@
+{
+  "name": "Nusantara Community Store · 双40尺样板店",
+  "lat": -6.2445,
+  "lon": 106.8525,
+  "city": "Jakarta",
+  "neighborhood": "Tebet（演示坐标）",
+  "tier": "D · 双 40 尺高箱",
+  "net_size": "约 12.0 × 4.7 m（概念净尺寸，待复测）",
+  "service_radius_m": 800,
+  "service_note": "服务半径为演示默认值，待试点验证",
+  "status": "样板店（DEMO）",
+  "link": "/case/"
+}

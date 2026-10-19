@@ -80,6 +80,7 @@
   <a class="nl" data-p="map" href="/map/">渠道地图</a>
   <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
   <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+  <a class="nl" data-p="case" href="/case/">案例</a>
 </nav>
 <script>
   (() => { const p = location.pathname;
@@ -139,6 +140,19 @@ fetch('./data/channel_map.json').then(r => {
   const warungLayer = L.layerGroup().addTo(map);
   const compLayer = L.layerGroup().addTo(map);
   const covLayer = L.layerGroup();
+
+  // 案例门店：Nusantara Community Store（DEMO 坐标）
+  fetch('./data/case_store.json').then(r => r.ok ? r.json() : null).then(cs => {
+    if (!cs) return;
+    const icon = L.divIcon({ className: '', iconSize: [22, 22],
+      html: `<div style="width:22px;height:22px;background:#e4022b;border:2px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 10px #e4022b88"></div>` });
+    L.marker([cs.lat, cs.lon], { icon }).addTo(map).bindPopup(
+      `<b>${cs.name}</b><br>${cs.tier} · ${cs.net_size}<br>` +
+      `${cs.neighborhood} · ${cs.status}<br>服务半径 ${cs.service_radius_m}m（${cs.service_note}）<br>` +
+      `<a href="${cs.link}" style="color:#ffd700">进入案例 →</a>`);
+    L.circle([cs.lat, cs.lon], { radius: cs.service_radius_m, color: '#e4022b', weight: 1.5,
+      fillColor: '#e4022b', fillOpacity: 0.06, dashArray: '6 4' }).addTo(map);
+  }).catch(() => {});
 
   const popupHtml = p => {
     const dims = Object.entries(p.dims || {}).map(([n, v]) =>

@@ -1,0 +1,187 @@
+{
+  "store_id": "case-d",
+  "store_name": "Nusantara Community Store · 双40尺宽体样板店",
+  "size_sqm": 56.4,
+  "footprint": {
+    "w": 12.0,
+    "h": 4.7
+  },
+  "entrance": {
+    "x": 6.0,
+    "y": 0.0,
+    "side": "south"
+  },
+  "aisle_width_m": 1.35,
+  "zones": {
+    "fresh": {
+      "x": 0.0,
+      "w": 2.16
+    },
+    "food": {
+      "x": 2.16,
+      "w": 7.92
+    },
+    "non-food": {
+      "x": 10.08,
+      "w": 1.92
+    }
+  },
+  "shelves": [
+    {
+      "id": "CASED-BK-S01",
+      "zone": "food",
+      "x": 2.7,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.7
+    },
+    {
+      "id": "CASED-BK-S02",
+      "zone": "food",
+      "x": 3.9,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.75
+    },
+    {
+      "id": "CASED-BK-S03",
+      "zone": "food",
+      "x": 5.1,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.7999999999999999
+    },
+    {
+      "id": "CASED-BK-S04",
+      "zone": "food",
+      "x": 6.3,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.85
+    },
+    {
+      "id": "CASED-BK-S05",
+      "zone": "food",
+      "x": 7.5,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.8999999999999999
+    },
+    {
+      "id": "CASED-BK-S06",
+      "zone": "food",
+      "x": 8.7,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.95
+    },
+    {
+      "id": "CASED-IS-S01",
+      "zone": "food",
+      "x": 3.0,
+      "y": 2.1,
+      "w": 1.5,
+      "h": 0.85,
+      "rotation": 0,
+      "layer_count": 4,
+      "facing_width_m": 0.9,
+      "heat_value": 0.85
+    },
+    {
+      "id": "CASED-IS-S02",
+      "zone": "food",
+      "x": 4.5,
+      "y": 2.1,
+      "w": 1.5,
+      "h": 0.85,
+      "rotation": 0,
+      "layer_count": 4,
+      "facing_width_m": 0.9,
+      "heat_value": 0.7999999999999999
+    },
+    {
+      "id": "CASED-IS-S03",
+      "zone": "food",
+      "x": 6.0,
+      "y": 2.1,
+      "w": 1.5,
+      "h": 0.85,
+      "rotation": 0,
+      "layer_count": 4,
+      "facing_width_m": 0.9,
+      "heat_value": 0.75
+    },
+    {
+      "id": "CASED-IS-S04",
+      "zone": "food",
+      "x": 7.5,
+      "y": 2.1,
+      "w": 1.5,
+      "h": 0.85,
+      "rotation": 0,
+      "layer_count": 4,
+      "facing_width_m": 0.9,
+      "heat_value": 0.7
+    },
+    {
+      "id": "CASED-EW-S01",
+      "zone": "fresh",
+      "x": 11.6,
+      "y": 1.0,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 90,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.75
+    },
+    {
+      "id": "CASED-EW-S02",
+      "zone": "fresh",
+      "x": 11.6,
+      "y": 2.2,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 90,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.75
+    },
+    {
+      "id": "CASED-WW-S01",
+      "zone": "non-food",
+      "x": 0.0,
+      "y": 1.4,
+      "w": 1.8,
+      "h": 0.4,
+      "rotation": 90,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.5
+    }
+  ]
+}

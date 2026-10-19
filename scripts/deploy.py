@@ -49,6 +49,12 @@ def main():
     for f in ("index.html", "leaflet.js", "leaflet.css"):
         shutil.copy(ROOT / "web/map" / f, SITE / "map")
     shutil.copy(ROOT / "web/map/data/channel_map.json", SITE / "map/data")
+    shutil.copy(ROOT / "web/map/data/case_store.json", SITE / "map/data")
+    # 案例页（社区集装箱店）
+    (SITE / "case/data").mkdir(parents=True)
+    shutil.copy(ROOT / "web/case/index.html", SITE / "case")
+    for f in (ROOT / "web/case/data").glob("*.json"):
+        shutil.copy(f, SITE / "case/data")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)
