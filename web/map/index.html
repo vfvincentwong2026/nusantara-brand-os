@@ -35,6 +35,7 @@
   .badge.potential { background:rgba(210,153,34,.15); color:var(--potential); }
   .badge.normal { background:rgba(110,118,129,.2); color:var(--dim); }
   .badge.step { background:rgba(63,185,80,.15); color:var(--green); }
+  .badge.real { background:rgba(88,166,255,.2); color:var(--comp); border:1px solid rgba(88,166,255,.4); }
   .gap .name { font-weight:600; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .gap .sub { color:var(--dim); font-size:12px; display:flex; align-items:center; gap:8px; }
   .bar { flex:1; height:6px; background:#21262d; border-radius:3px; overflow:hidden; }
@@ -153,21 +154,29 @@ fetch('./data/channel_map.json').then(r => {
 
   // 侧栏：城市过滤 chips + 缺口清单（排名 / 徽章 / 评分条 / WhatsApp CTA）
   const cities = [...new Set(d.gaps.map(g => g.city || '未知'))];
-  let cityFilter = '全部';
+  let cityFilter = '全部', realFirst = false;
   const chipsEl = document.getElementById('cityChips');
   const renderChips = () => {
     chipsEl.innerHTML = ['全部', ...cities].map(c =>
-      `<span class="chip ${c === cityFilter ? 'on' : ''}" data-c="${c}">${c}</span>`).join('');
-    chipsEl.querySelectorAll('.chip').forEach(el => el.onclick = () => { cityFilter = el.dataset.c; renderChips(); renderGaps(); });
+      `<span class="chip ${c === cityFilter ? 'on' : ''}" data-c="${c}">${c}</span>`).join('') +
+      `<span class="chip ${realFirst ? 'on' : ''}" data-c="__real">⚡ 真实数据优先</span>`;
+    chipsEl.querySelectorAll('.chip').forEach(el => el.onclick = () => {
+      if (el.dataset.c === '__real') { realFirst = !realFirst; }
+      else { cityFilter = el.dataset.c; }
+      renderChips(); renderGaps();
+    });
   };
   const renderGaps = () => {
-    const list = d.gaps.map((g, i) => ({ ...g, rank: i + 1 }))
+    let list = d.gaps.map((g, i) => ({ ...g, rank: i + 1 }))
       .filter(g => cityFilter === '全部' || (g.city || '未知') === cityFilter);
+    if (realFirst) list = list.sort((a, b) =>
+      (b.source === 'warungscout') - (a.source === 'warungscout'));  // 真实线索排前，组内保持评分序
     document.getElementById('gaps').innerHTML = list.map(g => {
       const wa = 'https://wa.me/620000000000?text=' +
         encodeURIComponent(`Halo ${g.name}! Kami dari Nusantara Brand — 想为您铺设新品陈列（${g.city || ''}）`);
       return `<div class="gap" data-lat="${g.lat}" data-lon="${g.lon}">
         <div class="top"><span class="rank">#${g.rank}</span><span class="name">${g.name}</span>
+          ${g.source === 'warungscout' ? '<span class="badge real">真实</span>' : ''}
           <span class="badge ${g.grade}">${GRADE_LABEL[g.grade]}</span><span class="badge step">步骤 ${g.sales_step}</span></div>
         <div class="sub"><span style="min-width:52px">${g.final_score} 分</span><span class="bar"><i style="width:${g.final_score}%"></i></span><span>${g.city || ''}</span></div>
         <a class="cta" href="${wa}" target="_blank" rel="noopener" onclick="event.stopPropagation()">WhatsApp 发起铺货 →</a>

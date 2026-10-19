@@ -68,7 +68,8 @@ def coverage_gaps(points: list[dict], density: dict[str, int], min_grade: str = 
         keep = {"gold", "silver"}
     gaps = [{"id": p["id"], "name": p["name"], "grade": p["grade"],
              "final_score": p["final_score"], "sales_step": p["sales_step"],
-             "lat": p["lat"], "lon": p["lon"], "city": p["city"], "dims": p.get("dims")}
+             "lat": p["lat"], "lon": p["lon"], "city": p["city"], "dims": p.get("dims"),
+             "source": p.get("source")}
             for p in points
             if p["type"] == "warung" and p["grade"] in keep and density.get(p["id"], 0) == 0]
     return sorted(gaps, key=lambda g: (rank.get(g["grade"], 9), -g["final_score"]))
