@@ -3,51 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nusantara Brand OS · 印尼品牌落地作战平台</title>
+<title>Nusantara Brand OS · 中国品牌落地印尼的作战系统</title>
+<meta name="description" content="零食先行的印尼品牌落地作战平台：合规引擎、WarungScout 渠道评分、门店数字孪生、SKU 去化与补货模拟。引擎层本地计算，Cloudflare 全球边缘交付。">
 <style>
-  :root { --bg:#0d1117; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#8b949e; --red:#e4022b; }
+  :root { --bg:#0a0e14; --panel:#12171f; --line:#232b36; --text:#e8eef5; --dim:#8b98a8;
+          --red:#e4022b; --gold:#ffd700; --green:#3fb950; --blue:#58a6ff; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); color:var(--text); font:15px/1.7 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
-         min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  .brand { font-size:13px; letter-spacing:.2em; color:var(--red); font-weight:700; margin-bottom:8px; }
-  h1 { font-size:26px; margin-bottom:6px; }
-  .sub { color:var(--dim); margin-bottom:36px; }
-  .cards { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; padding:0 20px; max-width:1100px; }
-  a.card { display:block; width:300px; background:var(--panel); border:1px solid var(--line); border-radius:12px;
-           padding:24px; text-decoration:none; color:var(--text); transition:border-color .15s; }
-  a.card:hover { border-color:var(--red); }
-  a.card h2 { font-size:18px; margin-bottom:8px; }
-  a.card p { color:var(--dim); font-size:13px; }
-  a.card .go { color:var(--red); font-size:13px; margin-top:14px; display:block; }
-  footer { margin-top:40px; color:var(--dim); font-size:12px; }
+  body { background:var(--bg); color:var(--text); font:15px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+  a { color:inherit; }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 28px; }
+
+  /* ── Hero ── */
+  header { padding:88px 0 64px; background:
+    radial-gradient(1000px 420px at 18% -10%, rgba(228,2,43,.16), transparent 60%),
+    radial-gradient(900px 400px at 85% 0%, rgba(88,166,255,.10), transparent 55%); }
+  .kicker { font-size:13px; letter-spacing:.32em; color:var(--red); font-weight:700; margin-bottom:18px; }
+  h1 { font-size:clamp(30px,4.6vw,50px); line-height:1.25; letter-spacing:.01em; max-width:820px; }
+  h1 em { font-style:normal; color:var(--gold); }
+  .lead { color:var(--dim); font-size:16px; max-width:680px; margin-top:20px; }
+  .cta-row { display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .btn { display:inline-block; padding:12px 26px; border-radius:8px; font-weight:600; font-size:15px;
+         text-decoration:none; transition:transform .15s, box-shadow .15s; }
+  .btn.primary { background:var(--red); color:#fff; box-shadow:0 6px 24px rgba(228,2,43,.35); }
+  .btn.primary:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(228,2,43,.45); }
+  .btn.ghost { border:1px solid var(--line); color:var(--dim); }
+  .btn.ghost:hover { color:var(--text); border-color:var(--dim); }
+
+  /* ── 策略支柱 ── */
+  .pillars { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; padding:56px 0 8px; }
+  .pillar { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:22px 22px 18px; }
+  .pillar .no { font-size:12px; color:var(--red); font-weight:700; letter-spacing:.15em; }
+  .pillar h3 { font-size:16px; margin:8px 0 6px; }
+  .pillar p { color:var(--dim); font-size:13px; }
+  .sec-title { font-size:22px; margin:64px 0 6px; }
+  .sec-sub { color:var(--dim); font-size:14px; margin-bottom:26px; }
+
+  /* ── 模块展示 ── */
+  .mods { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  @media (max-width:860px) { .mods { grid-template-columns:1fr; } }
+  a.mod { display:block; background:var(--panel); border:1px solid var(--line); border-radius:14px;
+          overflow:hidden; text-decoration:none; transition:border-color .18s, transform .18s; }
+  a.mod:hover { border-color:rgba(228,2,43,.6); transform:translateY(-3px); }
+  a.mod .shot { display:block; width:100%; aspect-ratio:1370/758; object-fit:cover; object-position:top;
+                border-bottom:1px solid var(--line); background:#000; }
+  a.mod .body { padding:18px 22px 20px; }
+  a.mod .tag { font-size:11px; letter-spacing:.14em; color:var(--red); font-weight:700; }
+  a.mod h3 { font-size:18px; margin:6px 0 8px; }
+  a.mod p { color:var(--dim); font-size:13px; }
+  a.mod .go { color:var(--gold); font-size:13px; margin-top:12px; display:block; font-weight:600; }
+
+  /* ── 合作 ── */
+  .partner { margin:72px 0 56px; background:linear-gradient(135deg, rgba(228,2,43,.10), rgba(88,166,255,.06));
+             border:1px solid var(--line); border-radius:16px; padding:40px 44px; }
+  .partner h2 { font-size:22px; margin-bottom:10px; }
+  .partner p { color:var(--dim); max-width:720px; font-size:14px; }
+  .partner .row { display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; }
+  .chip { font-size:12.5px; color:var(--text); background:rgba(255,255,255,.05); border:1px solid var(--line);
+          border-radius:999px; padding:6px 16px; }
+  footer { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--dim); font-size:12.5px; }
 </style>
 </head>
 <body>
-<div class="brand">NUSANTARA BRAND OS</div>
-<h1>印尼品牌落地作战平台</h1>
-<div class="sub">零食先行 · 引擎层本地计算 → 静态渲染 · V1 数字孪生已上线</div>
-<div class="cards">
-  <a class="card" href="./dashboard/">
-    <h2>📦 SKU 去化大屏</h2>
-    <p>库存 / FEFO 临期 / 缺货风险 / 补货建议 / 合规预警。预测口径含斋月·开斋·Harbolnas 节庆因子与回测 MAPE。</p>
-    <span class="go">打开大屏 →</span>
-  </a>
-  <a class="card" href="./map/">
-    <h2>🗺️ 渠道地图</h2>
-    <p>Warung 点位分布、Alfamart/Indomaret 竞品密度（500m）、覆盖缺口优先铺货清单。数据模型对齐 WarungScout。</p>
-    <span class="go">打开地图 →</span>
-  </a>
-  <a class="card" href="./floorplan/">
-    <h2>📐 2D 平面图编辑器</h2>
-    <p>三档门店 planogram 布局：货架拖拽/属性编辑、区域色带、热力图叠加、JSON 导入导出（与 3D 共享同一份数据）。</p>
-    <span class="go">打开编辑器 →</span>
-  </a>
-  <a class="card" href="./three/">
-    <h2>🧊 3D 数字孪生</h2>
-    <p>门店三维重建：货架按层数拔高、区域着色、热力模式、点击货架查详情、自动漫游。WebGL 免构建直跑。</p>
-    <span class="go">打开孪生 →</span>
-  </a>
-</div>
-<footer>© 2026 Nusantara Brand OS · 测试阶段仅 pages.dev · 引擎仓库：<a style="color:var(--dim)" href="https://github.com/vfvincentwong2026/nusantara-brand-os">GitHub</a></footer>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">NUSANTARA BRAND OS</div>
+    <h1>中国品牌落地印尼的<em>作战系统</em>：<br>从合规准入到 Warung 货架，一套引擎全打通。</h1>
+    <p class="lead">零食先行。合规引擎（BPOM / Halal / SNI）× WarungScout 渠道评分 × 门店数字孪生 × 去化与补货模拟——策略不是 PPT，是可直接点开的实时系统。引擎层本地计算，Cloudflare 全球边缘交付，雅加达打开一样快。</p>
+    <div class="cta-row">
+      <a class="btn primary" href="./dashboard/">进入作战大屏</a>
+      <a class="btn ghost" href="./map/">渠道地图</a>
+      <a class="btn ghost" href="./three/">3D 数字孪生</a>
+    </div>
+    <div class="pillars">
+      <div class="pillar"><div class="no">策略 01</div><h3>合规先行，一票否决</h3><p>BPOM / Halal / SNI 状态跟踪与到期预警，无证 SKU 不上架——印尼市场的入场券先管好。</p></div>
+      <div class="pillar"><div class="no">策略 02</div><h3>渠道评分，先打最值的 Warung</h3><p>7 维加权评分（位置 25% · 活跃度 20% …）把几十万 Warung 排成黄金/白银/潜力/普通，销售第一步打在哪一目了然。</p></div>
+      <div class="pillar"><div class="no">策略 03</div><h3>空间即销售</h3><p>门店 3D 数字孪生 + MILP 空间优化，货架面位分配可计算、可对比、可漫游——名创优品体系的核心打法。</p></div>
+      <div class="pillar"><div class="no">策略 04</div><h3>节庆驱动供应链</h3><p>斋月 · 开斋 · Mudik · Harbolnas 需求曲线内建，FEFO 临期预警 + 安全库存模拟，节日期间不断货、不压库。</p></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <h2 class="sec-title">四大作战模块 · 点开即实时系统</h2>
+  <div class="sec-sub">以下为线上真实页面截屏，非设计稿。每个模块都可交互、可下钻。</div>
+  <div class="mods">
+    <a class="mod" href="./dashboard/">
+      <img class="shot" src="./assets/preview-dashboard.png" alt="SKU 去化大屏">
+      <div class="body"><div class="tag">SUPPLY CHAIN</div><h3>SKU 去化大屏</h3>
+        <p>在库 / 临期 / 缺货 / 合规预警一屏总览；预测口径内建斋月·开斋·Harbolnas 节庆因子与回测 MAPE；每条 SKU 给出建议补货量。</p>
+        <span class="go">打开大屏 →</span></div>
+    </a>
+    <a class="mod" href="./map/">
+      <img class="shot" src="./assets/preview-map.png" alt="渠道地图">
+      <div class="body"><div class="tag">CHANNEL INTELLIGENCE</div><h3>渠道地图 · WarungScout 评分融合</h3>
+        <p>Warung 点位按 7 维评分分级落图，Alfamart / Indomaret 500m 竞品覆盖圈，覆盖缺口自动生成优先铺货清单 + WhatsApp 触达。真实数据与演示种子一眼区分。</p>
+        <span class="go">打开地图 →</span></div>
+    </a>
+    <a class="mod" href="./three/">
+      <img class="shot" src="./assets/preview-3d.png" alt="3D 数字孪生">
+      <div class="body"><div class="tag">DIGITAL TWIN</div><h3>3D 门店数字孪生</h3>
+        <p>500㎡ / 2,000㎡ / 5,000㎡ 三档印尼主流门店实时渲染：客流动线寻路模拟、热力图、MILP 空间优化前后对比、自动漫游。</p>
+        <span class="go">打开 3D 孪生 →</span></div>
+    </a>
+    <a class="mod" href="./floorplan/">
+      <img class="shot" src="./assets/preview-2d.png" alt="2D 平面编辑器">
+      <div class="body"><div class="tag">PLANOGRAM</div><h3>2D 平面编辑器</h3>
+        <p>货架拖拽编辑、热力/网格双视图、JSON 导入导出——与 3D 孪生共享同一份 planogram，编辑一次双端同步。</p>
+        <span class="go">打开编辑器 →</span></div>
+    </a>
+  </div>
+
+  <div class="partner">
+    <h2>与合作方共建印尼落地基础设施</h2>
+    <p>我们提供品牌落地作战系统 + 中国顶级零食团队方法论（爆品策划 / 口味本地化 / 品类创新 + 天猫系数据化运营），寻找印尼本地渠道、供应链与门店伙伴。系统已上线，欢迎直接体验后约谈。</p>
+    <div class="row">
+      <span class="chip">🇮🇩 雅加达 · 泗水 · 万隆</span>
+      <span class="chip">🏪 Warung 网络共建</span>
+      <span class="chip">📦 现代渠道 / 商场铺货</span>
+      <span class="chip">🕌 节庆档期联合操盘</span>
+      <span class="chip">🤝 品牌授权与联名</span>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Nusantara Brand OS · 引擎层本地计算（Python）→ 静态渲染 → Cloudflare Pages 交付 · 演示数据为种子样本，接 WarungScout D1 实时数据一键同步</div>
+</footer>
+
 </body>
 </html>

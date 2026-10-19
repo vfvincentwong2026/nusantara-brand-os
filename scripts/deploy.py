@@ -57,6 +57,9 @@ def main():
     for f in list(out_dir.glob("planogram-*.json")) + list(out_dir.glob("flow-*.json")) + list(out_dir.glob("optimize-*.json")):
         shutil.copy(f, SITE / "twin/data")
     shutil.copy(ROOT / "web/index.html", SITE / "index.html")
+    (SITE / "assets").mkdir(exist_ok=True)
+    for f in (ROOT / "web/assets").glob("*.png"):
+        shutil.copy(f, SITE / "assets")
     shutil.copy(ROOT / "web/floorplan/index.html", SITE / "floorplan")
     shutil.copy(ROOT / "web/floorplan/konva.min.js", SITE / "floorplan")
     for f in ("index.html", "three.module.min.js", "OrbitControls.js", "RoomEnvironment.js"):
