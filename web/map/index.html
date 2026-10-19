@@ -86,8 +86,11 @@ const GRADE_LABEL = { gold: '黄金', silver: '白银', potential: '潜力', nor
 const DIM_LABEL = { location: '位置', activity: '活跃度', competition: '竞争', cooperation: '合作',
                     digital: '数字化', owner: '店主', region: '区域' };
 
+const SOURCE_LABEL = { warungscout: 'WarungScout 真实数据', google_maps: 'Google Maps', manual: '演示种子' };
+
 document.getElementById('legend').innerHTML =
   ['gold','silver','potential','normal'].map(g => `<div><i style="background:${GRADE_COLOR[g]}"></i>Warung ${GRADE_LABEL[g]}</div>`).join('') +
+  `<div><i style="background:transparent;border:2px solid #fff;width:8px;height:8px;margin:0 8px 0 1px"></i>白圈 = WarungScout 真实数据</div>` +
   Object.entries(COMP_COLOR).map(([t, c]) => `<div><i class="sq" style="background:${c}"></i>${t}（竞品）</div>`).join('');
 
 fetch('./data/channel_map.json').then(r => {
@@ -120,7 +123,7 @@ fetch('./data/channel_map.json').then(r => {
       `<div class="d"><span class="n">${DIM_LABEL[n] || n}</span><span class="bar"><i style="width:${v}%"></i></span><span class="v">${v}</span></div>`
     ).join('');
     return `<div class="pop"><div class="t">${p.name}</div>` +
-      `<div class="s">${p.grade_label || ''} · ${p.final_score} 分 · 步骤 ${p.sales_step} · 500m 内竞品 ${p.competitors_within ?? '-'} 家</div>` +
+      `<div class="s">${p.grade_label || ''} · ${p.final_score} 分 · 步骤 ${p.sales_step} · 500m 内竞品 ${p.competitors_within ?? '-'} 家 · ${SOURCE_LABEL[p.source] || p.source || '演示种子'}</div>` +
       dims + `</div>`;
   };
 
@@ -132,9 +135,11 @@ fetch('./data/channel_map.json').then(r => {
 
   d.points.forEach(p => {
     if (p.type === 'warung') {
+      const isWS = p.source === 'warungscout';  // 真实数据白圈角标，演示种子按等级色圈
       const m = L.circleMarker([p.lat, p.lon], {
-        radius: 4 + p.final_score / 9, color: GRADE_COLOR[p.grade], weight: 2,
-        fillColor: GRADE_COLOR[p.grade], fillOpacity: 0.38
+        radius: 4 + p.final_score / 9, color: isWS ? '#ffffff' : GRADE_COLOR[p.grade],
+        weight: isWS ? 3 : 2,
+        fillColor: GRADE_COLOR[p.grade], fillOpacity: isWS ? 0.5 : 0.38
       }).bindPopup(popupHtml(p));
       m._gapCandidate = d.gaps.some(g => g.id === p.id);
       warungLayer.addLayer(m);
