@@ -11,7 +11,7 @@
           --gold:#ffd700; --silver:#c0c0c0; --potential:#d29922; --normal:#6e7681;
           --comp:#58a6ff; --red:#f85149; --green:#3fb950; }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); color:var(--text); font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; display:flex; height:100vh; }
+  body { background:var(--bg); color:var(--text); font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; display:flex; height:100vh; padding-top:38px; }
   #map { flex:1; background:#0a0e14; }
   #side { width:372px; min-width:372px; overflow-y:auto; border-left:1px solid var(--line); padding:16px 16px 24px; }
   h1 { font-size:17px; margin-bottom:2px; }
@@ -63,8 +63,29 @@
   .leaflet-popup-close-button { color:#8b949e !important; }
   .leaflet-container { background:#0a0e14; }
 </style>
+<style>
+  .nbo-nav { position:fixed; top:0; left:0; right:0; height:38px; z-index:10000; display:flex; align-items:center;
+    padding:0 16px; background:rgba(10,14,20,.92); backdrop-filter:blur(8px); border-bottom:1px solid #232b36;
+    font:12.5px -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+  .nbo-nav .brand { color:#e4022b; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
+  .nbo-nav a.nl { color:#8b98a8; text-decoration:none; padding:6px 12px; border-radius:6px; }
+  .nbo-nav a.nl:hover { color:#e8eef5; }
+  .nbo-nav a.nl.on { color:#fff; background:rgba(228,2,43,.2); }
+</style>
 </head>
 <body>
+<nav class="nbo-nav">
+  <a class="brand" href="/">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+</nav>
+<script>
+  (() => { const p = location.pathname;
+    document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
+  })();
+</script>
 <div id="map"></div>
 <div class="legend" id="legend"></div>
 <div class="layers">

@@ -9,7 +9,7 @@
   :root { --bg:#0b0e13; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#8b949e; --accent:#e4022b; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font:13px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
-         display:flex; height:100vh; overflow:hidden; }
+         display:flex; height:100vh; overflow:hidden; padding-top:38px; }
   #stage { flex:1; overflow:hidden; cursor:grab; }
   #stage:active { cursor:grabbing; }
   #side { width:290px; min-width:290px; border-left:1px solid var(--line); padding:14px; overflow-y:auto; background:var(--panel); }
@@ -30,8 +30,29 @@
   #coord { position:absolute; left:12px; bottom:34px; color:var(--dim); font-size:11px; z-index:5;
            background:#161b22cc; padding:3px 8px; border-radius:5px; pointer-events:none; font-variant-numeric:tabular-nums; }
 </style>
+<style>
+  .nbo-nav { position:fixed; top:0; left:0; right:0; height:38px; z-index:10000; display:flex; align-items:center;
+    padding:0 16px; background:rgba(10,14,20,.92); backdrop-filter:blur(8px); border-bottom:1px solid #232b36;
+    font:12.5px -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+  .nbo-nav .brand { color:#e4022b; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
+  .nbo-nav a.nl { color:#8b98a8; text-decoration:none; padding:6px 12px; border-radius:6px; }
+  .nbo-nav a.nl:hover { color:#e8eef5; }
+  .nbo-nav a.nl.on { color:#fff; background:rgba(228,2,43,.2); }
+</style>
 </head>
 <body>
+<nav class="nbo-nav">
+  <a class="brand" href="/">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+</nav>
+<script>
+  (() => { const p = location.pathname;
+    document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
+  })();
+</script>
 <div style="position:relative;flex:1;">
   <div id="stage"></div>
   <div id="coord"></div>

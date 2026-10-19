@@ -9,7 +9,7 @@
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font:13px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; overflow:hidden; }
   #canvas-wrap { position:fixed; inset:0; }
-  #hud { position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:flex-start;
+  #hud { position:fixed; top:38px; left:0; right:0; display:flex; justify-content:space-between; align-items:flex-start;
          padding:14px 18px; background:linear-gradient(rgba(11,14,19,.92),transparent); pointer-events:none; z-index:10; }
   #hud > * { pointer-events:auto; }
   h1 { font-size:15px; text-shadow:0 1px 4px #000; }
@@ -23,12 +23,31 @@
   #info b { color:var(--text); font-size:13px; }
   #loading { position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
              background:var(--bg); z-index:100; color:var(--dim); font-size:14px; letter-spacing:.15em; transition:opacity .6s; }
+  .nbo-nav { position:fixed; top:0; left:0; right:0; height:38px; z-index:10000; display:flex; align-items:center;
+    padding:0 16px; background:rgba(10,14,20,.92); backdrop-filter:blur(8px); border-bottom:1px solid #232b36;
+    font:12.5px -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+  .nbo-nav .brand { color:#e4022b; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
+  .nbo-nav a.nl { color:#8b98a8; text-decoration:none; padding:6px 12px; border-radius:6px; }
+  .nbo-nav a.nl:hover { color:#e8eef5; }
+  .nbo-nav a.nl.on { color:#fff; background:rgba(228,2,43,.2); }
 </style>
 <script type="importmap">
 { "imports": { "three": "./three.module.min.js" } }
 </script>
 </head>
 <body>
+<nav class="nbo-nav">
+  <a class="brand" href="/">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+</nav>
+<script>
+  (() => { const p = location.pathname;
+    document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
+  })();
+</script>
 <div id="loading">正在构建数字孪生 …</div>
 <div id="canvas-wrap"></div>
 <div id="hud">
