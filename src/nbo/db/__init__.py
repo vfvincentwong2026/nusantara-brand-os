@@ -136,6 +136,12 @@ def seed(db_path: Path = DB_PATH) -> int:
                      dims["digital"], dims["owner"], dims["region"],
                      json.dumps(signals, ensure_ascii=False) if signals else None))
             n += 1
+        # 案例演示数据（社区集装箱店，P1 结构化实体）
+        case_file = SEED_DIR / "case_demo.json"
+        if case_file.exists():
+            from nbo.case import seed_case
+            seed_case(conn, json.loads(case_file.read_text(encoding="utf-8")))
+            n += 1
         conn.commit()
         return n
     finally:

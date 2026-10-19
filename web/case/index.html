@@ -179,16 +179,7 @@
   <h2 id="ops">门店运营演示面板</h2>
   <div class="sec-sub">全部为种子样本 / 模拟数据 · 口径：按日 · 门店 = 双 40 尺样板店 <span class="b b-demo">DEMO</span></div>
 
-  <div class="kpis">
-    <div class="kpi"><div class="v">86 单</div><div class="l">日交易数</div></div>
-    <div class="kpi"><div class="v">Rp 4.21 jt</div><div class="l">日销售额</div></div>
-    <div class="kpi"><div class="v">31.2%</div><div class="l">毛利率</div></div>
-    <div class="kpi"><div class="v">Rp 48,900</div><div class="l">客单价</div></div>
-    <div class="kpi"><div class="v">2 个</div><div class="l">缺货 SKU</div></div>
-    <div class="kpi"><div class="v">5 件</div><div class="l">临期库存（30 天内）</div></div>
-    <div class="kpi"><div class="v">96%</div><div class="l">配送准时率</div></div>
-    <div class="kpi"><div class="v">34%</div><div class="l">30 天复购率</div></div>
-  </div>
+  <div class="kpis" id="opsKpis"></div>
 
   <div class="grid2" style="margin-top:16px">
     <div class="card">
@@ -196,13 +187,11 @@
       <div class="stepper" id="stepper"></div>
       <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
         <button class="mini-btn" id="adv">推进下一步 →</button>
-        <span style="color:var(--dim);font-size:12.5px">订单 <b style="color:var(--text)">#CS-1042</b> · 3 SKU · Rp 132,500 · 配送</span>
+        <span style="color:var(--dim);font-size:12.5px" id="orderInfo"></span>
       </div>
       <table style="margin-top:14px">
         <tr><th>SKU</th><th>数量</th><th>状态</th></tr>
-        <tr><td>海苔脆片 20g</td><td>2</td><td><span class="b b-ok">有货</span></td></tr>
-        <tr><td>辣味薯片 65g</td><td>1</td><td><span class="b b-ok">有货</span></td></tr>
-        <tr><td>豆干 50g</td><td>1</td><td><span class="b b-warn">临期替换为虾条 60g</span></td></tr>
+        <tbody id="orderItems"></tbody>
       </table>
     </div>
 
@@ -210,12 +199,7 @@
       <h3>能源与设备</h3>
       <table>
         <tr><th>项目</th><th>状态</th><th>来源</th></tr>
-        <tr><td>电源模式</td><td>市电 + 发电机备援（候选）</td><td><span class="b b-tbd">待确认</span></td></tr>
-        <tr><td>关键负载</td><td>POS / 网络 / 基础照明 / 监控 / 必要冷藏</td><td><span class="b b-demo">概念</span></td></tr>
-        <tr><td>发电机</td><td>功率 / 续航 / 排烟 / 燃料安全 → 工程核算待确认</td><td><span class="b b-tbd">待确认</span></td></tr>
-        <tr><td>运行小时 / 燃料记录</td><td>演示 12h · 人工录入</td><td><span class="b b-demo">演示</span></td></tr>
-        <tr><td>停电记录</td><td>近 30 天 0 次（种子样本）</td><td><span class="b b-demo">演示</span></td></tr>
-        <tr><td>数字屏 / 音响</td><td>已标记安装位 · 无远程播放控制</td><td><span class="b b-demo">演示</span></td></tr>
+        <tbody id="energyBody"></tbody>
       </table>
     </div>
 
@@ -223,21 +207,15 @@
       <h3>音视频内容排期 <span class="b b-demo" style="margin-left:8px">计划播放 · 未接真实设备</span></h3>
       <table>
         <tr><th>素材</th><th>位置</th><th>时段</th><th>关联</th><th>状态</th></tr>
-        <tr><td>斋月组合促销</td><td>门头屏</td><td>17:00–21:00</td><td>SKU 节庆礼盒</td><td><span class="b b-demo">计划播放</span></td></tr>
-        <tr><td>新品：海苔脆片</td><td>橱窗屏</td><td>全天轮播</td><td>SKU006</td><td><span class="b b-demo">计划播放</span></td></tr>
-        <tr><td>社区公告 · 周五集市</td><td>音响</td><td>10:00–12:00</td><td>活动</td><td><span class="b b-warn">待审核</span></td></tr>
+        <tbody id="mediaBody"></tbody>
       </table>
     </div>
 
     <div class="card">
       <h3>SKU 与合规快照</h3>
       <table>
-        <tr><th>SKU</th><th>库存</th><th>补货</th><th>合规</th></tr>
-        <tr><td>辣味薯片 65g</td><td>620</td><td>5,720</td><td><span class="b b-ok">BPOM 有效</span></td></tr>
-        <tr><td>虾条 60g</td><td>380</td><td>3,854</td><td><span class="b b-warn">Halal 临期</span></td></tr>
-        <tr><td>豆干 50g</td><td>650</td><td>1,255</td><td><span class="b b-warn">BPOM 已过期</span></td></tr>
-        <tr><td>干脆面 40g</td><td>180</td><td>9,206</td><td><span class="b b-tbd">SNI 待核验</span></td></tr>
-        <tr><td>本店试制酱料</td><td>—</td><td>—</td><td><span class="b b-warn">⚠ 禁止建议上架</span></td></tr>
+        <tr><th>SKU</th><th>库存</th><th>日均销量</th><th>合规</th></tr>
+        <tbody id="skuBody"></tbody>
       </table>
       <div class="warn" style="margin-top:10px">未完成适用合规核验的 SKU 显示警告并禁止建议上架；未核验适用性前不假设每种商品都需全部证件。</div>
     </div>
@@ -269,6 +247,48 @@
 </footer>
 
 <script>
+const SRC_CLASS = { "真实接入": "b-ok", "人工录入": "b-ok", "种子样本": "b-demo", "模拟计算": "b-demo", "演示": "b-demo", "待确认": "b-tbd", "概念": "b-tbd" };
+const srcBadge = t => `<span class="b ${SRC_CLASS[t] || 'b-tbd'}">${t}</span>`;
+const certBadge = (s, blocked) => {
+  if (blocked) return '<span class="b b-warn">⚠ 禁止建议上架</span>';
+  if (/有效/.test(s)) return `<span class="b b-ok">${s}</span>`;
+  if (/临期|过期|待核验/.test(s)) return `<span class="b b-warn">${s}</span>`;
+  return `<span class="b b-tbd">${s}</span>`;
+};
+
+fetch('./data/case_ops.json').then(r => {
+  if (!r.ok) throw new Error(`case_ops.json 加载失败: ${r.status}（请先生成：python -m nbo.case --db nbo.db --out web/case/data/case_ops.json）`);
+  return r.json();
+}).then(d => {
+  // KPI
+  document.getElementById('opsKpis').innerHTML = Object.values(d.kpis).map(k =>
+    `<div class="kpi"><div class="v">${k.v}</div><div class="l">${k.l}</div><div class="note">${k.source_type}</div></div>`).join('');
+
+  // 订单流
+  const STEPS = d.order_steps, o = d.flow_order || {};
+  let si = Math.max(0, STEPS.indexOf(o.status));
+  const stEl = document.getElementById('stepper');
+  const renderSteps = () => stEl.innerHTML = STEPS.map((s, i) =>
+    `<div class="step ${i<si?'done':i===si?'cur':''}">${s}</div>`).join('');
+  document.getElementById('adv').onclick = () => { si = (si + 1) % (STEPS.length + 1); if (si === STEPS.length) si = 0; renderSteps(); };
+  renderSteps();
+  document.getElementById('orderInfo').innerHTML =
+    `订单 <b style="color:var(--text)">#${o.id || '—'}</b> · ${(o.items || []).length} SKU · Rp ${Number(o.amount_idr || 0).toLocaleString()} · ${o.fulfillment_type || ''} · ${o.channel || ''}`;
+  document.getElementById('orderItems').innerHTML = (o.items || []).map(it =>
+    `<tr><td>${it.sku}</td><td>${it.qty}</td><td>${/有货/.test(it.state) ? '<span class="b b-ok">有货</span>' : `<span class="b b-warn">${it.state}</span>`}</td></tr>`).join('');
+
+  // 能源 / 媒体 / SKU
+  document.getElementById('energyBody').innerHTML = d.energy.map(e =>
+    `<tr><td>${e.source}</td><td>${e.generator_status}</td><td>${srcBadge(e.source_type)}</td></tr>`).join('');
+  document.getElementById('mediaBody').innerHTML = d.media.map(m =>
+    `<tr><td>${m.asset_title}</td><td>${m.device}</td><td>${m.slot}</td><td>${m.linked}</td><td>${/待审核/.test(m.status) ? '<span class="b b-warn">待审核</span>' : srcBadge(m.status)}</td></tr>`).join('');
+  document.getElementById('skuBody').innerHTML = d.skus.map(k =>
+    `<tr><td>${k.name}${k.compliance_note ? `<div style="color:var(--dim);font-size:11px">${k.compliance_note}</div>` : ''}</td>` +
+    `<td>${k.stock}${k.reserved ? `（锁定 ${k.reserved}）` : ''}</td><td>${k.avg_daily_sales}</td><td>${certBadge(k.compliance_status, k.blocked)}</td></tr>`).join('');
+}).catch(e => {
+  document.getElementById('opsKpis').innerHTML = `<div style="color:#f85149">加载失败：${e.message}</div>`;
+});
+
 const TIERS = [
   { id:'A', t:'档位 A · 单 20 尺箱', s:'约 13.9 ㎡ 毛坯 · 微型快取店 · 40–80 SKU', d:'<b>5.90 × 2.352m</b> 原始内部参考 · 过道狭窄，不适合作主推可逛店；适合试点 / 快取自提' },
   { id:'B', t:'档位 B · 双 20 尺并排', s:'约 27.7 ㎡ 概念净尺寸 · 首店试运营推荐 · 100–140 SKU', d:'<b>5.9 × 4.7m</b> 概念净尺寸（待复测）· 外部占地约 6.06 × 4.88m · 销售 15–17㎡ / 后仓 3–4㎡ / 收银拣货 2.5–3.5㎡ / 冷藏 2–3㎡', rec:true },
@@ -285,17 +305,6 @@ function renderTiers() {
   tiersEl.querySelectorAll('.tier').forEach(el => el.onclick = () => { cur = el.dataset.id; renderTiers(); });
 }
 renderTiers();
-
-// 订单履约状态机（演示）
-const STEPS = ['新订单','待拣货','拣货中','待复核','待自提/配送','配送中','已完成'];
-let si = 0;
-const stEl = document.getElementById('stepper');
-function renderSteps() {
-  stEl.innerHTML = STEPS.map((s, i) =>
-    `<div class="step ${i<si?'done':i===si?'cur':''}">${s}</div>`).join('');
-}
-document.getElementById('adv').onclick = () => { si = (si + 1) % (STEPS.length + 1); if (si === STEPS.length) si = 0; renderSteps(); };
-renderSteps();
 </script>
 </body>
 </html>
