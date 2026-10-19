@@ -57,7 +57,8 @@ def main():
     (SITE / "case/assets").mkdir(parents=True)
     shutil.copy(ROOT / "web/case/index.html", SITE / "case")
     for f in (ROOT / "web/case/data").glob("*.json"):
-        shutil.copy(f, SITE / "case/data")    for f in (ROOT / "web/case/assets").glob("*.jpg"):
+        shutil.copy(f, SITE / "case/data")
+    for f in (ROOT / "web/case/assets").glob("*.jpg"):
         shutil.copy(f, SITE / "case/assets")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
