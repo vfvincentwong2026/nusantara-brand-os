@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/ui/tokens.css">
 <title>SKU 去化大屏 · Nusantara Brand OS</title>
 <script src="./echarts.min.js"></script>
 <style>
@@ -61,7 +62,12 @@
   })();
 </script>
 <header>
-  <h1>SKU 去化大屏 · <span id="store-name">…</span></h1>
+  <h1>SKU 去化大屏 · <span id="store-name">…</span>
+    <select id="store-sel" style="margin-left:14px;background:#161b22;color:#e6edf3;border:1px solid #2d333b;border-radius:6px;padding:4px 10px;font-size:13px">
+      <option value="./data/dashboard.json">2,000㎡ 标准店</option>
+      <option value="../case/data/dashboard-case.json">56㎡ 案例集装箱店</option>
+    </select>
+  </h1>
   <div class="meta" id="generated-at"></div>
 </header>
 
@@ -88,8 +94,9 @@ const STATUS_LABEL = { ok: '正常', watch: '关注', high: '高风险', out_of_
 const STATUS_COLOR = { ok: '#3fb950', watch: '#d29922', high: '#f0883e', out_of_stock: '#f85149' };
 const badge = s => `b-${s}`;
 
-fetch('./data/dashboard.json').then(r => {
-  if (!r.ok) throw new Error(`dashboard.json 加载失败: ${r.status}（请先用 python -m nbo.dashboard --out web/dashboard/data/dashboard.json 生成）`);
+function loadDash(url) {
+fetch(url).then(r => {
+  if (!r.ok) throw new Error(`数据加载失败: ${r.status}（${url}）`);
   return r.json();
 }).then(d => {
   document.getElementById('store-name').textContent = `${d.store.name}（${d.store.island_region}）`;
@@ -104,10 +111,13 @@ fetch('./data/dashboard.json').then(r => {
     [k.cert_alert, '合规预警（过期/临期/撤证）'],
   ].map(([v, l]) => `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
 
-  // 状态分布环图
+  // 状态分布环图（重渲染前先释放旧实例）
   const counts = { ok: 0, watch: 0, high: 0, out_of_stock: 0 };
   d.skus.forEach(s => counts[s.status]++);
-  echarts.init(document.getElementById('status-chart')).setOption({
+  const scDom = document.getElementById('status-chart'), dosDom = document.getElementById('dos-chart');
+  echarts.getInstanceByDom(scDom)?.dispose();
+  echarts.getInstanceByDom(dosDom)?.dispose();
+  echarts.init(scDom).setOption({
     title: { text: '库存状态分布', textStyle: { color: '#e6edf3', fontSize: 14 }, left: 12, top: 10 },
     tooltip: {},
     series: [{
@@ -122,7 +132,7 @@ fetch('./data/dashboard.json').then(r => {
   // 可售天数条形图（升序=最危险在前）
   const sorted = [...d.skus].sort((a, b) =>
     (a.days_of_supply ?? 999) - (b.days_of_supply ?? 999));
-  echarts.init(document.getElementById('dos-chart')).setOption({
+  echarts.init(dosDom).setOption({
     title: { text: `可售天数（补货线 = LT_eff ${d.params.lt_eff} 天）`, textStyle: { color: '#e6edf3', fontSize: 14 }, left: 12, top: 10 },
     tooltip: { trigger: 'axis' },
     grid: { left: 90, right: 30, top: 45, bottom: 25 },
@@ -155,6 +165,10 @@ fetch('./data/dashboard.json').then(r => {
 }).catch(e => {
   document.body.innerHTML = `<div style="padding:40px;color:#f85149">加载失败：${e.message}</div>`;
 });
+}
+const sel = document.getElementById('store-sel');
+sel.onchange = () => loadDash(sel.value);
+loadDash(sel.value);
 </script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/ui/tokens.css">
 <title>案例 · Nusantara Community Store 社区集装箱店</title>
 <style>
   :root { --bg:#0a0e14; --panel:#12171f; --line:#232b36; --text:#e8eef5; --dim:#8b98a8;
@@ -299,12 +300,20 @@ let cur = 'D';
 const tiersEl = document.getElementById('tiers'), detailEl = document.getElementById('tierDetail');
 function renderTiers() {
   tiersEl.innerHTML = TIERS.map(t =>
-    `<div class="tier ${t.id===cur?'on':''}" data-id="${t.id}"><div class="t">${t.t}</div><div class="s">${t.s}</div>${t.rec?'<div class="badge-rec">✓ 推荐</div>':''}</div>`).join('');
+    `<div class="tier spot ${t.id===cur?'on':''}" data-id="${t.id}"><div class="t">${t.t}</div><div class="s">${t.s}</div>${t.rec?'<div class="badge-rec">✓ 推荐</div>':''}</div>`).join('');
   const t = TIERS.find(x => x.id === cur);
   detailEl.innerHTML = `<div style="min-width:260px">${t.d}</div><div class="warn">⚠ 示意尺寸，施工前复测 · 分区面积为设计目标区间，不机械相加</div>`;
   tiersEl.querySelectorAll('.tier').forEach(el => el.onclick = () => { cur = el.dataset.id; renderTiers(); });
 }
 renderTiers();
+</script>
+<script>
+/* 聚光灯卡：跟随指针的径向高光 */
+document.querySelectorAll('.spot').forEach(el => el.addEventListener('pointermove', e => {
+  const r = el.getBoundingClientRect();
+  el.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
+  el.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
+}));
 </script>
 </body>
 </html>

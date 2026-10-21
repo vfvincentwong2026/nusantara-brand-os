@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/ui/tokens.css">
 <title>Nusantara Brand OS · 中国品牌落地印尼的作战系统</title>
 <meta name="description" content="零食先行的印尼品牌落地作战平台：合规引擎、WarungScout 渠道评分、门店数字孪生、SKU 去化与补货模拟。引擎层本地计算，Cloudflare 全球边缘交付。">
 <style>
@@ -88,31 +89,31 @@
   <h2 class="sec-title">五大作战模块 · 点开即实时系统</h2>
   <div class="sec-sub">以下为线上真实页面截屏，非设计稿。每个模块都可交互、可下钻。</div>
   <div class="mods">
-    <a class="mod" href="./dashboard/">
+    <a class="mod spot lift" href="./dashboard/">
       <img class="shot" src="./assets/preview-dashboard.png" alt="SKU 去化大屏">
       <div class="body"><div class="tag">SUPPLY CHAIN</div><h3>SKU 去化大屏</h3>
         <p>在库 / 临期 / 缺货 / 合规预警一屏总览；预测口径内建斋月·开斋·Harbolnas 节庆因子与回测 MAPE；每条 SKU 给出建议补货量。</p>
         <span class="go">打开大屏 →</span></div>
     </a>
-    <a class="mod" href="./map/">
+    <a class="mod spot lift" href="./map/">
       <img class="shot" src="./assets/preview-map.png" alt="渠道地图">
       <div class="body"><div class="tag">CHANNEL INTELLIGENCE</div><h3>渠道地图 · WarungScout 评分融合</h3>
         <p>Warung 点位按 7 维评分分级落图，Alfamart / Indomaret 500m 竞品覆盖圈，覆盖缺口自动生成优先铺货清单 + WhatsApp 触达。真实数据与演示种子一眼区分。</p>
         <span class="go">打开地图 →</span></div>
     </a>
-    <a class="mod" href="./three/">
+    <a class="mod spot lift" href="./three/">
       <img class="shot" src="./assets/preview-3d.png" alt="3D 数字孪生">
       <div class="body"><div class="tag">DIGITAL TWIN</div><h3>3D 门店数字孪生</h3>
         <p>500㎡ / 2,000㎡ / 5,000㎡ 三档印尼主流门店实时渲染：客流动线寻路模拟、热力图、MILP 空间优化前后对比、自动漫游。</p>
         <span class="go">打开 3D 孪生 →</span></div>
     </a>
-    <a class="mod" href="./floorplan/">
+    <a class="mod spot lift" href="./floorplan/">
       <img class="shot" src="./assets/preview-2d.png" alt="2D 平面编辑器">
       <div class="body"><div class="tag">PLANOGRAM</div><h3>2D 平面编辑器</h3>
         <p>货架拖拽编辑、热力/网格双视图、JSON 导入导出——与 3D 孪生共享同一份 planogram，编辑一次双端同步。</p>
         <span class="go">打开编辑器 →</span></div>
     </a>
-    <a class="mod" href="./case/">
+    <a class="mod spot lift" href="./case/">
       <div class="shot" style="display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(255,215,0,.10),rgba(228,2,43,.08));aspect-ratio:1370/758;border-bottom:1px solid var(--line)">
         <div style="text-align:center">
           <div style="font-size:44px">🏪</div>
@@ -143,5 +144,13 @@
   <div class="wrap">Nusantara Brand OS · 引擎层本地计算（Python）→ 静态渲染 → Cloudflare Pages 交付 · 演示数据为种子样本，接 WarungScout D1 实时数据一键同步</div>
 </footer>
 
+<script>
+/* 聚光灯卡：跟随指针的径向高光 */
+document.querySelectorAll('.spot').forEach(el => el.addEventListener('pointermove', e => {
+  const r = el.getBoundingClientRect();
+  el.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
+  el.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
+}));
+</script>
 </body>
 </html>

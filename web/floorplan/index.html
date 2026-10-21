@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/ui/tokens.css">
 <title>2D 平面图编辑器 · Nusantara Brand OS</title>
 <script src="./konva.min.js"></script>
 <style>
   :root { --bg:#0b0e13; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#8b949e; --accent:#e4022b; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font:13px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
-         display:flex; height:100vh; overflow:hidden; padding-top:38px; }
+         display:flex; height:100dvh; overflow:hidden; padding-top:38px; }
   #stage { flex:1; overflow:hidden; cursor:grab; }
   #stage:active { cursor:grabbing; }
   #side { width:290px; min-width:290px; border-left:1px solid var(--line); padding:14px; overflow-y:auto; background:var(--panel); }

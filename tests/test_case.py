@@ -45,7 +45,23 @@ def test_write_case_ops(tmp_path):
     seed(db)
     out = tmp_path / "case" / "case_ops.json"
     d = build_case_ops(db)
-    from nbo.case import write_case_ops
-    write_case_ops(out, db_path=db)
+    from nbo.case import write_json
+    write_json(d, out)
     on_disk = json.loads(out.read_text(encoding="utf-8"))
     assert on_disk == d
+
+
+def test_build_case_map_and_dashboard(tmp_path):
+    from nbo.case import build_case_dashboard, build_case_map
+    db = tmp_path / "t.db"
+    seed(db)
+    m = build_case_map(db)
+    assert m["name"] and m["lat"] and m["link"] == "/case/"
+    assert "待复测" in m["net_size"]
+    dd = build_case_dashboard(db)
+    assert dd["store"]["demo"] is True
+    assert dd["kpis"]["on_hand_total"] == sum(k["on_hand"] for k in dd["skus"])
+    # 状态键与大屏前端一致；blocked SKU 归入缺货
+    assert all(r["status"] in ("ok", "watch", "high", "out_of_stock") for r in dd["skus"])
+    blocked = [r for r in dd["skus"] if r["blocked"]]
+    assert blocked and all(r["status"] == "out_of_stock" for r in blocked)

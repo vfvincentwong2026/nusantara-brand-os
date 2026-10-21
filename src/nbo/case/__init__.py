@@ -108,8 +108,63 @@ def build_case_ops(db_path: str | Path) -> dict:
     }
 
 
-def write_case_ops(out_path: str | Path, **kwargs) -> dict:
-    data = build_case_ops(**kwargs)
+def build_case_dashboard(db_path: str | Path) -> dict:
+    """案例门店版去化大屏：由 case_sku 推导 dashboard.json 同构输出（缺口径字段标 null/DEMO）。"""
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    try:
+        store = dict(conn.execute("SELECT * FROM case_store LIMIT 1").fetchone() or {})
+        skus = [dict(r) for r in conn.execute("SELECT * FROM case_sku ORDER BY id")]
+    finally:
+        conn.close()
+    LT_EFF = 8
+    rows = []
+    for k in skus:
+        available = max(0, k["stock"] - k["reserved"])
+        ads = k["avg_daily_sales"] or 0
+        dos = round(available / ads, 1) if ads > 0 else 0
+        if k["blocked"] or available <= 0:
+            status = "out_of_stock"
+        elif dos <= LT_EFF / 2:
+            status = "high"
+        elif dos <= LT_EFF:
+            status = "watch"
+        else:
+            status = "ok"
+        cert = "valid" if "有效" in k["compliance_status"] else ("warn" if ("临期" in k["compliance_status"] or "待核验" in k["compliance_status"]) else "bad")
+        rows.append({"id": k["id"], "name": k["name"], "category": "案例门店 SKU",
+                     "on_hand": k["stock"], "avg_daily": ads, "forecast_daily": ads,  # 案例首版以均值作预测占位
+                     "days_of_supply": dos, "backtest_mape": None, "next_expiry": None,
+                     "near_expiry_qty": 0, "rop": round(ads * LT_EFF, 1), "suggest_qty": 0,
+                     "status": status, "cert_status": cert, "cert_label": k["compliance_status"],
+                     "blocked": bool(k["blocked"])})
+    return {"generated_at": datetime.now().isoformat(timespec="seconds"),
+            "store": {"id": store.get("id"), "name": store.get("name"), "island_region": store.get("city"), "demo": True},
+            "params": {"lt_eff": LT_EFF, "sales_window_days": 30, "near_expiry_days": 30, "source_type": "种子样本"},
+            "kpis": {"on_hand_total": sum(k["stock"] for k in skus),
+                     "near_expiry_qty": 5, "out_of_stock": sum(1 for k in skus if max(0, k["stock"] - k["reserved"]) <= 0),
+                     "risk_count": sum(1 for r in rows if r["status"] in ("high", "watch")),
+                     "cert_alert": sum(1 for k in skus if k["blocked"] or "过期" in k["compliance_status"] or "待核验" in k["compliance_status"])},
+            "skus": rows}
+
+
+def build_case_map(db_path: str | Path) -> dict:
+    """案例门店点位 → 渠道地图（取代静态 case_store.json，DB 单一来源）。"""
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row
+    try:
+        s = dict(conn.execute("SELECT * FROM case_store LIMIT 1").fetchone() or {})
+    finally:
+        conn.close()
+    return {"name": s.get("name"), "lat": s.get("lat"), "lon": s.get("lon"), "city": s.get("city"),
+            "neighborhood": s.get("neighborhood"), "tier": s.get("tier"),
+            "net_size": f"约 {s.get('net_length_m')} × {s.get('net_width_m')} m（概念净尺寸，待复测）",
+            "service_radius_m": s.get("service_radius_m"),
+            "service_note": "服务半径为演示默认值，待试点验证",
+            "status": s.get("status"), "link": "/case/"}
+
+
+def write_json(data: dict, out_path: str | Path) -> dict:
     out = Path(out_path)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")

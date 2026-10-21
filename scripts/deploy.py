@@ -38,7 +38,9 @@ def main():
         sh([sys.executable, "-m", "nbo.space", "--db", "nbo.db",
             "--store", a.store, "--out-dir", "web/twin/data"])
         sh([sys.executable, "-m", "nbo.case", "--db", "nbo.db",
-            "--out", "web/case/data/case_ops.json"])
+            "--out", "web/case/data/case_ops.json",
+            "--out-dashboard", "web/case/data/dashboard-case.json",
+            "--out-map", "web/map/data/case_store.json"])
 
     # 组装部署目录
     if SITE.exists():
@@ -68,6 +70,9 @@ def main():
     for f in list(out_dir.glob("planogram-*.json")) + list(out_dir.glob("flow-*.json")) + list(out_dir.glob("optimize-*.json")):
         shutil.copy(f, SITE / "twin/data")
     shutil.copy(ROOT / "web/index.html", SITE / "index.html")
+    (SITE / "ui").mkdir(exist_ok=True)
+    for f in (ROOT / "web/ui").glob("*.css"):
+        shutil.copy(f, SITE / "ui")
     (SITE / "assets").mkdir(exist_ok=True)
     for f in (ROOT / "web/assets").glob("*.png"):
         shutil.copy(f, SITE / "assets")

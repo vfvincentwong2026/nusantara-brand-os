@@ -47,3 +47,4 @@ site/
 .shots/
 nusantara-store-site-assets.zip
 web/case/assets/*.png
+web/map/data/case_store.json
