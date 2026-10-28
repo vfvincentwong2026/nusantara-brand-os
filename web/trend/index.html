@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/ui/tokens.css">
+<title>网红零食热点雷达 · Nusantara Brand OS</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  .wrap { max-width:1280px; margin:0 auto; padding:64px 24px 80px; }
+  .head { margin-bottom:28px; }
+  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(232,178,70,.5); border-radius:999px;
+               color:#e8b246; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+  .head h1 { font-size:34px; font-weight:800; line-height:1.2; }
+  .head h1 em { color:#e4022b; font-style:normal; }
+  .head p { margin-top:10px; color:#8b98a8; font-size:13px; max-width:760px; line-height:1.8; }
+  .demo-bar { background:rgba(232,178,70,.1); border:1px solid rgba(232,178,70,.4); color:#e8b246;
+              padding:8px 14px; border-radius:8px; font-size:12px; margin-bottom:20px; }
+  .layout { display:grid; grid-template-columns:1fr 340px; gap:20px; align-items:start; }
+  @media (max-width:960px) { .layout { grid-template-columns:1fr; } }
+  .panel { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; }
+  .panel h2 { font-size:14px; letter-spacing:.08em; color:#8b98a8; margin-bottom:14px; font-weight:600; }
+  .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .tabs button { background:#181f29; color:#8b98a8; border:1px solid #232c3a; border-radius:999px;
+                 padding:6px 16px; font-size:12px; cursor:pointer; transition:all .25s cubic-bezier(.16,1,.3,1); }
+  .tabs button.on { background:rgba(228,2,43,.18); color:#ff5c7a; border-color:rgba(228,2,43,.5); }
+  .tabs button:hover { color:#e8eef5; }
+  .card { background:#151c26; border:1px solid #1f2733; border-radius:12px; padding:16px 18px; margin-bottom:12px;
+          transition:border-color .25s, transform .25s cubic-bezier(.16,1,.3,1); }
+  .card:hover { border-color:#33405a; transform:translateY(-2px); }
+  .card .top { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .card .rank { color:#e4022b; font-weight:800; font-size:18px; font-family:Consolas,monospace; }
+  .card .name { font-size:16px; font-weight:700; }
+  .card .local { color:#5b6779; font-size:12px; }
+  .card .meta { display:flex; gap:8px; margin:6px 0 10px; flex-wrap:wrap; }
+  .chip { font-size:10px; padding:2px 10px; border-radius:999px; border:1px solid #232c3a; color:#8b98a8; }
+  .chip.region { color:#e8b246; border-color:rgba(232,178,70,.4); }
+  .chip.rep-high { color:#34d17b; border-color:rgba(52,209,123,.4); }
+  .chip.rep-mid { color:#e8b246; border-color:rgba(232,178,70,.4); }
+  .chip.rep-low { color:#ff5c7a; border-color:rgba(255,92,122,.4); }
+  .heat { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .heat .bar { flex:1; height:6px; background:#1c2430; border-radius:3px; overflow:hidden; }
+  .heat .bar i { display:block; height:100%; background:linear-gradient(90deg,#e4022b,#e8b246); border-radius:3px; }
+  .heat .v { font-family:Consolas,monospace; font-size:12px; color:#e8b246; }
+  .sec { font-size:12px; line-height:1.75; margin-top:8px; }
+  .sec b { display:block; color:#5b6779; font-weight:600; font-size:10px; letter-spacing:.12em; margin-bottom:3px; }
+  .sec.hot b { color:#e8b246; } .sec.fit b { color:#34d17b; } .sec.adapt b { color:#ff5c7a; } .sec.comp b { color:#e4022b; }
+  .fitline { display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed #232c3a; }
+  .fitline .bar { flex:1; height:6px; background:#1c2430; border-radius:3px; overflow:hidden; }
+  .fitline .bar i { display:block; height:100%; border-radius:3px; }
+  .fitline .v { font-size:12px; font-family:Consolas,monospace; }
+  .prio { display:flex; gap:10px; padding:10px 0; border-bottom:1px dashed #232c3a; }
+  .prio:last-child { border-bottom:none; }
+  .prio .n { color:#e8b246; font-weight:800; font-family:Consolas,monospace; }
+  .prio .t { flex:1; }
+  .prio .t .nm { font-size:13px; font-weight:700; }
+  .prio .t .act { font-size:11px; color:#8b98a8; line-height:1.6; margin-top:3px; }
+  .dir { font-size:12px; color:#aebacd; line-height:1.8; padding:8px 0 8px 14px; border-left:2px solid rgba(228,2,43,.5); margin-bottom:10px; }
+  .sig { font-size:11px; color:#5b6779; line-height:1.7; }
+  .sig::before { content:"▸ "; color:#33405a; }
+</style>
+</head>
+<body>
+<nav class="nbo-nav">
+  <a class="brand" href="/">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+  <a class="nl" data-p="case" href="/case/">案例</a>
+  <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
+</nav>
+<div class="wrap">
+  <div class="head">
+    <div class="tag">TREND SCOUT · 6 REGIONS / 3 MONTHS</div>
+    <h1>网红零食热点雷达：<em>东亚爆款</em>怎么抄到印尼货架</h1>
+    <p>全网热点信号（TikTok / X / 便利店榜单）→ 网红视角拆解"为什么火"→ 印尼适配评分与复制性评估 →
+       反向输出时尚网红店选品与改造方向。让顶级团队的策略不是凭感觉，是按数据排优先级。</p>
+  </div>
+  <div class="demo-bar">⚠ DEMO 当前为演示种子数据（18 款 · 近 3 个月窗口）；信号字段与真实接入（X/TikTok 热点 API）对齐，替换 seed 即切换。</div>
+  <div class="layout">
+    <div>
+      <div class="panel">
+        <h2>区域筛选</h2>
+        <div class="tabs" id="tabs"></div>
+        <div id="list"></div>
+      </div>
+    </div>
+    <div>
+      <div class="panel" style="margin-bottom:20px;">
+        <h2>🇮🇩 反向指导 · 优先复制 TOP5</h2>
+        <div id="prio"></div>
+      </div>
+      <div class="panel">
+        <h2>网红店打法方向</h2>
+        <div id="dirs"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const state = { data: null, region: '全部' };
+const REP_CLS = { '高': 'rep-high', '中': 'rep-mid', '低': 'rep-low' };
+const FIT_COLOR = v => v >= 70 ? '#34d17b' : v >= 60 ? '#e8b246' : '#ff5c7a';
+
+function esc(s) { return (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function renderTabs() {
+  const regs = ['全部', ...state.data.regions];
+  document.getElementById('tabs').innerHTML = regs.map(r =>
+    `<button class="${r === state.region ? 'on' : ''}" onclick="setRegion('${r}')">${r}</button>`).join('');
+}
+
+function card(s, i) {
+  const fit = Math.round(s.indo_fit);
+  return `<div class="card">
+    <div class="top"><span class="rank">${String(i + 1).padStart(2, '0')}</span>
+      <span class="name">${esc(s.name)}</span><span class="local">${esc(s.name_local)}</span></div>
+    <div class="meta">
+      <span class="chip region">${esc(s.region)}</span>
+      <span class="chip">${esc(s.category)}</span>
+      <span class="chip ${REP_CLS[s.replicability]}">复制性 ${s.replicability}</span>
+    </div>
+    <div class="heat"><div class="bar"><i style="width:${s.heat}%"></i></div><span class="v">${Math.round(s.heat)}°</span></div>
+    <div class="sec hot"><b>为什么火 · 网红视角</b>${esc(s.why_hot)}</div>
+    <div class="sec"><b>病毒式玩法</b>${esc(s.viral_format)}</div>
+    <div class="sec"><b>热度信号</b><div class="sig">${s.heat_signals.map(esc).join('</div><div class="sig">')}</div></div>
+    <div class="fitline"><span style="font-size:11px;color:#5b6779;">印尼适配</span>
+      <div class="bar"><i style="width:${fit}%;background:${FIT_COLOR(fit)}"></i></div>
+      <span class="v" style="color:${FIT_COLOR(fit)}">${fit}</span></div>
+    <div class="sec fit"><b>适配判断</b>${esc(s.fit_reasons)}</div>
+    <div class="sec adapt"><b>本地化改造</b>${esc(s.adaptation)}</div>
+    <div class="sec comp"><b>合规前置</b>${esc(s.compliance_note)}</div>
+    <div class="sec"><b>复制性说明</b>${esc(s.repl_reason)}</div>
+  </div>`;
+}
+
+function renderList() {
+  const snacks = state.region === '全部' ? state.data.snacks : state.data.by_region[state.region] || [];
+  document.getElementById('list').innerHTML = snacks.map(card).join('');
+}
+
+function renderSide() {
+  const g = state.data.guidance;
+  document.getElementById('prio').innerHTML = g.priority_copies.map((p, i) =>
+    `<div class="prio"><span class="n">${i + 1}</span><div class="t">
+       <div class="nm">${esc(p.name)} <span style="color:#5b6779;font-weight:400;font-size:11px;">${esc(p.region)} · 适配 ${Math.round(p.indo_fit)} · 复制${p.replicability}</span></div>
+       <div class="act">${esc(p.action)}</div></div></div>`).join('');
+  document.getElementById('dirs').innerHTML = g.directions.map(d => `<div class="dir">${esc(d)}</div>`).join('');
+}
+
+function setRegion(r) { state.region = r; renderTabs(); renderList(); }
+
+fetch('./data/trend_snacks.json').then(r => r.json()).then(d => {
+  state.data = d;
+  renderTabs(); renderList(); renderSide();
+});
+const p = location.pathname;
+document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
+</script>
+</body>
+</html>

@@ -142,6 +142,10 @@ def seed(db_path: Path = DB_PATH) -> int:
             from nbo.case import seed_case
             seed_case(conn, json.loads(case_file.read_text(encoding="utf-8")))
             n += 1
+        # 热点零食雷达演示数据
+        from nbo.trend import seed_trend
+        seed_trend(conn)
+        n += 1
         conn.commit()
         return n
     finally:

@@ -41,6 +41,8 @@ def main():
             "--out", "web/case/data/case_ops.json",
             "--out-dashboard", "web/case/data/dashboard-case.json",
             "--out-map", "web/map/data/case_store.json"])
+        sh([sys.executable, "-m", "nbo.trend", "--db", "nbo.db",
+            "--out", "web/trend/data/trend_snacks.json"])
 
     # 组装部署目录
     if SITE.exists():
@@ -62,6 +64,10 @@ def main():
         shutil.copy(f, SITE / "case/data")
     for f in (ROOT / "web/case/assets").glob("*.jpg"):
         shutil.copy(f, SITE / "case/assets")
+    # 热点雷达
+    (SITE / "trend/data").mkdir(parents=True)
+    shutil.copy(ROOT / "web/trend/index.html", SITE / "trend")
+    shutil.copy(ROOT / "web/trend/data/trend_snacks.json", SITE / "trend/data")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)
