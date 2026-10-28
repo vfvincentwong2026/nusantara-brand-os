@@ -146,6 +146,10 @@ def seed(db_path: Path = DB_PATH) -> int:
         from nbo.trend import seed_trend
         seed_trend(conn)
         n += 1
+        # 加盟体系演示数据
+        from nbo.franchise import seed_franchise
+        seed_franchise(conn)
+        n += 1
         conn.commit()
         return n
     finally:

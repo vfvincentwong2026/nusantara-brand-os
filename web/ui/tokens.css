@@ -102,6 +102,7 @@ button:active, .btn:active {
 }
 .nbo-nav a.nl:hover { color: var(--text-primary); }
 .nbo-nav a.nl.on { color: #fff; background: var(--accent-soft); }
+.nbo-nav .sep { color: var(--border-default); margin: 0 2px; user-select: none; }
 
 @media (max-width: 640px) {
   .nbo-nav { overflow-x: auto; }

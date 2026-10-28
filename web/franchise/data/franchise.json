@@ -1,0 +1,289 @@
+{
+  "generated_at": "2026-10-29T02:26:20",
+  "demo": true,
+  "fx": {
+    "rmb_to_idr": 2200,
+    "note": "演示汇率，签约以实际牌价为准"
+  },
+  "budget_anchor": "单店总投资 8–10 万 RMB ≈ Rp 176–220 juta",
+  "formats": [
+    {
+      "id": "snack",
+      "name": "时尚零食集合店",
+      "concept": "雷达 S 级概念直接上架：东亚爆款本地化 + 机制型包装",
+      "store_sqm": 35.0,
+      "capex_rmb": 9.5,
+      "capex_idr": 209000000,
+      "capex_display": "9.5 万 RMB ≈ Rp 209.0 jt",
+      "package": {
+        "加盟费": 2.0,
+        "设备": 3.0,
+        "装修装配": 2.5,
+        "首批货": 1.2,
+        "保证金": 0.5,
+        "流动资金": 0.3
+      },
+      "daily_sales_idr": 4500000.0,
+      "gross_margin_pct": 0.32,
+      "monthly_fixed_idr": 30000000.0,
+      "monthly_profit_idr": 13200000,
+      "payback_months": 15.8,
+      "staff": 3,
+      "supply_chain": [
+        "休闲零食批发链",
+        "进口爆品代购通道",
+        "机制包装印刷厂"
+      ],
+      "key_risk": "SKU 汰换快，滞销依赖雷达周更",
+      "source_type": "演示"
+    },
+    {
+      "id": "deli",
+      "name": "熟食卤味档口",
+      "concept": "即食档口 + 晚市加成，复购最强业态",
+      "store_sqm": 12.0,
+      "capex_rmb": 9.0,
+      "capex_idr": 198000000,
+      "capex_display": "9.0 万 RMB ≈ Rp 198.0 jt",
+      "package": {
+        "加盟费": 1.8,
+        "设备": 3.2,
+        "装修装配": 2.0,
+        "首批货": 1.0,
+        "保证金": 0.5,
+        "流动资金": 0.5
+      },
+      "daily_sales_idr": 3500000.0,
+      "gross_margin_pct": 0.45,
+      "monthly_fixed_idr": 26000000.0,
+      "monthly_profit_idr": 21250000,
+      "payback_months": 9.3,
+      "staff": 2,
+      "supply_chain": [
+        "中央厨房半成品",
+        "冷链日配",
+        "Halal 认证肉源"
+      ],
+      "key_risk": "食安与 Halal 合规一票否决",
+      "source_type": "演示"
+    },
+    {
+      "id": "coffee",
+      "name": "精品咖啡档",
+      "concept": "外带窗口 + 3 款招牌，人效最高的饮品业态",
+      "store_sqm": 15.0,
+      "capex_rmb": 9.999999999999998,
+      "capex_idr": 220000000,
+      "capex_display": "10.0 万 RMB ≈ Rp 220.0 jt",
+      "package": {
+        "加盟费": 2.5,
+        "设备": 3.5,
+        "装修装配": 2.2,
+        "首批货": 0.6,
+        "保证金": 0.7,
+        "流动资金": 0.5
+      },
+      "daily_sales_idr": 2800000.0,
+      "gross_margin_pct": 0.62,
+      "monthly_fixed_idr": 30000000.0,
+      "monthly_profit_idr": 22080000,
+      "payback_months": 10.0,
+      "staff": 2,
+      "supply_chain": [
+        "咖啡豆烘焙坊",
+        "乳制品日配",
+        "纸杯包材厂"
+      ],
+      "key_risk": "商圈依赖强，选址权重高于一切",
+      "source_type": "演示"
+    },
+    {
+      "id": "tea",
+      "name": "手摇奶茶档",
+      "concept": "加盟体系最成熟品类，培训与 SOP 现成度最高",
+      "store_sqm": 10.0,
+      "capex_rmb": 8.8,
+      "capex_idr": 193600000,
+      "capex_display": "8.8 万 RMB ≈ Rp 193.6 jt",
+      "package": {
+        "加盟费": 2.2,
+        "设备": 3.0,
+        "装修装配": 2.0,
+        "首批货": 0.8,
+        "保证金": 0.5,
+        "流动资金": 0.3
+      },
+      "daily_sales_idr": 2600000.0,
+      "gross_margin_pct": 0.6,
+      "monthly_fixed_idr": 26000000.0,
+      "monthly_profit_idr": 20800000,
+      "payback_months": 9.3,
+      "staff": 2,
+      "supply_chain": [
+        "茶叶/果酱集采",
+        "珍珠等配料周配",
+        "封口设备维保"
+      ],
+      "key_risk": "竞品密度高，需依赖品牌流量",
+      "source_type": "演示"
+    },
+    {
+      "id": "single",
+      "name": "单品爆品店",
+      "concept": "一支 S 级单品打穿：海苔卷/咸蛋黄鱼皮专柜模型",
+      "store_sqm": 20.0,
+      "capex_rmb": 8.0,
+      "capex_idr": 176000000,
+      "capex_display": "8.0 万 RMB ≈ Rp 176.0 jt",
+      "package": {
+        "加盟费": 1.5,
+        "设备": 2.5,
+        "装修装配": 2.2,
+        "首批货": 1.2,
+        "保证金": 0.4,
+        "流动资金": 0.2
+      },
+      "daily_sales_idr": 4000000.0,
+      "gross_margin_pct": 0.4,
+      "monthly_fixed_idr": 26000000.0,
+      "monthly_profit_idr": 22000000,
+      "payback_months": 8.0,
+      "staff": 2,
+      "supply_chain": [
+        "单品深度代工",
+        "变体包装快反",
+        "快闪巡回团队"
+      ],
+      "key_risk": "单品生命周期 6-9 个月，需机制续命",
+      "source_type": "演示"
+    },
+    {
+      "id": "popup",
+      "name": "新品快闪柜",
+      "concept": "最小单元验证：商场中岛柜 6㎡，测款后再放大",
+      "store_sqm": 6.0,
+      "capex_rmb": 8.5,
+      "capex_idr": 187000000,
+      "capex_display": "8.5 万 RMB ≈ Rp 187.0 jt",
+      "package": {
+        "加盟费": 1.5,
+        "设备": 2.5,
+        "装修装配": 2.0,
+        "首批货": 1.0,
+        "保证金": 1.0,
+        "流动资金": 0.5
+      },
+      "daily_sales_idr": 2200000.0,
+      "gross_margin_pct": 0.5,
+      "monthly_fixed_idr": 18000000.0,
+      "monthly_profit_idr": 15000000,
+      "payback_months": 12.5,
+      "staff": 1,
+      "supply_chain": [
+        "共享供应链池",
+        "柜体模块化租赁",
+        "周更选品"
+      ],
+      "key_risk": "点位租金谈判能力决定盈亏",
+      "source_type": "演示"
+    }
+  ],
+  "brands": [
+    {
+      "id": "BR-01",
+      "name": "SnackVault 零食仓",
+      "country": "中国·杭州",
+      "format_id": "snack",
+      "fee_idr": 45000000.0,
+      "invest_idr": 210000000.0,
+      "supply_req": "总部集采 70% + 本地 30%",
+      "training_level": "三级认证（店员→店长→督导）",
+      "stores_count": 860,
+      "fit_regions": "雅加达/泗水/万隆 商圈街铺",
+      "source_type": "演示",
+      "fee_display": "Rp 0.0 jt",
+      "invest_display": "Rp 0.0 jt",
+      "format_name": "时尚零食集合店"
+    },
+    {
+      "id": "BR-02",
+      "name": "Mr. Ayam 卤味先生",
+      "country": "印尼·本地",
+      "format_id": "deli",
+      "fee_idr": 30000000.0,
+      "invest_idr": 180000000.0,
+      "supply_req": "中央厨房日配 + 本地鸡源",
+      "training_level": "7 天岗前 + 月度食安复训",
+      "stores_count": 320,
+      "fit_regions": "社区入口/夜市/办公区",
+      "source_type": "演示",
+      "fee_display": "Rp 0.0 jt",
+      "invest_display": "Rp 0.0 jt",
+      "format_name": "熟食卤味档口"
+    },
+    {
+      "id": "BR-03",
+      "name": "Kopi Kilat 闪电咖啡",
+      "country": "印尼·本地",
+      "format_id": "coffee",
+      "fee_idr": 55000000.0,
+      "invest_idr": 215000000.0,
+      "supply_req": "指定烘焙豆 + 设备租赁绑定",
+      "training_level": "10 天咖啡师认证",
+      "stores_count": 540,
+      "fit_regions": "雅加达/日惹/棉兰 交通枢纽",
+      "source_type": "演示",
+      "fee_display": "Rp 0.0 jt",
+      "invest_display": "Rp 0.0 jt",
+      "format_name": "精品咖啡档"
+    },
+    {
+      "id": "BR-04",
+      "name": "Boba Sultan 波霸苏丹",
+      "country": "台湾系",
+      "format_id": "tea",
+      "fee_idr": 50000000.0,
+      "invest_idr": 195000000.0,
+      "supply_req": "茶叶/配料总部直供",
+      "training_level": "7 天调制认证 + 季度新品课",
+      "stores_count": 1200,
+      "fit_regions": "购物中心/大学区",
+      "source_type": "演示",
+      "fee_display": "Rp 0.0 jt",
+      "invest_display": "Rp 0.0 jt",
+      "format_name": "手摇奶茶档"
+    },
+    {
+      "id": "BR-05",
+      "name": "Seawave 海苔卷专柜",
+      "country": "泰国系",
+      "format_id": "single",
+      "fee_idr": 33000000.0,
+      "invest_idr": 175000000.0,
+      "supply_req": "海苔原料产地直采 + 本地代工",
+      "training_level": "5 天 + 随柜督导",
+      "stores_count": 95,
+      "fit_regions": "旅游区/商场中岛",
+      "source_type": "演示",
+      "fee_display": "Rp 0.0 jt",
+      "invest_display": "Rp 0.0 jt",
+      "format_name": "单品爆品店"
+    },
+    {
+      "id": "BR-06",
+      "name": "HypeBox 快闪盒",
+      "country": "新加坡",
+      "format_id": "popup",
+      "fee_idr": 33000000.0,
+      "invest_idr": 190000000.0,
+      "supply_req": "共享供应链池按周结算",
+      "training_level": "3 天快训 + 远程督导",
+      "stores_count": 60,
+      "fit_regions": "快闪点位轮换",
+      "source_type": "演示",
+      "fee_display": "Rp 0.0 jt",
+      "invest_display": "Rp 0.0 jt",
+      "format_name": "新品快闪柜"
+    }
+  ]
+}

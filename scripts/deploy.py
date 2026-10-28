@@ -45,6 +45,8 @@ def main():
             "--out", "web/trend/data/trend_snacks.json"])
         sh([sys.executable, "-m", "nbo.launch", "--db", "nbo.db",
             "--out", "web/launch/data/launch.json"])
+        sh([sys.executable, "-m", "nbo.franchise", "--db", "nbo.db",
+            "--out", "web/franchise/data/franchise.json"])
 
     # 组装部署目录
     if SITE.exists():
@@ -74,6 +76,10 @@ def main():
     (SITE / "launch/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/launch/index.html", SITE / "launch")
     shutil.copy(ROOT / "web/launch/data/launch.json", SITE / "launch/data")
+    # 加盟体系
+    (SITE / "franchise/data").mkdir(parents=True)
+    shutil.copy(ROOT / "web/franchise/index.html", SITE / "franchise")
+    shutil.copy(ROOT / "web/franchise/data/franchise.json", SITE / "franchise/data")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)

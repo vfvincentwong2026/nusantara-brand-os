@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/ui/tokens.css">
+<title>加盟体系 · Nusantara Brand OS</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  .wrap { max-width:1280px; margin:0 auto; padding:64px 24px 80px; }
+  .head { margin-bottom:20px; }
+  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(228,2,43,.5); border-radius:999px;
+               color:#ff5c7a; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+  .head h1 { font-size:34px; font-weight:800; line-height:1.2; }
+  .head h1 em { color:#e4022b; font-style:normal; }
+  .head p { margin-top:10px; color:#8b98a8; font-size:13px; max-width:820px; line-height:1.8; }
+  .fx { background:rgba(232,178,70,.1); border:1px solid rgba(232,178,70,.4); color:#e8b246;
+        padding:8px 14px; border-radius:8px; font-size:12px; margin-bottom:20px; }
+  .panel { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; margin-bottom:20px; }
+  .panel h2 { font-size:14px; letter-spacing:.08em; color:#8b98a8; margin-bottom:14px; font-weight:600; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:14px; }
+  .fmt { background:#151c26; border:1px solid #1f2733; border-radius:12px; padding:18px;
+         transition:transform .25s cubic-bezier(.16,1,.3,1), border-color .25s; }
+  .fmt:hover { transform:translateY(-3px); border-color:#33405a; }
+  .fmt .fn { font-size:16px; font-weight:800; display:flex; justify-content:space-between; align-items:baseline; }
+  .fmt .fn .sq { color:#5b6779; font-size:11px; font-weight:400; }
+  .fmt .fc { color:#8b98a8; font-size:11.5px; margin:6px 0 12px; line-height:1.6; }
+  .capex { background:linear-gradient(135deg,rgba(228,2,43,.14),rgba(232,178,70,.08)); border:1px solid rgba(228,2,43,.3);
+           border-radius:10px; padding:10px 14px; font-size:14px; font-weight:700; color:#ffd97a; }
+  .pkg { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; }
+  .pkg span { font-size:10.5px; background:#1a222d; border-radius:6px; padding:3px 8px; color:#8b98a8; }
+  .pkg span b { color:#e8eef5; }
+  .kv { display:flex; gap:8px; font-size:11.5px; padding:5px 0; border-bottom:1px dashed #1f2733; line-height:1.6; }
+  .kv:last-child { border-bottom:none; }
+  .kv b { color:#5b6779; min-width:74px; font-weight:600; font-size:10.5px; }
+  .pb { display:inline-block; min-width:64px; text-align:center; padding:3px 10px; border-radius:8px;
+        font-family:Consolas,monospace; font-weight:800; font-size:13px;
+        background:rgba(52,209,123,.15); color:#34d17b; }
+  .tbl { width:100%; border-collapse:collapse; font-size:12px; }
+  .tbl th { text-align:left; color:#5b6779; font-weight:600; font-size:10.5px; letter-spacing:.06em;
+            padding:8px 10px; border-bottom:1px solid #1f2733; }
+  .tbl td { padding:10px; border-bottom:1px solid #161d27; line-height:1.6; vertical-align:top; }
+  .tbl tr:hover td { background:rgba(255,255,255,.02); }
+  .tbl .bn { font-weight:700; color:#e8eef5; }
+  .tbl .sub { color:#5b6779; font-size:10.5px; }
+  .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:10.5px;
+          background:rgba(77,163,255,.12); color:#4da3ff; }
+</style>
+</head>
+<body>
+<nav class="nbo-nav">
+  <a class="brand" href="/">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+  <span class="sep">｜</span>
+  <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
+  <a class="nl" data-p="launch" href="/launch/">落地评分</a>
+  <a class="nl" data-p="case" href="/case/">案例</a>
+  <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
+</nav>
+<div class="wrap">
+  <div class="head">
+    <div class="tag">FRANCHISE SYSTEM · 单店模型</div>
+    <h1>加盟体系：<em>8–10 万 RMB</em> 在印尼开出一家可复制的网红单店</h1>
+    <p>六大业态的开店成本包（RMB + IDR 双币呈现）、回本模型（假设可审计）、供应链绑定清单，
+       与特权加盟品牌库联动——雷达发现爆品 → 落地评分定级 → 加盟体系承接复制。</p>
+  </div>
+  <div class="fx" id="fx"></div>
+  <div class="panel">
+    <h2>六大业态 · 成本包与回本模型</h2>
+    <div class="grid" id="formats"></div>
+  </div>
+  <div class="panel">
+    <h2>特权加盟品牌库 <span style="font-weight:400;font-size:11px">（扫描区域后按适配度引入，当前为演示档案）</span></h2>
+    <div style="overflow-x:auto;">
+    <table class="tbl">
+      <thead><tr><th>品牌</th><th>业态</th><th>加盟费 / 总投资</th><th>供应链要求</th><th>培训体系</th><th>门店数</th><th>适配区域</th></tr></thead>
+      <tbody id="brands"></tbody>
+    </table>
+    </div>
+  </div>
+</div>
+<script>
+const esc = s => (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const jt = n => 'Rp ' + (n / 1e6).toLocaleString('id-ID', {maximumFractionDigits: 1}) + ' jt';
+
+fetch('./data/franchise.json').then(r => r.json()).then(d => {
+  document.getElementById('fx').textContent =
+    `⚠ ${d.fx.note}（1 RMB = ${d.fx.rmb_to_idr.toLocaleString()} IDR）· 锚定：${d.budget_anchor}`;
+  document.getElementById('formats').innerHTML = d.formats.map(f => `
+    <div class="fmt">
+      <div class="fn">${esc(f.name)} <span class="sq">${f.store_sqm}㎡ · ${f.staff} 人</span></div>
+      <div class="fc">${esc(f.concept)}</div>
+      <div class="capex">${esc(f.capex_display)}</div>
+      <div class="pkg">${Object.entries(f.package).map(([k, v]) => `<span>${k} <b>${v} 万</b></span>`).join('')}</div>
+      <div class="kv"><b>回本模型</b><span>日销 ${jt(f.daily_sales_idr)} × 毛利 ${(f.gross_margin_pct * 100).toFixed(0)}%
+        − 月固定 ${jt(f.monthly_fixed_idr)} → 月净利 <b style="color:#34d17b">${jt(f.monthly_profit_idr)}</b>
+        → <span class="pb">${f.payback_months} 个月</span></span></div>
+      <div class="kv"><b>供应链绑定</b><span>${f.supply_chain.map(esc).join(' / ')}</span></div>
+      <div class="kv"><b>关键风险</b><span style="color:#ff9a3d">${esc(f.key_risk)}</span></div>
+    </div>`).join('');
+  document.getElementById('brands').innerHTML = d.brands.map(b => `
+    <tr><td><div class="bn">${esc(b.name)}</div><div class="sub">${esc(b.country)}</div></td>
+      <td><span class="pill">${esc(b.format_name)}</span></td>
+      <td>${esc(b.fee_display)}<div class="sub">总 ${esc(b.invest_display)}</div></td>
+      <td>${esc(b.supply_req)}</td><td>${esc(b.training)}</td>
+      <td style="font-family:Consolas,monospace">${b.stores}</td><td>${esc(b.fit_regions)}</td></tr>`).join('');
+});
+const p = location.pathname;
+document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
+</script>
+</body>
+</html>
