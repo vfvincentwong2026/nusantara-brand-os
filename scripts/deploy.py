@@ -47,6 +47,8 @@ def main():
             "--out", "web/launch/data/launch.json"])
         sh([sys.executable, "-m", "nbo.franchise", "--db", "nbo.db",
             "--out", "web/franchise/data/franchise.json"])
+        sh([sys.executable, "-m", "nbo.storedash", "--db", "nbo.db",
+            "--out", "web/store-dash/data/store-dash.json"])
 
     # 组装部署目录
     if SITE.exists():
@@ -80,6 +82,10 @@ def main():
     (SITE / "franchise/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/franchise/index.html", SITE / "franchise")
     shutil.copy(ROOT / "web/franchise/data/franchise.json", SITE / "franchise/data")
+    # 小店版大屏
+    (SITE / "store-dash/data").mkdir(parents=True)
+    shutil.copy(ROOT / "web/store-dash/index.html", SITE / "store-dash")
+    shutil.copy(ROOT / "web/store-dash/data/store-dash.json", SITE / "store-dash/data")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)
