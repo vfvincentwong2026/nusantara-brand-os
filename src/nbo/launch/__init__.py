@@ -56,6 +56,16 @@ SUPPLY_EVIDENCE = [("本地采购", 10), ("本地代工", 10), ("本地有优势
 
 GRADES = [(85, "S", "立即立项"), (75, "A", "优先复制"), (65, "B", "改造后试销"), (0, "C", "仅作话题款")]
 
+# 品类 → 孪生门店分区（planogram zone），用于 2D/3D 品类聚焦视角
+FRESH_CATS = {"冷冻甜品", "现制烘焙", "现制甜品"}
+CAT_TO_ZONE = lambda cat: "fresh" if cat in FRESH_CATS else "food"
+
+
+def twin_links(category: str, name: str) -> dict:
+    z = CAT_TO_ZONE(category)
+    q = f"?store=2000&zone={z}&label={name}"
+    return {"zone": z, "floorplan": f"/floorplan/{q}", "three": f"/three/{q}"}
+
 
 def _clamp(v: float) -> float:
     return max(0.0, min(100.0, round(v, 1)))
@@ -81,7 +91,8 @@ def _score_snack(s: dict) -> dict:
     grade, action = next((g, a) for th, g, a in GRADES if total >= th)
     return {"id": s["id"], "name": s["name"], "region": s["region"], "category": s["category"],
             "heat": s["heat"], "scores": scores, "total": total, "grade": grade,
-            "grade_action": action, "replicability": s["replicability"]}
+            "grade_action": action, "replicability": s["replicability"],
+            "twin": twin_links(s["category"], s["name"])}
 
 
 def _build_plan(top: dict, s: dict) -> dict:
@@ -94,7 +105,7 @@ def _build_plan(top: dict, s: dict) -> dict:
         "concept": {"name": s["name"], "region": s["region"], "category": s["category"],
                     "total": top["total"], "grade": top["grade"], "indo_fit": fit},
         "container": {"tier": tier[0], "space_plan": tier[1],
-                      "link": "/case/",
+                      "link": "/case/", "twin": twin_links(s["category"], s["name"]),
                       "note": "集装箱整装四档体系直接复用；快闪模块可拆装巡回"},
         "steps": [
             dict(no=1, name="定义传播单元",

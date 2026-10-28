@@ -116,7 +116,8 @@ fetch('./data/launch.json').then(r => r.json()).then(d => {
       <span>${c('f1')}</span><span class="hide-m">${c('f2')}</span><span class="hide-m">${c('f3')}</span>
       <span>${c('f4')}</span><span class="hide-m">${c('f5')}</span><span class="hide-m">${c('f6')}</span>
       <span>${c('f7')}</span>
-      <span><div class="total">${s.total}</div><span class="grade g-${s.grade}">${s.grade} · ${esc(s.grade_action)}</span></span>
+      <span><div class="total">${s.total}</div><span class="grade g-${s.grade}">${s.grade} · ${esc(s.grade_action)}</span>
+      ${s.grade === 'S' ? `<div style="margin-top:4px;white-space:nowrap"><a href="${s.twin.floorplan}" style="color:#4da3ff;font-size:11px">2D 视角</a> · <a href="${s.twin.three}" style="color:#4da3ff;font-size:11px">3D 漫游</a></div>` : ''}</span>
     </div>`; }).join('');
 
   const p = d.plan;
@@ -132,6 +133,10 @@ fetch('./data/launch.json').then(r => r.json()).then(d => {
       <div class="kv"><b>推荐档位</b><span>${esc(p.container.tier)}</span></div>
       <div class="kv"><b>空间方案</b><span>${esc(p.container.space_plan)}——空间不是装修，是机制剧场：入口吸引点 → 主动线 → 机制发生区 → 打卡点 → 收银转化区</span></div>
       <div class="kv"><b>复制性</b><span>${esc(p.container.note)}</span></div>
+      <div class="kv"><b>孪生视角</b><span>
+        <a href="${p.container.twin.floorplan}" style="color:#4da3ff">2D 平面图 · 品类货架聚焦</a> ｜
+        <a href="${p.container.twin.three}" style="color:#4da3ff">3D 漫游 · 机制剧场空间</a>
+        <span style="color:#5b6779">（自动高亮目标分区货架，其余调暗）</span></span></div>
     </div>
     <div class="panel">
       <h2>🧬 五步启动链路 · 执行动作</h2>

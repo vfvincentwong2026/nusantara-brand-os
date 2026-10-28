@@ -558,8 +558,28 @@ function animate() {
 
 init();
 const qsStore = new URLSearchParams(location.search).get('store');
-load(qsStore || '2000');
+const qsZone = new URLSearchParams(location.search).get('zone');
+const qsLabel = new URLSearchParams(location.search).get('label');
+load(qsStore || '2000').then(applyZoneHighlight);
 if (qsStore) document.getElementById('store-sel').value = qsStore;
+
+/* 品类聚焦：?zone=food&label=xxx → 目标分区红色高亮，其余调暗 */
+function applyZoneHighlight() {
+  if (!qsZone || !plano) return;
+  shelfMeshes.forEach(m => {
+    const s = m.userData;
+    if (!s || s.isCap) return;
+    if (s.zone === qsZone) {
+      m.material.emissive.setHex(0xe4022b);
+      m.material.emissiveIntensity = 0.35;
+    } else {
+      m.material.transparent = true;
+      m.material.opacity = 0.14;
+    }
+  });
+  document.getElementById('info').innerHTML =
+    `<b>品类聚焦 · ${qsLabel || qsZone}</b><br>红色高亮 = 目标分区货架（${qsZone}），其余已调暗`;
+}
 </script>
 </body>
 </html>

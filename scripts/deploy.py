@@ -86,7 +86,7 @@ def main():
     for f in (ROOT / "web/ui").glob("*.css"):
         shutil.copy(f, SITE / "ui")
     (SITE / "assets").mkdir(exist_ok=True)
-    for f in (ROOT / "web/assets").glob("*.png"):
+    for f in list((ROOT / "web/assets").glob("*.png")) + list((ROOT / "web/assets").glob("*.jpg")):
         shutil.copy(f, SITE / "assets")
     shutil.copy(ROOT / "web/floorplan/index.html", SITE / "floorplan")
     shutil.copy(ROOT / "web/floorplan/konva.min.js", SITE / "floorplan")

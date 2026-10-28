@@ -130,8 +130,12 @@ const snap = v => Math.round(v * 10) / 10;
 let plano, stage, layer, gridLayer, shelfNodes = new Map(), selected = null, heatOn = false, gridOn = true;
 let idCounter = 1;
 
+const QS = new URLSearchParams(location.search);
+const HIGHLIGHT_ZONE = QS.get('zone');
+const HIGHLIGHT_LABEL = QS.get('label');
+
 function load(store) {
-  fetch(`../twin/data/planogram-${store}.json`).then(r => r.json()).then(render);
+  return fetch(`../twin/data/planogram-${store}.json`).then(r => r.json()).then(render);
 }
 
 function drawGrid(W, H) {
@@ -192,6 +196,15 @@ function render(data) {
   layer.draw();
   updateStats();
 
+  // 品类聚焦横幅（?zone=food&label=xxx）
+  if (HIGHLIGHT_ZONE) {
+    layer.add(new Konva.Rect({ x: 8, y: H - 44, width: Math.max(320, (HIGHLIGHT_LABEL || HIGHLIGHT_ZONE).length * 15 + 210),
+      height: 34, fill: 'rgba(228,2,43,.85)', cornerRadius: 8, listening: false }));
+    layer.add(new Konva.Text({ x: 22, y: H - 36, text: `🔍 品类聚焦：${HIGHLIGHT_LABEL || HIGHLIGHT_ZONE} · 红框 = 目标分区货架`,
+      fontSize: 14, fontStyle: 'bold', fill: '#fff', listening: false }));
+    layer.draw();
+  }
+
   // 交互：滚轮缩放 + 平移 + 坐标
   stage.on('wheel', e => {
     e.evt.preventDefault();
@@ -219,13 +232,16 @@ function render(data) {
 
 function drawShelf(s) {
   const isSel = selected === s.id;
+  const dimmed = HIGHLIGHT_ZONE && s.zone !== HIGHLIGHT_ZONE;
   const g = new Konva.Group({ x: s.x * SCALE, y: (s.y - s.h / 2) * SCALE, rotation: s.rotation || 0,
     offsetX: (s.rotation ? s.w * SCALE / 2 : 0), offsetY: (s.rotation ? s.h * SCALE / 2 : 0) });
-  const baseColor = heatOn ? HEAT_COLOR(s.heat_value) : ZONE_COLOR[s.zone];
+  const baseColor = dimmed ? '#3a4149' : (heatOn ? HEAT_COLOR(s.heat_value) : ZONE_COLOR[s.zone]);
   const wPx = s.w * SCALE, hPx = s.h * SCALE;
-  g.add(new Konva.Rect({ width: wPx, height: hPx, fill: baseColor, opacity: 0.55, cornerRadius: 1.5,
-    stroke: isSel ? '#e4022b' : 'rgba(230,237,243,.6)', strokeWidth: isSel ? 2.5 : 1.4,
-    dash: isSel ? [6, 3] : undefined, shadowColor: '#000', shadowBlur: 8, shadowOpacity: 0.45 }));
+  const focused = HIGHLIGHT_ZONE && s.zone === HIGHLIGHT_ZONE;
+  g.add(new Konva.Rect({ width: wPx, height: hPx, fill: baseColor, opacity: dimmed ? 0.08 : 0.55, cornerRadius: 1.5,
+    stroke: isSel ? '#e4022b' : (focused ? '#e4022b' : 'rgba(230,237,243,.6)'),
+    strokeWidth: isSel ? 2.5 : (focused ? 2.2 : 1.4),
+    dash: isSel ? [6, 3] : undefined, shadowColor: '#000', shadowBlur: 8, shadowOpacity: dimmed ? 0 : 0.45 }));
   g.add(new Konva.Rect({ width: wPx, height: 5, y: hPx - 5, fill: baseColor, opacity: 0.85, cornerRadius: [0, 0, 1.5, 1.5] })); // 正面
   if (isSel) {
     g.add(new Konva.Text({ text: `${s.id}`, fontSize: 11, fill: '#e4022b', y: -16, fontStyle: 'bold' }));

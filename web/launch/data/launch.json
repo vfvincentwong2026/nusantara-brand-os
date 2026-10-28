@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T00:30:47",
+  "generated_at": "2026-10-29T01:48:02",
   "demo": true,
   "window": "近 3 个月",
   "factors": [
@@ -72,7 +72,12 @@
       "total": 87.3,
       "grade": "S",
       "grade_action": "立即立项",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=小老板海苔卷",
+        "three": "/three/?store=2000&zone=food&label=小老板海苔卷"
+      }
     },
     {
       "id": "MY-01",
@@ -92,7 +97,12 @@
       "total": 86.9,
       "grade": "S",
       "grade_action": "立即立项",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=咸蛋黄鱼皮",
+        "three": "/three/?store=2000&zone=food&label=咸蛋黄鱼皮"
+      }
     },
     {
       "id": "TW-01",
@@ -112,7 +122,12 @@
       "total": 85.8,
       "grade": "S",
       "grade_action": "立即立项",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=珍珠奶茶酥/奶茶零食",
+        "three": "/three/?store=2000&zone=food&label=珍珠奶茶酥/奶茶零食"
+      }
     },
     {
       "id": "KR-03",
@@ -132,7 +147,12 @@
       "total": 84.7,
       "grade": "A",
       "grade_action": "优先复制",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=韩式炸鸡味膨化零食",
+        "three": "/three/?store=2000&zone=food&label=韩式炸鸡味膨化零食"
+      }
     },
     {
       "id": "KR-01",
@@ -152,7 +172,12 @@
       "total": 84.3,
       "grade": "A",
       "grade_action": "优先复制",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=药果（蜂蜜油果子）",
+        "three": "/three/?store=2000&zone=food&label=药果（蜂蜜油果子）"
+      }
     },
     {
       "id": "JP-01",
@@ -172,7 +197,12 @@
       "total": 83.8,
       "grade": "A",
       "grade_action": "优先复制",
-      "replicability": "中"
+      "replicability": "中",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=黄油树夹心饼干",
+        "three": "/three/?store=2000&zone=food&label=黄油树夹心饼干"
+      }
     },
     {
       "id": "TH-03",
@@ -192,7 +222,12 @@
       "total": 81.7,
       "grade": "A",
       "grade_action": "优先复制",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=烤鱿鱼丝/酸辣鱿鱼",
+        "three": "/three/?store=2000&zone=food&label=烤鱿鱼丝/酸辣鱿鱼"
+      }
     },
     {
       "id": "TH-02",
@@ -212,7 +247,12 @@
       "total": 81.6,
       "grade": "A",
       "grade_action": "优先复制",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=泰式奶茶即饮/冲剂",
+        "three": "/three/?store=2000&zone=food&label=泰式奶茶即饮/冲剂"
+      }
     },
     {
       "id": "TW-03",
@@ -232,7 +272,12 @@
       "total": 80.0,
       "grade": "A",
       "grade_action": "优先复制",
-      "replicability": "中"
+      "replicability": "中",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=麻辣锅味薯片",
+        "three": "/three/?store=2000&zone=food&label=麻辣锅味薯片"
+      }
     },
     {
       "id": "MY-02",
@@ -252,7 +297,12 @@
       "total": 76.8,
       "grade": "A",
       "grade_action": "优先复制",
-      "replicability": "中"
+      "replicability": "中",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=白咖啡三合一",
+        "three": "/three/?store=2000&zone=food&label=白咖啡三合一"
+      }
     },
     {
       "id": "CN-01",
@@ -272,7 +322,12 @@
       "total": 74.9,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "中"
+      "replicability": "中",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=魔芋爽/魔芋零食",
+        "three": "/three/?store=2000&zone=food&label=魔芋爽/魔芋零食"
+      }
     },
     {
       "id": "JP-03",
@@ -292,7 +347,12 @@
       "total": 74.6,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=鲜奶油水果三明治",
+        "three": "/three/?store=2000&zone=fresh&label=鲜奶油水果三明治"
+      }
     },
     {
       "id": "CN-03",
@@ -312,7 +372,12 @@
       "total": 74.0,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "低"
+      "replicability": "低",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=气泡/猎奇口味薯片",
+        "three": "/three/?store=2000&zone=food&label=气泡/猎奇口味薯片"
+      }
     },
     {
       "id": "TW-02",
@@ -332,7 +397,12 @@
       "total": 73.8,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "高"
+      "replicability": "高",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=太阳饼/老婆饼创新礼盒",
+        "three": "/three/?store=2000&zone=food&label=太阳饼/老婆饼创新礼盒"
+      }
     },
     {
       "id": "MY-03",
@@ -352,7 +422,12 @@
       "total": 72.8,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "中"
+      "replicability": "中",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=咖喱叻沙杯面",
+        "three": "/three/?store=2000&zone=food&label=咖喱叻沙杯面"
+      }
     },
     {
       "id": "CN-02",
@@ -372,7 +447,12 @@
       "total": 72.3,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "中"
+      "replicability": "中",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=大辣片/麻辣豆干",
+        "three": "/three/?store=2000&zone=food&label=大辣片/麻辣豆干"
+      }
     },
     {
       "id": "KR-02",
@@ -392,7 +472,12 @@
       "total": 71.9,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "中"
+      "replicability": "中",
+      "twin": {
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈",
+        "three": "/three/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈"
+      }
     },
     {
       "id": "JP-02",
@@ -412,7 +497,12 @@
       "total": 66.9,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "中"
+      "replicability": "中",
+      "twin": {
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=冷冻巴斯克芝士蛋糕",
+        "three": "/three/?store=2000&zone=fresh&label=冷冻巴斯克芝士蛋糕"
+      }
     }
   ],
   "plan": {
@@ -428,6 +518,11 @@
       "tier": "双40尺旗舰样板（56㎡）",
       "space_plan": "机制剧场全配置：挑战台+等级墙+打卡装置",
       "link": "/case/",
+      "twin": {
+        "zone": "food",
+        "floorplan": "/floorplan/?store=2000&zone=food&label=小老板海苔卷",
+        "three": "/three/?store=2000&zone=food&label=小老板海苔卷"
+      },
       "note": "集装箱整装四档体系直接复用；快闪模块可拆装巡回"
     },
     "steps": [
