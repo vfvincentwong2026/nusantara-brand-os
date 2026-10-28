@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/ui/tokens.css">
+<title>概念落地评分 · Nusantara Brand OS</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  .wrap { max-width:1280px; margin:0 auto; padding:64px 24px 80px; }
+  .head { margin-bottom:22px; }
+  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(52,209,123,.5); border-radius:999px;
+               color:#34d17b; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+  .head h1 { font-size:34px; font-weight:800; line-height:1.2; }
+  .head h1 em { color:#e4022b; font-style:normal; }
+  .head p { margin-top:10px; color:#8b98a8; font-size:13px; max-width:820px; line-height:1.8; }
+  .panel { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; margin-bottom:20px; }
+  .panel h2 { font-size:14px; letter-spacing:.08em; color:#8b98a8; margin-bottom:14px; font-weight:600; }
+  /* 因子权重带 */
+  .factors { display:flex; flex-wrap:wrap; gap:8px; }
+  .factor { background:#151c26; border:1px solid #1f2733; border-radius:10px; padding:10px 14px; flex:1 1 150px; }
+  .factor .fn { font-size:12px; font-weight:700; }
+  .factor .fw { color:#e8b246; font-family:Consolas,monospace; font-size:12px; }
+  .factor .fd { color:#5b6779; font-size:10.5px; margin-top:4px; line-height:1.5; }
+  /* 评分榜 */
+  .rankrow { display:grid; grid-template-columns:44px 1.3fr repeat(7,1fr) 70px; gap:8px; align-items:center;
+             padding:10px 8px; border-bottom:1px solid #1a222d; font-size:12px; }
+  .rankrow.headrow { color:#5b6779; font-size:10px; letter-spacing:.05em; }
+  .rankrow .r { color:#e4022b; font-weight:800; font-family:Consolas,monospace; font-size:15px; }
+  .rankrow .nm { font-weight:700; font-size:13px; }
+  .rankrow .nm small { display:block; color:#5b6779; font-weight:400; font-size:10.5px; margin-top:2px; }
+  .cellbar { height:5px; background:#1c2430; border-radius:3px; overflow:hidden; margin-top:3px; }
+  .cellbar i { display:block; height:100%; border-radius:3px; }
+  .cellv { font-family:Consolas,monospace; font-size:10px; color:#8b98a8; }
+  .total { font-weight:800; font-family:Consolas,monospace; font-size:15px; text-align:right; }
+  .grade { display:inline-block; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:700; }
+  .g-S { background:rgba(52,209,123,.15); color:#34d17b; }
+  .g-A { background:rgba(232,178,70,.15); color:#e8b246; }
+  .g-B { background:rgba(255,154,61,.15); color:#ff9a3d; }
+  .g-C { background:rgba(255,92,122,.15); color:#ff5c7a; }
+  /* 执行方案 */
+  .plan-hero { display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between;
+               background:linear-gradient(135deg,rgba(228,2,43,.12),rgba(232,178,70,.06));
+               border:1px solid rgba(228,2,43,.35); border-radius:14px; padding:20px 22px; margin-bottom:20px; }
+  .plan-hero .pn { font-size:24px; font-weight:800; }
+  .plan-hero .pm { color:#8b98a8; font-size:12px; margin-top:6px; }
+  .plan-hero .score { text-align:right; }
+  .plan-hero .score .v { font-size:38px; font-weight:800; color:#e8b246; font-family:Consolas,monospace; }
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; }
+  .step { background:#151c26; border:1px solid #1f2733; border-radius:12px; padding:16px; }
+  .step .sn { color:#e4022b; font-family:Consolas,monospace; font-weight:800; font-size:13px; }
+  .step .st { font-weight:700; font-size:14px; margin:4px 0 8px; }
+  .step .sa { font-size:11.5px; color:#aebacd; line-height:1.7; }
+  .step .sa b { color:#5b6779; font-size:10px; letter-spacing:.1em; display:block; margin-top:8px; }
+  .twocol { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:900px) { .twocol { grid-template-columns:1fr; } .rankrow { grid-template-columns:36px 1.2fr repeat(4,1fr) 60px; }
+    .rankrow .hide-m { display:none; } }
+  .kv { display:flex; gap:10px; padding:9px 0; border-bottom:1px dashed #232c3a; font-size:12px; line-height:1.7; }
+  .kv:last-child { border-bottom:none; }
+  .kv b { color:#5b6779; min-width:86px; font-weight:600; font-size:11px; }
+  .chk { font-size:12px; color:#aebacd; padding:7px 0 7px 24px; position:relative; line-height:1.6; }
+  .chk::before { content:"✓"; position:absolute; left:4px; color:#34d17b; font-weight:800; }
+</style>
+</head>
+<body>
+<nav class="nbo-nav">
+  <a class="brand" href="/">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+  <a class="nl" data-p="case" href="/case/">案例</a>
+  <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
+  <a class="nl" data-p="launch" href="/launch/">落地评分</a>
+</nav>
+<div class="wrap">
+  <div class="head">
+    <div class="tag">LAUNCH SCORER · 5-STEP CHAIN</div>
+    <h1>概念落地评分：<em>从爆款信号</em>到集装箱整装的可执行方案</h1>
+    <p>把热点雷达的每款零食代入五步启动链路（传播单元→寄生行为→机制→被拍性→活人感+大单品），
+       叠加机制型设计系统、供应链本地匹配与集装箱整装适配，归因出 7 项落地因子加权评分，
+       S 级概念直接生成执行方案。</p>
+  </div>
+
+  <div class="panel">
+    <h2>落地因子与权重（归因模型）</h2>
+    <div class="factors" id="factors"></div>
+  </div>
+
+  <div class="panel">
+    <h2>落地评分榜 · 18 款概念</h2>
+    <div class="rankrow headrow">
+      <span>#</span><span>概念</span><span>传播</span><span class="hide-m">机制</span><span class="hide-m">被拍性</span>
+      <span>供应链</span><span class="hide-m">合规</span><span class="hide-m">集装箱</span><span>复购</span><span style="text-align:right">总分/评级</span>
+    </div>
+    <div id="rank"></div>
+  </div>
+
+  <div id="plan"></div>
+</div>
+<script>
+const FC = { f1:'#e4022b', f2:'#b04dff', f3:'#4da3ff', f4:'#34d17b', f5:'#e8b246', f6:'#ff9a3d', f7:'#ff5c7a' };
+const esc = s => (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+fetch('./data/launch.json').then(r => r.json()).then(d => {
+  document.getElementById('factors').innerHTML = d.factors.map(f =>
+    `<div class="factor"><div><span class="fn">${esc(f.name)}</span> <span class="fw">${f.weight}%</span></div>
+     <div class="fd">${esc(f.desc)}</div></div>`).join('');
+
+  document.getElementById('rank').innerHTML = d.ranked.map((s, i) => {
+    const c = k => `<div class="cellbar"><i style="width:${s.scores[k]}%;background:${FC[k]}"></i></div><span class="cellv">${s.scores[k]}</span>`;
+    return `<div class="rankrow">
+      <span class="r">${String(i+1).padStart(2,'0')}</span>
+      <span class="nm">${esc(s.name)}<small>${esc(s.region)} · ${esc(s.category)}</small></span>
+      <span>${c('f1')}</span><span class="hide-m">${c('f2')}</span><span class="hide-m">${c('f3')}</span>
+      <span>${c('f4')}</span><span class="hide-m">${c('f5')}</span><span class="hide-m">${c('f6')}</span>
+      <span>${c('f7')}</span>
+      <span><div class="total">${s.total}</div><span class="grade g-${s.grade}">${s.grade} · ${esc(s.grade_action)}</span></span>
+    </div>`; }).join('');
+
+  const p = d.plan;
+  document.getElementById('plan').innerHTML = `
+    <div class="plan-hero">
+      <div><div style="font-size:11px;letter-spacing:.14em;color:#e8b246">首选概念 · ${esc(p.concept.region)} / ${esc(p.concept.category)}</div>
+        <div class="pn">${esc(p.concept.name)} <span class="grade g-${p.concept.grade}" style="vertical-align:middle">${p.concept.grade} 级</span></div>
+        <div class="pm">印尼适配 ${p.concept.indo_fit} · 规则引擎评分 · ${esc(d.source_note)}</div></div>
+      <div class="score"><div class="v">${p.concept.total}</div><div style="font-size:11px;color:#8b98a8">落地总分 / 100</div></div>
+    </div>
+    <div class="panel">
+      <h2>📦 集装箱整装落地（<a href="${p.container.link}" style="color:#e8b246">案例体系</a>复用）</h2>
+      <div class="kv"><b>推荐档位</b><span>${esc(p.container.tier)}</span></div>
+      <div class="kv"><b>空间方案</b><span>${esc(p.container.space_plan)}——空间不是装修，是机制剧场：入口吸引点 → 主动线 → 机制发生区 → 打卡点 → 收银转化区</span></div>
+      <div class="kv"><b>复制性</b><span>${esc(p.container.note)}</span></div>
+    </div>
+    <div class="panel">
+      <h2>🧬 五步启动链路 · 执行动作</h2>
+      <div class="steps">${p.steps.map(s => `
+        <div class="step"><div class="sn">STEP ${s.no}</div><div class="st">${esc(s.name)}</div>
+          <div class="sa">${esc(s.action)}<b>设计交付：${esc(s.design)}</b><b>供应链：${esc(s.supply)}</b></div>
+        </div>`).join('')}</div>
+    </div>
+    <div class="twocol">
+      <div class="panel">
+        <h2>🔗 供应链本地匹配</h2>
+        <div class="kv"><b>匹配依据</b><span>${esc(p.supply_chain.local_match)}</span></div>
+        <div class="kv"><b>本地化改造</b><span>${esc(p.supply_chain.adaptation)}</span></div>
+        <div class="kv"><b>合规前置</b><span>${esc(p.supply_chain.compliance)}</span></div>
+        <div class="kv"><b>周期提醒</b><span style="color:#e8b246">${esc(p.supply_chain.compliance_lead)}</span></div>
+      </div>
+      <div class="panel">
+        <h2>📋 设计与空间交付物清单</h2>
+        ${p.deliverables.map(x => `<div class="chk">${esc(x)}</div>`).join('')}
+      </div>
+    </div>`;
+});
+const p = location.pathname;
+document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
+</script>
+</body>
+</html>

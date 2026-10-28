@@ -43,6 +43,8 @@ def main():
             "--out-map", "web/map/data/case_store.json"])
         sh([sys.executable, "-m", "nbo.trend", "--db", "nbo.db",
             "--out", "web/trend/data/trend_snacks.json"])
+        sh([sys.executable, "-m", "nbo.launch", "--db", "nbo.db",
+            "--out", "web/launch/data/launch.json"])
 
     # 组装部署目录
     if SITE.exists():
@@ -68,6 +70,10 @@ def main():
     (SITE / "trend/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/trend/index.html", SITE / "trend")
     shutil.copy(ROOT / "web/trend/data/trend_snacks.json", SITE / "trend/data")
+    # 概念落地评分
+    (SITE / "launch/data").mkdir(parents=True)
+    shutil.copy(ROOT / "web/launch/index.html", SITE / "launch")
+    shutil.copy(ROOT / "web/launch/data/launch.json", SITE / "launch/data")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)

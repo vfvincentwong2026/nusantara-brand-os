@@ -1,0 +1,486 @@
+{
+  "generated_at": "2026-10-29T00:30:47",
+  "demo": true,
+  "window": "近 3 个月",
+  "factors": [
+    {
+      "id": "f1",
+      "name": "传播单元强度",
+      "weight": 15,
+      "desc": "被消费时可传播的画面/话题/结果有多强",
+      "source": "trend.heat + why_hot"
+    },
+    {
+      "id": "f2",
+      "name": "机制可运行性",
+      "weight": 15,
+      "desc": "挑战/收集/隐藏款/联名关卡能否重复运行、用户是否零门槛参与",
+      "source": "品类基值 × 复制性"
+    },
+    {
+      "id": "f3",
+      "name": "被拍性与被理解性",
+      "weight": 15,
+      "desc": "货架三秒识别 + 开箱脚本 + 无需思考的拍摄角度（SHUDAO 硬标准）",
+      "source": "品类基值 + 病毒玩法"
+    },
+    {
+      "id": "f4",
+      "name": "供应链本地匹配",
+      "weight": 20,
+      "desc": "原料/代工在印尼的可得性与成本结构（权重最高：落地的硬约束）",
+      "source": "adaptation + 复制性"
+    },
+    {
+      "id": "f5",
+      "name": "合规就绪度",
+      "weight": 10,
+      "desc": "BPOM/Halal 路径长短与宣称风险",
+      "source": "compliance_note 风险词"
+    },
+    {
+      "id": "f6",
+      "name": "集装箱整装适配",
+      "weight": 10,
+      "desc": "常温长保 / 小空间机制剧场 / warung 渠道兼容性",
+      "source": "品类 + 渠道"
+    },
+    {
+      "id": "f7",
+      "name": "复购承接（大单品潜力）",
+      "weight": 15,
+      "desc": "话题款拉新之后有没有 100 分的大单品接住利润",
+      "source": "品类基值"
+    }
+  ],
+  "ranked": [
+    {
+      "id": "TH-01",
+      "name": "小老板海苔卷",
+      "region": "泰国",
+      "category": "海味零食",
+      "heat": 93.0,
+      "scores": {
+        "f1": 93.7,
+        "f2": 82,
+        "f3": 82,
+        "f4": 96,
+        "f5": 85,
+        "f6": 86,
+        "f7": 82
+      },
+      "total": 87.3,
+      "grade": "S",
+      "grade_action": "立即立项",
+      "replicability": "高"
+    },
+    {
+      "id": "MY-01",
+      "name": "咸蛋黄鱼皮",
+      "region": "马来西亚",
+      "category": "炸制零食",
+      "heat": 87.0,
+      "scores": {
+        "f1": 82.3,
+        "f2": 84,
+        "f3": 96,
+        "f4": 100.0,
+        "f5": 85,
+        "f6": 80,
+        "f7": 74
+      },
+      "total": 86.9,
+      "grade": "S",
+      "grade_action": "立即立项",
+      "replicability": "高"
+    },
+    {
+      "id": "TW-01",
+      "name": "珍珠奶茶酥/奶茶零食",
+      "region": "台湾",
+      "category": "烘焙饼干",
+      "heat": 90.0,
+      "scores": {
+        "f1": 85.0,
+        "f2": 86,
+        "f3": 92,
+        "f4": 94,
+        "f5": 85,
+        "f6": 82,
+        "f7": 72
+      },
+      "total": 85.8,
+      "grade": "S",
+      "grade_action": "立即立项",
+      "replicability": "高"
+    },
+    {
+      "id": "KR-03",
+      "name": "韩式炸鸡味膨化零食",
+      "region": "韩国",
+      "category": "膨化零食",
+      "heat": 79.0,
+      "scores": {
+        "f1": 75.1,
+        "f2": 88,
+        "f3": 88,
+        "f4": 90,
+        "f5": 85,
+        "f6": 93,
+        "f7": 75
+      },
+      "total": 84.7,
+      "grade": "A",
+      "grade_action": "优先复制",
+      "replicability": "高"
+    },
+    {
+      "id": "KR-01",
+      "name": "药果（蜂蜜油果子）",
+      "region": "韩国",
+      "category": "传统油炸糕点",
+      "heat": 91.0,
+      "scores": {
+        "f1": 85.9,
+        "f2": 80,
+        "f3": 72,
+        "f4": 99,
+        "f5": 85,
+        "f6": 86,
+        "f7": 78
+      },
+      "total": 84.3,
+      "grade": "A",
+      "grade_action": "优先复制",
+      "replicability": "高"
+    },
+    {
+      "id": "JP-01",
+      "name": "黄油树夹心饼干",
+      "region": "日本",
+      "category": "烘焙饼干",
+      "heat": 94.0,
+      "scores": {
+        "f1": 94.6,
+        "f2": 78,
+        "f3": 88,
+        "f4": 86,
+        "f5": 85,
+        "f6": 82,
+        "f7": 72
+      },
+      "total": 83.8,
+      "grade": "A",
+      "grade_action": "优先复制",
+      "replicability": "中"
+    },
+    {
+      "id": "TH-03",
+      "name": "烤鱿鱼丝/酸辣鱿鱼",
+      "region": "泰国",
+      "category": "海味熟食",
+      "heat": 71.0,
+      "scores": {
+        "f1": 73.9,
+        "f2": 83,
+        "f3": 78,
+        "f4": 94,
+        "f5": 79,
+        "f6": 78,
+        "f7": 80
+      },
+      "total": 81.7,
+      "grade": "A",
+      "grade_action": "优先复制",
+      "replicability": "高"
+    },
+    {
+      "id": "TH-02",
+      "name": "泰式奶茶即饮/冲剂",
+      "region": "泰国",
+      "category": "冲调饮品",
+      "heat": 85.0,
+      "scores": {
+        "f1": 80.5,
+        "f2": 76,
+        "f3": 80,
+        "f4": 88,
+        "f5": 69,
+        "f6": 90,
+        "f7": 84
+      },
+      "total": 81.6,
+      "grade": "A",
+      "grade_action": "优先复制",
+      "replicability": "高"
+    },
+    {
+      "id": "TW-03",
+      "name": "麻辣锅味薯片",
+      "region": "台湾",
+      "category": "膨化零食",
+      "heat": 74.0,
+      "scores": {
+        "f1": 70.6,
+        "f2": 85,
+        "f3": 80,
+        "f4": 82,
+        "f5": 85,
+        "f6": 85,
+        "f7": 75
+      },
+      "total": 80.0,
+      "grade": "A",
+      "grade_action": "优先复制",
+      "replicability": "中"
+    },
+    {
+      "id": "MY-02",
+      "name": "白咖啡三合一",
+      "region": "马来西亚",
+      "category": "冲调饮品",
+      "heat": 73.0,
+      "scores": {
+        "f1": 69.7,
+        "f2": 68,
+        "f3": 72,
+        "f4": 80,
+        "f5": 85,
+        "f6": 82,
+        "f7": 84
+      },
+      "total": 76.8,
+      "grade": "A",
+      "grade_action": "优先复制",
+      "replicability": "中"
+    },
+    {
+      "id": "CN-01",
+      "name": "魔芋爽/魔芋零食",
+      "region": "中国",
+      "category": "素食零食",
+      "heat": 92.0,
+      "scores": {
+        "f1": 86.8,
+        "f2": 74,
+        "f3": 78,
+        "f4": 58,
+        "f5": 65,
+        "f6": 96,
+        "f7": 76
+      },
+      "total": 74.9,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "中"
+    },
+    {
+      "id": "JP-03",
+      "name": "鲜奶油水果三明治",
+      "region": "日本",
+      "category": "现制烘焙",
+      "heat": 81.0,
+      "scores": {
+        "f1": 76.9,
+        "f2": 66,
+        "f3": 100.0,
+        "f4": 74,
+        "f5": 85,
+        "f6": 66,
+        "f7": 55
+      },
+      "total": 74.6,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "高"
+    },
+    {
+      "id": "CN-03",
+      "name": "气泡/猎奇口味薯片",
+      "region": "中国",
+      "category": "膨化零食",
+      "heat": 77.0,
+      "scores": {
+        "f1": 73.3,
+        "f2": 70,
+        "f3": 70,
+        "f4": 78,
+        "f5": 85,
+        "f6": 85,
+        "f7": 63
+      },
+      "total": 74.0,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "低"
+    },
+    {
+      "id": "TW-02",
+      "name": "太阳饼/老婆饼创新礼盒",
+      "region": "台湾",
+      "category": "传统糕点",
+      "heat": 76.0,
+      "scores": {
+        "f1": 72.4,
+        "f2": 73,
+        "f3": 84,
+        "f4": 73,
+        "f5": 85,
+        "f6": 65,
+        "f7": 65
+      },
+      "total": 73.8,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "高"
+    },
+    {
+      "id": "MY-03",
+      "name": "咖喱叻沙杯面",
+      "region": "马来西亚",
+      "category": "方便熟食",
+      "heat": 78.0,
+      "scores": {
+        "f1": 80.2,
+        "f2": 66,
+        "f3": 66,
+        "f4": 66,
+        "f5": 85,
+        "f6": 70,
+        "f7": 82
+      },
+      "total": 72.8,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "中"
+    },
+    {
+      "id": "CN-02",
+      "name": "大辣片/麻辣豆干",
+      "region": "中国",
+      "category": "豆制品零食",
+      "heat": 83.0,
+      "scores": {
+        "f1": 84.7,
+        "f2": 76,
+        "f3": 86,
+        "f4": 61,
+        "f5": 67,
+        "f6": 74,
+        "f7": 60
+      },
+      "total": 72.3,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "中"
+    },
+    {
+      "id": "KR-02",
+      "name": "Knotted 奶油甜甜圈",
+      "region": "韩国",
+      "category": "现制甜品",
+      "heat": 86.0,
+      "scores": {
+        "f1": 81.4,
+        "f2": 69,
+        "f3": 94,
+        "f4": 58,
+        "f5": 85,
+        "f6": 64,
+        "f7": 58
+      },
+      "total": 71.9,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "中"
+    },
+    {
+      "id": "JP-02",
+      "name": "冷冻巴斯克芝士蛋糕",
+      "region": "日本",
+      "category": "冷冻甜品",
+      "heat": 88.0,
+      "scores": {
+        "f1": 83.2,
+        "f2": 62,
+        "f3": 91,
+        "f4": 54,
+        "f5": 67,
+        "f6": 35,
+        "f7": 70
+      },
+      "total": 66.9,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "中"
+    }
+  ],
+  "plan": {
+    "concept": {
+      "name": "小老板海苔卷",
+      "region": "泰国",
+      "category": "海味零食",
+      "total": 87.3,
+      "grade": "S",
+      "indo_fit": 80
+    },
+    "container": {
+      "tier": "双40尺旗舰样板（56㎡）",
+      "space_plan": "机制剧场全配置：挑战台+等级墙+打卡装置",
+      "link": "/case/",
+      "note": "集装箱整装四档体系直接复用；快闪模块可拆装巡回"
+    },
+    "steps": [
+      {
+        "no": 1,
+        "name": "定义传播单元",
+        "action": "锁定「'泰国名片'级单品」为唯一传播画面，所有物料围绕这一个画面服务。",
+        "design": "包装主视觉 + 开箱背景板",
+        "supply": "—"
+      },
+      {
+        "no": 2,
+        "name": "选择寄生行为",
+        "action": "寄生高频行为：办公摸鱼 / 追剧熬夜 / 课间偷吃，产品作为道具嵌入而非创造场景。",
+        "design": "场景化 UGC 模板（办公桌/宿舍/通勤）",
+        "supply": "小规格独立包装适配场景"
+      },
+      {
+        "no": 3,
+        "name": "做成机制",
+        "action": "把机制写进产品结构：整卷咬断脆响镜头 + 口味全测评矩阵。；等级/收集/隐藏款三选一并系列化。",
+        "design": "等级徽章 + 收集编号 + 挑战卡（可延展超级符号）",
+        "supply": "包装产线需支持变体印刷"
+      },
+      {
+        "no": 4,
+        "name": "前置被拍性与被理解性",
+        "action": "货架三秒识别测试 + 开箱脚本测试 + 拍摄测试 + 系列延展测试，作为评审硬标准。",
+        "design": "货架层/开箱层/社交层三层包装打样",
+        "supply": "材质工艺与成本测试同步"
+      },
+      {
+        "no": 5,
+        "name": "活人感冷启动 + 大单品承接",
+        "action": "话题款负责拉新曝光；复购由大单品承接——sambal matah / rendang 两种印尼限定味；大卷分享装进超市。。",
+        "design": "内容模板 + 门店打卡模板",
+        "supply": "sambal matah / rendang 两种印尼限定味；大卷分享装进超市。"
+      }
+    ],
+    "supply_chain": {
+      "local_match": "海洋饮食文化相通，海苔接受度高；印尼是海苔原料产地之一，成本可控。",
+      "adaptation": "sambal matah / rendang 两种印尼限定味；大卷分享装进超市。",
+      "compliance": "海苔碘含量标注；辣味添加剂需 BPOM 备案。",
+      "compliance_lead": "BPOM + Halal 认证周期约 3-6 个月，与产品开发同步启动"
+    },
+    "deliverables": [
+      "品牌识别系统 VIS + 核心超级符号",
+      "货架层/开箱层/社交层三层包装",
+      "开箱脚本与机制道具（挑战卡/收集卡）",
+      "平面动线图 + 机制装置详图",
+      "陈列道具清单 + 施工落地成本估算",
+      "快闪模块化拆装方案"
+    ]
+  },
+  "source_note": "评分由规则引擎从 trend 字段推导（品类基值 + 透明修正），可审计可测试。"
+}
