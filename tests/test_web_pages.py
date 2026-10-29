@@ -5,7 +5,7 @@ WEB = Path(__file__).resolve().parent.parent / "web"
 
 NAV_PAGES = ["case", "dashboard", "floorplan", "franchise", "launch",
              "library", "map", "three", "trend", "store-dash", "brandkit",
-             "assembly", "playbook"]
+             "assembly", "playbook", "retail"]
 
 
 def _read(page: str) -> str:
@@ -57,6 +57,13 @@ def test_home_dual_portal_separation():
     assert "体系 A · 网红单店快速验证" in html
     assert "体系 B · 集装箱社区零售" in html
     assert "两条独立业务线" in html
+
+
+def test_retail_landing_page():
+    html = _read("retail")
+    for k in ["集装箱社区店", "投资模型", "样板店", "共建印尼社区零售网络",
+              "/assembly/data/assembly.json", "对外单页" if False else "B·集装箱零售"]:
+        assert k in html, f"retail 缺少 {k}"
 
 
 def test_case_has_no_influencer_chain():

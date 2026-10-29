@@ -107,6 +107,9 @@ def main():
     # 手册培训
     (SITE / "playbook").mkdir(parents=True)
     shutil.copy(ROOT / "web/playbook/index.html", SITE / "playbook")
+    # B 体系对外单页
+    (SITE / "retail").mkdir(parents=True)
+    shutil.copy(ROOT / "web/retail/index.html", SITE / "retail")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)
