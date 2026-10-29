@@ -108,3 +108,6 @@ button:active, .btn:active {
   .nbo-nav { overflow-x: auto; }
   .nbo-nav a.nl { padding: 6px var(--space-2); }
 }
+
+/* 导航项不收缩不换行，超出横向滚动（13 项分组导航） */
+.nbo-nav a.nl { flex: 0 0 auto; white-space: nowrap; }

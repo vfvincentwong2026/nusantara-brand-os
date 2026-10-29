@@ -104,6 +104,9 @@ def main():
     (SITE / "assembly/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/assembly/index.html", SITE / "assembly")
     shutil.copy(ROOT / "web/assembly/data/assembly.json", SITE / "assembly/data")
+    # 手册培训
+    (SITE / "playbook").mkdir(parents=True)
+    shutil.copy(ROOT / "web/playbook/index.html", SITE / "playbook")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)

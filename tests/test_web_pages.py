@@ -5,7 +5,7 @@ WEB = Path(__file__).resolve().parent.parent / "web"
 
 NAV_PAGES = ["case", "dashboard", "floorplan", "franchise", "launch",
              "library", "map", "three", "trend", "store-dash", "brandkit",
-             "assembly"]
+             "assembly", "playbook"]
 
 
 def _read(page: str) -> str:
@@ -15,9 +15,15 @@ def _read(page: str) -> str:
 def test_all_pages_share_full_nav():
     for p in NAV_PAGES:
         html = _read(p)
-        for anchor in ["热点雷达", "落地评分", "中央库", "品牌生成", "装配对比"]:
+        for anchor in ["热点雷达", "落地评分", "中央库", "品牌生成", "装配对比", "手册培训"]:
             assert anchor in html, f"{p} 导航缺少 {anchor}"
         assert 'href="/ui/tokens.css"' in html, f"{p} 缺少 tokens.css"
+
+
+def test_nav_grouped_by_system():
+    for p in NAV_PAGES:
+        html = _read(p)
+        assert html.count("单店链路") == 1 and html.count("复制体系") == 1, f"{p} 导航缺分组标签"
 
 
 def test_nav_pages_have_data_p_highlight():
