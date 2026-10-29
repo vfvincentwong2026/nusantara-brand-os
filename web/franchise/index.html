@@ -89,6 +89,14 @@
     </table>
     </div>
   </div>
+  <div class="panel" style="border-color:rgba(52,209,123,.4);">
+    <h2>第七业态 · 移动推车（轻资产入口） <span style="font-weight:400;font-size:11px">租车 + 配供应链 = 加盟 · 车身涂装即品牌资产</span></h2>
+    <p style="font-size:12px;color:#8b98a8;line-height:1.8;margin-bottom:14px;">
+      合作门槛进一步下探：<b style="color:#34d17b;">3–5 万 RMB 甚至更低即可启动</b>——租金替代加盟费，车到哪品牌到哪。
+      两种主力车型：电动车改造（前部制作轨做熟食 + 饮品咖啡）与手推车（纯供应链零售）。回本测算假设可审计（见下）。</p>
+    <div class="grid" id="carts" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));"></div>
+    <div id="cartDemo" style="margin-top:10px;font-size:11px;color:#e8b246;"></div>
+  </div>
 </div>
 <script>
 const esc = s => (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -115,6 +123,22 @@ fetch('./data/franchise.json').then(r => r.json()).then(d => {
       <td>${esc(b.fee_display)}<div class="sub">总 ${esc(b.invest_display)}</div></td>
       <td>${esc(b.supply_req)}</td><td>${esc(b.training)}</td>
       <td style="font-family:Consolas,monospace">${b.stores}</td><td>${esc(b.fit_regions)}</td></tr>`).join('');
+});
+fetch('/cart/data/carts.json').then(r => r.json()).then(d => {
+  const fmt = m => `¥${m.wan_cny[0]}–${m.wan_cny[1]} 万（Rp ${m.idr_m[0]}–${m.idr_m[1]} 百万）`;
+  document.getElementById('carts').innerHTML = d.carts.map(c => `
+    <div class="fmt" style="border-color:rgba(52,209,123,.25);">
+      <div class="fn">${esc(c.name)} <span class="sq">${esc(c.form)}</span></div>
+      <div class="capex">启动 <b style="color:#34d17b">${fmt(c.startup)}</b>
+        <div class="sub" style="font-size:10.5px;color:#5b6779;margin-top:3px;">押金 ${fmt(c.deposit)} · 月租 ${fmt(c.rent_mo)} · 首批货 ${fmt(c.first_stock)} · 证照 ${fmt(c.cert)}</div></div>
+      <div class="kv"><b>回本模型</b><span>日销 Rp ${c.daily_sales_idr[0]}k–${c.daily_sales_idr[1]}k × 毛利 ${(c.gross_margin * 100).toFixed(0)}%
+        → 回本 <span class="pb">${c.payback_months[0]}–${c.payback_months[1]} 个月</span></span></div>
+      <div class="kv"><b>供应链包</b><span>${esc(c.supply)}</span></div>
+      <div class="kv"><b>证照路径</b><span>${esc(c.permit)}</span></div>
+      <div class="kv"><b>品牌植入</b><span style="color:#e8b246;">${esc(c.brand)}</span></div>
+    </div>`).join('');
+  document.getElementById('cartDemo').textContent =
+    `⚠ ${d.meta.source_note}`;
 });
 const p = location.pathname;
 document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });

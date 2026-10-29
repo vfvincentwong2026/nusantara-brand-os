@@ -49,6 +49,8 @@ def main():
             "--out", "web/trend/data/hotbrands.json"])
         sh([sys.executable, "-m", "nbo.assembly", "--db", "nbo.db",
             "--out", "web/assembly/data/assembly.json"])
+        sh([sys.executable, "-m", "nbo.cart", "--db", "nbo.db",
+            "--out", "web/cart/data/carts.json"])
         sh([sys.executable, "-m", "nbo.launch", "--db", "nbo.db",
             "--out", "web/launch/data/launch.json"])
         sh([sys.executable, "-m", "nbo.franchise", "--db", "nbo.db",
@@ -110,6 +112,9 @@ def main():
     # B 体系对外单页
     (SITE / "retail").mkdir(parents=True)
     shutil.copy(ROOT / "web/retail/index.html", SITE / "retail")
+    # 移动推车加盟数据
+    (SITE / "cart/data").mkdir(parents=True)
+    shutil.copy(ROOT / "web/cart/data/carts.json", SITE / "cart/data")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)
