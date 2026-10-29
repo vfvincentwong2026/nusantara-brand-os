@@ -115,3 +115,76 @@ button:active, .btn:active {
 /* 体系 B（集装箱零售）导航项蓝色标识，与体系 A 视觉分离 */
 .nbo-nav a.nl.bline { color: #4da3ff; }
 .nbo-nav a.nl.bline:hover { color: #8ec2ff; }
+
+/* ═══ NBO Editorial Ink · 顶级品牌咨询公司排版体系（2026-10 改版）═══
+   原则：衬线大标题 + 发丝线分区 + mono 标签 + 单一强调色；弃用圆角卡片堆。 */
+:root {
+  --ink: #0b0b0c;
+  --paper: #f2f0eb;
+  --dim-warm: #9a958c;
+  --faint-warm: #55524c;
+  --hairline: rgba(242, 240, 235, 0.14);
+  --hairline-strong: rgba(242, 240, 235, 0.32);
+  --accent: #e4022b;
+  --accent-b: #4da3ff;
+  --font-display: "Fraunces", "Songti SC", Georgia, serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+}
+.ed-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+.ed-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.28em;
+             text-transform: uppercase; color: var(--accent); }
+.ed-kicker.b { color: var(--accent-b); }
+.ed-display { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.015em;
+              line-height: 1.06; }
+.ed-lead { color: var(--dim-warm); font-size: 16px; line-height: 1.9; }
+.ed-hr { border: 0; border-top: 1px solid var(--hairline); }
+.ed-sec { display: flex; align-items: baseline; gap: 18px; margin: 0 0 34px; }
+.ed-sec .no { font-family: var(--font-mono); font-size: 12px; color: var(--faint-warm); letter-spacing: 0.1em; }
+.ed-sec h2 { font-family: var(--font-display); font-size: clamp(24px, 3vw, 34px); font-weight: 600; letter-spacing: -0.01em; }
+.ed-sec .note { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--faint-warm); }
+/* 文字链按钮：无圆角胶囊，下划线 + 箭头 */
+.ed-link { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.08em; text-decoration: none;
+           color: var(--paper); border-bottom: 1px solid var(--hairline-strong); padding-bottom: 3px;
+           transition: border-color 0.15s, color 0.15s; }
+.ed-link:hover { border-color: var(--accent); color: #fff; }
+.ed-link .ar { color: var(--accent); }
+.ed-link.b:hover { border-color: var(--accent-b); }
+.ed-link.b .ar { color: var(--accent-b); }
+/* 巨型数字 */
+.ed-stat .v { font-family: var(--font-display); font-size: clamp(34px, 4vw, 56px); font-weight: 600; letter-spacing: -0.02em; }
+.ed-stat .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--dim-warm);
+              text-transform: uppercase; margin-top: 8px; line-height: 1.7; }
+/* 规则列表行（hover 整行微移） */
+.ed-row { display: block; text-decoration: none; color: inherit; border-top: 1px solid var(--hairline);
+          padding: 22px 0; transition: padding-left 0.18s; }
+.ed-row:hover { padding-left: 10px; }
+.ed-row .rn { font-family: var(--font-mono); font-size: 11px; color: var(--faint-warm); letter-spacing: 0.1em; }
+.ed-row h3 { font-family: var(--font-display); font-size: 21px; font-weight: 600; margin: 6px 0; }
+.ed-row p { color: var(--dim-warm); font-size: 13.5px; line-height: 1.8; max-width: 640px; }
+.ed-row .go { font-family: var(--font-mono); font-size: 11.5px; color: var(--accent); letter-spacing: 0.08em; margin-top: 10px; display: inline-block; }
+.ed-row.b .go { color: var(--accent-b); }
+
+/* ═══ Editorial 全局覆盖：所有引用本文件的页面统一编辑部质感 ═══
+   字体/底色/阴影一刀切；常见面板类名重映射为暖黑发丝线卡片。 */
+body { background: #0b0b0c !important; color: #f2f0eb !important;
+       font-family: var(--font-body) !important; }
+h1, h2, h3 { font-family: var(--font-display) !important; font-weight: 600;
+             letter-spacing: -0.01em; }
+code, pre, kbd, samp { font-family: var(--font-mono) !important; }
+/* 去模板：全部阴影与上浮效果归零 */
+*, *::before, *::after { box-shadow: none !important; }
+.lift:hover { transform: none !important; }
+/* 蓝黑面板 → 暖黑发丝线卡片（覆盖各页硬编码色） */
+.panel, .card, .plan, .tier, .rules, .layout, .tier-detail, .mini-btn,
+.tabs button, .step, .zone, .rules-card, .stat-card, .brand-card, .kv,
+.opt, .item-card, .store-card, .crawl-card, .hot-card, .hero-card,
+.step-card, .faq-card, .mode-card, .fmt-card, .chip {
+  background: #141311 !important;
+  border-color: rgba(242, 240, 235, 0.14) !important;
+  border-radius: 6px !important;
+}
+/* 次级文字蓝灰 → 暖灰 */
+small, .dim, .muted, .sub, .desc, .d, .note, .hint, .muted-warm {
+  color: #9a958c !important;
+}

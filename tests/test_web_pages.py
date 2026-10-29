@@ -54,8 +54,8 @@ def test_home_links_brandkit_and_library():
 
 def test_home_dual_portal_separation():
     html = (WEB / "index.html").read_text(encoding="utf-8")
-    assert "体系 A · 网红单店快速验证" in html
-    assert "体系 B · 集装箱社区零售" in html
+    assert "System A · 网红单店快速验证" in html
+    assert "System B · 集装箱社区零售" in html
     assert "两条独立业务线" in html
 
 
