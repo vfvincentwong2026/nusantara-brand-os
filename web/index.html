@@ -23,6 +23,13 @@
   h1 em { font-style:normal; color:var(--gold); }
   .lead { color:var(--dim); font-size:16px; max-width:680px; margin-top:20px; }
   .cta-row { display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .hero-search { display:flex; gap:10px; max-width:640px; margin-top:22px; }
+  .hero-search input { flex:1; background:rgba(18,24,32,.85); border:1px solid #232c3a; border-radius:10px;
+                       color:#e8eef5; padding:11px 16px; font-size:13.5px; outline:none; }
+  .hero-search input:focus { border-color:#e8b246; }
+  .hero-search button { background:rgba(232,178,70,.14); color:#e8b246; border:1px solid rgba(232,178,70,.45);
+                        border-radius:10px; padding:11px 20px; font-size:13px; cursor:pointer; white-space:nowrap; }
+  .hero-search button:hover { background:rgba(232,178,70,.25); }
   .btn { display:inline-block; padding:12px 26px; border-radius:8px; font-weight:600; font-size:15px;
          text-decoration:none; transition:transform .15s, box-shadow .15s; }
   .btn.primary { background:var(--red); color:#fff; box-shadow:0 6px 24px rgba(228,2,43,.35); }
@@ -76,6 +83,10 @@
       <a class="btn ghost" href="./map/">渠道地图</a>
       <a class="btn ghost" href="./three/">3D 数字孪生</a>
     </div>
+    <form class="hero-search" onsubmit="event.preventDefault(); location.href='/library/?q='+encodeURIComponent(this.q.value);">
+      <input name="q" placeholder="全局搜索：品牌 / 爆品 / 选址 / 供应商…（如：海苔、喜茶、BSD）" autocomplete="off">
+      <button type="submit">搜索中央库 →</button>
+    </form>
     <div class="pillars">
       <div class="pillar"><div class="no">策略 01</div><h3>合规先行，一票否决</h3><p>BPOM / Halal / SNI 状态跟踪与到期预警，无证 SKU 不上架——印尼市场的入场券先管好。</p></div>
       <div class="pillar"><div class="no">策略 02</div><h3>渠道评分，先打最值的 Warung</h3><p>7 维加权评分（位置 25% · 活跃度 20% …）把几十万 Warung 排成黄金/白银/潜力/普通，销售第一步打在哪一目了然。</p></div>

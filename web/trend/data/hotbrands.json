@@ -1,0 +1,362 @@
+{
+  "generated_at": "2026-10-29T11:20:05",
+  "demo": true,
+  "window": "近 3 个月",
+  "brands": [
+    {
+      "id": "HB-03",
+      "name": "蜜雪冰城",
+      "name_local": "MIXUE",
+      "country": "中国",
+      "category": "冰淇淋茶饮",
+      "franchise_status": "开放加盟（东南亚 2000+ 店）",
+      "hot_products": [
+        "冰鲜柠檬水",
+        "摩天脆脆",
+        "雪王大圣代"
+      ],
+      "ido_fit": 90.0,
+      "ido_path": "直接加盟——印尼已验证",
+      "ido_note": "印尼已有大量门店且盈利模型跑通；主题曲营销是教科书案例。加盟费低、供应链本地化最深，复制风险最低。",
+      "platforms": [
+        "TikTok",
+        "抖音",
+        "YouTube"
+      ],
+      "remix_note": "雪王 IP 二创自由度极高，官方鼓励鬼畜改编——UGC 引擎全开",
+      "photo": null,
+      "source_type": "演示",
+      "social": {
+        "views_wan": 88000.0,
+        "likes_wan": 3600.0,
+        "shares_wan": 510.0
+      },
+      "ugc": 95.0
+    },
+    {
+      "id": "HB-09",
+      "name": "三养",
+      "name_local": "Samyang",
+      "country": "韩国",
+      "category": "方便食品",
+      "franchise_status": "经销代理（已全球化）",
+      "hot_products": [
+        "火鸡面",
+        "奶油火鸡面",
+        "辣鸡酱料"
+      ],
+      "ido_fit": 75.0,
+      "ido_path": "经销引进——辣挑战内容生态现成",
+      "ido_note": "印尼嗜辣基础极佳；火鸡面辣挑战内容可无缝平移，酱料单独引进做本地速食联名。",
+      "platforms": [
+        "TikTok",
+        "YouTube",
+        "IG"
+      ],
+      "remix_note": "辣挑战阶梯是跨文化硬通货；印尼博主二创量巨大",
+      "photo": null,
+      "source_type": "演示",
+      "social": {
+        "views_wan": 65000.0,
+        "likes_wan": 2700.0,
+        "shares_wan": 430.0
+      },
+      "ugc": 93.0
+    },
+    {
+      "id": "HB-01",
+      "name": "喜茶",
+      "name_local": "HEYTEA",
+      "country": "中国",
+      "category": "新茶饮",
+      "franchise_status": "事业合伙（区域开放）",
+      "hot_products": [
+        "芝芝莓莓",
+        "多肉葡萄",
+        "烤黑糖波波牛乳"
+      ],
+      "ido_fit": 68.0,
+      "ido_path": "区域代理谈判 + 本地供应链共建",
+      "ido_note": "直营基因强、加盟门槛高；更现实路径是学其'鲜果+芝士奶盖'结构做本土品牌，或与区域代理谈雅加达试点。",
+      "platforms": [
+        "抖音",
+        "小红书",
+        "IG"
+      ],
+      "remix_note": "奶盖分层特写 + 季节限定开箱；二创门槛低，模板化滤镜官方提供",
+      "photo": "/assets/brand-heytea.png",
+      "source_type": "演示",
+      "social": {
+        "views_wan": 52000.0,
+        "likes_wan": 2100.0,
+        "shares_wan": 340.0
+      },
+      "ugc": 92.0
+    },
+    {
+      "id": "HB-02",
+      "name": "霸王茶姬",
+      "name_local": "CHAGEE",
+      "country": "中国",
+      "category": "新茶饮",
+      "franchise_status": "开放加盟（海外已布局马来西亚）",
+      "hot_products": [
+        "伯牙绝弦",
+        "花田乌龙",
+        "万里木兰"
+      ],
+      "ido_fit": 82.0,
+      "ido_path": "加盟优先——已有东南亚运营样板",
+      "ido_note": "东南亚已有 100+ 店，加盟体系成熟；印尼市场相对空白，是窗口期品牌。产品标准化程度高，适合直接加盟。",
+      "platforms": [
+        "抖音",
+        "TikTok",
+        "IG"
+      ],
+      "remix_note": "国风杯身 + 撕杯有礼机制；包装本身即传播单元",
+      "photo": null,
+      "source_type": "演示",
+      "social": {
+        "views_wan": 46000.0,
+        "likes_wan": 1800.0,
+        "shares_wan": 290.0
+      },
+      "ugc": 88.0
+    },
+    {
+      "id": "HB-08",
+      "name": "卫龙",
+      "name_local": "Weilong",
+      "country": "中国",
+      "category": "辣条豆干",
+      "franchise_status": "经销 + 出海建厂",
+      "hot_products": [
+        "大面筋",
+        "魔芋爽",
+        "亲嘴烧"
+      ],
+      "ido_fit": 65.0,
+      "ido_path": "经销试水温 + 魔芋品类重点学",
+      "ido_note": "魔芋爽是 S 级信号：低卡解痒精准。辣条本体在印尼需品类教育，先做魔芋线。",
+      "platforms": [
+        "抖音",
+        "TikTok"
+      ],
+      "remix_note": "老外首次吃辣条 reaction 是长青格式；热量对比测评",
+      "photo": null,
+      "source_type": "演示",
+      "social": {
+        "views_wan": 30000.0,
+        "likes_wan": 1300.0,
+        "shares_wan": 210.0
+      },
+      "ugc": 85.0
+    },
+    {
+      "id": "HB-04",
+      "name": "Knotted",
+      "name_local": "노티드",
+      "country": "韩国",
+      "category": "甜甜圈",
+      "franchise_status": "直营不加盟（可学模式）",
+      "hot_products": [
+        "经典奶油甜甜圈",
+        "Ube 香芋限定",
+        "季节联名款"
+      ],
+      "ido_fit": 62.0,
+      "ido_path": "模式复制——学排队经济学",
+      "ido_note": "不开放加盟；复制其'厚奶油+掰开爆浆'产品结构与饥饿营销打法，用本地烘焙代工落地。",
+      "platforms": [
+        "TikTok",
+        "X"
+      ],
+      "remix_note": "掰开爆浆慢镜头是固定爆款格式；二创无需授权顾虑（学结构不抄 IP）",
+      "photo": "/assets/brand-knotted.png",
+      "source_type": "演示",
+      "social": {
+        "views_wan": 21000.0,
+        "likes_wan": 950.0,
+        "shares_wan": 180.0
+      },
+      "ugc": 90.0
+    },
+    {
+      "id": "HB-05",
+      "name": "小老板",
+      "name_local": "Tao Kae Noi",
+      "country": "泰国",
+      "category": "海苔零食",
+      "franchise_status": "经销代理（可复制产线）",
+      "hot_products": [
+        "香脆海苔卷（辣味）",
+        "冬阴功味海苔",
+        "大卷分享装"
+      ],
+      "ido_fit": 85.0,
+      "ido_path": "双轨：代理引进 + 本地代工复制",
+      "ido_note": "印尼本身是海苔原料产地，复制成本全球最低；同时可谈区域经销快速上架。落地评分 S 级概念。",
+      "platforms": [
+        "TikTok",
+        "Shopee Live"
+      ],
+      "remix_note": "整卷咬断脆响 ASMR；口味测评矩阵类内容长尾稳定",
+      "photo": "/assets/brand-taokae.png",
+      "source_type": "演示",
+      "social": {
+        "views_wan": 15000.0,
+        "likes_wan": 620.0,
+        "shares_wan": 95.0
+      },
+      "ugc": 78.0
+    },
+    {
+      "id": "HB-10",
+      "name": "茶颜悦色",
+      "name_local": "茶颜悦色",
+      "country": "中国",
+      "category": "新茶饮",
+      "franchise_status": "直营不加盟（学文化叙事）",
+      "hot_products": [
+        "幽兰拿铁",
+        "声声乌龙",
+        "桂花弄"
+      ],
+      "ido_fit": 55.0,
+      "ido_path": "学文化叙事——不做加盟指望",
+      "ido_note": "不开放加盟且区域保护强；其价值在'新中式文化叙事'方法论，供本土品牌策划库参考。",
+      "platforms": [
+        "小红书",
+        "抖音"
+      ],
+      "remix_note": "国风美学 + 城市限定；二创以视觉模板为主",
+      "photo": null,
+      "source_type": "演示",
+      "social": {
+        "views_wan": 18000.0,
+        "likes_wan": 800.0,
+        "shares_wan": 120.0
+      },
+      "ugc": 82.0
+    },
+    {
+      "id": "HB-07",
+      "name": "卡乐比",
+      "name_local": "Calbee",
+      "country": "日本",
+      "category": "膨化零食",
+      "franchise_status": "经销代理",
+      "hot_products": [
+        "薯条三兄弟",
+        "坚脆薯片",
+        "水果麦片"
+      ],
+      "ido_fit": 72.0,
+      "ido_path": "经销引进 + 联名学习",
+      "ido_note": "单品生命周期管理教科书：限定口味 + 地区限定制造稀缺。可与本地品牌学其上新节奏。",
+      "platforms": [
+        "X",
+        "TikTok",
+        "小红书"
+      ],
+      "remix_note": "地区限定收集玩法；开箱测评类内容稳定产出",
+      "photo": null,
+      "source_type": "演示",
+      "social": {
+        "views_wan": 12000.0,
+        "likes_wan": 500.0,
+        "shares_wan": 80.0
+      },
+      "ugc": 70.0
+    },
+    {
+      "id": "HB-06",
+      "name": "IRVINS",
+      "name_local": "IRVINS Salted Egg",
+      "country": "新加坡",
+      "category": "咸蛋黄零食",
+      "franchise_status": "区域代理",
+      "hot_products": [
+        "咸蛋黄鱼皮",
+        "咸蛋黄薯片",
+        "松露味鱼皮"
+      ],
+      "ido_fit": 80.0,
+      "ido_path": "代理引进 + 本地鱼皮成本优势复制",
+      "ido_note": "品牌溢价强适合做礼品渠道；复制版可用印尼廉价鱼皮原料打 Rp 15k 大众价格带错位竞争。",
+      "platforms": [
+        "IG",
+        "小红书",
+        "TikTok"
+      ],
+      "remix_note": "流沙裹层特写 + 舔手指 reaction；礼盒开箱适配节庆",
+      "photo": "/assets/brand-irvins.png",
+      "source_type": "演示",
+      "social": {
+        "views_wan": 9800.0,
+        "likes_wan": 410.0,
+        "shares_wan": 66.0
+      },
+      "ugc": 75.0
+    },
+    {
+      "id": "HB-12",
+      "name": "奈雪",
+      "name_local": "Nayuki",
+      "country": "中国",
+      "category": "茶饮+烘焙",
+      "franchise_status": "直营为主（亏损收缩，谨慎）",
+      "hot_products": [
+        "霸气橙子",
+        "草莓魔法棒",
+        "奥利奥脆弱蛋挞"
+      ],
+      "ido_fit": 58.0,
+      "ido_path": "仅学习——大店模型当前不可复制",
+      "ido_note": "茶饮+烘焙大店模型正在收缩，作为'反面教材库'收录：重资产大店在印尼风险高。",
+      "platforms": [
+        "小红书",
+        "抖音"
+      ],
+      "remix_note": "烘焙茶饮组合拍摄；大店空间 vlog",
+      "photo": null,
+      "source_type": "演示",
+      "social": {
+        "views_wan": 14000.0,
+        "likes_wan": 560.0,
+        "shares_wan": 70.0
+      },
+      "ugc": 68.0
+    },
+    {
+      "id": "HB-11",
+      "name": "% Arabica",
+      "name_local": "アラビカ",
+      "country": "日本",
+      "category": "精品咖啡",
+      "franchise_status": "区域代理（高门槛）",
+      "hot_products": [
+        "西班牙拿铁",
+        "抹茶拿铁",
+        "单品手冲"
+      ],
+      "ido_fit": 60.0,
+      "ido_path": "高端商圈代理或学极简空间",
+      "ido_note": "适合雅加达高端商场单点；更普适的是学其'极简白+吧台风'空间语言做中端咖啡档。",
+      "platforms": [
+        "IG",
+        "小红书"
+      ],
+      "remix_note": "% 符号打卡构图；空间摄影是主要内容形式",
+      "photo": null,
+      "source_type": "演示",
+      "social": {
+        "views_wan": 8900.0,
+        "likes_wan": 380.0,
+        "shares_wan": 55.0
+      },
+      "ugc": 72.0
+    }
+  ],
+  "source_note": "社媒数据为演示口径；photo 为 AI 概念参考图，真实照片抓取后替换 URL 即可。"
+}

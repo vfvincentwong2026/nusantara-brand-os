@@ -10,6 +10,46 @@ from pathlib import Path
 
 REGIONS = ["日本", "韩国", "台湾", "泰国", "马来西亚", "中国"]
 
+# 社媒热度口径（演示数据）：播放量/点赞/转发（万）+ 平台分布 + 二创自由度
+SOCIAL = {
+    "JP-01": dict(views=42000, likes=1300, shares=210, platforms=["TikTok", "X", "IG"], ugc=85,
+                  remix="切面 ASMR + 排队 vlog；礼盒开箱模板官方可复用"),
+    "JP-02": dict(views=18000, likes=620, shares=95, platforms=["TikTok", "X"], ugc=80,
+                  remix="解冻切开流心镜头；便利店寻宝类"),
+    "JP-03": dict(views=9000, likes=350, shares=48, platforms=["TikTok", "IG"], ugc=88,
+                  remix="切面 reveal + 奶油挤花过程；DIY 复刻教程 UGC 占大头"),
+    "KR-01": dict(views=24000, likes=980, shares=170, platforms=["TikTok", "X", "YouTube"], ugc=75,
+                  remix="蘸咖啡吃法 + 复古市场探店；低糖对比测评"),
+    "KR-02": dict(views=21000, likes=950, shares=180, platforms=["TikTok", "X"], ugc=90,
+                  remix="掰开爆浆慢镜头 + 排队测评；学结构不抄 IP"),
+    "KR-03": dict(views=6000, likes=240, shares=38, platforms=["TikTok", "YouTube"], ugc=78,
+                  remix="开袋香气 reaction + 酱料蘸食测评"),
+    "TW-01": dict(views=50000, likes=1900, shares=330, platforms=["TikTok", "IG", "小红书"], ugc=92,
+                  remix="咬开珍珠颗粒特写 + 奶茶对比；跨品类二创空间最大"),
+    "TW-02": dict(views=8000, likes=300, shares=45, platforms=["小红书", "Threads"], ugc=65,
+                  remix="酥皮分层慢镜 + 伴手礼攻略清单"),
+    "TW-03": dict(views=3000, likes=130, shares=25, platforms=["TikTok", "IG"], ugc=82,
+                  remix="辣度阶梯挑战 + 闻香盲测；挑战类硬通货"),
+    "TH-01": dict(views=12000, likes=480, shares=70, platforms=["TikTok", "Shopee Live"], ugc=76,
+                  remix="整卷咬断脆响 ASMR；口味全测评矩阵"),
+    "TH-02": dict(views=50000, likes=2100, shares=380, platforms=["TikTok", "IG", "YouTube"], ugc=90,
+                  remix="拉茶过程 + 泰奶色视觉标签；甜品化二创（泰奶冰/吐司）"),
+    "TH-03": dict(views=7000, likes=260, shares=40, platforms=["TikTok", "YouTube"], ugc=72,
+                  remix="夜市现烤 + 蘸酱吃法；硬度挑战类"),
+    "MY-01": dict(views=12000, likes=520, shares=88, platforms=["TikTok", "IG", "小红书"], ugc=84,
+                  remix="流沙裹层特写 + 舔手指 reaction；真假咸蛋黄对比"),
+    "MY-02": dict(views=5000, likes=200, shares=30, platforms=["TikTok", "X"], ugc=62,
+                  remix="kopitiam 探店 + 三合一盲测"),
+    "MY-03": dict(views=6000, likes=230, shares=32, platforms=["YouTube", "TikTok"], ugc=68,
+                  remix="冲泡过程 + 料包全加镜头；泡面排行榜测评"),
+    "CN-01": dict(views=46000, likes=1900, shares=300, platforms=["抖音", "TikTok"], ugc=89,
+                  remix="咀嚼 ASMR + 热量对比测评；办公室囤货 vlog"),
+    "CN-02": dict(views=30000, likes=1250, shares=220, platforms=["抖音", "TikTok", "YouTube"], ugc=91,
+                  remix="老外首次吃辣条 reaction + 撕咬慢镜；长青格式"),
+    "CN-03": dict(views=4000, likes=180, shares=28, platforms=["抖音", "小红书"], ugc=74,
+                  remix="开袋气泡声 + 表情 reaction 合集；生命周期短快进快出"),
+}
+
 TREND_DDL = """
 CREATE TABLE IF NOT EXISTS trend_snack (
     id TEXT PRIMARY KEY, region TEXT, name TEXT, name_local TEXT,
@@ -242,6 +282,8 @@ def build_trend(db_path: str | Path) -> dict:
     if not snacks:
         return {"demo": True, "error": "trend_snack 为空，请先 seed"}
     snacks.sort(key=lambda s: -s["heat"])
+    for s in snacks:
+        s["social"] = SOCIAL.get(s["id"], {})
     by_region = {reg: sorted([s for s in snacks if s["region"] == reg],
                              key=lambda s: -s["heat"]) for reg in REGIONS}
     # 反向指导：按印尼适配分 × 复制性排序，提炼可操作方向

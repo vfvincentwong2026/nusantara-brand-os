@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T09:47:25",
+  "generated_at": "2026-10-29T11:20:04",
   "demo": true,
   "window": "近 3 个月",
   "regions": [
@@ -31,7 +31,19 @@
       "compliance_note": "配料表需 BPOM 注册；黄油含量宣称需符合标签法，避免'北海道'产地误导。",
       "replicability": "中",
       "repl_reason": "工艺门槛中等（夹心+烘烤曲线），但品牌溢价依赖产地故事，本地版需另造叙事。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 42000,
+        "likes": 1300,
+        "shares": 210,
+        "platforms": [
+          "TikTok",
+          "X",
+          "IG"
+        ],
+        "ugc": 85,
+        "remix": "切面 ASMR + 排队 vlog；礼盒开箱模板官方可复用"
+      }
     },
     {
       "id": "TH-01",
@@ -52,7 +64,18 @@
       "compliance_note": "海苔碘含量标注；辣味添加剂需 BPOM 备案。",
       "replicability": "高",
       "repl_reason": "原料本地有优势，烘烤工艺简单，是最优先复制对象之一。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 12000,
+        "likes": 480,
+        "shares": 70,
+        "platforms": [
+          "TikTok",
+          "Shopee Live"
+        ],
+        "ugc": 76,
+        "remix": "整卷咬断脆响 ASMR；口味全测评矩阵"
+      }
     },
     {
       "id": "CN-01",
@@ -73,7 +96,18 @@
       "compliance_note": "魔芋粉进口需 BPOM 审批；'低卡'宣称需营养检测支撑。",
       "replicability": "中",
       "repl_reason": "魔芋原料需进口或建立本地种植，短期可先做调味差异化。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 46000,
+        "likes": 1900,
+        "shares": 300,
+        "platforms": [
+          "抖音",
+          "TikTok"
+        ],
+        "ugc": 89,
+        "remix": "咀嚼 ASMR + 热量对比测评；办公室囤货 vlog"
+      }
     },
     {
       "id": "KR-01",
@@ -94,7 +128,19 @@
       "compliance_note": "蜂蜜原料需 Halal 来源证明；油炸工艺标签需标反式脂肪酸。",
       "replicability": "高",
       "repl_reason": "kue 产业链成熟，本地代工无壁垒；差异化在口味微调。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 24000,
+        "likes": 980,
+        "shares": 170,
+        "platforms": [
+          "TikTok",
+          "X",
+          "YouTube"
+        ],
+        "ugc": 75,
+        "remix": "蘸咖啡吃法 + 复古市场探店；低糖对比测评"
+      }
     },
     {
       "id": "TW-01",
@@ -115,7 +161,19 @@
       "compliance_note": "黑糖色素需符合 BPOM 添加剂标准；珍珠粒口感货架期衰减需标注。",
       "replicability": "高",
       "repl_reason": "饼干产线通用，联名款可在 1-2 个月内上架。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 50000,
+        "likes": 1900,
+        "shares": 330,
+        "platforms": [
+          "TikTok",
+          "IG",
+          "小红书"
+        ],
+        "ugc": 92,
+        "remix": "咬开珍珠颗粒特写 + 奶茶对比；跨品类二创空间最大"
+      }
     },
     {
       "id": "JP-02",
@@ -136,7 +194,18 @@
       "compliance_note": "冷冻乳制品进口关税高，本地代工更优；需 Halal 乳源认证。",
       "replicability": "中",
       "repl_reason": "配方可复制但冷冻物流成本是主要瓶颈，外岛难下沉。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 18000,
+        "likes": 620,
+        "shares": 95,
+        "platforms": [
+          "TikTok",
+          "X"
+        ],
+        "ugc": 80,
+        "remix": "解冻切开流心镜头；便利店寻宝类"
+      }
     },
     {
       "id": "MY-01",
@@ -157,7 +226,19 @@
       "compliance_note": "咸蛋黄为动物源配料，Halal 认证关键；油炸酸价控制。",
       "replicability": "高",
       "repl_reason": "原料成本优势+工艺简单，是最具性价比的复制标的。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 12000,
+        "likes": 520,
+        "shares": 88,
+        "platforms": [
+          "TikTok",
+          "IG",
+          "小红书"
+        ],
+        "ugc": 84,
+        "remix": "流沙裹层特写 + 舔手指 reaction；真假咸蛋黄对比"
+      }
     },
     {
       "id": "KR-02",
@@ -178,7 +259,18 @@
       "compliance_note": "现制同 JP-03；若做预包装需 BPOM。",
       "replicability": "中",
       "repl_reason": "工艺可复制，但'排队经济学'依赖商圈选址与营销预算。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 21000,
+        "likes": 950,
+        "shares": 180,
+        "platforms": [
+          "TikTok",
+          "X"
+        ],
+        "ugc": 90,
+        "remix": "掰开爆浆慢镜头 + 排队测评；学结构不抄 IP"
+      }
     },
     {
       "id": "TH-02",
@@ -199,7 +291,19 @@
       "compliance_note": "色素（日落黄等）BPOM 限量严格，需天然色素替代方案。",
       "replicability": "高",
       "repl_reason": "冲剂工艺简单，差异化在茶底拼配与减糖技术。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 50000,
+        "likes": 2100,
+        "shares": 380,
+        "platforms": [
+          "TikTok",
+          "IG",
+          "YouTube"
+        ],
+        "ugc": 90,
+        "remix": "拉茶过程 + 泰奶色视觉标签；甜品化二创（泰奶冰/吐司）"
+      }
     },
     {
       "id": "CN-02",
@@ -220,7 +324,19 @@
       "compliance_note": "豆制品发酵工艺卫生标准严格；BPOM 对添加剂种类有限制。",
       "replicability": "中",
       "repl_reason": "品类教育期较长，适合先以进口版试水温再本地化。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 30000,
+        "likes": 1250,
+        "shares": 220,
+        "platforms": [
+          "抖音",
+          "TikTok",
+          "YouTube"
+        ],
+        "ugc": 91,
+        "remix": "老外首次吃辣条 reaction + 撕咬慢镜；长青格式"
+      }
     },
     {
       "id": "JP-03",
@@ -241,7 +357,18 @@
       "compliance_note": "现制餐饮需当地 PIRT/卫生许可；奶油需冷链记录。",
       "replicability": "高",
       "repl_reason": "设备与工艺简单，适合作为网红店引流品而非零售 SKU。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 9000,
+        "likes": 350,
+        "shares": 48,
+        "platforms": [
+          "TikTok",
+          "IG"
+        ],
+        "ugc": 88,
+        "remix": "切面 reveal + 奶油挤花过程；DIY 复刻教程 UGC 占大头"
+      }
     },
     {
       "id": "KR-03",
@@ -262,7 +389,18 @@
       "compliance_note": "调味粉 Halal 认证必需；辣度宣称需实测一致。",
       "replicability": "高",
       "repl_reason": "膨化代工门槛低，口味复制快，窗口期约 6-9 个月。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 6000,
+        "likes": 240,
+        "shares": 38,
+        "platforms": [
+          "TikTok",
+          "YouTube"
+        ],
+        "ugc": 78,
+        "remix": "开袋香气 reaction + 酱料蘸食测评"
+      }
     },
     {
       "id": "MY-03",
@@ -283,7 +421,18 @@
       "compliance_note": "方便面 BPOM 注册 + 营养标签；棕榈油使用符合 RSPO 叙事加分。",
       "replicability": "中",
       "repl_reason": "泡面产线重资产，更适合与现有厂商联名而非自建。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 6000,
+        "likes": 230,
+        "shares": 32,
+        "platforms": [
+          "YouTube",
+          "TikTok"
+        ],
+        "ugc": 68,
+        "remix": "冲泡过程 + 料包全加镜头；泡面排行榜测评"
+      }
     },
     {
       "id": "CN-03",
@@ -304,7 +453,18 @@
       "compliance_note": "碳酸口感添加剂需符合 BPOM 标准；限量营销避免饥饿营销争议。",
       "replicability": "低",
       "repl_reason": "话题款属性强、生命周期 3-6 个月，不宜作为战略 SKU。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 4000,
+        "likes": 180,
+        "shares": 28,
+        "platforms": [
+          "抖音",
+          "小红书"
+        ],
+        "ugc": 74,
+        "remix": "开袋气泡声 + 表情 reaction 合集；生命周期短快进快出"
+      }
     },
     {
       "id": "TW-02",
@@ -325,7 +485,18 @@
       "compliance_note": "伴手礼食品需 BPOM 流通许可；椰糖为本地原料可降成本。",
       "replicability": "高",
       "repl_reason": "烘焙工艺本地完全可复制，竞争点在包装设计与节庆营销。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 8000,
+        "likes": 300,
+        "shares": 45,
+        "platforms": [
+          "小红书",
+          "Threads"
+        ],
+        "ugc": 65,
+        "remix": "酥皮分层慢镜 + 伴手礼攻略清单"
+      }
     },
     {
       "id": "TW-03",
@@ -346,7 +517,18 @@
       "compliance_note": "辣椒素含量标签；挑战类营销需避免过量食用免责文案。",
       "replicability": "中",
       "repl_reason": "调味可复制，但味型教育需要营销投入，适合作为话题款而非主力 SKU。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 3000,
+        "likes": 130,
+        "shares": 25,
+        "platforms": [
+          "TikTok",
+          "IG"
+        ],
+        "ugc": 82,
+        "remix": "辣度阶梯挑战 + 闻香盲测；挑战类硬通货"
+      }
     },
     {
       "id": "MY-02",
@@ -367,7 +549,18 @@
       "compliance_note": "咖啡制品标签需标咖啡因含量；植脂末反式脂肪标注。",
       "replicability": "中",
       "repl_reason": "市场已有大量即溶咖啡竞品，差异化空间在豆种故事。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 5000,
+        "likes": 200,
+        "shares": 30,
+        "platforms": [
+          "TikTok",
+          "X"
+        ],
+        "ugc": 62,
+        "remix": "kopitiam 探店 + 三合一盲测"
+      }
     },
     {
       "id": "TH-03",
@@ -388,7 +581,18 @@
       "compliance_note": "水产干货需 BPOM 水产类注册；防腐剂使用受控。",
       "replicability": "高",
       "repl_reason": "原料与工艺本地成熟，主要做包装与调味升级。",
-      "source_type": "演示"
+      "source_type": "演示",
+      "social": {
+        "views": 7000,
+        "likes": 260,
+        "shares": 40,
+        "platforms": [
+          "TikTok",
+          "YouTube"
+        ],
+        "ugc": 72,
+        "remix": "夜市现烤 + 蘸酱吃法；硬度挑战类"
+      }
     }
   ],
   "by_region": {
@@ -413,7 +617,19 @@
         "compliance_note": "配料表需 BPOM 注册；黄油含量宣称需符合标签法，避免'北海道'产地误导。",
         "replicability": "中",
         "repl_reason": "工艺门槛中等（夹心+烘烤曲线），但品牌溢价依赖产地故事，本地版需另造叙事。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 42000,
+          "likes": 1300,
+          "shares": 210,
+          "platforms": [
+            "TikTok",
+            "X",
+            "IG"
+          ],
+          "ugc": 85,
+          "remix": "切面 ASMR + 排队 vlog；礼盒开箱模板官方可复用"
+        }
       },
       {
         "id": "JP-02",
@@ -434,7 +650,18 @@
         "compliance_note": "冷冻乳制品进口关税高，本地代工更优；需 Halal 乳源认证。",
         "replicability": "中",
         "repl_reason": "配方可复制但冷冻物流成本是主要瓶颈，外岛难下沉。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 18000,
+          "likes": 620,
+          "shares": 95,
+          "platforms": [
+            "TikTok",
+            "X"
+          ],
+          "ugc": 80,
+          "remix": "解冻切开流心镜头；便利店寻宝类"
+        }
       },
       {
         "id": "JP-03",
@@ -455,7 +682,18 @@
         "compliance_note": "现制餐饮需当地 PIRT/卫生许可；奶油需冷链记录。",
         "replicability": "高",
         "repl_reason": "设备与工艺简单，适合作为网红店引流品而非零售 SKU。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 9000,
+          "likes": 350,
+          "shares": 48,
+          "platforms": [
+            "TikTok",
+            "IG"
+          ],
+          "ugc": 88,
+          "remix": "切面 reveal + 奶油挤花过程；DIY 复刻教程 UGC 占大头"
+        }
       }
     ],
     "韩国": [
@@ -478,7 +716,19 @@
         "compliance_note": "蜂蜜原料需 Halal 来源证明；油炸工艺标签需标反式脂肪酸。",
         "replicability": "高",
         "repl_reason": "kue 产业链成熟，本地代工无壁垒；差异化在口味微调。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 24000,
+          "likes": 980,
+          "shares": 170,
+          "platforms": [
+            "TikTok",
+            "X",
+            "YouTube"
+          ],
+          "ugc": 75,
+          "remix": "蘸咖啡吃法 + 复古市场探店；低糖对比测评"
+        }
       },
       {
         "id": "KR-02",
@@ -499,7 +749,18 @@
         "compliance_note": "现制同 JP-03；若做预包装需 BPOM。",
         "replicability": "中",
         "repl_reason": "工艺可复制，但'排队经济学'依赖商圈选址与营销预算。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 21000,
+          "likes": 950,
+          "shares": 180,
+          "platforms": [
+            "TikTok",
+            "X"
+          ],
+          "ugc": 90,
+          "remix": "掰开爆浆慢镜头 + 排队测评；学结构不抄 IP"
+        }
       },
       {
         "id": "KR-03",
@@ -520,7 +781,18 @@
         "compliance_note": "调味粉 Halal 认证必需；辣度宣称需实测一致。",
         "replicability": "高",
         "repl_reason": "膨化代工门槛低，口味复制快，窗口期约 6-9 个月。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 6000,
+          "likes": 240,
+          "shares": 38,
+          "platforms": [
+            "TikTok",
+            "YouTube"
+          ],
+          "ugc": 78,
+          "remix": "开袋香气 reaction + 酱料蘸食测评"
+        }
       }
     ],
     "台湾": [
@@ -543,7 +815,19 @@
         "compliance_note": "黑糖色素需符合 BPOM 添加剂标准；珍珠粒口感货架期衰减需标注。",
         "replicability": "高",
         "repl_reason": "饼干产线通用，联名款可在 1-2 个月内上架。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 50000,
+          "likes": 1900,
+          "shares": 330,
+          "platforms": [
+            "TikTok",
+            "IG",
+            "小红书"
+          ],
+          "ugc": 92,
+          "remix": "咬开珍珠颗粒特写 + 奶茶对比；跨品类二创空间最大"
+        }
       },
       {
         "id": "TW-02",
@@ -564,7 +848,18 @@
         "compliance_note": "伴手礼食品需 BPOM 流通许可；椰糖为本地原料可降成本。",
         "replicability": "高",
         "repl_reason": "烘焙工艺本地完全可复制，竞争点在包装设计与节庆营销。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 8000,
+          "likes": 300,
+          "shares": 45,
+          "platforms": [
+            "小红书",
+            "Threads"
+          ],
+          "ugc": 65,
+          "remix": "酥皮分层慢镜 + 伴手礼攻略清单"
+        }
       },
       {
         "id": "TW-03",
@@ -585,7 +880,18 @@
         "compliance_note": "辣椒素含量标签；挑战类营销需避免过量食用免责文案。",
         "replicability": "中",
         "repl_reason": "调味可复制，但味型教育需要营销投入，适合作为话题款而非主力 SKU。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 3000,
+          "likes": 130,
+          "shares": 25,
+          "platforms": [
+            "TikTok",
+            "IG"
+          ],
+          "ugc": 82,
+          "remix": "辣度阶梯挑战 + 闻香盲测；挑战类硬通货"
+        }
       }
     ],
     "泰国": [
@@ -608,7 +914,18 @@
         "compliance_note": "海苔碘含量标注；辣味添加剂需 BPOM 备案。",
         "replicability": "高",
         "repl_reason": "原料本地有优势，烘烤工艺简单，是最优先复制对象之一。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 12000,
+          "likes": 480,
+          "shares": 70,
+          "platforms": [
+            "TikTok",
+            "Shopee Live"
+          ],
+          "ugc": 76,
+          "remix": "整卷咬断脆响 ASMR；口味全测评矩阵"
+        }
       },
       {
         "id": "TH-02",
@@ -629,7 +946,19 @@
         "compliance_note": "色素（日落黄等）BPOM 限量严格，需天然色素替代方案。",
         "replicability": "高",
         "repl_reason": "冲剂工艺简单，差异化在茶底拼配与减糖技术。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 50000,
+          "likes": 2100,
+          "shares": 380,
+          "platforms": [
+            "TikTok",
+            "IG",
+            "YouTube"
+          ],
+          "ugc": 90,
+          "remix": "拉茶过程 + 泰奶色视觉标签；甜品化二创（泰奶冰/吐司）"
+        }
       },
       {
         "id": "TH-03",
@@ -650,7 +979,18 @@
         "compliance_note": "水产干货需 BPOM 水产类注册；防腐剂使用受控。",
         "replicability": "高",
         "repl_reason": "原料与工艺本地成熟，主要做包装与调味升级。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 7000,
+          "likes": 260,
+          "shares": 40,
+          "platforms": [
+            "TikTok",
+            "YouTube"
+          ],
+          "ugc": 72,
+          "remix": "夜市现烤 + 蘸酱吃法；硬度挑战类"
+        }
       }
     ],
     "马来西亚": [
@@ -673,7 +1013,19 @@
         "compliance_note": "咸蛋黄为动物源配料，Halal 认证关键；油炸酸价控制。",
         "replicability": "高",
         "repl_reason": "原料成本优势+工艺简单，是最具性价比的复制标的。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 12000,
+          "likes": 520,
+          "shares": 88,
+          "platforms": [
+            "TikTok",
+            "IG",
+            "小红书"
+          ],
+          "ugc": 84,
+          "remix": "流沙裹层特写 + 舔手指 reaction；真假咸蛋黄对比"
+        }
       },
       {
         "id": "MY-03",
@@ -694,7 +1046,18 @@
         "compliance_note": "方便面 BPOM 注册 + 营养标签；棕榈油使用符合 RSPO 叙事加分。",
         "replicability": "中",
         "repl_reason": "泡面产线重资产，更适合与现有厂商联名而非自建。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 6000,
+          "likes": 230,
+          "shares": 32,
+          "platforms": [
+            "YouTube",
+            "TikTok"
+          ],
+          "ugc": 68,
+          "remix": "冲泡过程 + 料包全加镜头；泡面排行榜测评"
+        }
       },
       {
         "id": "MY-02",
@@ -715,7 +1078,18 @@
         "compliance_note": "咖啡制品标签需标咖啡因含量；植脂末反式脂肪标注。",
         "replicability": "中",
         "repl_reason": "市场已有大量即溶咖啡竞品，差异化空间在豆种故事。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 5000,
+          "likes": 200,
+          "shares": 30,
+          "platforms": [
+            "TikTok",
+            "X"
+          ],
+          "ugc": 62,
+          "remix": "kopitiam 探店 + 三合一盲测"
+        }
       }
     ],
     "中国": [
@@ -738,7 +1112,18 @@
         "compliance_note": "魔芋粉进口需 BPOM 审批；'低卡'宣称需营养检测支撑。",
         "replicability": "中",
         "repl_reason": "魔芋原料需进口或建立本地种植，短期可先做调味差异化。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 46000,
+          "likes": 1900,
+          "shares": 300,
+          "platforms": [
+            "抖音",
+            "TikTok"
+          ],
+          "ugc": 89,
+          "remix": "咀嚼 ASMR + 热量对比测评；办公室囤货 vlog"
+        }
       },
       {
         "id": "CN-02",
@@ -759,7 +1144,19 @@
         "compliance_note": "豆制品发酵工艺卫生标准严格；BPOM 对添加剂种类有限制。",
         "replicability": "中",
         "repl_reason": "品类教育期较长，适合先以进口版试水温再本地化。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 30000,
+          "likes": 1250,
+          "shares": 220,
+          "platforms": [
+            "抖音",
+            "TikTok",
+            "YouTube"
+          ],
+          "ugc": 91,
+          "remix": "老外首次吃辣条 reaction + 撕咬慢镜；长青格式"
+        }
       },
       {
         "id": "CN-03",
@@ -780,7 +1177,18 @@
         "compliance_note": "碳酸口感添加剂需符合 BPOM 标准；限量营销避免饥饿营销争议。",
         "replicability": "低",
         "repl_reason": "话题款属性强、生命周期 3-6 个月，不宜作为战略 SKU。",
-        "source_type": "演示"
+        "source_type": "演示",
+        "social": {
+          "views": 4000,
+          "likes": 180,
+          "shares": 28,
+          "platforms": [
+            "抖音",
+            "小红书"
+          ],
+          "ugc": 74,
+          "remix": "开袋气泡声 + 表情 reaction 合集；生命周期短快进快出"
+        }
       }
     ]
   },

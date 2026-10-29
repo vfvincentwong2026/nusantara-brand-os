@@ -154,6 +154,10 @@ def seed(db_path: Path = DB_PATH) -> int:
         from nbo.opportunity import seed_opportunity
         seed_opportunity(conn)
         n += 1
+        # 热点品牌演示数据
+        from nbo.hotbrand import seed_hotbrand
+        seed_hotbrand(conn)
+        n += 1
         conn.commit()
         return n
     finally:

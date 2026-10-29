@@ -59,6 +59,9 @@
   .dir { font-size:12px; color:#aebacd; line-height:1.8; padding:8px 0 8px 14px; border-left:2px solid rgba(228,2,43,.5); margin-bottom:10px; }
   .sig { font-size:11px; color:#5b6779; line-height:1.7; }
   .sig::before { content:"▸ "; color:#33405a; }
+  .btn-pick { background:rgba(52,209,123,.12); color:#34d17b; border:1px solid rgba(52,209,123,.4);
+              border-radius:8px; padding:5px 14px; font-size:11.5px; cursor:pointer; }
+  .btn-pick:hover { background:rgba(52,209,123,.22); }
 </style>
 </head>
 <body>
@@ -74,6 +77,7 @@
   <a class="nl" data-p="launch" href="/launch/">落地评分</a>
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
   <a class="nl" data-p="store-dash" href="/store-dash/">小店大屏</a>
+  <a class="nl" data-p="library" href="/library/">中央库</a>
 </nav>
 <div class="wrap">
   <div class="head">
@@ -83,7 +87,11 @@
        反向输出时尚网红店选品与改造方向。让顶级团队的策略不是凭感觉，是按数据排优先级。</p>
   </div>
   <div class="demo-bar">⚠ DEMO 当前为演示种子数据（18 款 · 近 3 个月窗口）；信号字段与真实接入（X/TikTok 热点 API）对齐，替换 seed 即切换。</div>
-  <div class="layout">
+  <div class="tabs" style="margin-bottom:20px;">
+    <button class="on" id="vw-snack" onclick="switchView('snack')">🔥 爆款零食榜</button>
+    <button id="vw-brand" onclick="switchView('brand')">🏷 热点品牌库</button>
+  </div>
+  <div class="layout" id="snack-view">
     <div>
       <div class="panel">
         <h2>区域筛选</h2>
@@ -102,11 +110,29 @@
       </div>
     </div>
   </div>
+  <div class="panel" id="brand-view" style="display:none;">
+    <h2>热点品牌库 · 能引入什么品牌、加盟还是复制（近 3 个月社媒口径）</h2>
+    <div id="brands"></div>
+  </div>
 </div>
 <script>
-const state = { data: null, region: '全部' };
+const state = { data: null, region: '全部', brands: null };
 const REP_CLS = { '高': 'rep-high', '中': 'rep-mid', '低': 'rep-low' };
 const FIT_COLOR = v => v >= 70 ? '#34d17b' : v >= 60 ? '#e8b246' : '#ff5c7a';
+
+/* ── 入库（localStorage 演示库，结构可迁后端） ── */
+function addPick(kind, item) {
+  const key = 'nbo_lib_' + kind;
+  const lib = JSON.parse(localStorage.getItem(key) || '[]');
+  if (!lib.some(x => x.id === item.id)) { lib.push(item); localStorage.setItem(key, JSON.stringify(lib)); }
+  alert('已保存到' + { pick: '选品库', brand: '品牌库' }[kind] + '（共 ' + lib.length + ' 条）→ /library/ 查看');
+}
+function switchView(v) {
+  document.getElementById('snack-view').style.display = v === 'snack' ? '' : 'none';
+  document.getElementById('brand-view').style.display = v === 'brand' ? '' : 'none';
+  document.getElementById('vw-snack').classList.toggle('on', v === 'snack');
+  document.getElementById('vw-brand').classList.toggle('on', v === 'brand');
+}
 
 function esc(s) { return (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
@@ -130,6 +156,10 @@ function card(s, i) {
     <div class="sec hot"><b>为什么火 · 网红视角</b>${esc(s.why_hot)}</div>
     <div class="sec"><b>病毒式玩法</b>${esc(s.viral_format)}</div>
     <div class="sec"><b>热度信号</b><div class="sig">${s.heat_signals.map(esc).join('</div><div class="sig">')}</div></div>
+    <div class="sec"><b>社媒热度（近 3 个月 · 演示口径）</b>
+      <div class="sig">▸ 播放 ${s.social.views ?? '—'} 万 · 赞 ${s.social.likes ?? '—'} 万 · 转发 ${s.social.shares ?? '—'} 万</div>
+      <div class="sig">▸ 平台：${(s.social.platforms || []).map(esc).join(' / ')} · 二创自由度 ${s.social.ugc ?? '—'}/100</div>
+      <div class="sig">▸ 二创玩法：${esc(s.social.remix || '—')}</div></div>
     <div class="fitline"><span style="font-size:11px;color:#5b6779;">印尼适配</span>
       <div class="bar"><i style="width:${fit}%;background:${FIT_COLOR(fit)}"></i></div>
       <span class="v" style="color:${FIT_COLOR(fit)}">${fit}</span></div>
@@ -137,6 +167,7 @@ function card(s, i) {
     <div class="sec adapt"><b>本地化改造</b>${esc(s.adaptation)}</div>
     <div class="sec comp"><b>合规前置</b>${esc(s.compliance_note)}</div>
     <div class="sec"><b>复制性说明</b>${esc(s.repl_reason)}</div>
+    <div style="margin-top:10px"><button class="btn-pick" onclick='addPick("pick", ${JSON.stringify({id: s.id, name: s.name, region: s.region, category: s.category, heat: s.heat, indo_fit: s.indo_fit, replicability: s.replicability})})'>＋ 选品入库</button></div>
   </div>`;
 }
 
@@ -156,10 +187,35 @@ function renderSide() {
 
 function setRegion(r) { state.region = r; renderTabs(); renderList(); }
 
+const PATH_COLOR = { 加盟: '#34d17b', 代理: '#4da3ff', 复制: '#e8b246', 学习: '#8b98a8', 谨慎: '#ff5c7a', 仅: '#8b98a8' };
+function renderBrands() {
+  if (!state.brands) return;
+  document.getElementById('brands').innerHTML = state.brands.map((b, i) => {
+    const pc = Object.entries(PATH_COLOR).find(([k]) => b.ido_path.includes(k))?.[1] || '#8b98a8';
+    return `<div class="card" style="display:grid;grid-template-columns:${b.photo ? '220px ' : ''}1fr;gap:16px;">
+    ${b.photo ? `<img src="${b.photo}" style="width:100%;border-radius:10px;object-fit:cover;" alt="${esc(b.name)} 参考图">` : ''}
+    <div>
+      <div class="top"><span class="rank">${String(i + 1).padStart(2, '0')}</span>
+        <span class="name">${esc(b.name)}</span><span class="local">${esc(b.name_local)} · ${esc(b.country)}</span></div>
+      <div class="meta"><span class="chip region">${esc(b.category)}</span>
+        <span class="chip" style="color:${pc};border-color:${pc}55">${esc(b.franchise_status)}</span></div>
+      <div class="sec"><b>热点产品（正热，可对标选品）</b>${b.hot_products.map(esc).join(' · ')}</div>
+      <div class="sec"><b>社媒热度</b>播放 ${b.social.views_wan} 万 · 赞 ${b.social.likes_wan} 万 · 转发 ${b.social.shares_wan} 万
+        · ${b.platforms.map(esc).join('/')} · 二创自由度 ${b.ugc}/100</div>
+      <div class="sec"><b>二创玩法</b>${esc(b.remix_note)}</div>
+      <div class="fitline"><span style="font-size:11px;color:#5b6779;">印尼适配</span>
+        <div class="bar"><i style="width:${b.ido_fit}%;background:${FIT_COLOR(b.ido_fit)}"></i></div>
+        <span class="v" style="color:${FIT_COLOR(b.ido_fit)}">${b.ido_fit}</span></div>
+      <div class="sec fit"><b>引入路径：${esc(b.ido_path)}</b>${esc(b.ido_note)}</div>
+      <div style="margin-top:8px"><button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: b.id, name: b.name, country: b.country, category: b.category, status: b.franchise_status, ido_path: b.ido_path, ido_fit: b.ido_fit})})'>＋ 品牌入库</button></div>
+    </div></div>`; }).join('');
+}
+
 fetch('./data/trend_snacks.json').then(r => r.json()).then(d => {
   state.data = d;
   renderTabs(); renderList(); renderSide();
 });
+fetch('./data/hotbrands.json').then(r => r.json()).then(d => { state.brands = d.brands; renderBrands(); });
 const p = location.pathname;
 document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
 </script>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/ui/tokens.css">
+<title>中央库 · Nusantara Brand OS</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  .wrap { max-width:1100px; margin:0 auto; padding:64px 24px 80px; }
+  .head { margin-bottom:18px; }
+  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(77,163,255,.5); border-radius:999px;
+               color:#4da3ff; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+  .head h1 { font-size:30px; font-weight:800; }
+  .head p { margin-top:8px; color:#8b98a8; font-size:12.5px; max-width:760px; line-height:1.8; }
+  .search { display:flex; gap:10px; margin:14px 0 18px; }
+  .search input { flex:1; background:#121820; border:1px solid #232c3a; border-radius:10px; color:#e8eef5;
+                  padding:10px 16px; font-size:14px; outline:none; }
+  .search input:focus { border-color:#4da3ff; }
+  .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+  .tabs button { background:#181f29; color:#8b98a8; border:1px solid #232c3a; border-radius:999px;
+                 padding:6px 16px; font-size:12px; cursor:pointer; }
+  .tabs button.on { background:rgba(77,163,255,.15); color:#4da3ff; border-color:rgba(77,163,255,.5); }
+  .panel { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; }
+  .item { display:flex; justify-content:space-between; align-items:center; gap:12px;
+          padding:11px 4px; border-bottom:1px dashed #1f2733; font-size:13px; }
+  .item:last-child { border-bottom:none; }
+  .item .in { font-weight:700; }
+  .item .im { color:#8b98a8; font-size:11.5px; margin-top:2px; }
+  .item .del { color:#ff5c7a; background:none; border:none; cursor:pointer; font-size:12px; }
+  .addrow { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+  .addrow input, .addrow select { background:#181f29; border:1px solid #232c3a; border-radius:8px; color:#e8eef5;
+                                  padding:7px 12px; font-size:12.5px; }
+  .addrow button { background:rgba(52,209,123,.12); color:#34d17b; border:1px solid rgba(52,209,123,.4);
+                   border-radius:8px; padding:7px 16px; font-size:12.5px; cursor:pointer; }
+  .empty { color:#33405a; font-size:13px; padding:16px 0; text-align:center; }
+  .bar { display:flex; gap:10px; margin-top:8px; }
+  .bar button, .bar a { background:#181f29; color:#4da3ff; border:1px solid #232c3a; border-radius:8px;
+                        padding:6px 14px; font-size:12px; cursor:pointer; text-decoration:none; }
+  .chip { display:inline-block; font-size:10px; padding:2px 10px; border-radius:999px; border:1px solid #232c3a; color:#8b98a8; margin-right:6px; }
+  .empty-hint { color:#33405a; font-size:11.5px; }
+</style>
+</head>
+<body>
+<nav class="nbo-nav">
+  <a class="brand" href="/">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+  <span class="sep">｜</span>
+  <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
+  <a class="nl" data-p="launch" href="/launch/">落地评分</a>
+  <a class="nl" data-p="case" href="/case/">案例</a>
+  <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
+  <a class="nl" data-p="store-dash" href="/store-dash/">小店大屏</a>
+  <a class="nl" data-p="library" href="/library/">中央库</a>
+</nav>
+<div class="wrap">
+  <div class="head">
+    <div class="tag">CENTRAL LIBRARY</div>
+    <h1>中央库：选品 · 供应商 · 品牌 · 选址 · 策划资产</h1>
+    <p>每日侦察后的落地工作台。收藏保存在本机浏览器（演示无后端，结构可直接迁 Cloudflare D1）；支持导出 JSON 备份。</p>
+  </div>
+  <div class="search"><input id="q" placeholder="搜索库内条目：如 海苔 / 咖啡 / BSD…" oninput="render()"></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="panel" id="body"></div>
+  <div class="bar">
+    <button onclick="exportLib()">导出全部库 JSON</button>
+    <a href="/trend/">← 去雷达选品</a>
+    <a href="/map/">← 去地图看选址</a>
+  </div>
+</div>
+<script>
+const TABS = [['pick', '📦 选品库'], ['supplier', '🏭 供应商库'], ['brand', '🏷 品牌库'],
+              ['site', '📍 选址库'], ['asset', '🎨 策划资产']];
+const DEFAULT_SUPPLIERS = [
+  { id: 'SUP-01', name: '雅加达烘焙代工 A', cat: '烘焙饼干', moq: '500 箱', cert: 'BPOM + Halal', note: '夹心/曲奇产线，变体印刷快反' },
+  { id: 'SUP-02', name: '爪哇海苔原料社', cat: '海味零食', moq: '1 吨', cert: 'Halal', note: '原料产地直采，可谈独家' },
+  { id: 'SUP-03', name: '中爪哇膨化食品厂', cat: '膨化零食', moq: '1000 箱', cert: 'BPOM', note: '调味车间支持辣度定制' },
+  { id: 'SUP-04', name: '万隆乳制品日配', cat: '乳品/奶油', moq: '日配', cert: 'Halal 乳源', note: '冷链覆盖雅加达-万隆' },
+  { id: 'SUP-05', name: '泗水中央厨房', cat: '熟食卤味', moq: '日配', cert: 'BPOM + Halal', note: '半成品 + 酱料包' },
+  { id: 'SUP-06', name: '巴淡包装印刷', cat: '机制包装', moq: '1 万起印', cert: '食品级', note: '挑战卡/收集卡等机制道具' },
+];
+let tab = 'pick', sites = [];
+const esc = s => (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const load = k => JSON.parse(localStorage.getItem('nbo_lib_' + k) || '[]');
+const save = (k, v) => localStorage.setItem('nbo_lib_' + k, JSON.stringify(v));
+if (!localStorage.getItem('nbo_lib_supplier')) save('supplier', DEFAULT_SUPPLIERS);
+
+fetch('/map/data/opportunity.json').then(r => r.ok ? r.json() : null).then(d => { sites = d ? d.zones : []; render(); });
+
+function match(x) {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  return !q || JSON.stringify(x).toLowerCase().includes(q);
+}
+function renderTabs() {
+  document.getElementById('tabs').innerHTML = TABS.map(([k, l]) =>
+    `<button class="${k === tab ? 'on' : ''}" onclick="tab='${k}';render()">${l}（${k === 'site' ? sites.length : load(k).length}）</button>`).join('');
+}
+function render() {
+  renderTabs();
+  const el = document.getElementById('body');
+  if (tab === 'supplier') {
+    const rows = load('supplier').filter(match);
+    el.innerHTML = `<div class="addrow">
+        <input id="sn" placeholder="供应商名称"><input id="sc" placeholder="品类">
+        <input id="sm" placeholder="MOQ"><input id="se" placeholder="认证（Halal/BPOM）">
+        <button onclick="addSupplier()">＋ 添加</button></div>` +
+      (rows.map((s, i) => `<div class="item"><div><div class="in">${esc(s.name)} <span class="chip">${esc(s.cat)}</span><span class="chip">${esc(s.cert)}</span></div>
+        <div class="im">MOQ ${esc(s.moq)} · ${esc(s.note || '')}</div></div>
+        <button class="del" onclick="del('supplier', ${i})">删除</button></div>`).join('') || '<div class="empty">无匹配条目</div>');
+    return;
+  }
+  if (tab === 'site') {
+    const rows = sites.filter(match);
+    el.innerHTML = rows.map(z => `<div class="item"><div><div class="in">${esc(z.name)} · ${esc(z.city)}
+        <span class="chip" style="color:${z.grade === 'S' ? '#34d17b' : '#4da3ff'}">${z.grade} 级 ${z.score} 分</span></div>
+        <div class="im">人口 ${z.population_k}k · 商圈 ${z.mall_grade}/5 · 竞品 ${z.competitor_count} · 建议品牌 ${esc(z.suggested_brand.name || '—')}</div></div>
+        <a href="/map/" style="color:#4da3ff;font-size:12px">地图查看 →</a></div>`).join('') || '<div class="empty">无匹配选址</div>';
+    return;
+  }
+  if (tab === 'asset') {
+    el.innerHTML = [
+      ['品牌色板（机制型零食演示 token）', '主色 #E4022B（行动/机制）· 辅助 #E8B246（等级/收集）· 成功 #34D17B · 背景 #0B0F14'],
+      ['超级符号方向', '等级徽章 + 挑战标签 + 收集编号三件套；新增 SKU 低成本延展（系列延展测试）'],
+      ['包装三层规范', '货架层三秒识别 / 开箱层脚本动线 / 社交层被拍性——评审硬标准见落地评分 STEP 4'],
+      ['空间模型', '<a href="/floorplan/" style="color:#4da3ff">2D 平面编辑器</a> · <a href="/three/" style="color:#4da3ff">3D 数字孪生</a>（含 MILP 空间优化对比）'],
+      ['集装箱整装', '<a href="/case/" style="color:#4da3ff">社区集装箱店案例</a>：四档箱体体系 + 56㎡ 标准样板'],
+    ].filter(a => match({ x: a[0] + a[1] })).map(a => `<div class="item"><div><div class="in">${a[0]}</div>
+      <div class="im">${a[1]}</div></div></div>`).join('');
+    return;
+  }
+  const rows = load(tab).filter(match);
+  el.innerHTML = rows.map((x, i) => `<div class="item"><div>
+      <div class="in">${esc(x.name)} ${x.region ? `<span class="chip">${esc(x.region)}</span>` : ''}${x.category ? `<span class="chip">${esc(x.category)}</span>` : ''}</div>
+      <div class="im">${Object.entries(x).filter(([k]) => !['id', 'name', 'region', 'category'].includes(k))
+        .map(([k, v]) => `${k}: ${esc(String(v))}`).join(' · ')}</div></div>
+      <button class="del" onclick="del('${tab}', ${i})">删除</button></div>`).join('') ||
+    `<div class="empty">库为空 — 去 <a href="/trend/" style="color:#4da3ff">热点雷达</a> 点「＋选品入库 / ＋品牌入库」<span class="empty-hint"></span></div>`;
+}
+function del(k, i) { const l = load(k); l.splice(i, 1); save(k, l); render(); }
+function addSupplier() {
+  const v = id => document.getElementById(id).value.trim();
+  if (!v('sn')) return;
+  const l = load('supplier');
+  l.push({ id: 'SUP-' + Date.now(), name: v('sn'), cat: v('sc') || '未分类', moq: v('sm') || '待谈', cert: v('se') || '待确认', note: '' });
+  save('supplier', l); render();
+}
+function exportLib() {
+  const out = {}; TABS.forEach(([k]) => out[k] = k === 'site' ? sites : load(k));
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(out, null, 2)], { type: 'application/json' }));
+  a.download = 'nbo-library.json'; a.click();
+}
+const p = location.pathname;
+document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
+const q0 = new URLSearchParams(location.search).get('q');
+if (q0) document.getElementById('q').value = q0;
+render();
+</script>
+</body>
+</html>

@@ -45,6 +45,8 @@ def main():
             "--out-map", "web/map/data/case_store.json"])
         sh([sys.executable, "-m", "nbo.trend", "--db", "nbo.db",
             "--out", "web/trend/data/trend_snacks.json"])
+        sh([sys.executable, "-m", "nbo.hotbrand", "--db", "nbo.db",
+            "--out", "web/trend/data/hotbrands.json"])
         sh([sys.executable, "-m", "nbo.launch", "--db", "nbo.db",
             "--out", "web/launch/data/launch.json"])
         sh([sys.executable, "-m", "nbo.franchise", "--db", "nbo.db",
@@ -89,6 +91,9 @@ def main():
     (SITE / "store-dash/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/store-dash/index.html", SITE / "store-dash")
     shutil.copy(ROOT / "web/store-dash/data/store-dash.json", SITE / "store-dash/data")
+    # 中央库
+    (SITE / "library").mkdir(parents=True)
+    shutil.copy(ROOT / "web/library/index.html", SITE / "library")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)
