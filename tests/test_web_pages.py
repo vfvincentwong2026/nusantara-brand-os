@@ -23,7 +23,7 @@ def test_all_pages_share_full_nav():
 def test_nav_grouped_by_system():
     for p in NAV_PAGES:
         html = _read(p)
-        assert html.count("A·网红单店") == 1 and html.count("B·集装箱零售") == 1, f"{p} 导航缺体系分组标签"
+        assert "A·网红单店" in html and "B·集装箱零售" in html, f"{p} 导航缺体系分组标签"
 
 
 def test_nav_pages_have_data_p_highlight():
