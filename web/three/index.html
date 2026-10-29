@@ -56,6 +56,16 @@
   <a class="nl" data-p="playbook" href="/playbook/">培训体系</a>
   <a class="nl" data-p="library" href="/library/">中央库</a>
 </nav>
+<div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #14202e;background:rgba(9,13,19,.92);backdrop-filter:blur(6px);">
+  <span style="letter-spacing:.1em;color:#4da3ff;">B·集装箱零售链路</span>
+  <a href="/case/" data-s="/case/" style="color:#8b98a8;text-decoration:none;">① 集装箱店样板</a><span>→</span>
+  <a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">② 开店方案选型</a><span>→</span>
+  <a href="/floorplan/" data-s="/floorplan/" style="color:#8b98a8;text-decoration:none;">③ 平面布局</a><span>→</span>
+  <a href="/three/" data-s="/three/" style="color:#8b98a8;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
+  <a href="/dashboard/" data-s="/dashboard/" style="color:#8b98a8;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
+  <a href="/map/" data-s="/map/" style="color:#8b98a8;text-decoration:none;">⑥ 渠道地图铺货</a>
+  <script>document.querySelectorAll('.bchain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#4da3ff';a.style.fontWeight='700';}});</script>
+</div>
 <script>
   (() => { const p = location.pathname;
     document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
