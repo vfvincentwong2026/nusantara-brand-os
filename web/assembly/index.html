@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/ui/tokens.css">
+<title>装配方案对比 · Nusantara Brand OS</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  .wrap { max-width:1280px; margin:0 auto; padding:64px 24px 80px; }
+  .head { margin-bottom:22px; }
+  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(232,178,70,.5); border-radius:999px;
+               color:#e8b246; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+  .head h1 { font-size:34px; font-weight:800; line-height:1.2; }
+  .head h1 em { color:#e4022b; font-style:normal; }
+  .head p { margin-top:10px; color:#8b98a8; font-size:13px; max-width:860px; line-height:1.8; }
+  .demo { margin-top:12px; font-size:11px; color:#e8b246; }
+  .cmp { overflow-x:auto; margin-bottom:22px; }
+  table { width:100%; border-collapse:collapse; font-size:12px; min-width:860px; }
+  th { text-align:left; color:#5b6779; font-size:10.5px; letter-spacing:.08em; padding:10px 12px;
+       border-bottom:1px solid #1f2733; font-weight:600; white-space:nowrap; }
+  td { padding:12px; border-bottom:1px solid #1a222d; vertical-align:top; line-height:1.7; }
+  tr.rowcard:hover { background:rgba(255,255,255,.02); }
+  td .form { font-weight:800; font-size:13px; white-space:nowrap; }
+  td .form small { display:block; color:#5b6779; font-weight:400; font-size:10.5px; margin-top:2px; }
+  .money { font-family:Consolas,monospace; font-weight:700; font-size:14px; white-space:nowrap; }
+  .money small { display:block; color:#5b6779; font-weight:400; font-size:10.5px; }
+  .wk { font-family:Consolas,monospace; white-space:nowrap; }
+  .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
+  .pill.on { background:rgba(52,209,123,.15); color:#34d17b; border:1px solid rgba(52,209,123,.4); }
+  .pill.off { background:rgba(255,92,122,.1); color:#ff5c7a; border:1px solid rgba(255,92,122,.3); }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:16px; }
+  .card { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px; }
+  .card.best { border-color:rgba(52,209,123,.45); box-shadow:0 0 24px rgba(52,209,123,.08); }
+  .card h3 { font-size:15px; }
+  .card h3 small { color:#5b6779; font-size:11px; font-weight:400; margin-left:6px; }
+  .bars { display:flex; flex-direction:column; gap:6px; }
+  .bar { display:grid; grid-template-columns:64px 1fr 96px; gap:8px; align-items:center; font-size:10.5px; }
+  .bar .bn { color:#8b98a8; }
+  .bar .bt { height:8px; background:#1c2430; border-radius:4px; overflow:hidden; }
+  .bar .bt i { display:block; height:100%; border-radius:4px; }
+  .bar .bv { font-family:Consolas,monospace; color:#8b98a8; text-align:right; white-space:nowrap; }
+  .pc { display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:11.5px; line-height:1.7; }
+  .pc ul { list-style:none; }
+  .pc li { padding-left:14px; position:relative; margin-bottom:5px; color:#a9b6c6; }
+  .pc .pros li::before { content:"+"; position:absolute; left:0; color:#34d17b; font-weight:800; }
+  .pc .cons li::before { content:"−"; position:absolute; left:0; color:#ff5c7a; font-weight:800; }
+  .kv { font-size:11.5px; color:#8b98a8; line-height:1.8; border-top:1px solid #1a222d; padding-top:10px; }
+  .kv b { color:#e8eef5; }
+  .fitline { font-size:12px; color:#e8b246; }
+  .reco { background:linear-gradient(135deg,rgba(52,209,123,.1),rgba(232,178,70,.05));
+          border:1px solid rgba(52,209,123,.35); border-radius:14px; padding:18px 20px; margin-bottom:20px;
+          font-size:13px; line-height:1.9; }
+  .reco b { color:#34d17b; }
+</style>
+</head>
+<body>
+<nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid #1a222d;background:#0d1117;flex-wrap:wrap;font-size:13px;">
+  <a href="/" style="color:#e4022b;font-weight:800;letter-spacing:.1em;margin-right:10px;text-decoration:none;">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+  <span class="sep">｜</span>
+  <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
+  <a class="nl" data-p="launch" href="/launch/">落地评分</a>
+  <a class="nl" data-p="case" href="/case/">案例</a>
+  <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
+  <a class="nl" data-p="assembly" href="/assembly/">装配对比</a>
+  <a class="nl" data-p="store-dash" href="/store-dash/">小店大屏</a>
+  <a class="nl" data-p="library" href="/library/">中央库</a>
+  <a class="nl" data-p="brandkit" href="/brandkit/">品牌生成</a>
+</nav>
+<div class="wrap">
+  <div class="head">
+    <div class="tag">ASSEMBLY COMPARE</div>
+    <h1>装配方案对比：<em>8–10 万开店成本包</em>选哪种形态</h1>
+    <p>三种整装形态 × 五维成本拆解 × 工期/证照/供应链要求。核心判断：快速验证阶段只选「可搬迁、预算内、工期短」的方案；验证通过后再放大到不可搬迁形态。</p>
+    <div class="demo" id="demoNote"></div>
+  </div>
+  <div class="reco" id="reco"></div>
+  <div class="panel cmp"><table>
+    <thead><tr><th>形态</th><th>面积</th><th>总造价</th><th>工期</th><th>预算适配</th><th>适配场景</th></tr></thead>
+    <tbody id="tbody"></tbody>
+  </table></div>
+  <div class="cards" id="cards"></div>
+</div>
+<script>
+const BAR_COLORS = ['#e4022b','#e8b246','#4da3ff','#34d17b','#ff9a3d'];
+fetch('./data/assembly.json').then(r => r.json()).then(d => {
+  document.getElementById('demoNote').textContent =
+    `⚠ DEMO 金额为雅加达 2026 行情区间估算（演示口径）；汇率锚 1 CNY ≈ ${d.meta.cny_idr} IDR；落地前需当地承包商询价复核。`;
+  const budget = d.meta.budget_wan;
+  document.getElementById('reco').innerHTML =
+    `结论先行：8–10 万成本包内有两条合规路径——<b>单箱体集装箱店（ASM-C1）</b>「可搬迁 + 网红属性 + 两周开业」，`
+    + `与 <b>店中店档口（ASM-S1）</b>「最快现金流 + 借商场客流但利润薄」。建议 C1 做品牌样板、S1 借成熟商圈测品；`
+    + `双箱体与轻钢平房是验证通过后的二期放大选项，不进入首期预算。`;
+  document.getElementById('tbody').innerHTML = d.schemes.map(s => `<tr class="rowcard">
+    <td><div class="form">${s.form}<small>${s.id}</small></div></td>
+    <td class="wk">${s.area_sqm}㎡</td>
+    <td><div class="money">¥${s.total_lo.wan_cny}–${s.total_hi.wan_cny} 万<small>Rp ${s.total_lo.idr_m}–${s.total_hi.idr_m} 百万</small></div></td>
+    <td class="wk">${s.weeks[0]}–${s.weeks[1]} 周</td>
+    <td><span class="pill ${s.fit_budget ? 'on' : 'off'}">${s.fit_budget ? '✓ 预算内' : '× 超预算'}</span></td>
+    <td style="max-width:260px;">${s.fit}</td></tr>`).join('');
+  document.getElementById('cards').innerHTML = d.schemes.map(s => {
+    const maxv = Math.max(...s.breakdown.map(b => b.hi.wan_cny));
+    return `<div class="card ${s.fit_budget ? 'best' : ''}">
+      <h3>${s.form}<small>${s.id} · ${s.area_sqm}㎡ · ${s.weeks[0]}–${s.weeks[1]} 周</small></h3>
+      <div class="money">¥${s.total_lo.wan_cny}–${s.total_hi.wan_cny} 万<small> ≈ Rp ${s.total_lo.idr_m}–${s.total_hi.idr_m} 百万</small></div>
+      <div class="bars">${s.breakdown.map((b, i) => `<div class="bar">
+        <span class="bn">${b.dim}</span>
+        <span class="bt"><i style="width:${(b.hi.wan_cny / maxv * 100).toFixed(0)}%;background:${BAR_COLORS[i]};"></i></span>
+        <span class="bv">${b.lo.wan_cny}–${b.hi.wan_cny} 万</span></div>`).join('')}</div>
+      <div class="pc"><ul class="pros">${s.pros.map(p => `<li>${p}</li>`).join('')}</ul>
+        <ul class="cons">${s.cons.map(c => `<li>${c}</li>`).join('')}</ul></div>
+      <div class="kv"><b>证照：</b>${s.permit}<br><b>供应链：</b>${s.supply}</div>
+      <div class="fitline">${s.fit_budget ? '★ 适配 8–10 万首期预算包' : '二期放大选项（超出首期预算包）'}</div>
+    </div>`; }).join('');
+});
+const p = location.pathname;
+document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
+</script>
+</body>
+</html>

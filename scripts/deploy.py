@@ -47,6 +47,8 @@ def main():
             "--out", "web/trend/data/trend_snacks.json"])
         sh([sys.executable, "-m", "nbo.hotbrand", "--db", "nbo.db",
             "--out", "web/trend/data/hotbrands.json"])
+        sh([sys.executable, "-m", "nbo.assembly", "--db", "nbo.db",
+            "--out", "web/assembly/data/assembly.json"])
         sh([sys.executable, "-m", "nbo.launch", "--db", "nbo.db",
             "--out", "web/launch/data/launch.json"])
         sh([sys.executable, "-m", "nbo.franchise", "--db", "nbo.db",
@@ -98,6 +100,10 @@ def main():
     # 品牌设计生成器
     (SITE / "brandkit").mkdir(parents=True)
     shutil.copy(ROOT / "web/brandkit/index.html", SITE / "brandkit")
+    # 装配方案对比
+    (SITE / "assembly/data").mkdir(parents=True)
+    shutil.copy(ROOT / "web/assembly/index.html", SITE / "assembly")
+    shutil.copy(ROOT / "web/assembly/data/assembly.json", SITE / "assembly/data")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)

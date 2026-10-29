@@ -4,7 +4,8 @@ from pathlib import Path
 WEB = Path(__file__).resolve().parent.parent / "web"
 
 NAV_PAGES = ["case", "dashboard", "floorplan", "franchise", "launch",
-             "library", "map", "three", "trend", "store-dash", "brandkit"]
+             "library", "map", "three", "trend", "store-dash", "brandkit",
+             "assembly"]
 
 
 def _read(page: str) -> str:
@@ -14,7 +15,7 @@ def _read(page: str) -> str:
 def test_all_pages_share_full_nav():
     for p in NAV_PAGES:
         html = _read(p)
-        for anchor in ["热点雷达", "落地评分", "中央库", "品牌生成"]:
+        for anchor in ["热点雷达", "落地评分", "中央库", "品牌生成", "装配对比"]:
             assert anchor in html, f"{p} 导航缺少 {anchor}"
         assert 'href="/ui/tokens.css"' in html, f"{p} 缺少 tokens.css"
 
