@@ -127,6 +127,7 @@ button:active, .btn:active {
   --hairline-strong: rgba(242, 240, 235, 0.32);
   --accent: #e4022b;
   --accent-b: #4da3ff;
+  --gold-a: #e8b246;
   --font-display: "Fraunces", "Songti SC", Georgia, serif;
   --font-body: "Inter", -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
   --font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
@@ -188,3 +189,13 @@ code, pre, kbd, samp { font-family: var(--font-mono) !important; }
 small, .dim, .muted, .sub, .desc, .d, .note, .hint, .muted-warm {
   color: #9a958c !important;
 }
+
+/* ── 品牌墙无限滚动 marquee ── */
+.marquee { overflow:hidden; border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);
+           padding:26px 0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+           mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+.m-track { display:flex; gap:44px; width:max-content; animation:m-scroll 36s linear infinite; }
+.m-track img { height:52px; width:auto; filter:grayscale(1) brightness(.75); transition:filter .2s; }
+.m-track img:hover { filter:grayscale(0) brightness(1); }
+@keyframes m-scroll { to { transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .m-track { animation:none; } }

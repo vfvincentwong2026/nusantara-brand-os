@@ -6,52 +6,76 @@
 <link rel="stylesheet" href="/ui/tokens.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <title>Nusantara Brand OS · 中国品牌落地印尼的作战系统</title>
 <meta name="description" content="零食先行的印尼品牌落地作战平台：合规引擎、WarungScout 渠道评分、门店数字孪生、SKU 去化与补货模拟。引擎层本地计算，Cloudflare 全球边缘交付。">
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--ink); color:var(--paper); font-family:var(--font-body);
-         font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased; }
+         font-size:15px; line-height:1.75; -webkit-font-smoothing:antialiased;
+         background-image:radial-gradient(1200px 500px at 85% -8%, rgba(228,2,43,.07), transparent 60%); }
   a { color:inherit; }
   ::selection { background:var(--accent); color:#fff; }
 
-  /* ── Hero ── */
-  header { padding:120px 0 72px; }
+  /* ── Hero：非对称双栏 + 巨型幽灵英文 ── */
+  header { position:relative; padding:64px 0 80px; overflow:hidden; }
+  .ghost { position:absolute; top:44px; right:-2%; font-family:var(--font-display); font-style:italic;
+           font-weight:600; font-size:clamp(90px,15.5vw,224px); line-height:.9; letter-spacing:-0.03em;
+           color:transparent; -webkit-text-stroke:1px rgba(242,240,235,.09);
+           pointer-events:none; user-select:none; white-space:nowrap; }
   .hero-top { display:flex; justify-content:space-between; align-items:baseline;
-              border-bottom:1px solid var(--hairline); padding-bottom:14px; margin-bottom:56px; }
+              border-bottom:1px solid var(--hairline); padding-bottom:14px; margin-bottom:52px; position:relative; }
   .hero-top .r { font-family:var(--font-mono); font-size:11px; color:var(--faint-warm); letter-spacing:.12em; }
-  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(40px,6.4vw,86px);
-       line-height:1.04; letter-spacing:-0.02em; max-width:1000px; }
+  .hero-grid { display:grid; grid-template-columns:minmax(0,7fr) minmax(0,5fr); gap:56px; align-items:end; position:relative; }
+  @media (max-width:960px) { .hero-grid { grid-template-columns:1fr; gap:40px; } .ghost { font-size:24vw; top:20px; } }
+  h1 { font-family:var(--font-display); font-weight:600; font-size:clamp(34px,4.8vw,66px);
+       line-height:1.06; letter-spacing:-0.02em; }
   h1 em { font-style:italic; color:var(--accent); white-space:nowrap; }
-  .lead { color:var(--dim-warm); font-size:16.5px; max-width:660px; margin-top:32px; line-height:1.95; }
-  .hero-cta { display:flex; gap:36px; align-items:center; margin-top:44px; flex-wrap:wrap; }
-  .hero-search { display:flex; gap:0; max-width:600px; margin-top:48px; border-bottom:1px solid var(--hairline-strong); }
+  .lead { color:var(--dim-warm); font-size:16px; max-width:600px; margin-top:30px; line-height:1.95; }
+  .hero-cta { display:flex; gap:32px; align-items:center; margin-top:40px; flex-wrap:wrap; }
+  .hero-search { display:flex; gap:0; max-width:600px; margin-top:36px; border-bottom:1px solid var(--hairline-strong); }
   .hero-search input { flex:1; background:none; border:0; color:var(--paper); padding:12px 0;
                        font-family:var(--font-mono); font-size:13px; outline:none; }
   .hero-search input::placeholder { color:var(--faint-warm); }
   .hero-search button { background:none; border:0; color:var(--accent); font-family:var(--font-mono);
                         font-size:12px; letter-spacing:.1em; cursor:pointer; padding:12px 0 12px 20px; white-space:nowrap; }
+  /* 右侧主图：红签 + mono 注 */
+  .hero-fig { position:relative; border:1px solid var(--hairline-strong); padding:10px; background:#100f0d; }
+  .hero-fig img { display:block; width:100%; aspect-ratio:4/4.6; object-fit:cover; filter:saturate(.92) contrast(1.04); }
+  .hero-fig .tab { position:absolute; top:-1px; left:-1px; background:var(--accent); color:#fff;
+                   font-family:var(--font-mono); font-size:10.5px; letter-spacing:.14em; padding:6px 12px; }
+  .hero-fig .cap { display:flex; justify-content:space-between; gap:12px; font-family:var(--font-mono);
+                   font-size:10.5px; color:var(--faint-warm); letter-spacing:.06em; padding-top:10px; }
+  .hero-fig .cap b { color:var(--dim-warm); font-weight:500; }
 
   /* ── 统计带 ── */
   .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-           border-top:1px solid var(--hairline); margin-top:64px; }
-  .stat { border-right:1px solid var(--hairline); padding:28px 28px 28px 0; }
+           border-top:1px solid var(--hairline-strong); border-bottom:1px solid var(--hairline); margin-top:64px; }
+  .stat { border-right:1px solid var(--hairline); padding:30px 28px 30px 0; }
   .stat:last-child { border-right:0; }
+  @media (max-width:700px) { .stat { border-right:0; border-bottom:1px solid var(--hairline); padding:22px 0; } }
 
   /* ── 分区 ── */
-  section { padding:88px 0; }
+  section { padding:88px 0; position:relative; }
   .sec-rule { border-top:1px solid var(--hairline-strong); }
+  .sec-ghost { position:absolute; top:36px; right:0; font-family:var(--font-display); font-weight:600;
+               font-size:clamp(80px,9vw,140px); line-height:1; color:transparent;
+               -webkit-text-stroke:1px rgba(242,240,235,.07); pointer-events:none; user-select:none; }
 
   /* ── 双门户 ── */
-  .portals { display:grid; grid-template-columns:1fr 1fr; gap:64px; }
+  .portals { display:grid; grid-template-columns:1fr 1fr; gap:56px; }
   @media (max-width:900px) { .portals { grid-template-columns:1fr; } }
-  .portal .p-head { border-top:2px solid var(--accent); padding-top:20px; }
+  .portal .p-head { border-top:3px solid var(--gold-a); padding-top:20px; }
   .portal.b .p-head { border-top-color:var(--accent-b); }
-  .portal h3 { font-family:var(--font-display); font-size:clamp(26px,2.6vw,36px); font-weight:600;
-               letter-spacing:-0.015em; line-height:1.15; margin:14px 0 16px; }
-  .portal .p-desc { color:var(--dim-warm); font-size:14px; line-height:1.9; }
-  .portal .p-links { margin-top:28px; border-top:1px solid var(--hairline); }
+  .portal h3 { font-family:var(--font-display); font-size:clamp(24px,2.3vw,32px); font-weight:600;
+               letter-spacing:-0.015em; line-height:1.2; margin:14px 0 14px; }
+  .portal .p-desc { color:var(--dim-warm); font-size:13.5px; line-height:1.9; }
+  .portal .p-fig { margin-top:24px; border:1px solid var(--hairline); padding:8px; background:#100f0d; }
+  .portal .p-fig img { display:block; width:100%; aspect-ratio:16/8.4; object-fit:cover; object-position:top;
+                       filter:saturate(.9); }
+  .portal .p-fig .cap { font-family:var(--font-mono); font-size:10px; color:var(--faint-warm);
+                        letter-spacing:.08em; padding-top:8px; display:flex; justify-content:space-between; }
+  .portal .p-links { margin-top:26px; border-top:1px solid var(--hairline); }
   .portal .p-links a { display:flex; justify-content:space-between; align-items:baseline; gap:12px;
                        text-decoration:none; padding:13px 0; border-bottom:1px solid var(--hairline);
                        transition:padding-left .15s; }
@@ -59,22 +83,23 @@
   .portal .p-links .t { font-size:14px; }
   .portal .p-links .d { font-family:var(--font-mono); font-size:10.5px; color:var(--faint-warm); letter-spacing:.06em; }
   .portal .p-cta { margin-top:26px; display:flex; gap:26px; align-items:center; flex-wrap:wrap; }
+  .portal .p-links a:hover .t { color:var(--gold-a); }
   .portal.b .p-links a:hover .t { color:var(--accent-b); }
-  .portal .p-links a:hover .t { color:var(--accent); }
 
   /* ── 公共底座 ── */
-  .base-links { display:grid; grid-template-columns:1fr 1fr; gap:64px; }
+  .base-links { display:grid; grid-template-columns:1fr 1fr; gap:56px; }
   @media (max-width:900px) { .base-links { grid-template-columns:1fr; } }
 
   /* ── 合作 ── */
-  .partner { border-top:1px solid var(--hairline-strong); padding:88px 0; }
+  .partner { border-top:1px solid var(--hairline-strong); }
   .partner h2 { font-family:var(--font-display); font-size:clamp(28px,3.4vw,46px); font-weight:600;
-                letter-spacing:-0.015em; line-height:1.15; max-width:760px; }
+                letter-spacing:-0.015em; line-height:1.15; max-width:760px; margin-top:14px; }
   .partner p { color:var(--dim-warm); max-width:640px; font-size:14.5px; margin-top:22px; }
   .partner .tags { display:flex; gap:0; flex-wrap:wrap; margin-top:36px; border-top:1px solid var(--hairline); }
   .partner .tags span { font-family:var(--font-mono); font-size:11.5px; color:var(--dim-warm);
                         letter-spacing:.08em; padding:14px 28px 14px 0; margin-right:28px;
                         border-bottom:1px solid var(--hairline); }
+  .partner .tags span::before { content:"● "; color:var(--accent); font-size:8px; vertical-align:2px; }
 
   footer { border-top:1px solid var(--hairline); padding:30px 0 48px;
            color:var(--faint-warm); font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; line-height:2; }
@@ -102,26 +127,36 @@
 </nav>
 
 <header>
+  <div class="ghost">Nusantara</div>
   <div class="ed-wrap">
     <div class="hero-top">
       <span class="ed-kicker">Nusantara Brand OS — Indonesia Market Entry</span>
       <span class="r">雅加达 · 泗水 · 万隆 / 2026</span>
     </div>
-    <h1>中国品牌落地印尼的<br><em>作战系统</em>——<br>从合规准入到 Warung 货架。</h1>
-    <p class="lead">零食先行。合规引擎（BPOM / Halal / SNI）× WarungScout 渠道评分 × 门店数字孪生 × 去化与补货模拟。策略不是 PPT，是每一条都可点开的实时系统；引擎本地计算，Cloudflare 边缘交付。</p>
-    <div class="hero-cta">
-      <a class="ed-link" href="./trend/">① 从热点雷达开始，六步看完一家网红店怎么落地 <span class="ar">→</span></a>
-      <a class="ed-link" href="./case/" style="border-color:var(--accent-b);">直接看集装箱落地样板 <span class="ar" style="color:var(--accent-b);">→</span></a>
+    <div class="hero-grid">
+      <div>
+        <h1>中国品牌落地印尼的<br><em>作战系统</em>——<br>从合规准入到 Warung 货架。</h1>
+        <p class="lead">零食先行。合规引擎（BPOM / Halal / SNI）× WarungScout 渠道评分 × 门店数字孪生 × 去化与补货模拟。策略不是 PPT，是每一条都可点开的实时系统；引擎本地计算，Cloudflare 边缘交付。</p>
+        <div class="hero-cta">
+          <a class="ed-link" href="./trend/">① 从热点雷达开始，六步看完一家网红店怎么落地 <span class="ar">→</span></a>
+          <a class="ed-link b" href="./case/">直接看集装箱落地样板 <span class="ar">→</span></a>
+        </div>
+        <form class="hero-search" onsubmit="event.preventDefault(); location.href='/library/?q='+encodeURIComponent(this.q.value);">
+          <input name="q" placeholder="搜索全站资源库：品牌 / 爆品 / 选址 / 供应商…（如：海苔、喜茶、BSD）" autocomplete="off">
+          <button type="submit">搜索 →</button>
+        </form>
+      </div>
+      <figure class="hero-fig">
+        <span class="tab">CASE 001 — CONCEPT</span>
+        <img src="/case/assets/01-store-exterior-day.jpg" alt="社区集装箱店 · 白天外观概念图">
+        <figcaption class="cap"><span><b>社区集装箱店样板</b> · 56㎡ / 两周落地 / 整店可搬迁</span><span>FIG. 01</span></figcaption>
+      </figure>
     </div>
-    <form class="hero-search" onsubmit="event.preventDefault(); location.href='/library/?q='+encodeURIComponent(this.q.value);">
-      <input name="q" placeholder="搜索全站资源库：品牌 / 爆品 / 选址 / 供应商…（如：海苔、喜茶、BSD）" autocomplete="off">
-      <button type="submit">搜索 →</button>
-    </form>
     <div class="stats">
-      <div class="stat ed-stat"><div class="v">2<span style="color:var(--faint-warm);font-size:.5em;"> 条</span></div><div class="k">独立业务线<br>网红单店 / 集装箱零售</div></div>
-      <div class="stat ed-stat"><div class="v">6<span style="color:var(--faint-warm);font-size:.5em;"> 步</span></div><div class="k">单店验证链路<br>找货→定级→定装→选型→落地→运营</div></div>
-      <div class="stat ed-stat"><div class="v">¥3<span style="color:var(--faint-warm);font-size:.5em;"> 万起</span></div><div class="k">推车轻资产入口<br>最高 10 万单店完整模型</div></div>
-      <div class="stat ed-stat"><div class="v">12<span style="color:var(--faint-warm);font-size:.5em;"> 品牌</span></div><div class="k">热点品牌库<br>含加盟路径与社媒证据</div></div>
+      <div class="stat ed-stat"><div class="v">2<span style="color:var(--faint-warm);font-size:.5em;"> 条</span></div><div class="k">Business Lines<br>网红单店 / 集装箱零售</div></div>
+      <div class="stat ed-stat"><div class="v">6<span style="color:var(--faint-warm);font-size:.5em;"> 步</span></div><div class="k">Validation Loop<br>找货→定级→定装→选型→落地→运营</div></div>
+      <div class="stat ed-stat"><div class="v">¥3<span style="color:var(--faint-warm);font-size:.5em;"> 万起</span></div><div class="k">Cart Entry · 推车轻资产<br>最高 10 万单店完整模型</div></div>
+      <div class="stat ed-stat"><div class="v">12<span style="color:var(--faint-warm);font-size:.5em;"> 品牌</span></div><div class="k">Hot Brands DB<br>含加盟路径与社媒证据</div></div>
     </div>
   </div>
 </header>
@@ -129,13 +164,18 @@
 <main class="ed-wrap">
 
   <section class="sec-rule">
-    <div class="ed-sec"><span class="no">01</span><h2>两条独立业务线，选边进入</h2>
+    <div class="sec-ghost">01</div>
+    <div class="ed-sec"><span class="no">01 / SYSTEMS</span><h2>两条独立业务线，选边进入</h2>
       <span class="note">SUPPLY CHAIN LOGIC / DIFFERENT</span></div>
     <div class="portals">
       <div class="portal">
-        <div class="p-head"><span class="ed-kicker">System A · 网红单店快速验证</span></div>
+        <div class="p-head"><span class="ed-kicker" style="color:var(--gold-a);">System A · 网红单店快速验证</span></div>
         <h3>轻供应链 × 重传播机制，¥8–10 万开一家可复制的网红店</h3>
         <p class="p-desc">单品爆发驱动，依赖内容运营与机制玩法；六步链路与移动推车轻资产入口（¥3–5 万）构成完整梯度。</p>
+        <div class="p-fig">
+          <img src="/assets/preview-franchise.png" alt="体系 A · 单店验证链路预览">
+          <div class="cap"><span>SIX-STEP LAUNCH CHAIN</span><span>FIG. A</span></div>
+        </div>
         <div class="p-links">
           <a href="./trend/"><span class="t">① 热点雷达 · 六区爆款侦察与品牌库</span><span class="d">TREND SCOUT</span></a>
           <a href="./launch/"><span class="t">② 选品评分 · 7 因子定级出执行方案</span><span class="d">LAUNCH SCORER</span></a>
@@ -150,6 +190,10 @@
         <div class="p-head"><span class="ed-kicker b">System B · 集装箱社区零售</span></div>
         <h3>重供应链整合 × 空间效率，社区店与 Warung 网络放量</h3>
         <p class="p-desc">以社区集装箱店为样板：箱体两周落地、整店可搬迁；后端接库存预测、渠道评分与 3D 空间优化，不赌流量。</p>
+        <div class="p-fig">
+          <img src="/assets/preview-case.jpg" alt="体系 B · 集装箱社区店样板预览">
+          <div class="cap"><span>COMMUNITY RETAIL INFRA</span><span>FIG. B</span></div>
+        </div>
         <div class="p-links">
           <a href="./case/"><span class="t">集装箱店 · 四档箱体 + 56㎡ 样板</span><span class="d">CASE 001</span></a>
           <a href="./assembly/"><span class="t">开店方案 · 集装箱/轻钢/档口造价</span><span class="d">ASSEMBLY</span></a>
@@ -159,15 +203,29 @@
           <a href="./map/"><span class="t">渠道地图 · Warung 评分与铺货清单</span><span class="d">CHANNEL MAP</span></a>
         </div>
         <div class="p-cta">
-          <a class="ed-link b" href="./retail/" style="border-color:var(--accent-b);">对外单页（可直接转发）<span class="ar" style="color:var(--accent-b);">→</span></a>
-          <a class="ed-link b" href="./case/">进入体系 B <span class="ar" style="color:var(--accent-b);">→</span></a>
+          <a class="ed-link b" href="./retail/">对外单页（可直接转发）<span class="ar">→</span></a>
+          <a class="ed-link b" href="./case/">进入体系 B <span class="ar">→</span></a>
         </div>
       </div>
     </div>
   </section>
 
-  <section>
-    <div class="ed-sec"><span class="no">02</span><h2>公共底座 · 两线共享</h2>
+  <!-- 热点品牌墙：无限滚动 marquee -->
+  <section style="padding-top:0;">
+    <div class="ed-sec"><span class="no">BRAND WALL</span><h2>热点品牌库 · 可复制对象</h2>
+      <span class="note">12 HOT BRANDS / SOCIAL PROOF</span></div>
+    <div class="marquee" aria-label="热点品牌墙">
+      <div class="m-track">
+        <img src="/assets/brand-heytea.png" alt="喜茶 HEYTEA"><img src="/assets/brand-mixue.png" alt="蜜雪冰城 MIXUE"><img src="/assets/brand-naixue.png" alt="奈雪 NAIXUE"><img src="/assets/brand-chagee.png" alt="霸王茶姬 CHAGEE"><img src="/assets/brand-knotted.png" alt="Knotted 甜甜圈"><img src="/assets/brand-irvins.png" alt="Irvins 咸蛋黄"><img src="/assets/brand-samyang.png" alt="三养 SAMYANG"><img src="/assets/brand-calbee.png" alt="卡乐比 CALBEE"><img src="/assets/brand-weilong.png" alt="卫龙 WEILONG"><img src="/assets/brand-taokae.png" alt="老板仔 TAOKAENOI"><img src="/assets/brand-chayan.png" alt="茶颜悦色"><img src="/assets/brand-arabica.png" alt="%Arabica">
+        <img src="/assets/brand-heytea.png" alt="" aria-hidden="true"><img src="/assets/brand-mixue.png" alt="" aria-hidden="true"><img src="/assets/brand-naixue.png" alt="" aria-hidden="true"><img src="/assets/brand-chagee.png" alt="" aria-hidden="true"><img src="/assets/brand-knotted.png" alt="" aria-hidden="true"><img src="/assets/brand-irvins.png" alt="" aria-hidden="true"><img src="/assets/brand-samyang.png" alt="" aria-hidden="true"><img src="/assets/brand-calbee.png" alt="" aria-hidden="true"><img src="/assets/brand-weilong.png" alt="" aria-hidden="true"><img src="/assets/brand-taokae.png" alt="" aria-hidden="true"><img src="/assets/brand-chayan.png" alt="" aria-hidden="true"><img src="/assets/brand-arabica.png" alt="" aria-hidden="true">
+      </div>
+    </div>
+    <p style="font-family:var(--font-mono);font-size:11px;color:var(--faint-warm);letter-spacing:.08em;margin-top:16px;">每个品牌含：产品线 × 社媒热度证据 × 印尼复制路径 → <a href="./trend/" style="color:var(--accent);text-decoration:none;">打开热点雷达 →</a></p>
+  </section>
+
+  <section class="sec-rule">
+    <div class="sec-ghost">02</div>
+    <div class="ed-sec"><span class="no">02 / SHARED</span><h2>公共底座 · 两线共享</h2>
       <span class="note">SHARED INFRASTRUCTURE</span></div>
     <div class="base-links">
       <a class="ed-row" href="./playbook/">
@@ -186,7 +244,7 @@
   </section>
 
   <section class="partner">
-    <span class="ed-kicker">Partnership</span>
+    <span class="ed-kicker">Partnership / 合作共建</span>
     <h2>与合作方共建印尼落地基础设施</h2>
     <p>我们提供品牌落地作战系统 + 中国顶级零食团队方法论（爆品策划 / 口味本地化 / 品类创新 + 天猫系数据化运营），寻找印尼本地渠道、供应链与门店伙伴。系统全部可点开实测，欢迎体验后约谈。</p>
     <div class="tags">
@@ -202,14 +260,5 @@
 <footer>
   <div class="ed-wrap">NUSANTARA BRAND OS · 引擎层本地计算（Python）→ 静态渲染 → CLOUDFLARE PAGES 交付<br>演示数据为种子样本；接 WARUNGSCOUT D1 实时数据一键同步</div>
 </footer>
-
-<script>
-/* 聚光灯卡：跟随指针的径向高光 */
-document.querySelectorAll('.spot').forEach(el => el.addEventListener('pointermove', e => {
-  const r = el.getBoundingClientRect();
-  el.style.setProperty('--mouse-x', (e.clientX - r.left) + 'px');
-  el.style.setProperty('--mouse-y', (e.clientY - r.top) + 'px');
-}));
-</script>
 </body>
 </html>
