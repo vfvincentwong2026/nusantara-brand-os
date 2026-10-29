@@ -56,6 +56,7 @@
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
   <a class="nl" data-p="store-dash" href="/store-dash/">小店大屏</a>
   <a class="nl" data-p="library" href="/library/">中央库</a>
+  <a class="nl" data-p="brandkit" href="/brandkit/">品牌生成</a>
 </nav>
 <div class="wrap">
   <div class="head">
@@ -122,7 +123,14 @@ function render() {
     return;
   }
   if (tab === 'asset') {
-    el.innerHTML = [
+    const savedKits = load('asset').filter(x => String(x.id).startsWith('KIT-'));
+    const kitRows = savedKits.map((x, i) => `<div class="item"><div>
+      <div class="in">${esc(x.name)} <span class="chip">${esc(x.category)}</span></div>
+      <div class="im">${Object.entries(x).filter(([k]) => !['id', 'name', 'category'].includes(k))
+        .map(([k, v]) => `${k}: ${esc(String(v))}`).join(' · ')}</div></div>
+      <button class="del" onclick="del('asset', ${load('asset').indexOf(x)})">删除</button></div>`).join('');
+    el.innerHTML = kitRows + [
+      ['➕ 生成新品牌体系', '<a href="/brandkit/" style="color:#4da3ff">品牌设计生成器</a>：输入名字 → 机制色板 · 字标搭配 · 超级符号 · 包装三层规范，一键保存回本库'],
       ['品牌色板（机制型零食演示 token）', '主色 #E4022B（行动/机制）· 辅助 #E8B246（等级/收集）· 成功 #34D17B · 背景 #0B0F14'],
       ['超级符号方向', '等级徽章 + 挑战标签 + 收集编号三件套；新增 SKU 低成本延展（系列延展测试）'],
       ['包装三层规范', '货架层三秒识别 / 开箱层脚本动线 / 社交层被拍性——评审硬标准见落地评分 STEP 4'],

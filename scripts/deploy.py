@@ -95,6 +95,9 @@ def main():
     # 中央库
     (SITE / "library").mkdir(parents=True)
     shutil.copy(ROOT / "web/library/index.html", SITE / "library")
+    # 品牌设计生成器
+    (SITE / "brandkit").mkdir(parents=True)
+    shutil.copy(ROOT / "web/brandkit/index.html", SITE / "brandkit")
     # 数字孪生（2D/3D 共享 planogram JSON）
     (SITE / "twin/data").mkdir(parents=True)
     (SITE / "floorplan").mkdir(parents=True)

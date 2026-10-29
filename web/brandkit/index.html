@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/ui/tokens.css">
+<title>品牌设计生成器 · Nusantara Brand OS</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  .wrap { max-width:1280px; margin:0 auto; padding:64px 24px 80px; }
+  .head { margin-bottom:22px; }
+  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(77,163,255,.5); border-radius:999px;
+               color:#4da3ff; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+  .head h1 { font-size:34px; font-weight:800; line-height:1.2; }
+  .head h1 em { color:#e4022b; font-style:normal; }
+  .head p { margin-top:10px; color:#8b98a8; font-size:13px; max-width:860px; line-height:1.8; }
+  .demo { margin:14px 0 0; display:flex; flex-wrap:wrap; gap:8px; }
+  .demo button { background:#151c26; border:1px solid #1f2733; color:#8b98a8; border-radius:999px;
+                 padding:6px 14px; font-size:12px; cursor:pointer; transition:.15s; }
+  .demo button:hover { border-color:#4da3ff; color:#e8eef5; }
+  .grid { display:grid; grid-template-columns:340px 1fr; gap:20px; margin-top:22px; }
+  @media (max-width:960px) { .grid { grid-template-columns:1fr; } }
+  .panel { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:20px; }
+  .panel h2 { font-size:13px; letter-spacing:.1em; color:#8b98a8; margin-bottom:16px; font-weight:600; }
+  .fld { margin-bottom:14px; }
+  .fld label { display:block; font-size:11px; color:#5b6779; letter-spacing:.08em; margin-bottom:6px; }
+  .fld input, .fld select { width:100%; background:#0b0f14; border:1px solid #1f2733; border-radius:8px;
+                            color:#e8eef5; padding:10px 12px; font-size:14px; outline:none; transition:.15s; }
+  .fld input:focus, .fld select:focus { border-color:#4da3ff; }
+  .gen { width:100%; margin-top:6px; background:linear-gradient(135deg,#e4022b,#ff5c3d); border:none; color:#fff;
+         font-size:14px; font-weight:700; padding:12px; border-radius:10px; cursor:pointer; letter-spacing:.06em; }
+  .gen:hover { filter:brightness(1.1); }
+  /* 输出区 */
+  .brand-hero { display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between;
+                border-radius:14px; padding:22px; margin-bottom:20px; border:1px solid #1f2733; }
+  .brand-hero .bn { font-size:26px; font-weight:800; }
+  .brand-hero .bn small { display:block; font-size:12px; font-weight:400; opacity:.75; margin-top:4px; letter-spacing:.2em; }
+  .brand-hero .slogan { font-size:13px; opacity:.85; margin-top:8px; max-width:520px; line-height:1.6; }
+  .markbox { width:120px; height:120px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+             background:rgba(255,255,255,.06); flex:0 0 auto; }
+  .markbox svg { width:88px; height:88px; }
+  .sec { margin-bottom:20px; }
+  .sec h3 { font-size:12px; letter-spacing:.12em; color:#5b6779; margin-bottom:12px; }
+  .swatches { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; }
+  .sw { border-radius:10px; overflow:hidden; border:1px solid #1f2733; cursor:pointer; transition:.15s; }
+  .sw:hover { transform:translateY(-2px); }
+  .sw .c { height:64px; }
+  .sw .m { padding:8px 10px; background:#0d1219; font-size:11px; }
+  .sw .m b { display:block; font-family:Consolas,monospace; font-size:12px; }
+  .sw .m span { color:#5b6779; font-size:10px; }
+  .type-card { display:flex; gap:14px; flex-wrap:wrap; }
+  .type-cell { flex:1 1 200px; background:#0d1219; border:1px solid #1f2733; border-radius:10px; padding:14px; }
+  .type-cell .tt { color:#5b6779; font-size:10px; letter-spacing:.1em; margin-bottom:8px; }
+  .type-cell .tv { font-size:20px; font-weight:700; }
+  .type-cell .tn { color:#8b98a8; font-size:11px; margin-top:6px; line-height:1.6; }
+  .rules { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:10px; }
+  .rule { background:#0d1219; border:1px solid #1f2733; border-radius:10px; padding:12px 14px; font-size:12px; line-height:1.7; }
+  .rule b { display:block; color:#e8b246; font-size:11px; letter-spacing:.08em; margin-bottom:6px; }
+  .rule i { color:#5b6779; font-style:normal; font-size:11px; }
+  .savebar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:4px; }
+  .savebar button { background:rgba(52,209,123,.12); border:1px solid rgba(52,209,123,.4); color:#34d17b;
+                    padding:10px 18px; border-radius:10px; font-size:13px; font-weight:700; cursor:pointer; }
+  .savebar a { color:#4da3ff; font-size:12px; text-decoration:none; }
+  .note { margin-top:14px; font-size:11px; color:#5b6779; line-height:1.7; }
+</style>
+</head>
+<body>
+<nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid #1a222d;background:#0d1117;flex-wrap:wrap;font-size:13px;">
+  <a href="/" style="color:#e4022b;font-weight:800;letter-spacing:.1em;margin-right:10px;text-decoration:none;">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="dashboard" href="/dashboard/">去化大屏</a>
+  <a class="nl" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl" data-p="floorplan" href="/floorplan/">2D 孪生</a>
+  <a class="nl" data-p="three" href="/three/">3D 孪生</a>
+  <span class="sep">｜</span>
+  <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
+  <a class="nl" data-p="launch" href="/launch/">落地评分</a>
+  <a class="nl" data-p="case" href="/case/">案例</a>
+  <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
+  <a class="nl" data-p="store-dash" href="/store-dash/">小店大屏</a>
+  <a class="nl" data-p="library" href="/library/">中央库</a>
+  <a class="nl" data-p="brandkit" href="/brandkit/">品牌生成</a>
+</nav>
+<div class="wrap">
+  <div class="head">
+    <div class="tag">BRAND KIT GENERATOR</div>
+    <h1>品牌设计生成器：<em>输入名字</em>，出一套可复制的品牌体系</h1>
+    <p>同一输入永远得到同一套方案（确定性哈希生成，可审计、可复现）。输出四件套：机制色板 · 字标搭配 · 超级符号 · 包装三层规范——对应「视觉不是解释品牌，是被三秒识别的传播机制」。</p>
+    <div class="demo" id="demo"></div>
+  </div>
+
+  <div class="grid">
+    <div class="panel">
+      <h2>输入</h2>
+      <div class="fld"><label>品牌名（中文）</label><input id="f-name" value="赤道火山脆" maxlength="12"></div>
+      <div class="fld"><label>品牌名（拉丁字标）</label><input id="f-latin" value="VOLCANO CRUNCH" maxlength="24"></div>
+      <div class="fld"><label>品类</label>
+        <select id="f-cat">
+          <option value="snack">机制型零食</option>
+          <option value="tea">新茶饮</option>
+          <option value="coffee">咖啡</option>
+          <option value="bakery">烘焙</option>
+          <option value="instant">方便食品</option>
+          <option value="ready">熟食卤味</option>
+        </select>
+      </div>
+      <div class="fld"><label>情绪方向</label>
+        <select id="f-vibe">
+          <option value="hot">热血挑战</option>
+          <option value="heal">治愈日常</option>
+          <option value="orient">国潮东方</option>
+          <option value="min">极简高级</option>
+          <option value="retro">复古街角</option>
+        </select>
+      </div>
+      <button class="gen" onclick="generate()">生成品牌体系 →</button>
+      <div class="note">演示工具：配色/字形取自策划池按哈希索引，超级符号为参数化几何构图。定稿前需设计师复核与商标检索（尤其印尼市场已有品牌）。生成结果可一键存入中央库 · 策划资产。</div>
+    </div>
+    <div id="out"></div>
+  </div>
+</div>
+<script>
+// ── 确定性哈希（FNV-1a 32bit + 增量取数）──────────────────
+function hash(str){let h=0x811c9dc5;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,0x01000193)>>>0;}return h;}
+function rng(seed){let s=seed>>>0;return()=>{s=Math.imul(s^s>>>15,s|1);s^=s+Math.imul(s^s>>>7,s|61);return((s^s>>>14)>>>0)/4294967296;};}
+// HSL→Hex，S/L 按角色固定，保证任何种子都协调
+function hslHex(h,s,l){s/=100;l/=100;const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l);
+  const f=n=>{const c=l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return Math.round(255*c).toString(16).padStart(2,'0');};
+  return '#'+f(0)+f(8)+f(4);}
+
+const CAT_HUE={snack:[355,25,45],tea:[340,280,200],coffee:[25,35,210],bakery:[35,20,340],instant:[0,30,210],ready:[10,355,45]};
+const VIBE_HUE_SHIFT={hot:0,heal:40,orient:-25,min:200,retro:15};
+const FONTS=[
+  ['Anton / 超粗无衬','Anton, Impact, sans-serif','字标全大写 + 紧缩字距，三米外可读'],
+  ['Bricolage / 人文几何','Bricolage Grotesque, Segoe UI, sans-serif','亲和力优先，适合治愈/日常向'],
+  ['DM Serif / 编辑衬线','DM Serif Display, Georgia, serif','高级感与故事感，配极简单色'],
+  ['Archivo Black / 海报黑','Archivo Black, Arial Black, sans-serif','挑战/竞技向，能量最高'],
+  ['Space Grotesk / 技术感','Space Grotesk, Consolas, monospace','机制/等级/编号系统天然契合'],
+  ['Zilla / 稳重建构','Zilla Slab, Courier New, serif','复古工业，适合街角店叙事'],
+];
+const VIBE_FONT={hot:3,heal:1,orient:2,min:4,retro:5};
+const SYMBOLS=['徽章 Medal','闪电 Bolt','火山 Volcano','星爆 Starburst','图腾 Totem','漩涡 Swirl','骰子 Dice','翅膀 Wing'];
+const VIBE_SYMBOL={hot:1,heal:5,orient:4,min:0,retro:6};
+const SLOGAN={
+  hot:['越嚼越上头，停不下来的那种','一口点燃，挑战开始','辣度有等级，勇气无上限'],
+  heal:['今天也值得好好吃','小袋子里的大安慰','一人食，也要有仪式感'],
+  orient:['老味道，新玩法','一杯东方，一口惊艳','把故事泡进这一杯'],
+  min:['少即是更多','好味道不需要解释','只留必要的，其余删掉'],
+  retro:['小时候的味道，升级版','街角那一家，又回来了','老配方，新包装'],
+};
+const PACK_RULES=[
+  ['货架层 · 三秒识别','主色覆盖 ≥60% 正面；符号置于左上黄金区；品名与符号锁定固定比例，系列变体只换底色','<i>评审：3 米外能报出品类的包装才及格</i>'],
+  ['开箱层 · 脚本动线','内盖印挑战说明/收集进度；首层视觉反转制造"第二层惊喜"；动线按「看→撕→晒」三步排布','<i>评审：开箱必须自带拍摄脚本</i>'],
+  ['社交层 · 被拍性','预留 UGC 打卡位（一句话文案区）；每袋一个可收集编号；色差在 TikTok 滤镜下依然成立','<i>评审：先被看见、再被理解、最后被记住</i>'],
+];
+
+function generate(preset){
+  if(preset){document.getElementById('f-name').value=preset[0];document.getElementById('f-latin').value=preset[1];
+    document.getElementById('f-cat').value=preset[2];document.getElementById('f-vibe').value=preset[3];}
+  const name=document.getElementById('f-name').value.trim()||'未命名';
+  const latin=document.getElementById('f-latin').value.trim()||name;
+  const cat=document.getElementById('f-cat').value, vibe=document.getElementById('f-vibe').value;
+  const r=rng(hash(name+latin+cat+vibe));
+  // 色板：品类基调 ± 情绪偏移 ± 哈希抖动
+  const hues=CAT_HUE[cat];
+  const shift=VIBE_HUE_SHIFT[vibe];
+  const pick=()=>{const base=hues[Math.floor(r()*hues.length)];return(((base+shift+(r()*24-12))%360+360)%360);};
+  const primary=hslHex(pick(),88,54), accent=hslHex(pick(),80,62);
+  const surface=hslHex(pick(),30,14), deep=hslHex(pick(),35,8);
+  const paper=vibe==='min'?hslHex(pick(),8,94):hslHex(pick(),45,90);
+  const palette=[['主色 · 行动指令',primary,'正面大面积 / CTA / 挑战标识'],
+                 ['辅助 · 等级收集',accent,'等级条 / 限定标 / 收集编号'],
+                 ['深底 · 货架反差',deep,'背板 / 门头底板 / 夜市场景'],
+                 ['台面 · 容器层次',surface,'卡片 / 托盘 / 二级信息底'],
+                 ['纸色 · 社交底色',paper,'开箱内衬 / UGC 打卡位底']];
+  const font=FONTS[VIBE_FONT[vibe]];
+  const symbol=SYMBOLS[(VIBE_SYMBOL[vibe]+Math.floor(r()*3))%SYMBOLS.length];
+  const slogan=SLOGAN[vibe][Math.floor(r()*SLOGAN[vibe].length)];
+  const kit={name,latin,cat,vibe,primary,accent,deep,paper,font:font[0],symbol,slogan,ts:new Date().toISOString()};
+  window.__kit=kit;
+  render(kit,palette,font);
+}
+
+function symbolSVG(kit,r){
+  // 参数化构图：外环 + 内多边形 + 条纹，种子决定边数与切角
+  const sides=3+Math.floor(r()*5), rot=Math.floor(r()*360);
+  const pts=[];for(let i=0;i<sides;i++){const a=(rot+i*360/sides)*Math.PI/180;
+    pts.push((50+34*Math.cos(a)).toFixed(1)+','+(50+34*Math.sin(a)).toFixed(1));}
+  const gap=6+Math.floor(r()*8);
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="46" fill="none" stroke="${kit.accent}" stroke-width="3"/>
+    <polygon points="${pts.join(' ')}" fill="${kit.primary}"/>
+    <circle cx="50" cy="50" r="16" fill="${kit.deep}" stroke="${kit.paper}" stroke-width="2"/>
+    <rect x="${20+gap}" y="70" width="34" height="5" fill="${kit.paper}"/>
+    <rect x="${30+gap}" y="79" width="22" height="4" fill="${kit.accent}"/>
+  </svg>`;
+}
+
+function render(kit,palette,font){
+  const r=rng(hash(kit.name+'svg'));
+  document.getElementById('out').innerHTML=`
+  <div class="brand-hero" style="background:linear-gradient(135deg,${kit.deep},${kit.surface});">
+    <div>
+      <div class="bn" style="font-family:${font[1]};">${esc(kit.latin)}<small>${esc(kit.name)} · ${catName(kit.cat)}</small></div>
+      <div class="slogan">「${esc(kit.slogan)}」 · 超级符号方向：${esc(kit.symbol)}</div>
+    </div>
+    <div class="markbox">${symbolSVG(kit,r)}</div>
+  </div>
+  <div class="panel sec"><h3>机制色板 · 点击复制 Hex</h3>
+    <div class="swatches">${palette.map(p=>`
+      <div class="sw" onclick="navigator.clipboard.writeText('${p[1]}');this.querySelector('.m span').textContent='已复制 ✓'">
+        <div class="c" style="background:${p[1]};"></div>
+        <div class="m"><b>${p[1]}</b><span>${p[0]} — ${p[2]}</span></div>
+      </div>`).join('')}
+    </div>
+  </div>
+  <div class="panel sec"><h3>字标与字体搭配</h3>
+    <div class="type-card">
+      <div class="type-cell"><div class="tt">字标 DISPLAY</div>
+        <div class="tv" style="font-family:${font[1]};">${esc(kit.latin)}</div>
+        <div class="tn">${font[0]} — ${font[2]}</div></div>
+      <div class="type-cell"><div class="tt">正文 BODY</div>
+        <div class="tv" style="font-size:15px;line-height:1.8;">Noto Sans / 系统黑体。印尼市场注意：正文以拉丁字母为主，避免装饰性中文字体作主字标；Halal 与 BPOM 文案区用正文级字号，禁止压缩到不可读。</div>
+        <div class="tn">字距 +2% · 行高 1.6 · 全大写仅用于货架层 ≤6 词</div></div>
+    </div>
+  </div>
+  <div class="panel sec"><h3>超级符号 · 构图与延展</h3>
+    <div class="rules">
+      <div class="rule"><b>主符号（${esc(kit.symbol)} 型）</b>参数化几何构图，如上预览；任何媒介单色可还原。<i>单色剪影测试：缩小到 16px 仍可辨认才算通过。</i></div>
+      <div class="rule"><b>容器规则</b>符号锁定最小留白 = 符号高度的 1/4；禁止倾斜超过 8°；与品名组合时符号不小于字高的 1.2 倍。</div>
+      <div class="rule"><b>系列延展</b>变体/新 SKU 只换底色与编号，不动结构——新增成本趋近于零，系列感自动成立。</div>
+    </div>
+  </div>
+  <div class="panel sec"><h3>包装三层规范（SHUDAO 硬标准）</h3>
+    <div class="rules">${PACK_RULES.map(p=>`<div class="rule"><b>${p[0]}</b>${p[1]}<br>${p[2]}</div>`).join('')}</div>
+  </div>
+  <div class="panel savebar">
+    <button onclick="saveKit()">＋ 保存到中央库 · 策划资产</button>
+    <a href="/library/">打开中央库 →</a>
+  </div>`;
+  document.getElementById('out').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function catName(c){return{snack:'机制型零食',tea:'新茶饮',coffee:'咖啡',bakery:'烘焙',instant:'方便食品',ready:'熟食卤味'}[c];}
+function saveKit(){
+  const k=window.__kit;if(!k)return;
+  const l=JSON.parse(localStorage.getItem('nbo_lib_asset')||'[]');
+  l.push({id:'KIT-'+Date.now(),name:`品牌体系 · ${k.name}（${k.latin}）`,category:k.cat,
+    palette:`主色 ${k.primary} · 辅助 ${k.accent}`,font:k.font,symbol:k.symbol,slogan:k.slogan});
+  localStorage.setItem('nbo_lib_asset',JSON.stringify(l));
+  alert(`已存入策划资产库：${k.name}`);
+}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+document.getElementById('demo').innerHTML='一键试样：'+[
+  ['赤道火山脆','VOLCANO CRUNCH','snack','hot'],
+  ['南洋茶事','NANYANG CHA','tea','orient'],
+  ['巷口咖啡','LORONG KOPI','coffee','retro'],
+].map(d=>`<button onclick="generate(${JSON.stringify(d).replace(/"/g,'&quot;')})">${d[0]} · ${d[3]}</button>`).join('');
+const p=location.pathname;
+document.querySelectorAll('.nbo-nav a.nl').forEach(a=>{if(p.includes(a.dataset.p))a.classList.add('on');});
+generate();
+</script>
+</body>
+</html>
