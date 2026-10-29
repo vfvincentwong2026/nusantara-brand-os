@@ -23,7 +23,7 @@ def test_all_pages_share_full_nav():
 def test_nav_grouped_by_system():
     for p in NAV_PAGES:
         html = _read(p)
-        assert html.count("单店链路") == 1 and html.count("复制体系") == 1, f"{p} 导航缺分组标签"
+        assert html.count("A·网红单店") == 1 and html.count("B·集装箱零售") == 1, f"{p} 导航缺体系分组标签"
 
 
 def test_nav_pages_have_data_p_highlight():
@@ -50,3 +50,15 @@ def test_library_asset_tab_wires_brandkit():
 def test_home_links_brandkit_and_library():
     html = (WEB / "index.html").read_text(encoding="utf-8")
     assert "./brandkit/" in html and "./library/" in html
+
+
+def test_home_dual_portal_separation():
+    html = (WEB / "index.html").read_text(encoding="utf-8")
+    assert "体系 A · 网红单店快速验证" in html
+    assert "体系 B · 集装箱社区零售" in html
+    assert "两条独立业务线" in html
+
+
+def test_case_has_no_influencer_chain():
+    html = _read("case")
+    assert 'class="chain"' not in html
