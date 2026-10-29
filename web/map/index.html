@@ -98,6 +98,7 @@
 <div class="layers">
   <label><input type="checkbox" id="covToggle"> 竞品覆盖圈（500m）</label>
   <label><input type="checkbox" id="gapToggle" checked> 仅显示缺口候选</label>
+  <label><input type="checkbox" id="oppToggle"> <b style="color:#e8b246">加盟机会图层</b>（区域评分 + 保护半径）</label>
 </div>
 <div id="side">
   <h1>渠道地图</h1>
@@ -239,6 +240,42 @@ fetch('./data/channel_map.json').then(r => {
       m.setStyle({ opacity: on ? 1 : 0.12, fillOpacity: on ? 0.38 : 0.05 });
       if (on) m.bringToFront();
     });
+  };
+
+  /* ── 加盟机会图层（体系二）：区域评分热力点 + 保护半径圈 + 品牌匹配弹窗 ── */
+  const OPP_COLOR = { S: '#34d17b', A: '#4da3ff', B: '#e8b246', C: '#6e7681' };
+  let oppLayer = null, oppLoaded = false;
+  const jt = n => 'Rp ' + (n / 1e6).toLocaleString('id-ID', { maximumFractionDigits: 0 }) + ' jt';
+  document.getElementById('oppToggle').onchange = async e => {
+    if (e.target.checked && !oppLoaded) {
+      const d = await (await fetch('./data/opportunity.json')).json();
+      oppLayer = L.layerGroup();
+      // 保护半径圈（已开业加盟店 + 案例样板）
+      d.protection.forEach(p => {
+        L.circle([p.lat, p.lon], { radius: p.radius_m, color: '#e4022b', weight: 1.2, dashArray: '4 4',
+          fillColor: '#e4022b', fillOpacity: 0.05 }).addTo(oppLayer)
+          .bindPopup(`<b>${p.name}</b><br>${p.kind} · ${p.opened_at} 开业<br>保护半径 ${p.radius_m}m`);
+        L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '', iconSize: [14, 14],
+          html: '<div style="width:12px;height:12px;background:#e4022b;border:2px solid #fff;border-radius:3px;transform:rotate(45deg)"></div>' }) })
+          .addTo(oppLayer).bindPopup(`<b>${p.name}</b><br>${p.kind} · 保护半径 ${p.radius_m}m`);
+      });
+      // 机会分区（按评分着色，S 级脉动大件）
+      d.zones.forEach(z => {
+        const c = OPP_COLOR[z.grade] || '#6e7681';
+        L.circleMarker([z.lat, z.lon], { radius: 8 + z.score / 8, color: '#fff', weight: 1,
+          fillColor: c, fillOpacity: 0.55 })
+          .addTo(oppLayer)
+          .bindPopup(`<b>${z.name}</b> · ${z.city}<br>
+            机会分 <b style="color:${c}">${z.score}</b>（${z.grade} 级）<br>
+            人口 ${z.population_k}k · 商圈 ${z.mall_grade}/5 · 竞品 ${z.competitor_count}<br>
+            <span style="color:#e8b246">建议引入：${z.suggested_brand.name || '—'}</span>
+            <span style="color:#8b98a8">（加盟费 ${jt(z.suggested_brand.fee_idr || 0)} / 总投 ${jt(z.suggested_brand.invest_idr || 0)}）</span><br>
+            <a href="/franchise/" style="color:#4da3ff">查看加盟业态 →</a>`);
+      });
+      oppLoaded = true;
+    }
+    if (!oppLayer) return;
+    e.target.checked ? oppLayer.addTo(map) : map.removeLayer(oppLayer);
   };
 }).catch(e => {
   document.getElementById('side').innerHTML = `<div style="color:#f85149;padding:20px">加载失败：${e.message}</div>`;

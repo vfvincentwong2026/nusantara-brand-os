@@ -1,0 +1,247 @@
+{
+  "generated_at": "2026-10-29T09:47:16",
+  "demo": true,
+  "model": "机会分 = 人口 50% + 商圈等级 30% + 低竞品 20%（min-max 归一）",
+  "zones": [
+    {
+      "id": "Z-03",
+      "name": "Bekasi Kota",
+      "city": "Bekasi",
+      "lat": -6.2383,
+      "lon": 106.9756,
+      "population_k": 610.0,
+      "mall_grade": 3,
+      "competitor_count": 18,
+      "source_type": "演示",
+      "score": 76,
+      "grade": "S",
+      "suggested_brand": {
+        "id": "BR-01",
+        "name": "SnackVault 零食仓",
+        "format": "snack",
+        "fee_idr": 45000000.0,
+        "invest_idr": 210000000.0
+      }
+    },
+    {
+      "id": "Z-05",
+      "name": "BSD Serpong",
+      "city": "Tangerang Selatan",
+      "lat": -6.305,
+      "lon": 106.682,
+      "population_k": 380.0,
+      "mall_grade": 5,
+      "competitor_count": 9,
+      "source_type": "演示",
+      "score": 76,
+      "grade": "S",
+      "suggested_brand": {
+        "id": "BR-04",
+        "name": "Boba Sultan 波霸苏丹",
+        "format": "tea",
+        "fee_idr": 50000000.0,
+        "invest_idr": 195000000.0
+      }
+    },
+    {
+      "id": "Z-01",
+      "name": "Kelapa Gading",
+      "city": "Jakarta Utara",
+      "lat": -6.1575,
+      "lon": 106.9083,
+      "population_k": 420.0,
+      "mall_grade": 5,
+      "competitor_count": 14,
+      "source_type": "演示",
+      "score": 75,
+      "grade": "S",
+      "suggested_brand": {
+        "id": "BR-04",
+        "name": "Boba Sultan 波霸苏丹",
+        "format": "tea",
+        "fee_idr": 50000000.0,
+        "invest_idr": 195000000.0
+      }
+    },
+    {
+      "id": "Z-04",
+      "name": "Margonda",
+      "city": "Depok",
+      "lat": -6.391,
+      "lon": 106.822,
+      "population_k": 520.0,
+      "mall_grade": 3,
+      "competitor_count": 11,
+      "source_type": "演示",
+      "score": 75,
+      "grade": "S",
+      "suggested_brand": {
+        "id": "BR-01",
+        "name": "SnackVault 零食仓",
+        "format": "snack",
+        "fee_idr": 45000000.0,
+        "invest_idr": 210000000.0
+      }
+    },
+    {
+      "id": "Z-10",
+      "name": "Karawaci",
+      "city": "Tangerang",
+      "lat": -6.228,
+      "lon": 106.617,
+      "population_k": 340.0,
+      "mall_grade": 4,
+      "competitor_count": 8,
+      "source_type": "演示",
+      "score": 69,
+      "grade": "A",
+      "suggested_brand": {
+        "id": "BR-04",
+        "name": "Boba Sultan 波霸苏丹",
+        "format": "tea",
+        "fee_idr": 50000000.0,
+        "invest_idr": 195000000.0
+      }
+    },
+    {
+      "id": "Z-09",
+      "name": "Cibubur",
+      "city": "Jakarta Timur",
+      "lat": -6.37,
+      "lon": 106.953,
+      "population_k": 450.0,
+      "mall_grade": 2,
+      "competitor_count": 7,
+      "source_type": "演示",
+      "score": 68,
+      "grade": "A",
+      "suggested_brand": {
+        "id": "BR-01",
+        "name": "SnackVault 零食仓",
+        "format": "snack",
+        "fee_idr": 45000000.0,
+        "invest_idr": 210000000.0
+      }
+    },
+    {
+      "id": "Z-02",
+      "name": "PIK 2",
+      "city": "Jakarta Utara",
+      "lat": -6.108,
+      "lon": 106.735,
+      "population_k": 180.0,
+      "mall_grade": 4,
+      "competitor_count": 4,
+      "source_type": "演示",
+      "score": 60,
+      "grade": "A",
+      "suggested_brand": {
+        "id": "BR-06",
+        "name": "HypeBox 快闪盒",
+        "format": "popup",
+        "fee_idr": 33000000.0,
+        "invest_idr": 190000000.0
+      }
+    },
+    {
+      "id": "Z-07",
+      "name": "Tebet",
+      "city": "Jakarta Selatan",
+      "lat": -6.229,
+      "lon": 106.861,
+      "population_k": 350.0,
+      "mall_grade": 3,
+      "competitor_count": 12,
+      "source_type": "演示",
+      "score": 60,
+      "grade": "A",
+      "suggested_brand": {
+        "id": "BR-03",
+        "name": "Kopi Kilat 闪电咖啡",
+        "format": "coffee",
+        "fee_idr": 55000000.0,
+        "invest_idr": 215000000.0
+      }
+    },
+    {
+      "id": "Z-08",
+      "name": "Mangga Dua",
+      "city": "Jakarta Barat",
+      "lat": -6.143,
+      "lon": 106.827,
+      "population_k": 310.0,
+      "mall_grade": 4,
+      "competitor_count": 15,
+      "source_type": "演示",
+      "score": 59,
+      "grade": "B",
+      "suggested_brand": {
+        "id": "BR-04",
+        "name": "Boba Sultan 波霸苏丹",
+        "format": "tea",
+        "fee_idr": 50000000.0,
+        "invest_idr": 195000000.0
+      }
+    },
+    {
+      "id": "Z-06",
+      "name": "Bogor Yasmin",
+      "city": "Bogor",
+      "lat": -6.57,
+      "lon": 106.806,
+      "population_k": 290.0,
+      "mall_grade": 2,
+      "competitor_count": 6,
+      "source_type": "演示",
+      "score": 56,
+      "grade": "B",
+      "suggested_brand": {
+        "id": "BR-05",
+        "name": "Seawave 海苔卷专柜",
+        "format": "single",
+        "fee_idr": 33000000.0,
+        "invest_idr": 175000000.0
+      }
+    }
+  ],
+  "protection": [
+    {
+      "name": "Mr. Ayam · Kelapa Gading",
+      "lat": -6.16,
+      "lon": 106.905,
+      "radius_m": 500,
+      "opened_at": "2026-03",
+      "kind": "加盟店"
+    },
+    {
+      "name": "Kopi Kilat · Tebet",
+      "lat": -6.231,
+      "lon": 106.858,
+      "radius_m": 500,
+      "opened_at": "2026-06",
+      "kind": "加盟店"
+    },
+    {
+      "name": "Boba Sultan · BSD",
+      "lat": -6.303,
+      "lon": 106.685,
+      "radius_m": 500,
+      "opened_at": "2026-08",
+      "kind": "加盟店"
+    },
+    {
+      "name": "Nusantara Community Store · 双40尺样板店",
+      "lat": -6.2445,
+      "lon": 106.8525,
+      "radius_m": 800,
+      "opened_at": "样板店",
+      "kind": "案例样板"
+    }
+  ],
+  "kpi": {
+    "s_grade": 4,
+    "a_grade": 4,
+    "protected": 4,
+    "avg_score": 67
+  }
+}

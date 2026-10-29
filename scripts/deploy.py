@@ -31,6 +31,8 @@ def main():
             "--store", a.store, "--out", "web/dashboard/data/dashboard.json"])
         sh([sys.executable, "-m", "nbo.channel", "--db", "nbo.db",
             "--out", "web/map/data/channel_map.json"])
+        sh([sys.executable, "-m", "nbo.opportunity", "--db", "nbo.db",
+            "--out", "web/map/data/opportunity.json"])
         sh([sys.executable, "-m", "nbo.twin", "--db", "nbo.db",
             "--out-dir", "web/twin/data"])
         sh([sys.executable, "-m", "nbo.flow", "--db", "nbo.db",
@@ -62,6 +64,7 @@ def main():
         shutil.copy(ROOT / "web/map" / f, SITE / "map")
     shutil.copy(ROOT / "web/map/data/channel_map.json", SITE / "map/data")
     shutil.copy(ROOT / "web/map/data/case_store.json", SITE / "map/data")
+    shutil.copy(ROOT / "web/map/data/opportunity.json", SITE / "map/data")
     # 案例页（社区集装箱店）
     (SITE / "case/data").mkdir(parents=True)
     (SITE / "case/assets").mkdir(parents=True)
