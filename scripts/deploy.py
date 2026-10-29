@@ -78,7 +78,8 @@ def main():
     # 热点雷达
     (SITE / "trend/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/trend/index.html", SITE / "trend")
-    shutil.copy(ROOT / "web/trend/data/trend_snacks.json", SITE / "trend/data")
+    for f in (ROOT / "web/trend/data").glob("*.json"):
+        shutil.copy(f, SITE / "trend/data")
     # 概念落地评分
     (SITE / "launch/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/launch/index.html", SITE / "launch")

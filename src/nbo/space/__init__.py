@@ -58,6 +58,7 @@ def solve_allocation(shelves: list[dict], skus: list[dict]) -> dict:
 
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = 20
+    solver.parameters.num_search_workers = 1  # 固定单线程，保证多次求解结果可复现（去大屏/对比视图依赖确定性）
     status = solver.Solve(model)
     if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
         return {"status": "infeasible", "shelves": shelves, "skus": skus,
