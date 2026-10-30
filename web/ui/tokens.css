@@ -112,6 +112,14 @@ button:active, .btn:active {
 /* 导航项不收缩不换行，超出横向滚动（13 项分组导航） */
 .nbo-nav a.nl { flex: 0 0 auto; white-space: nowrap; }
 
+/* 链路条（chain）项不收缩不换行，超出横向滚动——防移动端竖排文字 */
+.chain { flex-wrap: nowrap !important; }
+.chain span, .chain a { flex: 0 0 auto; white-space: nowrap; }
+@media (max-width: 640px) {
+  .chain { font-size: 11px !important; }
+  .chain > span:first-child { display: none; }
+}
+
 /* 体系 B（集装箱零售）导航项蓝色标识，与体系 A 视觉分离 */
 .nbo-nav a.nl.bline { color: #999; }
 .nbo-nav a.nl.bline:hover { color: #8ec2ff; }

@@ -18,6 +18,13 @@
   #hud > * { pointer-events:auto; }
   h1 { font-size:15px; text-shadow:0 1px 4px #000; }
   .controls { margin-top:8px; display:flex; gap:8px; }
+  /* 移动端：控件横向滚动不换行，防按钮文字竖排 */
+  @media (max-width: 640px) {
+    #hud { flex-direction:column; gap:10px; }
+    .controls { overflow-x:auto; padding-bottom:4px; }
+    .controls select, .controls button { flex:0 0 auto; white-space:nowrap; }
+    #info { min-width:0; font-size:11px; }
+  }
   select, button { background:#161b22; color:var(--text); border:1px solid var(--line); border-radius:6px;
                    padding:6px 12px; font-size:13px; cursor:pointer; backdrop-filter:blur(6px); transition:.15s; }
   button:hover, select:hover { border-color:#e4022b; }

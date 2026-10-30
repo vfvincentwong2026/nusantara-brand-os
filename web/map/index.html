@@ -16,7 +16,7 @@
           --comp:#58a6ff; --red:#f85149; --green:#3fb950; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; display:flex; height:100dvh; padding-top:70px; }
-  #map { flex:1; background:#0a0e14; }
+  #map { flex:1; background:#0a0e14; position:relative; }
   #side { width:372px; min-width:372px; overflow-y:auto; border-left:1px solid var(--line); padding:16px 16px 24px; }
   h1 { font-size:17px; margin-bottom:2px; }
   .meta { color:var(--dim); font-size:12px; margin-bottom:12px; }
@@ -54,6 +54,14 @@
   .layers { position:absolute; top:12px; right:12px; z-index:1000; background:rgba(22,27,34,.92); border:1px solid var(--line);
             border-radius:8px; padding:8px 12px; font-size:12px; color:var(--dim); }
   .layers label { display:flex; align-items:center; gap:6px; cursor:pointer; padding:2px 0; }
+  /* 移动端：地图在上（40vh）、清单在下全宽，图例留在地图内不压列表 */
+  @media (max-width: 720px) {
+    body { flex-direction:column; padding-top:60px; }
+    #map { flex:none; height:42vh; min-height:280px; order:1; }
+    #side { width:100%; min-width:0; order:2; border-left:none; border-top:1px solid var(--line); }
+    .legend { bottom:12px; left:8px; font-size:11px; padding:8px 10px; }
+    .layers { top:8px; right:8px; font-size:11px; padding:6px 10px; }
+  }
   /* popup 7 维迷你条 */
   .pop { min-width:220px; font-family:inherit; }
   .pop .t { font-weight:700; margin-bottom:2px; }
@@ -112,8 +120,7 @@
     document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
   })();
 </script>
-<div id="map"></div>
-<div class="legend" id="legend"></div>
+<div id="map"><div class="legend" id="legend"></div></div>
 <div class="layers">
   <label><input type="checkbox" id="covToggle"> 竞品覆盖圈（500m）</label>
   <label><input type="checkbox" id="gapToggle" checked> 仅显示缺口候选</label>
