@@ -106,7 +106,7 @@
 </div>
 <div class="wrap">
   <div class="head">
-    <div class="tag">BRAND KIT GENERATOR</div>
+    <div class="tag">品牌体系生成器</div>
     <h1>品牌生成：<em>输入一个名字</em>，出一套能上货架的品牌体系</h1>
     <p>同一输入永远得到同一套方案（确定性哈希生成，可审计、可复现）。输出四件套：机制色板 · 字标搭配 · 超级符号 · 包装三层规范——对应「视觉不是解释品牌，是被三秒识别的传播机制」。</p>
     <div class="demo" id="demo"></div>
@@ -229,7 +229,7 @@ function render(kit,palette,font){
     </div>
     <div class="markbox">${symbolSVG(kit,r)}</div>
   </div>
-  <div class="panel sec"><h3>机制色板 · 点击复制 Hex</h3>
+  <div class="panel sec"><h3>机制色板 · 点击复制色值</h3>
     <div class="swatches">${palette.map(p=>`
       <div class="sw" onclick="navigator.clipboard.writeText('${p[1]}');this.querySelector('.m span').textContent='已复制 ✓'">
         <div class="c" style="background:${p[1]};"></div>
@@ -254,7 +254,7 @@ function render(kit,palette,font){
       <div class="rule"><b>系列延展</b>变体/新 SKU 只换底色与编号，不动结构——新增成本趋近于零，系列感自动成立。</div>
     </div>
   </div>
-  <div class="panel sec"><h3>包装三层规范（SHUDAO 硬标准）</h3>
+  <div class="panel sec"><h3>包装三层规范（树导硬标准）</h3>
     <div class="rules">${PACK_RULES.map(p=>`<div class="rule"><b>${p[0]}</b>${p[1]}<br>${p[2]}</div>`).join('')}</div>
   </div>
   <div class="panel sec"><h3>实物效果示意 · 默认样机「${esc(kit.name)}」</h3>

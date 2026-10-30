@@ -35,7 +35,7 @@ def test_brandkit_generator_core():
     html = _read("brandkit")
     for key in ["function hash", "function rng", "function hslHex",
                 "function generate", "symbolSVG", "nbo_lib_asset",
-                "包装三层", "SHUDAO", "保存到中央库"]:
+                "包装三层", "树导硬标准", "保存到中央库"]:
         assert key in html, f"brandkit 缺少 {key}"
     # 确定性：两次同输入同色（哈希函数纯函数，无可变全局）
     assert html.count("Math.random") == 0, "生成器禁止使用 Math.random，破坏可复现性"
