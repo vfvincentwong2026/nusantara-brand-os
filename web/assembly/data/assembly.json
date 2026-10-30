@@ -104,7 +104,10 @@
         "部分 mall 不接受箱体进场内"
       ],
       "fit": "快速验证单店模型 / 社区节点 / 快闪先行",
-      "fit_budget": true
+      "fit_budget": true,
+      "images": [
+        "/assets/asm-c1.jpg"
+      ]
     },
     {
       "id": "ASM-C2",
@@ -195,7 +198,10 @@
         "需更大场地租约"
       ],
       "fit": "验证成功后的二期放大 / 双品类合营",
-      "fit_budget": false
+      "fit_budget": false,
+      "images": [
+        "/assets/asm-c2.jpg"
+      ]
     },
     {
       "id": "ASM-L1",
@@ -286,7 +292,10 @@
         "总价 15–20 万，重资产，不符合快速验证原则"
       ],
       "fit": "复购稳定后的标准社区店 / 区域样板",
-      "fit_budget": false
+      "fit_budget": false,
+      "images": [
+        "/assets/asm-l1.jpg"
+      ]
     },
     {
       "id": "ASM-S1",
@@ -378,7 +387,10 @@
         "不可搬迁，且受商场排他条款约束"
       ],
       "fit": "借成熟商圈测品 / 品牌进商场的第一块滩头阵地",
-      "fit_budget": true
+      "fit_budget": true,
+      "images": [
+        "/assets/asm-s1.jpg"
+      ]
     }
   ]
 }

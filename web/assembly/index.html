@@ -52,6 +52,9 @@
   .kv { font-size:11.5px; color:#8b98a8; line-height:1.8; border-top:1px solid #1a222d; padding-top:10px; }
   .kv b { color:#e8eef5; }
   .fitline { font-size:12px; color:#999; }
+  .fimg { display:block; border:1px solid #1f2733; border-radius:8px; overflow:hidden; margin-bottom:2px; }
+  .fimg img { display:block; width:100%; height:150px; object-fit:cover; transition:transform .45s cubic-bezier(.16,1,.3,1); }
+  .fimg:hover img { transform:scale(1.04); }
   .reco { background:linear-gradient(135deg,rgba(52,209,123,.1),rgba(232,178,70,.05));
           border:1px solid rgba(52,209,123,.35); border-radius:14px; padding:18px 20px; margin-bottom:20px;
           font-size:13px; line-height:1.9; }
@@ -122,6 +125,7 @@ fetch('./data/assembly.json').then(r => r.json()).then(d => {
     const maxv = Math.max(...s.breakdown.map(b => b.hi.wan_cny));
     return `<div class="card ${s.fit_budget ? 'best' : ''}">
       <h3>${s.form}<small>${s.id} · ${s.area_sqm}㎡ · ${s.weeks[0]}–${s.weeks[1]} 周</small></h3>
+      ${(s.images || []).map(src => `<a href="${src}" target="_blank" rel="noopener" class="fimg"><img src="${src}" alt="${s.form} 实景参考图" loading="lazy"></a>`).join('')}
       <div class="money">¥${s.total_lo.wan_cny}–${s.total_hi.wan_cny} 万<small> ≈ Rp ${s.total_lo.idr_m}–${s.total_hi.idr_m} 百万</small></div>
       <div class="bars">${s.breakdown.map((b, i) => `<div class="bar">
         <span class="bn">${b.dim}</span>

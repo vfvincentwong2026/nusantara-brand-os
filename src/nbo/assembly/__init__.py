@@ -75,7 +75,8 @@ def build_assembly() -> dict:
             total_lo=_wan(lo), total_hi=_wan(hi), total_mid=_wan(mid),
             breakdown=breakdown, weeks=s["weeks"], permit=s["permit"],
             supply=s["supply"], pros=s["pros"], cons=s["cons"], fit=s["fit"],
-            fit_budget=s["fit_budget"]))
+            fit_budget=s["fit_budget"],
+            images=[f"/assets/asm-{s['id'].lower().replace('asm-', '')}.jpg"]))
     rec = [s["id"] for s in schemes if s["fit_budget"] and s["area_sqm"] >= 15]
     return {
         "meta": {"cny_idr": CNY_IDR, "budget_wan": (8, 10),
