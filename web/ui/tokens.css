@@ -119,12 +119,12 @@ button:active, .btn:active {
 /* ═══ NBO Editorial Ink · 顶级品牌咨询公司排版体系（2026-10 改版）═══
    原则：衬线大标题 + 发丝线分区 + mono 标签 + 单一强调色；弃用圆角卡片堆。 */
 :root {
-  --ink: #0a0a0a;
-  --paper: #f2f0eb;
-  --dim-warm: #9a958c;
-  --faint-warm: #55524c;
-  --hairline: rgba(242, 240, 235, 0.14);
-  --hairline-strong: rgba(242, 240, 235, 0.32);
+  --ink: #0f0f0f;
+  --paper: #ededed;
+  --dim-warm: #888888;
+  --faint-warm: #555555;
+  --hairline: #222222;
+  --hairline-strong: #3a3a3a;
   --accent: #e4022b;
   --accent-b: #4da3ff;
   --hl: #ffd600;
@@ -169,9 +169,9 @@ button:active, .btn:active {
 
 /* ═══ Editorial 全局覆盖：所有引用本文件的页面统一编辑部质感 ═══
    字体/底色/阴影一刀切；常见面板类名重映射为暖黑发丝线卡片。 */
-body { background: #0b0b0c !important; color: #f2f0eb !important;
-       font-family: var(--font-body) !important; }
-h1, h2, h3 { font-family: var(--font-display) !important; font-weight: 700 !important;
+body { background: #0f0f0f !important; color: #ededed !important;
+       font-family: var(--font-body) !important; font-weight: 400; }
+h1, h2, h3 { font-family: var(--font-display) !important; font-weight: 500 !important;
              letter-spacing: -0.01em; }
 code, pre, kbd, samp { font-family: var(--font-mono) !important; }
 /* 去模板：全部阴影与上浮效果归零 */
@@ -184,13 +184,13 @@ code, pre, kbd, samp { font-family: var(--font-mono) !important; }
 .tabs button, .step, .zone, .rules-card, .stat-card, .brand-card, .kv,
 .opt, .item-card, .store-card, .crawl-card, .hot-card, .hero-card,
 .step-card, .faq-card, .mode-card, .fmt-card, .fmt, .chip {
-  background: #141311 !important;
-  border-color: rgba(242, 240, 235, 0.14) !important;
-  border-radius: 6px !important;
+  background: #141414 !important;
+  border-color: #2a2a2a !important;
+  border-radius: 12px !important;
 }
-/* 次级文字蓝灰 → 暖灰 */
+/* 次级文字 → 中性灰 */
 small, .dim, .muted, .sub, .desc, .d, .note, .hint, .muted-warm {
-  color: #9a958c !important;
+  color: #888888 !important;
 }
 
 /* ── 品牌墙无限滚动 marquee ── */
