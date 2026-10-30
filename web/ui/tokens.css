@@ -176,11 +176,13 @@ code, pre, kbd, samp { font-family: var(--font-mono) !important; }
 /* 去模板：全部阴影与上浮效果归零 */
 *, *::before, *::after { box-shadow: none !important; }
 .lift:hover { transform: none !important; }
+.card:hover, .fmt:hover, .panel:hover { transform: none !important;
+  border-color: rgba(242, 240, 235, 0.3) !important; }
 /* 蓝黑面板 → 暖黑发丝线卡片（覆盖各页硬编码色） */
 .panel, .card, .plan, .tier, .rules, .layout, .tier-detail, .mini-btn,
 .tabs button, .step, .zone, .rules-card, .stat-card, .brand-card, .kv,
 .opt, .item-card, .store-card, .crawl-card, .hot-card, .hero-card,
-.step-card, .faq-card, .mode-card, .fmt-card, .chip {
+.step-card, .faq-card, .mode-card, .fmt-card, .fmt, .chip {
   background: #141311 !important;
   border-color: rgba(242, 240, 235, 0.14) !important;
   border-radius: 6px !important;
