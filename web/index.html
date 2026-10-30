@@ -21,10 +21,10 @@
   .hero { padding:120px 0 0; }
   .hero .kick { font-family:var(--font-mono); font-size:11px; letter-spacing:.28em;
                 text-transform:uppercase; color:var(--dim-warm); margin-bottom:28px; }
-  .hero .kick b { color:var(--accent); font-weight:500; }
+  .hero .kick b { color:#ededed; font-weight:500; }
   h1 { font-size:clamp(34px,5.4vw,76px); font-weight:500; line-height:1.12;
        letter-spacing:-0.03em; max-width:1160px; }
-  h1 em { font-style:italic; color:var(--accent); }
+  h1 em { font-style:italic; color:#888; }
   .hero-meta { display:flex; justify-content:space-between; align-items:baseline; gap:24px;
                border-top:1px solid var(--hairline); margin-top:56px; padding:20px 0 0;
                color:var(--dim-warm); font-size:14px; flex-wrap:wrap; }
@@ -36,7 +36,7 @@
   .hero-search input::placeholder { color:var(--faint-warm); }
   .hero-search button { background:none; border:0; color:var(--paper); font-family:var(--font-mono);
                         font-size:12px; letter-spacing:.1em; cursor:pointer; padding:12px 0 12px 20px; }
-  .hero-search button:hover { color:var(--hl); }
+  .hero-search button:hover { color:#fff; }
 
   /* ── 统计带 ── */
   .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -66,8 +66,8 @@
   .work-media .sys { position:absolute; top:14px; left:14px; font-family:var(--font-mono); font-size:10px;
                      letter-spacing:.16em; padding:5px 10px; background:rgba(15,15,15,.75);
                      backdrop-filter:blur(4px); border:1px solid var(--hairline-strong); }
-  .work-media .sys.a { color:var(--gold-a); }
-  .work-media .sys.b { color:var(--accent-b); }
+  .work-media .sys.a { color:#ededed; }
+  .work-media .sys.b { color:#ededed; }
   .work-info { padding:22px 24px 26px; }
   .work-info .ti { display:flex; justify-content:space-between; align-items:center; gap:12px; }
   .work-info h3 { font-size:19px; font-weight:500; letter-spacing:-0.01em; }
@@ -117,15 +117,15 @@
 </head>
 <body>
 <nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid #1a222d;background:#0d1117;flex-wrap:nowrap;overflow-x:auto;font-size:13px;">
-  <a href="/" style="color:#e4022b;font-weight:800;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
-  <span style="color:#e8b246;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·网红单店</span>
+  <a href="/" style="color:#ededed;font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·网红单店</span>
   <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
   <a class="nl" data-p="launch" href="/launch/">选品评分</a>
   <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计</a>
   <a class="nl" data-p="assembly" href="/assembly/">开店方案</a>
   <a class="nl" data-p="store-dash" href="/store-dash/">门店大屏</a>
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
-  <span style="color:#4da3ff;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
   <a class="nl bline" data-p="case" href="/case/">集装箱店</a>
   <a class="nl bline" data-p="dashboard" href="/dashboard/">库存大屏</a>
   <a class="nl bline" data-p="map" href="/map/">渠道地图</a>
@@ -229,8 +229,8 @@
         <h3>中央库</h3>
         <p>选品 / 供应商 / 品牌 / 选址 / 策划资产五库合一，雷达与生成器产出在此收口，支持搜索导出。</p>
       </a>
-      <div class="svc-box" style="border-color:rgba(255,214,0,.35);">
-        <div class="rn" style="color:var(--gold-a);">PARTNERSHIP</div>
+      <div class="svc-box">
+        <div class="rn">PARTNERSHIP</div>
         <h3>寻找合作方</h3>
         <p>品牌落地作战系统 + 中国顶级零食团队方法论，寻找印尼本地渠道、供应链与门店伙伴。系统全部可点开实测。</p>
       </div>

@@ -113,7 +113,7 @@ button:active, .btn:active {
 .nbo-nav a.nl { flex: 0 0 auto; white-space: nowrap; }
 
 /* 体系 B（集装箱零售）导航项蓝色标识，与体系 A 视觉分离 */
-.nbo-nav a.nl.bline { color: #4da3ff; }
+.nbo-nav a.nl.bline { color: #999; }
 .nbo-nav a.nl.bline:hover { color: #8ec2ff; }
 
 /* ═══ NBO Editorial Ink · 顶级品牌咨询公司排版体系（2026-10 改版）═══
@@ -135,7 +135,7 @@ button:active, .btn:active {
 }
 .ed-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
 .ed-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.28em;
-             text-transform: uppercase; color: var(--accent); }
+             text-transform: uppercase; color: #ededed; }
 .ed-kicker.b { color: var(--accent-b); }
 .ed-display { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.015em;
               line-height: 1.06; }
@@ -204,11 +204,11 @@ small, .dim, .muted, .sub, .desc, .d, .note, .hint, .muted-warm {
 @media (prefers-reduced-motion: reduce) { .m-track { animation:none; } }
 
 /* ═══ Saffron 交互层：黄色高亮 / 媒体悬停微缩放 / 滚动渐显 ═══ */
-::selection { background: var(--hl) !important; color: #111 !important; }
-.ed-kicker::before { content: "● "; font-size: 8px; vertical-align: 2px; }
-.ed-link:hover { border-color: var(--hl) !important; color: #fff; }
-.ed-link:hover .ar { color: var(--hl) !important; }
-.ed-cta { display: inline-block; background: var(--hl); color: #111 !important;
+::selection { background: #ededed !important; color: #111 !important; }
+.ed-kicker::before { content: "● "; font-size: 8px; vertical-align: 2px; color: #666; }
+.ed-link:hover { border-color: #ededed !important; color: #fff; }
+.ed-link:hover .ar { color: #ededed !important; }
+.ed-cta { display: inline-block; background: #ededed; color: #111 !important;
           font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .08em;
           text-decoration: none; padding: 13px 24px; transition: filter .15s; }
 .ed-cta:hover { filter: brightness(1.08); }
@@ -227,7 +227,7 @@ small, .dim, .muted, .sub, .desc, .d, .note, .hint, .muted-warm {
   border-radius: 50%; display: none; }
 .cursor-on, .cursor-on a, .cursor-on button { cursor: none; }
 .cursor-on input, .cursor-on textarea, .cursor-on select { cursor: auto; }
-.cursor-on .cursor-dot { display: block; width: 6px; height: 6px; background: var(--hl); }
-.cursor-on .cursor-ring { display: block; width: 34px; height: 34px; border: 1.5px solid rgba(255,214,0,.65);
+.cursor-on .cursor-dot { display: block; width: 6px; height: 6px; background: #ededed; }
+.cursor-on .cursor-ring { display: block; width: 34px; height: 34px; border: 1.5px solid rgba(237,237,237,.5);
   transition: width .18s, height .18s, border-color .18s; }
-.cursor-on .cursor-ring.big { width: 56px; height: 56px; border-color: var(--hl); }
+.cursor-on .cursor-ring.big { width: 56px; height: 56px; border-color: #ededed; }

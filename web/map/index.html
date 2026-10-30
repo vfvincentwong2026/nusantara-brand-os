@@ -79,15 +79,15 @@
 </head>
 <body>
 <nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid #1a222d;background:#0d1117;flex-wrap:nowrap;overflow-x:auto;font-size:13px;">
-  <a href="/" style="color:#e4022b;font-weight:800;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
-  <span style="color:#e8b246;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·网红单店</span>
+  <a href="/" style="color:#ededed;font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·网红单店</span>
   <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
   <a class="nl" data-p="launch" href="/launch/">选品评分</a>
   <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计</a>
   <a class="nl" data-p="assembly" href="/assembly/">开店方案</a>
   <a class="nl" data-p="store-dash" href="/store-dash/">门店大屏</a>
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
-  <span style="color:#4da3ff;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
   <a class="nl bline" data-p="case" href="/case/">集装箱店</a>
   <a class="nl bline" data-p="dashboard" href="/dashboard/">库存大屏</a>
   <a class="nl bline" data-p="map" href="/map/">渠道地图</a>
@@ -98,7 +98,7 @@
   <a class="nl" data-p="library" href="/library/">中央库</a>
 </nav>
 <div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #14202e;background:rgba(9,13,19,.92);backdrop-filter:blur(6px);">
-  <span style="letter-spacing:.1em;color:#4da3ff;">B·集装箱零售链路</span>
+  <span style="letter-spacing:.1em;color:#999999;">B·集装箱零售链路</span>
   <a href="/case/" data-s="/case/" style="color:#8b98a8;text-decoration:none;">① 集装箱店样板</a><span>→</span>
   <a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">② 开店方案选型</a><span>→</span>
   <a href="/floorplan/" data-s="/floorplan/" style="color:#8b98a8;text-decoration:none;">③ 平面布局</a><span>→</span>
@@ -117,7 +117,7 @@
 <div class="layers">
   <label><input type="checkbox" id="covToggle"> 竞品覆盖圈（500m）</label>
   <label><input type="checkbox" id="gapToggle" checked> 仅显示缺口候选</label>
-  <label><input type="checkbox" id="oppToggle"> <b style="color:#e8b246">加盟机会图层</b>（区域评分 + 保护半径）</label>
+  <label><input type="checkbox" id="oppToggle"> <b style="color:#999">加盟机会图层</b>（区域评分 + 保护半径）</label>
 </div>
 <div id="side">
   <h1>渠道地图：<em>给 Warung 打分</em>，按数据铺货</h1>
@@ -287,9 +287,9 @@ fetch('./data/channel_map.json').then(r => {
           .bindPopup(`<b>${z.name}</b> · ${z.city}<br>
             机会分 <b style="color:${c}">${z.score}</b>（${z.grade} 级）<br>
             人口 ${z.population_k}k · 商圈 ${z.mall_grade}/5 · 竞品 ${z.competitor_count}<br>
-            <span style="color:#e8b246">建议引入：${z.suggested_brand.name || '—'}</span>
+            <span style="color:#999">建议引入：${z.suggested_brand.name || '—'}</span>
             <span style="color:#8b98a8">（加盟费 ${jt(z.suggested_brand.fee_idr || 0)} / 总投 ${jt(z.suggested_brand.invest_idr || 0)}）</span><br>
-            <a href="/franchise/" style="color:#4da3ff">查看加盟业态 →</a>`);
+            <a href="/franchise/" style="color:#999999">查看加盟业态 →</a>`);
       });
       oppLoaded = true;
     }

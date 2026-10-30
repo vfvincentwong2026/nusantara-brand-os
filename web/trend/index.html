@@ -16,16 +16,16 @@
   .ghost { position:absolute; top:-34px; right:0; font-family:var(--font-display); font-style:italic; font-weight:600;
            font-size:clamp(64px,9vw,140px); line-height:1; color:transparent;
            -webkit-text-stroke:1px rgba(242,240,235,.08); pointer-events:none; user-select:none; white-space:nowrap; }
-  .head .tag { display:block; font-family:var(--font-mono); color:var(--gold-a);
+  .head .tag { display:block; font-family:var(--font-mono); color:#999999;
                font-size:11px; letter-spacing:.28em; text-transform:uppercase; margin-bottom:18px; }
   .head .tag::before { content:"● "; font-size:8px; vertical-align:2px; }
   .head h1 { font-family:var(--font-display); font-size:clamp(30px,4.2vw,54px); font-weight:600;
              line-height:1.12; letter-spacing:-0.015em; max-width:840px; position:relative; }
-  .head h1 em { color:var(--accent); font-style:italic; }
+  .head h1 em { color:#888; font-style:italic; }
   .head p { margin-top:16px; color:var(--dim-warm); font-size:14px; max-width:760px; line-height:1.9; }
   .head .en { font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; color:var(--faint-warm);
               margin-top:14px; text-transform:uppercase; }
-  .demo-bar { background:rgba(232,178,70,.1); border:1px solid rgba(232,178,70,.4); color:#e8b246;
+  .demo-bar { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.22); color:#999;
               padding:8px 14px; border-radius:8px; font-size:12px; margin-bottom:20px; }
   .layout { display:grid; grid-template-columns:1fr 340px; gap:20px; align-items:start; }
   @media (max-width:960px) { .layout { grid-template-columns:1fr; } }
@@ -41,29 +41,29 @@
           transition:border-color .25s, transform .25s cubic-bezier(.16,1,.3,1); }
   .card:hover { border-color:#33405a; transform:translateY(-2px); }
   .card .top { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
-  .card .rank { color:#e4022b; font-weight:800; font-size:18px; font-family:Consolas,monospace; }
+  .card .rank { color:#ededed; font-weight:800; font-size:18px; font-family:Consolas,monospace; }
   .card .name { font-size:16px; font-weight:700; }
   .card .local { color:#5b6779; font-size:12px; }
   .card .meta { display:flex; gap:8px; margin:6px 0 10px; flex-wrap:wrap; }
   .chip { font-size:10px; padding:2px 10px; border-radius:999px; border:1px solid #232c3a; color:#8b98a8; }
-  .chip.region { color:#e8b246; border-color:rgba(232,178,70,.4); }
+  .chip.region { color:#999; border-color:rgba(255,255,255,.22); }
   .chip.rep-high { color:#34d17b; border-color:rgba(52,209,123,.4); }
-  .chip.rep-mid { color:#e8b246; border-color:rgba(232,178,70,.4); }
+  .chip.rep-mid { color:#999; border-color:rgba(255,255,255,.22); }
   .chip.rep-low { color:#ff5c7a; border-color:rgba(255,92,122,.4); }
   .heat { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
   .heat .bar { flex:1; height:6px; background:#1c2430; border-radius:3px; overflow:hidden; }
   .heat .bar i { display:block; height:100%; background:linear-gradient(90deg,#e4022b,#e8b246); border-radius:3px; }
-  .heat .v { font-family:Consolas,monospace; font-size:12px; color:#e8b246; }
+  .heat .v { font-family:Consolas,monospace; font-size:12px; color:#999; }
   .sec { font-size:12px; line-height:1.75; margin-top:8px; }
   .sec b { display:block; color:#5b6779; font-weight:600; font-size:10px; letter-spacing:.12em; margin-bottom:3px; }
-  .sec.hot b { color:#e8b246; } .sec.fit b { color:#34d17b; } .sec.adapt b { color:#ff5c7a; } .sec.comp b { color:#e4022b; }
+  .sec.hot b { color:#999; } .sec.fit b { color:#34d17b; } .sec.adapt b { color:#ff5c7a; } .sec.comp b { color:#e4022b; }
   .fitline { display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed #232c3a; }
   .fitline .bar { flex:1; height:6px; background:#1c2430; border-radius:3px; overflow:hidden; }
   .fitline .bar i { display:block; height:100%; border-radius:3px; }
   .fitline .v { font-size:12px; font-family:Consolas,monospace; }
   .prio { display:flex; gap:10px; padding:10px 0; border-bottom:1px dashed #232c3a; }
   .prio:last-child { border-bottom:none; }
-  .prio .n { color:#e8b246; font-weight:800; font-family:Consolas,monospace; }
+  .prio .n { color:#999; font-weight:800; font-family:Consolas,monospace; }
   .prio .t { flex:1; }
   .prio .t .nm { font-size:13px; font-weight:700; }
   .prio .t .act { font-size:11px; color:#8b98a8; line-height:1.6; margin-top:3px; }
@@ -83,15 +83,15 @@
 </head>
 <body>
 <nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid #1a222d;background:#0d1117;flex-wrap:nowrap;overflow-x:auto;font-size:13px;">
-  <a href="/" style="color:#e4022b;font-weight:800;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
-  <span style="color:#e8b246;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·网红单店</span>
+  <a href="/" style="color:#ededed;font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·网红单店</span>
   <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
   <a class="nl" data-p="launch" href="/launch/">选品评分</a>
   <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计</a>
   <a class="nl" data-p="assembly" href="/assembly/">开店方案</a>
   <a class="nl" data-p="store-dash" href="/store-dash/">门店大屏</a>
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
-  <span style="color:#4da3ff;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
   <a class="nl bline" data-p="case" href="/case/">集装箱店</a>
   <a class="nl bline" data-p="dashboard" href="/dashboard/">库存大屏</a>
   <a class="nl bline" data-p="map" href="/map/">渠道地图</a>

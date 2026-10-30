@@ -16,16 +16,16 @@
   .ghost { position:absolute; top:-38px; right:0; font-family:var(--font-display); font-style:italic; font-weight:600;
            font-size:clamp(56px,8vw,120px); line-height:1; color:transparent;
            -webkit-text-stroke:1px rgba(242,240,235,.08); pointer-events:none; user-select:none; white-space:nowrap; }
-  .head .tag { display:block; font-family:var(--font-mono); color:var(--accent);
+  .head .tag { display:block; font-family:var(--font-mono); color:#ededed;
                font-size:11px; letter-spacing:.28em; text-transform:uppercase; margin-bottom:18px; }
   .head .tag::before { content:"● "; font-size:8px; vertical-align:2px; }
   .head h1 { font-family:var(--font-display); font-size:clamp(30px,4vw,50px); font-weight:600;
              line-height:1.14; letter-spacing:-0.015em; max-width:860px; position:relative; }
-  .head h1 em { color:var(--accent); font-style:italic; }
+  .head h1 em { color:#888; font-style:italic; }
   .head p { margin-top:16px; color:var(--dim-warm); font-size:14px; max-width:820px; line-height:1.9; }
   .head .en { font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; color:var(--faint-warm);
               margin-top:14px; text-transform:uppercase; }
-  .fx { background:rgba(232,178,70,.1); border:1px solid rgba(232,178,70,.4); color:#e8b246;
+  .fx { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.22); color:#999;
         padding:8px 14px; border-radius:8px; font-size:12px; margin-bottom:20px; }
   .panel { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; margin-bottom:20px; }
   .panel h2 { font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
@@ -62,20 +62,20 @@
   .tbl .bn { font-weight:700; color:#e8eef5; }
   .tbl .sub { color:#5b6779; font-size:10.5px; }
   .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:10.5px;
-          background:rgba(77,163,255,.12); color:#4da3ff; }
+          background:rgba(77,163,255,.12); color:#999999; }
 </style>
 </head>
 <body>
 <nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid #1a222d;background:#0d1117;flex-wrap:nowrap;overflow-x:auto;font-size:13px;">
-  <a href="/" style="color:#e4022b;font-weight:800;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
-  <span style="color:#e8b246;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·网红单店</span>
+  <a href="/" style="color:#ededed;font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·网红单店</span>
   <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
   <a class="nl" data-p="launch" href="/launch/">选品评分</a>
   <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计</a>
   <a class="nl" data-p="assembly" href="/assembly/">开店方案</a>
   <a class="nl" data-p="store-dash" href="/store-dash/">门店大屏</a>
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
-  <span style="color:#4da3ff;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
   <a class="nl bline" data-p="case" href="/case/">集装箱店</a>
   <a class="nl bline" data-p="dashboard" href="/dashboard/">库存大屏</a>
   <a class="nl bline" data-p="map" href="/map/">渠道地图</a>
@@ -114,7 +114,7 @@
       合作门槛进一步下探：<b style="color:#34d17b;">3–5 万 RMB 甚至更低即可启动</b>——租金替代加盟费，车到哪品牌到哪。
       三种轻形态：手推车与<b style="color:#34d17b;">骑行车摊</b>（纯供应链零售，人到哪摊到哪）、电动车改造（前部制作轨做熟食 + 饮品咖啡）。意向图为印尼街头实拍风格参考。回本测算假设可审计（见下）。</p>
     <div class="grid" id="carts" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));"></div>
-    <div id="cartDemo" style="margin-top:10px;font-size:11px;color:#e8b246;"></div>
+    <div id="cartDemo" style="margin-top:10px;font-size:11px;color:#999;"></div>
   </div>
 </div>
 <script>
@@ -155,7 +155,7 @@ fetch('/cart/data/carts.json').then(r => r.json()).then(d => {
         → 回本 <span class="pb">${c.payback_months[0]}–${c.payback_months[1]} 个月</span></span></div>
       <div class="kv"><b>供应链包</b><span>${esc(c.supply)}</span></div>
       <div class="kv"><b>证照路径</b><span>${esc(c.permit)}</span></div>
-      <div class="kv"><b>品牌植入</b><span style="color:#e8b246;">${esc(c.brand)}</span></div>
+      <div class="kv"><b>品牌植入</b><span style="color:#999;">${esc(c.brand)}</span></div>
     </div>`).join('');
   document.getElementById('cartDemo').textContent =
     `⚠ ${d.meta.source_note}`;
