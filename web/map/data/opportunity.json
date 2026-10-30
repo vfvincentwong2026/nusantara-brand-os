@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T17:49:28",
+  "generated_at": "2026-10-30T18:36:12",
   "demo": true,
   "model": "机会分 = 人口 50% + 商圈等级 30% + 低竞品 20%（min-max 归一）",
   "zones": [
