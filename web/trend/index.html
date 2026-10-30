@@ -73,6 +73,12 @@
   .btn-pick { background:rgba(52,209,123,.12); color:#34d17b; border:1px solid rgba(52,209,123,.4);
               border-radius:8px; padding:5px 14px; font-size:11.5px; cursor:pointer; }
   .btn-pick:hover { background:rgba(52,209,123,.22); }
+  /* 社媒热度证据截图墙 */
+  .proof { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px; }
+  .proof a { display:block; border:1px solid var(--hairline); overflow:hidden; padding:0; }
+  .proof img { display:block; width:100%; aspect-ratio:1/1.1; object-fit:cover; object-position:top;
+               transition:transform .6s cubic-bezier(.16,1,.3,1); }
+  .proof a:hover img { transform:scale(1.06); }
 </style>
 </head>
 <body>
@@ -187,6 +193,13 @@ function card(s, i) {
       <div class="sig">▸ 播放 ${s.social.views ?? '—'} 万 · 赞 ${s.social.likes ?? '—'} 万 · 转发 ${s.social.shares ?? '—'} 万</div>
       <div class="sig">▸ 平台：${(s.social.platforms || []).map(esc).join(' / ')} · 二创自由度 ${s.social.ugc ?? '—'}/100</div>
       <div class="sig">▸ 二创玩法：${esc(s.social.remix || '—')}</div></div>
+    ${s.id === 'JP-01' ? `<div class="sec" style="margin-top:10px;"><b>社媒热度证据 · Social Proof（实拍截图）</b>
+      <div class="proof">
+        <a href="/assets/hot-buttertree-1.png" target="_blank" rel="noopener"><img src="/assets/hot-buttertree-1.png" alt="黄油树夹心饼干 社媒热帖截图 1" loading="lazy"></a>
+        <a href="/assets/hot-buttertree-2.png" target="_blank" rel="noopener"><img src="/assets/hot-buttertree-2.png" alt="黄油树夹心饼干 社媒热帖截图 2" loading="lazy"></a>
+        <a href="/assets/hot-buttertree-3.png" target="_blank" rel="noopener"><img src="/assets/hot-buttertree-3.png" alt="黄油树夹心饼干 社媒热帖截图 3" loading="lazy"></a>
+      </div>
+      <div class="sig">▸ 小红书 / TikTok 实拍热帖（演示样本）· 点击放大 · 复刻参考：货架三秒识别 + 切面 ASMR 开箱动线</div></div>` : ''}
     <div class="fitline"><span style="font-size:11px;color:#5b6779;">印尼适配</span>
       <div class="bar"><i style="width:${fit}%;background:${FIT_COLOR(fit)}"></i></div>
       <span class="v" style="color:${FIT_COLOR(fit)}">${fit}</span></div>
