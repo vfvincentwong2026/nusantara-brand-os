@@ -33,6 +33,11 @@
   .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:14px; }
   .fmt { background:#151c26; border:1px solid #1f2733; border-radius:12px; padding:18px;
          transition:transform .25s cubic-bezier(.16,1,.3,1), border-color .25s; }
+  /* 业态门店参考图 */
+  .fimg { display:block; overflow:hidden; border:1px solid var(--hairline); border-radius:8px; margin-bottom:12px; padding:0; }
+  .fimg img { display:block; width:100%; height:150px; object-fit:cover;
+              transition:transform .6s cubic-bezier(.16,1,.3,1); }
+  .fimg:hover img { transform:scale(1.04); }
   /* 推车意向图库 */
   .cgal { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:12px; }
   .cgal a { display:block; overflow:hidden; border:1px solid var(--hairline); border-radius:4px; padding:0; }
@@ -126,6 +131,7 @@ fetch('./data/franchise.json').then(r => r.json()).then(d => {
     `⚠ ${d.fx.note}（1 RMB = ${d.fx.rmb_to_idr.toLocaleString()} IDR）· 锚定：${d.budget_anchor}`;
   document.getElementById('formats').innerHTML = d.formats.map(f => `
     <div class="fmt">
+      ${(f.images || []).map(src => `<a href="${src}" target="_blank" rel="noopener" class="fimg"><img src="${src}" alt="${esc(f.name)} 门店参考图" loading="lazy"></a>`).join('')}
       <div class="fn">${esc(f.name)} <span class="sq">${f.store_sqm}㎡ · ${f.staff} 人</span></div>
       <div class="fc">${esc(f.concept)}</div>
       <div class="capex">${esc(f.capex_display)}</div>

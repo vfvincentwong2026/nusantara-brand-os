@@ -116,6 +116,7 @@ def build_franchise(db_path: str | Path) -> dict:
         formats, brands = [], []
         for r in conn.execute("SELECT * FROM franchise_format"):
             f = dict(r)
+            f["images"] = [f"/assets/fmt-{f['id']}.jpg"]
             f["supply_chain"] = json.loads(f["supply_chain"])
             capex_rmb = f["fee_rmb"] + f["equip_rmb"] + f["fitout_rmb"] + f["goods_rmb"] + f["deposit_rmb"] + f["float_rmb"]
             capex_idr = capex_rmb * 10_000 * FX
@@ -123,6 +124,7 @@ def build_franchise(db_path: str | Path) -> dict:
             payback = round(capex_idr / monthly_profit, 1) if monthly_profit > 0 else None
             formats.append({
                 "id": f["id"], "name": f["name"], "concept": f["concept"], "store_sqm": f["store_sqm"],
+                "images": f["images"],
                 "capex_rmb": capex_rmb, "capex_idr": round(capex_idr),
                 "capex_display": f"{_rmb(capex_rmb)} RMB ≈ {_idr(capex_idr)}",
                 "package": {"加盟费": f["fee_rmb"], "设备": f["equip_rmb"], "装修装配": f["fitout_rmb"],
