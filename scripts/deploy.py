@@ -124,7 +124,7 @@ def main():
         shutil.copy(f, SITE / "twin/data")
     shutil.copy(ROOT / "web/index.html", SITE / "index.html")
     (SITE / "ui").mkdir(exist_ok=True)
-    for f in (ROOT / "web/ui").glob("*.css"):
+    for f in list((ROOT / "web/ui").glob("*.css")) + list((ROOT / "web/ui").glob("*.js")):
         shutil.copy(f, SITE / "ui")
     (SITE / "assets").mkdir(exist_ok=True)
     for f in list((ROOT / "web/assets").glob("*.png")) + list((ROOT / "web/assets").glob("*.jpg")):
