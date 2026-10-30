@@ -261,37 +261,6 @@
   <div class="ed-wrap">NUSANTARA BRAND OS · 引擎层本地计算（Python）→ 静态渲染 → CLOUDFLARE PAGES 交付<br>演示数据为种子样本；接 WARUNGSCOUT D1 实时数据一键同步</div>
 </footer>
 
-<script>
-/* Saffron 微交互：滚动渐显 + 磁吸光标（仅精确指针设备） */
-(() => {
-  const fine = matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (fine) {
-    document.body.classList.add('cursor-on');
-    const dot = document.createElement('div'), ring = document.createElement('div');
-    dot.className = 'cursor-dot'; ring.className = 'cursor-ring';
-    document.body.append(dot, ring);
-    let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
-    addEventListener('pointermove', e => {
-      mx = e.clientX; my = e.clientY;
-      dot.style.transform = `translate(${mx - 3}px,${my - 3}px)`;
-    });
-    (function loop() {
-      rx += (mx - rx) * .16; ry += (my - ry) * .16;
-      const s = ring.classList.contains('big') ? 56 : 34;
-      ring.style.transform = `translate(${rx - s / 2}px,${ry - s / 2}px)`;
-      requestAnimationFrame(loop);
-    })();
-    document.querySelectorAll('a,button').forEach(el => {
-      el.addEventListener('pointerenter', () => ring.classList.add('big'));
-      el.addEventListener('pointerleave', () => ring.classList.remove('big'));
-    });
-  }
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('rv-in'); io.unobserve(e.target); }
-  }), { threshold: .12 });
-  document.querySelectorAll('.hero-grid,.stats,.portals .portal,.base-links .ed-row,.marquee,.partner .tags,.ed-sec')
-    .forEach(el => { el.classList.add('rv'); io.observe(el); });
-})();
-</script>
+<script src="/ui/interactions.js" defer></script>
 </body>
 </html>

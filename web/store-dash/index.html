@@ -140,5 +140,6 @@ fetch('./data/store-dash.json').then(r => r.json()).then(d => {
 const p = location.pathname;
 document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
 </script>
+<script src="/ui/interactions.js" defer></script>
 </body>
 </html>
