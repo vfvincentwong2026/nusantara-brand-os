@@ -23,7 +23,7 @@ def test_all_pages_share_full_nav():
 def test_nav_grouped_by_system():
     for p in NAV_PAGES:
         html = _read(p)
-        assert "A·网红单店" in html and "B·集装箱零售" in html, f"{p} 导航缺体系分组标签"
+        assert "A·品牌孵化引擎" in html and "B·集装箱零售" in html, f"{p} 导航缺体系分组标签"
 
 
 def test_nav_pages_have_data_p_highlight():
@@ -54,9 +54,9 @@ def test_home_links_brandkit_and_library():
 
 def test_home_dual_portal_separation():
     html = (WEB / "index.html").read_text(encoding="utf-8")
-    assert "网红单店快速验证" in html
+    assert "品牌加盟孵化引擎" in html
     assert "集装箱社区零售" in html
-    assert "两条独立业务线" in html
+    assert "独立产品线" in html
 
 
 def test_retail_landing_page():
