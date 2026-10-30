@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T01:03:29",
+  "generated_at": "2026-10-31T01:38:50",
   "demo": true,
   "window": "近 3 个月",
   "brands": [
@@ -32,36 +32,6 @@
         "shares_wan": 510.0
       },
       "ugc": 95.0
-    },
-    {
-      "id": "HB-09",
-      "name": "三养",
-      "name_local": "Samyang",
-      "country": "韩国",
-      "category": "方便食品",
-      "franchise_status": "经销代理（已全球化）",
-      "hot_products": [
-        "火鸡面",
-        "奶油火鸡面",
-        "辣鸡酱料"
-      ],
-      "ido_fit": 75.0,
-      "ido_path": "经销引进——辣挑战内容生态现成",
-      "ido_note": "印尼嗜辣基础极佳；火鸡面辣挑战内容可无缝平移，酱料单独引进做本地速食联名。",
-      "platforms": [
-        "TikTok",
-        "YouTube",
-        "IG"
-      ],
-      "remix_note": "辣挑战阶梯是跨文化硬通货；印尼博主二创量巨大",
-      "photo": "/assets/brand-samyang.jpg",
-      "source_type": "演示",
-      "social": {
-        "views_wan": 65000.0,
-        "likes_wan": 2700.0,
-        "shares_wan": 430.0
-      },
-      "ugc": 93.0
     },
     {
       "id": "HB-01",
@@ -124,35 +94,6 @@
       "ugc": 88.0
     },
     {
-      "id": "HB-08",
-      "name": "卫龙",
-      "name_local": "Weilong",
-      "country": "中国",
-      "category": "辣条豆干",
-      "franchise_status": "经销 + 出海建厂",
-      "hot_products": [
-        "大面筋",
-        "魔芋爽",
-        "亲嘴烧"
-      ],
-      "ido_fit": 65.0,
-      "ido_path": "经销试水温 + 魔芋品类重点学",
-      "ido_note": "魔芋爽是 S 级信号：低卡解痒精准。辣条本体在印尼需品类教育，先做魔芋线。",
-      "platforms": [
-        "抖音",
-        "TikTok"
-      ],
-      "remix_note": "老外首次吃辣条 reaction 是长青格式；热量对比测评",
-      "photo": "/assets/brand-weilong.jpg",
-      "source_type": "演示",
-      "social": {
-        "views_wan": 30000.0,
-        "likes_wan": 1300.0,
-        "shares_wan": 210.0
-      },
-      "ugc": 85.0
-    },
-    {
       "id": "HB-04",
       "name": "Knotted",
       "name_local": "노티드",
@@ -180,124 +121,6 @@
         "shares_wan": 180.0
       },
       "ugc": 90.0
-    },
-    {
-      "id": "HB-05",
-      "name": "小老板",
-      "name_local": "Tao Kae Noi",
-      "country": "泰国",
-      "category": "海苔零食",
-      "franchise_status": "经销代理（可复制产线）",
-      "hot_products": [
-        "香脆海苔卷（辣味）",
-        "冬阴功味海苔",
-        "大卷分享装"
-      ],
-      "ido_fit": 85.0,
-      "ido_path": "双轨：代理引进 + 本地代工复制",
-      "ido_note": "印尼本身是海苔原料产地，复制成本全球最低；同时可谈区域经销快速上架。落地评分 S 级概念。",
-      "platforms": [
-        "TikTok",
-        "Shopee Live"
-      ],
-      "remix_note": "整卷咬断脆响 ASMR；口味测评矩阵类内容长尾稳定",
-      "photo": "/assets/brand-taokae.jpg",
-      "source_type": "演示",
-      "social": {
-        "views_wan": 15000.0,
-        "likes_wan": 620.0,
-        "shares_wan": 95.0
-      },
-      "ugc": 78.0
-    },
-    {
-      "id": "HB-10",
-      "name": "茶颜悦色",
-      "name_local": "茶颜悦色",
-      "country": "中国",
-      "category": "新茶饮",
-      "franchise_status": "直营不加盟（学文化叙事）",
-      "hot_products": [
-        "幽兰拿铁",
-        "声声乌龙",
-        "桂花弄"
-      ],
-      "ido_fit": 55.0,
-      "ido_path": "学文化叙事——不做加盟指望",
-      "ido_note": "不开放加盟且区域保护强；其价值在'新中式文化叙事'方法论，供本土品牌策划库参考。",
-      "platforms": [
-        "小红书",
-        "抖音"
-      ],
-      "remix_note": "国风美学 + 城市限定；二创以视觉模板为主",
-      "photo": "/assets/brand-chayan.jpg",
-      "source_type": "演示",
-      "social": {
-        "views_wan": 18000.0,
-        "likes_wan": 800.0,
-        "shares_wan": 120.0
-      },
-      "ugc": 82.0
-    },
-    {
-      "id": "HB-07",
-      "name": "卡乐比",
-      "name_local": "Calbee",
-      "country": "日本",
-      "category": "膨化零食",
-      "franchise_status": "经销代理",
-      "hot_products": [
-        "薯条三兄弟",
-        "坚脆薯片",
-        "水果麦片"
-      ],
-      "ido_fit": 72.0,
-      "ido_path": "经销引进 + 联名学习",
-      "ido_note": "单品生命周期管理教科书：限定口味 + 地区限定制造稀缺。可与本地品牌学其上新节奏。",
-      "platforms": [
-        "X",
-        "TikTok",
-        "小红书"
-      ],
-      "remix_note": "地区限定收集玩法；开箱测评类内容稳定产出",
-      "photo": "/assets/brand-calbee.jpg",
-      "source_type": "演示",
-      "social": {
-        "views_wan": 12000.0,
-        "likes_wan": 500.0,
-        "shares_wan": 80.0
-      },
-      "ugc": 70.0
-    },
-    {
-      "id": "HB-06",
-      "name": "IRVINS",
-      "name_local": "IRVINS Salted Egg",
-      "country": "新加坡",
-      "category": "咸蛋黄零食",
-      "franchise_status": "区域代理",
-      "hot_products": [
-        "咸蛋黄鱼皮",
-        "咸蛋黄薯片",
-        "松露味鱼皮"
-      ],
-      "ido_fit": 80.0,
-      "ido_path": "代理引进 + 本地鱼皮成本优势复制",
-      "ido_note": "品牌溢价强适合做礼品渠道；复制版可用印尼廉价鱼皮原料打 Rp 15k 大众价格带错位竞争。",
-      "platforms": [
-        "IG",
-        "小红书",
-        "TikTok"
-      ],
-      "remix_note": "流沙裹层特写 + 舔手指 reaction；礼盒开箱适配节庆",
-      "photo": "/assets/brand-irvins.png",
-      "source_type": "演示",
-      "social": {
-        "views_wan": 9800.0,
-        "likes_wan": 410.0,
-        "shares_wan": 66.0
-      },
-      "ugc": 75.0
     },
     {
       "id": "HB-12",

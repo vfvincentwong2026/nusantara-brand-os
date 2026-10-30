@@ -10,7 +10,7 @@ def test_hotbrand_build(tmp_path):
     db = tmp_path / "t.db"
     seed(db)
     d = build_hotbrand(db)
-    assert d["demo"] is True and len(d["brands"]) == 12
+    assert d["demo"] is True and len(d["brands"]) == 6
     for b in d["brands"]:
         assert len(b["hot_products"]) == 3
         assert b["franchise_status"] and b["ido_path"] and b["ido_note"]
@@ -41,7 +41,7 @@ def test_hotbrand_seed_idempotent(tmp_path):
     conn.commit()
     n = conn.execute("SELECT COUNT(*) FROM hot_brand").fetchone()[0]
     conn.close()
-    assert n == 12
+    assert n == 6
 
 
 def test_hotbrand_empty_db(tmp_path):
