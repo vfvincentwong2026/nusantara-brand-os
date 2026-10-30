@@ -72,7 +72,15 @@
       "supply": "全 SKU 由中央供应链直配：网红零食 + 熟食半成品，双周补货，换品零成本",
       "permit": "低——PIRT 食品生产编号 + 地方政府摊位许可（TPS/UMK 档位），一周可办",
       "brand": "车身三面涂装 + 统一餐服 + 收款码即会员入口；推车走到哪，品牌广告打到哪",
-      "image": "/assets/cart-hand.png",
+      "images": [
+        "/assets/cart-gallery-01.jpg",
+        "/assets/cart-gallery-02.jpg",
+        "/assets/cart-gallery-03.jpg",
+        "/assets/cart-gallery-04.jpg",
+        "/assets/cart-gallery-05.jpg",
+        "/assets/cart-gallery-08.jpg",
+        "/assets/cart-gallery-09.jpg"
+      ],
       "source_type": "演示"
     },
     {
@@ -141,7 +149,10 @@
       "supply": "熟食半成品冷链日配 + 饮品原料 + 咖啡豆统采；制作轨设备模块化，坏件 48h 换新",
       "permit": "中——车体改装需符合印尼电动车上路规范（演示口径），PIRT + 摊位许可 + 卫生检查",
       "brand": "车体即旗舰店缩微版：涂装/灯箱/菜单板全总部输出，摊主零设计负担",
-      "image": "/assets/cart-EV.png",
+      "images": [
+        "/assets/cart-gallery-06.jpg",
+        "/assets/cart-gallery-10.jpg"
+      ],
       "source_type": "演示"
     },
     {
@@ -210,7 +221,10 @@
       "supply": "咖啡豆/茶叶统采 + 糖浆小料中央仓；配方与出品 SOP 由培训体系 L1 认证",
       "permit": "中——PIRT + 摊位许可；现制饮品需卫生等级 B 以上（演示口径）",
       "brand": "杯身贴纸 + 车身涂装双媒介；出杯即曝光，单杯成本里含品牌广告费",
-      "image": "/assets/cart-drink.png",
+      "images": [
+        "/assets/cart-gallery-07.jpg",
+        "/assets/cart-gallery-11.jpg"
+      ],
       "source_type": "演示"
     }
   ]

@@ -33,6 +33,12 @@
   .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(360px,1fr)); gap:14px; }
   .fmt { background:#151c26; border:1px solid #1f2733; border-radius:12px; padding:18px;
          transition:transform .25s cubic-bezier(.16,1,.3,1), border-color .25s; }
+  /* 推车意向图库 */
+  .cgal { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:12px; }
+  .cgal a { display:block; overflow:hidden; border:1px solid var(--hairline); border-radius:4px; padding:0; }
+  .cgal img { display:block; width:100%; height:74px; object-fit:cover;
+              transition:transform .6s cubic-bezier(.16,1,.3,1); }
+  .cgal a:hover img { transform:scale(1.08); }
   .fmt:hover { transform:translateY(-3px); border-color:#33405a; }
   .fmt .fn { font-size:16px; font-weight:800; display:flex; justify-content:space-between; align-items:baseline; }
   .fmt .fn .sq { color:#5b6779; font-size:11px; font-weight:400; }
@@ -106,7 +112,7 @@
     <h2>第七业态 · 移动推车 · Mobile Cart <span style="font-weight:400;font-size:11px;letter-spacing:.05em;text-transform:none;">（轻资产入口：租车 + 配供应链 = 加盟 · 车身涂装即品牌资产）</span></h2>
     <p style="font-size:12px;color:#8b98a8;line-height:1.8;margin-bottom:14px;">
       合作门槛进一步下探：<b style="color:#34d17b;">3–5 万 RMB 甚至更低即可启动</b>——租金替代加盟费，车到哪品牌到哪。
-      两种主力车型：电动车改造（前部制作轨做熟食 + 饮品咖啡）与手推车（纯供应链零售）。回本测算假设可审计（见下）。</p>
+      三种轻形态：手推车与<b style="color:#34d17b;">骑行车摊</b>（纯供应链零售，人到哪摊到哪）、电动车改造（前部制作轨做熟食 + 饮品咖啡）。意向图为印尼街头实拍风格参考。回本测算假设可审计（见下）。</p>
     <div class="grid" id="carts" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));"></div>
     <div id="cartDemo" style="margin-top:10px;font-size:11px;color:#e8b246;"></div>
   </div>
@@ -141,7 +147,7 @@ fetch('/cart/data/carts.json').then(r => r.json()).then(d => {
   const fmt = m => `¥${m.wan_cny[0]}–${m.wan_cny[1]} 万（Rp ${m.idr_m[0]}–${m.idr_m[1]} 百万）`;
   document.getElementById('carts').innerHTML = d.carts.map(c => `
     <div class="fmt" style="border-color:rgba(52,209,123,.25);">
-      <img src="${c.image}" alt="${esc(c.name)} 概念参考图" style="width:100%;height:150px;object-fit:cover;border-radius:8px;margin-bottom:10px;" loading="lazy">
+      <div class="cgal">${(c.images || []).map((src, i) => `<a href="${src}" target="_blank" rel="noopener"><img src="${src}" alt="${esc(c.name)} 意向图 ${i + 1}" loading="lazy"></a>`).join('')}</div>
       <div class="fn">${esc(c.name)} <span class="sq">${esc(c.form)}</span></div>
       <div class="capex">启动 <b style="color:#34d17b">${fmt(c.startup)}</b>
         <div class="sub" style="font-size:10.5px;color:#5b6779;margin-top:3px;">押金 ${fmt(c.deposit)} · 月租 ${fmt(c.rent_mo)} · 首批货 ${fmt(c.first_stock)} · 证照 ${fmt(c.cert)}</div></div>
