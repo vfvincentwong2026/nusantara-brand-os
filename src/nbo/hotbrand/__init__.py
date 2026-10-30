@@ -49,7 +49,7 @@ BRANDS = [
          note="不开放加盟；复制其'厚奶油+掰开爆浆'产品结构与饥饿营销打法，用本地烘焙代工落地。",
          views=21000, likes=950, shares=180, platforms=["TikTok", "X"],
          ugc=90, remix="掰开爆浆慢镜头是固定爆款格式；二创无需授权顾虑（学结构不抄 IP）",
-         photo="/assets/brand-knotted.png", source_type="演示"),
+         photo="/assets/brand-knotted.jpg", source_type="演示"),
     dict(id="HB-05", name="小老板", name_local="Tao Kae Noi", country="泰国", category="海苔零食",
          status="经销代理（可复制产线）",
          products=["香脆海苔卷（辣味）", "冬阴功味海苔", "大卷分享装"],
