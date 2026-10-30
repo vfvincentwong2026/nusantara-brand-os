@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T01:38:53",
+  "generated_at": "2026-10-31T02:11:59",
   "demo": true,
   "window": "近 3 个月",
   "factors": [
@@ -54,106 +54,6 @@
     }
   ],
   "ranked": [
-    {
-      "id": "TH-01",
-      "name": "小老板海苔卷",
-      "region": "泰国",
-      "category": "海味零食",
-      "heat": 93.0,
-      "scores": {
-        "f1": 93.7,
-        "f2": 82,
-        "f3": 82,
-        "f4": 96,
-        "f5": 85,
-        "f6": 86,
-        "f7": 82
-      },
-      "total": 87.3,
-      "grade": "S",
-      "grade_action": "立即立项",
-      "replicability": "高",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=小老板海苔卷",
-        "three": "/three/?store=2000&zone=food&label=小老板海苔卷"
-      }
-    },
-    {
-      "id": "MY-01",
-      "name": "咸蛋黄鱼皮",
-      "region": "马来西亚",
-      "category": "炸制零食",
-      "heat": 87.0,
-      "scores": {
-        "f1": 82.3,
-        "f2": 84,
-        "f3": 96,
-        "f4": 100.0,
-        "f5": 85,
-        "f6": 80,
-        "f7": 74
-      },
-      "total": 86.9,
-      "grade": "S",
-      "grade_action": "立即立项",
-      "replicability": "高",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=咸蛋黄鱼皮",
-        "three": "/three/?store=2000&zone=food&label=咸蛋黄鱼皮"
-      }
-    },
-    {
-      "id": "TW-01",
-      "name": "珍珠奶茶酥/奶茶零食",
-      "region": "台湾",
-      "category": "烘焙饼干",
-      "heat": 90.0,
-      "scores": {
-        "f1": 85.0,
-        "f2": 86,
-        "f3": 92,
-        "f4": 94,
-        "f5": 85,
-        "f6": 82,
-        "f7": 72
-      },
-      "total": 85.8,
-      "grade": "S",
-      "grade_action": "立即立项",
-      "replicability": "高",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=珍珠奶茶酥/奶茶零食",
-        "three": "/three/?store=2000&zone=food&label=珍珠奶茶酥/奶茶零食"
-      }
-    },
-    {
-      "id": "KR-03",
-      "name": "韩式炸鸡味膨化零食",
-      "region": "韩国",
-      "category": "膨化零食",
-      "heat": 79.0,
-      "scores": {
-        "f1": 75.1,
-        "f2": 88,
-        "f3": 88,
-        "f4": 90,
-        "f5": 85,
-        "f6": 93,
-        "f7": 75
-      },
-      "total": 84.7,
-      "grade": "A",
-      "grade_action": "优先复制",
-      "replicability": "高",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=韩式炸鸡味膨化零食",
-        "three": "/three/?store=2000&zone=food&label=韩式炸鸡味膨化零食"
-      }
-    },
     {
       "id": "KR-01",
       "name": "药果（蜂蜜油果子）",
@@ -255,31 +155,6 @@
       }
     },
     {
-      "id": "TW-03",
-      "name": "麻辣锅味薯片",
-      "region": "台湾",
-      "category": "膨化零食",
-      "heat": 74.0,
-      "scores": {
-        "f1": 70.6,
-        "f2": 85,
-        "f3": 80,
-        "f4": 82,
-        "f5": 85,
-        "f6": 85,
-        "f7": 75
-      },
-      "total": 80.0,
-      "grade": "A",
-      "grade_action": "优先复制",
-      "replicability": "中",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=麻辣锅味薯片",
-        "three": "/three/?store=2000&zone=food&label=麻辣锅味薯片"
-      }
-    },
-    {
       "id": "MY-02",
       "name": "白咖啡三合一",
       "region": "马来西亚",
@@ -302,31 +177,6 @@
         "zone": "food",
         "floorplan": "/floorplan/?store=2000&zone=food&label=白咖啡三合一",
         "three": "/three/?store=2000&zone=food&label=白咖啡三合一"
-      }
-    },
-    {
-      "id": "CN-01",
-      "name": "魔芋爽/魔芋零食",
-      "region": "中国",
-      "category": "素食零食",
-      "heat": 92.0,
-      "scores": {
-        "f1": 86.8,
-        "f2": 74,
-        "f3": 78,
-        "f4": 58,
-        "f5": 65,
-        "f6": 96,
-        "f7": 76
-      },
-      "total": 74.9,
-      "grade": "B",
-      "grade_action": "改造后试销",
-      "replicability": "中",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=魔芋爽/魔芋零食",
-        "three": "/three/?store=2000&zone=food&label=魔芋爽/魔芋零食"
       }
     },
     {
@@ -355,31 +205,6 @@
       }
     },
     {
-      "id": "CN-03",
-      "name": "气泡/猎奇口味薯片",
-      "region": "中国",
-      "category": "膨化零食",
-      "heat": 77.0,
-      "scores": {
-        "f1": 73.3,
-        "f2": 70,
-        "f3": 70,
-        "f4": 78,
-        "f5": 85,
-        "f6": 85,
-        "f7": 63
-      },
-      "total": 74.0,
-      "grade": "B",
-      "grade_action": "改造后试销",
-      "replicability": "低",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=气泡/猎奇口味薯片",
-        "three": "/three/?store=2000&zone=food&label=气泡/猎奇口味薯片"
-      }
-    },
-    {
       "id": "TW-02",
       "name": "太阳饼/老婆饼创新礼盒",
       "region": "台湾",
@@ -402,56 +227,6 @@
         "zone": "food",
         "floorplan": "/floorplan/?store=2000&zone=food&label=太阳饼/老婆饼创新礼盒",
         "three": "/three/?store=2000&zone=food&label=太阳饼/老婆饼创新礼盒"
-      }
-    },
-    {
-      "id": "MY-03",
-      "name": "咖喱叻沙杯面",
-      "region": "马来西亚",
-      "category": "方便熟食",
-      "heat": 78.0,
-      "scores": {
-        "f1": 80.2,
-        "f2": 66,
-        "f3": 66,
-        "f4": 66,
-        "f5": 85,
-        "f6": 70,
-        "f7": 82
-      },
-      "total": 72.8,
-      "grade": "B",
-      "grade_action": "改造后试销",
-      "replicability": "中",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=咖喱叻沙杯面",
-        "three": "/three/?store=2000&zone=food&label=咖喱叻沙杯面"
-      }
-    },
-    {
-      "id": "CN-02",
-      "name": "大辣片/麻辣豆干",
-      "region": "中国",
-      "category": "豆制品零食",
-      "heat": 83.0,
-      "scores": {
-        "f1": 84.7,
-        "f2": 76,
-        "f3": 86,
-        "f4": 61,
-        "f5": 67,
-        "f6": 74,
-        "f7": 60
-      },
-      "total": 72.3,
-      "grade": "B",
-      "grade_action": "改造后试销",
-      "replicability": "中",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=大辣片/麻辣豆干",
-        "three": "/three/?store=2000&zone=food&label=大辣片/麻辣豆干"
       }
     },
     {
@@ -507,12 +282,12 @@
   ],
   "plan": {
     "concept": {
-      "name": "小老板海苔卷",
-      "region": "泰国",
-      "category": "海味零食",
-      "total": 87.3,
-      "grade": "S",
-      "indo_fit": 80
+      "name": "药果（蜂蜜油果子）",
+      "region": "韩国",
+      "category": "传统油炸糕点",
+      "total": 84.3,
+      "grade": "A",
+      "indo_fit": 70
     },
     "container": {
       "tier": "双40尺旗舰样板（56㎡）",
@@ -520,8 +295,8 @@
       "link": "/case/",
       "twin": {
         "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=小老板海苔卷",
-        "three": "/three/?store=2000&zone=food&label=小老板海苔卷"
+        "floorplan": "/floorplan/?store=2000&zone=food&label=药果（蜂蜜油果子）",
+        "three": "/three/?store=2000&zone=food&label=药果（蜂蜜油果子）"
       },
       "note": "集装箱整装四档体系直接复用；快闪模块可拆装巡回"
     },
@@ -529,7 +304,7 @@
       {
         "no": 1,
         "name": "定义传播单元",
-        "action": "锁定「'泰国名片'级单品」为唯一传播画面，所有物料围绕这一个画面服务。",
+        "action": "锁定「'传统点心年轻化'叙事 + 咖啡搭配场景」为唯一传播画面，所有物料围绕这一个画面服务。",
         "design": "包装主视觉 + 开箱背景板",
         "supply": "—"
       },
@@ -543,7 +318,7 @@
       {
         "no": 3,
         "name": "做成机制",
-        "action": "把机制写进产品结构：整卷咬断脆响镜头 + 口味全测评矩阵。；等级/收集/隐藏款三选一并系列化。",
+        "action": "把机制写进产品结构：蘸咖啡吃法 + 传统市场探店；低糖对比测评类。；等级/收集/隐藏款三选一并系列化。",
         "design": "等级徽章 + 收集编号 + 挑战卡（可延展超级符号）",
         "supply": "包装产线需支持变体印刷"
       },
@@ -557,15 +332,15 @@
       {
         "no": 5,
         "name": "活人感冷启动 + 大单品承接",
-        "action": "话题款负责拉新曝光；复购由大单品承接——sambal matah / rendang 两种印尼限定味；大卷分享装进超市。。",
+        "action": "话题款负责拉新曝光；复购由大单品承接——减糖 30% 适配本地甜度；小袋 2 枚装进便利店收银台货架。。",
         "design": "内容模板 + 门店打卡模板",
-        "supply": "sambal matah / rendang 两种印尼限定味；大卷分享装进超市。"
+        "supply": "减糖 30% 适配本地甜度；小袋 2 枚装进便利店收银台货架。"
       }
     ],
     "supply_chain": {
-      "local_match": "海洋饮食文化相通，海苔接受度高；印尼是海苔原料产地之一，成本可控。",
-      "adaptation": "sambal matah / rendang 两种印尼限定味；大卷分享装进超市。",
-      "compliance": "海苔碘含量标注；辣味添加剂需 BPOM 备案。",
+      "local_match": "蜂蜜油炸甜味与印尼 kue 传统高度兼容；常温长保适合 warung 渠道。",
+      "adaptation": "减糖 30% 适配本地甜度；小袋 2 枚装进便利店收银台货架。",
+      "compliance": "蜂蜜原料需 Halal 来源证明；油炸工艺标签需标反式脂肪酸。",
       "compliance_lead": "BPOM + Halal 认证周期约 3-6 个月，与产品开发同步启动"
     },
     "deliverables": [

@@ -11,9 +11,9 @@ def test_launch_build(tmp_path):
     # 7 因子权重合计 100
     assert len(d["factors"]) == 7
     assert sum(f["weight"] for f in d["factors"]) == 100
-    # 18 款全部评分、降序、分数合法、带评级
+    # 9 款全部评分、降序、分数合法、带评级
     ranked = d["ranked"]
-    assert len(ranked) == 18
+    assert len(ranked) == 9
     totals = [r["total"] for r in ranked]
     assert totals == sorted(totals, reverse=True)
     for r in ranked:
