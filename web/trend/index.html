@@ -242,7 +242,8 @@ function renderBrands() {
       <div class="top"><span class="rank">${String(i + 1).padStart(2, '0')}</span>
         <span class="name">${esc(b.name)}</span><span class="local">${esc(b.name_local)} · ${esc(b.country)}</span></div>
       <div class="meta"><span class="chip region">${esc(b.category)}</span>
-        <span class="chip" style="color:${pc};border-color:${pc}55">${esc(b.franchise_status)}</span></div>
+        <span class="chip" style="color:${pc};border-color:${pc}55">${esc(b.franchise_status)}</span>
+        ${b.intro ? `<span class="chip" style="color:${b.intro.color};border-color:${b.intro.color}55;font-weight:700;">引入分级 ${b.intro.grade} · ${esc(b.intro.label)}</span>` : ''}</div>
       <div class="sec"><b>热点产品（正热，可对标选品）</b>${b.hot_products.map(esc).join(' · ')}</div>
       <div class="sec"><b>社媒热度</b>播放 ${b.social.views_wan} 万 · 赞 ${b.social.likes_wan} 万 · 转发 ${b.social.shares_wan} 万
         · ${b.platforms.map(esc).join('/')} · 二创自由度 ${b.ugc}/100</div>

@@ -84,6 +84,25 @@ def seed_hotbrand(conn: sqlite3.Connection) -> None:
                       b["photo"], b["source_type"]))
 
 
+# 引入分级（AI 甄别）：按加盟路径自动判定——给招商决策看的硬标签
+INTRO_RULES = [
+    ("直接加盟", "S", "可加盟 · 直接引入"),
+    ("加盟优先", "A", "可加盟 · 优先引入"),
+    ("仅学习",   "C", "仅学习 · 不引入"),
+    ("代理",     "B", "可代理 · 谈判引入"),
+    ("复制",     "B", "模式复制 · 学结构"),
+]
+INTRO_CLS = {"S": "#34d17b", "A": "#4da3ff", "B": "#e8b246", "C": "#8b98a8"}
+
+
+def _intro_of(b: dict) -> dict:
+    text = " ".join(str(b.get(k) or "") for k in ("path", "status", "ido_path", "franchise_status"))
+    for kw, grade, label in INTRO_RULES:
+        if kw in text:
+            return {"grade": grade, "label": label, "color": INTRO_CLS[grade]}
+    return {"grade": "B", "label": "待评估 · 需商务谈判", "color": INTRO_CLS["B"]}
+
+
 def build_hotbrand(db_path: str | Path) -> dict:
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
@@ -101,6 +120,7 @@ def build_hotbrand(db_path: str | Path) -> dict:
         b["social"] = {"views_wan": b.pop("social_views_wan"), "likes_wan": b.pop("social_likes_wan"),
                        "shares_wan": b.pop("social_shares_wan")}
         b["ugc"] = b.pop("ugc_score")
+        b["intro"] = _intro_of(b)
         brands.append(b)
     brands.sort(key=lambda x: -(x["social"]["views_wan"] * 0.5 + x["ido_fit"] * 100))
     return {"generated_at": datetime.now().isoformat(timespec="seconds"), "demo": True,

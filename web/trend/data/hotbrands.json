@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T18:37:01",
+  "generated_at": "2026-11-01T01:23:39",
   "demo": true,
   "window": "近 3 个月",
   "brands": [
@@ -31,7 +31,12 @@
         "likes_wan": 3600.0,
         "shares_wan": 510.0
       },
-      "ugc": 95.0
+      "ugc": 95.0,
+      "intro": {
+        "grade": "S",
+        "label": "可加盟 · 直接引入",
+        "color": "#34d17b"
+      }
     },
     {
       "id": "HB-01",
@@ -61,7 +66,12 @@
         "likes_wan": 2100.0,
         "shares_wan": 340.0
       },
-      "ugc": 92.0
+      "ugc": 92.0,
+      "intro": {
+        "grade": "B",
+        "label": "可代理 · 谈判引入",
+        "color": "#e8b246"
+      }
     },
     {
       "id": "HB-02",
@@ -91,7 +101,12 @@
         "likes_wan": 1800.0,
         "shares_wan": 290.0
       },
-      "ugc": 88.0
+      "ugc": 88.0,
+      "intro": {
+        "grade": "A",
+        "label": "可加盟 · 优先引入",
+        "color": "#4da3ff"
+      }
     },
     {
       "id": "HB-04",
@@ -120,7 +135,12 @@
         "likes_wan": 950.0,
         "shares_wan": 180.0
       },
-      "ugc": 90.0
+      "ugc": 90.0,
+      "intro": {
+        "grade": "B",
+        "label": "模式复制 · 学结构",
+        "color": "#e8b246"
+      }
     },
     {
       "id": "HB-12",
@@ -149,7 +169,12 @@
         "likes_wan": 560.0,
         "shares_wan": 70.0
       },
-      "ugc": 68.0
+      "ugc": 68.0,
+      "intro": {
+        "grade": "C",
+        "label": "仅学习 · 不引入",
+        "color": "#8b98a8"
+      }
     },
     {
       "id": "HB-11",
@@ -178,7 +203,12 @@
         "likes_wan": 380.0,
         "shares_wan": 55.0
       },
-      "ugc": 72.0
+      "ugc": 72.0,
+      "intro": {
+        "grade": "B",
+        "label": "可代理 · 谈判引入",
+        "color": "#e8b246"
+      }
     }
   ],
   "source_note": "社媒数据为演示口径；photo 为 AI 概念参考图，真实照片抓取后替换 URL 即可。"

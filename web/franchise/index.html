@@ -98,10 +98,16 @@
     <h1>加盟体系：<em>8–10 万 RMB</em><br>在印尼开出一家可复制的网红单店</h1>
     <p class="actq" style="margin:10px 0 0;color:#666;font-size:12.5px;letter-spacing:.02em;">这一幕回答：单店跑通后怎么复制成网络——成本包、回本模型与品牌引入。</p>
     <p>六大业态的开店成本包（RMB + IDR 双币呈现）、回本模型（假设可审计）、供应链绑定清单，
-       与特权加盟品牌库联动——雷达发现爆品 → 落地评分定级 → 加盟体系承接复制。</p>
+       与特权加盟品牌库联动——雷达发现爆品 → 落地评分定级 → 加盟体系承接复制。
+       复制不是靠招商广告：<b style="color:#e8b246;">先预算打爆（社媒 + 直播电商引流），把单店做成现象，再线下招商收单</b>。</p>
     <div class="en">Six formats × payback model × supply chain binding / audited assumptions</div>
   </div>
   <div class="fx" id="fx"></div>
+  <div class="panel" style="border-color:rgba(232,178,70,.45);">
+    <h2>打爆引流 → 招商转化 · 预算模型<span style="font-weight:400;font-size:11px;letter-spacing:.05em;text-transform:none;">（先线上打爆造声势，再线下招商收单；假设可审计，演示口径）</span></h2>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));" id="funnel"></div>
+    <div style="margin-top:12px;font-size:11px;color:#5b6779;line-height:1.8;" id="funnel-note"></div>
+  </div>
   <div class="panel">
     <h2>六大业态 · 成本包与回本模型</h2>
     <div class="grid" id="formats"></div>
@@ -127,6 +133,36 @@
 <script>
 const esc = s => (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const jt = n => 'Rp ' + (n / 1e6).toLocaleString('id-ID', {maximumFractionDigits: 1}) + ' jt';
+
+/* 打爆引流 → 招商转化漏斗（预算模型，演示口径） */
+const FUNNEL = [
+  { n: 'STAGE 1', t: '社媒打爆', s: 'SOCIAL BLAZE', c: '#e4022b',
+    budget: 'Rp 45 jt / 月',
+    items: ['TikTok/IG 达人矩阵：头部 5 位 + 腰部 30 位（佣金 + 坑位）',
+            '挑战赛 + 机制话题（隐藏款/收集卡），预算 40% 投 UGC 激励',
+            '门店即片场：明档表演（拉茶/现烤/爆浆）日更短视频 2 条',
+            '目标：单月 1,000 万曝光 · 10 万互动 · 话题进区域热榜'] },
+  { n: 'STAGE 2', t: '电商直播打爆', s: 'LIVE COMMERCE', c: '#b04dff',
+    budget: 'Rp 30 jt / 月',
+    items: ['TikTok Live / Shopee Live 日播 4 小时：套餐券 + 到店核销券',
+            '直播专属机制款（直播价 + 限量赠品），券 30 天内到店核销',
+            '本地 MCN 代播分成模式：底薪 + GMV 5-8% 佣金，控制现金风险',
+            '目标：月 GMV Rp 150 jt · 核销券引流到店 800+ 人次'] },
+  { n: 'STAGE 3', t: '线下招商收单', s: 'FRANCHISE CLOSE', c: '#34d17b',
+    budget: 'Rp 25 jt / 月',
+    items: ['样板店参访日：每周 2 场，直播打爆数据现场给意向商看',
+            '招商会：月 1 场，主打"已验证单店 + 可审计流水"',
+            '加盟线索漏斗：直播/短视频留资 → 电销筛选 → 参访 → 签约',
+            '目标：月 50 条加盟线索 · 8 家参访 · 2–3 家签约'] },
+];
+document.getElementById('funnel').innerHTML = FUNNEL.map(f => `
+  <div class="fmt" style="border-color:${f.c}44;">
+    <div class="fn">${f.n} · ${f.t} <span class="sq">${f.s}</span></div>
+    <div class="capex">预算 <b style="color:${f.c}">${f.budget}</b></div>
+    ${f.items.map(i => `<div class="kv"><b>▸</b><span>${i}</span></div>`).join('')}
+  </div>`).join('');
+document.getElementById('funnel-note').textContent =
+  '⚠ 演示口径：总预算 Rp 100 jt / 月（≈¥4.5 万），三阶段联动——线上打爆制造"这家店在风口"的证据，直播核销把人引进店，样板店数据成为招商会的成交弹药。签约 2 家即可覆盖当月打爆预算。';
 
 fetch('./data/franchise.json').then(r => r.json()).then(d => {
   document.getElementById('fx').textContent =
