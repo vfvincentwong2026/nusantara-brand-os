@@ -68,6 +68,19 @@
   .lv-p1 { background:rgba(255,92,122,.15); color:#ff5c7a; }
   .lv-p2 { background:rgba(255,154,61,.15); color:#ff9a3d; }
   .note { color:#5b6779; font-size:11px; line-height:1.7; margin-top:8px; }
+  /* 行内处置按钮 */
+  .qbtn { background:none; border:1px solid #2a3546; color:#8b98a8; border-radius:6px; font-size:10px;
+          padding:2px 8px; margin-left:4px; cursor:pointer; font-family:inherit; letter-spacing:.04em; }
+  .qbtn:hover { border-color:#e8b246; color:#e8b246; }
+  .qbtn.kill:hover { border-color:#ff5c7a; color:#ff5c7a; }
+  .qrow.killed { opacity:.38; }
+  .qrow.killed .heat { color:#5b6779; }
+  .st.s-promo { color:#e8b246; }
+  .qbar { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;
+          margin-bottom:10px; font-size:11px; color:#5b6779; }
+  .qbar .rst { border:1px solid #2a3546; background:none; color:#8b98a8; border-radius:6px; font-size:10.5px;
+               padding:3px 10px; cursor:pointer; font-family:inherit; }
+  .qbar .rst:hover { border-color:#ff5c7a; color:#ff5c7a; }
 </style>
 </head>
 <body>
@@ -183,6 +196,10 @@
 
   <div class="panel">
     <h2>跨幕流转队列 · 信号 → 定级 → 下一步动作</h2>
+    <div class="qbar">
+      <span>演示操作：点行内「晋级 / 淘汰」处置概念，状态保存在本地项目库（nbo_queue_v1）· 已处置 <b id="q-disp" style="color:#e8b246;font-family:'IBM Plex Mono',Consolas,monospace;">0</b> 款</span>
+      <button class="rst" id="q-reset">↺ 重置全部处置</button>
+    </div>
     <div class="qrow headrow">
       <span>ID</span><span>概念</span><span>信号热度</span><span>决策总分</span><span class="hide-m">下一步动作</span><span>状态</span>
     </div>
@@ -195,7 +212,7 @@
     <div class="todo">
       <div class="it"><span class="lv lv-p1">P1</span><b>中央库打通</b>供应商库 / 品牌库 / 选址库「保存」按钮落成统一数据库，队列状态可真实回写。</div>
       <div class="it"><span class="lv lv-p1">P1</span><b>真实信号接入</b>替换演示种子数据：接 X / TikTok 热点 API 与 WARUNGSCOUT 评分数据，队列自动刷新。</div>
-      <div class="it"><span class="lv lv-p2">P2</span><b>控制塔回写</b>每幕操作（定级 / 生成 / 装配选型）完成后回写队列状态，形成真正的项目大脑时间线。</div>
+      <div class="it"><span class="lv lv-p2">P2</span><b>控制塔回写</b>轻量版已上线（晋级/淘汰本地保存）；待做：每幕操作自动回写 + 跨设备同步的真实项目大脑时间线。</div>
       <div class="it"><span class="lv lv-p2">P2</span><b>客户视图</b>对外演示模式：隐藏内部待办，只保留管线图 + 队列 + 总览指标。</div>
     </div>
   </div>
@@ -231,19 +248,42 @@
     const q = snacks.map(s => ({...s, r: rmap[s.id]}))
       .sort((a,b2) => ((b2.r&&b2.r.total)||-1) - ((a.r&&a.r.total)||-1));
     const act = {S:'生成执行方案 · 进入造物', A:'优先复制 · 排入造物队列', B:'观察 · 补供应链匹配', C:'淘汰 · 保留信号档案'};
-    document.getElementById('queue').innerHTML = q.map(s => {
-      const r = s.r, g = r ? r.grade : '—';
-      const cls = {'S':'g-S','A':'g-A','B':'g-B','C':'g-C'}[g] || '';
-      const st = !r ? ['待评分','st-skip'] : (g==='S'||g==='A') ? ['流转中','st-live'] : ['滞留','st-skip'];
-      return `<div class="qrow">
-        <span class="id">${esc(s.id)}</span>
-        <span class="nm">${esc(s.name)}<small>${esc(s.region)} · ${esc(s.category||'')}</small></span>
-        <span class="heat">${s.heat != null ? '🔥 ' + s.heat : '—'}</span>
-        <span class="total">${r ? r.total + ' <span class="grade ' + cls + '">' + g + '</span>' : '待评分'}</span>
-        <span class="nx hide-m">${r ? esc(act[g]||'—') : '进入 ② 选品评分 完成 7 因子定级'}</span>
-        <span class="st ${st[1]}">${st[0]}</span>
-      </div>`;
-    }).join('');
+    // 本地处置库：晋级 / 淘汰（演示用轻量回写，P1 全站中央库前的过渡）
+    const LSK = 'nbo_queue_v1';
+    const loadOv = () => { try { return JSON.parse(localStorage.getItem(LSK) || '{}'); } catch { return {}; } };
+    let ov = loadOv();
+    const saveOv = () => localStorage.setItem(LSK, JSON.stringify(ov));
+    const renderQueue = () => {
+      document.getElementById('queue').innerHTML = q.map(s => {
+        const r = s.r, g = r ? r.grade : '—';
+        const cls = {'S':'g-S','A':'g-A','B':'g-B','C':'g-C'}[g] || '';
+        const o = ov[s.id];
+        let st, nx, killed = false;
+        if (o === 'kill') { st = ['已淘汰','st-skip']; nx = '归档 · 移出流水线'; killed = true; }
+        else if (o === 'promote') { st = ['已晋级','s-promo']; nx = '进入 ③ 造物 · 品牌体系生成排队'; }
+        else if (!r) { st = ['待评分','st-skip']; nx = '进入 ② 选品评分 完成 7 因子定级'; }
+        else if (g==='S'||g==='A') { st = ['流转中','st-live']; nx = act[g]; }
+        else { st = ['滞留','st-skip']; nx = act[g]; }
+        return `<div class="qrow${killed ? ' killed' : ''}">
+          <span class="id">${esc(s.id)}</span>
+          <span class="nm">${esc(s.name)}<small>${esc(s.region)} · ${esc(s.category||'')}</small></span>
+          <span class="heat">${s.heat != null ? '🔥 ' + s.heat : '—'}</span>
+          <span class="total">${r ? r.total + ' <span class="grade ' + cls + '">' + g + '</span>' : '待评分'}</span>
+          <span class="nx hide-m">${esc(nx)}</span>
+          <span class="st ${st[1]}">${st[0]}
+            <button class="qbtn" data-id="${esc(s.id)}" data-a="promote">晋级</button><button class="qbtn kill" data-id="${esc(s.id)}" data-a="kill">淘汰</button>
+          </span>
+        </div>`;
+      }).join('');
+      document.getElementById('q-disp').textContent = Object.keys(ov).length;
+      document.querySelectorAll('#queue .qbtn').forEach(b => b.addEventListener('click', () => {
+        const id = b.dataset.id;
+        if (ov[id] === b.dataset.a) delete ov[id]; else ov[id] = b.dataset.a; // 再点一次=撤销
+        saveOv(); renderQueue();
+      }));
+    };
+    renderQueue();
+    document.getElementById('q-reset').addEventListener('click', () => { ov = {}; saveOv(); renderQueue(); });
     document.getElementById('gen').textContent = '信号窗口：' + (t.window||'—') + ' · 引擎生成：' + (t.generated_at||'') + ' · 演示种子数据';
   } catch (e) {
     document.getElementById('gen').textContent = '数据载入失败：' + e.message;
