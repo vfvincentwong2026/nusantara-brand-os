@@ -99,6 +99,9 @@ def main():
     # 中央库
     (SITE / "library").mkdir(parents=True)
     shutil.copy(ROOT / "web/library/index.html", SITE / "library")
+    # 孵化控制塔（五幕总览，读取 trend/launch JSON）
+    (SITE / "tower").mkdir(parents=True)
+    shutil.copy(ROOT / "web/tower/index.html", SITE / "tower")
     # 品牌设计生成器
     (SITE / "brandkit").mkdir(parents=True)
     shutil.copy(ROOT / "web/brandkit/index.html", SITE / "brandkit")
