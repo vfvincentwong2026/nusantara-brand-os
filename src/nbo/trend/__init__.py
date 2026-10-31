@@ -1,4 +1,8 @@
-"""趋势侦察引擎：六区域热点零食（近 3 个月）→ 网红视角分析 → 印尼适配与复制性评估。
+"""趋势侦察引擎：六区域热点（近 3 个月）→ 网红视角分析 → 印尼适配与复制性评估。
+
+收录原则（AI 甄别硬门槛）：只收录**适合加盟单店的现制店面食品**（现烤烘焙 /
+现调茶饮咖啡 / 现做熟食甜品）。工业级预包装零食不进入雷达——它们撑不起一家
+店，不符合品牌加盟孵化定位。
 
 数据边界：当前为带来源标记的种子样本（source_type=演示），表结构与信号字段按
 可接入 X/TikTok 热点 API / 人工录入升级设计，替换 seed 即可切换真实接入。
@@ -56,32 +60,33 @@ CREATE TABLE IF NOT EXISTS trend_snack (
     category TEXT, heat REAL, heat_signals TEXT,
     why_hot TEXT, viral_format TEXT,
     indo_fit REAL, fit_reasons TEXT, adaptation TEXT,
-    compliance_note TEXT, replicability TEXT, repl_reason TEXT, source_type TEXT
+    compliance_note TEXT, replicability TEXT, repl_reason TEXT, source_type TEXT,
+    store_mode TEXT
 );
 """
 
 SEED_SNACKS = [
     # ── 日本 ──────────────────────────────────────────────
     dict(id="JP-01", region="日本", name="黄油树夹心饼干", name_local="バターの木",
-         category="烘焙饼干", heat=94,
+         category="现烤烘焙", heat=94,
          heat_signals=["X 话题 3 个月 42 万帖", "便利店限购+代购溢价 2.5 倍", "TikTok #buttertree 播放 1.8 亿"],
          why_hot="切面卡嚓 ASMR + 黄油横截面特写极具镜头感；'北海道黄油'产地叙事强化送礼属性，网红开箱即内容。",
          viral_format="切面慢镜头 + 排队 vlog；礼盒开箱测评类视频完播率最高。",
          indo_fit=72, fit_reasons="黄油+砂糖口味与印尼 palmiers/蝴蝶酥接受度重叠；礼盒化契合开斋送礼季。",
-         adaptation="改 8 枚小规格（Rp 25k 价格带）；开发榴莲/香蕉两种本地夹心；印尼黄油成本高，改用混合脂。",
-         compliance_note="配料表需 BPOM 注册；黄油含量宣称需符合标签法，避免'北海道'产地误导。",
-         replicability="中", repl_reason="工艺门槛中等（夹心+烘烤曲线），但品牌溢价依赖产地故事，本地版需另造叙事。",
-         source_type="演示"),
-    dict(id="JP-02", region="日本", name="冷冻巴斯克芝士蛋糕", name_local="冷冻バスチー",
-         category="冷冻甜品", heat=88,
+         adaptation="单店模型 = 现烤柜台（玻璃后厨看切面）+ 伴手礼礼盒墙；8 枚小规格 Rp 25k 价格带；开发榴莲/香蕉本地夹心。",
+         compliance_note="现制门店需 PIRT/卫生许可 + Halal；若兼售预包装伴手礼需 BPOM 注册，黄油含量宣称需符合标签法。",
+         replicability="中", repl_reason="现烤工艺门槛中等（夹心+烘烤曲线），品牌溢价靠'现烤香气+切面仪式感'，不依赖产地故事。",
+         store_mode="现烤专门店 + 伴手礼双轨", source_type="演示"),
+    dict(id="JP-02", region="日本", name="现烤巴斯克芝士蛋糕", name_local="バスクチーズケーキ",
+         category="现烤甜品", heat=88,
          heat_signals=["TikTok 日本美食榜 TOP3 连续 8 周", "便利店 CV SNS 引流单品"],
-         why_hot="'便利店价格吃到名店味'反差话题；半熟流心截面是天然短视频素材。",
-         viral_format="解冻 3 分钟切开流心镜头；便利店寻宝类内容。",
-         indo_fit=65, fit_reasons="芝士蛋糕在雅加达咖啡馆渠道已验证；冷冻链在爪哇岛城市可行。",
-         adaptation="配 sago/椰糖淋酱做本地化款；走 minimarket 冷冻柜 + 网红店即食双渠道。",
-         compliance_note="冷冻乳制品进口关税高，本地代工更优；需 Halal 乳源认证。",
-         replicability="中", repl_reason="配方可复制但冷冻物流成本是主要瓶颈，外岛难下沉。",
-         source_type="演示"),
+         why_hot="'整只现烤、当场切开流心'的仪式感是天然短视频素材；焦香外皮+半熟芯的反差口感评测类内容稳定产出。",
+         viral_format="出炉摇铃 + 当场切开流心镜头；整只外带 vs 切片堂食对比。",
+         indo_fit=65, fit_reasons="芝士蛋糕在雅加达咖啡馆渠道已验证；现烤模式不依赖冷冻链，爪哇岛城市均可落地。",
+         adaptation="配 sago/椰糖淋酱做本地化款；小门店模型：1 台风炉+明档切台，商场档口/街边店均可。",
+         compliance_note="现制门店需 PIRT/卫生许可；乳源需 Halal 认证，本地乳脂供应链成熟。",
+         replicability="中", repl_reason="配方可复制，明档切台是记忆点；客单价 Rp 60-120k，适合作为加盟旗舰店品类。",
+         store_mode="现烤甜品专门店", source_type="演示"),
     dict(id="JP-03", region="日本", name="鲜奶油水果三明治", name_local="フルーツサンド",
          category="现制烘焙", heat=81,
          heat_signals=["TikTok #fruitsandwich 播放 9000 万", "首尔/曼谷门店相继复刻"],
@@ -91,18 +96,18 @@ SEED_SNACKS = [
          adaptation="限定网红店现制现售（不做零售化）；用本地芒果/红毛丹替代高价进口果。",
          compliance_note="现制餐饮需当地 PIRT/卫生许可；奶油需冷链记录。",
          replicability="高", repl_reason="设备与工艺简单，适合作为网红店引流品而非零售 SKU。",
-         source_type="演示"),
+         store_mode="现制烘焙专门店", source_type="演示"),
     # ── 韩国 ──────────────────────────────────────────────
     dict(id="KR-01", region="韩国", name="药果（蜂蜜油果子）", name_local="약과",
-         category="传统油炸糕点", heat=91,
+         category="现制传统糕点", heat=91,
          heat_signals=[" Olive Young 零食榜连续 12 周 TOP5", "TikTok 复古韩食话题播放 2.4 亿"],
          why_hot="'传统点心年轻化'叙事 + 咖啡搭配场景；低糖/无麸质改良版制造第二话题。",
          viral_format="蘸咖啡吃法 + 传统市场探店；低糖对比测评类。",
          indo_fit=70, fit_reasons="蜂蜜油炸甜味与印尼 kue 传统高度兼容；常温长保适合 warung 渠道。",
-         adaptation="减糖 30% 适配本地甜度；小袋 2 枚装进便利店收银台货架。",
-         compliance_note="蜂蜜原料需 Halal 来源证明；油炸工艺标签需标反式脂肪酸。",
-         replicability="高", repl_reason="kue 产业链成熟，本地代工无壁垒；差异化在口味微调。",
-         source_type="演示"),
+         adaptation="单店模型 = 现炸明档 + 咖啡档口组合（韩国药果 café 模式）；减糖 30% 适配本地甜度；外带礼盒做伴手礼。",
+         compliance_note="现制需 PIRT/卫生许可；蜂蜜需 Halal 来源证明；油炸用油管理需留记录。",
+         replicability="高", repl_reason="kue 油炸工艺与印尼本地高度相通，设备门槛低；差异化在口味微调与空间叙事。",
+         store_mode="现制糕点 café（明档+外带）", source_type="演示"),
     dict(id="KR-02", region="韩国", name="Knotted 奶油甜甜圈", name_local="노티드 도넛",
          category="现制甜品", heat=86,
          heat_signals=["门店排队 2 小时+ 打卡内容", "首尔甜甜圈地图类笔记 3 个月 15 万篇"],
@@ -112,67 +117,72 @@ SEED_SNACKS = [
          adaptation="减甜+增咸（奶酪/焦糖盐味）；门店即制即售，不做预包装。",
          compliance_note="现制同 JP-03；若做预包装需 BPOM。",
          replicability="中", repl_reason="工艺可复制，但'排队经济学'依赖商圈选址与营销预算。",
-         source_type="演示"),
+         store_mode="现制甜品专门店", source_type="演示"),
     # ── 台湾 ──────────────────────────────────────────────
-    dict(id="TW-02", region="台湾", name="太阳饼/老婆饼创新礼盒", name_local="太陽餅",
-         category="传统糕点", heat=76,
+    dict(id="TW-02", region="台湾", name="现烤太阳饼/老婆饼", name_local="太陽餅",
+         category="现烤糕饼", heat=76,
          heat_signals=["机场伴手礼销量回升 40%", "小红书/Threads 礼盒开箱热"],
-         why_hot="'老字号翻新包装'适礼场景；酥皮层次切面适合质感类内容。",
-         viral_format="酥皮分层慢镜 + 伴手礼攻略清单。",
-         indo_fit=60, fit_reasons="酥饼类与印尼 kue 千层酥（kue lapis）工艺相通；礼盒契合节庆。",
-         adaptation="开斋节/春节限定包装；麦芽糖内馅改椰糖（gula aren）版本。",
-         compliance_note="伴手礼食品需 BPOM 流通许可；椰糖为本地原料可降成本。",
-         replicability="高", repl_reason="烘焙工艺本地完全可复制，竞争点在包装设计与节庆营销。",
-         source_type="演示"),
+         why_hot="'现烤出炉 + 酥皮层次切面'仪式感；老字号翻新包装适礼场景，质感类内容友好。",
+         viral_format="出炉整盘特写 + 酥皮分层慢镜；现烤店探店 + 伴手礼攻略清单。",
+         indo_fit=60, fit_reasons="酥饼工艺与印尼 kue 千层酥（kue lapis）相通；现烤香气型门店在商场客群中已验证。",
+         adaptation="开斋节/春节限定礼盒；麦芽糖内馅改椰糖（gula aren）版本；档口店+礼盒墙单店模型。",
+         compliance_note="现制需 PIRT/卫生许可；椰糖为本地原料可降成本；兼售预包装礼盒需 BPOM 流通许可。",
+         replicability="高", repl_reason="烘焙工艺本地完全可复制，竞争点在出炉仪式感、包装设计与节庆营销。",
+         store_mode="现烤糕饼专门店 + 伴手礼", source_type="演示"),
     # ── 泰国 ──────────────────────────────────────────────
-    dict(id="TH-02", region="泰国", name="泰式奶茶即饮/冲剂", name_local="ชาไทย",
-         category="冲调饮品", heat=85,
+    dict(id="TH-02", region="泰国", name="泰式手打奶茶", name_local="ชาไทย",
+         category="现调茶饮", heat=85,
          heat_signals=["TikTok #thaitea 播放 5 亿+", "泰国手标茶代购长盛不衰"],
-         why_hot="橙红色泽辨识度极高，'泰奶色'成为视觉标签；手标摇茶过程自带表演性。",
-         viral_format="拉茶过程 + 橙色调色对比；泰奶甜品化（泰奶冰/泰奶吐司）二创。",
-         indo_fit=77, fit_reasons="茶饮在印尼高速增长；泰奶与印尼 teh manis 味型接近，教育成本低。",
-         adaptation="减糖版 + 印尼红茶底拼配；挂耳/冲剂零售化进 warung。",
-         compliance_note="色素（日落黄等）BPOM 限量严格，需天然色素替代方案。",
-         replicability="高", repl_reason="冲剂工艺简单，差异化在茶底拼配与减糖技术。",
-         source_type="演示"),
+         why_hot="橙红色泽辨识度极高，'泰奶色'成为视觉标签；手标拉茶过程自带表演性，是门店活广告。",
+         viral_format="拉茶高空倒茶过程 + 橙色调色对比；泰奶甜品化（泰奶冰/泰奶吐司）二创。",
+         indo_fit=77, fit_reasons="茶饮在印尼高速增长；泰奶与印尼 teh manis 味型接近，教育成本低；手标式 franchise 模型全球可考。",
+         adaptation="减糖版 + 印尼红茶底拼配；档口店模型（3-5㎡ 即可起店）；袋装茶底做外卖零售延伸。",
+         compliance_note="色素（日落黄等）BPOM 限量严格，需天然色素替代方案；现制饮品需卫生许可。",
+         replicability="高", repl_reason="操作标准化程度高，培训一周可上岗；差异化在茶底拼配与减糖技术。",
+         store_mode="现调茶饮档口店", source_type="演示"),
     dict(id="TH-03", region="泰国", name="烤鱿鱼丝/酸辣鱿鱼", name_local="ปลาหมึกย่าง",
-         category="海味熟食", heat=71,
+         category="现烤海味熟食", heat=71,
          heat_signals=["泰国夜市内容常年热门", "711 鱿鱼干月销稳定前三"],
          why_hot="夜市烟火气内容的核心道具；撕扯质感适合咀嚼类 ASMR。",
          viral_format="夜市现烤 + 蘸酱吃法；硬度挑战类内容。",
          indo_fit=69, fit_reasons="鱿鱼制品在印尼沿海市场基础好；蘸酱吃法与 sambal 体系兼容。",
-         adaptation="配 sambal roa 蘸酱包组合装；独立小包进便利渠道。",
-         compliance_note="水产干货需 BPOM 水产类注册；防腐剂使用受控。",
-         replicability="高", repl_reason="原料与工艺本地成熟，主要做包装与调味升级。",
-         source_type="演示"),
+         adaptation="单店/档口模型 = 现烤明档 + sambal roa 蘸酱台（夜市烟火气直接复刻）；独立小包可做外卖延伸。",
+         compliance_note="现烤水产需卫生许可 + 冷链记录；若兼售预包装干货需 BPOM 水产类注册。",
+         replicability="高", repl_reason="原料与烤工艺本地成熟，设备仅需烤炉+排烟；差异化在蘸酱体系与调味升级。",
+         store_mode="现烤熟食档（夜市模型）", source_type="演示"),
     # ── 马来西亚 ──────────────────────────────────────────
-    dict(id="MY-02", region="马来西亚", name="白咖啡三合一", name_local="White Coffee",
-         category="冲调饮品", heat=73,
+    dict(id="MY-02", region="马来西亚", name="南洋白咖啡（现调）", name_local="White Coffee",
+         category="现调咖啡", heat=73,
          heat_signals=["东马特产伴手礼长销", "TikTok 南洋咖啡文化内容回温"],
-         why_hot="'南洋慢生活'文化叙事；咖啡+炼乳的浓醇口感评测类内容稳定产出。",
-         viral_format="传统 kopitiam 探店 + 三合一盲测。",
-         indo_fit=70, fit_reasons="印尼本身是咖啡大国，kopi sachet 市场成熟；白咖啡差异化在口感顺滑。",
-         adaptation="与 toraja/aceh 豆拼配做'印尼白咖啡'；减糖版适配健康趋势。",
-         compliance_note="咖啡制品标签需标咖啡因含量；植脂末反式脂肪标注。",
-         replicability="中", repl_reason="市场已有大量即溶咖啡竞品，差异化空间在豆种故事。",
-         source_type="演示"),
+         why_hot="'南洋慢生活'文化叙事；现拉白咖啡+炼乳的浓醇口感，评测类内容稳定产出。",
+         viral_format="传统 kopitiam 探店 + 拉茶式拉咖啡过程；早餐搭挡测评。",
+         indo_fit=70, fit_reasons="印尼本身是咖啡大国，kopi 店密度极高；现调白咖啡差异化在口感顺滑与文化叙事。",
+         adaptation="与 toraja/aceh 豆拼配做'印尼白咖啡'；kopitiam 档口模型（咖啡+吐司+半熟蛋组合）。",
+         compliance_note="现制饮品需卫生许可；植脂末改用鲜奶/淡奶规避反式脂肪争议。",
+         replicability="中", repl_reason="操作流程标准化易培训；竞争点在豆种故事与 kopitiam 空间氛围。",
+         store_mode="现调咖啡 kopitiam 档口", source_type="演示"),
     # ── 中国 ──────────────────────────────────────────────
 ]
 
 
 def migrate_trend(conn: sqlite3.Connection) -> None:
     conn.executescript(TREND_DDL)
+    # 存量库补列（store_mode 加盟适配甄别）
+    cols = {r[1] for r in conn.execute("PRAGMA table_info(trend_snack)")}
+    if "store_mode" not in cols:
+        conn.execute("ALTER TABLE trend_snack ADD COLUMN store_mode TEXT")
 
 
 def seed_trend(conn: sqlite3.Connection, snacks: list[dict] | None = None) -> None:
     migrate_trend(conn)
     for s in snacks or SEED_SNACKS:
-        conn.execute("INSERT OR REPLACE INTO trend_snack VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        conn.execute("INSERT OR REPLACE INTO trend_snack VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                      (s["id"], s["region"], s["name"], s["name_local"], s["category"],
                       s["heat"], json.dumps(s["heat_signals"], ensure_ascii=False),
                       s["why_hot"], s["viral_format"], s["indo_fit"], s["fit_reasons"],
                       s["adaptation"], s["compliance_note"], s["replicability"],
-                      s["repl_reason"], s["source_type"]))
+                      s["repl_reason"], s["source_type"],
+                      s.get("store_mode", "现制专门店")))
 
 
 def _row_to_snack(r: sqlite3.Row) -> dict:
@@ -204,11 +214,12 @@ def build_trend(db_path: str | Path) -> dict:
         "priority_copies": [{"id": s["id"], "name": s["name"], "region": s["region"],
                              "indo_fit": s["indo_fit"], "replicability": s["replicability"],
                              "action": s["adaptation"]} for s in top],
+        "screening": "AI 收录硬门槛：适合加盟单店的现制店面食品（现烤/现调/现做）；工业级预包装零食不进入雷达。",
         "directions": [
-            "海味系优先：泰国海苔卷 + 马来咸蛋黄鱼皮原料成本在印尼有结构性优势，先做这两支跑通 warung 渠道。",
-            "调味嫁接公式：东亚爆款味型 × sambal/椰糖本地底味，是低成本差异化主线（韩甜辣、泰奶茶、台黑糖已验证）。",
-            "网红店角色定位：现制品（甜甜圈/水果三明治）只做门店引流与打卡素材，零售化只押常温长保款。",
-            "合规前置：Halal 认证与 BPOM 注册周期 3-6 个月，复制立项时同步启动，避免产品好了上不了架。",
+            "单店模型优先：每款信号都必须回答'这家店长什么样、多少平米、几个人'——档口 3-5㎡ 到专门店 30-60㎡ 均已标注门店形态。",
+            "现制是壁垒：现烤香气、明档表演（拉茶/切巴斯克/现炸药果）是包装零食无法复制的护城河，也是短视频天然素材。",
+            "调味嫁接公式：东亚爆款味型 × sambal/椰糖本地底味，是低成本差异化主线（韩甜、泰奶、南洋咖啡已验证）。",
+            "合规前置：现制门店需 PIRT/卫生许可 + Halal；兼售预包装伴手礼再叠加 BPOM，立项时同步启动。",
         ],
     }
     return {"generated_at": datetime.now().isoformat(timespec="seconds"),

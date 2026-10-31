@@ -122,7 +122,7 @@
        反向输出时尚网红店选品与改造方向。让顶级团队的策略不是凭感觉，是按数据排优先级。</p>
     <div class="en">Signal → Decode → Adapt → Launch / From viral heat to shelf-ready decision</div>
   </div>
-  <div class="demo-bar">⚠ DEMO 当前为演示种子数据（9 款 · 近 3 个月窗口）；信号字段与真实接入（X/TikTok 热点 API）对齐，替换 seed 即切换。</div>
+  <div class="demo-bar">🎯 AI 收录硬门槛：只收录<b>适合加盟单店的现制店面食品</b>（现烤 / 现调 / 现做）；工业级预包装零食不进入雷达。⚠ 当前为演示种子数据（9 款 · 近 3 个月窗口），字段与真实接入（X/TikTok 热点 API）对齐。</div>
   <div class="tabs" style="margin-bottom:20px;">
     <button class="on" id="vw-snack" onclick="switchView('snack')">🔥 爆款零食榜</button>
     <button id="vw-brand" onclick="switchView('brand')">🏷 热点品牌库</button>
@@ -186,6 +186,7 @@ function card(s, i) {
     <div class="meta">
       <span class="chip region">${esc(s.region)}</span>
       <span class="chip">${esc(s.category)}</span>
+      ${s.store_mode ? `<span class="chip" style="border-color:rgba(52,209,123,.45);color:#34d17b;">门店形态 · ${esc(s.store_mode)}</span>` : ''}
       <span class="chip ${REP_CLS[s.replicability]}">复制性 ${s.replicability}</span>
     </div>
     <div class="heat"><div class="bar"><i style="width:${s.heat}%"></i></div><span class="v">${Math.round(s.heat)}°</span></div>

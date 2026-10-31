@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T15:31:42",
+  "generated_at": "2026-10-31T18:37:04",
   "demo": true,
   "window": "近 3 个月",
   "factors": [
@@ -58,125 +58,125 @@
       "id": "KR-01",
       "name": "药果（蜂蜜油果子）",
       "region": "韩国",
-      "category": "传统油炸糕点",
+      "category": "现制传统糕点",
       "heat": 91.0,
       "scores": {
         "f1": 85.9,
-        "f2": 80,
-        "f3": 72,
+        "f2": 82,
+        "f3": 76,
         "f4": 99,
         "f5": 85,
-        "f6": 86,
-        "f7": 78
+        "f6": 78,
+        "f7": 76
       },
-      "total": 84.3,
+      "total": 84.1,
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "高",
       "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=药果（蜂蜜油果子）",
-        "three": "/three/?store=2000&zone=food&label=药果（蜂蜜油果子）"
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=药果（蜂蜜油果子）",
+        "three": "/three/?store=2000&zone=fresh&label=药果（蜂蜜油果子）"
       }
     },
     {
       "id": "JP-01",
       "name": "黄油树夹心饼干",
       "region": "日本",
-      "category": "烘焙饼干",
+      "category": "现烤烘焙",
       "heat": 94.0,
       "scores": {
         "f1": 94.6,
         "f2": 78,
-        "f3": 88,
+        "f3": 90,
         "f4": 86,
         "f5": 85,
-        "f6": 82,
+        "f6": 76,
         "f7": 72
       },
-      "total": 83.8,
+      "total": 83.5,
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "中",
       "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=黄油树夹心饼干",
-        "three": "/three/?store=2000&zone=food&label=黄油树夹心饼干"
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=黄油树夹心饼干",
+        "three": "/three/?store=2000&zone=fresh&label=黄油树夹心饼干"
+      }
+    },
+    {
+      "id": "TW-02",
+      "name": "现烤太阳饼/老婆饼",
+      "region": "台湾",
+      "category": "现烤糕饼",
+      "heat": 76.0,
+      "scores": {
+        "f1": 72.4,
+        "f2": 80,
+        "f3": 92,
+        "f4": 90,
+        "f5": 85,
+        "f6": 80,
+        "f7": 74
+      },
+      "total": 82.3,
+      "grade": "A",
+      "grade_action": "优先复制",
+      "replicability": "高",
+      "twin": {
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=现烤太阳饼/老婆饼",
+        "three": "/three/?store=2000&zone=fresh&label=现烤太阳饼/老婆饼"
       }
     },
     {
       "id": "TH-03",
       "name": "烤鱿鱼丝/酸辣鱿鱼",
       "region": "泰国",
-      "category": "海味熟食",
+      "category": "现烤海味熟食",
       "heat": 71.0,
       "scores": {
         "f1": 73.9,
         "f2": 83,
-        "f3": 78,
+        "f3": 80,
         "f4": 94,
-        "f5": 79,
-        "f6": 78,
+        "f5": 85,
+        "f6": 72,
         "f7": 80
       },
-      "total": 81.7,
+      "total": 82.0,
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "高",
       "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=烤鱿鱼丝/酸辣鱿鱼",
-        "three": "/three/?store=2000&zone=food&label=烤鱿鱼丝/酸辣鱿鱼"
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=烤鱿鱼丝/酸辣鱿鱼",
+        "three": "/three/?store=2000&zone=fresh&label=烤鱿鱼丝/酸辣鱿鱼"
       }
     },
     {
       "id": "TH-02",
-      "name": "泰式奶茶即饮/冲剂",
+      "name": "泰式手打奶茶",
       "region": "泰国",
-      "category": "冲调饮品",
+      "category": "现调茶饮",
       "heat": 85.0,
       "scores": {
         "f1": 80.5,
-        "f2": 76,
-        "f3": 80,
-        "f4": 88,
+        "f2": 80,
+        "f3": 95,
+        "f4": 86,
         "f5": 69,
-        "f6": 90,
-        "f7": 84
+        "f6": 55,
+        "f7": 75
       },
-      "total": 81.6,
+      "total": 79.2,
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "高",
       "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=泰式奶茶即饮/冲剂",
-        "three": "/three/?store=2000&zone=food&label=泰式奶茶即饮/冲剂"
-      }
-    },
-    {
-      "id": "MY-02",
-      "name": "白咖啡三合一",
-      "region": "马来西亚",
-      "category": "冲调饮品",
-      "heat": 73.0,
-      "scores": {
-        "f1": 69.7,
-        "f2": 68,
-        "f3": 72,
-        "f4": 80,
-        "f5": 85,
-        "f6": 82,
-        "f7": 84
-      },
-      "total": 76.8,
-      "grade": "A",
-      "grade_action": "优先复制",
-      "replicability": "中",
-      "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=白咖啡三合一",
-        "three": "/three/?store=2000&zone=food&label=白咖啡三合一"
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=泰式手打奶茶",
+        "three": "/three/?store=2000&zone=fresh&label=泰式手打奶茶"
       }
     },
     {
@@ -205,28 +205,53 @@
       }
     },
     {
-      "id": "TW-02",
-      "name": "太阳饼/老婆饼创新礼盒",
-      "region": "台湾",
-      "category": "传统糕点",
-      "heat": 76.0,
+      "id": "MY-02",
+      "name": "南洋白咖啡（现调）",
+      "region": "马来西亚",
+      "category": "现调咖啡",
+      "heat": 73.0,
       "scores": {
-        "f1": 72.4,
-        "f2": 73,
-        "f3": 84,
-        "f4": 73,
+        "f1": 69.7,
+        "f2": 66,
+        "f3": 74,
+        "f4": 80,
         "f5": 85,
-        "f6": 65,
-        "f7": 65
+        "f6": 62,
+        "f7": 78
       },
-      "total": 73.8,
+      "total": 73.9,
       "grade": "B",
       "grade_action": "改造后试销",
-      "replicability": "高",
+      "replicability": "中",
       "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=太阳饼/老婆饼创新礼盒",
-        "three": "/three/?store=2000&zone=food&label=太阳饼/老婆饼创新礼盒"
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=南洋白咖啡（现调）",
+        "three": "/three/?store=2000&zone=fresh&label=南洋白咖啡（现调）"
+      }
+    },
+    {
+      "id": "JP-02",
+      "name": "现烤巴斯克芝士蛋糕",
+      "region": "日本",
+      "category": "现烤甜品",
+      "heat": 88.0,
+      "scores": {
+        "f1": 83.2,
+        "f2": 64,
+        "f3": 92,
+        "f4": 68,
+        "f5": 85,
+        "f6": 58,
+        "f7": 60
+      },
+      "total": 72.8,
+      "grade": "B",
+      "grade_action": "改造后试销",
+      "replicability": "中",
+      "twin": {
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=现烤巴斯克芝士蛋糕",
+        "three": "/three/?store=2000&zone=fresh&label=现烤巴斯克芝士蛋糕"
       }
     },
     {
@@ -253,39 +278,14 @@
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈",
         "three": "/three/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈"
       }
-    },
-    {
-      "id": "JP-02",
-      "name": "冷冻巴斯克芝士蛋糕",
-      "region": "日本",
-      "category": "冷冻甜品",
-      "heat": 88.0,
-      "scores": {
-        "f1": 83.2,
-        "f2": 62,
-        "f3": 91,
-        "f4": 54,
-        "f5": 67,
-        "f6": 35,
-        "f7": 70
-      },
-      "total": 66.9,
-      "grade": "B",
-      "grade_action": "改造后试销",
-      "replicability": "中",
-      "twin": {
-        "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=冷冻巴斯克芝士蛋糕",
-        "three": "/three/?store=2000&zone=fresh&label=冷冻巴斯克芝士蛋糕"
-      }
     }
   ],
   "plan": {
     "concept": {
       "name": "药果（蜂蜜油果子）",
       "region": "韩国",
-      "category": "传统油炸糕点",
-      "total": 84.3,
+      "category": "现制传统糕点",
+      "total": 84.1,
       "grade": "A",
       "indo_fit": 70
     },
@@ -294,9 +294,9 @@
       "space_plan": "机制剧场全配置：挑战台+等级墙+打卡装置",
       "link": "/case/",
       "twin": {
-        "zone": "food",
-        "floorplan": "/floorplan/?store=2000&zone=food&label=药果（蜂蜜油果子）",
-        "three": "/three/?store=2000&zone=food&label=药果（蜂蜜油果子）"
+        "zone": "fresh",
+        "floorplan": "/floorplan/?store=2000&zone=fresh&label=药果（蜂蜜油果子）",
+        "three": "/three/?store=2000&zone=fresh&label=药果（蜂蜜油果子）"
       },
       "note": "集装箱整装四档体系直接复用；快闪模块可拆装巡回"
     },
@@ -332,15 +332,15 @@
       {
         "no": 5,
         "name": "活人感冷启动 + 大单品承接",
-        "action": "话题款负责拉新曝光；复购由大单品承接——减糖 30% 适配本地甜度；小袋 2 枚装进便利店收银台货架。。",
+        "action": "话题款负责拉新曝光；复购由大单品承接——单店模型 = 现炸明档 + 咖啡档口组合（韩国药果 café 模式）；减糖 30% 适配本地甜度；外带礼盒做伴手礼。。",
         "design": "内容模板 + 门店打卡模板",
-        "supply": "减糖 30% 适配本地甜度；小袋 2 枚装进便利店收银台货架。"
+        "supply": "单店模型 = 现炸明档 + 咖啡档口组合（韩国药果 café 模式）；减糖 30% 适配本地甜度；外带礼盒做伴手礼。"
       }
     ],
     "supply_chain": {
       "local_match": "蜂蜜油炸甜味与印尼 kue 传统高度兼容；常温长保适合 warung 渠道。",
-      "adaptation": "减糖 30% 适配本地甜度；小袋 2 枚装进便利店收银台货架。",
-      "compliance": "蜂蜜原料需 Halal 来源证明；油炸工艺标签需标反式脂肪酸。",
+      "adaptation": "单店模型 = 现炸明档 + 咖啡档口组合（韩国药果 café 模式）；减糖 30% 适配本地甜度；外带礼盒做伴手礼。",
+      "compliance": "现制需 PIRT/卫生许可；蜂蜜需 Halal 来源证明；油炸用油管理需留记录。",
       "compliance_lead": "BPOM + Halal 认证周期约 3-6 个月，与产品开发同步启动"
     },
     "deliverables": [
