@@ -64,6 +64,10 @@
   .kv b { color:#5b6779; min-width:86px; font-weight:600; font-size:11px; }
   .chk { font-size:12px; color:#aebacd; padding:7px 0 7px 24px; position:relative; line-height:1.6; }
   .chk::before { content:"✓"; position:absolute; left:4px; color:#34d17b; font-weight:800; }
+  /* 概念入库 */
+  .libbtn { margin-top:5px; background:none; border:1px solid #2a3546; color:#8b98a8; border-radius:6px;
+            font-size:10.5px; padding:2px 9px; cursor:pointer; font-family:inherit; white-space:nowrap; }
+  .libbtn:hover { border-color:#34d17b; color:#34d17b; }
 </style>
 </head>
 <body>
@@ -126,6 +130,11 @@
 <script>
 const FC = { f1:'#e4022b', f2:'#b04dff', f3:'#4da3ff', f4:'#34d17b', f5:'#e8b246', f6:'#ff9a3d', f7:'#ff5c7a' };
 const esc = s => (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* 概念入库（与 /library/ 中央库同键 nbo_lib_pick） */
+const addPick = item => { const key = 'nbo_lib_pick';
+  const lib = JSON.parse(localStorage.getItem(key) || '[]');
+  if (!lib.some(x => x.id === item.id)) { lib.push(item); localStorage.setItem(key, JSON.stringify(lib)); }
+  alert('已保存到选品库（共 ' + lib.length + ' 条）→ /library/ 查看'); };
 
 fetch('./data/launch.json').then(r => r.json()).then(d => {
   document.getElementById('factors').innerHTML = d.factors.map(f =>
@@ -141,6 +150,7 @@ fetch('./data/launch.json').then(r => r.json()).then(d => {
       <span>${c('f4')}</span><span class="hide-m">${c('f5')}</span><span class="hide-m">${c('f6')}</span>
       <span>${c('f7')}</span>
       <span><div class="total">${s.total}</div><span class="grade g-${s.grade}">${s.grade} · ${esc(s.grade_action)}</span>
+      <div style="margin-top:4px"><button class="libbtn" onclick='addPick(${JSON.stringify({id: s.id, name: s.name, region: s.region, category: s.category, heat: s.heat, total: s.total, grade: s.grade, replicability: s.replicability})})'>＋ 概念入库</button></div>
       ${s.grade === 'S' ? `<div style="margin-top:4px;white-space:nowrap"><a href="${s.twin.floorplan}" style="color:#999999;font-size:11px">2D 视角</a> · <a href="${s.twin.three}" style="color:#999999;font-size:11px">3D 漫游</a></div>` : ''}</span>
     </div>`; }).join('');
 
