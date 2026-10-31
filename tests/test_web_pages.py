@@ -23,7 +23,7 @@ def test_all_pages_share_full_nav():
 def test_nav_grouped_by_system():
     for p in NAV_PAGES:
         html = _read(p)
-        assert "A·品牌孵化引擎" in html and "B·集装箱零售" in html, f"{p} 导航缺体系分组标签"
+        assert "A·品牌孵化引擎" in html and "B·兄弟项目 · 集装箱" in html, f"{p} 导航缺体系分组标签"
 
 
 def test_nav_pages_have_data_p_highlight():
@@ -54,15 +54,15 @@ def test_home_links_brandkit_and_library():
 
 def test_home_dual_portal_separation():
     html = (WEB / "index.html").read_text(encoding="utf-8")
-    assert "品牌加盟孵化引擎" in html
-    assert "集装箱社区零售" in html
-    assert "独立产品线" in html
+    assert "品牌复刻引擎" in html
+    assert "兄弟项目 · 集装箱零售" in html
+    assert "聚焦主线" in html
 
 
 def test_retail_landing_page():
     html = _read("retail")
     for k in ["集装箱社区店", "投资模型", "样板店", "共建印尼社区零售网络",
-              "/assembly/data/assembly.json", "对外单页" if False else "B·集装箱零售"]:
+              "/assembly/data/assembly.json", "对外单页" if False else "B·兄弟项目 · 集装箱"]:
         assert k in html, f"retail 缺少 {k}"
 
 
