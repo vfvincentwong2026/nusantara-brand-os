@@ -46,5 +46,7 @@ site/
 .wrangler/
 .shots/
 nusantara-store-site-assets.zip
-web/case/assets/*.png
+container/case/assets/*.png
 web/map/data/case_store.json
+site/
+site-container/
