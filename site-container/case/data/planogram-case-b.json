@@ -1,0 +1,115 @@
+{
+  "store_id": "case-b",
+  "store_name": "Nusantara Community Store · 双20尺试点店",
+  "size_sqm": 27.7,
+  "footprint": {
+    "w": 5.9,
+    "h": 4.7
+  },
+  "entrance": {
+    "x": 2.95,
+    "y": 0.0,
+    "side": "south"
+  },
+  "aisle_width_m": 1.35,
+  "zones": {
+    "fresh": {
+      "x": 0.0,
+      "w": 1.06
+    },
+    "food": {
+      "x": 1.06,
+      "w": 3.89
+    },
+    "non-food": {
+      "x": 4.96,
+      "w": 0.94
+    }
+  },
+  "shelves": [
+    {
+      "id": "CASEB-BK-S01",
+      "zone": "food",
+      "x": 0.6,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.65
+    },
+    {
+      "id": "CASEB-BK-S02",
+      "zone": "food",
+      "x": 1.8,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.7000000000000001
+    },
+    {
+      "id": "CASEB-BK-S03",
+      "zone": "food",
+      "x": 3.0,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.75
+    },
+    {
+      "id": "CASEB-BK-S04",
+      "zone": "food",
+      "x": 4.2,
+      "y": 4.3,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 0,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.8
+    },
+    {
+      "id": "CASEB-IS-S01",
+      "zone": "food",
+      "x": 1.3,
+      "y": 2.1,
+      "w": 1.5,
+      "h": 0.85,
+      "rotation": 0,
+      "layer_count": 4,
+      "facing_width_m": 0.9,
+      "heat_value": 0.8
+    },
+    {
+      "id": "CASEB-IS-S02",
+      "zone": "food",
+      "x": 2.9,
+      "y": 2.1,
+      "w": 1.5,
+      "h": 0.85,
+      "rotation": 0,
+      "layer_count": 4,
+      "facing_width_m": 0.9,
+      "heat_value": 0.75
+    },
+    {
+      "id": "CASEB-EW-S01",
+      "zone": "fresh",
+      "x": 5.5,
+      "y": 1.6,
+      "w": 1.2,
+      "h": 0.4,
+      "rotation": 90,
+      "layer_count": 5,
+      "facing_width_m": 0.4,
+      "heat_value": 0.7
+    }
+  ]
+}

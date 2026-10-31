@@ -1,38 +1,60 @@
-"""Web 页面完整性测试：导航一致性、关键模块存在性、入库键约定。"""
+"""Web 页面完整性测试：导航一致性、关键模块存在性、入库键约定。
+2026-11 拆分：主站(web/)与集装箱兄弟项目站(container/)各自独立导航。"""
 from pathlib import Path
 
-WEB = Path(__file__).resolve().parent.parent / "web"
+ROOT = Path(__file__).resolve().parent.parent
+WEB = ROOT / "web"
+CT = ROOT / "container"
 
-NAV_PAGES = ["case", "dashboard", "floorplan", "franchise", "launch",
-             "library", "map", "three", "trend", "store-dash", "brandkit",
-             "assembly", "playbook", "retail", "tower"]
+NAV_PAGES = ["franchise", "launch", "library", "map", "trend",
+             "brandkit", "assembly", "playbook", "tower"]
+CT_PAGES = ["case", "dashboard", "retail", "three", "floorplan", "store-dash"]
+
+MAIN_NAV_ANCHORS = ["热点雷达", "选品评分", "中央库", "品牌设计", "开店方案", "培训体系"]
+CT_URL = "https://nusantara-container.pages.dev/"
+MAIN_URL = "https://nusantara-brand-os.pages.dev/"
 
 
-def _read(page: str) -> str:
-    return (WEB / page / "index.html").read_text(encoding="utf-8")
+def _read(root: Path, page: str) -> str:
+    return (root / page / "index.html").read_text(encoding="utf-8")
 
 
-def test_all_pages_share_full_nav():
+def test_main_pages_share_full_nav():
     for p in NAV_PAGES:
-        html = _read(p)
-        for anchor in ["热点雷达", "选品评分", "中央库", "品牌设计", "开店方案", "培训体系"]:
+        html = _read(WEB, p)
+        for anchor in MAIN_NAV_ANCHORS:
             assert anchor in html, f"{p} 导航缺少 {anchor}"
         assert 'href="/ui/tokens.css"' in html, f"{p} 缺少 tokens.css"
+        assert CT_URL in html, f"{p} 缺少集装箱兄弟项目外链"
+        assert 'class="nl bline"' not in html, f"{p} 仍残留旧 bline 分组导航"
 
 
-def test_nav_grouped_by_system():
+def test_main_nav_pages_have_data_p_highlight():
     for p in NAV_PAGES:
-        html = _read(p)
-        assert "A·品牌孵化引擎" in html and "B·兄弟项目 · 集装箱" in html, f"{p} 导航缺体系分组标签"
+        assert f'data-p="{p}"' in _read(WEB, p), f"{p} 缺少自身 data-p 高亮"
 
 
-def test_nav_pages_have_data_p_highlight():
-    for p in NAV_PAGES:
-        assert f'data-p="{p}"' in _read(p), f"{p} 缺少自身 data-p 高亮"
+def test_container_pages_share_container_nav():
+    for p in CT_PAGES:
+        html = _read(CT, p)
+        for anchor in ["集装箱店案例", "3D 门店", "平面布局", "库存大屏"]:
+            assert anchor in html, f"container/{p} 导航缺少 {anchor}"
+        assert MAIN_URL in html, f"container/{p} 缺少主站回链"
+        assert 'href="/ui/tokens.css"' in html, f"container/{p} 缺少 tokens.css"
+
+
+def test_container_nav_pages_have_data_p_highlight():
+    for p in CT_PAGES:
+        assert f'data-p="{p}"' in _read(CT, p), f"container/{p} 缺少自身 data-p 高亮"
+
+
+def test_container_landing_exists():
+    html = (CT / "index.html").read_text(encoding="utf-8")
+    assert "NUSANTARA CONTAINER" in html and MAIN_URL in html
 
 
 def test_brandkit_generator_core():
-    html = _read("brandkit")
+    html = _read(WEB, "brandkit")
     for key in ["function hash", "function rng", "function hslHex",
                 "function generate", "symbolSVG", "nbo_lib_asset",
                 "包装三层", "树导硬标准", "保存到中央库"]:
@@ -42,7 +64,7 @@ def test_brandkit_generator_core():
 
 
 def test_library_asset_tab_wires_brandkit():
-    html = _read("library")
+    html = _read(WEB, "library")
     assert "KIT-" in html and "/brandkit/" in html
     assert "'nbo_lib_'" in html
 
@@ -57,15 +79,16 @@ def test_home_dual_portal_separation():
     assert "品牌复刻引擎" in html
     assert "兄弟项目 · 集装箱零售" in html
     assert "聚焦主线" in html
+    assert CT_URL in html, "首页缺少集装箱独立站外链"
 
 
 def test_retail_landing_page():
-    html = _read("retail")
+    html = _read(CT, "retail")
     for k in ["集装箱社区店", "投资模型", "样板店", "共建印尼社区零售网络",
-              "/assembly/data/assembly.json", "对外单页" if False else "B·兄弟项目 · 集装箱"]:
+              "./data/assembly.json", "NUSANTARA CONTAINER"]:
         assert k in html, f"retail 缺少 {k}"
 
 
 def test_case_has_no_influencer_chain():
-    html = _read("case")
+    html = _read(CT, "case")
     assert 'class="chain"' not in html

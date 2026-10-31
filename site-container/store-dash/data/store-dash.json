@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-11-01T03:19:58",
+  "demo": true,
+  "store": {
+    "name": "Nusantara Community Store · 双40尺样板店",
+    "concept": "56㎡ 案例集装箱店 · 小店模式演示"
+  },
+  "business_date": "2026-10-19",
+  "is_today": false,
+  "kpi": {
+    "today_revenue": 219000,
+    "today_orders": 2,
+    "alert_count": 2,
+    "reorder_lines": 0,
+    "skus_on_shelf": 5
+  },
+  "top5": [
+    {
+      "name": "干脆面 40g",
+      "avg_daily": 41.8,
+      "stock": 180
+    },
+    {
+      "name": "辣味薯片 65g",
+      "avg_daily": 28.2,
+      "stock": 620
+    },
+    {
+      "name": "虾条 60g",
+      "avg_daily": 18.8,
+      "stock": 380
+    },
+    {
+      "name": "豆干 50g",
+      "avg_daily": 8.4,
+      "stock": 650
+    },
+    {
+      "name": "本店试制酱料",
+      "avg_daily": 0.0,
+      "stock": 0
+    }
+  ],
+  "alerts": [
+    {
+      "name": "本店试制酱料",
+      "level": "bad",
+      "action": "合规 blocked，立即下架"
+    },
+    {
+      "name": "干脆面 40g",
+      "level": "warn",
+      "action": "仅剩 4.3 天库存，列入下次订货"
+    }
+  ],
+  "reorder": [],
+  "links": {
+    "full_dashboard": "/dashboard/?store=case",
+    "franchise": "/franchise/"
+  }
+}

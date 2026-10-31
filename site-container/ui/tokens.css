@@ -1,0 +1,236 @@
+/* Nusantara · Pinterest 极简设计系统（2026-11 改版）
+   原则：白底 + 近黑文字 #111 + 中性灰 #767676 + 单一强调红 #e60023；
+   卡片白底细边框 16px 圆角；中英双语并存；弃用暗色与多彩。 */
+:root {
+  /* 色彩（Pinterest palette） */
+  --surface-base: #ffffff;
+  --surface-card: #ffffff;
+  --surface-overlay: rgba(255, 255, 255, .92);
+  --border-subtle: #e5e5e5;
+  --border-strong: #cccccc;
+  --text-primary: #111111;
+  --text-secondary: #767676;
+  --text-disabled: #c4c4c4;
+  --accent: #e60023;
+  --accent-soft: rgba(230, 0, 35, .08);
+  --gold: #e60023;
+  --status-success: #2e7d32;
+  --status-warning: #b26a00;
+  --status-error: #e60023;
+  --status-info: #767676;
+
+  /* Editorial 变量（页面级引用） */
+  --ink: #ffffff;
+  --paper: #111111;
+  --dim-warm: #767676;
+  --faint-warm: #a8a8a8;
+  --hairline: #e5e5e5;
+  --hairline-strong: #cccccc;
+  --accent-b: #767676;
+  --hl: #111111;
+  --gold-a: #e60023;
+  --card: #ffffff;
+  --font-display: "Inter", -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "IBM Plex Mono", "SF Mono", Consolas, monospace;
+
+  /* 间距（base-8） */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-6: 24px; --space-8: 32px; --space-12: 48px; --space-16: 64px; --space-24: 96px;
+
+  /* 圆角（Pinterest pin 16px） */
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px; --radius-full: 9999px;
+
+  /* 动效 */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-in: cubic-bezier(.7, 0, .84, 0);
+  --dur-micro: 160ms;
+  --dur-modal: 340ms;
+
+  /* 容器 */
+  --container: 1180px;
+  --container-wide: 1440px;
+
+  /* 阴影（浅色场景极淡） */
+  --elevation-low: 0 2px 8px -2px rgba(0, 0, 0, .08);
+  --elevation-med: 0 8px 24px -4px rgba(0, 0, 0, .12);
+}
+
+/* ── 可访问性：焦点环（全站交互元素生效） ── */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── 全局微动效：交互元素统一曲线 ── */
+a, button, select, .chip, .tier, .gap, [role="button"] {
+  transition: border-color var(--dur-micro) var(--ease-out),
+              background-color var(--dur-micro) var(--ease-out),
+              color var(--dur-micro) var(--ease-out),
+              transform var(--dur-micro) var(--ease-out),
+              box-shadow var(--dur-micro) var(--ease-out);
+}
+button:active, .btn:active {
+  transform: translateY(0) scale(.98);
+}
+
+/* ── 悬浮上浮（营销页卡片） ── */
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--elevation-med);
+}
+
+/* ── 聚光灯卡（配合 --mouse-x/--mouse-y） ── */
+.spot { position: relative; }
+.spot::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+              rgba(230, 0, 35, .04), transparent 40%);
+  opacity: 0;
+  transition: opacity var(--dur-micro) var(--ease-out);
+  pointer-events: none;
+}
+.spot:hover::after { opacity: 1; }
+
+/* ── 选择高亮 / 滚动条 ── */
+::selection { background: rgba(230, 0, 35, .16); }
+* { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+
+/* ═══ 导航条（双站统一，Pinterest 白底红标） ═══ */
+.nbo-nav {
+  position: fixed; top: 0; left: 0; right: 0; min-height: 38px; z-index: 10000;
+  display: flex; align-items: center; padding: 0 var(--space-4);
+  background: var(--surface-overlay); backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-subtle);
+  font: 12.5px -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+.nbo-nav a.nl {
+  color: var(--text-secondary); text-decoration: none;
+  padding: 6px var(--space-3); border-radius: var(--radius-full);
+  min-height: 30px; display: inline-flex; align-items: center;
+  flex: 0 0 auto; white-space: nowrap;
+}
+.nbo-nav a.nl:hover { color: var(--text-primary); background: #f2f2f2; }
+.nbo-nav a.nl.on { color: var(--accent); background: var(--accent-soft); font-weight: 600; }
+.nbo-nav a.nl .nle {
+  font-style: normal; font-size: 9px; letter-spacing: .1em;
+  color: var(--faint-warm); margin-left: 5px; text-transform: uppercase;
+}
+.nbo-nav a.nl.on .nle { color: var(--accent); opacity: .75; }
+.nbo-nav .sep { color: var(--border-strong); margin: 0 2px; user-select: none; }
+
+@media (max-width: 640px) {
+  .nbo-nav { overflow-x: auto; }
+  .nbo-nav a.nl { padding: 6px var(--space-2); }
+}
+
+/* 链路条（chain）项不收缩不换行，超出横向滚动——防移动端竖排文字 */
+.chain { flex-wrap: nowrap !important; }
+.chain span, .chain a { flex: 0 0 auto; white-space: nowrap; }
+@media (max-width: 640px) {
+  .chain { font-size: 11px !important; }
+  .chain > span:first-child { display: none; }
+}
+
+/* ═══ Editorial 排版层 ═══ */
+.ed-wrap { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+.ed-kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.28em;
+             text-transform: uppercase; color: var(--text-primary); }
+.ed-kicker.b { color: var(--accent-b); }
+.ed-display { font-family: var(--font-display); font-weight: 600; letter-spacing: -0.015em;
+              line-height: 1.06; }
+.ed-lead { color: var(--dim-warm); font-size: 16px; line-height: 1.9; }
+.ed-hr { border: 0; border-top: 1px solid var(--hairline); }
+.ed-sec { display: flex; align-items: baseline; gap: 18px; margin: 0 0 34px; }
+.ed-sec .no { font-family: var(--font-mono); font-size: 12px; color: var(--faint-warm); letter-spacing: 0.1em; }
+.ed-sec h2 { font-family: var(--font-display); font-size: clamp(24px, 3vw, 34px); font-weight: 600; letter-spacing: -0.01em; }
+.ed-sec .note { margin-left: auto; font-family: var(--font-mono); font-size: 11px; color: var(--faint-warm); }
+/* 文字链按钮 */
+.ed-link { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.08em; text-decoration: none;
+           color: var(--paper); border-bottom: 1px solid var(--hairline-strong); padding-bottom: 3px;
+           transition: border-color 0.15s, color 0.15s; }
+.ed-link:hover { border-color: var(--accent); color: #000; }
+.ed-link .ar { color: var(--accent); }
+.ed-link.b:hover { border-color: var(--accent-b); }
+.ed-link.b .ar { color: var(--accent-b); }
+/* 巨型数字 */
+.ed-stat .v { font-family: var(--font-display); font-size: clamp(34px, 4vw, 56px); font-weight: 600; letter-spacing: -0.02em; }
+.ed-stat .k { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; color: var(--dim-warm);
+              text-transform: uppercase; margin-top: 8px; line-height: 1.7; }
+/* 规则列表行 */
+.ed-row { display: block; text-decoration: none; color: inherit; border-top: 1px solid var(--hairline);
+          padding: 22px 0; transition: padding-left 0.18s; }
+.ed-row:hover { padding-left: 10px; }
+.ed-row .rn { font-family: var(--font-mono); font-size: 11px; color: var(--faint-warm); letter-spacing: 0.1em; }
+.ed-row h3 { font-family: var(--font-display); font-size: 21px; font-weight: 600; margin: 6px 0; }
+.ed-row p { color: var(--dim-warm); font-size: 13.5px; line-height: 1.8; max-width: 640px; }
+.ed-row .go { font-family: var(--font-mono); font-size: 11.5px; color: var(--accent); letter-spacing: 0.08em; margin-top: 10px; display: inline-block; }
+.ed-row.b .go { color: var(--accent-b); }
+
+/* ═══ Editorial 全局覆盖：白底黑字一刀切 ═══ */
+body { background: #ffffff !important; color: #111111 !important;
+       font-family: var(--font-body) !important; font-weight: 400; }
+h1, h2, h3 { font-family: var(--font-display) !important; font-weight: 500 !important;
+             letter-spacing: -0.01em; }
+code, pre, kbd, samp { font-family: var(--font-mono) !important; }
+/* 阴影归零，保留线框 */
+*, *::before, *::after { box-shadow: none !important; }
+.lift:hover { transform: none !important; }
+.card:hover, .fmt:hover, .panel:hover { transform: none !important;
+  border-color: #cccccc !important; }
+/* 面板 → 白底细边框 Pinterest pin 卡（覆盖各页硬编码色） */
+.panel, .card, .plan, .tier, .rules, .layout, .tier-detail, .mini-btn,
+.tabs button, .step, .zone, .rules-card, .stat-card, .brand-card, .kv,
+.opt, .item-card, .store-card, .crawl-card, .hot-card, .hero-card,
+.step-card, .faq-card, .mode-card, .fmt-card, .fmt, .chip {
+  background: #ffffff !important;
+  border-color: #e5e5e5 !important;
+  border-radius: 16px !important;
+}
+/* 次级文字 → 中性灰 */
+small, .dim, .muted, .sub, .desc, .d, .note, .hint, .muted-warm {
+  color: #767676 !important;
+}
+
+/* ── 品牌墙无限滚动 marquee ── */
+.marquee { overflow:hidden; border-top:1px solid var(--hairline); border-bottom:1px solid var(--hairline);
+           padding:26px 0; -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+           mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent); }
+.m-track { display:flex; gap:44px; width:max-content; animation:m-scroll 36s linear infinite; }
+.m-track img { height:52px; width:auto; filter:grayscale(1); transition:filter .2s; }
+.m-track img:hover { filter:grayscale(0); }
+@keyframes m-scroll { to { transform:translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .m-track { animation:none; } }
+
+/* ═══ 交互层：红强调 / 媒体悬停微缩放 / 滚动渐显 ═══ */
+::selection { background: rgba(230,0,35,.16) !important; color: #111 !important; }
+.ed-kicker::before { content: "● "; font-size: 8px; vertical-align: 2px; color: var(--accent); }
+.ed-link:hover { border-color: #111 !important; color: #000; }
+.ed-link:hover .ar { color: var(--accent) !important; }
+.ed-cta { display: inline-block; background: #e60023; color: #ffffff !important;
+          font-family: var(--font-mono); font-size: 12.5px; letter-spacing: .08em;
+          text-decoration: none; padding: 13px 24px; border-radius: 9999px;
+          transition: filter .15s, background-color .15s; }
+.ed-cta:hover { filter: brightness(1.08); }
+.hero-fig img, .p-fig img { transition: transform .6s cubic-bezier(.16,1,.3,1), filter .2s; }
+.hero-fig:hover img, .p-fig:hover img { transform: scale(1.03); }
+/* 滚动渐显：Fade-in + Slide-up ≤24px */
+.rv { opacity: 0; transform: translateY(24px);
+      transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1); }
+.rv.rv-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; transition: none; }
+  .m-track { animation: none; }
+}
+/* 磁吸光标（仅精确指针设备启用，页面加 .cursor-on） */
+.cursor-dot, .cursor-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99999;
+  border-radius: 50%; display: none; }
+.cursor-on, .cursor-on a, .cursor-on button { cursor: none; }
+.cursor-on input, .cursor-on textarea, .cursor-on select { cursor: auto; }
+.cursor-on .cursor-dot { display: block; width: 6px; height: 6px; background: #e60023; }
+.cursor-on .cursor-ring { display: block; width: 34px; height: 34px; border: 1.5px solid rgba(17,17,17,.35);
+  transition: width .18s, height .18s, border-color .18s; }
+.cursor-on .cursor-ring.big { width: 56px; height: 56px; border-color: #e60023; }
