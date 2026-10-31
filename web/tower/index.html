@@ -68,6 +68,17 @@
   .lv-p1 { background:rgba(255,92,122,.15); color:#ff5c7a; }
   .lv-p2 { background:rgba(255,154,61,.15); color:#ff9a3d; }
   .note { color:#5b6779; font-size:11px; line-height:1.7; margin-top:8px; }
+  /* 打爆招商漏斗 */
+  .frow { display:grid; grid-template-columns:150px 1fr 90px 70px; gap:10px; align-items:center;
+          padding:9px 8px; border-bottom:1px solid #1a222d; font-size:12px; }
+  .frow.headrow { color:#5b6779; font-size:10px; letter-spacing:.05em; }
+  .frow .fs { font-weight:700; font-size:12.5px; }
+  .frow .fs small { display:block; color:#5b6779; font-weight:400; font-size:10px; margin-top:2px; letter-spacing:.06em; }
+  .frow .fbar { height:6px; background:#1c2430; border-radius:3px; overflow:hidden; }
+  .frow .fbar i { display:block; height:100%; border-radius:3px; }
+  .frow .fv { font-family:'IBM Plex Mono',Consolas,monospace; color:#e8eef5; }
+  .frow .fp { font-family:'IBM Plex Mono',Consolas,monospace; text-align:right; font-weight:700; }
+  @media (max-width:700px) { .frow { grid-template-columns:110px 1fr 70px; } .frow .fp { display:none; } }
   /* 行内处置按钮 */
   .qbtn { background:none; border:1px solid #2a3546; color:#8b98a8; border-radius:6px; font-size:10px;
           padding:2px 8px; margin-left:4px; cursor:pointer; font-family:inherit; letter-spacing:.04em; }
@@ -185,6 +196,12 @@
   </div>
 
   <div class="panel">
+  <div class="panel" style="border-color:rgba(232,178,70,.45);">
+    <h2>打爆引流 → 招商转化 · 本月进度<span style="font-weight:400;font-size:11px;letter-spacing:.05em;">（演示口径，接真实投放/直播/招商数据后自动刷新）</span></h2>
+    <div id="funnel"></div>
+  </div>
+
+  <div class="panel">
     <h2>总览指标 · 孵化引擎一眼读数</h2>
     <div class="stats">
       <div class="stat"><div class="v" id="s-sig">—</div><div class="k">全网信号入池（近 3 个月窗口）</div></div>
@@ -222,6 +239,22 @@
   <span id="gen">数据载入中…</span>
 </footer>
 <script>
+/* 打爆引流 → 招商转化 · 本月进度（演示口径） */
+const FUNNEL_MONTH = [
+  { stage:'STAGE 1 · 社媒打爆', en:'SOCIAL BLAZE', color:'#e4022b', cur:'730 万', tgt:'1,000 万曝光', pct:73 },
+  { stage:'STAGE 2 · 直播电商', en:'LIVE COMMERCE', color:'#b04dff', cur:'Rp 96 jt', tgt:'月 GMV Rp 150 jt', pct:64 },
+  { stage:'到店核销引流', en:'STORE VISITS', color:'#4da3ff', cur:'612 人次', tgt:'800+ 人次', pct:77 },
+  { stage:'STAGE 3 · 招商线索', en:'LEADS', color:'#e8b246', cur:'32 条', tgt:'50 条', pct:64 },
+  { stage:'参访转化', en:'VISITS → DEALS', color:'#34d17b', cur:'1 家签约', tgt:'2–3 家签约', pct:40 },
+];
+document.getElementById('funnel').innerHTML =
+  `<div class="frow headrow"><span>阶段</span><span>进度</span><span>当前 / 目标</span><span style="text-align:right">达成</span></div>` +
+  FUNNEL_MONTH.map(f => `<div class="frow">
+    <span class="fs">${f.stage}<small>${f.en}</small></span>
+    <span class="fbar"><i style="width:${f.pct}%;background:${f.color}"></i></span>
+    <span class="fv">${f.cur}</span><span class="fp" style="color:${f.color}">${f.pct}%</span>
+  </div>`).join('') +
+  `<div class="note" style="margin-top:10px;">打爆预算消耗 Rp 62 jt / Rp 100 jt（62%）· 曝光→线索转化 0.44% · 线索→签约转化 3.1% —— 口径与加盟页漏斗一致，真实接入后按日刷新。</div>`;
 (async () => {
   const J = async u => { const r = await fetch(u); if(!r.ok) throw new Error(u); return r.json(); };
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
