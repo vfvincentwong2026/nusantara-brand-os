@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/ui/tokens.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>孵化控制塔 · 五幕流水线一屏尽览 | Nusantara Brand OS</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  .wrap { max-width:1280px; margin:0 auto; padding:86px 24px 80px; }
+  .head { margin-bottom:22px; }
+  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(232,178,70,.5); border-radius:999px;
+               color:#e8b246; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+  .head h1 { font-size:34px; font-weight:800; line-height:1.2; }
+  .head h1 em { color:#888; font-style:normal; }
+  .head p { margin-top:10px; color:#8b98a8; font-size:13px; max-width:820px; line-height:1.8; }
+  .panel { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; margin-bottom:20px; }
+  .panel h2 { font-size:14px; letter-spacing:.08em; color:#8b98a8; margin-bottom:14px; font-weight:600; }
+  /* 五幕管线 */
+  .acts { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; }
+  .act { position:relative; background:#151c26; border:1px solid #1f2733; border-radius:12px; padding:16px 14px 14px; text-decoration:none; color:inherit; transition:border-color .2s, transform .2s; }
+  .act:hover { border-color:rgba(232,178,70,.5); transform:translateY(-2px); }
+  .act .an { font-family:'IBM Plex Mono',Consolas,monospace; font-size:10px; letter-spacing:.14em; color:#5b6779; }
+  .act .an b { color:#e8b246; }
+  .act .at { font-weight:800; font-size:16px; margin:6px 0 2px; }
+  .act .as { font-size:10.5px; color:#5b6779; letter-spacing:.06em; }
+  .act .kpis { margin-top:12px; display:grid; gap:6px; }
+  .act .kpi { display:flex; justify-content:space-between; font-size:11px; border-top:1px dashed #232c3a; padding-top:6px; }
+  .act .kpi b { color:#aebacd; font-weight:600; }
+  .act .kpi span { font-family:'IBM Plex Mono',Consolas,monospace; color:#e8eef5; }
+  .act .go { margin-top:10px; font-size:10.5px; color:#e8b246; letter-spacing:.08em; }
+  @media (max-width:1000px) { .acts { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px) { .acts { grid-template-columns:1fr; } }
+  /* 流转队列 */
+  .qrow { display:grid; grid-template-columns:56px 1.4fr 110px 130px 1fr 90px; gap:10px; align-items:center;
+          padding:10px 8px; border-bottom:1px solid #1a222d; font-size:12px; }
+  .qrow.headrow { color:#5b6779; font-size:10px; letter-spacing:.05em; }
+  .qrow .id { font-family:'IBM Plex Mono',Consolas,monospace; color:#5b6779; font-size:11px; }
+  .qrow .nm { font-weight:700; font-size:13px; }
+  .qrow .nm small { display:block; color:#5b6779; font-weight:400; font-size:10.5px; margin-top:2px; }
+  .qrow .heat { font-family:'IBM Plex Mono',Consolas,monospace; color:#ff9a3d; font-weight:700; }
+  .qrow .total { font-family:'IBM Plex Mono',Consolas,monospace; font-weight:800; }
+  .grade { display:inline-block; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:700; }
+  .g-S { background:rgba(52,209,123,.15); color:#34d17b; }
+  .g-A { background:rgba(232,178,70,.15); color:#e8b246; }
+  .g-B { background:rgba(255,154,61,.15); color:#ff9a3d; }
+  .g-C { background:rgba(255,92,122,.15); color:#ff5c7a; }
+  .qrow .nx { color:#aebacd; font-size:11px; line-height:1.5; }
+  .qrow .st { font-size:10.5px; font-weight:700; letter-spacing:.05em; }
+  .st.s-live { color:#34d17b; } .st-skip { color:#5b6779; }
+  @media (max-width:900px) { .qrow { grid-template-columns:44px 1.2fr 90px 80px; }
+    .qrow .hide-m { display:none; } }
+  /* KPI 总览带 */
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; }
+  .stat { background:#151c26; border:1px solid #1f2733; border-radius:12px; padding:16px; }
+  .stat .v { font-size:30px; font-weight:800; font-family:'IBM Plex Mono',Consolas,monospace; }
+  .stat .v small { font-size:14px; color:#8b98a8; font-weight:600; }
+  .stat .k { color:#5b6779; font-size:11px; margin-top:4px; letter-spacing:.05em; }
+  .todo { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media (max-width:800px) { .todo { grid-template-columns:1fr; } }
+  .todo .it { background:#151c26; border:1px solid #1f2733; border-radius:10px; padding:12px 14px; font-size:12px; color:#aebacd; line-height:1.7; }
+  .todo .it b { color:#e8eef5; display:block; font-size:12.5px; margin-bottom:2px; }
+  .todo .it .lv { display:inline-block; margin-right:8px; padding:1px 7px; border-radius:5px; font-size:10px; font-weight:700; }
+  .lv-p1 { background:rgba(255,92,122,.15); color:#ff5c7a; }
+  .lv-p2 { background:rgba(255,154,61,.15); color:#ff9a3d; }
+  .note { color:#5b6779; font-size:11px; line-height:1.7; margin-top:8px; }
+</style>
+</head>
+<body>
+<nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid #1a222d;background:#0d1117;flex-wrap:nowrap;overflow-x:auto;font-size:13px;">
+  <a href="/" style="color:#ededed;font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 8px;white-space:nowrap;flex:0 0 auto;">A·品牌孵化引擎</span>
+  <a class="nl" data-p="trend" href="/trend/">热点雷达</a>
+  <a class="nl" data-p="launch" href="/launch/">选品评分</a>
+  <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计</a>
+  <a class="nl" data-p="assembly" href="/assembly/">开店方案</a>
+  <a class="nl" data-p="store-dash" href="/store-dash/">门店大屏</a>
+  <a class="nl" data-p="franchise" href="/franchise/">加盟体系</a>
+  <a class="nl" data-p="tower" href="/tower/">控制塔</a>
+  <span style="color:#999999;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">B·集装箱零售</span>
+  <a class="nl bline" data-p="case" href="/case/">集装箱店</a>
+  <a class="nl bline" data-p="dashboard" href="/dashboard/">库存大屏</a>
+  <a class="nl bline" data-p="map" href="/map/">渠道地图</a>
+  <a class="nl bline" data-p="floorplan" href="/floorplan/">平面布局</a>
+  <a class="nl bline" data-p="three" href="/three/">3D 门店</a>
+  <span style="color:#3a4556;font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">底座</span>
+  <a class="nl" data-p="playbook" href="/playbook/">培训体系</a>
+  <a class="nl" data-p="library" href="/library/">中央库</a>
+</nav>
+<div class="chain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #141a23;background:rgba(11,14,19,.92);backdrop-filter:blur(6px);">
+  <span style="letter-spacing:.1em;">孵化流水线</span>
+  <a href="/trend/" data-s="/trend/" style="color:#8b98a8;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
+  <a href="/launch/" data-s="/launch/" style="color:#8b98a8;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
+  <a href="/brandkit/" data-s="/brandkit/" style="color:#8b98a8;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
+  <a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
+  <a href="/store-dash/" data-s="/store-dash/" style="color:#8b98a8;text-decoration:none;">⑤ 验证 · 门店大屏</a><span>→</span>
+  <a href="/franchise/" data-s="/franchise/" style="color:#8b98a8;text-decoration:none;">⑥ 复制 · 加盟体系</a>
+</div>
+<div class="wrap">
+  <div class="head">
+    <div class="tag">TOWER 控制塔 · AI PROJECT BRAIN · 五幕总览</div>
+    <h1>孵化控制塔：<em>五幕流水线</em>一屏尽览</h1>
+    <p class="actq" style="margin:10px 0 0;color:#666;font-size:12.5px;letter-spacing:.02em;">这一幕回答：整个孵化项目跑到哪了——信号、决策、造物、验证、复制的实时状态与流转队列。</p>
+    <p>控制塔是品牌孵化引擎的 AI 项目大脑门面：它不做新分析，而是把五幕的产出实时汇聚成
+       一张管线图——每幕的关键指标、跨幕流转队列（信号 → 定级 → 方案）、以及下一步待办。
+       给合作方与客户看的不是 PPT，而是正在运转的流水线。</p>
+  </div>
+
+  <div class="panel">
+    <h2>五幕管线 · 各幕实时状态（点击任一幕进入该站）</h2>
+    <div class="acts">
+      <a class="act" href="/trend/">
+        <div class="an">ACT 01 · <b>SIGNAL</b></div>
+        <div class="at">发现</div>
+        <div class="as">TREND SCOUT · 热点雷达</div>
+        <div class="kpis">
+          <div class="kpi"><b>信号池</b><span id="a1-n">—</span></div>
+          <div class="kpi"><b>覆盖区域</b><span id="a1-r">—</span></div>
+          <div class="kpi"><b>信号 TOP1</b><span id="a1-top" style="font-size:10.5px;">—</span></div>
+        </div>
+        <div class="go">进入热点雷达 →</div>
+      </a>
+      <a class="act" href="/launch/">
+        <div class="an">ACT 02 · <b>DECIDE</b></div>
+        <div class="at">决策</div>
+        <div class="as">LAUNCH SCORER · 选品评分</div>
+        <div class="kpis">
+          <div class="kpi"><b>已评概念</b><span id="a2-n">—</span></div>
+          <div class="kpi"><b>S / A 级</b><span id="a2-sa">—</span></div>
+          <div class="kpi"><b>最高分</b><span id="a2-top">—</span></div>
+        </div>
+        <div class="go">进入选品评分 →</div>
+      </a>
+      <a class="act" href="/brandkit/">
+        <div class="an">ACT 03 · <b>CREATE</b></div>
+        <div class="at">造物</div>
+        <div class="as">BRAND KIT · 品牌体系生成器</div>
+        <div class="kpis">
+          <div class="kpi"><b>设计系统</b><span>机制型 · 就绪</span></div>
+          <div class="kpi"><b>品牌案例</b><span>6 体系</span></div>
+          <div class="kpi"><b>硬标准</b><span style="font-size:10.5px;">先被看见→理解→记住</span></div>
+        </div>
+        <div class="go">进入品牌设计 →</div>
+      </a>
+      <a class="act" href="/assembly/">
+        <div class="an">ACT 04 · <b>PILOT</b></div>
+        <div class="at">验证</div>
+        <div class="as">ASSEMBLY · 开店方案 + 门店大屏</div>
+        <div class="kpis">
+          <div class="kpi"><b>装配方案</b><span>4 选型</span></div>
+          <div class="kpi"><b>落地成本带</b><span>¥3–10 万</span></div>
+          <div class="kpi"><b>演示门店</b><span style="font-size:10.5px;">STORE PULSE 运行中</span></div>
+        </div>
+        <div class="go">进入开店方案 →</div>
+      </a>
+      <a class="act" href="/franchise/">
+        <div class="an">ACT 05 · <b>REPLICATE</b></div>
+        <div class="at">复制</div>
+        <div class="as">FRANCHISE SYSTEM · 加盟体系</div>
+        <div class="kpis">
+          <div class="kpi"><b>业态包</b><span>6 大业态</span></div>
+          <div class="kpi"><b>单店投资</b><span>Rp 176–220 jt</span></div>
+          <div class="kpi"><b>特权品牌池</b><span>6 品牌可引入</span></div>
+        </div>
+        <div class="go">进入加盟体系 →</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>总览指标 · 孵化引擎一眼读数</h2>
+    <div class="stats">
+      <div class="stat"><div class="v" id="s-sig">—</div><div class="k">全网信号入池（近 3 个月窗口）</div></div>
+      <div class="stat"><div class="v" id="s-brand">—</div><div class="k">热点品牌库 · 可引入加盟</div></div>
+      <div class="stat"><div class="v" id="s-sa">—</div><div class="k">S / A 级概念 · 优先复制</div></div>
+      <div class="stat"><div class="v" id="s-max">—</div><div class="k">最高决策总分 / 100</div></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>跨幕流转队列 · 信号 → 定级 → 下一步动作</h2>
+    <div class="qrow headrow">
+      <span>ID</span><span>概念</span><span>信号热度</span><span>决策总分</span><span class="hide-m">下一步动作</span><span>状态</span>
+    </div>
+    <div id="queue"></div>
+    <p class="note" id="q-note">跨幕 join：热点雷达信号 × 选品评分定级，按决策分排序。S/A 级进入「造物」排队，B 级观察，C 级淘汰。</p>
+  </div>
+
+  <div class="panel">
+    <h2>待办 · 流水线下一步</h2>
+    <div class="todo">
+      <div class="it"><span class="lv lv-p1">P1</span><b>中央库打通</b>供应商库 / 品牌库 / 选址库「保存」按钮落成统一数据库，队列状态可真实回写。</div>
+      <div class="it"><span class="lv lv-p1">P1</span><b>真实信号接入</b>替换演示种子数据：接 X / TikTok 热点 API 与 WARUNGSCOUT 评分数据，队列自动刷新。</div>
+      <div class="it"><span class="lv lv-p2">P2</span><b>控制塔回写</b>每幕操作（定级 / 生成 / 装配选型）完成后回写队列状态，形成真正的项目大脑时间线。</div>
+      <div class="it"><span class="lv lv-p2">P2</span><b>客户视图</b>对外演示模式：隐藏内部待办，只保留管线图 + 队列 + 总览指标。</div>
+    </div>
+  </div>
+</div>
+<footer style="border-top:1px solid #1a222d;padding:16px 24px;color:#5b6779;font-size:11px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+  <span>NUSANTARA BRAND OS · 孵化控制塔</span>
+  <span id="gen">数据载入中…</span>
+</footer>
+<script>
+(async () => {
+  const J = async u => { const r = await fetch(u); if(!r.ok) throw new Error(u); return r.json(); };
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  try {
+    const [t, b, l] = await Promise.all([
+      J('/trend/data/trend_snacks.json'), J('/trend/data/hotbrands.json'), J('/launch/data/launch.json')]);
+    const snacks = t.snacks || [], brands = b.brands || [], ranked = l.ranked || [];
+    const regions = new Set(snacks.map(s => s.region));
+    const top = [...snacks].sort((a,b2) => b2.heat - a.heat)[0] || {};
+    const sa = ranked.filter(r => r.grade==='S' || r.grade==='A');
+    const best = [...ranked].sort((a,b2) => b2.total - a.total)[0] || {};
+    document.getElementById('a1-n').textContent = snacks.length + ' 款';
+    document.getElementById('a1-r').textContent = regions.size + ' 区';
+    document.getElementById('a1-top').textContent = top.name || '—';
+    document.getElementById('a2-n').textContent = ranked.length + ' 款';
+    document.getElementById('a2-sa').textContent = sa.length + ' 款';
+    document.getElementById('a2-top').textContent = (best.total||'—') + ' · ' + (best.grade||'');
+    document.getElementById('s-sig').innerHTML = snacks.length + '<small> 款</small>';
+    document.getElementById('s-brand').innerHTML = brands.length + '<small> 品牌</small>';
+    document.getElementById('s-sa').innerHTML = sa.length + '<small> 款</small>';
+    document.getElementById('s-max').textContent = best.total || '—';
+    // 跨幕队列：trend × launch join
+    const rmap = {}; ranked.forEach(r => rmap[r.id] = r);
+    const q = snacks.map(s => ({...s, r: rmap[s.id]}))
+      .sort((a,b2) => ((b2.r&&b2.r.total)||-1) - ((a.r&&a.r.total)||-1));
+    const act = {S:'生成执行方案 · 进入造物', A:'优先复制 · 排入造物队列', B:'观察 · 补供应链匹配', C:'淘汰 · 保留信号档案'};
+    document.getElementById('queue').innerHTML = q.map(s => {
+      const r = s.r, g = r ? r.grade : '—';
+      const cls = {'S':'g-S','A':'g-A','B':'g-B','C':'g-C'}[g] || '';
+      const st = !r ? ['待评分','st-skip'] : (g==='S'||g==='A') ? ['流转中','st-live'] : ['滞留','st-skip'];
+      return `<div class="qrow">
+        <span class="id">${esc(s.id)}</span>
+        <span class="nm">${esc(s.name)}<small>${esc(s.region)} · ${esc(s.category||'')}</small></span>
+        <span class="heat">${s.heat != null ? '🔥 ' + s.heat : '—'}</span>
+        <span class="total">${r ? r.total + ' <span class="grade ' + cls + '">' + g + '</span>' : '待评分'}</span>
+        <span class="nx hide-m">${r ? esc(act[g]||'—') : '进入 ② 选品评分 完成 7 因子定级'}</span>
+        <span class="st ${st[1]}">${st[0]}</span>
+      </div>`;
+    }).join('');
+    document.getElementById('gen').textContent = '信号窗口：' + (t.window||'—') + ' · 引擎生成：' + (t.generated_at||'') + ' · 演示种子数据';
+  } catch (e) {
+    document.getElementById('gen').textContent = '数据载入失败：' + e.message;
+  }
+})();
+</script>
+<script src="/ui/interactions.js" defer></script>
+</body>
+</html>

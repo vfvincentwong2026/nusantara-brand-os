@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T05:07:55",
+  "generated_at": "2026-10-31T08:47:00",
   "demo": true,
   "store": {
     "id": "CS-D-001",
@@ -3868,9 +3868,96 @@
       "energy_cost_idr": null,
       "outage_count_30d": null,
       "source_type": "演示"
+    },
+    {
+      "store_id": "CS-D-001",
+      "source": "电源模式",
+      "generator_status": "市电 + 发电机备援（候选）",
+      "runtime_hours": null,
+      "fuel_record": null,
+      "energy_cost_idr": null,
+      "outage_count_30d": 0,
+      "source_type": "待确认"
+    },
+    {
+      "store_id": "CS-D-001",
+      "source": "关键负载",
+      "generator_status": "POS / 网络 / 基础照明 / 监控 / 必要冷藏",
+      "runtime_hours": null,
+      "fuel_record": null,
+      "energy_cost_idr": null,
+      "outage_count_30d": null,
+      "source_type": "概念"
+    },
+    {
+      "store_id": "CS-D-001",
+      "source": "发电机",
+      "generator_status": "功率 / 续航 / 排烟 / 燃料安全 → 工程核算待确认",
+      "runtime_hours": null,
+      "fuel_record": null,
+      "energy_cost_idr": null,
+      "outage_count_30d": null,
+      "source_type": "待确认"
+    },
+    {
+      "store_id": "CS-D-001",
+      "source": "运行小时 / 燃料记录",
+      "generator_status": "演示 12h · 人工录入",
+      "runtime_hours": 12.0,
+      "fuel_record": "人工录入",
+      "energy_cost_idr": null,
+      "outage_count_30d": null,
+      "source_type": "演示"
+    },
+    {
+      "store_id": "CS-D-001",
+      "source": "停电记录",
+      "generator_status": "近 30 天 0 次（种子样本）",
+      "runtime_hours": null,
+      "fuel_record": null,
+      "energy_cost_idr": null,
+      "outage_count_30d": 0,
+      "source_type": "演示"
+    },
+    {
+      "store_id": "CS-D-001",
+      "source": "数字屏 / 音响",
+      "generator_status": "已标记安装位 · 无远程播放控制",
+      "runtime_hours": null,
+      "fuel_record": null,
+      "energy_cost_idr": null,
+      "outage_count_30d": null,
+      "source_type": "演示"
     }
   ],
   "media": [
+    {
+      "store_id": "CS-D-001",
+      "asset_title": "斋月组合促销",
+      "device": "门头屏",
+      "slot": "17:00–21:00",
+      "linked": "SKU 节庆礼盒",
+      "status": "计划播放",
+      "source_type": "演示"
+    },
+    {
+      "store_id": "CS-D-001",
+      "asset_title": "新品：海苔脆片",
+      "device": "橱窗屏",
+      "slot": "全天轮播",
+      "linked": "CSKU-001",
+      "status": "计划播放",
+      "source_type": "演示"
+    },
+    {
+      "store_id": "CS-D-001",
+      "asset_title": "社区公告 · 周五集市",
+      "device": "音响",
+      "slot": "10:00–12:00",
+      "linked": "活动",
+      "status": "待审核",
+      "source_type": "演示"
+    },
     {
       "store_id": "CS-D-001",
       "asset_title": "斋月组合促销",

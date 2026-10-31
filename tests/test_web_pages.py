@@ -5,7 +5,7 @@ WEB = Path(__file__).resolve().parent.parent / "web"
 
 NAV_PAGES = ["case", "dashboard", "floorplan", "franchise", "launch",
              "library", "map", "three", "trend", "store-dash", "brandkit",
-             "assembly", "playbook", "retail"]
+             "assembly", "playbook", "retail", "tower"]
 
 
 def _read(page: str) -> str:
