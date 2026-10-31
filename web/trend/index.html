@@ -10,13 +10,13 @@
 <title>热点雷达 · 全网爆款侦察，反向指导印尼选品 | Nusantara Brand OS</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  body { background:#ffffff; color:#111111; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
   .wrap { max-width:1280px; margin:0 auto; padding:86px 24px 80px; }
   .head { margin:30px 0 34px; position:relative; }
   .ghost { position:absolute; top:-34px; right:0; font-family:var(--font-display); font-style:italic; font-weight:600;
            font-size:clamp(64px,9vw,140px); line-height:1; color:transparent;
-           -webkit-text-stroke:1px rgba(242,240,235,.08); pointer-events:none; user-select:none; white-space:nowrap; }
-  .head .tag { display:block; font-family:var(--font-mono); color:#999999;
+           -webkit-text-stroke:1px rgba(17,17,17,.06); pointer-events:none; user-select:none; white-space:nowrap; }
+  .head .tag { display:block; font-family:var(--font-mono); color:#767676;
                font-size:11px; letter-spacing:.28em; text-transform:uppercase; margin-bottom:18px; }
   .head .tag::before { content:"● "; font-size:8px; vertical-align:2px; }
   .head h1 { font-family:var(--font-display); font-size:clamp(30px,4.2vw,54px); font-weight:600;
@@ -25,54 +25,54 @@
   .head p { margin-top:16px; color:var(--dim-warm); font-size:14px; max-width:760px; line-height:1.9; }
   .head .en { font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; color:var(--faint-warm);
               margin-top:14px; text-transform:uppercase; }
-  .demo-bar { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.22); color:#999;
+  .demo-bar { background:#f7f7f7; border:1px solid #e5e5e5; color:#767676;
               padding:8px 14px; border-radius:8px; font-size:12px; margin-bottom:20px; }
   .layout { display:grid; grid-template-columns:1fr 340px; gap:20px; align-items:start; }
   @media (max-width:960px) { .layout { grid-template-columns:1fr; } }
-  .panel { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; }
+  .panel { background:#ffffff; border:1px solid #e5e5e5; border-radius:14px; padding:18px; }
   .panel h2 { font-family:var(--font-mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
               color:var(--dim-warm); margin-bottom:14px; font-weight:500; }
   .tabs { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
-  .tabs button { background:#181f29; color:#8b98a8; border:1px solid #232c3a; border-radius:999px;
+  .tabs button { background:#f2f2f2; color:#767676; border:1px solid #e5e5e5; border-radius:999px;
                  padding:6px 16px; font-size:12px; cursor:pointer; transition:all .25s cubic-bezier(.16,1,.3,1); }
-  .tabs button.on { background:rgba(228,2,43,.18); color:#ff5c7a; border-color:rgba(228,2,43,.5); }
-  .tabs button:hover { color:#e8eef5; }
-  .card { background:#151c26; border:1px solid #1f2733; border-radius:12px; padding:16px 18px; margin-bottom:12px;
+  .tabs button.on { background:rgba(230,0,35,.18); color:#e60023; border-color:rgba(230,0,35,.5); }
+  .tabs button:hover { color:#111111; }
+  .card { background:#ffffff; border:1px solid #e5e5e5; border-radius:12px; padding:16px 18px; margin-bottom:12px;
           transition:border-color .25s, transform .25s cubic-bezier(.16,1,.3,1); }
-  .card:hover { border-color:#33405a; transform:translateY(-2px); }
+  .card:hover { border-color:#cccccc; transform:translateY(-2px); }
   .card .top { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
-  .card .rank { color:#ededed; font-weight:800; font-size:18px; font-family:Consolas,monospace; }
+  .card .rank { color:#111111; font-weight:800; font-size:18px; font-family:Consolas,monospace; }
   .card .name { font-size:16px; font-weight:700; }
-  .card .local { color:#5b6779; font-size:12px; }
+  .card .local { color:#767676; font-size:12px; }
   .card .meta { display:flex; gap:8px; margin:6px 0 10px; flex-wrap:wrap; }
-  .chip { font-size:10px; padding:2px 10px; border-radius:999px; border:1px solid #232c3a; color:#8b98a8; }
-  .chip.region { color:#999; border-color:rgba(255,255,255,.22); }
-  .chip.rep-high { color:#34d17b; border-color:rgba(52,209,123,.4); }
-  .chip.rep-mid { color:#999; border-color:rgba(255,255,255,.22); }
-  .chip.rep-low { color:#ff5c7a; border-color:rgba(255,92,122,.4); }
+  .chip { font-size:10px; padding:2px 10px; border-radius:999px; border:1px solid #e5e5e5; color:#767676; }
+  .chip.region { color:#767676; border-color:#e5e5e5; }
+  .chip.rep-high { color:#2e7d32; border-color:rgba(46,125,35,.4); }
+  .chip.rep-mid { color:#767676; border-color:#e5e5e5; }
+  .chip.rep-low { color:#e60023; border-color:rgba(230,0,35,.4); }
   .heat { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-  .heat .bar { flex:1; height:6px; background:#1c2430; border-radius:3px; overflow:hidden; }
-  .heat .bar i { display:block; height:100%; background:linear-gradient(90deg,#e4022b,#e8b246); border-radius:3px; }
-  .heat .v { font-family:Consolas,monospace; font-size:12px; color:#999; }
+  .heat .bar { flex:1; height:6px; background:#efefef; border-radius:3px; overflow:hidden; }
+  .heat .bar i { display:block; height:100%; background:linear-gradient(90deg,#e60023,#b26a00); border-radius:3px; }
+  .heat .v { font-family:Consolas,monospace; font-size:12px; color:#767676; }
   .sec { font-size:12px; line-height:1.75; margin-top:8px; }
-  .sec b { display:block; color:#5b6779; font-weight:600; font-size:10px; letter-spacing:.12em; margin-bottom:3px; }
-  .sec.hot b { color:#999; } .sec.fit b { color:#34d17b; } .sec.adapt b { color:#ff5c7a; } .sec.comp b { color:#e4022b; }
-  .fitline { display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed #232c3a; }
-  .fitline .bar { flex:1; height:6px; background:#1c2430; border-radius:3px; overflow:hidden; }
+  .sec b { display:block; color:#767676; font-weight:600; font-size:10px; letter-spacing:.12em; margin-bottom:3px; }
+  .sec.hot b { color:#767676; } .sec.fit b { color:#2e7d32; } .sec.adapt b { color:#e60023; } .sec.comp b { color:#e60023; }
+  .fitline { display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed #e5e5e5; }
+  .fitline .bar { flex:1; height:6px; background:#efefef; border-radius:3px; overflow:hidden; }
   .fitline .bar i { display:block; height:100%; border-radius:3px; }
   .fitline .v { font-size:12px; font-family:Consolas,monospace; }
-  .prio { display:flex; gap:10px; padding:10px 0; border-bottom:1px dashed #232c3a; }
+  .prio { display:flex; gap:10px; padding:10px 0; border-bottom:1px dashed #e5e5e5; }
   .prio:last-child { border-bottom:none; }
-  .prio .n { color:#999; font-weight:800; font-family:Consolas,monospace; }
+  .prio .n { color:#767676; font-weight:800; font-family:Consolas,monospace; }
   .prio .t { flex:1; }
   .prio .t .nm { font-size:13px; font-weight:700; }
-  .prio .t .act { font-size:11px; color:#8b98a8; line-height:1.6; margin-top:3px; }
-  .dir { font-size:12px; color:#aebacd; line-height:1.8; padding:8px 0 8px 14px; border-left:2px solid rgba(228,2,43,.5); margin-bottom:10px; }
-  .sig { font-size:11px; color:#5b6779; line-height:1.7; }
-  .sig::before { content:"▸ "; color:#33405a; }
-  .btn-pick { background:rgba(52,209,123,.12); color:#34d17b; border:1px solid rgba(52,209,123,.4);
+  .prio .t .act { font-size:11px; color:#767676; line-height:1.6; margin-top:3px; }
+  .dir { font-size:12px; color:#aebacd; line-height:1.8; padding:8px 0 8px 14px; border-left:2px solid rgba(230,0,35,.5); margin-bottom:10px; }
+  .sig { font-size:11px; color:#767676; line-height:1.7; }
+  .sig::before { content:"▸ "; color:#cccccc; }
+  .btn-pick { background:rgba(46,125,35,.12); color:#2e7d32; border:1px solid rgba(46,125,35,.4);
               border-radius:8px; padding:5px 14px; font-size:11.5px; cursor:pointer; }
-  .btn-pick:hover { background:rgba(52,209,123,.22); }
+  .btn-pick:hover { background:rgba(46,125,35,.22); }
   /* 社媒热度证据截图墙 */
   .proof { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px; }
   .proof a { display:block; border:1px solid var(--hairline); overflow:hidden; padding:0; }
@@ -97,59 +97,59 @@
   <span style="color:var(--faint-warm);font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">兄弟项目</span>
   <a class="nl" href="https://nusantara-container.pages.dev/" target="_blank" rel="noopener">集装箱项目<span class="nle">CONTAINER ↗</span></a>
 </nav>
-<div class="chain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #141a23;background:rgba(11,14,19,.92);backdrop-filter:blur(6px);">
+<div class="chain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#767676;border-bottom:1px solid #e5e5e5;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);">
   <span style="letter-spacing:.1em;">孵化流水线</span>
-  <a href="/trend/" data-s="/trend/" style="color:#8b98a8;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
-<a href="/launch/" data-s="/launch/" style="color:#8b98a8;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
-<a href="/brandkit/" data-s="/brandkit/" style="color:#8b98a8;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
-<a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
-<a href="/store-dash/" data-s="/store-dash/" style="color:#8b98a8;text-decoration:none;">⑤ 验证 · 门店大屏</a><span>→</span>
-<a href="/franchise/" data-s="/franchise/" style="color:#8b98a8;text-decoration:none;">⑥ 复制 · 加盟体系</a>
-  <script>document.querySelectorAll('.chain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#e8b246';a.style.fontWeight='700';}});</script>
+  <a href="/trend/" data-s="/trend/" style="color:#767676;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
+<a href="/launch/" data-s="/launch/" style="color:#767676;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
+<a href="/brandkit/" data-s="/brandkit/" style="color:#767676;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
+<a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
+<a href="https://nusantara-container.pages.dev/store-dash/" data-s="/store-dash/" target="_blank" rel="noopener" style="color:#767676;text-decoration:none;">⑤ 验证 · 门店大屏 ↗</a><span>→</span>
+<a href="/franchise/" data-s="/franchise/" style="color:#767676;text-decoration:none;">⑥ 复制 · 加盟体系</a>
+  <script>document.querySelectorAll('.chain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#e60023';a.style.fontWeight='700';}});</script>
 </div>
 <div class="wrap">
   <div class="head">
     <div class="ghost">Trend Scout</div>
     <div class="tag">SIGNAL 发现 · TREND SCOUT · 热点雷达</div>
     <h1>在全网找爆款，在印尼做复盘：<em>六区热点雷达</em><br>反向指导选品与品牌引入</h1>
-    <p class="actq" style="margin:10px 0 0;color:#666;font-size:12.5px;letter-spacing:.02em;">这一幕回答：全网正在火什么、为什么火——信号进入流水线的入口。</p>
+    <p class="actq" style="margin:10px 0 0;color:#767676;font-size:12.5px;letter-spacing:.02em;">这一幕回答：全网正在火什么、为什么火——信号进入流水线的入口。</p>
     <p>全网热点信号（TikTok / X / 便利店榜单）→ 网红视角拆解"为什么火"→ 印尼适配评分与复制性评估 →
        反向输出时尚网红店选品与改造方向。让顶级团队的策略不是凭感觉，是按数据排优先级。</p>
     <div class="en">Signal → Decode → Adapt → Launch / From viral heat to shelf-ready decision</div>
   </div>
-  <div class="demo-bar">🎯 AI 收录硬门槛：只收录<b>适合加盟单店的现制店面食品</b>（现烤 / 现调 / 现做）；工业级预包装零食不进入雷达。⚠ 当前为演示种子数据（9 款 · 近 3 个月窗口），字段与真实接入（X/TikTok 热点 API）对齐。</div>
+  <div class="demo-bar">🎯 AI 收录硬门槛 GATE：只收录<b>适合加盟单店的现制店面食品</b>（现烤 / 现调 / 现做）；工业级预包装零食不进入雷达。⚠ 当前为演示种子数据（9 款 · 近 3 个月窗口），字段与真实接入（X/TikTok 热点 API）对齐。</div>
   <div class="tabs" style="margin-bottom:20px;">
-    <button class="on" id="vw-snack" onclick="switchView('snack')">🔥 爆款零食榜</button>
-    <button id="vw-brand" onclick="switchView('brand')">🏷 热点品牌库</button>
+    <button class="on" id="vw-snack" onclick="switchView('snack')">🔥 爆款零食榜 SNACKS</button>
+    <button id="vw-brand" onclick="switchView('brand')">🏷 热点品牌库 BRANDS</button>
   </div>
   <div class="layout" id="snack-view">
     <div>
       <div class="panel">
-        <h2>区域筛选</h2>
+        <h2>区域筛选 · REGIONS</h2>
         <div class="tabs" id="tabs"></div>
         <div id="list"></div>
       </div>
     </div>
     <div>
       <div class="panel" style="margin-bottom:20px;">
-        <h2>🇮🇩 反向指导 · 优先复制 TOP5</h2>
+        <h2>🇮🇩 反向指导 · 优先复制 TOP5 · PRIORITY</h2>
         <div id="prio"></div>
       </div>
       <div class="panel">
-        <h2>网红店打法方向 · 打法手册</h2>
+        <h2>网红店打法方向 · PLAYBOOK</h2>
         <div id="dirs"></div>
       </div>
     </div>
   </div>
   <div class="panel" id="brand-view" style="display:none;">
-    <h2>热点品牌库 · 可引入品牌清单（能引入什么品牌、加盟还是复制 · 近 3 个月社媒口径）</h2>
+    <h2>热点品牌库 · 可引入品牌清单 BRAND LIBRARY（能引入什么品牌、加盟还是复制 · 近 3 个月社媒口径）</h2>
     <div id="brands"></div>
   </div>
 </div>
 <script>
 const state = { data: null, region: '全部', brands: null };
 const REP_CLS = { '高': 'rep-high', '中': 'rep-mid', '低': 'rep-low' };
-const FIT_COLOR = v => v >= 70 ? '#34d17b' : v >= 60 ? '#e8b246' : '#ff5c7a';
+const FIT_COLOR = v => v >= 70 ? '#2e7d32' : v >= 60 ? '#b26a00' : '#e60023';
 
 /* ── 入库（localStorage 演示库，结构可迁后端） ── */
 function addPick(kind, item) {
@@ -181,14 +181,14 @@ function card(s, i) {
     <div class="meta">
       <span class="chip region">${esc(s.region)}</span>
       <span class="chip">${esc(s.category)}</span>
-      ${s.store_mode ? `<span class="chip" style="border-color:rgba(52,209,123,.45);color:#34d17b;">门店形态 · ${esc(s.store_mode)}</span>` : ''}
+      ${s.store_mode ? `<span class="chip" style="border-color:rgba(46,125,35,.45);color:#2e7d32;">门店形态 · ${esc(s.store_mode)}</span>` : ''}
       <span class="chip ${REP_CLS[s.replicability]}">复制性 ${s.replicability}</span>
     </div>
     <div class="heat"><div class="bar"><i style="width:${s.heat}%"></i></div><span class="v">${Math.round(s.heat)}°</span></div>
-    <div class="sec hot"><b>为什么火 · 网红视角</b>${esc(s.why_hot)}</div>
-    <div class="sec"><b>病毒式玩法</b>${esc(s.viral_format)}</div>
-    <div class="sec"><b>热度信号</b><div class="sig">${s.heat_signals.map(esc).join('</div><div class="sig">')}</div></div>
-    <div class="sec"><b>社媒热度（近 3 个月 · 演示口径）</b>
+    <div class="sec hot"><b>为什么火 · 网红视角 WHY IT'S HOT</b>${esc(s.why_hot)}</div>
+    <div class="sec"><b>病毒式玩法 VIRAL FORMAT</b>${esc(s.viral_format)}</div>
+    <div class="sec"><b>热度信号 SIGNALS</b><div class="sig">${s.heat_signals.map(esc).join('</div><div class="sig">')}</div></div>
+    <div class="sec"><b>社媒热度 SOCIAL HEAT（近 3 个月 · 演示口径）</b>
       <div class="sig">▸ 播放 ${s.social.views ?? '—'} 万 · 赞 ${s.social.likes ?? '—'} 万 · 转发 ${s.social.shares ?? '—'} 万</div>
       <div class="sig">▸ 平台：${(s.social.platforms || []).map(esc).join(' / ')} · 二创自由度 ${s.social.ugc ?? '—'}/100</div>
       <div class="sig">▸ 二创玩法：${esc(s.social.remix || '—')}</div></div>
@@ -199,14 +199,14 @@ function card(s, i) {
         <a href="/assets/hot-buttertree-3.jpg" target="_blank" rel="noopener"><img src="/assets/hot-buttertree-3.jpg" alt="黄油树夹心饼干 社媒热帖截图 3" loading="lazy"></a>
       </div>
       <div class="sig">▸ 真实社媒证据：豆瓣小组热帖截图（2024-03）· 小红书 UGC 礼盒实拍 · 买家切面实拍 · 点击放大 · 复刻参考：货架三秒识别 + 切面 ASMR 开箱动线</div></div>` : ''}
-    <div class="fitline"><span style="font-size:11px;color:#5b6779;">印尼适配</span>
+    <div class="fitline"><span style="font-size:11px;color:#767676;">印尼适配 FIT</span>
       <div class="bar"><i style="width:${fit}%;background:${FIT_COLOR(fit)}"></i></div>
       <span class="v" style="color:${FIT_COLOR(fit)}">${fit}</span></div>
-    <div class="sec fit"><b>适配判断</b>${esc(s.fit_reasons)}</div>
-    <div class="sec adapt"><b>本地化改造</b>${esc(s.adaptation)}</div>
-    <div class="sec comp"><b>合规前置</b>${esc(s.compliance_note)}</div>
-    <div class="sec"><b>复制性说明</b>${esc(s.repl_reason)}</div>
-    <div style="margin-top:10px"><button class="btn-pick" onclick='addPick("pick", ${JSON.stringify({id: s.id, name: s.name, region: s.region, category: s.category, heat: s.heat, indo_fit: s.indo_fit, replicability: s.replicability})})'>＋ 选品入库</button></div>
+    <div class="sec fit"><b>适配判断 FIT</b>${esc(s.fit_reasons)}</div>
+    <div class="sec adapt"><b>本地化改造 LOCALIZATION</b>${esc(s.adaptation)}</div>
+    <div class="sec comp"><b>合规前置 COMPLIANCE</b>${esc(s.compliance_note)}</div>
+    <div class="sec"><b>复制性说明 REPLICATION</b>${esc(s.repl_reason)}</div>
+    <div style="margin-top:10px"><button class="btn-pick" onclick='addPick("pick", ${JSON.stringify({id: s.id, name: s.name, region: s.region, category: s.category, heat: s.heat, indo_fit: s.indo_fit, replicability: s.replicability})})'>＋ 选品入库 SAVE</button></div>
   </div>`;
 }
 
@@ -219,18 +219,18 @@ function renderSide() {
   const g = state.data.guidance;
   document.getElementById('prio').innerHTML = g.priority_copies.map((p, i) =>
     `<div class="prio"><span class="n">${i + 1}</span><div class="t">
-       <div class="nm">${esc(p.name)} <span style="color:#5b6779;font-weight:400;font-size:11px;">${esc(p.region)} · 适配 ${Math.round(p.indo_fit)} · 复制${p.replicability}</span></div>
+       <div class="nm">${esc(p.name)} <span style="color:#767676;font-weight:400;font-size:11px;">${esc(p.region)} · 适配 ${Math.round(p.indo_fit)} · 复制${p.replicability}</span></div>
        <div class="act">${esc(p.action)}</div></div></div>`).join('');
   document.getElementById('dirs').innerHTML = g.directions.map(d => `<div class="dir">${esc(d)}</div>`).join('');
 }
 
 function setRegion(r) { state.region = r; renderTabs(); renderList(); }
 
-const PATH_COLOR = { 加盟: '#34d17b', 代理: '#4da3ff', 复制: '#e8b246', 学习: '#8b98a8', 谨慎: '#ff5c7a', 仅: '#8b98a8' };
+const PATH_COLOR = { 加盟: '#2e7d32', 代理: '#767676', 复制: '#b26a00', 学习: '#767676', 谨慎: '#e60023', 仅: '#767676' };
 function renderBrands() {
   if (!state.brands) return;
   document.getElementById('brands').innerHTML = state.brands.map((b, i) => {
-    const pc = Object.entries(PATH_COLOR).find(([k]) => b.ido_path.includes(k))?.[1] || '#8b98a8';
+    const pc = Object.entries(PATH_COLOR).find(([k]) => b.ido_path.includes(k))?.[1] || '#767676';
     return `<div class="card" style="display:grid;grid-template-columns:${b.photo ? '220px ' : ''}1fr;gap:16px;">
     ${b.photo ? `<img src="${b.photo}" style="width:100%;border-radius:10px;object-fit:cover;" alt="${esc(b.name)} 参考图">` : ''}
     <div>
@@ -239,15 +239,15 @@ function renderBrands() {
       <div class="meta"><span class="chip region">${esc(b.category)}</span>
         <span class="chip" style="color:${pc};border-color:${pc}55">${esc(b.franchise_status)}</span>
         ${b.intro ? `<span class="chip" style="color:${b.intro.color};border-color:${b.intro.color}55;font-weight:700;">引入分级 ${b.intro.grade} · ${esc(b.intro.label)}</span>` : ''}</div>
-      <div class="sec"><b>热点产品（正热，可对标选品）</b>${b.hot_products.map(esc).join(' · ')}</div>
-      <div class="sec"><b>社媒热度</b>播放 ${b.social.views_wan} 万 · 赞 ${b.social.likes_wan} 万 · 转发 ${b.social.shares_wan} 万
+      <div class="sec"><b>热点产品 HOT SKUs（正热，可对标选品）</b>${b.hot_products.map(esc).join(' · ')}</div>
+      <div class="sec"><b>社媒热度 SOCIAL</b>播放 ${b.social.views_wan} 万 · 赞 ${b.social.likes_wan} 万 · 转发 ${b.social.shares_wan} 万
         · ${b.platforms.map(esc).join('/')} · 二创自由度 ${b.ugc}/100</div>
-      <div class="sec"><b>二创玩法</b>${esc(b.remix_note)}</div>
-      <div class="fitline"><span style="font-size:11px;color:#5b6779;">印尼适配</span>
+      <div class="sec"><b>二创玩法 REMIX</b>${esc(b.remix_note)}</div>
+      <div class="fitline"><span style="font-size:11px;color:#767676;">印尼适配 FIT</span>
         <div class="bar"><i style="width:${b.ido_fit}%;background:${FIT_COLOR(b.ido_fit)}"></i></div>
         <span class="v" style="color:${FIT_COLOR(b.ido_fit)}">${b.ido_fit}</span></div>
       <div class="sec fit"><b>引入路径：${esc(b.ido_path)}</b>${esc(b.ido_note)}</div>
-      <div style="margin-top:8px"><button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: b.id, name: b.name, country: b.country, category: b.category, status: b.franchise_status, ido_path: b.ido_path, ido_fit: b.ido_fit})})'>＋ 品牌入库</button></div>
+      <div style="margin-top:8px"><button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: b.id, name: b.name, country: b.country, category: b.category, status: b.franchise_status, ido_path: b.ido_path, ido_fit: b.ido_fit})})'>＋ 品牌入库 SAVE</button></div>
     </div></div>`; }).join('');
 }
 
