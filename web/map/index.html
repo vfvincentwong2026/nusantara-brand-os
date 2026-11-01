@@ -11,12 +11,12 @@
 <link rel="stylesheet" href="./leaflet.css">
 <script src="./leaflet.js"></script>
 <style>
-  :root { --bg:#0d1117; --panel:#161b22; --line:#2d333b; --text:#e6edf3; --dim:#8b949e;
-          --gold:#ffd700; --silver:#c0c0c0; --potential:#d29922; --normal:#6e7681;
-          --comp:#58a6ff; --red:#f85149; --green:#3fb950; }
+  :root { --bg:#ffffff; --panel:#ffffff; --line:#2d333b; --text:#111111; --dim:#767676;
+          --gold:#b26a00; --silver:#c0c0c0; --potential:#b26a00; --normal:#767676;
+          --comp:#767676; --red:#e60023; --green:#3fb950; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; display:flex; height:100dvh; padding-top:70px; }
-  #map { flex:1; background:#0a0e14; position:relative; }
+  #map { flex:1; background:#ffffff; position:relative; }
   #side { width:372px; min-width:372px; overflow-y:auto; border-left:1px solid var(--line); padding:16px 16px 24px; }
   h1 { font-size:17px; margin-bottom:2px; }
   .meta { color:var(--dim); font-size:12px; margin-bottom:12px; }
@@ -47,11 +47,11 @@
   .gap .cta { display:inline-block; margin-top:8px; font-size:12px; color:#3fb950; text-decoration:none;
               border:1px solid rgba(63,185,80,.4); border-radius:6px; padding:3px 10px; }
   .gap .cta:hover { background:rgba(63,185,80,.12); }
-  .legend { position:absolute; bottom:20px; left:12px; z-index:1000; background:rgba(22,27,34,.92); border:1px solid var(--line);
+  .legend { position:absolute; bottom:20px; left:12px; z-index:1000; background:rgba(255,255,255,.92); border:1px solid var(--line);
             border-radius:8px; padding:10px 12px; font-size:12px; color:var(--dim); }
   .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; }
   .legend i.sq { border-radius:2px; }
-  .layers { position:absolute; top:12px; right:12px; z-index:1000; background:rgba(22,27,34,.92); border:1px solid var(--line);
+  .layers { position:absolute; top:12px; right:12px; z-index:1000; background:rgba(255,255,255,.92); border:1px solid var(--line);
             border-radius:8px; padding:8px 12px; font-size:12px; color:var(--dim); }
   .layers label { display:flex; align-items:center; gap:6px; cursor:pointer; padding:2px 0; }
   /* 移动端：地图在上（40vh）、清单在下全宽，图例留在地图内不压列表 */
@@ -65,24 +65,24 @@
   /* popup 7 维迷你条 */
   .pop { min-width:220px; font-family:inherit; }
   .pop .t { font-weight:700; margin-bottom:2px; }
-  .pop .s { color:#8b949e; font-size:12px; margin-bottom:6px; }
+  .pop .s { color:#767676; font-size:12px; margin-bottom:6px; }
   .pop .d { display:flex; align-items:center; gap:6px; font-size:11px; margin:2px 0; }
-  .pop .d .n { width:34px; color:#8b949e; }
+  .pop .d .n { width:34px; color:#767676; }
   .pop .d .bar { height:5px; }
-  .pop .d .v { width:22px; text-align:right; color:#e6edf3; }
-  .leaflet-popup-content-wrapper { background:#161b22; color:#e6edf3; border:1px solid #2d333b; border-radius:8px; }
-  .leaflet-popup-tip { background:#161b22; }
-  .leaflet-popup-close-button { color:#8b949e !important; }
-  .leaflet-container { background:#0a0e14; }
+  .pop .d .v { width:22px; text-align:right; color:#111111; }
+  .leaflet-popup-content-wrapper { background:#ffffff; color:#111111; border:1px solid #2d333b; border-radius:8px; }
+  .leaflet-popup-tip { background:#ffffff; }
+  .leaflet-popup-close-button { color:#767676 !important; }
+  .leaflet-container { background:#ffffff; }
 </style>
 <style>
   .nbo-nav { position:fixed; top:0; left:0; right:0; height:38px; z-index:10000; display:flex; align-items:center;
     padding:0 16px; background:rgba(10,14,20,.92); backdrop-filter:blur(8px); border-bottom:1px solid #232b36;
     font:12.5px -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
-  .nbo-nav .brand { color:#e4022b; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
-  .nbo-nav a.nl { color:#8b98a8; text-decoration:none; padding:6px 12px; border-radius:6px; }
-  .nbo-nav a.nl:hover { color:#e8eef5; }
-  .nbo-nav a.nl.on { color:#fff; background:rgba(228,2,43,.2); }
+  .nbo-nav .brand { color:#e60023; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
+  .nbo-nav a.nl { color:#767676; text-decoration:none; padding:6px 12px; border-radius:6px; }
+  .nbo-nav a.nl:hover { color:#111111; }
+  .nbo-nav a.nl.on { color:#111111; background:rgba(230,0,35,.2); }
 </style>
 </head>
 <body>
@@ -101,15 +101,15 @@
   <span style="color:var(--faint-warm);font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">兄弟项目</span>
   <a class="nl" href="https://nusantara-container.pages.dev/" target="_blank" rel="noopener">集装箱项目<span class="nle">CONTAINER ↗</span></a>
 </nav>
-<div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #14202e;background:rgba(9,13,19,.92);backdrop-filter:blur(6px);">
-  <span style="letter-spacing:.1em;color:#999999;">B·集装箱零售链路</span>
-  <a href="/case/" data-s="/case/" style="color:#8b98a8;text-decoration:none;">① 集装箱店样板</a><span>→</span>
-  <a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">② 开店方案选型</a><span>→</span>
-  <a href="/floorplan/" data-s="/floorplan/" style="color:#8b98a8;text-decoration:none;">③ 平面布局</a><span>→</span>
-  <a href="/three/" data-s="/three/" style="color:#8b98a8;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
-  <a href="/dashboard/" data-s="/dashboard/" style="color:#8b98a8;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
-  <a href="/map/" data-s="/map/" style="color:#8b98a8;text-decoration:none;">⑥ 渠道地图铺货</a>
-  <script>document.querySelectorAll('.bchain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#4da3ff';a.style.fontWeight='700';}});</script>
+<div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#767676;border-bottom:1px solid #e5e5e5;background:rgba(9,13,19,.92);backdrop-filter:blur(6px);">
+  <span style="letter-spacing:.1em;color:#767676;">B·集装箱零售链路</span>
+  <a href="/case/" data-s="/case/" style="color:#767676;text-decoration:none;">① 集装箱店样板</a><span>→</span>
+  <a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">② 开店方案选型</a><span>→</span>
+  <a href="/floorplan/" data-s="/floorplan/" style="color:#767676;text-decoration:none;">③ 平面布局</a><span>→</span>
+  <a href="/three/" data-s="/three/" style="color:#767676;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
+  <a href="/dashboard/" data-s="/dashboard/" style="color:#767676;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
+  <a href="/map/" data-s="/map/" style="color:#767676;text-decoration:none;">⑥ 渠道地图铺货</a>
+  <script>document.querySelectorAll('.bchain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#767676';a.style.fontWeight='700';}});</script>
 </div>
 <script>
   (() => { const p = location.pathname;
@@ -120,20 +120,20 @@
 <div class="layers">
   <label><input type="checkbox" id="covToggle"> 竞品覆盖圈（500m）</label>
   <label><input type="checkbox" id="gapToggle" checked> 仅显示缺口候选</label>
-  <label><input type="checkbox" id="oppToggle"> <b style="color:#999">加盟机会图层</b>（区域评分 + 保护半径）</label>
+  <label><input type="checkbox" id="oppToggle"> <b style="color:#767676">加盟机会图层</b>（区域评分 + 保护半径）</label>
 </div>
 <div id="side">
-  <h1>渠道地图：<em>给 Warung 打分</em>，按数据铺货</h1>
+  <h1>渠道地图 CHANNEL MAP：<em>给 Warung 打分</em>，按数据铺货</h1>
   <div class="meta" id="meta"></div>
   <div class="kpi" id="kpis"></div>
-  <h2>覆盖缺口 · 优先铺货清单</h2>
+  <h2>覆盖缺口 GAPS · 优先铺货清单</h2>
   <div class="chips" id="cityChips"></div>
   <div id="gaps"></div>
 </div>
 
 <script>
-const GRADE_COLOR = { gold: '#ffd700', silver: '#c0c0c0', potential: '#d29922', normal: '#6e7681' };
-const COMP_COLOR = { alfamart: '#58a6ff', indomaret: '#bc8cff' };
+const GRADE_COLOR = { gold: '#b26a00', silver: '#c0c0c0', potential: '#b26a00', normal: '#767676' };
+const COMP_COLOR = { alfamart: '#767676', indomaret: '#bc8cff' };
 const GRADE_LABEL = { gold: '黄金', silver: '白银', potential: '潜力', normal: '普通' };
 const DIM_LABEL = { location: '位置', activity: '活跃度', competition: '竞争', cooperation: '合作',
                     digital: '数字化', owner: '店主', region: '区域' };
@@ -174,13 +174,13 @@ fetch('./data/channel_map.json').then(r => {
   fetch('./data/case_store.json').then(r => r.ok ? r.json() : null).then(cs => {
     if (!cs) return;
     const icon = L.divIcon({ className: '', iconSize: [22, 22],
-      html: `<div style="width:22px;height:22px;background:#e4022b;border:2px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 10px #e4022b88"></div>` });
+      html: `<div style="width:22px;height:22px;background:#e60023;border:2px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 10px #e6002388"></div>` });
     L.marker([cs.lat, cs.lon], { icon }).addTo(map).bindPopup(
       `<b>${cs.name}</b><br>${cs.tier} · ${cs.net_size}<br>` +
       `${cs.neighborhood} · ${cs.status}<br>服务半径 ${cs.service_radius_m}m（${cs.service_note}）<br>` +
-      `<a href="${cs.link}" style="color:#ffd700">进入案例 →</a>`);
-    L.circle([cs.lat, cs.lon], { radius: cs.service_radius_m, color: '#e4022b', weight: 1.5,
-      fillColor: '#e4022b', fillOpacity: 0.06, dashArray: '6 4' }).addTo(map);
+      `<a href="${cs.link}" style="color:#b26a00">进入案例 →</a>`);
+    L.circle([cs.lat, cs.lon], { radius: cs.service_radius_m, color: '#e60023', weight: 1.5,
+      fillColor: '#e60023', fillOpacity: 0.06, dashArray: '6 4' }).addTo(map);
   }).catch(() => {});
 
   const popupHtml = p => {
@@ -194,8 +194,8 @@ fetch('./data/channel_map.json').then(r => {
 
   const compIcon = (type, name) => L.divIcon({
     className: '', iconSize: [14, 14],
-    html: `<div title="${name}" style="width:14px;height:14px;background:${COMP_COLOR[type] || '#58a6ff'};` +
-          `border:2px solid #0d1117;border-radius:3px;box-shadow:0 0 6px ${COMP_COLOR[type] || '#58a6ff'}88"></div>`
+    html: `<div title="${name}" style="width:14px;height:14px;background:${COMP_COLOR[type] || '#767676'};` +
+          `border:2px solid #ffffff;border-radius:3px;box-shadow:0 0 6px ${COMP_COLOR[type] || '#767676'}88"></div>`
   });
 
   d.points.forEach(p => {
@@ -211,8 +211,8 @@ fetch('./data/channel_map.json').then(r => {
     } else {
       compLayer.addLayer(L.marker([p.lat, p.lon], { icon: compIcon(p.type, p.name) })
         .bindPopup(`<b>${p.name}</b><br>现代渠道竞品（${p.type}）`));
-      L.circle([p.lat, p.lon], { radius: d.params.radius_m, color: '#58a6ff', weight: 1,
-        fillColor: '#58a6ff', fillOpacity: 0.05, opacity: 0.35 }).addTo(covLayer);
+      L.circle([p.lat, p.lon], { radius: d.params.radius_m, color: '#767676', weight: 1,
+        fillColor: '#767676', fillOpacity: 0.05, opacity: 0.35 }).addTo(covLayer);
     }
   });
 
@@ -265,7 +265,7 @@ fetch('./data/channel_map.json').then(r => {
   };
 
   /* ── 加盟机会图层（体系二）：区域评分热力点 + 保护半径圈 + 品牌匹配弹窗 ── */
-  const OPP_COLOR = { S: '#34d17b', A: '#4da3ff', B: '#e8b246', C: '#6e7681' };
+  const OPP_COLOR = { S: '#2e7d32', A: '#767676', B: '#b26a00', C: '#767676' };
   let oppLayer = null, oppLoaded = false;
   const jt = n => 'Rp ' + (n / 1e6).toLocaleString('id-ID', { maximumFractionDigits: 0 }) + ' jt';
   document.getElementById('oppToggle').onchange = async e => {
@@ -274,25 +274,25 @@ fetch('./data/channel_map.json').then(r => {
       oppLayer = L.layerGroup();
       // 保护半径圈（已开业加盟店 + 案例样板）
       d.protection.forEach(p => {
-        L.circle([p.lat, p.lon], { radius: p.radius_m, color: '#e4022b', weight: 1.2, dashArray: '4 4',
-          fillColor: '#e4022b', fillOpacity: 0.05 }).addTo(oppLayer)
+        L.circle([p.lat, p.lon], { radius: p.radius_m, color: '#e60023', weight: 1.2, dashArray: '4 4',
+          fillColor: '#e60023', fillOpacity: 0.05 }).addTo(oppLayer)
           .bindPopup(`<b>${p.name}</b><br>${p.kind} · ${p.opened_at} 开业<br>保护半径 ${p.radius_m}m`);
         L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '', iconSize: [14, 14],
-          html: '<div style="width:12px;height:12px;background:#e4022b;border:2px solid #fff;border-radius:3px;transform:rotate(45deg)"></div>' }) })
+          html: '<div style="width:12px;height:12px;background:#e60023;border:2px solid #fff;border-radius:3px;transform:rotate(45deg)"></div>' }) })
           .addTo(oppLayer).bindPopup(`<b>${p.name}</b><br>${p.kind} · 保护半径 ${p.radius_m}m`);
       });
       // 机会分区（按评分着色，S 级脉动大件）
       d.zones.forEach(z => {
-        const c = OPP_COLOR[z.grade] || '#6e7681';
+        const c = OPP_COLOR[z.grade] || '#767676';
         L.circleMarker([z.lat, z.lon], { radius: 8 + z.score / 8, color: '#fff', weight: 1,
           fillColor: c, fillOpacity: 0.55 })
           .addTo(oppLayer)
           .bindPopup(`<b>${z.name}</b> · ${z.city}<br>
             机会分 <b style="color:${c}">${z.score}</b>（${z.grade} 级）<br>
             人口 ${z.population_k}k · 商圈 ${z.mall_grade}/5 · 竞品 ${z.competitor_count}<br>
-            <span style="color:#999">建议引入：${z.suggested_brand.name || '—'}</span>
-            <span style="color:#8b98a8">（加盟费 ${jt(z.suggested_brand.fee_idr || 0)} / 总投 ${jt(z.suggested_brand.invest_idr || 0)}）</span><br>
-            <a href="/franchise/" style="color:#999999">查看加盟业态 →</a>`);
+            <span style="color:#767676">建议引入：${z.suggested_brand.name || '—'}</span>
+            <span style="color:#767676">（加盟费 ${jt(z.suggested_brand.fee_idr || 0)} / 总投 ${jt(z.suggested_brand.invest_idr || 0)}）</span><br>
+            <a href="/franchise/" style="color:#767676">查看加盟业态 →</a>`);
       });
       oppLoaded = true;
     }
@@ -300,7 +300,7 @@ fetch('./data/channel_map.json').then(r => {
     e.target.checked ? oppLayer.addTo(map) : map.removeLayer(oppLayer);
   };
 }).catch(e => {
-  document.getElementById('side').innerHTML = `<div style="color:#f85149;padding:20px">加载失败：${e.message}</div>`;
+  document.getElementById('side').innerHTML = `<div style="color:#e60023;padding:20px">加载失败：${e.message}</div>`;
 });
 </script>
 <script src="/ui/interactions.js" defer></script>

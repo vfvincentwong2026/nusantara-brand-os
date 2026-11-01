@@ -10,41 +10,41 @@
 <title>培训体系 · SOP + 三级认证，让任何人复制单店 | Nusantara Brand OS</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  body { background:#ffffff; color:#111111; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
   .wrap { max-width:1280px; margin:0 auto; padding:64px 24px 80px; }
   .head { margin-bottom:22px; }
-  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(52,209,123,.5); border-radius:999px;
-               color:#34d17b; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+  .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(46,125,35,.5); border-radius:999px;
+               color:#2e7d32; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
   .head h1 { font-size:34px; font-weight:800; line-height:1.2; }
   .head h1 em { color:#888; font-style:normal; }
-  .head p { margin-top:10px; color:#8b98a8; font-size:13px; max-width:860px; line-height:1.8; }
-  .track { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:22px; margin-bottom:22px; }
+  .head p { margin-top:10px; color:#767676; font-size:13px; max-width:860px; line-height:1.8; }
+  .track { background:#ffffff; border:1px solid #e5e5e5; border-radius:14px; padding:22px; margin-bottom:22px; }
   .track > h2 { font-size:16px; margin-bottom:4px; }
-  .track > .td { color:#8b98a8; font-size:12px; margin-bottom:16px; line-height:1.7; }
+  .track > .td { color:#767676; font-size:12px; margin-bottom:16px; line-height:1.7; }
   .mods { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:14px; }
-  .mod { background:#0d1219; border:1px solid #1a222d; border-radius:12px; padding:16px; }
+  .mod { background:#ffffff; border:1px solid #f2f2f2; border-radius:12px; padding:16px; }
   .mod h3 { font-size:13px; margin-bottom:4px; }
-  .mod .md { color:#5b6779; font-size:10.5px; margin-bottom:12px; line-height:1.6; }
-  .chk { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid #161d27;
-         cursor:pointer; font-size:12px; line-height:1.7; color:#a9b6c6; }
-  .chk input { margin-top:3px; accent-color:#34d17b; flex:0 0 auto; }
-  .chk.done { color:#5b6779; text-decoration:line-through; }
-  .chk small { display:block; color:#5b6779; font-size:10.5px; margin-top:2px; }
-  .prog { height:6px; background:#1c2430; border-radius:3px; overflow:hidden; margin:10px 0 4px; }
-  .prog i { display:block; height:100%; background:linear-gradient(90deg,#34d17b,#e8b246); border-radius:3px; transition:width .3s; }
-  .progtxt { font-family:Consolas,monospace; font-size:11px; color:#8b98a8; }
+  .mod .md { color:#767676; font-size:10.5px; margin-bottom:12px; line-height:1.6; }
+  .chk { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-top:1px solid #e5e5e5;
+         cursor:pointer; font-size:12px; line-height:1.7; color:#444444; }
+  .chk input { margin-top:3px; accent-color:#2e7d32; flex:0 0 auto; }
+  .chk.done { color:#767676; text-decoration:line-through; }
+  .chk small { display:block; color:#767676; font-size:10.5px; margin-top:2px; }
+  .prog { height:6px; background:#efefef; border-radius:3px; overflow:hidden; margin:10px 0 4px; }
+  .prog i { display:block; height:100%; background:linear-gradient(90deg,#2e7d32,#b26a00); border-radius:3px; transition:width .3s; }
+  .progtxt { font-family:Consolas,monospace; font-size:11px; color:#767676; }
   .lvls { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; margin-top:14px; }
-  .lvl { background:#0d1219; border:1px solid #1a222d; border-radius:12px; padding:14px; }
-  .lvl .ln { font-weight:800; font-size:13px; color:#999; }
-  .lvl .lt { color:#5b6779; font-size:10.5px; margin:4px 0 8px; }
-  .lvl ul { list-style:none; font-size:11.5px; color:#a9b6c6; line-height:1.9; }
-  .lvl li::before { content:"▸ "; color:#999999; }
+  .lvl { background:#ffffff; border:1px solid #f2f2f2; border-radius:12px; padding:14px; }
+  .lvl .ln { font-weight:800; font-size:13px; color:#767676; }
+  .lvl .lt { color:#767676; font-size:10.5px; margin:4px 0 8px; }
+  .lvl ul { list-style:none; font-size:11.5px; color:#444444; line-height:1.9; }
+  .lvl li::before { content:"▸ "; color:#767676; }
   .cal { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; margin-top:12px; }
-  .cal .w { background:#0d1219; border:1px solid #1a222d; border-radius:10px; padding:10px 12px; font-size:11px; }
-  .cal .w b { display:block; color:#e4022b; font-size:11px; margin-bottom:4px; }
-  .reset { background:none; border:1px solid #1f2733; color:#5b6779; border-radius:8px; padding:6px 12px;
+  .cal .w { background:#ffffff; border:1px solid #f2f2f2; border-radius:10px; padding:10px 12px; font-size:11px; }
+  .cal .w b { display:block; color:#e60023; font-size:11px; margin-bottom:4px; }
+  .reset { background:none; border:1px solid #e5e5e5; color:#767676; border-radius:8px; padding:6px 12px;
            font-size:11px; cursor:pointer; margin-top:10px; }
-  .reset:hover { color:#ff5c7a; border-color:rgba(255,92,122,.4); }
+  .reset:hover { color:#e60023; border-color:rgba(230,0,35,.4); }
 </style>
 </head>
 <body>
@@ -66,12 +66,12 @@
 <div class="wrap">
   <div class="head">
     <div class="tag">PLAYBOOK · 培训与认证体系</div>
-    <h1>培训体系：<em>SOP + 三级认证</em>，让单店模型可以被任何人复制</h1>
+    <h1>培训体系 PLAYBOOK：<em>SOP + 三级认证</em>，让单店模型可以被任何人复制</h1>
     <p>两条线：供应链操作手册（SOP，管货与场）+ 加盟培训体系（管人，三级认证）。勾选进度保存在本机浏览器，店长培训时可直接当电子检查单用。</p>
   </div>
 
   <div class="track">
-    <h2>📦 供应链操作手册（SOP）</h2>
+    <h2>📦 供应链操作手册 SUPPLY SOP</h2>
     <div class="td">覆盖「订货 → 验收 → 陈列 → 盘点效期 → 食安合规」五个环节，与中央库 · 供应商库联动：每步的供应商要求写入供应商档案备注。</div>
     <div class="prog"><i id="sopBar" style="width:0%"></i></div>
     <div class="progtxt" id="sopTxt">0 / 0</div>
@@ -79,7 +79,7 @@
   </div>
 
   <div class="track">
-    <h2>🎓 加盟培训体系</h2>
+    <h2>🎓 加盟培训体系 FRANCHISE TRAINING</h2>
     <div class="td">三级认证：L1 上岗 → L2 店长 → L3 主理人。培训内容直接引用站内模块：机制玩法来自落地评分、被拍性标准来自品牌生成器、选址评估来自渠道地图。</div>
     <div class="mods" style="grid-template-columns:1fr;">
       <div class="mod"><h3>三级认证路径</h3><div class="md">每级 = 课堂模块 + 门店实操 + 考核</div>

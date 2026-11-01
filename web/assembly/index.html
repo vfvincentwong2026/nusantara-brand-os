@@ -10,55 +10,55 @@
 <title>开店方案 · 四种装配路径，成本工期一页对比 | Nusantara Brand OS</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  body { background:#ffffff; color:#111111; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
   .wrap { max-width:1280px; margin:0 auto; padding:86px 24px 80px; }
   .head { margin-bottom:22px; }
   .head .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(255,255,255,.3); border-radius:999px;
-               color:#999; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
+               color:#767676; font-size:11px; letter-spacing:.14em; margin-bottom:14px; }
   .head h1 { font-size:34px; font-weight:800; line-height:1.2; }
   .head h1 em { color:#888; font-style:normal; }
-  .head p { margin-top:10px; color:#8b98a8; font-size:13px; max-width:860px; line-height:1.8; }
-  .demo { margin-top:12px; font-size:11px; color:#999; }
+  .head p { margin-top:10px; color:#767676; font-size:13px; max-width:860px; line-height:1.8; }
+  .demo { margin-top:12px; font-size:11px; color:#767676; }
   .cmp { overflow-x:auto; margin-bottom:22px; }
   table { width:100%; border-collapse:collapse; font-size:12px; min-width:860px; }
-  th { text-align:left; color:#5b6779; font-size:10.5px; letter-spacing:.08em; padding:10px 12px;
-       border-bottom:1px solid #1f2733; font-weight:600; white-space:nowrap; }
-  td { padding:12px; border-bottom:1px solid #1a222d; vertical-align:top; line-height:1.7; }
-  tr.rowcard:hover { background:rgba(255,255,255,.02); }
+  th { text-align:left; color:#767676; font-size:10.5px; letter-spacing:.08em; padding:10px 12px;
+       border-bottom:1px solid #e5e5e5; font-weight:600; white-space:nowrap; }
+  td { padding:12px; border-bottom:1px solid #f2f2f2; vertical-align:top; line-height:1.7; }
+  tr.rowcard:hover { background:rgba(0,0,0,.02); }
   td .form { font-weight:800; font-size:13px; white-space:nowrap; }
-  td .form small { display:block; color:#5b6779; font-weight:400; font-size:10.5px; margin-top:2px; }
+  td .form small { display:block; color:#767676; font-weight:400; font-size:10.5px; margin-top:2px; }
   .money { font-family:Consolas,monospace; font-weight:700; font-size:14px; white-space:nowrap; }
-  .money small { display:block; color:#5b6779; font-weight:400; font-size:10.5px; }
+  .money small { display:block; color:#767676; font-weight:400; font-size:10.5px; }
   .wk { font-family:Consolas,monospace; white-space:nowrap; }
   .pill { display:inline-block; padding:2px 10px; border-radius:999px; font-size:11px; font-weight:700; white-space:nowrap; }
-  .pill.on { background:rgba(52,209,123,.15); color:#34d17b; border:1px solid rgba(52,209,123,.4); }
-  .pill.off { background:rgba(255,92,122,.1); color:#ff5c7a; border:1px solid rgba(255,92,122,.3); }
+  .pill.on { background:rgba(46,125,35,.15); color:#2e7d32; border:1px solid rgba(46,125,35,.4); }
+  .pill.off { background:rgba(230,0,35,.1); color:#e60023; border:1px solid rgba(230,0,35,.3); }
   .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:16px; }
-  .card { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px; }
-  .card.best { border-color:rgba(52,209,123,.45); box-shadow:0 0 24px rgba(52,209,123,.08); }
+  .card { background:#ffffff; border:1px solid #e5e5e5; border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:12px; }
+  .card.best { border-color:rgba(46,125,35,.45); box-shadow:0 0 24px rgba(46,125,35,.08); }
   .card h3 { font-size:15px; }
-  .card h3 small { color:#5b6779; font-size:11px; font-weight:400; margin-left:6px; }
+  .card h3 small { color:#767676; font-size:11px; font-weight:400; margin-left:6px; }
   .bars { display:flex; flex-direction:column; gap:6px; }
   .bar { display:grid; grid-template-columns:64px 1fr 96px; gap:8px; align-items:center; font-size:10.5px; }
-  .bar .bn { color:#8b98a8; }
-  .bar .bt { height:8px; background:#1c2430; border-radius:4px; overflow:hidden; }
+  .bar .bn { color:#767676; }
+  .bar .bt { height:8px; background:#efefef; border-radius:4px; overflow:hidden; }
   .bar .bt i { display:block; height:100%; border-radius:4px; }
-  .bar .bv { font-family:Consolas,monospace; color:#8b98a8; text-align:right; white-space:nowrap; }
+  .bar .bv { font-family:Consolas,monospace; color:#767676; text-align:right; white-space:nowrap; }
   .pc { display:grid; grid-template-columns:1fr 1fr; gap:8px; font-size:11.5px; line-height:1.7; }
   .pc ul { list-style:none; }
-  .pc li { padding-left:14px; position:relative; margin-bottom:5px; color:#a9b6c6; }
-  .pc .pros li::before { content:"+"; position:absolute; left:0; color:#34d17b; font-weight:800; }
-  .pc .cons li::before { content:"−"; position:absolute; left:0; color:#ff5c7a; font-weight:800; }
-  .kv { font-size:11.5px; color:#8b98a8; line-height:1.8; border-top:1px solid #1a222d; padding-top:10px; }
-  .kv b { color:#e8eef5; }
-  .fitline { font-size:12px; color:#999; }
-  .fimg { display:block; border:1px solid #1f2733; border-radius:8px; overflow:hidden; margin-bottom:2px; }
+  .pc li { padding-left:14px; position:relative; margin-bottom:5px; color:#444444; }
+  .pc .pros li::before { content:"+"; position:absolute; left:0; color:#2e7d32; font-weight:800; }
+  .pc .cons li::before { content:"−"; position:absolute; left:0; color:#e60023; font-weight:800; }
+  .kv { font-size:11.5px; color:#767676; line-height:1.8; border-top:1px solid #f2f2f2; padding-top:10px; }
+  .kv b { color:#111111; }
+  .fitline { font-size:12px; color:#767676; }
+  .fimg { display:block; border:1px solid #e5e5e5; border-radius:8px; overflow:hidden; margin-bottom:2px; }
   .fimg img { display:block; width:100%; height:150px; object-fit:cover; transition:transform .45s cubic-bezier(.16,1,.3,1); }
   .fimg:hover img { transform:scale(1.04); }
-  .reco { background:linear-gradient(135deg,rgba(52,209,123,.1),rgba(232,178,70,.05));
-          border:1px solid rgba(52,209,123,.35); border-radius:14px; padding:18px 20px; margin-bottom:20px;
+  .reco { background:linear-gradient(135deg,rgba(46,125,35,.1),rgba(182,106,0,.05));
+          border:1px solid rgba(46,125,35,.35); border-radius:14px; padding:18px 20px; margin-bottom:20px;
           font-size:13px; line-height:1.9; }
-  .reco b { color:#34d17b; }
+  .reco b { color:#2e7d32; }
 </style>
 </head>
 <body>
@@ -77,20 +77,20 @@
   <span style="color:var(--faint-warm);font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">兄弟项目</span>
   <a class="nl" href="https://nusantara-container.pages.dev/" target="_blank" rel="noopener">集装箱项目<span class="nle">CONTAINER ↗</span></a>
 </nav>
-<div class="chain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #141a23;background:rgba(11,14,19,.92);backdrop-filter:blur(6px);">
+<div class="chain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#767676;border-bottom:1px solid #e5e5e5;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);">
   <span style="letter-spacing:.1em;">孵化流水线</span>
-  <a href="/trend/" data-s="/trend/" style="color:#8b98a8;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
-<a href="/launch/" data-s="/launch/" style="color:#8b98a8;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
-<a href="/brandkit/" data-s="/brandkit/" style="color:#8b98a8;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
-<a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
-<a href="/store-dash/" data-s="/store-dash/" style="color:#8b98a8;text-decoration:none;">⑤ 验证 · 门店大屏</a><span>→</span>
-<a href="/franchise/" data-s="/franchise/" style="color:#8b98a8;text-decoration:none;">⑥ 复制 · 加盟体系</a>
-  <script>document.querySelectorAll('.chain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#e8b246';a.style.fontWeight='700';}});</script>
+  <a href="/trend/" data-s="/trend/" style="color:#767676;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
+<a href="/launch/" data-s="/launch/" style="color:#767676;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
+<a href="/brandkit/" data-s="/brandkit/" style="color:#767676;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
+<a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
+<a href="https://nusantara-container.pages.dev/store-dash/" data-s="/store-dash/" target="_blank" rel="noopener" style="color:#767676;text-decoration:none;">⑤ 验证 · 门店大屏 ↗</a><span>→</span>
+<a href="/franchise/" data-s="/franchise/" style="color:#767676;text-decoration:none;">⑥ 复制 · 加盟体系</a>
+  <script>document.querySelectorAll('.chain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#b26a00';a.style.fontWeight='700';}});</script>
 </div>
 <div class="wrap">
   <div class="head">
     <div class="tag">PILOT 验证 · ASSEMBLY COMPARE · 装配选型</div>
-    <h1>开店方案：<em>8–10 万成本包</em>，四种装配形态一页选型</h1>
+    <h1>开店方案 STORE ASSEMBLY：<em>8–10 万成本包</em>，四种装配形态一页选型</h1>
     <p class="actq" style="margin:10px 0 0;color:#666;font-size:12.5px;letter-spacing:.02em;">这一幕回答：8–10 万怎么把第一家店开出来——四种装配形态一页选型。</p>
     <p>三种整装形态 × 五维成本拆解 × 工期/证照/供应链要求。核心判断：快速验证阶段只选「可搬迁、预算内、工期短」的方案；验证通过后再放大到不可搬迁形态。</p>
     <div class="demo" id="demoNote"></div>
@@ -103,7 +103,7 @@
   <div class="cards" id="cards"></div>
 </div>
 <script>
-const BAR_COLORS = ['#e4022b','#e8b246','#4da3ff','#34d17b','#ff9a3d'];
+const BAR_COLORS = ['#e60023','#b26a00','#767676','#2e7d32','#b26a00'];
 fetch('./data/assembly.json').then(r => r.json()).then(d => {
   document.getElementById('demoNote').textContent =
     `⚠ DEMO 金额为雅加达 2026 行情区间估算（演示口径）；汇率锚 1 CNY ≈ ${d.meta.cny_idr} IDR；落地前需当地承包商询价复核。`;
