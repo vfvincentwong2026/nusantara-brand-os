@@ -122,9 +122,10 @@
        我们去联系合作：供应链网络加持、社交媒体系统加持、策略打法输出。不是复制者，是本土网红品牌的放大器与合伙人。</p>
     <div class="en">Scrape local heat → Identify rising local brands → Partner &amp; amplify / From viral signal to partnership</div>
   </div>
-  <div class="demo-bar">🇮🇩 数据源 DATA：印尼本地 <b>IG / TikTok / X</b> 公开数据抓取口径（粉丝 / 播放 / 赞 / 转发 / 互动率 / 30 天增速）。⚠ 当前为演示种子数据（10 个本土品牌 · 近 3 个月窗口），字段与真实抓取 API 对齐，可无缝切换。</div>
+  <div class="demo-bar">🇮🇩 数据源 DATA：印尼本地 <b>IG / TikTok / X</b> 公开数据抓取口径（粉丝 / 播放 / 赞 / 转发 / 互动率 / 30 天增速）。⚠ 当前为演示种子数据（10 个本土品牌 + 10 家潜力小店 · 近 3 个月窗口），字段与真实抓取 API 对齐，可无缝切换。</div>
   <div class="tabs" style="margin-bottom:20px;">
     <button class="on" id="vw-heat" onclick="switchView('heat')">🔥 本地热度榜 LOCAL HEAT</button>
+    <button id="vw-pot" onclick="switchView('pot')">🌱 潜力新星榜 POTENTIAL</button>
     <button id="vw-coop" onclick="switchView('coop')">🤝 合作机会榜 PARTNERSHIP</button>
   </div>
   <div class="layout" id="heat-view">
@@ -146,6 +147,10 @@
       </div>
     </div>
   </div>
+  <div class="panel" id="pot-view" style="display:none;">
+    <h2>潜力新星榜 · 1~3 店线下小店的现象级候选 POTENTIAL（选址/客群/产品/社交/热点 五维因子评分 → 优化方向 → 资源嫁接 → 合作模式）</h2>
+    <div id="pots"></div>
+  </div>
   <div class="panel" id="coop-view" style="display:none;">
     <h2>合作机会榜 · 按合作价值排序 PARTNERSHIP（热度 × 缺口 × 增速 → 谁先联系、怎么切入 · 近 3 个月社媒口径）</h2>
     <div id="coops"></div>
@@ -166,8 +171,10 @@ function addPick(kind, item) {
 }
 function switchView(v) {
   document.getElementById('heat-view').style.display = v === 'heat' ? '' : 'none';
+  document.getElementById('pot-view').style.display = v === 'pot' ? '' : 'none';
   document.getElementById('coop-view').style.display = v === 'coop' ? '' : 'none';
   document.getElementById('vw-heat').classList.toggle('on', v === 'heat');
+  document.getElementById('vw-pot').classList.toggle('on', v === 'pot');
   document.getElementById('vw-coop').classList.toggle('on', v === 'coop');
 }
 
@@ -231,6 +238,43 @@ function renderSide() {
     `<div class="boostcard"><div class="bn">${esc(x.name)}<span>${esc(x.en)}</span></div><div class="bd">${esc(x.desc)}</div></div>`).join('');
 }
 
+const DIM_LABEL = { site: '选址 SITE', crowd: '客群 CROWD', product: '产品定位 PRODUCT', social: '社交属性 SOCIAL', viral: '热点属性 VIRAL' };
+const DIM_COLOR = v => v >= 75 ? '#2e7d32' : v >= 60 ? '#b26a00' : '#e60023';
+const POT_COLOR = v => v >= 72 ? '#2e7d32' : v >= 65 ? '#b26a00' : '#767676';
+
+function shopCard(s, i) {
+  const dimBars = Object.entries(s.dims).map(([k, v]) =>
+    `<div class="g">${DIM_LABEL[k]} <b style="color:${DIM_COLOR(v)}">${v}</b><div class="bar"><i style="width:${v}%;background:${DIM_COLOR(v)}"></i></div></div>`).join('');
+  const optLines = Object.entries(s.opt).map(([k, t]) =>
+    `<div class="sig">▸ <b style="color:#111;">${DIM_LABEL[k].split(' ')[0]}</b> → ${esc(t)}</div>`).join('');
+  return `<div class="card">
+    <div class="top"><span class="rank">${String(i + 1).padStart(2, '0')}</span>
+      <span class="name">${esc(s.name)}</span></div>
+    <div class="meta">
+      <span class="chip">📍 ${esc(s.city)}</span>
+      <span class="chip">${esc(s.category)}</span>
+      <span class="chip stage-up">${s.stores} 家店</span>
+      <span class="chip">营业 ${s.age_months} 个月</span>
+    </div>
+    <div class="fitline" style="border-top:none;padding-top:0;"><span style="font-size:11px;color:#767676;">现象级潜力 POTENTIAL</span>
+      <div class="bar"><i style="width:${s.potential_score}%;background:${POT_COLOR(s.potential_score)}"></i></div>
+      <span class="v" style="color:${POT_COLOR(s.potential_score)}">${s.potential_score}</span></div>
+    <div class="sec"><b>五维因子评分 FACTORS</b><div class="gapline">${dimBars}</div></div>
+    <div class="sec hot"><b>优化方向 OPTIMIZE（结合我们的因子）</b>${optLines}</div>
+    <div class="sec gap"><b>需提高 / 嫁接的资源 GAPS</b>${gapLines(s)}</div>
+    <div class="sec coop"><b>资源匹配我们能给 MATCH</b>${s.boost.map(x => `<span class="chip" style="color:#2e7d32;border-color:rgba(46,125,35,.45);margin-right:6px;">${esc(x)}</span>`).join('')}</div>
+    <div class="sec coop"><b>建议合作模式：${esc(s.coop_model)}</b>${esc(s.coop_note)}</div>
+    <div style="margin-top:10px">
+      <button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: s.id, name: s.name, city: s.city, category: s.category, stores: s.stores, stage: "潜力新星", potential_score: s.potential_score, coop_model: s.coop_model})})'>＋ 合作候选入库 SAVE</button>
+      <a class="btn-coop" href="mailto:${s.contact}?subject=合作提案 · Nusantara Brand OS × ${encodeURIComponent(s.name)}">发起合作 →</a>
+    </div>
+  </div>`;
+}
+
+function renderPots() {
+  document.getElementById('pots').innerHTML = (state.data.shops || []).map(shopCard).join('');
+}
+
 function renderCoop() {
   const ranked = [...state.data.brands].sort((a, b) => b.value_score - a.value_score);
   document.getElementById('coops').innerHTML = ranked.map(card).join('');
@@ -240,7 +284,7 @@ function setCity(c) { state.city = c; renderTabs(); renderList(); }
 
 fetch('./data/local_brands.json').then(r => r.json()).then(d => {
   state.data = d;
-  renderTabs(); renderList(); renderSide(); renderCoop();
+  renderTabs(); renderList(); renderSide(); renderCoop(); renderPots();
 });
 const p = location.pathname;
 document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });

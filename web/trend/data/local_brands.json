@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01 23:55",
+  "generated_at": "2026-11-02 00:41",
   "demo": true,
   "window": "近3个月",
   "source_note": "演示种子数据 · 字段对齐真实 IG/TikTok/X 公开数据抓取口径（粉丝/播放/互动/增速）",
@@ -382,6 +382,354 @@
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
       "value_score": 61.7
+    }
+  ],
+  "shops": [
+    {
+      "id": "SH-02",
+      "name": "Seblak Teh Ninih",
+      "city": "万隆",
+      "category": "西爪哇辣烫",
+      "stores": 2,
+      "age_months": 20,
+      "need_supply": 70,
+      "need_social": 58,
+      "need_strategy": 62,
+      "boost": [
+        "社媒矩阵代运营",
+        "加盟体系输出"
+      ],
+      "coop_model": "品牌联营 + 系统加持",
+      "coop_note": "已具备两店模型与自发流量，最适合'联营+体系输出'快速铺到 10 店。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 66,
+        "crowd": 81,
+        "product": 77,
+        "social": 72,
+        "viral": 76
+      },
+      "opt": {
+        "site": "两店都在大学半径内，第三店应沿轻轨站复制",
+        "crowd": "学生客群极稳，需设计毕业后的家庭场景产品线",
+        "product": "辣度分级+隐藏配料已是玩法雏形，应机制化写成收集系统",
+        "social": "学生自发性 UGC 多，缺官方话题引导与 KOC 分发",
+        "viral": "#seblak 话题天然高流量，本店视频被搬运 300+ 次但未挂定位"
+      },
+      "potential_score": 74.7
+    },
+    {
+      "id": "SH-04",
+      "name": "Pisang Goreng Madu Bu Nanik",
+      "city": "泗水",
+      "category": "蜂蜜炸香蕉",
+      "stores": 1,
+      "age_months": 14,
+      "need_supply": 68,
+      "need_social": 82,
+      "need_strategy": 71,
+      "boost": [
+        "社媒矩阵代运营",
+        "选址引擎",
+        "快闪店模型"
+      ],
+      "coop_model": "深孵 + 快闪验证",
+      "coop_note": "全网最火的'无主流量'：流量在别人的账号里。先把账号和锚点门店做出来，转化现成热度。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 52,
+        "crowd": 64,
+        "product": 79,
+        "social": 74,
+        "viral": 82
+      },
+      "opt": {
+        "site": "流动档口无固定点位，急需固定锚点门店承接流量",
+        "crowd": "路人客群随机性强，需用预购群把过客变熟客",
+        "product": "蜂蜜瀑布浇汁是传播画面，应固定为仪式化出品 SOP",
+        "social": "浇汁慢镜头已被搬运 500+ 万次，官方账号仅 800 粉",
+        "viral": "单条搬运视频播放破 800 万，'泗水蜂蜜香蕉'已成搜索词"
+      },
+      "potential_score": 72.6
+    },
+    {
+      "id": "SH-03",
+      "name": "Ayam Gepuk Bu Yati",
+      "city": "日惹",
+      "category": "椰浆炸鸡",
+      "stores": 3,
+      "age_months": 30,
+      "need_supply": 76,
+      "need_social": 64,
+      "need_strategy": 55,
+      "boost": [
+        "零售化供应链",
+        "社媒内容系统",
+        "爆品机制设计"
+      ],
+      "coop_model": "供应链共建 + 爆品共创",
+      "coop_note": "工艺壁垒型选手，把腌制工艺变成零售 SKU 是最快的第二曲线。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 71,
+        "crowd": 75,
+        "product": 82,
+        "social": 61,
+        "viral": 68
+      },
+      "opt": {
+        "site": "三店均为社区街边店，旗舰体验店缺失，品牌无'打卡锚点'",
+        "crowd": "家庭客群扎实，Z 世代触达不足",
+        "product": "椰浆腌制工艺有壁垒，应开发即食包装进 KA 渠道",
+        "social": "出餐快但无'被拍性'设计，加木槌敲鸡仪式化动作",
+        "viral": "本地美食号多次自发探店，未形成统一话题标签"
+      },
+      "potential_score": 70.9
+    },
+    {
+      "id": "SH-06",
+      "name": "Kwetiau Akang",
+      "city": "雅加达",
+      "category": "炒粿条",
+      "stores": 3,
+      "age_months": 42,
+      "need_supply": 66,
+      "need_social": 60,
+      "need_strategy": 58,
+      "boost": [
+        "加盟体系输出",
+        "社媒矩阵代运营"
+      ],
+      "coop_model": "加盟体系输出 + 供应链托管",
+      "coop_note": "三店已验证，连锁化模板清晰——输出 SOP+供应链即可加速。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 68,
+        "crowd": 77,
+        "product": 73,
+        "social": 66,
+        "viral": 70
+      },
+      "opt": {
+        "site": "三店覆盖雅加达西区，东区与卫星城空白",
+        "crowd": "华人与本地客群双覆盖，可做'两代人同桌'叙事",
+        "product": "锅气是核心卖点但无法标准化，需锁定 3 个黄金 SKU",
+        "social": "明档现炒有画面，缺统一视觉锤与话题标签",
+        "viral": "#kwetiauakang 话题 6000 万播放，官方未下场"
+      },
+      "potential_score": 70.5
+    },
+    {
+      "id": "SH-10",
+      "name": "Rujak Cingur Delta",
+      "city": "泗水",
+      "category": "东爪哇沙拉",
+      "stores": 1,
+      "age_months": 66,
+      "need_supply": 64,
+      "need_social": 77,
+      "need_strategy": 68,
+      "boost": [
+        "社媒矩阵代运营",
+        "游客动线策划",
+        "双产品线设计"
+      ],
+      "coop_model": "品牌联营 + 系统加持",
+      "coop_note": "挑战型内容基因极强，做一次官方挑战赛即可激活存量话题。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 59,
+        "crowd": 65,
+        "product": 74,
+        "social": 69,
+        "viral": 73
+      },
+      "opt": {
+        "site": "Delta 大桥下地标点位，游客知道但找不到——导视缺失",
+        "crowd": "游客+本地家庭混合，缺年轻人轻食版本",
+        "product": "重口味是门槛也是记忆点，可出'轻版 cingur'双产品线",
+        "social": "'敢不敢吃 cingur'挑战天然适合短视频",
+        "viral": "外国游客试吃反应视频多次破百万，官方零运营"
+      },
+      "potential_score": 69.1
+    },
+    {
+      "id": "SH-09",
+      "name": "Pempek 61",
+      "city": "雅加达",
+      "category": "巨港鱼糕",
+      "stores": 2,
+      "age_months": 54,
+      "need_supply": 73,
+      "need_social": 66,
+      "need_strategy": 61,
+      "boost": [
+        "零售化供应链",
+        "社媒内容系统",
+        "选址引擎"
+      ],
+      "coop_model": "深孵 + 快闪验证",
+      "coop_note": "蘸酱零售化+商场快闪是低成本验证路径，适合投早。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 64,
+        "crowd": 69,
+        "product": 78,
+        "social": 63,
+        "viral": 66
+      },
+      "opt": {
+        "site": "两店在社区商业街，缺高流量展示面",
+        "crowd": "巨港移民乡愁客群+本地尝鲜客群并存",
+        "product": "cuko 酸甜辣酱是差异化武器，应做蘸酱零售",
+        "social": "切鱼糕的弹刀工有视觉点，未设计拍摄位",
+        "viral": "TikTok 上巨港美食话题升温，本店未承接"
+      },
+      "potential_score": 68.0
+    },
+    {
+      "id": "SH-05",
+      "name": "Nasi Goreng Kambing Barito",
+      "city": "雅加达",
+      "category": "羊肉炒饭",
+      "stores": 1,
+      "age_months": 120,
+      "need_supply": 72,
+      "need_social": 75,
+      "need_strategy": 63,
+      "boost": [
+        "社媒内容系统",
+        "零售化供应链"
+      ],
+      "coop_model": "品牌联营 + 系统加持",
+      "coop_note": "老字号现象级点位，年轻化与零售化是最大的增值空间。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 78,
+        "crowd": 80,
+        "product": 80,
+        "social": 49,
+        "viral": 57
+      },
+      "opt": {
+        "site": "Barito 夜市锚点极佳，但排队动线无拍照区",
+        "crowd": "夜宵客群全国闻名，游客占比高，缺游客伴手礼转化",
+        "product": "秘制羊肉炒饭料应做成家庭装酱料零售",
+        "social": "凌晨大排长龙是奇观却无人运营，加'排队认证'打卡机制",
+        "viral": "美食纪录片常客，但短视频时代声量断层"
+      },
+      "potential_score": 66.6
+    },
+    {
+      "id": "SH-01",
+      "name": "Sate Kambing H. Diding",
+      "city": "雅加达",
+      "category": "沙嗲烧烤",
+      "stores": 1,
+      "age_months": 36,
+      "need_supply": 74,
+      "need_social": 78,
+      "need_strategy": 66,
+      "boost": [
+        "社媒内容系统",
+        "零售化供应链",
+        "选址引擎"
+      ],
+      "coop_model": "深度孵化",
+      "coop_note": "产品 84 分是全榜最高之一，只差包装与传播——典型的'产品好不会红'案例。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 58,
+        "crowd": 72,
+        "product": 84,
+        "social": 55,
+        "viral": 61
+      },
+      "opt": {
+        "site": "点位在老居民区深处，建议嫁接商场食阁或夜市档口做第二触点",
+        "crowd": "客群以周边中年男性为主，需补年轻客群入口（学生价套餐）",
+        "product": "沙嗲酱是记忆点，应做成零售罐装 SKU 进便利店测试",
+        "social": "无被拍动线设计，加开放式炭烤台让烟与火成为画面",
+        "viral": "本地论坛有口碑但零短视频运营，TikTok 账号尚未建立"
+      },
+      "potential_score": 65.6
+    },
+    {
+      "id": "SH-07",
+      "name": "Soto Lamongan Cak Har",
+      "city": "泗水",
+      "category": "爪哇鸡汤",
+      "stores": 2,
+      "age_months": 26,
+      "need_supply": 80,
+      "need_social": 70,
+      "need_strategy": 66,
+      "boost": [
+        "供应链网络加持",
+        "门店轻改造方案",
+        "社媒内容系统"
+      ],
+      "coop_model": "深度孵化",
+      "coop_note": "供应链分散采购痛点最典型——集采+标准化能直接降 15% 成本。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 61,
+        "crowd": 70,
+        "product": 76,
+        "social": 58,
+        "viral": 63
+      },
+      "opt": {
+        "site": "两店均在传统市场旁，卫生视觉升级是第一步",
+        "crowd": "早餐刚需客群稳，午晚场景完全空白",
+        "product": "Koya 虾松粉是灵魂配料，应独立包装成零售 SKU",
+        "social": "汤头翻滚画面好，但店内灯光昏暗无法拍摄",
+        "viral": "本地美食博主零星推荐，未形成声量"
+      },
+      "potential_score": 65.3
+    },
+    {
+      "id": "SH-08",
+      "name": "Bubur Ayam Barito",
+      "city": "雅加达",
+      "category": "鸡肉粥",
+      "stores": 1,
+      "age_months": 96,
+      "need_supply": 77,
+      "need_social": 72,
+      "need_strategy": 69,
+      "boost": [
+        "中央厨房供应链",
+        "社媒内容系统"
+      ],
+      "coop_model": "供应链共建 + 品牌焕新",
+      "coop_note": "中央厨房化改造后单店人效可提 40%，是供应链切入的好标的。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 75,
+        "crowd": 78,
+        "product": 71,
+        "social": 52,
+        "viral": 59
+      },
+      "opt": {
+        "site": "Barito 街区双锚点（与其余名店共生），可做'一条街吃透'动线",
+        "crowd": "早餐全龄段客群，缺办公场景外送订阅",
+        "product": "粥底可标准化中央厨房配送，门店只做浇头",
+        "social": "深夜收摊前的'最后一碗'是天然情绪点，未内容化",
+        "viral": "老牌网红余温尚在，近年声量下滑需再激活"
+      },
+      "potential_score": 65.2
     }
   ],
   "boost_system": {

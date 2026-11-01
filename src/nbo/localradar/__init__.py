@@ -137,6 +137,127 @@ BRANDS = [
          contact="partnership@demo.nbo"),
 ]
 
+# ---------- 潜力新星：1~3 家店的线下小店，现象级候选 ----------
+# 五维因子：选址 SITE / 客群 CROWD / 产品定位 PRODUCT / 社交属性 SOCIAL / 热点属性 VIRAL
+SHOP_DDL = """
+CREATE TABLE IF NOT EXISTS local_shop (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  city TEXT NOT NULL,
+  category TEXT NOT NULL,
+  stores INTEGER, age_months INTEGER,
+  dim_site INTEGER, dim_crowd INTEGER, dim_product INTEGER, dim_social INTEGER, dim_viral INTEGER,
+  opt_site TEXT, opt_crowd TEXT, opt_product TEXT, opt_social TEXT, opt_viral TEXT,
+  need_supply INTEGER, need_social INTEGER, need_strategy INTEGER,
+  boost TEXT,
+  coop_model TEXT, coop_note TEXT, contact TEXT,
+  source_type TEXT DEFAULT 'demo_seed'
+);
+"""
+
+SHOPS = [
+    dict(id="SH-01", name="Sate Kambing H. Diding", city="雅加达", category="沙嗲烧烤", stores=1, age_months=36,
+         dim_site=58, dim_crowd=72, dim_product=84, dim_social=55, dim_viral=61,
+         opt_site="点位在老居民区深处，建议嫁接商场食阁或夜市档口做第二触点",
+         opt_crowd="客群以周边中年男性为主，需补年轻客群入口（学生价套餐）",
+         opt_product="沙嗲酱是记忆点，应做成零售罐装 SKU 进便利店测试",
+         opt_social="无被拍动线设计，加开放式炭烤台让烟与火成为画面",
+         opt_viral="本地论坛有口碑但零短视频运营，TikTok 账号尚未建立",
+         need_supply=74, need_social=78, need_strategy=66,
+         boost=["社媒内容系统", "零售化供应链", "选址引擎"],
+         coop_model="深度孵化", coop_note="产品 84 分是全榜最高之一，只差包装与传播——典型的'产品好不会红'案例。", contact="partnership@demo.nbo"),
+    dict(id="SH-02", name="Seblak Teh Ninih", city="万隆", category="西爪哇辣烫", stores=2, age_months=20,
+         dim_site=66, dim_crowd=81, dim_product=77, dim_social=72, dim_viral=76,
+         opt_site="两店都在大学半径内，第三店应沿轻轨站复制",
+         opt_crowd="学生客群极稳，需设计毕业后的家庭场景产品线",
+         opt_product="辣度分级+隐藏配料已是玩法雏形，应机制化写成收集系统",
+         opt_social="学生自发性 UGC 多，缺官方话题引导与 KOC 分发",
+         opt_viral="#seblak 话题天然高流量，本店视频被搬运 300+ 次但未挂定位",
+         need_supply=70, need_social=58, need_strategy=62,
+         boost=["社媒矩阵代运营", "加盟体系输出"],
+         coop_model="品牌联营 + 系统加持", coop_note="已具备两店模型与自发流量，最适合'联营+体系输出'快速铺到 10 店。", contact="partnership@demo.nbo"),
+    dict(id="SH-03", name="Ayam Gepuk Bu Yati", city="日惹", category="椰浆炸鸡", stores=3, age_months=30,
+         dim_site=71, dim_crowd=75, dim_product=82, dim_social=61, dim_viral=68,
+         opt_site="三店均为社区街边店，旗舰体验店缺失，品牌无'打卡锚点'",
+         opt_crowd="家庭客群扎实，Z 世代触达不足",
+         opt_product="椰浆腌制工艺有壁垒，应开发即食包装进 KA 渠道",
+         opt_social="出餐快但无'被拍性'设计，加木槌敲鸡仪式化动作",
+         opt_viral="本地美食号多次自发探店，未形成统一话题标签",
+         need_supply=76, need_social=64, need_strategy=55,
+         boost=["零售化供应链", "社媒内容系统", "爆品机制设计"],
+         coop_model="供应链共建 + 爆品共创", coop_note="工艺壁垒型选手，把腌制工艺变成零售 SKU 是最快的第二曲线。", contact="partnership@demo.nbo"),
+    dict(id="SH-04", name="Pisang Goreng Madu Bu Nanik", city="泗水", category="蜂蜜炸香蕉", stores=1, age_months=14,
+         dim_site=52, dim_crowd=64, dim_product=79, dim_social=74, dim_viral=82,
+         opt_site="流动档口无固定点位，急需固定锚点门店承接流量",
+         opt_crowd="路人客群随机性强，需用预购群把过客变熟客",
+         opt_product="蜂蜜瀑布浇汁是传播画面，应固定为仪式化出品 SOP",
+         opt_social="浇汁慢镜头已被搬运 500+ 万次，官方账号仅 800 粉",
+         opt_viral="单条搬运视频播放破 800 万，'泗水蜂蜜香蕉'已成搜索词",
+         need_supply=68, need_social=82, need_strategy=71,
+         boost=["社媒矩阵代运营", "选址引擎", "快闪店模型"],
+         coop_model="深孵 + 快闪验证", coop_note="全网最火的'无主流量'：流量在别人的账号里。先把账号和锚点门店做出来，转化现成热度。", contact="partnership@demo.nbo"),
+    dict(id="SH-05", name="Nasi Goreng Kambing Barito", city="雅加达", category="羊肉炒饭", stores=1, age_months=120,
+         dim_site=78, dim_crowd=80, dim_product=80, dim_social=49, dim_viral=57,
+         opt_site="Barito 夜市锚点极佳，但排队动线无拍照区",
+         opt_crowd="夜宵客群全国闻名，游客占比高，缺游客伴手礼转化",
+         opt_product="秘制羊肉炒饭料应做成家庭装酱料零售",
+         opt_social="凌晨大排长龙是奇观却无人运营，加'排队认证'打卡机制",
+         opt_viral="美食纪录片常客，但短视频时代声量断层",
+         need_supply=72, need_social=75, need_strategy=63,
+         boost=["社媒内容系统", "零售化供应链"],
+         coop_model="品牌联营 + 系统加持", coop_note="老字号现象级点位，年轻化与零售化是最大的增值空间。", contact="partnership@demo.nbo"),
+    dict(id="SH-06", name="Kwetiau Akang", city="雅加达", category="炒粿条", stores=3, age_months=42,
+         dim_site=68, dim_crowd=77, dim_product=73, dim_social=66, dim_viral=70,
+         opt_site="三店覆盖雅加达西区，东区与卫星城空白",
+         opt_crowd="华人与本地客群双覆盖，可做'两代人同桌'叙事",
+         opt_product="锅气是核心卖点但无法标准化，需锁定 3 个黄金 SKU",
+         opt_social="明档现炒有画面，缺统一视觉锤与话题标签",
+         opt_viral="#kwetiauakang 话题 6000 万播放，官方未下场",
+         need_supply=66, need_social=60, need_strategy=58,
+         boost=["加盟体系输出", "社媒矩阵代运营"],
+         coop_model="加盟体系输出 + 供应链托管", coop_note="三店已验证，连锁化模板清晰——输出 SOP+供应链即可加速。", contact="partnership@demo.nbo"),
+    dict(id="SH-07", name="Soto Lamongan Cak Har", city="泗水", category="爪哇鸡汤", stores=2, age_months=26,
+         dim_site=61, dim_crowd=70, dim_product=76, dim_social=58, dim_viral=63,
+         opt_site="两店均在传统市场旁，卫生视觉升级是第一步",
+         opt_crowd="早餐刚需客群稳，午晚场景完全空白",
+         opt_product="Koya 虾松粉是灵魂配料，应独立包装成零售 SKU",
+         opt_social="汤头翻滚画面好，但店内灯光昏暗无法拍摄",
+         opt_viral="本地美食博主零星推荐，未形成声量",
+         need_supply=80, need_social=70, need_strategy=66,
+         boost=["供应链网络加持", "门店轻改造方案", "社媒内容系统"],
+         coop_model="深度孵化", coop_note="供应链分散采购痛点最典型——集采+标准化能直接降 15% 成本。", contact="partnership@demo.nbo"),
+    dict(id="SH-08", name="Bubur Ayam Barito", city="雅加达", category="鸡肉粥", stores=1, age_months=96,
+         dim_site=75, dim_crowd=78, dim_product=71, dim_social=52, dim_viral=59,
+         opt_site="Barito 街区双锚点（与其余名店共生），可做'一条街吃透'动线",
+         opt_crowd="早餐全龄段客群，缺办公场景外送订阅",
+         opt_product="粥底可标准化中央厨房配送，门店只做浇头",
+         opt_social="深夜收摊前的'最后一碗'是天然情绪点，未内容化",
+         opt_viral="老牌网红余温尚在，近年声量下滑需再激活",
+         need_supply=77, need_social=72, need_strategy=69,
+         boost=["中央厨房供应链", "社媒内容系统"],
+         coop_model="供应链共建 + 品牌焕新", coop_note="中央厨房化改造后单店人效可提 40%，是供应链切入的好标的。", contact="partnership@demo.nbo"),
+    dict(id="SH-09", name="Pempek 61", city="雅加达", category="巨港鱼糕", stores=2, age_months=54,
+         dim_site=64, dim_crowd=69, dim_product=78, dim_social=63, dim_viral=66,
+         opt_site="两店在社区商业街，缺高流量展示面",
+         opt_crowd="巨港移民乡愁客群+本地尝鲜客群并存",
+         opt_product="cuko 酸甜辣酱是差异化武器，应做蘸酱零售",
+         opt_social="切鱼糕的弹刀工有视觉点，未设计拍摄位",
+         opt_viral="TikTok 上巨港美食话题升温，本店未承接",
+         need_supply=73, need_social=66, need_strategy=61,
+         boost=["零售化供应链", "社媒内容系统", "选址引擎"],
+         coop_model="深孵 + 快闪验证", coop_note="蘸酱零售化+商场快闪是低成本验证路径，适合投早。", contact="partnership@demo.nbo"),
+    dict(id="SH-10", name="Rujak Cingur Delta", city="泗水", category="东爪哇沙拉", stores=1, age_months=66,
+         dim_site=59, dim_crowd=65, dim_product=74, dim_social=69, dim_viral=73,
+         opt_site="Delta 大桥下地标点位，游客知道但找不到——导视缺失",
+         opt_crowd="游客+本地家庭混合，缺年轻人轻食版本",
+         opt_product="重口味是门槛也是记忆点，可出'轻版 cingur'双产品线",
+         opt_social="'敢不敢吃 cingur'挑战天然适合短视频",
+         opt_viral="外国游客试吃反应视频多次破百万，官方零运营",
+         need_supply=64, need_social=77, need_strategy=68,
+         boost=["社媒矩阵代运营", "游客动线策划", "双产品线设计"],
+         coop_model="品牌联营 + 系统加持", coop_note="挑战型内容基因极强，做一次官方挑战赛即可激活存量话题。", contact="partnership@demo.nbo"),
+]
+
 # 我们的三张牌（合作加持体系）
 BOOST_SYSTEM = {
     "supply": {"name": "供应链网络加持", "en": "SUPPLY CHAIN",
@@ -153,6 +274,7 @@ def migrate_localradar(conn: sqlite3.Connection) -> None:
     if cols and "value_score" not in cols and "need_supply" not in cols and len(cols) != 27:
         conn.execute("DROP TABLE local_brand")
     conn.executescript(DDL)
+    conn.executescript(SHOP_DDL)
 
 
 def seed_localradar(conn: sqlite3.Connection) -> None:
@@ -168,6 +290,15 @@ def seed_localradar(conn: sqlite3.Connection) -> None:
              b["need_supply"], b["need_social"], b["need_strategy"],
              json.dumps(b["boost"], ensure_ascii=False),
              b["coop_model"], b["coop_note"], b["contact"], "demo_seed"))
+    for s in SHOPS:
+        conn.execute(
+            "INSERT OR REPLACE INTO local_shop VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            (s["id"], s["name"], s["city"], s["category"], s["stores"], s["age_months"],
+             s["dim_site"], s["dim_crowd"], s["dim_product"], s["dim_social"], s["dim_viral"],
+             s["opt_site"], s["opt_crowd"], s["opt_product"], s["opt_social"], s["opt_viral"],
+             s["need_supply"], s["need_social"], s["need_strategy"],
+             json.dumps(s["boost"], ensure_ascii=False),
+             s["coop_model"], s["coop_note"], s["contact"], "demo_seed"))
 
 
 def value_score(b: dict) -> float:
@@ -177,20 +308,43 @@ def value_score(b: dict) -> float:
     return round(b["heat"] * 0.4 + need_avg * 0.4 + growth * 0.2, 1)
 
 
+def potential_score(s: dict) -> float:
+    """现象级潜力 = 热点属性×0.30 + 社交×0.20 + 产品×0.20 + 选址×0.15 + 客群×0.15（0-100）"""
+    return round(s["dim_viral"] * 0.30 + s["dim_social"] * 0.20 + s["dim_product"] * 0.20
+                 + s["dim_site"] * 0.15 + s["dim_crowd"] * 0.15, 1)
+
+
+def _shop_from_row(r: dict) -> dict:
+    s = dict(r)
+    s["boost"] = json.loads(s["boost"] or "[]")
+    s["dims"] = {"site": s.pop("dim_site"), "crowd": s.pop("dim_crowd"),
+                 "product": s.pop("dim_product"), "social": s.pop("dim_social"),
+                 "viral": s.pop("dim_viral")}
+    s["opt"] = {"site": s.pop("opt_site"), "crowd": s.pop("opt_crowd"),
+                "product": s.pop("opt_product"), "social": s.pop("opt_social"),
+                "viral": s.pop("opt_viral")}
+    d = s["dims"]
+    s["potential_score"] = round(d["viral"] * 0.30 + d["social"] * 0.20 + d["product"] * 0.20
+                                 + d["site"] * 0.15 + d["crowd"] * 0.15, 1)
+    return s
+
+
 def build_localradar(db_path: str | Path) -> dict:
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     try:
         migrate_localradar(conn)
         rows = [dict(r) for r in conn.execute("SELECT * FROM local_brand")]
+        shop_rows = [dict(r) for r in conn.execute("SELECT * FROM local_shop")]
     finally:
         conn.close()
-    if not rows:
+    if not rows or not shop_rows:
         conn = sqlite3.connect(db_path)
         try:
             seed_localradar(conn)
             conn.commit()
             rows = [dict(r) for r in conn.execute("SELECT * FROM local_brand")]
+            shop_rows = [dict(r) for r in conn.execute("SELECT * FROM local_shop")]
         finally:
             conn.close()
     brands = []
@@ -201,7 +355,9 @@ def build_localradar(db_path: str | Path) -> dict:
         b["value_score"] = value_score(b)
         brands.append(b)
     brands.sort(key=lambda b: b["heat"], reverse=True)
-    cities = sorted({b["city"] for b in brands})
+    shops = [_shop_from_row(r) for r in shop_rows]
+    shops.sort(key=lambda s: s["potential_score"], reverse=True)
+    cities = sorted({b["city"] for b in brands} | {s["city"] for s in shops})
     return {
         "generated_at": datetime.now(WIB).strftime("%Y-%m-%d %H:%M"),
         "demo": True,
@@ -209,6 +365,7 @@ def build_localradar(db_path: str | Path) -> dict:
         "source_note": "演示种子数据 · 字段对齐真实 IG/TikTok/X 公开数据抓取口径（粉丝/播放/互动/增速）",
         "cities": cities,
         "brands": brands,
+        "shops": shops,
         "boost_system": BOOST_SYSTEM,
     }
 
