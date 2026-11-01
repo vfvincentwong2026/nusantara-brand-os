@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02 00:41",
+  "generated_at": "2026-11-02 01:24",
   "demo": true,
   "window": "近3个月",
   "source_note": "演示种子数据 · 字段对齐真实 IG/TikTok/X 公开数据抓取口径（粉丝/播放/互动/增速）",
@@ -45,7 +45,8 @@
       "coop_note": "门店已规模化，机会在二三线城市供应链下沉与冷库共配。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 69.1
+      "value_score": 69.1,
+      "photo": "/assets/radar/ID-01.jpg"
     },
     {
       "id": "ID-06",
@@ -83,7 +84,8 @@
       "coop_note": "扩张最猛但供应链最薄：茶叶/糖浆依赖分散采购，是最佳加持窗口。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 77.8
+      "value_score": 77.8,
+      "photo": "/assets/radar/ID-06.jpg"
     },
     {
       "id": "ID-02",
@@ -121,7 +123,8 @@
       "coop_note": "加盟扩张快但品控与供应不稳，正是体系化加持窗口。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 68.2
+      "value_score": 68.2,
+      "photo": "/assets/radar/ID-02.jpg"
     },
     {
       "id": "ID-04",
@@ -158,7 +161,8 @@
       "coop_note": "SKU 过宽导致备货浪费，需要精选供应链与爆品聚焦策略。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 66.9
+      "value_score": 66.9,
+      "photo": "/assets/radar/ID-04.jpg"
     },
     {
       "id": "ID-09",
@@ -195,7 +199,8 @@
       "coop_note": "现烤模式对中央厨房与配送时效要求极高，供应链共建是最硬切入点。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 64.7
+      "value_score": 64.7,
+      "photo": "/assets/radar/ID-09.jpg"
     },
     {
       "id": "ID-03",
@@ -232,7 +237,8 @@
       "coop_note": "咖啡已稳，轻食 SKU 供应与冷链是短板。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 66.0
+      "value_score": 66.0,
+      "photo": "/assets/radar/ID-03.jpg"
     },
     {
       "id": "ID-05",
@@ -270,7 +276,8 @@
       "coop_note": "国内稳态、寻求海外复制——与我们的跨国供应链网络互补。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 63.4
+      "value_score": 63.4,
+      "photo": "/assets/radar/ID-05.jpg"
     },
     {
       "id": "ID-07",
@@ -307,7 +314,8 @@
       "coop_note": "模型优秀但品牌声量未匹配产品力，社媒系统加持空间最大。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 62.7
+      "value_score": 62.7,
+      "photo": "/assets/radar/ID-07.jpg"
     },
     {
       "id": "ID-08",
@@ -344,7 +352,8 @@
       "coop_note": "起步阶段、三缺口都高——最适合全托管式深度孵化样板。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 62.9
+      "value_score": 62.9,
+      "photo": "/assets/radar/ID-08.jpg"
     },
     {
       "id": "ID-10",
@@ -381,7 +390,8 @@
       "coop_note": "高增速低基数，早介入成本最低——典型的'投早投小'候选。",
       "contact": "partnership@demo.nbo",
       "source_type": "demo_seed",
-      "value_score": 61.7
+      "value_score": 61.7,
+      "photo": "/assets/radar/ID-10.jpg"
     }
   ],
   "shops": [
@@ -417,7 +427,8 @@
         "social": "学生自发性 UGC 多，缺官方话题引导与 KOC 分发",
         "viral": "#seblak 话题天然高流量，本店视频被搬运 300+ 次但未挂定位"
       },
-      "potential_score": 74.7
+      "potential_score": 74.7,
+      "photo": "/assets/radar/SH-02.jpg"
     },
     {
       "id": "SH-04",
@@ -452,7 +463,8 @@
         "social": "浇汁慢镜头已被搬运 500+ 万次，官方账号仅 800 粉",
         "viral": "单条搬运视频播放破 800 万，'泗水蜂蜜香蕉'已成搜索词"
       },
-      "potential_score": 72.6
+      "potential_score": 72.6,
+      "photo": "/assets/radar/SH-04.jpg"
     },
     {
       "id": "SH-03",
@@ -487,7 +499,8 @@
         "social": "出餐快但无'被拍性'设计，加木槌敲鸡仪式化动作",
         "viral": "本地美食号多次自发探店，未形成统一话题标签"
       },
-      "potential_score": 70.9
+      "potential_score": 70.9,
+      "photo": "/assets/radar/SH-03.jpg"
     },
     {
       "id": "SH-06",
@@ -521,7 +534,8 @@
         "social": "明档现炒有画面，缺统一视觉锤与话题标签",
         "viral": "#kwetiauakang 话题 6000 万播放，官方未下场"
       },
-      "potential_score": 70.5
+      "potential_score": 70.5,
+      "photo": "/assets/radar/SH-06.jpg"
     },
     {
       "id": "SH-10",
@@ -556,7 +570,8 @@
         "social": "'敢不敢吃 cingur'挑战天然适合短视频",
         "viral": "外国游客试吃反应视频多次破百万，官方零运营"
       },
-      "potential_score": 69.1
+      "potential_score": 69.1,
+      "photo": "/assets/radar/SH-10.jpg"
     },
     {
       "id": "SH-09",
@@ -591,7 +606,8 @@
         "social": "切鱼糕的弹刀工有视觉点，未设计拍摄位",
         "viral": "TikTok 上巨港美食话题升温，本店未承接"
       },
-      "potential_score": 68.0
+      "potential_score": 68.0,
+      "photo": "/assets/radar/SH-09.jpg"
     },
     {
       "id": "SH-05",
@@ -625,7 +641,8 @@
         "social": "凌晨大排长龙是奇观却无人运营，加'排队认证'打卡机制",
         "viral": "美食纪录片常客，但短视频时代声量断层"
       },
-      "potential_score": 66.6
+      "potential_score": 66.6,
+      "photo": "/assets/radar/SH-05.jpg"
     },
     {
       "id": "SH-01",
@@ -660,7 +677,8 @@
         "social": "无被拍动线设计，加开放式炭烤台让烟与火成为画面",
         "viral": "本地论坛有口碑但零短视频运营，TikTok 账号尚未建立"
       },
-      "potential_score": 65.6
+      "potential_score": 65.6,
+      "photo": "/assets/radar/SH-01.jpg"
     },
     {
       "id": "SH-07",
@@ -695,7 +713,8 @@
         "social": "汤头翻滚画面好，但店内灯光昏暗无法拍摄",
         "viral": "本地美食博主零星推荐，未形成声量"
       },
-      "potential_score": 65.3
+      "potential_score": 65.3,
+      "photo": "/assets/radar/SH-07.jpg"
     },
     {
       "id": "SH-08",
@@ -729,7 +748,8 @@
         "social": "深夜收摊前的'最后一碗'是天然情绪点，未内容化",
         "viral": "老牌网红余温尚在，近年声量下滑需再激活"
       },
-      "potential_score": 65.2
+      "potential_score": 65.2,
+      "photo": "/assets/radar/SH-08.jpg"
     }
   ],
   "boost_system": {

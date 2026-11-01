@@ -10,6 +10,7 @@
 <title>渠道地图 · Warung 评分与铺货清单，按数据选渠道 | Nusantara Brand OS</title>
 <link rel="stylesheet" href="./leaflet.css">
 <script src="./leaflet.js"></script>
+<script src="./leaflet-heat.js"></script>
 <style>
   :root { --bg:#ffffff; --panel:#ffffff; --line:#2d333b; --text:#111111; --dim:#767676;
           --gold:#b26a00; --silver:#c0c0c0; --potential:#b26a00; --normal:#767676;
@@ -118,15 +119,24 @@
 </script>
 <div id="map"><div class="legend" id="legend"></div></div>
 <div class="layers">
+  <label><input type="checkbox" id="heatToggle" checked> <b style="color:#e60023">人流热力</b>（商圈/枢纽强度）</label>
+  <label><input type="checkbox" id="poiMall" checked> 商城 MALLS</label>
+  <label><input type="checkbox" id="poiSchool" checked> 学校 SCHOOLS</label>
+  <label><input type="checkbox" id="poiComm" checked> 社区 COMMUNITIES</label>
+  <label><input type="checkbox" id="poiOffice"> 办公 OFFICES</label>
+  <label><input type="checkbox" id="siteToggle" checked> <b style="color:#e60023">智能选址候选</b>（评分+覆盖圈）</label>
+  <hr style="border:none;border-top:1px dashed #e5e5e5;margin:6px 0">
   <label><input type="checkbox" id="covToggle"> 竞品覆盖圈（500m）</label>
   <label><input type="checkbox" id="gapToggle" checked> 仅显示缺口候选</label>
   <label><input type="checkbox" id="oppToggle"> <b style="color:#767676">加盟机会图层</b>（区域评分 + 保护半径）</label>
 </div>
 <div id="side">
-  <h1>渠道地图 CHANNEL MAP：<em>给 Warung 打分</em>，按数据铺货</h1>
+  <h1>智能选址 SITE INTELLIGENCE：<em>人流 × 客群 × 租金 × 竞品</em></h1>
   <div class="meta" id="meta"></div>
   <div class="kpi" id="kpis"></div>
-  <h2>覆盖缺口 GAPS · 优先铺货清单</h2>
+  <h2>🏆 选址候选 TOP · SITE CANDIDATES（人流/客群/租金/竞品 四维评分 → 推荐店型）</h2>
+  <div id="sites"></div>
+  <h2 style="margin-top:18px">覆盖缺口 GAPS · 优先铺货清单</h2>
   <div class="chips" id="cityChips"></div>
   <div id="gaps"></div>
 </div>
@@ -159,6 +169,7 @@ fetch('./data/channel_map.json').then(r => {
   ].map(([v, l]) => `<div class="item"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
 
   const map = L.map('map', { zoomControl: true }).setView([-6.35, 106.85], 11);
+  window._leaflet_map = map;
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 19, attribution: 'Esri（正式环境切 Mapbox/自托管切片）'
   }).addTo(map);
@@ -302,6 +313,82 @@ fetch('./data/channel_map.json').then(r => {
 }).catch(e => {
   document.getElementById('side').innerHTML = `<div style="color:#e60023;padding:20px">加载失败：${e.message}</div>`;
 });
+</script>
+<script>
+/* ═══ 智能选址图层：人流热力 + POI + 候选点位评估 ═══ */
+const POI_COLOR = { malls: '#bc8cff', schools: '#4da3ff', communities: '#2ea043', offices: '#767676' };
+const POI_LABEL = { malls: '商城', schools: '学校', communities: '社区', offices: '办公' };
+const SCORE_COLOR = v => v >= 72 ? '#2e7d32' : v >= 65 ? '#b26a00' : '#e60023';
+let siteSel = null, siteLayer = null, poiLayers = {}, heatLayer = null;
+
+fetch('./data/site_select.json').then(r => r.ok ? r.json() : null).then(d => {
+  if (!d) return;
+  siteSel = d;
+  // 侧栏候选清单（不依赖地图）
+  document.getElementById('sites').innerHTML = d.candidates.map((c, i) => {
+    const col = SCORE_COLOR(c.score);
+    return `<div class="gap" style="margin-bottom:10px;padding:10px;border:1px solid #e5e5e5;border-radius:8px;cursor:pointer" data-lat="${c.lat}" data-lon="${c.lon}">
+      <div class="name" style="font-weight:700;">${String(i + 1).padStart(2, '0')}. ${c.name}
+        <b style="color:${col};float:right;font-family:Consolas,monospace;">${c.score}</b></div>
+      <div class="sub">📍 ${c.area} · ${c.city} · ${c.site_type} → ${c.recommended_model}</div>
+      <div class="sub">人流 ${c.foot_traffic} · 客群 ${c.crowd_fit} · 覆盖 ${c.catchment.pop_wan} 万人 / ${c.catchment.communities} 社区 / ${c.catchment.schools} 校</div>
+    </div>`; }).join('');
+  document.querySelectorAll('#sites .gap').forEach(el => el.onclick = () => {
+    const m = window._leaflet_map;
+    if (m) m.flyTo([+el.dataset.lat, +el.dataset.lon], 15);
+  });
+  // 等主图初始化完成后建图层
+  const init = () => {
+    const map = window._leaflet_map;
+    if (!map) { setTimeout(init, 300); return; }
+    buildLayers(map, d);
+  };
+  init();
+}).catch(() => {});
+
+function buildLayers(map, d) {
+
+  heatLayer = L.heatLayer(d.heat.map(h => [h[0], h[1], h[2]]), {
+    radius: 28, blur: 22, maxZoom: 14,
+    gradient: { 0.2: '#ffd6dd', 0.5: '#ff8fa3', 0.8: '#e60023' } });
+  document.getElementById('heatToggle').onchange = e =>
+    e.target.checked ? heatLayer.addTo(map) : map.removeLayer(heatLayer);
+  heatLayer.addTo(map);
+
+  Object.entries(d.pois).forEach(([kind, pts]) => {
+    const layer = L.layerGroup(pts.map(p => L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '',
+      iconSize: [12, 12], html: `<div style="width:10px;height:10px;background:${POI_COLOR[kind]};border:2px solid #fff;border-radius:${kind === 'malls' ? '0' : '50%'};box-shadow:0 0 5px ${POI_COLOR[kind]}66"></div>` }) })
+      .bindPopup(`<b>${p.name}</b><br>${POI_LABEL[kind]}`)));
+    poiLayers[kind] = layer;
+    const ids = { malls: 'poiMall', schools: 'poiSchool', communities: 'poiComm', offices: 'poiOffice' };
+    document.getElementById(ids[kind]).onchange = e =>
+      e.target.checked ? layer.addTo(map) : map.removeLayer(layer);
+    if (kind !== 'offices') layer.addTo(map);
+  });
+
+  const circles = L.layerGroup().addTo(map);
+  siteLayer = L.layerGroup(d.candidates.map(c => {
+    const col = SCORE_COLOR(c.score);
+    const m = L.marker([c.lat, c.lon], { icon: L.divIcon({ className: '', iconSize: [30, 30],
+      html: `<div style="width:26px;height:26px;background:${col};border:2.5px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 8px ${col}88;display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);color:#fff;font:700 11px Consolas,monospace;">${Math.round(c.score)}</span></div>` }) })
+      .bindPopup(`<b style="font-size:13px;">${c.name}</b> · ${c.area}（${c.city}）<br>
+        <span style="color:#767676">${c.site_type} · ${c.type_en}</span><br>
+        综合选址分 <b style="color:${col};font-size:15px;">${c.score}</b><br>
+        人流 ${c.foot_traffic} · 客群 ${c.crowd_fit} · 租金压力 ${c.rent_pressure} · 竞品密度 ${c.competition}<br>
+        <b>覆盖范围（${c.catchment.radius_m}m）</b>：人口 ${c.catchment.pop_wan} 万 · 社区 ${c.catchment.communities} · 学校 ${c.catchment.schools} · 商城 ${c.catchment.malls} · 办公 ${c.catchment.offices}<br>
+        <b>推荐店型</b>：${c.recommended_model}<br>
+        <span style="color:#555">${c.reason}</span>`);
+    L.circle([c.lat, c.lon], { radius: c.catchment.radius_m, color: col, weight: 1,
+      fillColor: col, fillOpacity: 0.05, dashArray: '4 4' }).addTo(circles);
+    return m;
+  }));
+  document.getElementById('siteToggle').onchange = e => {
+    const on = e.target.checked;
+    on ? siteLayer.addTo(map) : map.removeLayer(siteLayer);
+    on ? circles.addTo(map) : map.removeLayer(circles);
+  };
+  siteLayer.addTo(map);
+}
 </script>
 <script src="/ui/interactions.js" defer></script>
 </body>

@@ -50,6 +50,10 @@ def main():
             "--out", "web/trend/data/trend_snacks.json"])
         sh([sys.executable, "-m", "nbo.hotbrand", "--db", "nbo.db",
             "--out", "web/trend/data/hotbrands.json"])
+        sh([sys.executable, "-m", "nbo.localradar", "--db", "nbo.db",
+            "--out", "web/trend/data/local_brands.json"])
+        sh([sys.executable, "-m", "nbo.siteselect", "--db", "nbo.db",
+            "--out", "web/map/data/site_select.json"])
         sh([sys.executable, "-m", "nbo.assembly", "--db", "nbo.db",
             "--out", "web/assembly/data/assembly.json"])
         sh([sys.executable, "-m", "nbo.cart", "--db", "nbo.db",
@@ -65,11 +69,12 @@ def main():
     if SITE.exists():
         shutil.rmtree(SITE)
     (SITE / "map/data").mkdir(parents=True)
-    for f in ("index.html", "leaflet.js", "leaflet.css"):
+    for f in ("index.html", "leaflet.js", "leaflet.css", "leaflet-heat.js"):
         shutil.copy(ROOT / "web/map" / f, SITE / "map")
     shutil.copy(ROOT / "web/map/data/channel_map.json", SITE / "map/data")
     shutil.copy(ROOT / "web/map/data/case_store.json", SITE / "map/data")
     shutil.copy(ROOT / "web/map/data/opportunity.json", SITE / "map/data")
+    shutil.copy(ROOT / "web/map/data/site_select.json", SITE / "map/data")
     # 热点雷达
     (SITE / "trend/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/trend/index.html", SITE / "trend")
@@ -123,9 +128,7 @@ def main():
     (SITE / "ui").mkdir(exist_ok=True)
     for f in list((ROOT / "web/ui").glob("*.css")) + list((ROOT / "web/ui").glob("*.js")):
         shutil.copy(f, SITE / "ui")
-    (SITE / "assets").mkdir(exist_ok=True)
-    for f in list((ROOT / "web/assets").glob("*.png")) + list((ROOT / "web/assets").glob("*.jpg")):
-        shutil.copy(f, SITE / "assets")
+    shutil.copytree(ROOT / "web/assets", SITE / "assets", dirs_exist_ok=True)
     print(f"assembled: {SITE}")
 
     # ═══ 集装箱兄弟项目独立站（Nusantara Container）═══

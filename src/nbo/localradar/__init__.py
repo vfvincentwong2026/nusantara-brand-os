@@ -326,7 +326,13 @@ def _shop_from_row(r: dict) -> dict:
     d = s["dims"]
     s["potential_score"] = round(d["viral"] * 0.30 + d["social"] * 0.20 + d["product"] * 0.20
                                  + d["site"] * 0.15 + d["crowd"] * 0.15, 1)
+    s["photo"] = _photo_of(s["id"])
     return s
+
+
+def _photo_of(eid: str) -> str | None:
+    p = Path(__file__).resolve().parents[3] / "web/assets/radar" / f"{eid}.jpg"
+    return f"/assets/radar/{eid}.jpg" if p.exists() else None
 
 
 def build_localradar(db_path: str | Path) -> dict:
@@ -340,6 +346,7 @@ def build_localradar(db_path: str | Path) -> dict:
         conn.close()
     if not rows or not shop_rows:
         conn = sqlite3.connect(db_path)
+        conn.row_factory = sqlite3.Row
         try:
             seed_localradar(conn)
             conn.commit()
@@ -353,6 +360,7 @@ def build_localradar(db_path: str | Path) -> dict:
         b["heat_signals"] = json.loads(b["heat_signals"] or "[]")
         b["boost"] = json.loads(b["boost"] or "[]")
         b["value_score"] = value_score(b)
+        b["photo"] = _photo_of(b["id"])
         brands.append(b)
     brands.sort(key=lambda b: b["heat"], reverse=True)
     shops = [_shop_from_row(r) for r in shop_rows]

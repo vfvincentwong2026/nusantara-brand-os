@@ -194,6 +194,7 @@ function gapLines(b) {
 
 function card(b, i) {
   return `<div class="card">
+    ${b.photo ? `<img src="${b.photo}" alt="${esc(b.name)} 真实图片（Wikimedia）" loading="lazy" style="float:right;width:150px;height:104px;object-fit:cover;border-radius:10px;margin:0 0 6px 14px;border:1px solid #e5e5e5;">` : ''}
     <div class="top"><span class="rank">${String(i + 1).padStart(2, '0')}</span>
       <span class="name">${esc(b.name)}</span><span class="local">${esc(b.name_cn)}</span></div>
     <div class="meta">
@@ -248,6 +249,7 @@ function shopCard(s, i) {
   const optLines = Object.entries(s.opt).map(([k, t]) =>
     `<div class="sig">▸ <b style="color:#111;">${DIM_LABEL[k].split(' ')[0]}</b> → ${esc(t)}</div>`).join('');
   return `<div class="card">
+    ${s.photo ? `<img src="${s.photo}" alt="${esc(s.name)} 真实图片（Wikimedia）" loading="lazy" style="float:right;width:150px;height:104px;object-fit:cover;border-radius:10px;margin:0 0 6px 14px;border:1px solid #e5e5e5;">` : ''}
     <div class="top"><span class="rank">${String(i + 1).padStart(2, '0')}</span>
       <span class="name">${esc(s.name)}</span></div>
     <div class="meta">

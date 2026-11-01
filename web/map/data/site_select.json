@@ -1,0 +1,542 @@
+{
+  "generated_at": "2026-11-02 01:24",
+  "demo": true,
+  "source_note": "演示种子数据 · 字段对齐真实 POI 库（OSM/自采）与人流数据源",
+  "candidates": [
+    {
+      "id": "ST-02",
+      "name": "UI 大学 Depok 校门带",
+      "area": "Depok",
+      "city": "德波",
+      "lat": -6.3649,
+      "lon": 106.8219,
+      "site_type": "学校旁",
+      "foot_traffic": 88,
+      "crowd_fit": 82,
+      "rent_pressure": 30,
+      "competition": 48,
+      "recommended_model": "推车 / 15㎡ 档口",
+      "reason": "3 万学生高频价格敏感客群，传播属性极强（开学季刷屏体质）；租金极低，适合推车+档口轻模型跑量。",
+      "source_type": "demo_seed",
+      "score": 73.9,
+      "catchment": {
+        "pop_wan": 9.2,
+        "communities": 9,
+        "schools": 11,
+        "malls": 1,
+        "offices": 2,
+        "radius_m": 600
+      },
+      "type_en": "CAMPUS"
+    },
+    {
+      "id": "ST-01",
+      "name": "Bintaro 九号社区口",
+      "area": "Bintaro",
+      "city": "南唐格朗",
+      "lat": -6.2665,
+      "lon": 106.718,
+      "site_type": "社区口",
+      "foot_traffic": 78,
+      "crowd_fit": 86,
+      "rent_pressure": 42,
+      "competition": 35,
+      "recommended_model": "56㎡ 社区集装箱店 / 推车组合",
+      "reason": "中高收入社区密集、学校 6 所保底午晚双峰；竞品密度低，社区口锚点稀缺——社区零售标准打法的首选点。",
+      "source_type": "demo_seed",
+      "score": 72.8,
+      "catchment": {
+        "pop_wan": 6.8,
+        "communities": 14,
+        "schools": 6,
+        "malls": 2,
+        "offices": 5,
+        "radius_m": 800
+      },
+      "type_en": "COMMUNITY"
+    },
+    {
+      "id": "ST-08",
+      "name": "Summarecon Bekasi 社区轴",
+      "area": "Bekasi",
+      "city": "勿加泗",
+      "lat": -6.2479,
+      "lon": 106.9916,
+      "site_type": "社区口",
+      "foot_traffic": 62,
+      "crowd_fit": 79,
+      "rent_pressure": 33,
+      "competition": 22,
+      "recommended_model": "56㎡ 社区集装箱店",
+      "reason": "卫星城最大社区群、覆盖人口 10.6 万全榜第一，竞品密度全榜最低——'人口密度换增长'的长期价值点位。",
+      "source_type": "demo_seed",
+      "score": 71.2,
+      "catchment": {
+        "pop_wan": 10.6,
+        "communities": 21,
+        "schools": 9,
+        "malls": 4,
+        "offices": 6,
+        "radius_m": 1000
+      },
+      "type_en": "COMMUNITY"
+    },
+    {
+      "id": "ST-06",
+      "name": "BSD 塞尔蓬新社区轴",
+      "area": "BSD",
+      "city": "唐格朗",
+      "lat": -6.298,
+      "lon": 106.6844,
+      "site_type": "社区口",
+      "foot_traffic": 66,
+      "crowd_fit": 83,
+      "rent_pressure": 38,
+      "competition": 28,
+      "recommended_model": "56㎡ 社区集装箱店",
+      "reason": "新城社区 17 个且每年新增，年轻家庭客群与竞品低密度并存——'先占社区口'战略价值最高的成长型点位。",
+      "source_type": "demo_seed",
+      "score": 70.9,
+      "catchment": {
+        "pop_wan": 8.9,
+        "communities": 17,
+        "schools": 8,
+        "malls": 3,
+        "offices": 9,
+        "radius_m": 1000
+      },
+      "type_en": "COMMUNITY"
+    },
+    {
+      "id": "ST-05",
+      "name": "MRT Blok M 枢纽口",
+      "area": "Blok M",
+      "city": "雅加达",
+      "lat": -6.2447,
+      "lon": 106.7977,
+      "site_type": "交通枢纽",
+      "foot_traffic": 90,
+      "crowd_fit": 77,
+      "rent_pressure": 60,
+      "competition": 58,
+      "recommended_model": "30㎡ 快取店",
+      "reason": "轨道枢纽+夜市商圈双人流叠加，通勤与夜间双峰；快取店型转化枢纽流量，夜间外摆接夜市客流。",
+      "source_type": "demo_seed",
+      "score": 64.8,
+      "catchment": {
+        "pop_wan": 7.4,
+        "communities": 10,
+        "schools": 4,
+        "malls": 5,
+        "offices": 12,
+        "radius_m": 900
+      },
+      "type_en": "TRANSIT"
+    },
+    {
+      "id": "ST-07",
+      "name": "ITC Kuningan 批发商圈",
+      "area": "Kuningan",
+      "city": "雅加达",
+      "lat": -6.2333,
+      "lon": 106.8245,
+      "site_type": "办公区",
+      "foot_traffic": 71,
+      "crowd_fit": 64,
+      "rent_pressure": 45,
+      "competition": 41,
+      "recommended_model": "推车 + 外带窗口",
+      "reason": "批发商圈人流杂但单价低，适合极致性价比模型（Es Teh 路径）；办公+批发混合客群，下午茶场景空白。",
+      "source_type": "demo_seed",
+      "score": 63.0,
+      "catchment": {
+        "pop_wan": 4.2,
+        "communities": 5,
+        "schools": 2,
+        "malls": 2,
+        "offices": 22,
+        "radius_m": 800
+      },
+      "type_en": "OFFICE"
+    },
+    {
+      "id": "ST-04",
+      "name": "SCBD 办公区街角",
+      "area": "SCBD",
+      "city": "雅加达",
+      "lat": -6.2255,
+      "lon": 106.8086,
+      "site_type": "办公区",
+      "foot_traffic": 82,
+      "crowd_fit": 80,
+      "rent_pressure": 78,
+      "competition": 55,
+      "recommended_model": "咖啡/轻食档口",
+      "reason": "52 栋办公楼早高峰刚需，外卖半径 1km 内单量全城 top；租金高但客单价可撑——咖啡档口坪效模型最佳试验场。",
+      "source_type": "demo_seed",
+      "score": 60.2,
+      "catchment": {
+        "pop_wan": 3.1,
+        "communities": 2,
+        "schools": 0,
+        "malls": 3,
+        "offices": 52,
+        "radius_m": 700
+      },
+      "type_en": "OFFICE"
+    },
+    {
+      "id": "ST-03",
+      "name": "Grand Indonesia 食阁层",
+      "area": "Sudirman",
+      "city": "雅加达",
+      "lat": -6.1952,
+      "lon": 106.8207,
+      "site_type": "商场食阁",
+      "foot_traffic": 95,
+      "crowd_fit": 74,
+      "rent_pressure": 88,
+      "competition": 72,
+      "recommended_model": "品牌旗舰体验点",
+      "reason": "全雅加达人流天花板、办公客群 38 栋；但租金与竞品双高压——只适合已验证品牌做形象与单测，不适合首店。",
+      "source_type": "demo_seed",
+      "score": 56.4,
+      "catchment": {
+        "pop_wan": 4.5,
+        "communities": 4,
+        "schools": 1,
+        "malls": 4,
+        "offices": 38,
+        "radius_m": 1000
+      },
+      "type_en": "MALL F&B"
+    }
+  ],
+  "pois": {
+    "malls": [
+      {
+        "name": "Grand Indonesia",
+        "lat": -6.1952,
+        "lon": 106.8207
+      },
+      {
+        "name": "Plaza Indonesia",
+        "lat": -6.1925,
+        "lon": 106.823
+      },
+      {
+        "name": "Pacific Place",
+        "lat": -6.2244,
+        "lon": 106.8089
+      },
+      {
+        "name": "Senayan City",
+        "lat": -6.2278,
+        "lon": 106.7975
+      },
+      {
+        "name": "Gandaria City",
+        "lat": -6.244,
+        "lon": 106.7837
+      },
+      {
+        "name": "Blok M Square",
+        "lat": -6.2445,
+        "lon": 106.798
+      },
+      {
+        "name": "Summarecon Mall Serpong",
+        "lat": -6.3,
+        "lon": 106.683
+      },
+      {
+        "name": "Summarecon Mall Bekasi",
+        "lat": -6.2485,
+        "lon": 106.9925
+      },
+      {
+        "name": "Bintaro Jaya Xchange",
+        "lat": -6.265,
+        "lon": 106.719
+      },
+      {
+        "name": "Mall Kelapa Gading",
+        "lat": -6.1572,
+        "lon": 106.908
+      }
+    ],
+    "schools": [
+      {
+        "name": "UI Depok",
+        "lat": -6.3649,
+        "lon": 106.8219
+      },
+      {
+        "name": "UNJ Rawamangun",
+        "lat": -6.192,
+        "lon": 106.879
+      },
+      {
+        "name": "Atma Jaya Semanggi",
+        "lat": -6.215,
+        "lon": 106.811
+      },
+      {
+        "name": "Bina Nusantara Kemanggisan",
+        "lat": -6.2015,
+        "lon": 106.7805
+      },
+      {
+        "name": "SMAN 8 Jakarta",
+        "lat": -6.234,
+        "lon": 106.799
+      },
+      {
+        "name": "Santa Ursula",
+        "lat": -6.168,
+        "lon": 106.834
+      },
+      {
+        "name": "UPH BSD",
+        "lat": -6.303,
+        "lon": 106.679
+      },
+      {
+        "name": "SMAN 1 Bekasi",
+        "lat": -6.2455,
+        "lon": 106.99
+      }
+    ],
+    "communities": [
+      {
+        "name": "Bintaro Sektor 9",
+        "lat": -6.2665,
+        "lon": 106.718
+      },
+      {
+        "name": "BSD Nusa Loka",
+        "lat": -6.298,
+        "lon": 106.6844
+      },
+      {
+        "name": "Kelapa Gading",
+        "lat": -6.1572,
+        "lon": 106.908
+      },
+      {
+        "name": "Tebet Barat",
+        "lat": -6.229,
+        "lon": 106.85
+      },
+      {
+        "name": "Cibubur Country",
+        "lat": -6.35,
+        "lon": 106.885
+      },
+      {
+        "name": "Serpong Garden",
+        "lat": -6.295,
+        "lon": 106.69
+      },
+      {
+        "name": "Bekasi Summarecon",
+        "lat": -6.2479,
+        "lon": 106.9916
+      },
+      {
+        "name": "Tanjung Duren",
+        "lat": -6.168,
+        "lon": 106.787
+      }
+    ],
+    "offices": [
+      {
+        "name": "SCBD District",
+        "lat": -6.2255,
+        "lon": 106.8086
+      },
+      {
+        "name": "Sudirman CBD",
+        "lat": -6.21,
+        "lon": 106.82
+      },
+      {
+        "name": "Kuningan Corridor",
+        "lat": -6.2333,
+        "lon": 106.8245
+      },
+      {
+        "name": "TB Simatupang",
+        "lat": -6.293,
+        "lon": 106.797
+      },
+      {
+        "name": "Gatot Subroto",
+        "lat": -6.237,
+        "lon": 106.801
+      },
+      {
+        "name": "BSD Office Park",
+        "lat": -6.301,
+        "lon": 106.681
+      },
+      {
+        "name": "Bekasi Cyber Park",
+        "lat": -6.249,
+        "lon": 106.988
+      }
+    ]
+  },
+  "heat": [
+    [
+      -6.1952,
+      106.8207,
+      0.95
+    ],
+    [
+      -6.2244,
+      106.8089,
+      0.8
+    ],
+    [
+      -6.2447,
+      106.7977,
+      0.9
+    ],
+    [
+      -6.2255,
+      106.8086,
+      0.85
+    ],
+    [
+      -6.1925,
+      106.823,
+      0.88
+    ],
+    [
+      -6.2278,
+      106.7975,
+      0.75
+    ],
+    [
+      -6.244,
+      106.7837,
+      0.7
+    ],
+    [
+      -6.2333,
+      106.8245,
+      0.72
+    ],
+    [
+      -6.237,
+      106.801,
+      0.68
+    ],
+    [
+      -6.3649,
+      106.8219,
+      0.82
+    ],
+    [
+      -6.2665,
+      106.718,
+      0.62
+    ],
+    [
+      -6.298,
+      106.6844,
+      0.6
+    ],
+    [
+      -6.3,
+      106.683,
+      0.66
+    ],
+    [
+      -6.1572,
+      106.908,
+      0.7
+    ],
+    [
+      -6.2479,
+      106.9916,
+      0.58
+    ],
+    [
+      -6.2485,
+      106.9925,
+      0.64
+    ],
+    [
+      -6.2015,
+      106.7805,
+      0.55
+    ],
+    [
+      -6.215,
+      106.811,
+      0.6
+    ],
+    [
+      -6.229,
+      106.85,
+      0.5
+    ],
+    [
+      -6.168,
+      106.834,
+      0.52
+    ],
+    [
+      -6.234,
+      106.799,
+      0.48
+    ],
+    [
+      -6.35,
+      106.885,
+      0.42
+    ],
+    [
+      -6.168,
+      106.787,
+      0.5
+    ],
+    [
+      -6.293,
+      106.797,
+      0.56
+    ],
+    [
+      -6.303,
+      106.679,
+      0.44
+    ],
+    [
+      -6.295,
+      106.69,
+      0.46
+    ],
+    [
+      -6.249,
+      106.988,
+      0.4
+    ],
+    [
+      -6.301,
+      106.681,
+      0.42
+    ],
+    [
+      -6.2455,
+      106.99,
+      0.38
+    ],
+    [
+      -6.192,
+      106.879,
+      0.5
+    ]
+  ]
+}
