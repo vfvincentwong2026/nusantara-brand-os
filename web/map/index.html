@@ -77,12 +77,12 @@
 </style>
 <style>
   .nbo-nav { position:fixed; top:0; left:0; right:0; height:38px; z-index:10000; display:flex; align-items:center;
-    padding:0 16px; background:rgba(10,14,20,.92); backdrop-filter:blur(8px); border-bottom:1px solid #232b36;
+    padding:0 16px; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid #e5e5e5;
     font:12.5px -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
   .nbo-nav .brand { color:#e60023; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
   .nbo-nav a.nl { color:#767676; text-decoration:none; padding:6px 12px; border-radius:6px; }
   .nbo-nav a.nl:hover { color:#111111; }
-  .nbo-nav a.nl.on { color:#111111; background:rgba(230,0,35,.2); }
+  .nbo-nav a.nl.on { color:#111111; background:rgba(230,0,35,.08); }
 </style>
 </head>
 <body>
@@ -159,10 +159,10 @@ fetch('./data/channel_map.json').then(r => {
   ].map(([v, l]) => `<div class="item"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
 
   const map = L.map('map', { zoomControl: true }).setView([-6.35, 106.85], 11);
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 19, attribution: 'Esri（正式环境切 Mapbox/自托管切片）'
   }).addTo(map);
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
     maxZoom: 19
   }).addTo(map);
 

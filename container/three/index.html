@@ -163,8 +163,8 @@ function signTexture(text) {
 /* ---------- 场景 ---------- */
 function init() {
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x0b0e13);
-  scene.fog = new THREE.Fog(0x0b0e13, 120, 420);
+  scene.background = new THREE.Color(0xf2f1ee);
+  scene.fog = new THREE.Fog(0xf2f1ee, 120, 420);
   clock = new THREE.Clock();
 
   camera = new THREE.PerspectiveCamera(52, innerWidth / innerHeight, 0.1, 800);
@@ -187,7 +187,7 @@ function init() {
   controls.maxPolarAngle = Math.PI * 0.495;
 
   // 灯光：半球底光 + 主阳光（投影）+ 入口补光
-  scene.add(new THREE.HemisphereLight(0xbfd4ff, 0x30281e, 0.5));
+  scene.add(new THREE.HemisphereLight(0xd6e4ff, 0xd0c9bd, 0.85));
   const sun = new THREE.DirectionalLight(0xfff2e0, 2.2);
   sun.position.set(40, 60, 25);
   sun.castShadow = true;
@@ -199,7 +199,7 @@ function init() {
   scene.add(doorLight);
   scene.doorLight = doorLight;
 
-  scene.add(new THREE.GridHelper(300, 60, 0x1c2128, 0x14181e));
+  scene.add(new THREE.GridHelper(300, 60, 0xd6d5d0, 0xe7e6e1));
 
   renderer.domElement.addEventListener('click', onClick);
   window.addEventListener('resize', () => {
