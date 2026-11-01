@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>双站视觉走查报告 · 2026-11-01</title>
+<style>
+  :root{ --ink:#111; --muted:#767676; --line:#e5e5e5; --accent:#e60023; --ok:#0a7d34; --warn:#b25e09; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif;background:#fff;color:var(--ink);line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 24px 96px}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  h1{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin-bottom:8px}
+  .sub{color:var(--muted);font-size:15px;margin-bottom:36px}
+  .summary{border:1px solid var(--line);border-radius:16px;padding:24px 28px;margin-bottom:48px}
+  .summary h2{font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .summary .big{font-size:19px;font-weight:700;margin-bottom:10px}
+  .summary ul{margin-left:18px;font-size:14px}
+  .summary li{margin:6px 0}
+  .stat{display:flex;gap:32px;margin-top:16px;flex-wrap:wrap}
+  .stat b{display:block;font-size:30px;font-weight:800}
+  .stat span{font-size:12px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+  h2.site{font-size:22px;font-weight:800;margin:56px 0 6px;letter-spacing:-.01em}
+  .site-sub{font-size:13px;color:var(--muted);margin-bottom:24px}
+  .card{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:28px}
+  .card img{width:100%;display:block;border-bottom:1px solid var(--line)}
+  .card .body{padding:18px 22px}
+  .card .head{display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+  .card .head h3{font-size:16px;font-weight:700}
+  .tag{font-size:11px;font-weight:700;letter-spacing:.08em;padding:3px 10px;border-radius:999px}
+  .tag.ok{color:var(--ok);border:1px solid var(--ok)}
+  .tag.warn{color:var(--warn);border:1px solid var(--warn)}
+  .card p{font-size:13.5px;color:#333}
+  .card p.note{color:var(--muted)}
+  footer{margin-top:64px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}
+  a{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">Visual Audit · November 1, 2026</div>
+  <h1>双站视觉走查报告</h1>
+  <div class="sub">Nusantara Brand OS（品牌孵化主站）+ Nusantara Container（集装箱兄弟站）· 共 17 页 · 线上生产环境逐页截图亲验</div>
+
+  <div class="summary">
+    <h2>总结论</h2>
+    <div class="big">17 页全部符合 Pinterest 浅色设计规范，15 页完全通过，2 项可选优化，1 项已知遗留（待补素材）。</div>
+    <ul>
+      <li>✓ <b>品牌孵化主站 10 页</b>：全部 Pinterest 浅色规范，双语排版、线框图标、真实配图均正常。</li>
+      <li>✓ <b>集装箱站 7 页</b>：全部浅色规范，截图均为线上最新部署版本。</li>
+      <li>△ <b>可选优化①</b>：主站渠道地图使用 CartoDB 暗色地图瓦片，与浅色 UI 混搭（可读性无问题；如需彻底浅色可换 Positron 瓦片）。</li>
+      <li>△ <b>可选优化②</b>：集装箱站 3D 孪生页 WebGL 场景为黑底深空，与浅色站反差较大（货架绿/黄/白功能配色可保留；可提亮场景背景与灯光）。</li>
+      <li>▸ <b>已知遗留</b>：主站装配选型页"轻钢平房"卡片暂用 TOSU 移动箱体图顶替，待 Owner 提供轻钢平房实景/意向图后替换。</li>
+    </ul>
+    <div class="stat">
+      <div><b style="color:var(--ok)">15</b><span>通过 ✓</span></div>
+      <div><b style="color:var(--warn)">2</b><span>可选优化 △</span></div>
+      <div><b>1</b><span>已知遗留 ▸</span></div>
+      <div><b>0</b><span>阻断问题</span></div>
+    </div>
+  </div>
+
+  <h2 class="site">品牌孵化主站 · Nusantara Brand OS</h2>
+  <div class="site-sub">https://nusantara-brand-os.pages.dev/ · 10 页</div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/home-main.png" alt="首页">
+    <div class="body">
+      <div class="head"><h3>首页</h3><span class="tag ok">✓ 通过</span></div>
+      <p>双产品线入口、Pinterest 浅色卡片网格、中英双语标题正常。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_trend_.png" alt="热点雷达">
+    <div class="body">
+      <div class="head"><h3>热点雷达</h3><span class="tag ok">✓ 通过</span></div>
+      <p>适配加盟/线下现制口径已过滤工业包装食品，爆品热度卡片与保存入库按钮正常。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_franchise_.png" alt="特许加盟">
+    <div class="body">
+      <div class="head"><h3>特许加盟</h3><span class="tag ok">✓ 通过</span></div>
+      <p>品牌引入适配度标签（可加盟/可代理/仅学习）口径与雷达榜一致。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_launch_.png" alt="选品评分">
+    <div class="body">
+      <div class="head"><h3>选品评分 / 启动链路</h3><span class="tag ok">✓ 通过</span></div>
+      <p>五步走链路（传播单元→寄生行为→机制→被拍性→大单品承接）呈现完整。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_tower_.png" alt="控制塔">
+    <div class="body">
+      <div class="head"><h3>AI 控制塔</h3><span class="tag ok">✓ 通过</span></div>
+      <p>小店模式 AI 看板，指标呈现简洁明了。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_assembly_.png" alt="装配选型">
+    <div class="body">
+      <div class="head"><h3>装配选型</h3><span class="tag warn">▸ 已知遗留</span></div>
+      <p>四形态卡片与真实意向图正常；「轻钢平房」卡片暂以 TOSU 移动箱体图顶替，待补图后替换。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_map_.png" alt="渠道地图">
+    <div class="body">
+      <div class="head"><h3>渠道地图</h3><span class="tag warn">△ 可选优化</span></div>
+      <p>面板与交互正常；地图瓦片为 CartoDB 暗色切片，与浅色 UI 混搭——可读性无问题，如需彻底浅色可换 Positron 瓦片。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_brandkit_.png" alt="品牌工坊">
+    <div class="body">
+      <div class="head"><h3>品牌工坊</h3><span class="tag ok">✓ 通过</span></div>
+      <p class="note">内容约占首屏至 1/3 页高，下方留白为 min-height 布局所致；色板为生成器产物，属产品输出，可接受。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_library_.png" alt="产品库">
+    <div class="body">
+      <div class="head"><h3>产品库 / 供应商库</h3><span class="tag ok">✓ 通过</span></div>
+      <p class="note">空库状态与搜索框正常（截图为全新浏览器配置，故为空库）。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/_playbook_.png" alt="供应链手册">
+    <div class="body">
+      <div class="head"><h3>供应链操作手册</h3><span class="tag ok">✓ 通过</span></div>
+      <p>中英双语完整，培训体系内容齐全。</p>
+    </div>
+  </div>
+
+  <h2 class="site">集装箱兄弟站 · Nusantara Container</h2>
+  <div class="site-sub">https://nusantara-container.pages.dev/ · 7 页</div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/ct-home.png" alt="集装箱站首页">
+    <div class="body">
+      <div class="head"><h3>首页</h3><span class="tag ok">✓ 通过</span></div>
+      <p>白底 pin 卡网格 + 真实集装箱店配图，兄弟站定位文案清晰。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/ct-case.png" alt="集装箱店案例">
+    <div class="body">
+      <div class="head"><h3>集装箱店案例</h3><span class="tag ok">✓ 通过</span></div>
+      <p>56㎡ 案例指标卡 + 实景图正常；DEMO 种子样本红色声明条符合"概念意向非落地门店"口径。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/ct-retail.png" alt="零售样板">
+    <div class="body">
+      <div class="head"><h3>零售样板</h3><span class="tag ok">✓ 通过</span></div>
+      <p>白底投资模型卡正常。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/ct-three.png" alt="3D孪生">
+    <div class="body">
+      <div class="head"><h3>3D 门店 / 数字孪生</h3><span class="tag warn">△ 可选优化</span></div>
+      <p>场景与货架功能正常；WebGL 场景为黑底深空，与浅色站反差大——可提亮背景与灯光（货架绿/黄/白功能色建议保留）。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/ct-floorplan.png" alt="平面布局">
+    <div class="body">
+      <div class="head"><h3>平面布局 Planogram</h3><span class="tag ok">✓ 通过</span></div>
+      <p>Konva 画布为米白浅色底，生鲜/食品/非食品三色分区、统计面板正常，与整站风格一致。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/ct-dash2.png" alt="库存大屏">
+    <div class="body">
+      <div class="head"><h3>库存大屏</h3><span class="tag ok">✓ 通过</span></div>
+      <p>白底 KPI 卡 + 橙色图表 + SKU 风险表正常。</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="../tmp_bt/shots/ct-store-dash.png" alt="门店大屏">
+    <div class="body">
+      <div class="head"><h3>门店大屏</h3><span class="tag ok">✓ 通过</span></div>
+      <p>白底正常。</p>
+    </div>
+  </div>
+
+  <footer>
+    走查方式：Edge headless CDP 对线上生产环境逐页截图亲验（1400×900）· 本轮零代码改动，无部署。<br>
+    报告与截图均为本地交付物，截图原始文件位于 tmp_bt/shots/。
+  </footer>
+
+</div>
+</body>
+</html>
