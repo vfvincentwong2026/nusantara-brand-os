@@ -1,7 +1,45 @@
 {
-  "generated_at": "2026-11-02 01:24",
+  "generated_at": "2026-11-02 01:35",
   "demo": true,
   "source_note": "演示种子数据 · 字段对齐真实 POI 库（OSM/自采）与人流数据源",
+  "model_note": "选址模型库：体验店(星巴克) / 快取外卖(瑞幸) / 车餐家庭(麦当劳) / 性价比街铺(蜜雪) / 推车档口(轻资产) —— 加权评分 + 硬条件否决",
+  "models_legend": [
+    {
+      "key": "experience",
+      "name": "体验店",
+      "en": "EXPERIENCE",
+      "icon": "☕",
+      "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）"
+    },
+    {
+      "key": "pickup",
+      "name": "快取外卖店",
+      "en": "PICKUP",
+      "icon": "⚡",
+      "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）"
+    },
+    {
+      "key": "drive",
+      "name": "车餐家庭店",
+      "en": "DRIVE-THRU",
+      "icon": "🚗",
+      "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）"
+    },
+    {
+      "key": "value",
+      "name": "性价比街铺",
+      "en": "VALUE",
+      "icon": "🏪",
+      "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）"
+    },
+    {
+      "key": "cart",
+      "name": "推车档口",
+      "en": "CART",
+      "icon": "🛒",
+      "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店"
+    }
+  ],
   "candidates": [
     {
       "id": "ST-02",
@@ -15,6 +53,9 @@
       "crowd_fit": 82,
       "rent_pressure": 30,
       "competition": 48,
+      "visibility": 82,
+      "car_traffic": 30,
+      "delivery_fit": 72,
       "recommended_model": "推车 / 15㎡ 档口",
       "reason": "3 万学生高频价格敏感客群，传播属性极强（开学季刷屏体质）；租金极低，适合推车+档口轻模型跑量。",
       "source_type": "demo_seed",
@@ -27,7 +68,71 @@
         "offices": 2,
         "radius_m": 600
       },
-      "type_en": "CAMPUS"
+      "type_en": "CAMPUS",
+      "models": [
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 78.1,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 77.8,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 77.2,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 73.1,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 60.5,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "value",
+        "name": "性价比街铺",
+        "en": "VALUE",
+        "icon": "🏪",
+        "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+        "score": 78.1,
+        "eligible": true,
+        "hard_fail": []
+      }
     },
     {
       "id": "ST-01",
@@ -41,6 +146,9 @@
       "crowd_fit": 86,
       "rent_pressure": 42,
       "competition": 35,
+      "visibility": 75,
+      "car_traffic": 68,
+      "delivery_fit": 58,
       "recommended_model": "56㎡ 社区集装箱店 / 推车组合",
       "reason": "中高收入社区密集、学校 6 所保底午晚双峰；竞品密度低，社区口锚点稀缺——社区零售标准打法的首选点。",
       "source_type": "demo_seed",
@@ -53,7 +161,71 @@
         "offices": 5,
         "radius_m": 800
       },
-      "type_en": "COMMUNITY"
+      "type_en": "COMMUNITY",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 73.9,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80"
+          ]
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 73.0,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 72.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 72.3,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 65.2,
+          "eligible": true,
+          "hard_fail": []
+        }
+      ],
+      "best_model": {
+        "key": "value",
+        "name": "性价比街铺",
+        "en": "VALUE",
+        "icon": "🏪",
+        "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+        "score": 73.0,
+        "eligible": true,
+        "hard_fail": []
+      }
     },
     {
       "id": "ST-08",
@@ -67,6 +239,9 @@
       "crowd_fit": 79,
       "rent_pressure": 33,
       "competition": 22,
+      "visibility": 66,
+      "car_traffic": 70,
+      "delivery_fit": 48,
       "recommended_model": "56㎡ 社区集装箱店",
       "reason": "卫星城最大社区群、覆盖人口 10.6 万全榜第一，竞品密度全榜最低——'人口密度换增长'的长期价值点位。",
       "source_type": "demo_seed",
@@ -79,7 +254,76 @@
         "offices": 6,
         "radius_m": 1000
       },
-      "type_en": "COMMUNITY"
+      "type_en": "COMMUNITY",
+      "models": [
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 70.7,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 69.5,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80",
+            "可见性 ≥70"
+          ]
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 68.7,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 68.5,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥65"
+          ]
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 62.0,
+          "eligible": false,
+          "hard_fail": [
+            "外卖适配 ≥55"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "drive",
+        "name": "车餐家庭店",
+        "en": "DRIVE-THRU",
+        "icon": "🚗",
+        "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+        "score": 70.7,
+        "eligible": true,
+        "hard_fail": []
+      }
     },
     {
       "id": "ST-06",
@@ -93,6 +337,9 @@
       "crowd_fit": 83,
       "rent_pressure": 38,
       "competition": 28,
+      "visibility": 70,
+      "car_traffic": 65,
+      "delivery_fit": 52,
       "recommended_model": "56㎡ 社区集装箱店",
       "reason": "新城社区 17 个且每年新增，年轻家庭客群与竞品低密度并存——'先占社区口'战略价值最高的成长型点位。",
       "source_type": "demo_seed",
@@ -105,7 +352,73 @@
         "offices": 9,
         "radius_m": 1000
       },
-      "type_en": "COMMUNITY"
+      "type_en": "COMMUNITY",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 70.7,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80"
+          ]
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 69.7,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 69.4,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 68.8,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 62.8,
+          "eligible": false,
+          "hard_fail": [
+            "外卖适配 ≥55"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "drive",
+        "name": "车餐家庭店",
+        "en": "DRIVE-THRU",
+        "icon": "🚗",
+        "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+        "score": 69.7,
+        "eligible": true,
+        "hard_fail": []
+      }
     },
     {
       "id": "ST-05",
@@ -119,6 +432,9 @@
       "crowd_fit": 77,
       "rent_pressure": 60,
       "competition": 58,
+      "visibility": 85,
+      "car_traffic": 62,
+      "delivery_fit": 70,
       "recommended_model": "30㎡ 快取店",
       "reason": "轨道枢纽+夜市商圈双人流叠加，通勤与夜间双峰；快取店型转化枢纽流量，夜间外摆接夜市客流。",
       "source_type": "demo_seed",
@@ -131,7 +447,69 @@
         "offices": 12,
         "radius_m": 900
       },
-      "type_en": "TRANSIT"
+      "type_en": "TRANSIT",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 71.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 69.6,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 67.6,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 67.3,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 63.9,
+          "eligible": true,
+          "hard_fail": []
+        }
+      ],
+      "best_model": {
+        "key": "experience",
+        "name": "体验店",
+        "en": "EXPERIENCE",
+        "icon": "☕",
+        "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+        "score": 71.5,
+        "eligible": true,
+        "hard_fail": []
+      }
     },
     {
       "id": "ST-07",
@@ -145,6 +523,9 @@
       "crowd_fit": 64,
       "rent_pressure": 45,
       "competition": 41,
+      "visibility": 60,
+      "car_traffic": 48,
+      "delivery_fit": 66,
       "recommended_model": "推车 + 外带窗口",
       "reason": "批发商圈人流杂但单价低，适合极致性价比模型（Es Teh 路径）；办公+批发混合客群，下午茶场景空白。",
       "source_type": "demo_seed",
@@ -157,7 +538,74 @@
         "offices": 22,
         "radius_m": 800
       },
-      "type_en": "OFFICE"
+      "type_en": "OFFICE",
+      "models": [
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 63.6,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 63.3,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 62.6,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80",
+            "可见性 ≥70"
+          ]
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 62.2,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 57.6,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "cart",
+        "name": "推车档口",
+        "en": "CART",
+        "icon": "🛒",
+        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+        "score": 63.6,
+        "eligible": true,
+        "hard_fail": []
+      }
     },
     {
       "id": "ST-04",
@@ -171,6 +619,9 @@
       "crowd_fit": 80,
       "rent_pressure": 78,
       "competition": 55,
+      "visibility": 85,
+      "car_traffic": 55,
+      "delivery_fit": 95,
       "recommended_model": "咖啡/轻食档口",
       "reason": "52 栋办公楼早高峰刚需，外卖半径 1km 内单量全城 top；租金高但客单价可撑——咖啡档口坪效模型最佳试验场。",
       "source_type": "demo_seed",
@@ -183,7 +634,73 @@
         "offices": 52,
         "radius_m": 700
       },
-      "type_en": "OFFICE"
+      "type_en": "OFFICE",
+      "models": [
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 68.0,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 67.8,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 63.2,
+          "eligible": false,
+          "hard_fail": [
+            "租金压力 ≤60"
+          ]
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 62.8,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 59.9,
+          "eligible": true,
+          "hard_fail": []
+        }
+      ],
+      "best_model": {
+        "key": "pickup",
+        "name": "快取外卖店",
+        "en": "PICKUP",
+        "icon": "⚡",
+        "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+        "score": 68.0,
+        "eligible": true,
+        "hard_fail": []
+      }
     },
     {
       "id": "ST-03",
@@ -197,6 +714,9 @@
       "crowd_fit": 74,
       "rent_pressure": 88,
       "competition": 72,
+      "visibility": 95,
+      "car_traffic": 40,
+      "delivery_fit": 78,
       "recommended_model": "品牌旗舰体验点",
       "reason": "全雅加达人流天花板、办公客群 38 栋；但租金与竞品双高压——只适合已验证品牌做形象与单测，不适合首店。",
       "source_type": "demo_seed",
@@ -209,7 +729,73 @@
         "offices": 38,
         "radius_m": 1000
       },
-      "type_en": "MALL F&B"
+      "type_en": "MALL F&B",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 68.3,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 63.4,
+          "eligible": false,
+          "hard_fail": [
+            "租金压力 ≤60"
+          ]
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 59.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 59.2,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 56.6,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "experience",
+        "name": "体验店",
+        "en": "EXPERIENCE",
+        "icon": "☕",
+        "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+        "score": 68.3,
+        "eligible": true,
+        "hard_fail": []
+      }
     }
   ],
   "pois": {

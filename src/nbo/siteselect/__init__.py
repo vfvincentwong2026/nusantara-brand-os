@@ -1,7 +1,12 @@
 """智能选址：候选点位评估 + POI 图层 + 人流热力（雅加达/万隆演示区）。
 
-专业选址逻辑：人流 × 消费人群匹配 × 租金压力 × 竞品密度 → 综合选址分；
-每个候选点给出覆盖范围（步行圈内社区/学校/商城/办公数量与人口）。
+专业选址逻辑（借鉴连锁巨头方法论，按业态分模型）：
+- 体验店（星巴克逻辑）：第三空间锚定高质人流，可见性与展示面是硬门槛，租金承受力强
+- 快取外卖店（瑞幸逻辑）：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动
+- 车餐家庭店（麦当劳逻辑）：车流 + 学校社区家庭客群 + 全时段流量
+- 性价比街铺（蜜雪逻辑）：人流绝对量 + 学校 + 极致低租金
+- 推车档口（轻资产逻辑）：潮汐人流 + 接近零固定成本
+每个候选点按各模型加权评分 + 硬条件否决 → 推荐匹配模型。
 数据源：演示种子（字段对齐真实 POI 库 / 人流数据源，可无缝切换）。
 """
 import json
@@ -21,6 +26,7 @@ CREATE TABLE IF NOT EXISTS site_candidate (
   lon REAL NOT NULL,
   site_type TEXT NOT NULL,           -- 社区口 / 学校旁 / 商场食阁 / 办公区 / 交通枢纽 / 夜市
   foot_traffic INTEGER, crowd_fit INTEGER, rent_pressure INTEGER, competition INTEGER,
+  visibility INTEGER, car_traffic INTEGER, delivery_fit INTEGER,
   catch_pop_wan REAL, catch_communities INTEGER, catch_schools INTEGER,
   catch_malls INTEGER, catch_offices INTEGER, catch_radius_m INTEGER,
   recommended_model TEXT, reason TEXT,
@@ -28,45 +34,85 @@ CREATE TABLE IF NOT EXISTS site_candidate (
 );
 """
 
+# ---------- 选址模型库（借鉴星巴克/瑞幸/麦当劳/蜜雪方法论） ----------
+# 因子键：ft=人流 cf=客群匹配 rp=租金压力(逆向) cp=竞品密度(逆向) vs=可见性 ct=车流 df=外卖适配
+MODELS = {
+    "experience": {
+        "name": "体验店", "en": "EXPERIENCE", "icon": "☕",
+        "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+        "weights": {"ft": 0.25, "cf": 0.20, "rp": 0.15, "cp": 0.15, "vs": 0.25},
+        "hard": {"ft": 80, "vs": 70},          # 硬条件：低于即否决
+        "hard_label": {"ft": "人流 ≥80", "vs": "可见性 ≥70"},
+    },
+    "pickup": {
+        "name": "快取外卖店", "en": "PICKUP", "icon": "⚡",
+        "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+        "weights": {"ft": 0.10, "cf": 0.10, "rp": 0.25, "cp": 0.10, "vs": 0.10, "df": 0.35},
+        "hard": {"df": 55},
+        "hard_label": {"df": "外卖适配 ≥55"},
+    },
+    "drive": {
+        "name": "车餐家庭店", "en": "DRIVE-THRU", "icon": "🚗",
+        "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+        "weights": {"ft": 0.15, "cf": 0.20, "rp": 0.10, "cp": 0.10, "vs": 0.10, "ct": 0.35},
+        "hard": {"ct": 60},
+        "hard_label": {"ct": "车流 ≥60"},
+    },
+    "value": {
+        "name": "性价比街铺", "en": "VALUE", "icon": "🏪",
+        "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+        "weights": {"ft": 0.35, "cf": 0.20, "rp": 0.25, "cp": 0.10, "vs": 0.10},
+        "hard": {"rp_max": 60},
+        "hard_label": {"rp_max": "租金压力 ≤60"},
+    },
+    "cart": {
+        "name": "推车档口", "en": "CART", "icon": "🛒",
+        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+        "weights": {"ft": 0.40, "cf": 0.20, "rp": 0.30, "cp": 0.10},
+        "hard": {"ft": 65},
+        "hard_label": {"ft": "人流 ≥65"},
+    },
+}
+
 # 雅加达核心区坐标基准：-6.2, 106.8
 CANDIDATES = [
     dict(id="ST-01", name="Bintaro 九号社区口", area="Bintaro", city="南唐格朗", lat=-6.2665, lon=106.7180,
-         site_type="社区口", foot_traffic=78, crowd_fit=86, rent_pressure=42, competition=35,
+         site_type="社区口", foot_traffic=78, crowd_fit=86, rent_pressure=42, competition=35, visibility=75, car_traffic=68, delivery_fit=58,
          catch_pop_wan=6.8, catch_communities=14, catch_schools=6, catch_malls=2, catch_offices=5, catch_radius_m=800,
          recommended_model="56㎡ 社区集装箱店 / 推车组合",
          reason="中高收入社区密集、学校 6 所保底午晚双峰；竞品密度低，社区口锚点稀缺——社区零售标准打法的首选点。"),
     dict(id="ST-02", name="UI 大学 Depok 校门带", area="Depok", city="德波", lat=-6.3649, lon=106.8219,
-         site_type="学校旁", foot_traffic=88, crowd_fit=82, rent_pressure=30, competition=48,
+         site_type="学校旁", foot_traffic=88, crowd_fit=82, rent_pressure=30, competition=48, visibility=82, car_traffic=30, delivery_fit=72,
          catch_pop_wan=9.2, catch_communities=9, catch_schools=11, catch_malls=1, catch_offices=2, catch_radius_m=600,
          recommended_model="推车 / 15㎡ 档口",
          reason="3 万学生高频价格敏感客群，传播属性极强（开学季刷屏体质）；租金极低，适合推车+档口轻模型跑量。"),
     dict(id="ST-03", name="Grand Indonesia 食阁层", area="Sudirman", city="雅加达", lat=-6.1952, lon=106.8207,
-         site_type="商场食阁", foot_traffic=95, crowd_fit=74, rent_pressure=88, competition=72,
+         site_type="商场食阁", foot_traffic=95, crowd_fit=74, rent_pressure=88, competition=72, visibility=95, car_traffic=40, delivery_fit=78,
          catch_pop_wan=4.5, catch_communities=4, catch_schools=1, catch_malls=4, catch_offices=38, catch_radius_m=1000,
          recommended_model="品牌旗舰体验点",
          reason="全雅加达人流天花板、办公客群 38 栋；但租金与竞品双高压——只适合已验证品牌做形象与单测，不适合首店。"),
     dict(id="ST-04", name="SCBD 办公区街角", area="SCBD", city="雅加达", lat=-6.2255, lon=106.8086,
-         site_type="办公区", foot_traffic=82, crowd_fit=80, rent_pressure=78, competition=55,
+         site_type="办公区", foot_traffic=82, crowd_fit=80, rent_pressure=78, competition=55, visibility=85, car_traffic=55, delivery_fit=95,
          catch_pop_wan=3.1, catch_communities=2, catch_schools=0, catch_malls=3, catch_offices=52, catch_radius_m=700,
          recommended_model="咖啡/轻食档口",
          reason="52 栋办公楼早高峰刚需，外卖半径 1km 内单量全城 top；租金高但客单价可撑——咖啡档口坪效模型最佳试验场。"),
     dict(id="ST-05", name="MRT Blok M 枢纽口", area="Blok M", city="雅加达", lat=-6.2447, lon=106.7977,
-         site_type="交通枢纽", foot_traffic=90, crowd_fit=77, rent_pressure=60, competition=58,
+         site_type="交通枢纽", foot_traffic=90, crowd_fit=77, rent_pressure=60, competition=58, visibility=85, car_traffic=62, delivery_fit=70,
          catch_pop_wan=7.4, catch_communities=10, catch_schools=4, catch_malls=5, catch_offices=12, catch_radius_m=900,
          recommended_model="30㎡ 快取店",
          reason="轨道枢纽+夜市商圈双人流叠加，通勤与夜间双峰；快取店型转化枢纽流量，夜间外摆接夜市客流。"),
     dict(id="ST-06", name="BSD 塞尔蓬新社区轴", area="BSD", city="唐格朗", lat=-6.2980, lon=106.6844,
-         site_type="社区口", foot_traffic=66, crowd_fit=83, rent_pressure=38, competition=28,
+         site_type="社区口", foot_traffic=66, crowd_fit=83, rent_pressure=38, competition=28, visibility=70, car_traffic=65, delivery_fit=52,
          catch_pop_wan=8.9, catch_communities=17, catch_schools=8, catch_malls=3, catch_offices=9, catch_radius_m=1000,
          recommended_model="56㎡ 社区集装箱店",
          reason="新城社区 17 个且每年新增，年轻家庭客群与竞品低密度并存——'先占社区口'战略价值最高的成长型点位。"),
     dict(id="ST-07", name="ITC Kuningan 批发商圈", area="Kuningan", city="雅加达", lat=-6.2333, lon=106.8245,
-         site_type="办公区", foot_traffic=71, crowd_fit=64, rent_pressure=45, competition=41,
+         site_type="办公区", foot_traffic=71, crowd_fit=64, rent_pressure=45, competition=41, visibility=60, car_traffic=48, delivery_fit=66,
          catch_pop_wan=4.2, catch_communities=5, catch_schools=2, catch_malls=2, catch_offices=22, catch_radius_m=800,
          recommended_model="推车 + 外带窗口",
          reason="批发商圈人流杂但单价低，适合极致性价比模型（Es Teh 路径）；办公+批发混合客群，下午茶场景空白。"),
     dict(id="ST-08", name="Summarecon Bekasi 社区轴", area="Bekasi", city="勿加泗", lat=-6.2479, lon=106.9916,
-         site_type="社区口", foot_traffic=62, crowd_fit=79, rent_pressure=33, competition=22,
+         site_type="社区口", foot_traffic=62, crowd_fit=79, rent_pressure=33, competition=22, visibility=66, car_traffic=70, delivery_fit=48,
          catch_pop_wan=10.6, catch_communities=21, catch_schools=9, catch_malls=4, catch_offices=6, catch_radius_m=1000,
          recommended_model="56㎡ 社区集装箱店",
          reason="卫星城最大社区群、覆盖人口 10.6 万全榜第一，竞品密度全榜最低——'人口密度换增长'的长期价值点位。"),
@@ -136,6 +182,9 @@ SITE_TYPE_LABEL = {"社区口": "COMMUNITY", "学校旁": "CAMPUS", "商场食�
 
 
 def migrate_siteselect(conn: sqlite3.Connection) -> None:
+    cols = [r[1] for r in conn.execute("PRAGMA table_info(site_candidate)")]
+    if cols and "visibility" not in cols:
+        conn.execute("DROP TABLE site_candidate")
     conn.executescript(DDL)
 
 
@@ -143,16 +192,51 @@ def seed_siteselect(conn: sqlite3.Connection) -> None:
     migrate_siteselect(conn)
     for c in CANDIDATES:
         conn.execute(
-            "INSERT OR REPLACE INTO site_candidate VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT OR REPLACE INTO site_candidate VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (c["id"], c["name"], c["area"], c["city"], c["lat"], c["lon"], c["site_type"],
              c["foot_traffic"], c["crowd_fit"], c["rent_pressure"], c["competition"],
+             c["visibility"], c["car_traffic"], c["delivery_fit"],
              c["catch_pop_wan"], c["catch_communities"], c["catch_schools"],
              c["catch_malls"], c["catch_offices"], c["catch_radius_m"],
              c["recommended_model"], c["reason"], "demo_seed"))
 
 
+def _factors(c: dict) -> dict:
+    return {"ft": c["foot_traffic"], "cf": c["crowd_fit"],
+            "rp": 100 - c["rent_pressure"], "cp": 100 - c["competition"],
+            "vs": c["visibility"], "ct": c["car_traffic"], "df": c["delivery_fit"]}
+
+
+_HARD_FIELD = {"ft": "foot_traffic", "cf": "crowd_fit", "vs": "visibility",
+               "ct": "car_traffic", "df": "delivery_fit"}
+
+
+def _hard_check(m: dict, c: dict) -> list:
+    fails = []
+    for k, thr in m["hard"].items():
+        if k.endswith("_max"):
+            if c["rent_pressure"] > thr:
+                fails.append(m["hard_label"][k])
+        elif c[_HARD_FIELD.get(k, k)] < thr:
+            fails.append(m["hard_label"][k])
+    return fails
+
+
+def model_scores(c: dict) -> list:
+    f = _factors(c)
+    out = []
+    for key, m in MODELS.items():
+        score = round(sum(w * f[k] for k, w in m["weights"].items()), 1)
+        fails = _hard_check(m, c)
+        out.append({"key": key, "name": m["name"], "en": m["en"], "icon": m["icon"],
+                    "borrow": m["borrow"], "score": score, "eligible": not fails,
+                    "hard_fail": fails})
+    out.sort(key=lambda x: x["score"], reverse=True)
+    return out
+
+
 def site_score(c: dict) -> float:
-    """综合选址分 = 人流×0.30 + 客群×0.25 + (100-租金压力)×0.20 + (100-竞品密度)×0.25"""
+    """综合选址分（基准模型）：人流×0.30 + 客群×0.25 + (100-租金)×0.20 + (100-竞品)×0.25"""
     return round(c["foot_traffic"] * 0.30 + c["crowd_fit"] * 0.25
                  + (100 - c["rent_pressure"]) * 0.20 + (100 - c["competition"]) * 0.25, 1)
 
@@ -182,12 +266,18 @@ def build_siteselect(db_path: str | Path) -> dict:
                           "schools": c.pop("catch_schools"), "malls": c.pop("catch_malls"),
                           "offices": c.pop("catch_offices"), "radius_m": c.pop("catch_radius_m")}
         c["type_en"] = SITE_TYPE_LABEL.get(c["site_type"], c["site_type"])
+        c["models"] = model_scores(c)
+        best = next((m for m in c["models"] if m["eligible"]), None)
+        c["best_model"] = best
         cands.append(c)
     cands.sort(key=lambda c: c["score"], reverse=True)
     return {
         "generated_at": datetime.now(WIB).strftime("%Y-%m-%d %H:%M"),
         "demo": True,
         "source_note": "演示种子数据 · 字段对齐真实 POI 库（OSM/自采）与人流数据源",
+        "model_note": "选址模型库：体验店(星巴克) / 快取外卖(瑞幸) / 车餐家庭(麦当劳) / 性价比街铺(蜜雪) / 推车档口(轻资产) —— 加权评分 + 硬条件否决",
+        "models_legend": [{"key": k, "name": m["name"], "en": m["en"], "icon": m["icon"], "borrow": m["borrow"]}
+                          for k, m in MODELS.items()],
         "candidates": cands,
         "pois": POIS,
         "heat": HEAT,
