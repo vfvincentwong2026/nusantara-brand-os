@@ -9,12 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <title>3D 门店 · 数字孪生，开店前先逛一遍 | Nusantara Brand OS</title>
 <style>
-  :root { --bg:#0b0e13; --panel:#161b22cc; --line:#2d333b; --text:#e6edf3; --dim:#8b949e; --accent:#e4022b; }
+  :root { --bg:#ffffff; --panel:#ffffffcc; --line:#cccccc; --text:#111111; --dim:#767676; --accent:#e60023; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font:13px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; overflow:hidden; }
   #canvas-wrap { position:fixed; inset:0; }
   #hud { position:fixed; top:38px; left:0; right:0; display:flex; justify-content:space-between; align-items:flex-start;
-         padding:14px 18px; background:linear-gradient(rgba(11,14,19,.92),transparent); pointer-events:none; z-index:10; }
+         padding:14px 18px; background:linear-gradient(rgba(255,255,255,.92),transparent); pointer-events:none; z-index:10; }
   #hud > * { pointer-events:auto; }
   h1 { font-size:15px; text-shadow:0 1px 4px #000; }
   .controls { margin-top:8px; display:flex; gap:8px; }
@@ -25,22 +25,22 @@
     .controls select, .controls button { flex:0 0 auto; white-space:nowrap; }
     #info { min-width:0; font-size:11px; }
   }
-  select, button { background:#161b22; color:var(--text); border:1px solid var(--line); border-radius:6px;
+  select, button { background:#ffffff; color:var(--text); border:1px solid var(--line); border-radius:6px;
                    padding:6px 12px; font-size:13px; cursor:pointer; backdrop-filter:blur(6px); transition:.15s; }
-  button:hover, select:hover { border-color:#e4022b; }
-  button.on { border-color:var(--accent); color:#ff5c73; box-shadow:0 0 10px #e4022b33; }
+  button:hover, select:hover { border-color:#e60023; }
+  button.on { border-color:var(--accent); color:#ff5c73; box-shadow:0 0 10px #e6002333; }
   #info { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:12px 16px;
           font-size:12px; color:var(--dim); min-width:220px; backdrop-filter:blur(8px); box-shadow:0 4px 20px #0008; }
   #info b { color:var(--text); font-size:13px; }
   #loading { position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
              background:var(--bg); z-index:100; color:var(--dim); font-size:14px; letter-spacing:.15em; transition:opacity .6s; }
   .nbo-nav { position:fixed; top:0; left:0; right:0; height:38px; z-index:10000; display:flex; align-items:center;
-    padding:0 16px; background:rgba(10,14,20,.92); backdrop-filter:blur(8px); border-bottom:1px solid #232b36;
+    padding:0 16px; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid #e5e5e5;
     font:12.5px -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
-  .nbo-nav .brand { color:#e4022b; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
-  .nbo-nav a.nl { color:#8b98a8; text-decoration:none; padding:6px 12px; border-radius:6px; }
-  .nbo-nav a.nl:hover { color:#e8eef5; }
-  .nbo-nav a.nl.on { color:#fff; background:rgba(228,2,43,.2); }
+  .nbo-nav .brand { color:#e60023; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
+  .nbo-nav a.nl { color:#767676; text-decoration:none; padding:6px 12px; border-radius:6px; }
+  .nbo-nav a.nl:hover { color:#111111; }
+  .nbo-nav a.nl.on { color:#111111; background:rgba(230,0,35,.08); }
 </style>
 <script type="importmap">
 { "imports": { "three": "./three.module.min.js" } }
@@ -58,15 +58,15 @@
   <a class="nl" data-p="store-dash" href="/store-dash/">门店大屏<span class="nle">LIVE</span></a>
   <a class="nl" href="https://nusantara-brand-os.pages.dev/" target="_blank" rel="noopener">品牌孵化主站<span class="nle">BRAND OS ↗</span></a>
 </nav>
-<div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #14202e;background:rgba(9,13,19,.92);backdrop-filter:blur(6px);">
-  <span style="letter-spacing:.1em;color:#999999;">B·集装箱零售链路</span>
-  <a href="/case/" data-s="/case/" style="color:#8b98a8;text-decoration:none;">① 集装箱店样板</a><span>→</span>
-  <a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">② 开店方案选型</a><span>→</span>
-  <a href="/floorplan/" data-s="/floorplan/" style="color:#8b98a8;text-decoration:none;">③ 平面布局</a><span>→</span>
-  <a href="/three/" data-s="/three/" style="color:#8b98a8;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
-  <a href="/dashboard/" data-s="/dashboard/" style="color:#8b98a8;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
-  <a href="/map/" data-s="/map/" style="color:#8b98a8;text-decoration:none;">⑥ 渠道地图铺货</a>
-  <script>document.querySelectorAll('.bchain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#4da3ff';a.style.fontWeight='700';}});</script>
+<div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#767676;border-bottom:1px solid #e5e5e5;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);">
+  <span style="letter-spacing:.1em;color:#767676;">B·集装箱零售链路</span>
+  <a href="/case/" data-s="/case/" style="color:#767676;text-decoration:none;">① 集装箱店样板</a><span>→</span>
+  <a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">② 开店方案选型</a><span>→</span>
+  <a href="/floorplan/" data-s="/floorplan/" style="color:#767676;text-decoration:none;">③ 平面布局</a><span>→</span>
+  <a href="/three/" data-s="/three/" style="color:#767676;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
+  <a href="/dashboard/" data-s="/dashboard/" style="color:#767676;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
+  <a href="/map/" data-s="/map/" style="color:#767676;text-decoration:none;">⑥ 渠道地图铺货</a>
+  <script>document.querySelectorAll('.bchain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#767676';a.style.fontWeight='700';}});</script>
 </div>
 <script>
   (() => { const p = location.pathname;
@@ -77,7 +77,7 @@
 <div id="canvas-wrap"></div>
 <div id="hud">
   <div>
-    <h1>3D 数字孪生 · <span id="store-name">…</span></h1>
+    <h1>3D 数字孪生 DIGITAL TWIN · <span id="store-name">…</span></h1>
     <div class="controls">
       <select id="store-sel">
         <option value="case-d">56㎡ 集装箱店（案例）</option>
@@ -121,7 +121,7 @@ function floorTexture() {
   const g = c.getContext('2d');
   g.fillStyle = '#20242c'; g.fillRect(0, 0, 256, 256);
   for (let i = 0; i < 4; i++) {                       // 木地板条
-    g.fillStyle = i % 2 ? '#232833' : '#1f232d';
+    g.fillStyle = i % 2 ? '#232833' : '#e5e5e5';
     g.fillRect(0, i * 64, 256, 62);
     g.strokeStyle = 'rgba(0,0,0,.35)'; g.strokeRect(-1, i * 64, 258, 63);
   }
@@ -149,11 +149,11 @@ function zoneLabelTexture(text, colorCss) {
 function signTexture(text) {
   const c = document.createElement('canvas'); c.width = 1024; c.height = 128;
   const g = c.getContext('2d');
-  g.fillStyle = '#10131a'; g.fillRect(0, 0, 1024, 128);
+  g.fillStyle = '#f2f2f2'; g.fillRect(0, 0, 1024, 128);
   g.font = '700 84px "Segoe UI","Microsoft YaHei",sans-serif';
   g.textAlign = 'center'; g.textBaseline = 'middle';
-  g.fillStyle = '#e4022b';
-  g.shadowColor = '#e4022b'; g.shadowBlur = 26;
+  g.fillStyle = '#e60023';
+  g.shadowColor = '#e60023'; g.shadowBlur = 26;
   g.fillText(text, 512, 66);
   const t = new THREE.CanvasTexture(c);
   t.colorSpace = THREE.SRGBColorSpace;
@@ -349,7 +349,7 @@ async function load(store) {
   } catch (e) {
     const el = document.getElementById('loading');
     el.textContent = `布局数据加载失败（${e.message || e}）— 请确认已运行 python -m nbo.twin`;
-    el.style.color = '#f85149';
+    el.style.color = '#e60023';
     return;
   }
   plano = pl;
@@ -518,7 +518,7 @@ function applyOptColors() {
     `预期日毛利 ${fmt(opt.profit_before_idr)} → <b>${fmt(opt.profit_after_idr)} IDR</b>` +
     `（${opt.uplift > 0 ? '+' : ''}${(opt.uplift * 100).toFixed(1)}%）<br>` +
     `着色 = 各货架主导 SKU · 深灰 = 优化后空置面位<br>` +
-    `<span style="color:#8b949e">再次点击按钮回到区域配色</span>`;
+    `<span style="color:#767676">再次点击按钮回到区域配色</span>`;
 }
 function revertColors() {
   shelfMeshes.forEach(m => {

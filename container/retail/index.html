@@ -10,48 +10,48 @@
 <title>社区集装箱零售 · 单页投资模型（对外版） | Nusantara Brand OS</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; padding-top:38px; }
+  body { background:#ffffff; color:#111111; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; padding-top:38px; }
   .wrap { max-width:1180px; margin:0 auto; padding:70px 28px 80px; }
   .hero { text-align:left; margin-bottom:44px; }
-  .hero .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(77,163,255,.5); border-radius:999px;
-               color:#999999; font-size:11px; letter-spacing:.14em; margin-bottom:16px; }
+  .hero .tag { display:inline-block; padding:4px 14px; border:1px solid rgba(118,118,118,.5); border-radius:999px;
+               color:#767676; font-size:11px; letter-spacing:.14em; margin-bottom:16px; }
   .hero h1 { font-size:40px; font-weight:800; line-height:1.25; max-width:900px; }
-  .hero h1 em { color:#999999; font-style:normal; }
-  .hero .lead { margin-top:14px; color:#8b98a8; font-size:14.5px; max-width:860px; line-height:1.9; }
+  .hero h1 em { color:#767676; font-style:normal; }
+  .hero .lead { margin-top:14px; color:#767676; font-size:14.5px; max-width:860px; line-height:1.9; }
   .kpirow { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; margin:34px 0 44px; }
-  .kpi { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px 20px; }
-  .kpi .v { font-size:26px; font-weight:800; font-family:Consolas,monospace; color:#999999; }
-  .kpi .k { color:#8b98a8; font-size:12px; margin-top:6px; line-height:1.6; }
+  .kpi { background:#ffffff; border:1px solid #e5e5e5; border-radius:14px; padding:18px 20px; }
+  .kpi .v { font-size:26px; font-weight:800; font-family:Consolas,monospace; color:#767676; }
+  .kpi .k { color:#767676; font-size:12px; margin-top:6px; line-height:1.6; }
   .sec { margin-bottom:44px; }
   .sec h2 { font-size:20px; font-weight:800; margin-bottom:6px; }
-  .sec .sd { color:#8b98a8; font-size:13px; margin-bottom:18px; line-height:1.8; max-width:820px; }
+  .sec .sd { color:#767676; font-size:13px; margin-bottom:18px; line-height:1.8; max-width:820px; }
   .plans { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }
-  .plan { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:20px; }
-  .plan.hot { border-color:rgba(77,163,255,.5); box-shadow:0 0 24px rgba(77,163,255,.08); }
+  .plan { background:#ffffff; border:1px solid #e5e5e5; border-radius:14px; padding:20px; }
+  .plan.hot { border-color:rgba(118,118,118,.5); box-shadow:0 0 24px rgba(118,118,118,.08); }
   .plan h3 { font-size:15px; }
-  .plan h3 small { color:#5b6779; font-weight:400; font-size:11px; margin-left:6px; }
-  .plan .money { font-family:Consolas,monospace; font-size:20px; font-weight:800; color:#e8eef5; margin:10px 0 2px; }
-  .plan .money small { display:block; font-size:11px; color:#5b6779; font-weight:400; }
-  .plan .pm { font-size:12px; color:#8b98a8; line-height:1.9; }
-  .plan .pm b { color:#e8eef5; }
+  .plan h3 small { color:#767676; font-weight:400; font-size:11px; margin-left:6px; }
+  .plan .money { font-family:Consolas,monospace; font-size:20px; font-weight:800; color:#111111; margin:10px 0 2px; }
+  .plan .money small { display:block; font-size:11px; color:#767676; font-weight:400; }
+  .plan .pm { font-size:12px; color:#767676; line-height:1.9; }
+  .plan .pm b { color:#111111; }
   .flows { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
-  .flow { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:18px 20px; font-size:13px; line-height:1.9; color:#a9b6c6; }
-  .flow b { display:block; color:#999999; font-size:12px; letter-spacing:.1em; margin-bottom:8px; }
+  .flow { background:#ffffff; border:1px solid #e5e5e5; border-radius:14px; padding:18px 20px; font-size:13px; line-height:1.9; color:#444444; }
+  .flow b { display:block; color:#767676; font-size:12px; letter-spacing:.1em; margin-bottom:8px; }
   .steps { display:flex; gap:0; flex-wrap:wrap; margin-top:6px; }
-  .step { flex:1 1 160px; padding:14px 16px; border-left:2px solid #4da3ff; background:#0e141c; font-size:12px; color:#8b98a8; line-height:1.8; }
-  .step b { display:block; color:#e8eef5; font-size:13px; margin-bottom:4px; }
-  .cta { background:linear-gradient(135deg,rgba(77,163,255,.14),rgba(228,2,43,.06));
-         border:1px solid rgba(77,163,255,.4); border-radius:16px; padding:28px 30px;
+  .step { flex:1 1 160px; padding:14px 16px; border-left:2px solid #767676; background:#f2f2f2; font-size:12px; color:#767676; line-height:1.8; }
+  .step b { display:block; color:#111111; font-size:13px; margin-bottom:4px; }
+  .cta { background:linear-gradient(135deg,rgba(118,118,118,.14),rgba(230,0,35,.06));
+         border:1px solid rgba(118,118,118,.4); border-radius:16px; padding:28px 30px;
          display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between; }
   .cta h2 { font-size:20px; }
-  .cta p { color:#8b98a8; font-size:13px; margin-top:6px; max-width:640px; line-height:1.8; }
+  .cta p { color:#767676; font-size:13px; margin-top:6px; max-width:640px; line-height:1.8; }
   .cta .btns { display:flex; gap:10px; flex-wrap:wrap; }
   .cta .btns a { padding:11px 22px; border-radius:10px; font-size:13.5px; font-weight:700; text-decoration:none; }
-  .cta .btns .p { background:#4da3ff; color:#081018; }
-  .cta .btns .g { border:1px solid #2a3546; color:#8b98a8; }
-  .demo { margin-top:16px; font-size:11px; color:#999; line-height:1.7; }
-  .deep { margin-top:14px; font-size:12px; color:#5b6779; }
-  .deep a { color:#999999; text-decoration:none; margin-right:14px; }
+  .cta .btns .p { background:#767676; color:#ffffff; }
+  .cta .btns .g { border:1px solid #2a3546; color:#767676; }
+  .demo { margin-top:16px; font-size:11px; color:#767676; line-height:1.7; }
+  .deep { margin-top:14px; font-size:12px; color:#767676; }
+  .deep a { color:#767676; text-decoration:none; margin-right:14px; }
 </style>
 </head>
 <body data-p="retail">
@@ -76,14 +76,14 @@
   <div class="kpirow" id="kpis"></div>
 
   <div class="sec">
-    <h2>投资模型 · 三种建店形态</h2>
+    <h2>投资模型 INVESTMENT MODEL · 三种建店形态</h2>
     <div class="sd">总造价含主体硬装、设备、首批货、证照合规与流动资金，双币呈现。首期推荐单箱体：预算内、可搬迁、试错成本最低。</div>
     <div class="plans" id="plans"></div>
     <div class="demo">⚠ DEMO 金额为雅加达 2026 行情区间估算（演示口径，1 CNY ≈ 2200 IDR）；落地前需当地承包商询价复核。</div>
   </div>
 
   <div class="sec">
-    <h2>样板店 · 社区集装箱店 案例 001</h2>
+    <h2>样板店 FLAGSHIP · 社区集装箱店 案例 001</h2>
     <div class="sd">已在系统内完成全链路建模的样板节点：四种箱体档位、56.4㎡ 双 40 尺组合平面、SKU 合规快照、订单履约演示流与能源排期。</div>
     <div class="flows">
       <div class="flow"><b>店 · 56.4㎡ 双箱体</b>前店后仓：前场 100–180 个 SKU 覆盖社区高频需求，后场履约与冷藏；尺寸为概念示意，施工前现场复测。</div>
@@ -95,7 +95,7 @@
   </div>
 
   <div class="sec">
-    <h2>从样板到网络 · 五步</h2>
+    <h2>从样板到网络 SCALE-UP · 五步</h2>
     <div class="sd">单店只是起点，系统按同一套数据模型向点位网络扩张。</div>
     <div class="steps">
       <div class="step"><b>① 样板验证</b>单箱体店跑通选品、履约与复购，56.4㎡ 平面与 BOM 直接复用。</div>
@@ -108,7 +108,7 @@
 
   <div class="cta">
     <div>
-      <h2>共建印尼社区零售网络</h2>
+      <h2>共建印尼社区零售网络 CO-BUILD THE NETWORK</h2>
       <p>我们提供建店系统 + 供应链方法论 + 数据化运营底盘，寻找印尼本地点位、渠道与供应链伙伴。系统全部页面可点开实测，欢迎体验后约谈。</p>
     </div>
     <div class="btns">

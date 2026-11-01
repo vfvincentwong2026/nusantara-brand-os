@@ -9,23 +9,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <title>案例 · Nusantara Community Store，可复制的社区零售节点 | Nusantara Brand OS</title>
 <style>
-  :root { --bg:#0a0e14; --panel:#12171f; --line:#232b36; --text:#e8eef5; --dim:#8b98a8;
-          --red:#e4022b; --gold:#ffd700; --green:#3fb950; --blue:#58a6ff; --orange:#d29922; }
+  :root { --bg:#ffffff; --panel:#ffffff; --line:#e5e5e5; --text:#111111; --dim:#767676;
+          --red:#e60023; --gold:#b26a00; --green:#3fb950; --blue:#767676; --orange:#b26a00; }
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:var(--bg); color:var(--text); font:14px/1.7 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; padding-top:70px; }
   .wrap { max-width:1180px; margin:0 auto; padding:0 28px; }
   .nbo-nav { position:fixed; top:0; left:0; right:0; height:38px; z-index:10000; display:flex; align-items:center;
-    padding:0 16px; background:rgba(10,14,20,.92); backdrop-filter:blur(8px); border-bottom:1px solid #232b36;
+    padding:0 16px; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid #e5e5e5;
     font:12.5px -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
-  .nbo-nav .brand { color:#e4022b; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
-  .nbo-nav a.nl { color:#8b98a8; text-decoration:none; padding:6px 12px; border-radius:6px; }
-  .nbo-nav a.nl:hover { color:#e8eef5; }
-  .nbo-nav a.nl.on { color:#fff; background:rgba(228,2,43,.2); }
+  .nbo-nav .brand { color:#e60023; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
+  .nbo-nav a.nl { color:#767676; text-decoration:none; padding:6px 12px; border-radius:6px; }
+  .nbo-nav a.nl:hover { color:#111111; }
+  .nbo-nav a.nl.on { color:#111111; background:rgba(230,0,35,.08); }
 
-  .demo-strip { background:repeating-linear-gradient(-45deg, rgba(228,2,43,.14), rgba(228,2,43,.14) 14px, transparent 14px, transparent 28px);
-    border-bottom:1px solid rgba(228,2,43,.4); text-align:center; font-size:12.5px; color:#ffb3c0; padding:7px 12px; letter-spacing:.06em; }
-  .hero { padding:52px 0 30px; background:radial-gradient(900px 380px at 12% -8%, rgba(255,215,0,.10), transparent 60%),
-           radial-gradient(800px 360px at 90% 0%, rgba(228,2,43,.10), transparent 55%); }
+  .demo-strip { background:repeating-linear-gradient(-45deg, rgba(230,0,35,.14), rgba(230,0,35,.14) 14px, transparent 14px, transparent 28px);
+    border-bottom:1px solid rgba(230,0,35,.4); text-align:center; font-size:12.5px; color:#e60023; padding:7px 12px; letter-spacing:.06em; }
+  .hero { padding:52px 0 30px; background:radial-gradient(900px 380px at 12% -8%, rgba(230,0,35,.04), transparent 60%),
+           radial-gradient(800px 360px at 90% 0%, rgba(230,0,35,.10), transparent 55%); }
   .tag { display:inline-block; font-size:11.5px; letter-spacing:.12em; color:var(--gold); border:1px solid rgba(255,215,0,.45);
          border-radius:999px; padding:3px 14px; margin-bottom:14px; }
   h1 { font-size:clamp(26px,3.6vw,40px); line-height:1.3; }
@@ -54,22 +54,22 @@
   .plan { display:grid; grid-template-columns:1.5fr 1fr; gap:18px; }
   @media (max-width:900px) { .plan { grid-template-columns:1fr; } }
   .layout { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px; }
-  .layout .canvas { position:relative; width:100%; aspect-ratio:12/4.7; background:#0d131b; border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+  .layout .canvas { position:relative; width:100%; aspect-ratio:12/4.7; background:#ffffff; border:1px solid var(--line); border-radius:6px; overflow:hidden; }
   .zone { position:absolute; border-radius:3px; font-size:10.5px; color:#dfe7ef; padding:3px 6px; overflow:hidden; }
-  .z-store { background:rgba(110,118,129,.35); border:1px dashed #6e7681; }
+  .z-store { background:rgba(110,118,129,.35); border:1px dashed #767676; }
   .z-shelf { background:rgba(255,215,0,.16); border:1px solid rgba(255,215,0,.5); }
   .z-island { background:rgba(255,215,0,.24); border:1px solid var(--gold); }
   .z-cold { background:rgba(88,166,255,.20); border:1px solid var(--blue); }
   .z-pos { background:rgba(63,185,80,.20); border:1px solid var(--green); }
-  .z-entry { background:rgba(228,2,43,.14); border:1px dashed var(--red); }
+  .z-entry { background:rgba(230,0,35,.14); border:1px dashed var(--red); }
   .z-gen { background:rgba(210,153,34,.18); border:1px dashed var(--orange); }
-  .z-handover { background:rgba(188,140,255,.18); border:1px solid #bc8cff; }
+  .z-handover { background:rgba(188,140,255,.18); border:1px solid #767676; }
   .rules { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:18px 22px; font-size:13px; color:var(--dim); }
   .rules li { margin:6px 0 6px 18px; }
 
   .cta-row { display:flex; gap:12px; flex-wrap:wrap; margin:22px 0 6px; }
   .btn { display:inline-block; padding:10px 22px; border-radius:8px; font-weight:600; font-size:14px; text-decoration:none; }
-  .btn.primary { background:var(--red); color:#fff; }
+  .btn.primary { background:var(--red); color:#111111; }
   .btn.ghost { border:1px solid var(--line); color:var(--dim); }
   .btn.ghost:hover { color:var(--text); border-color:var(--dim); }
 
@@ -88,10 +88,10 @@
 
   .stepper { display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 14px; }
   .step { flex:1; min-width:86px; text-align:center; font-size:11.5px; padding:7px 4px; border-radius:6px;
-          background:#0d131b; border:1px solid var(--line); color:var(--dim); }
+          background:#ffffff; border:1px solid var(--line); color:var(--dim); }
   .step.done { border-color:var(--green); color:var(--green); }
   .step.cur { border-color:var(--gold); color:var(--gold); background:rgba(255,215,0,.08); }
-  .mini-btn { background:#1c2531; border:1px solid var(--line); color:var(--text); border-radius:6px;
+  .mini-btn { background:#e5e5e5; border:1px solid var(--line); color:var(--text); border-radius:6px;
               padding:6px 14px; font-size:12.5px; cursor:pointer; }
   .mini-btn:hover { border-color:var(--blue); }
   footer { border-top:1px solid var(--line); margin-top:52px; padding:22px 0 36px; color:var(--dim); font-size:12px; }
@@ -109,15 +109,15 @@
   <a class="nl" data-p="store-dash" href="/store-dash/">门店大屏<span class="nle">LIVE</span></a>
   <a class="nl" href="https://nusantara-brand-os.pages.dev/" target="_blank" rel="noopener">品牌孵化主站<span class="nle">BRAND OS ↗</span></a>
 </nav>
-<div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #14202e;background:rgba(9,13,19,.92);backdrop-filter:blur(6px);">
-  <span style="letter-spacing:.1em;color:#999999;">B·集装箱零售链路</span>
-  <a href="/case/" data-s="/case/" style="color:#8b98a8;text-decoration:none;">① 集装箱店样板</a><span>→</span>
-  <a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">② 开店方案选型</a><span>→</span>
-  <a href="/floorplan/" data-s="/floorplan/" style="color:#8b98a8;text-decoration:none;">③ 平面布局</a><span>→</span>
-  <a href="/three/" data-s="/three/" style="color:#8b98a8;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
-  <a href="/dashboard/" data-s="/dashboard/" style="color:#8b98a8;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
-  <a href="/map/" data-s="/map/" style="color:#8b98a8;text-decoration:none;">⑥ 渠道地图铺货</a>
-  <script>document.querySelectorAll('.bchain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#4da3ff';a.style.fontWeight='700';}});</script>
+<div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#767676;border-bottom:1px solid #e5e5e5;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);">
+  <span style="letter-spacing:.1em;color:#767676;">B·集装箱零售链路</span>
+  <a href="/case/" data-s="/case/" style="color:#767676;text-decoration:none;">① 集装箱店样板</a><span>→</span>
+  <a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">② 开店方案选型</a><span>→</span>
+  <a href="/floorplan/" data-s="/floorplan/" style="color:#767676;text-decoration:none;">③ 平面布局</a><span>→</span>
+  <a href="/three/" data-s="/three/" style="color:#767676;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
+  <a href="/dashboard/" data-s="/dashboard/" style="color:#767676;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
+  <a href="/map/" data-s="/map/" style="color:#767676;text-decoration:none;">⑥ 渠道地图铺货</a>
+  <script>document.querySelectorAll('.bchain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#767676';a.style.fontWeight='700';}});</script>
 </div>
 
 <script>
@@ -149,12 +149,12 @@
 
 <main class="wrap">
 
-  <h2>四种箱体档位</h2>
+  <h2>四种箱体档位 FOUR CONTAINER TIERS</h2>
   <div class="sec-sub">Hapag-Lloyd 公布参考：20 尺箱内约 5.900 × 2.352m，40 尺高箱内约 12.032 × 2.352 × 2.700m。以下为改造后概念净尺寸，非厂家保证值。</div>
   <div class="tiers" id="tiers"></div>
   <div class="tier-detail" id="tierDetail"></div>
 
-  <h2>推荐布局 · 双 40 尺约 56 ㎡</h2>
+  <h2>推荐布局 LAYOUT · 双 40 尺约 56 ㎡</h2>
   <div class="sec-sub">分区面积为设计目标区间，存在边界重叠；最终平面以设备外形、墙体厚度、开门方向和消防要求精确排布。</div>
   <div class="plan">
     <div class="layout">
@@ -172,7 +172,7 @@
     </ul></div>
   </div>
 
-  <h2>门店概念意向图</h2>
+  <h2>门店概念意向图 CONCEPT RENDERS</h2>
   <div class="sec-sub">以下均为概念意向图 · 非施工图 · 不代表已落地门店</div>
   <div class="gallery">
     <figure><img src="./assets/02-store-interior.jpg" alt="室内陈列概念意向图"><figcaption>室内陈列 · 明亮可见的货架</figcaption></figure>
@@ -194,7 +194,7 @@
   </div>
   <div class="sec-sub">2D 编辑器导入上述 JSON 即可查看/修改布局，3D 孪生已预载同一份 planogram——编辑一次双端复用（当前以 JSON 导入导出同步，无持久化）。</div>
 
-  <h2 id="ops">门店运营演示面板</h2>
+  <h2 id="ops">门店运营演示面板 STORE OPS DEMO</h2>
   <div class="sec-sub">全部为种子样本 / 模拟数据 · 口径：按日 · 门店 = 双 40 尺样板店 <span class="b b-demo">DEMO</span></div>
 
   <div class="kpis" id="opsKpis"></div>
@@ -239,7 +239,7 @@
     </div>
   </div>
 
-  <h2>数据边界与待接入</h2>
+  <h2>数据边界与待接入 DATA BOUNDARY</h2>
   <div class="grid2">
     <div class="card"><h3>标注为「估算 / 待确认」</h3>
       <ul style="color:var(--dim);font-size:13px;margin-left:18px">
@@ -304,7 +304,7 @@ fetch('./data/case_ops.json').then(r => {
     `<tr><td>${k.name}${k.compliance_note ? `<div style="color:var(--dim);font-size:11px">${k.compliance_note}</div>` : ''}</td>` +
     `<td>${k.stock}${k.reserved ? `（锁定 ${k.reserved}）` : ''}</td><td>${k.avg_daily_sales}</td><td>${certBadge(k.compliance_status, k.blocked)}</td></tr>`).join('');
 }).catch(e => {
-  document.getElementById('opsKpis').innerHTML = `<div style="color:#f85149">加载失败：${e.message}</div>`;
+  document.getElementById('opsKpis').innerHTML = `<div style="color:#e60023">加载失败：${e.message}</div>`;
 });
 
 const TIERS = [

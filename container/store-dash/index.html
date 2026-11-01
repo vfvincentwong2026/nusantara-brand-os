@@ -10,41 +10,41 @@
 <title>门店大屏 · 单店经营驾驶舱，去化补货一屏决策 | Nusantara Brand OS</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#0b0f14; color:#e8eef5; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
+  body { background:#ffffff; color:#111111; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
   .wrap { max-width:760px; margin:0 auto; padding:58px 16px 60px; }
   .head { margin-bottom:16px; }
-  .head .tag { font-size:10.5px; letter-spacing:.14em; color:#ff5c7a; }
+  .head .tag { font-size:10.5px; letter-spacing:.14em; color:#e60023; }
   .head h1 { font-size:22px; font-weight:800; margin-top:4px; }
-  .head .date { color:#5b6779; font-size:11.5px; margin-top:4px; }
-  .card { background:#121820; border:1px solid #1f2733; border-radius:14px; padding:16px 18px; margin-bottom:12px; }
-  .card h2 { font-size:11px; letter-spacing:.1em; color:#5b6779; font-weight:600; margin-bottom:10px; }
+  .head .date { color:#767676; font-size:11.5px; margin-top:4px; }
+  .card { background:#ffffff; border:1px solid #e5e5e5; border-radius:14px; padding:16px 18px; margin-bottom:12px; }
+  .card h2 { font-size:11px; letter-spacing:.1em; color:#767676; font-weight:600; margin-bottom:10px; }
   .big { font-size:34px; font-weight:800; font-family:Consolas,monospace; }
-  .big small { font-size:13px; font-weight:400; color:#8b98a8; font-family:'Segoe UI',sans-serif; }
-  .sub { color:#8b98a8; font-size:12px; margin-top:4px; }
+  .big small { font-size:13px; font-weight:400; color:#767676; font-family:'Segoe UI',sans-serif; }
+  .sub { color:#767676; font-size:12px; margin-top:4px; }
   .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
   .grid2 .card { margin-bottom:0; }
-  .alert { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px dashed #1f2733; font-size:13px; }
+  .alert { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px dashed #e5e5e5; font-size:13px; }
   .alert:last-child { border-bottom:none; }
   .dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-  .dot.bad { background:#ff5c7a; box-shadow:0 0 8px rgba(255,92,122,.7); }
-  .dot.high { background:#ff9a3d; }
-  .dot.warn { background:#e8b246; }
+  .dot.bad { background:#e60023; box-shadow:0 0 8px rgba(230,0,35,.7); }
+  .dot.high { background:#b26a00; }
+  .dot.warn { background:#b26a00; }
   .alert .an { font-weight:700; }
-  .alert .aa { color:#8b98a8; font-size:11.5px; }
-  .top5 { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px dashed #1f2733; font-size:13px; }
+  .alert .aa { color:#767676; font-size:11.5px; }
+  .top5 { display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px dashed #e5e5e5; font-size:13px; }
   .top5:last-child { border-bottom:none; }
-  .top5 .r { color:#e4022b; font-family:Consolas,monospace; font-weight:800; width:22px; }
+  .top5 .r { color:#e60023; font-family:Consolas,monospace; font-weight:800; width:22px; }
   .top5 .tn { flex:1; font-weight:600; }
-  .top5 .ts { color:#5b6779; font-size:11px; font-family:Consolas,monospace; }
-  .reorder { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px dashed #1f2733; font-size:13px; }
+  .top5 .ts { color:#767676; font-size:11px; font-family:Consolas,monospace; }
+  .reorder { display:flex; justify-content:space-between; align-items:center; padding:9px 0; border-bottom:1px dashed #e5e5e5; font-size:13px; }
   .reorder:last-child { border-bottom:none; }
-  .reorder .qty { background:rgba(52,209,123,.15); color:#34d17b; font-family:Consolas,monospace;
+  .reorder .qty { background:rgba(46,125,35,.15); color:#2e7d32; font-family:Consolas,monospace;
                   font-weight:800; padding:3px 12px; border-radius:8px; }
-  .reorder .rs { color:#5b6779; font-size:10.5px; }
-  .ok { color:#34d17b; font-size:13px; padding:6px 0; }
+  .reorder .rs { color:#767676; font-size:10.5px; }
+  .ok { color:#2e7d32; font-size:13px; padding:6px 0; }
   .links { display:flex; gap:14px; margin-top:16px; justify-content:center; }
-  .links a { color:#999999; font-size:12px; text-decoration:none; }
-  .foot { text-align:center; color:#33405a; font-size:10.5px; margin-top:18px; }
+  .links a { color:#767676; font-size:12px; text-decoration:none; }
+  .foot { text-align:center; color:#cccccc; font-size:10.5px; margin-top:18px; }
 </style>
 </head>
 <body>
@@ -59,15 +59,15 @@
   <a class="nl" data-p="store-dash" href="/store-dash/">门店大屏<span class="nle">LIVE</span></a>
   <a class="nl" href="https://nusantara-brand-os.pages.dev/" target="_blank" rel="noopener">品牌孵化主站<span class="nle">BRAND OS ↗</span></a>
 </nav>
-<div class="chain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#5b6779;border-bottom:1px solid #141a23;background:rgba(11,14,19,.92);backdrop-filter:blur(6px);">
+<div class="chain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#767676;border-bottom:1px solid #e5e5e5;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);">
   <span style="letter-spacing:.1em;">孵化流水线</span>
-  <a href="/trend/" data-s="/trend/" style="color:#8b98a8;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
-<a href="/launch/" data-s="/launch/" style="color:#8b98a8;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
-<a href="/brandkit/" data-s="/brandkit/" style="color:#8b98a8;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
-<a href="/assembly/" data-s="/assembly/" style="color:#8b98a8;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
-<a href="/store-dash/" data-s="/store-dash/" style="color:#8b98a8;text-decoration:none;">⑤ 验证 · 门店大屏</a><span>→</span>
-<a href="/franchise/" data-s="/franchise/" style="color:#8b98a8;text-decoration:none;">⑥ 复制 · 加盟体系</a>
-  <script>document.querySelectorAll('.chain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#e8b246';a.style.fontWeight='700';}});</script>
+  <a href="/trend/" data-s="/trend/" style="color:#767676;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
+<a href="/launch/" data-s="/launch/" style="color:#767676;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
+<a href="/brandkit/" data-s="/brandkit/" style="color:#767676;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
+<a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
+<a href="/store-dash/" data-s="/store-dash/" style="color:#767676;text-decoration:none;">⑤ 验证 · 门店大屏</a><span>→</span>
+<a href="/franchise/" data-s="/franchise/" style="color:#767676;text-decoration:none;">⑥ 复制 · 加盟体系</a>
+  <script>document.querySelectorAll('.chain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#b26a00';a.style.fontWeight='700';}});</script>
 </div>
 <div class="wrap">
   <div class="head">
@@ -77,20 +77,20 @@
     <div class="date" id="date"></div>
   </div>
   <div class="card">
-    <h2>今日流水</h2>
+    <h2>今日流水 SALES TODAY</h2>
     <div class="big" id="revenue"></div>
     <div class="sub" id="orders"></div>
   </div>
   <div class="grid2">
-    <div class="card"><h2>待处理预警</h2><div class="big" id="alerts" style="color:#ff9a3d"></div><div class="sub">只需行动项，不看全盘</div></div>
-    <div class="card"><h2>在架 SKU</h2><div class="big" id="skus" style="color:#999999"></div><div class="sub" id="reorder-sub"></div></div>
+    <div class="card"><h2>待处理预警 ALERTS</h2><div class="big" id="alerts" style="color:#b26a00"></div><div class="sub">只需行动项，不看全盘</div></div>
+    <div class="card"><h2>在架 SKU ON SHELF</h2><div class="big" id="skus" style="color:#767676"></div><div class="sub" id="reorder-sub"></div></div>
   </div>
   <div class="card" style="margin-top:12px;">
-    <h2>⚠ 行动预警</h2>
+    <h2>⚠ 行动预警 ACTION ALERTS</h2>
     <div id="alert-list"></div>
   </div>
   <div class="card">
-    <h2>🏆 畅销 TOP5</h2>
+    <h2>🏆 畅销 TOP5 BEST SELLERS</h2>
     <div id="top5"></div>
   </div>
   <div class="card">
