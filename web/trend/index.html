@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<title>热点雷达 · 全网爆款侦察，反向指导印尼选品 | Nusantara Brand OS</title>
+<title>本地品牌雷达 · 发现印尼正在爆的品牌，做它们的放大器 | Nusantara Brand OS</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:#ffffff; color:#111111; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
@@ -20,9 +20,9 @@
                font-size:11px; letter-spacing:.28em; text-transform:uppercase; margin-bottom:18px; }
   .head .tag::before { content:"● "; font-size:8px; vertical-align:2px; }
   .head h1 { font-family:var(--font-display); font-size:clamp(30px,4.2vw,54px); font-weight:600;
-             line-height:1.12; letter-spacing:-0.015em; max-width:840px; position:relative; }
+             line-height:1.12; letter-spacing:-0.015em; max-width:880px; position:relative; }
   .head h1 em { color:#888; font-style:italic; }
-  .head p { margin-top:16px; color:var(--dim-warm); font-size:14px; max-width:760px; line-height:1.9; }
+  .head p { margin-top:16px; color:var(--dim-warm); font-size:14px; max-width:800px; line-height:1.9; }
   .head .en { font-family:var(--font-mono); font-size:11px; letter-spacing:.18em; color:var(--faint-warm);
               margin-top:14px; text-transform:uppercase; }
   .demo-bar { background:#f7f7f7; border:1px solid #e5e5e5; color:#767676;
@@ -46,45 +46,50 @@
   .card .local { color:#767676; font-size:12px; }
   .card .meta { display:flex; gap:8px; margin:6px 0 10px; flex-wrap:wrap; }
   .chip { font-size:10px; padding:2px 10px; border-radius:999px; border:1px solid #e5e5e5; color:#767676; }
-  .chip.region { color:#767676; border-color:#e5e5e5; }
-  .chip.rep-high { color:#2e7d32; border-color:rgba(46,125,35,.4); }
-  .chip.rep-mid { color:#767676; border-color:#e5e5e5; }
-  .chip.rep-low { color:#e60023; border-color:rgba(230,0,35,.4); }
+  .chip.stage-boom { color:#e60023; border-color:rgba(230,0,35,.45); font-weight:700; }
+  .chip.stage-up { color:#b26a00; border-color:rgba(178,106,0,.45); }
+  .chip.stage-early { color:#2e7d32; border-color:rgba(46,125,35,.45); }
   .heat { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
   .heat .bar { flex:1; height:6px; background:#efefef; border-radius:3px; overflow:hidden; }
   .heat .bar i { display:block; height:100%; background:linear-gradient(90deg,#e60023,#b26a00); border-radius:3px; }
   .heat .v { font-family:Consolas,monospace; font-size:12px; color:#767676; }
   .sec { font-size:12px; line-height:1.75; margin-top:8px; }
   .sec b { display:block; color:#767676; font-weight:600; font-size:10px; letter-spacing:.12em; margin-bottom:3px; }
-  .sec.hot b { color:#767676; } .sec.fit b { color:#2e7d32; } .sec.adapt b { color:#e60023; } .sec.comp b { color:#e60023; }
+  .sec.hot b { color:#e60023; }
+  .sec.gap b { color:#b26a00; }
+  .sec.coop b { color:#2e7d32; }
   .fitline { display:flex; align-items:center; gap:10px; margin-top:10px; padding-top:10px; border-top:1px dashed #e5e5e5; }
   .fitline .bar { flex:1; height:6px; background:#efefef; border-radius:3px; overflow:hidden; }
   .fitline .bar i { display:block; height:100%; border-radius:3px; }
   .fitline .v { font-size:12px; font-family:Consolas,monospace; }
+  .gapline { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px; }
+  .gapline .g { font-size:11px; color:#767676; }
+  .gapline .g .bar { height:5px; background:#efefef; border-radius:3px; overflow:hidden; margin-top:3px; }
+  .gapline .g .bar i { display:block; height:100%; background:linear-gradient(90deg,#e8b246,#b26a00); border-radius:3px; }
   .prio { display:flex; gap:10px; padding:10px 0; border-bottom:1px dashed #e5e5e5; }
   .prio:last-child { border-bottom:none; }
   .prio .n { color:#767676; font-weight:800; font-family:Consolas,monospace; }
   .prio .t { flex:1; }
   .prio .t .nm { font-size:13px; font-weight:700; }
   .prio .t .act { font-size:11px; color:#767676; line-height:1.6; margin-top:3px; }
-  .dir { font-size:12px; color:#aebacd; line-height:1.8; padding:8px 0 8px 14px; border-left:2px solid rgba(230,0,35,.5); margin-bottom:10px; }
+  .boostcard { border:1px solid #e5e5e5; border-radius:10px; padding:12px 14px; margin-bottom:10px; }
+  .boostcard .bn { font-size:13px; font-weight:700; }
+  .boostcard .bn span { font-family:var(--font-mono); font-size:10px; color:#e60023; letter-spacing:.12em; margin-left:8px; }
+  .boostcard .bd { font-size:11.5px; color:#767676; line-height:1.7; margin-top:4px; }
   .sig { font-size:11px; color:#767676; line-height:1.7; }
   .sig::before { content:"▸ "; color:#cccccc; }
   .btn-pick { background:rgba(46,125,35,.12); color:#2e7d32; border:1px solid rgba(46,125,35,.4);
               border-radius:8px; padding:5px 14px; font-size:11.5px; cursor:pointer; }
   .btn-pick:hover { background:rgba(46,125,35,.22); }
-  /* 社媒热度证据截图墙 */
-  .proof { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px; }
-  .proof a { display:block; border:1px solid var(--hairline); overflow:hidden; padding:0; }
-  .proof img { display:block; width:100%; aspect-ratio:1/1.1; object-fit:cover; object-position:top;
-               transition:transform .6s cubic-bezier(.16,1,.3,1); }
-  .proof a:hover img { transform:scale(1.06); }
+  .btn-coop { background:#e60023; color:#ffffff; border:none; border-radius:8px; padding:5px 14px;
+              font-size:11.5px; cursor:pointer; margin-left:8px; text-decoration:none; display:inline-block; }
+  .btn-coop:hover { background:#c5001e; }
 </style>
 </head>
 <body>
 <nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid var(--hairline);flex-wrap:nowrap;overflow-x:auto;font-size:13px;">
   <a href="/" style="color:var(--paper);font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
-  <a class="nl" data-p="trend" href="/trend/">热点雷达<span class="nle">TREND</span></a>
+  <a class="nl" data-p="trend" href="/trend/">热点雷达<span class="nle">RADAR</span></a>
   <a class="nl" data-p="launch" href="/launch/">选品评分<span class="nle">SCORE</span></a>
   <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计<span class="nle">BRAND</span></a>
   <a class="nl" data-p="assembly" href="/assembly/">开店方案<span class="nle">ASSEMBLY</span></a>
@@ -99,7 +104,7 @@
 </nav>
 <div class="chain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#767676;border-bottom:1px solid #e5e5e5;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);">
   <span style="letter-spacing:.1em;">孵化流水线</span>
-  <a href="/trend/" data-s="/trend/" style="color:#767676;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
+  <a href="/trend/" data-s="/trend/" style="color:#767676;text-decoration:none;">① 发现 · 本地雷达</a><span>→</span>
 <a href="/launch/" data-s="/launch/" style="color:#767676;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
 <a href="/brandkit/" data-s="/brandkit/" style="color:#767676;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
 <a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
@@ -109,153 +114,134 @@
 </div>
 <div class="wrap">
   <div class="head">
-    <div class="ghost">Trend Scout</div>
-    <div class="tag">SIGNAL 发现 · TREND SCOUT · 热点雷达</div>
-    <h1>在全网找爆款，在印尼做复盘：<em>六区热点雷达</em><br>反向指导选品与品牌引入</h1>
-    <p class="actq" style="margin:10px 0 0;color:#767676;font-size:12.5px;letter-spacing:.02em;">这一幕回答：全网正在火什么、为什么火——信号进入流水线的入口。</p>
-    <p>全网热点信号（TikTok / X / 便利店榜单）→ 网红视角拆解"为什么火"→ 印尼适配评分与复制性评估 →
-       反向输出时尚网红店选品与改造方向。让顶级团队的策略不是凭感觉，是按数据排优先级。</p>
-    <div class="en">Signal → Decode → Adapt → Launch / From viral heat to shelf-ready decision</div>
+    <div class="ghost">Local Radar</div>
+    <div class="tag">SIGNAL 发现 · LOCAL RADAR · 印尼本地品牌雷达</div>
+    <h1>全网抓取印尼本地的火，<em>找到正在爆的本土品牌</em>：<br>联系它、加持它、一起把它做大</h1>
+    <p class="actq" style="margin:10px 0 0;color:#767676;font-size:12.5px;letter-spacing:.02em;">这一幕回答：印尼本地社媒上谁在火、火到什么程度、缺什么——合作机会的入口。</p>
+    <p>印尼本地社媒信号（IG / TikTok / X 的传播率与热度）→ 甄别出刚起步、需要体系化加持的本土网红品牌 →
+       我们去联系合作：供应链网络加持、社交媒体系统加持、策略打法输出。不是复制者，是本土网红品牌的放大器与合伙人。</p>
+    <div class="en">Scrape local heat → Identify rising local brands → Partner &amp; amplify / From viral signal to partnership</div>
   </div>
-  <div class="demo-bar">🎯 AI 收录硬门槛 GATE：只收录<b>适合加盟单店的现制店面食品</b>（现烤 / 现调 / 现做）；工业级预包装零食不进入雷达。⚠ 当前为演示种子数据（9 款 · 近 3 个月窗口），字段与真实接入（X/TikTok 热点 API）对齐。</div>
+  <div class="demo-bar">🇮🇩 数据源 DATA：印尼本地 <b>IG / TikTok / X</b> 公开数据抓取口径（粉丝 / 播放 / 赞 / 转发 / 互动率 / 30 天增速）。⚠ 当前为演示种子数据（10 个本土品牌 · 近 3 个月窗口），字段与真实抓取 API 对齐，可无缝切换。</div>
   <div class="tabs" style="margin-bottom:20px;">
-    <button class="on" id="vw-snack" onclick="switchView('snack')">🔥 爆款零食榜 SNACKS</button>
-    <button id="vw-brand" onclick="switchView('brand')">🏷 热点品牌库 BRANDS</button>
+    <button class="on" id="vw-heat" onclick="switchView('heat')">🔥 本地热度榜 LOCAL HEAT</button>
+    <button id="vw-coop" onclick="switchView('coop')">🤝 合作机会榜 PARTNERSHIP</button>
   </div>
-  <div class="layout" id="snack-view">
+  <div class="layout" id="heat-view">
     <div>
       <div class="panel">
-        <h2>区域筛选 · REGIONS</h2>
+        <h2>城市筛选 · CITIES</h2>
         <div class="tabs" id="tabs"></div>
         <div id="list"></div>
       </div>
     </div>
     <div>
       <div class="panel" style="margin-bottom:20px;">
-        <h2>🇮🇩 反向指导 · 优先复制 TOP5 · PRIORITY</h2>
+        <h2>🤝 合作价值 TOP5 · PARTNERSHIP PRIORITY</h2>
         <div id="prio"></div>
       </div>
       <div class="panel">
-        <h2>网红店打法方向 · PLAYBOOK</h2>
-        <div id="dirs"></div>
+        <h2>我们的加持体系 · BOOST SYSTEM</h2>
+        <div id="boosts"></div>
       </div>
     </div>
   </div>
-  <div class="panel" id="brand-view" style="display:none;">
-    <h2>热点品牌库 · 可引入品牌清单 BRAND LIBRARY（能引入什么品牌、加盟还是复制 · 近 3 个月社媒口径）</h2>
-    <div id="brands"></div>
+  <div class="panel" id="coop-view" style="display:none;">
+    <h2>合作机会榜 · 按合作价值排序 PARTNERSHIP（热度 × 缺口 × 增速 → 谁先联系、怎么切入 · 近 3 个月社媒口径）</h2>
+    <div id="coops"></div>
   </div>
 </div>
 <script>
-const state = { data: null, region: '全部', brands: null };
-const REP_CLS = { '高': 'rep-high', '中': 'rep-mid', '低': 'rep-low' };
-const FIT_COLOR = v => v >= 70 ? '#2e7d32' : v >= 60 ? '#b26a00' : '#e60023';
+const state = { data: null, city: '全部' };
+const STAGE_CLS = { '爆发期': 'stage-boom', '上升期': 'stage-up', '起步期': 'stage-early' };
+const NEED_COLOR = v => v >= 75 ? '#e60023' : v >= 60 ? '#b26a00' : '#2e7d32';
+const VAL_COLOR = v => v >= 75 ? '#2e7d32' : v >= 65 ? '#b26a00' : '#767676';
 
 /* ── 入库（localStorage 演示库，结构可迁后端） ── */
 function addPick(kind, item) {
   const key = 'nbo_lib_' + kind;
   const lib = JSON.parse(localStorage.getItem(key) || '[]');
   if (!lib.some(x => x.id === item.id)) { lib.push(item); localStorage.setItem(key, JSON.stringify(lib)); }
-  alert('已保存到' + { pick: '选品库', brand: '品牌库' }[kind] + '（共 ' + lib.length + ' 条）→ /library/ 查看');
+  alert('已保存到' + { brand: '合作品牌库' }[kind] + '（共 ' + lib.length + ' 条）→ /library/ 查看');
 }
 function switchView(v) {
-  document.getElementById('snack-view').style.display = v === 'snack' ? '' : 'none';
-  document.getElementById('brand-view').style.display = v === 'brand' ? '' : 'none';
-  document.getElementById('vw-snack').classList.toggle('on', v === 'snack');
-  document.getElementById('vw-brand').classList.toggle('on', v === 'brand');
+  document.getElementById('heat-view').style.display = v === 'heat' ? '' : 'none';
+  document.getElementById('coop-view').style.display = v === 'coop' ? '' : 'none';
+  document.getElementById('vw-heat').classList.toggle('on', v === 'heat');
+  document.getElementById('vw-coop').classList.toggle('on', v === 'coop');
 }
 
 function esc(s) { return (s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
 function renderTabs() {
-  const regs = ['全部', ...state.data.regions];
-  document.getElementById('tabs').innerHTML = regs.map(r =>
-    `<button class="${r === state.region ? 'on' : ''}" onclick="setRegion('${r}')">${r}</button>`).join('');
+  const cities = ['全部', ...state.data.cities];
+  document.getElementById('tabs').innerHTML = cities.map(c =>
+    `<button class="${c === state.city ? 'on' : ''}" onclick="setCity('${c}')">${c}</button>`).join('');
 }
 
-function card(s, i) {
-  const fit = Math.round(s.indo_fit);
+function gapLines(b) {
+  const items = [['供应链缺口', b.need_supply], ['社媒系统缺口', b.need_social], ['策略打法缺口', b.need_strategy]];
+  return `<div class="gapline">` + items.map(([n, v]) =>
+    `<div class="g">${n} <b style="color:${NEED_COLOR(v)}">${v}</b><div class="bar"><i style="width:${v}%"></i></div></div>`).join('') + `</div>`;
+}
+
+function card(b, i) {
   return `<div class="card">
     <div class="top"><span class="rank">${String(i + 1).padStart(2, '0')}</span>
-      <span class="name">${esc(s.name)}</span><span class="local">${esc(s.name_local)}</span></div>
+      <span class="name">${esc(b.name)}</span><span class="local">${esc(b.name_cn)}</span></div>
     <div class="meta">
-      <span class="chip region">${esc(s.region)}</span>
-      <span class="chip">${esc(s.category)}</span>
-      ${s.store_mode ? `<span class="chip" style="border-color:rgba(46,125,35,.45);color:#2e7d32;">门店形态 · ${esc(s.store_mode)}</span>` : ''}
-      <span class="chip ${REP_CLS[s.replicability]}">复制性 ${s.replicability}</span>
+      <span class="chip">📍 ${esc(b.city)}</span>
+      <span class="chip">${esc(b.category)}</span>
+      <span class="chip ${STAGE_CLS[b.stage] || ''}">${esc(b.stage)}</span>
     </div>
-    <div class="heat"><div class="bar"><i style="width:${s.heat}%"></i></div><span class="v">${Math.round(s.heat)}°</span></div>
-    <div class="sec hot"><b>为什么火 · 网红视角 WHY IT'S HOT</b>${esc(s.why_hot)}</div>
-    <div class="sec"><b>病毒式玩法 VIRAL FORMAT</b>${esc(s.viral_format)}</div>
-    <div class="sec"><b>热度信号 SIGNALS</b><div class="sig">${s.heat_signals.map(esc).join('</div><div class="sig">')}</div></div>
-    <div class="sec"><b>社媒热度 SOCIAL HEAT（近 3 个月 · 演示口径）</b>
-      <div class="sig">▸ 播放 ${s.social.views ?? '—'} 万 · 赞 ${s.social.likes ?? '—'} 万 · 转发 ${s.social.shares ?? '—'} 万</div>
-      <div class="sig">▸ 平台：${(s.social.platforms || []).map(esc).join(' / ')} · 二创自由度 ${s.social.ugc ?? '—'}/100</div>
-      <div class="sig">▸ 二创玩法：${esc(s.social.remix || '—')}</div></div>
-    ${s.id === 'JP-01' ? `<div class="sec" style="margin-top:10px;"><b>社媒热度证据 · Social Proof（实拍截图）</b>
-      <div class="proof">
-        <a href="/assets/hot-buttertree-1.jpg" target="_blank" rel="noopener"><img src="/assets/hot-buttertree-1.jpg" alt="黄油树夹心饼干 社媒热帖截图 1" loading="lazy"></a>
-        <a href="/assets/hot-buttertree-2.jpg" target="_blank" rel="noopener"><img src="/assets/hot-buttertree-2.jpg" alt="黄油树夹心饼干 社媒热帖截图 2" loading="lazy"></a>
-        <a href="/assets/hot-buttertree-3.jpg" target="_blank" rel="noopener"><img src="/assets/hot-buttertree-3.jpg" alt="黄油树夹心饼干 社媒热帖截图 3" loading="lazy"></a>
-      </div>
-      <div class="sig">▸ 真实社媒证据：豆瓣小组热帖截图（2024-03）· 小红书 UGC 礼盒实拍 · 买家切面实拍 · 点击放大 · 复刻参考：货架三秒识别 + 切面 ASMR 开箱动线</div></div>` : ''}
-    <div class="fitline"><span style="font-size:11px;color:#767676;">印尼适配 FIT</span>
-      <div class="bar"><i style="width:${fit}%;background:${FIT_COLOR(fit)}"></i></div>
-      <span class="v" style="color:${FIT_COLOR(fit)}">${fit}</span></div>
-    <div class="sec fit"><b>适配判断 FIT</b>${esc(s.fit_reasons)}</div>
-    <div class="sec adapt"><b>本地化改造 LOCALIZATION</b>${esc(s.adaptation)}</div>
-    <div class="sec comp"><b>合规前置 COMPLIANCE</b>${esc(s.compliance_note)}</div>
-    <div class="sec"><b>复制性说明 REPLICATION</b>${esc(s.repl_reason)}</div>
-    <div style="margin-top:10px"><button class="btn-pick" onclick='addPick("pick", ${JSON.stringify({id: s.id, name: s.name, region: s.region, category: s.category, heat: s.heat, indo_fit: s.indo_fit, replicability: s.replicability})})'>＋ 选品入库 SAVE</button></div>
+    <div class="heat"><div class="bar"><i style="width:${b.heat}%"></i></div><span class="v">热度 ${Math.round(b.heat)}° · 30天 +${Math.round(b.growth_30d)}%</span></div>
+    <div class="sec hot"><b>为什么火 · WHY IT'S HOT</b>${esc(b.why_hot)}</div>
+    <div class="sec"><b>病毒式玩法 VIRAL FORMAT</b>${esc(b.viral_format)}</div>
+    <div class="sec"><b>热度信号 SIGNALS</b><div class="sig">${b.heat_signals.map(esc).join('</div><div class="sig">')}</div></div>
+    <div class="sec"><b>本地社媒热度 LOCAL SOCIAL（近 3 个月 · IG / TikTok / X）</b>
+      <div class="sig">▸ IG ${esc(b.ig)} · TikTok ${esc(b.tiktok)} · X ${esc(b.x)}</div>
+      <div class="sig">▸ 粉丝 ${b.followers_wan} 万 · 播放 ${b.views_wan} 万 · 赞 ${b.likes_wan} 万 · 转发 ${b.shares_wan} 万</div>
+      <div class="sig">▸ 互动率 ${b.er}% · 30 天热度增速 +${b.growth_30d}%（传播率 = 转发 / 播放 ${(b.shares_wan / b.views_wan * 100).toFixed(1)}%）</div></div>
+    <div class="sec gap"><b>缺口评估 GAPS（越高 = 越需要我们加持）</b>${gapLines(b)}</div>
+    <div class="sec coop"><b>我们能给 BOOST</b>${b.boost.map(x => `<span class="chip" style="color:#2e7d32;border-color:rgba(46,125,35,.45);margin-right:6px;">${esc(x)}</span>`).join('')}</div>
+    <div class="fitline"><span style="font-size:11px;color:#767676;">合作价值 VALUE</span>
+      <div class="bar"><i style="width:${b.value_score}%;background:${VAL_COLOR(b.value_score)}"></i></div>
+      <span class="v" style="color:${VAL_COLOR(b.value_score)}">${b.value_score}</span></div>
+    <div class="sec coop"><b>合作模式：${esc(b.coop_model)}</b>${esc(b.coop_note)}</div>
+    <div style="margin-top:10px">
+      <button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: b.id, name: b.name, name_cn: b.name_cn, city: b.city, category: b.category, stage: b.stage, heat: b.heat, value_score: b.value_score, coop_model: b.coop_model})})'>＋ 合作候选入库 SAVE</button>
+      <a class="btn-coop" href="mailto:${b.contact}?subject=合作提案 · Nusantara Brand OS × ${encodeURIComponent(b.name)}">发起合作 →</a>
+    </div>
   </div>`;
 }
 
 function renderList() {
-  const snacks = state.region === '全部' ? state.data.snacks : state.data.by_region[state.region] || [];
-  document.getElementById('list').innerHTML = snacks.map(card).join('');
+  const brands = state.city === '全部' ? state.data.brands : state.data.brands.filter(b => b.city === state.city);
+  document.getElementById('list').innerHTML = brands.map(card).join('');
 }
 
 function renderSide() {
-  const g = state.data.guidance;
-  document.getElementById('prio').innerHTML = g.priority_copies.map((p, i) =>
+  const top = [...state.data.brands].sort((a, b) => b.value_score - a.value_score).slice(0, 5);
+  document.getElementById('prio').innerHTML = top.map((b, i) =>
     `<div class="prio"><span class="n">${i + 1}</span><div class="t">
-       <div class="nm">${esc(p.name)} <span style="color:#767676;font-weight:400;font-size:11px;">${esc(p.region)} · 适配 ${Math.round(p.indo_fit)} · 复制${p.replicability}</span></div>
-       <div class="act">${esc(p.action)}</div></div></div>`).join('');
-  document.getElementById('dirs').innerHTML = g.directions.map(d => `<div class="dir">${esc(d)}</div>`).join('');
+       <div class="nm">${esc(b.name)} <span style="color:#767676;font-weight:400;font-size:11px;">${esc(b.city)} · ${esc(b.stage)} · 价值 ${b.value_score}</span></div>
+       <div class="act">切入：${esc(b.coop_model)} —— ${esc(b.coop_note)}</div></div></div>`).join('');
+  const bs = state.data.boost_system;
+  document.getElementById('boosts').innerHTML = Object.values(bs).map(x =>
+    `<div class="boostcard"><div class="bn">${esc(x.name)}<span>${esc(x.en)}</span></div><div class="bd">${esc(x.desc)}</div></div>`).join('');
 }
 
-function setRegion(r) { state.region = r; renderTabs(); renderList(); }
-
-const PATH_COLOR = { 加盟: '#2e7d32', 代理: '#767676', 复制: '#b26a00', 学习: '#767676', 谨慎: '#e60023', 仅: '#767676' };
-function renderBrands() {
-  if (!state.brands) return;
-  document.getElementById('brands').innerHTML = state.brands.map((b, i) => {
-    const pc = Object.entries(PATH_COLOR).find(([k]) => b.ido_path.includes(k))?.[1] || '#767676';
-    return `<div class="card" style="display:grid;grid-template-columns:${b.photo ? '220px ' : ''}1fr;gap:16px;">
-    ${b.photo ? `<img src="${b.photo}" style="width:100%;border-radius:10px;object-fit:cover;" alt="${esc(b.name)} 参考图">` : ''}
-    <div>
-      <div class="top"><span class="rank">${String(i + 1).padStart(2, '0')}</span>
-        <span class="name">${esc(b.name)}</span><span class="local">${esc(b.name_local)} · ${esc(b.country)}</span></div>
-      <div class="meta"><span class="chip region">${esc(b.category)}</span>
-        <span class="chip" style="color:${pc};border-color:${pc}55">${esc(b.franchise_status)}</span>
-        ${b.intro ? `<span class="chip" style="color:${b.intro.color};border-color:${b.intro.color}55;font-weight:700;">引入分级 ${b.intro.grade} · ${esc(b.intro.label)}</span>` : ''}</div>
-      <div class="sec"><b>热点产品 HOT SKUs（正热，可对标选品）</b>${b.hot_products.map(esc).join(' · ')}</div>
-      <div class="sec"><b>社媒热度 SOCIAL</b>播放 ${b.social.views_wan} 万 · 赞 ${b.social.likes_wan} 万 · 转发 ${b.social.shares_wan} 万
-        · ${b.platforms.map(esc).join('/')} · 二创自由度 ${b.ugc}/100</div>
-      <div class="sec"><b>二创玩法 REMIX</b>${esc(b.remix_note)}</div>
-      <div class="fitline"><span style="font-size:11px;color:#767676;">印尼适配 FIT</span>
-        <div class="bar"><i style="width:${b.ido_fit}%;background:${FIT_COLOR(b.ido_fit)}"></i></div>
-        <span class="v" style="color:${FIT_COLOR(b.ido_fit)}">${b.ido_fit}</span></div>
-      <div class="sec fit"><b>引入路径：${esc(b.ido_path)}</b>${esc(b.ido_note)}</div>
-      <div style="margin-top:8px"><button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: b.id, name: b.name, country: b.country, category: b.category, status: b.franchise_status, ido_path: b.ido_path, ido_fit: b.ido_fit})})'>＋ 品牌入库 SAVE</button></div>
-    </div></div>`; }).join('');
+function renderCoop() {
+  const ranked = [...state.data.brands].sort((a, b) => b.value_score - a.value_score);
+  document.getElementById('coops').innerHTML = ranked.map(card).join('');
 }
 
-fetch('./data/trend_snacks.json').then(r => r.json()).then(d => {
+function setCity(c) { state.city = c; renderTabs(); renderList(); }
+
+fetch('./data/local_brands.json').then(r => r.json()).then(d => {
   state.data = d;
-  renderTabs(); renderList(); renderSide();
+  renderTabs(); renderList(); renderSide(); renderCoop();
 });
-fetch('./data/hotbrands.json').then(r => r.json()).then(d => { state.brands = d.brands; renderBrands(); });
 const p = location.pathname;
 document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
 </script>
