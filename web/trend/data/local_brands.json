@@ -1,13 +1,16 @@
 {
-  "generated_at": "2026-11-02 14:25",
+  "generated_at": "2026-11-02 23:58",
   "demo": true,
   "window": "近3个月",
   "source_note": "演示种子数据 · 字段对齐真实 IG/TikTok/X 公开数据抓取口径（粉丝/播放/互动/增速）",
   "cities": [
     "万隆",
+    "巴厘巴板",
     "日惹",
     "泗水",
-    "雅加达"
+    "登巴萨",
+    "雅加达",
+    "马那多"
   ],
   "brands": [
     {
@@ -431,6 +434,78 @@
       "photo": "/assets/radar/SH-02.jpg"
     },
     {
+      "id": "SH-11",
+      "name": "Sate Lilit Kedaton",
+      "city": "登巴萨",
+      "category": "巴厘鱼肉沙嗲",
+      "stores": 2,
+      "age_months": 22,
+      "need_supply": 72,
+      "need_social": 66,
+      "need_strategy": 70,
+      "boost": [
+        "游客动线策划",
+        "零售化供应链",
+        "社媒内容系统"
+      ],
+      "coop_model": "品牌联营 + 系统加持",
+      "coop_note": "巴厘岛游客流量全岛最高（集中度 62%），把游客区触达补上即放量。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 68,
+        "crowd": 74,
+        "product": 81,
+        "social": 70,
+        "viral": 77
+      },
+      "opt": {
+        "site": "两店在 Kedaton 居民区，游客区（Kuta）零覆盖——游客找不到",
+        "crowd": "本地家庭客群稳，游客只认 babi guling 不认 lilit",
+        "product": "鱼肉沙嗲是 Bali 独有品类，应做真空即食装进游客伴手礼店",
+        "social": "芭蕉叶捆串是天然画面，未设计拍摄位",
+        "viral": "#satelilit 话题在欧美游客间升温，官方账号未承接"
+      },
+      "potential_score": 74.6,
+      "photo": "/assets/radar/SH-11.jpg"
+    },
+    {
+      "id": "SH-12",
+      "name": "Babi Guling Pak Malen",
+      "city": "登巴萨",
+      "category": "巴厘烤乳猪",
+      "stores": 1,
+      "age_months": 48,
+      "need_supply": 68,
+      "need_social": 71,
+      "need_strategy": 64,
+      "boost": [
+        "加盟体系输出",
+        "社媒矩阵代运营",
+        "零售化供应链"
+      ],
+      "coop_model": "加盟体系输出 + 供应链托管",
+      "coop_note": "单品心智极强，二店三店模板清晰——输出 SOP 即可在游客带复制。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 80,
+        "crowd": 76,
+        "product": 83,
+        "social": 62,
+        "viral": 71
+      },
+      "opt": {
+        "site": "单店在 Denpasar 西，已排队但无取号系统，翻台受限",
+        "crowd": "游客专程打卡+本地宴席双客群，缺外带窗口",
+        "product": "脆皮工艺是壁垒，应出'迷你 guling 盒'进便利店",
+        "social": "整猪现切是震撼画面，但切台背对客流无法拍摄",
+        "viral": "游记平台长期霸榜，短视频声量被模仿者超越"
+      },
+      "potential_score": 73.7,
+      "photo": "/assets/radar/SH-12.jpg"
+    },
+    {
       "id": "SH-04",
       "name": "Pisang Goreng Madu Bu Nanik",
       "city": "泗水",
@@ -610,6 +685,42 @@
       "photo": "/assets/radar/SH-09.jpg"
     },
     {
+      "id": "SH-16",
+      "name": "Tinutuan Pagi Siang Malam",
+      "city": "马那多",
+      "category": "北苏蔬菜粥",
+      "stores": 2,
+      "age_months": 28,
+      "need_supply": 69,
+      "need_social": 59,
+      "need_strategy": 65,
+      "boost": [
+        "门店轻改造方案",
+        "零售化供应链",
+        "社媒内容系统"
+      ],
+      "coop_model": "品牌联营 + 系统加持",
+      "coop_note": "健康叙事+现成 KOC 声量，改造拍摄位后即可承接话题。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 64,
+        "crowd": 69,
+        "product": 72,
+        "social": 61,
+        "viral": 68
+      },
+      "opt": {
+        "site": "两店分踞早晚市口，午餐场景无人承接",
+        "crowd": "全龄段早餐客群，学生与教堂社群是隐形增量",
+        "product": "'无米蔬菜粥'是差异点，可出杯装即食进加油站",
+        "social": "五彩斑斓的粥体是自然流量画面，店内无法拍",
+        "viral": "健康轻食话题契合，本地 KOC 自发内容已起量"
+      },
+      "potential_score": 67.0,
+      "photo": "/assets/radar/SH-16.jpg"
+    },
+    {
       "id": "SH-05",
       "name": "Nasi Goreng Kambing Barito",
       "city": "雅加达",
@@ -750,6 +861,114 @@
       },
       "potential_score": 65.2,
       "photo": "/assets/radar/SH-08.jpg"
+    },
+    {
+      "id": "SH-13",
+      "name": "Amplang Barito Kaltim",
+      "city": "巴厘巴板",
+      "category": "东加里曼丹炸鱼饼",
+      "stores": 1,
+      "age_months": 30,
+      "need_supply": 78,
+      "need_social": 62,
+      "need_strategy": 68,
+      "boost": [
+        "零售化供应链",
+        "选址引擎",
+        "社媒内容系统"
+      ],
+      "coop_model": "深孵 + 零售化首发",
+      "coop_note": "集中度 70% 的紧凑城市+高消费力，零售化 SKU 进超市是最短路径。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 55,
+        "crowd": 66,
+        "product": 77,
+        "social": 58,
+        "viral": 64
+      },
+      "opt": {
+        "site": "社区深处无名门面，能源城白领找不到",
+        "crowd": "本地家庭+油田外派客群，消费力全岛前列",
+        "product": "amplang 常温长保天然适合零售化，是'离岛伴手礼'首选品类",
+        "social": "现炸过程有画面，门店无展示动线",
+        "viral": "#amplangbalikpapan 本地话题稳定，未出圈"
+      },
+      "potential_score": 64.4,
+      "photo": "/assets/radar/SH-13.jpg"
+    },
+    {
+      "id": "SH-15",
+      "name": "Cakalang Fufu Rumah Manado",
+      "city": "马那多",
+      "category": "北苏烟熏鲣鱼",
+      "stores": 1,
+      "age_months": 54,
+      "need_supply": 76,
+      "need_social": 70,
+      "need_strategy": 72,
+      "boost": [
+        "零售化供应链",
+        "社媒矩阵代运营",
+        "游客动线策划"
+      ],
+      "coop_model": "深孵 + 零售化首发",
+      "coop_note": "人口仅 46 万但集中度 55%，单品伴手礼逻辑跑通即可覆盖全岛——典型的离岛单品模型。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 58,
+        "crowd": 63,
+        "product": 80,
+        "social": 52,
+        "viral": 66
+      },
+      "opt": {
+        "site": "渔村深处家庭作坊，游客与年轻本地人都触达不到",
+        "crowd": "本地家庭刚需+海外 Manado 社群乡愁双客群",
+        "product": "烟熏鲣鱼是 Manado 头号伴手礼，真空装已验证但无品牌",
+        "social": "竹架烟熏的村落画面极具异域感，完全未被内容化",
+        "viral": "#manadofood 在印尼侨民圈稳定热度，官方缺席"
+      },
+      "potential_score": 64.4,
+      "photo": "/assets/radar/SH-15.jpg"
+    },
+    {
+      "id": "SH-14",
+      "name": "Nasi Kuning Bu Rina",
+      "city": "巴厘巴板",
+      "category": " banjar 黄姜饭",
+      "stores": 2,
+      "age_months": 36,
+      "need_supply": 81,
+      "need_social": 68,
+      "need_strategy": 62,
+      "boost": [
+        "中央厨房供应链",
+        "门店轻改造方案",
+        "社媒内容系统"
+      ],
+      "coop_model": "供应链共建 + 品牌焕新",
+      "coop_note": "供应链集采痛点典型（集中度高低价食材外运），中央厨房化直接降本。",
+      "contact": "partnership@demo.nbo",
+      "source_type": "demo_seed",
+      "dims": {
+        "site": 62,
+        "crowd": 71,
+        "product": 75,
+        "social": 55,
+        "viral": 60
+      },
+      "opt": {
+        "site": "两店在巴里奥老市场旁，早市客流强、午晚空白",
+        "crowd": "Banjar 族群乡愁客群+本地上班族，早餐刚需极稳",
+        "product": "黄姜饭可中央厨房标准化，配炸鸡腿锁定 3 个黄金 SKU",
+        "social": "堆头式出餐有烟火气，灯光与餐具拖累了画面",
+        "viral": "本地美食号偶尔推荐，零官方运营"
+      },
+      "potential_score": 63.9,
+      "photo": "/assets/radar/SH-14.jpg"
     }
   ],
   "boost_system": {
