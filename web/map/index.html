@@ -281,6 +281,7 @@ function buildLayers(map, d) {
         <b style="font-size:13px;">${c.origin === 'radar' ? '📡 ' : ''}${c.name}</b> · ${c.area}（${c.city}）<br>
         <span style="color:#767676">${c.site_type} · ${c.type_en}${c.radar_score ? ` · 雷达潜力 ${c.radar_score}` : ''}</span><br>
         综合选址分 <b style="color:${col};font-size:15px;">${c.score}</b><br>
+        城市基本面 <b>${c.island}</b> · 都市圈 ${c.city_pop_m} 百万人 · 城镇集中 ${c.urban_pct}%${c.island !== '爪哇' ? ' · <span style="color:#b26a00">离岛修正</span>' : ''}<br>
         人流 ${c.foot_traffic} · 客群 ${c.crowd_fit} · 租金压力 ${c.rent_pressure} · 竞品密度 ${c.competition}<br>
         <b>覆盖范围（${c.catchment.radius_m}m）</b>：人口 ${c.catchment.pop_wan} 万 · 社区 ${c.catchment.communities} · 学校 ${c.catchment.schools} · 商城 ${c.catchment.malls} · 办公 ${c.catchment.offices}<br>
         <b>模型匹配 MODELS</b>（${d.model_note}）<br>

@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-02 13:43",
+  "generated_at": "2026-11-02 14:25",
   "demo": true,
   "source_note": "演示种子数据 · 字段对齐真实 POI 库（OSM/自采）与人流数据源",
   "model_note": "选址模型库：体验店(星巴克) / 快取外卖(瑞幸) / 车餐家庭(麦当劳) / 性价比街铺(蜜雪) / 推车档口(轻资产) —— 加权评分 + 硬条件否决",
-  "loop_note": "闭环：雷达发现潜力店 → 五业态选址模型评估 → 匹配合作模式（RD- 前缀为雷达来源，因子为城市基准估算）",
+  "loop_note": "闭环：雷达发现潜力店 → 五业态选址模型评估 → 匹配合作模式（RD- 前缀为雷达来源；离岛点位按都市圈人口×城镇集中度加权估算）",
   "models_legend": [
     {
       "key": "experience",
@@ -60,6 +60,9 @@
       "recommended_model": "推车 / 15㎡ 档口",
       "reason": "3 万学生高频价格敏感客群，传播属性极强（开学季刷屏体质）；租金极低，适合推车+档口轻模型跑量。",
       "source_type": "demo_seed",
+      "city_pop_m": 31.0,
+      "urban_pct": 74,
+      "island": "爪哇",
       "score": 73.9,
       "catchment": {
         "pop_wan": 9.2,
@@ -157,6 +160,9 @@
       "recommended_model": "推车 / 15㎡ 档口",
       "reason": "万隆高校最密集街区（ITB 半径内），学生客群价格敏感且 UGC 体质强；租金远低于雅加达同量级点位。",
       "source_type": "demo_seed",
+      "city_pop_m": 8.8,
+      "urban_pct": 76,
+      "island": "爪哇",
       "score": 73.2,
       "catchment": {
         "pop_wan": 3.2,
@@ -254,6 +260,9 @@
       "recommended_model": "56㎡ 社区集装箱店 / 推车组合",
       "reason": "中高收入社区密集、学校 6 所保底午晚双峰；竞品密度低，社区口锚点稀缺——社区零售标准打法的首选点。",
       "source_type": "demo_seed",
+      "city_pop_m": 31.0,
+      "urban_pct": 72,
+      "island": "爪哇",
       "score": 72.8,
       "catchment": {
         "pop_wan": 6.8,
@@ -351,6 +360,9 @@
       "recommended_model": "56㎡ 社区集装箱店",
       "reason": "泗水东部最大社区群、覆盖 9.5 万人，家庭客群与低竞品并存——爪哇东翼复制社区店模型的首选点。",
       "source_type": "demo_seed",
+      "city_pop_m": 10.0,
+      "urban_pct": 72,
+      "island": "爪哇",
       "score": 72.2,
       "catchment": {
         "pop_wan": 9.5,
@@ -432,6 +444,220 @@
       }
     },
     {
+      "id": "RD-SH-03",
+      "name": "Ayam Gepuk Bu Yati",
+      "area": "日惹",
+      "city": "日惹",
+      "lat": -7.8111,
+      "lon": 110.3646,
+      "site_type": "雷达店铺",
+      "foot_traffic": 73,
+      "crowd_fit": 77,
+      "rent_pressure": 25,
+      "competition": 36,
+      "visibility": 71,
+      "car_traffic": 51,
+      "delivery_fit": 63,
+      "recommended_model": "",
+      "reason": "",
+      "source_type": "radar_shop",
+      "origin": "radar",
+      "radar_score": 70.9,
+      "photo": "/assets/radar/SH-03.jpg",
+      "shop_coop": "供应链共建 + 爆品共创",
+      "shop_coop_note": "工艺壁垒型选手，把腌制工艺变成零售 SKU 是最快的第二曲线。",
+      "city_pop_m": 4.3,
+      "urban_pct": 68,
+      "island": "爪哇",
+      "score": 72.2,
+      "catchment": {
+        "pop_wan": 1.9,
+        "communities": 12,
+        "schools": 3,
+        "malls": 2,
+        "offices": 1,
+        "radius_m": 600
+      },
+      "type_en": "RADAR PICK",
+      "models": [
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 73.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 73.2,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 72.2,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80"
+          ]
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 69.3,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 65.2,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "cart",
+        "name": "推车档口",
+        "en": "CART",
+        "icon": "🛒",
+        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+        "score": 73.5,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "cart",
+        "mode": "供应链 + 推车租赁"
+      }
+    },
+    {
+      "id": "RD-SH-02",
+      "name": "Seblak Teh Ninih",
+      "area": "万隆",
+      "city": "万隆",
+      "lat": -6.9075,
+      "lon": 107.611,
+      "site_type": "雷达店铺",
+      "foot_traffic": 81,
+      "crowd_fit": 85,
+      "rent_pressure": 29,
+      "competition": 52,
+      "visibility": 66,
+      "car_traffic": 51,
+      "delivery_fit": 69,
+      "recommended_model": "",
+      "reason": "",
+      "source_type": "radar_shop",
+      "origin": "radar",
+      "radar_score": 74.7,
+      "photo": "/assets/radar/SH-02.jpg",
+      "shop_coop": "品牌联营 + 系统加持",
+      "shop_coop_note": "已具备两店模型与自发流量，最适合'联营+体系输出'快速铺到 10 店。",
+      "city_pop_m": 8.8,
+      "urban_pct": 76,
+      "island": "爪哇",
+      "score": 71.8,
+      "catchment": {
+        "pop_wan": 2.4,
+        "communities": 10,
+        "schools": 3,
+        "malls": 2,
+        "offices": 1,
+        "radius_m": 600
+      },
+      "type_en": "RADAR PICK",
+      "models": [
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 75.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 74.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 71.6,
+          "eligible": false,
+          "hard_fail": [
+            "可见性 ≥70"
+          ]
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 69.9,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 65.5,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "cart",
+        "name": "推车档口",
+        "en": "CART",
+        "icon": "🛒",
+        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+        "score": 75.5,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "cart",
+        "mode": "供应链 + 推车租赁"
+      }
+    },
+    {
       "id": "ST-08",
       "name": "Summarecon Bekasi 社区轴",
       "area": "Bekasi",
@@ -449,6 +675,9 @@
       "recommended_model": "56㎡ 社区集装箱店",
       "reason": "卫星城最大社区群、覆盖人口 10.6 万全榜第一，竞品密度全榜最低——'人口密度换增长'的长期价值点位。",
       "source_type": "demo_seed",
+      "city_pop_m": 31.0,
+      "urban_pct": 71,
+      "island": "爪哇",
       "score": 71.2,
       "catchment": {
         "pop_wan": 10.6,
@@ -551,6 +780,9 @@
       "recommended_model": "56㎡ 社区集装箱店",
       "reason": "新城社区 17 个且每年新增，年轻家庭客群与竞品低密度并存——'先占社区口'战略价值最高的成长型点位。",
       "source_type": "demo_seed",
+      "city_pop_m": 31.0,
+      "urban_pct": 70,
+      "island": "爪哇",
       "score": 70.9,
       "catchment": {
         "pop_wan": 8.9,
@@ -633,6 +865,108 @@
       }
     },
     {
+      "id": "ST-14",
+      "name": "Balikpapan 能源社区口",
+      "area": "Batu Ampar",
+      "city": "巴厘巴板",
+      "lat": -1.237,
+      "lon": 116.852,
+      "site_type": "社区口",
+      "foot_traffic": 68,
+      "crowd_fit": 76,
+      "rent_pressure": 36,
+      "competition": 26,
+      "visibility": 70,
+      "car_traffic": 68,
+      "delivery_fit": 50,
+      "recommended_model": "56㎡ 社区集装箱店",
+      "reason": "加里曼丹能源城，人均收入高、社区成建制、竞品稀少；集中度 70% 的紧凑城市，单店覆盖效率最优。",
+      "source_type": "demo_seed",
+      "city_pop_m": 0.71,
+      "urban_pct": 70,
+      "island": "加里曼丹",
+      "score": 70.7,
+      "catchment": {
+        "pop_wan": 1.8,
+        "communities": 8,
+        "schools": 3,
+        "malls": 2,
+        "offices": 6,
+        "radius_m": 800
+      },
+      "type_en": "COMMUNITY",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 70.4,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80"
+          ]
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 70.0,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 69.4,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 69.0,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 62.3,
+          "eligible": false,
+          "hard_fail": [
+            "外卖适配 ≥55"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "drive",
+        "name": "车餐家庭店",
+        "en": "DRIVE-THRU",
+        "icon": "🚗",
+        "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+        "score": 70.0,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "drive",
+        "mode": "区域代理 + 车餐加盟"
+      }
+    },
+    {
       "id": "ST-11",
       "name": "Medan Ring Road 枢纽口",
       "area": "Ring Road",
@@ -650,6 +984,9 @@
       "recommended_model": "30㎡ 快取店",
       "reason": "苏门答腊第一城 ring road 与轻轨换乘叠加，通勤车流全榜最高之一；快取店吃透枢纽流量。",
       "source_type": "demo_seed",
+      "city_pop_m": 5.2,
+      "urban_pct": 58,
+      "island": "苏门答腊",
       "score": 70.1,
       "catchment": {
         "pop_wan": 8.2,
@@ -730,215 +1067,6 @@
       }
     },
     {
-      "id": "RD-SH-03",
-      "name": "Ayam Gepuk Bu Yati",
-      "area": "日惹",
-      "city": "日惹",
-      "lat": -7.8111,
-      "lon": 110.3646,
-      "site_type": "雷达店铺",
-      "foot_traffic": 74,
-      "crowd_fit": 75,
-      "rent_pressure": 25,
-      "competition": 44,
-      "visibility": 71,
-      "car_traffic": 51,
-      "delivery_fit": 61,
-      "recommended_model": "",
-      "reason": "",
-      "source_type": "radar_shop",
-      "origin": "radar",
-      "radar_score": 70.9,
-      "photo": "/assets/radar/SH-03.jpg",
-      "shop_coop": "供应链共建 + 爆品共创",
-      "shop_coop_note": "工艺壁垒型选手，把腌制工艺变成零售 SKU 是最快的第二曲线。",
-      "score": 70.0,
-      "catchment": {
-        "pop_wan": 1.9,
-        "communities": 12,
-        "schools": 3,
-        "malls": 2,
-        "offices": 1,
-        "radius_m": 600
-      },
-      "type_en": "RADAR PICK",
-      "models": [
-        {
-          "key": "cart",
-          "name": "推车档口",
-          "en": "CART",
-          "icon": "🛒",
-          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 72.7,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 72.3,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "experience",
-          "name": "体验店",
-          "en": "EXPERIENCE",
-          "icon": "☕",
-          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 70.9,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥80"
-          ]
-        },
-        {
-          "key": "pickup",
-          "name": "快取外卖店",
-          "en": "PICKUP",
-          "icon": "⚡",
-          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 67.7,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "drive",
-          "name": "车餐家庭店",
-          "en": "DRIVE-THRU",
-          "icon": "🚗",
-          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 64.2,
-          "eligible": false,
-          "hard_fail": [
-            "车流 ≥60"
-          ]
-        }
-      ],
-      "best_model": {
-        "key": "cart",
-        "name": "推车档口",
-        "en": "CART",
-        "icon": "🛒",
-        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-        "score": 72.7,
-        "eligible": true,
-        "hard_fail": []
-      },
-      "coop_proposal": {
-        "model": "cart",
-        "mode": "供应链 + 推车租赁"
-      }
-    },
-    {
-      "id": "RD-SH-02",
-      "name": "Seblak Teh Ninih",
-      "area": "万隆",
-      "city": "万隆",
-      "lat": -6.9075,
-      "lon": 107.611,
-      "site_type": "雷达店铺",
-      "foot_traffic": 73,
-      "crowd_fit": 81,
-      "rent_pressure": 29,
-      "competition": 52,
-      "visibility": 66,
-      "car_traffic": 51,
-      "delivery_fit": 65,
-      "recommended_model": "",
-      "reason": "",
-      "source_type": "radar_shop",
-      "origin": "radar",
-      "radar_score": 74.7,
-      "photo": "/assets/radar/SH-02.jpg",
-      "shop_coop": "品牌联营 + 系统加持",
-      "shop_coop_note": "已具备两店模型与自发流量，最适合'联营+体系输出'快速铺到 10 店。",
-      "score": 68.3,
-      "catchment": {
-        "pop_wan": 2.4,
-        "communities": 10,
-        "schools": 3,
-        "malls": 2,
-        "offices": 1,
-        "radius_m": 600
-      },
-      "type_en": "RADAR PICK",
-      "models": [
-        {
-          "key": "cart",
-          "name": "推车档口",
-          "en": "CART",
-          "icon": "🛒",
-          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 71.5,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 70.9,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "experience",
-          "name": "体验店",
-          "en": "EXPERIENCE",
-          "icon": "☕",
-          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 68.8,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥80",
-            "可见性 ≥70"
-          ]
-        },
-        {
-          "key": "pickup",
-          "name": "快取外卖店",
-          "en": "PICKUP",
-          "icon": "⚡",
-          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 67.3,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "drive",
-          "name": "车餐家庭店",
-          "en": "DRIVE-THRU",
-          "icon": "🚗",
-          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 63.5,
-          "eligible": false,
-          "hard_fail": [
-            "车流 ≥60"
-          ]
-        }
-      ],
-      "best_model": {
-        "key": "cart",
-        "name": "推车档口",
-        "en": "CART",
-        "icon": "🛒",
-        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-        "score": 71.5,
-        "eligible": true,
-        "hard_fail": []
-      },
-      "coop_proposal": {
-        "model": "cart",
-        "mode": "供应链 + 推车租赁"
-      }
-    },
-    {
       "id": "RD-SH-06",
       "name": "Kwetiau Akang",
       "area": "雅加达",
@@ -946,13 +1074,13 @@
       "lat": -6.2032,
       "lon": 106.8468,
       "site_type": "雷达店铺",
-      "foot_traffic": 75,
-      "crowd_fit": 77,
+      "foot_traffic": 83,
+      "crowd_fit": 81,
       "rent_pressure": 46,
       "competition": 44,
       "visibility": 68,
       "car_traffic": 69,
-      "delivery_fit": 81,
+      "delivery_fit": 86,
       "recommended_model": "",
       "reason": "",
       "source_type": "radar_shop",
@@ -961,7 +1089,10 @@
       "photo": "/assets/radar/SH-06.jpg",
       "shop_coop": "加盟体系输出 + 供应链托管",
       "shop_coop_note": "三店已验证，连锁化模板清晰——输出 SOP+供应链即可加速。",
-      "score": 66.5,
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
+      "score": 70.0,
       "catchment": {
         "pop_wan": 5.2,
         "communities": 12,
@@ -978,40 +1109,7 @@
           "en": "PICKUP",
           "icon": "⚡",
           "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 69.5,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "drive",
-          "name": "车餐家庭店",
-          "en": "DRIVE-THRU",
-          "icon": "🚗",
-          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 68.6,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "experience",
-          "name": "体验店",
-          "en": "EXPERIENCE",
-          "icon": "☕",
-          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 67.7,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥80",
-            "可见性 ≥70"
-          ]
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 67.5,
+          "score": 72.4,
           "eligible": true,
           "hard_fail": []
         },
@@ -1021,9 +1119,41 @@
           "en": "CART",
           "icon": "🛒",
           "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 67.2,
+          "score": 71.2,
           "eligible": true,
           "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 71.1,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 70.6,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 70.5,
+          "eligible": false,
+          "hard_fail": [
+            "可见性 ≥70"
+          ]
         }
       ],
       "best_model": {
@@ -1032,13 +1162,121 @@
         "en": "PICKUP",
         "icon": "⚡",
         "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-        "score": 69.5,
+        "score": 72.4,
         "eligible": true,
         "hard_fail": []
       },
       "coop_proposal": {
         "model": "pickup",
         "mode": "外卖联营 + 系统加持"
+      }
+    },
+    {
+      "id": "RD-SH-07",
+      "name": "Soto Lamongan Cak Har",
+      "area": "泗水",
+      "city": "泗水",
+      "lat": -7.2578,
+      "lon": 112.7522,
+      "site_type": "雷达店铺",
+      "foot_traffic": 75,
+      "crowd_fit": 73,
+      "rent_pressure": 32,
+      "competition": 52,
+      "visibility": 61,
+      "car_traffic": 54,
+      "delivery_fit": 68,
+      "recommended_model": "",
+      "reason": "",
+      "source_type": "radar_shop",
+      "origin": "radar",
+      "radar_score": 65.3,
+      "photo": "/assets/radar/SH-07.jpg",
+      "shop_coop": "深度孵化",
+      "shop_coop_note": "供应链分散采购痛点最典型——集采+标准化能直接降 15% 成本。",
+      "city_pop_m": 10.0,
+      "urban_pct": 72,
+      "island": "爪哇",
+      "score": 66.3,
+      "catchment": {
+        "pop_wan": 3.1,
+        "communities": 10,
+        "schools": 3,
+        "malls": 2,
+        "offices": 1,
+        "radius_m": 600
+      },
+      "type_en": "RADAR PICK",
+      "models": [
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 69.8,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 68.8,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 66.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 66.0,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80",
+            "可见性 ≥70"
+          ]
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 62.5,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "cart",
+        "name": "推车档口",
+        "en": "CART",
+        "icon": "🛒",
+        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+        "score": 69.8,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "cart",
+        "mode": "供应链 + 推车租赁"
       }
     },
     {
@@ -1059,6 +1297,9 @@
       "recommended_model": "品牌旗舰体验点",
       "reason": "印尼东部门户+海滨旅游客流，可见性高、租金仍温和——东部市场形象店与单测的稀缺优质点位。",
       "source_type": "demo_seed",
+      "city_pop_m": 2.7,
+      "urban_pct": 55,
+      "island": "苏拉威西",
       "score": 65.8,
       "catchment": {
         "pop_wan": 4.8,
@@ -1158,6 +1399,9 @@
       "recommended_model": "30㎡ 快取店",
       "reason": "轨道枢纽+夜市商圈双人流叠加，通勤与夜间双峰；快取店型转化枢纽流量，夜间外摆接夜市客流。",
       "source_type": "demo_seed",
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
       "score": 64.8,
       "catchment": {
         "pop_wan": 7.4,
@@ -1236,6 +1480,318 @@
       }
     },
     {
+      "id": "ST-13",
+      "name": "Denpasar 旅游枢纽带",
+      "area": "Kuta-Seminyak",
+      "city": "登巴萨",
+      "lat": -8.706,
+      "lon": 115.18,
+      "site_type": "交通枢纽",
+      "foot_traffic": 80,
+      "crowd_fit": 72,
+      "rent_pressure": 55,
+      "competition": 50,
+      "visibility": 80,
+      "car_traffic": 62,
+      "delivery_fit": 64,
+      "recommended_model": "30㎡ 快取店",
+      "reason": "巴厘岛游客+本地居民双客流，城镇集中度 62% 为离岛最高之一；快取店吃旅游潮汐，外卖接酒店半径。",
+      "source_type": "demo_seed",
+      "city_pop_m": 1.1,
+      "urban_pct": 62,
+      "island": "巴厘",
+      "score": 63.5,
+      "catchment": {
+        "pop_wan": 2.2,
+        "communities": 6,
+        "schools": 2,
+        "malls": 4,
+        "offices": 3,
+        "radius_m": 900
+      },
+      "type_en": "TRANSIT",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 68.7,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 66.7,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 65.6,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 64.9,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 61.9,
+          "eligible": true,
+          "hard_fail": []
+        }
+      ],
+      "best_model": {
+        "key": "experience",
+        "name": "体验店",
+        "en": "EXPERIENCE",
+        "icon": "☕",
+        "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+        "score": 68.7,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "experience",
+        "mode": "品牌联营 / 旗舰加盟"
+      }
+    },
+    {
+      "id": "RD-SH-09",
+      "name": "Pempek 61",
+      "area": "雅加达",
+      "city": "雅加达",
+      "lat": -6.2278,
+      "lon": 106.8516,
+      "site_type": "雷达店铺",
+      "foot_traffic": 77,
+      "crowd_fit": 73,
+      "rent_pressure": 49,
+      "competition": 52,
+      "visibility": 64,
+      "car_traffic": 66,
+      "delivery_fit": 85,
+      "recommended_model": "",
+      "reason": "",
+      "source_type": "radar_shop",
+      "origin": "radar",
+      "radar_score": 68.0,
+      "photo": "/assets/radar/SH-09.jpg",
+      "shop_coop": "深孵 + 快闪验证",
+      "shop_coop_note": "蘸酱零售化+商场快闪是低成本验证路径，适合投早。",
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
+      "score": 63.5,
+      "catchment": {
+        "pop_wan": 5.2,
+        "communities": 10,
+        "schools": 3,
+        "malls": 2,
+        "offices": 4,
+        "radius_m": 600
+      },
+      "type_en": "RADAR PICK",
+      "models": [
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 68.7,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 65.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 65.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 65.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 64.7,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80",
+            "可见性 ≥70"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "pickup",
+        "name": "快取外卖店",
+        "en": "PICKUP",
+        "icon": "⚡",
+        "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+        "score": 68.7,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "pickup",
+        "mode": "外卖联营 + 系统加持"
+      }
+    },
+    {
+      "id": "RD-SH-04",
+      "name": "Pisang Goreng Madu Bu Nanik",
+      "area": "泗水",
+      "city": "泗水",
+      "lat": -7.238,
+      "lon": 112.7665,
+      "site_type": "雷达店铺",
+      "foot_traffic": 78,
+      "crowd_fit": 67,
+      "rent_pressure": 35,
+      "competition": 60,
+      "visibility": 52,
+      "car_traffic": 51,
+      "delivery_fit": 70,
+      "recommended_model": "",
+      "reason": "",
+      "source_type": "radar_shop",
+      "origin": "radar",
+      "radar_score": 72.6,
+      "photo": "/assets/radar/SH-04.jpg",
+      "shop_coop": "深孵 + 快闪验证",
+      "shop_coop_note": "全网最火的'无主流量'：流量在别人的账号里。先把账号和锚点门店做出来，转化现成热度。",
+      "city_pop_m": 10.0,
+      "urban_pct": 72,
+      "island": "爪哇",
+      "score": 63.1,
+      "catchment": {
+        "pop_wan": 3.1,
+        "communities": 8,
+        "schools": 3,
+        "malls": 2,
+        "offices": 1,
+        "radius_m": 600
+      },
+      "type_en": "RADAR PICK",
+      "models": [
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 68.1,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 66.1,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 64.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 61.6,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80",
+            "可见性 ≥70"
+          ]
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 58.6,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "cart",
+        "name": "推车档口",
+        "en": "CART",
+        "icon": "🛒",
+        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+        "score": 68.1,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "cart",
+        "mode": "供应链 + 推车租赁"
+      }
+    },
+    {
       "id": "ST-07",
       "name": "ITC Kuningan 批发商圈",
       "area": "Kuningan",
@@ -1253,6 +1809,9 @@
       "recommended_model": "推车 + 外带窗口",
       "reason": "批发商圈人流杂但单价低，适合极致性价比模型（Es Teh 路径）；办公+批发混合客群，下午茶场景空白。",
       "source_type": "demo_seed",
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
       "score": 63.0,
       "catchment": {
         "pop_wan": 4.2,
@@ -1336,134 +1895,32 @@
       }
     },
     {
-      "id": "RD-SH-07",
-      "name": "Soto Lamongan Cak Har",
+      "id": "RD-SH-10",
+      "name": "Rujak Cingur Delta",
       "area": "泗水",
       "city": "泗水",
-      "lat": -7.2578,
-      "lon": 112.7522,
+      "lat": -7.2537,
+      "lon": 112.74,
       "site_type": "雷达店铺",
-      "foot_traffic": 66,
-      "crowd_fit": 70,
-      "rent_pressure": 32,
-      "competition": 52,
-      "visibility": 61,
-      "car_traffic": 54,
-      "delivery_fit": 65,
-      "recommended_model": "",
-      "reason": "",
-      "source_type": "radar_shop",
-      "origin": "radar",
-      "radar_score": 65.3,
-      "photo": "/assets/radar/SH-07.jpg",
-      "shop_coop": "深度孵化",
-      "shop_coop_note": "供应链分散采购痛点最典型——集采+标准化能直接降 15% 成本。",
-      "score": 62.9,
-      "catchment": {
-        "pop_wan": 3.1,
-        "communities": 10,
-        "schools": 3,
-        "malls": 2,
-        "offices": 1,
-        "radius_m": 600
-      },
-      "type_en": "RADAR PICK",
-      "models": [
-        {
-          "key": "cart",
-          "name": "推车档口",
-          "en": "CART",
-          "icon": "🛒",
-          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 65.6,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 65.0,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "pickup",
-          "name": "快取外卖店",
-          "en": "PICKUP",
-          "icon": "⚡",
-          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 64.2,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "experience",
-          "name": "体验店",
-          "en": "EXPERIENCE",
-          "icon": "☕",
-          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 63.1,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥80",
-            "可见性 ≥70"
-          ]
-        },
-        {
-          "key": "drive",
-          "name": "车餐家庭店",
-          "en": "DRIVE-THRU",
-          "icon": "🚗",
-          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 60.5,
-          "eligible": false,
-          "hard_fail": [
-            "车流 ≥60"
-          ]
-        }
-      ],
-      "best_model": {
-        "key": "cart",
-        "name": "推车档口",
-        "en": "CART",
-        "icon": "🛒",
-        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-        "score": 65.6,
-        "eligible": true,
-        "hard_fail": []
-      },
-      "coop_proposal": {
-        "model": "cart",
-        "mode": "供应链 + 推车租赁"
-      }
-    },
-    {
-      "id": "RD-SH-04",
-      "name": "Pisang Goreng Madu Bu Nanik",
-      "area": "泗水",
-      "city": "泗水",
-      "lat": -7.238,
-      "lon": 112.7665,
-      "site_type": "雷达店铺",
-      "foot_traffic": 71,
-      "crowd_fit": 64,
+      "foot_traffic": 75,
+      "crowd_fit": 68,
       "rent_pressure": 35,
       "competition": 60,
-      "visibility": 52,
+      "visibility": 59,
       "car_traffic": 51,
-      "delivery_fit": 67,
+      "delivery_fit": 69,
       "recommended_model": "",
       "reason": "",
       "source_type": "radar_shop",
       "origin": "radar",
-      "radar_score": 72.6,
-      "photo": "/assets/radar/SH-04.jpg",
-      "shop_coop": "深孵 + 快闪验证",
-      "shop_coop_note": "全网最火的'无主流量'：流量在别人的账号里。先把账号和锚点门店做出来，转化现成热度。",
-      "score": 60.3,
+      "radar_score": 69.1,
+      "photo": "/assets/radar/SH-10.jpg",
+      "shop_coop": "品牌联营 + 系统加持",
+      "shop_coop_note": "挑战型内容基因极强，做一次官方挑战赛即可激活存量话题。",
+      "city_pop_m": 10.0,
+      "urban_pct": 72,
+      "island": "爪哇",
+      "score": 62.5,
       "catchment": {
         "pop_wan": 3.1,
         "communities": 8,
@@ -1480,7 +1937,7 @@
           "en": "CART",
           "icon": "🛒",
           "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 64.7,
+          "score": 67.1,
           "eligible": true,
           "hard_fail": []
         },
@@ -1490,7 +1947,7 @@
           "en": "VALUE",
           "icon": "🏪",
           "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 63.1,
+          "score": 66.0,
           "eligible": true,
           "hard_fail": []
         },
@@ -1500,7 +1957,7 @@
           "en": "PICKUP",
           "icon": "⚡",
           "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 62.4,
+          "score": 64.6,
           "eligible": true,
           "hard_fail": []
         },
@@ -1510,7 +1967,7 @@
           "en": "EXPERIENCE",
           "icon": "☕",
           "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 59.3,
+          "score": 62.9,
           "eligible": false,
           "hard_fail": [
             "人流 ≥80",
@@ -1523,7 +1980,7 @@
           "en": "DRIVE-THRU",
           "icon": "🚗",
           "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 57.0,
+          "score": 59.1,
           "eligible": false,
           "hard_fail": [
             "车流 ≥60"
@@ -1536,13 +1993,223 @@
         "en": "CART",
         "icon": "🛒",
         "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-        "score": 64.7,
+        "score": 67.1,
         "eligible": true,
         "hard_fail": []
       },
       "coop_proposal": {
         "model": "cart",
         "mode": "供应链 + 推车租赁"
+      }
+    },
+    {
+      "id": "RD-SH-05",
+      "name": "Nasi Goreng Kambing Barito",
+      "area": "雅加达",
+      "city": "雅加达",
+      "lat": -6.216,
+      "lon": 106.8585,
+      "site_type": "雷达店铺",
+      "foot_traffic": 70,
+      "crowd_fit": 84,
+      "rent_pressure": 52,
+      "competition": 60,
+      "visibility": 78,
+      "car_traffic": 63,
+      "delivery_fit": 84,
+      "recommended_model": "",
+      "reason": "",
+      "source_type": "radar_shop",
+      "origin": "radar",
+      "radar_score": 66.6,
+      "photo": "/assets/radar/SH-05.jpg",
+      "shop_coop": "品牌联营 + 系统加持",
+      "shop_coop_note": "老字号现象级点位，年轻化与零售化是最大的增值空间。",
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
+      "score": 61.6,
+      "catchment": {
+        "pop_wan": 5.2,
+        "communities": 8,
+        "schools": 3,
+        "malls": 2,
+        "offices": 4,
+        "radius_m": 600
+      },
+      "type_en": "RADAR PICK",
+      "models": [
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 68.6,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 67.0,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80"
+          ]
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 66.0,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 65.1,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 63.2,
+          "eligible": true,
+          "hard_fail": []
+        }
+      ],
+      "best_model": {
+        "key": "pickup",
+        "name": "快取外卖店",
+        "en": "PICKUP",
+        "icon": "⚡",
+        "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+        "score": 68.6,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "pickup",
+        "mode": "外卖联营 + 系统加持"
+      }
+    },
+    {
+      "id": "RD-SH-08",
+      "name": "Bubur Ayam Barito",
+      "area": "雅加达",
+      "city": "雅加达",
+      "lat": -6.2263,
+      "lon": 106.8583,
+      "site_type": "雷达店铺",
+      "foot_traffic": 71,
+      "crowd_fit": 82,
+      "rent_pressure": 52,
+      "competition": 60,
+      "visibility": 75,
+      "car_traffic": 63,
+      "delivery_fit": 84,
+      "recommended_model": "",
+      "reason": "",
+      "source_type": "radar_shop",
+      "origin": "radar",
+      "radar_score": 65.2,
+      "photo": "/assets/radar/SH-08.jpg",
+      "shop_coop": "供应链共建 + 品牌焕新",
+      "shop_coop_note": "中央厨房化改造后单店人效可提 40%，是供应链切入的好标的。",
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
+      "score": 61.4,
+      "catchment": {
+        "pop_wan": 5.2,
+        "communities": 8,
+        "schools": 3,
+        "malls": 2,
+        "offices": 4,
+        "radius_m": 600
+      },
+      "type_en": "RADAR PICK",
+      "models": [
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 68.2,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 66.1,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80"
+          ]
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 65.4,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 64.8,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 63.2,
+          "eligible": true,
+          "hard_fail": []
+        }
+      ],
+      "best_model": {
+        "key": "pickup",
+        "name": "快取外卖店",
+        "en": "PICKUP",
+        "icon": "⚡",
+        "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+        "score": 68.2,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "pickup",
+        "mode": "外卖联营 + 系统加持"
       }
     },
     {
@@ -1563,6 +2230,9 @@
       "recommended_model": "咖啡/轻食档口",
       "reason": "52 栋办公楼早高峰刚需，外卖半径 1km 内单量全城 top；租金高但客单价可撑——咖啡档口坪效模型最佳试验场。",
       "source_type": "demo_seed",
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
       "score": 60.2,
       "catchment": {
         "pop_wan": 3.1,
@@ -1645,32 +2315,35 @@
       }
     },
     {
-      "id": "RD-SH-09",
-      "name": "Pempek 61",
+      "id": "RD-SH-01",
+      "name": "Sate Kambing H. Diding",
       "area": "雅加达",
       "city": "雅加达",
-      "lat": -6.2278,
-      "lon": 106.8516,
+      "lat": -6.2235,
+      "lon": 106.8543,
       "site_type": "雷达店铺",
-      "foot_traffic": 68,
-      "crowd_fit": 69,
-      "rent_pressure": 49,
-      "competition": 52,
-      "visibility": 64,
-      "car_traffic": 66,
-      "delivery_fit": 81,
+      "foot_traffic": 71,
+      "crowd_fit": 76,
+      "rent_pressure": 52,
+      "competition": 60,
+      "visibility": 58,
+      "car_traffic": 63,
+      "delivery_fit": 85,
       "recommended_model": "",
       "reason": "",
       "source_type": "radar_shop",
       "origin": "radar",
-      "radar_score": 68.0,
-      "photo": "/assets/radar/SH-09.jpg",
-      "shop_coop": "深孵 + 快闪验证",
-      "shop_coop_note": "蘸酱零售化+商场快闪是低成本验证路径，适合投早。",
+      "radar_score": 65.6,
+      "photo": "/assets/radar/SH-01.jpg",
+      "shop_coop": "深度孵化",
+      "shop_coop_note": "产品 84 分是全榜最高之一，只差包装与传播——典型的'产品好不会红'案例。",
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
       "score": 59.9,
       "catchment": {
         "pop_wan": 5.2,
-        "communities": 10,
+        "communities": 8,
         "schools": 3,
         "malls": 2,
         "offices": 4,
@@ -1684,7 +2357,7 @@
           "en": "PICKUP",
           "icon": "⚡",
           "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 66.0,
+          "score": 66.2,
           "eligible": true,
           "hard_fail": []
         },
@@ -1694,7 +2367,27 @@
           "en": "DRIVE-THRU",
           "icon": "🚗",
           "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 63.4,
+          "score": 62.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 62.0,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 61.9,
           "eligible": true,
           "hard_fail": []
         },
@@ -1704,32 +2397,12 @@
           "en": "EXPERIENCE",
           "icon": "☕",
           "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 61.6,
+          "score": 60.6,
           "eligible": false,
           "hard_fail": [
             "人流 ≥80",
             "可见性 ≥70"
           ]
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 61.5,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "cart",
-          "name": "推车档口",
-          "en": "CART",
-          "icon": "🛒",
-          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 61.1,
-          "eligible": true,
-          "hard_fail": []
         }
       ],
       "best_model": {
@@ -1738,320 +2411,7 @@
         "en": "PICKUP",
         "icon": "⚡",
         "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-        "score": 66.0,
-        "eligible": true,
-        "hard_fail": []
-      },
-      "coop_proposal": {
-        "model": "pickup",
-        "mode": "外卖联营 + 系统加持"
-      }
-    },
-    {
-      "id": "RD-SH-10",
-      "name": "Rujak Cingur Delta",
-      "area": "泗水",
-      "city": "泗水",
-      "lat": -7.2537,
-      "lon": 112.74,
-      "site_type": "雷达店铺",
-      "foot_traffic": 66,
-      "crowd_fit": 65,
-      "rent_pressure": 35,
-      "competition": 60,
-      "visibility": 59,
-      "car_traffic": 51,
-      "delivery_fit": 66,
-      "recommended_model": "",
-      "reason": "",
-      "source_type": "radar_shop",
-      "origin": "radar",
-      "radar_score": 69.1,
-      "photo": "/assets/radar/SH-10.jpg",
-      "shop_coop": "品牌联营 + 系统加持",
-      "shop_coop_note": "挑战型内容基因极强，做一次官方挑战赛即可激活存量话题。",
-      "score": 59.0,
-      "catchment": {
-        "pop_wan": 3.1,
-        "communities": 8,
-        "schools": 3,
-        "malls": 2,
-        "offices": 1,
-        "radius_m": 600
-      },
-      "type_en": "RADAR PICK",
-      "models": [
-        {
-          "key": "cart",
-          "name": "推车档口",
-          "en": "CART",
-          "icon": "🛒",
-          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 62.9,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "pickup",
-          "name": "快取外卖店",
-          "en": "PICKUP",
-          "icon": "⚡",
-          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 62.4,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 62.2,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "experience",
-          "name": "体验店",
-          "en": "EXPERIENCE",
-          "icon": "☕",
-          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 60.0,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥80",
-            "可见性 ≥70"
-          ]
-        },
-        {
-          "key": "drive",
-          "name": "车餐家庭店",
-          "en": "DRIVE-THRU",
-          "icon": "🚗",
-          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 57.1,
-          "eligible": false,
-          "hard_fail": [
-            "车流 ≥60"
-          ]
-        }
-      ],
-      "best_model": {
-        "key": "cart",
-        "name": "推车档口",
-        "en": "CART",
-        "icon": "🛒",
-        "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-        "score": 62.9,
-        "eligible": true,
-        "hard_fail": []
-      },
-      "coop_proposal": {
-        "model": "cart",
-        "mode": "供应链 + 推车租赁"
-      }
-    },
-    {
-      "id": "RD-SH-05",
-      "name": "Nasi Goreng Kambing Barito",
-      "area": "雅加达",
-      "city": "雅加达",
-      "lat": -6.216,
-      "lon": 106.8585,
-      "site_type": "雷达店铺",
-      "foot_traffic": 58,
-      "crowd_fit": 80,
-      "rent_pressure": 52,
-      "competition": 60,
-      "visibility": 78,
-      "car_traffic": 63,
-      "delivery_fit": 79,
-      "recommended_model": "",
-      "reason": "",
-      "source_type": "radar_shop",
-      "origin": "radar",
-      "radar_score": 66.6,
-      "photo": "/assets/radar/SH-05.jpg",
-      "shop_coop": "品牌联营 + 系统加持",
-      "shop_coop_note": "老字号现象级点位，年轻化与零售化是最大的增值空间。",
-      "score": 57.0,
-      "catchment": {
-        "pop_wan": 5.2,
-        "communities": 8,
-        "schools": 3,
-        "malls": 2,
-        "offices": 4,
-        "radius_m": 600
-      },
-      "type_en": "RADAR PICK",
-      "models": [
-        {
-          "key": "pickup",
-          "name": "快取外卖店",
-          "en": "PICKUP",
-          "icon": "⚡",
-          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 65.2,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "drive",
-          "name": "车餐家庭店",
-          "en": "DRIVE-THRU",
-          "icon": "🚗",
-          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 63.3,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "experience",
-          "name": "体验店",
-          "en": "EXPERIENCE",
-          "icon": "☕",
-          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 63.2,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥80"
-          ]
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 60.1,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "cart",
-          "name": "推车档口",
-          "en": "CART",
-          "icon": "🛒",
-          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 57.6,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥65"
-          ]
-        }
-      ],
-      "best_model": {
-        "key": "pickup",
-        "name": "快取外卖店",
-        "en": "PICKUP",
-        "icon": "⚡",
-        "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-        "score": 65.2,
-        "eligible": true,
-        "hard_fail": []
-      },
-      "coop_proposal": {
-        "model": "pickup",
-        "mode": "外卖联营 + 系统加持"
-      }
-    },
-    {
-      "id": "RD-SH-08",
-      "name": "Bubur Ayam Barito",
-      "area": "雅加达",
-      "city": "雅加达",
-      "lat": -6.2263,
-      "lon": 106.8583,
-      "site_type": "雷达店铺",
-      "foot_traffic": 59,
-      "crowd_fit": 78,
-      "rent_pressure": 52,
-      "competition": 60,
-      "visibility": 75,
-      "car_traffic": 63,
-      "delivery_fit": 80,
-      "recommended_model": "",
-      "reason": "",
-      "source_type": "radar_shop",
-      "origin": "radar",
-      "radar_score": 65.2,
-      "photo": "/assets/radar/SH-08.jpg",
-      "shop_coop": "供应链共建 + 品牌焕新",
-      "shop_coop_note": "中央厨房化改造后单店人效可提 40%，是供应链切入的好标的。",
-      "score": 56.8,
-      "catchment": {
-        "pop_wan": 5.2,
-        "communities": 8,
-        "schools": 3,
-        "malls": 2,
-        "offices": 4,
-        "radius_m": 600
-      },
-      "type_en": "RADAR PICK",
-      "models": [
-        {
-          "key": "pickup",
-          "name": "快取外卖店",
-          "en": "PICKUP",
-          "icon": "⚡",
-          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 65.2,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "drive",
-          "name": "车餐家庭店",
-          "en": "DRIVE-THRU",
-          "icon": "🚗",
-          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 62.8,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "experience",
-          "name": "体验店",
-          "en": "EXPERIENCE",
-          "icon": "☕",
-          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 62.3,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥80"
-          ]
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 59.8,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "cart",
-          "name": "推车档口",
-          "en": "CART",
-          "icon": "🛒",
-          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 57.6,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥65"
-          ]
-        }
-      ],
-      "best_model": {
-        "key": "pickup",
-        "name": "快取外卖店",
-        "en": "PICKUP",
-        "icon": "⚡",
-        "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-        "score": 65.2,
+        "score": 66.2,
         "eligible": true,
         "hard_fail": []
       },
@@ -2078,6 +2438,9 @@
       "recommended_model": "品牌旗舰体验点",
       "reason": "全雅加达人流天花板、办公客群 38 栋；但租金与竞品双高压——只适合已验证品牌做形象与单测，不适合首店。",
       "source_type": "demo_seed",
+      "city_pop_m": 31.0,
+      "urban_pct": 78,
+      "island": "爪哇",
       "score": 56.4,
       "catchment": {
         "pop_wan": 4.5,
@@ -2157,111 +2520,6 @@
       "coop_proposal": {
         "model": "experience",
         "mode": "品牌联营 / 旗舰加盟"
-      }
-    },
-    {
-      "id": "RD-SH-01",
-      "name": "Sate Kambing H. Diding",
-      "area": "雅加达",
-      "city": "雅加达",
-      "lat": -6.2235,
-      "lon": 106.8543,
-      "site_type": "雷达店铺",
-      "foot_traffic": 60,
-      "crowd_fit": 72,
-      "rent_pressure": 52,
-      "competition": 60,
-      "visibility": 58,
-      "car_traffic": 63,
-      "delivery_fit": 80,
-      "recommended_model": "",
-      "reason": "",
-      "source_type": "radar_shop",
-      "origin": "radar",
-      "radar_score": 65.6,
-      "photo": "/assets/radar/SH-01.jpg",
-      "shop_coop": "深度孵化",
-      "shop_coop_note": "产品 84 分是全榜最高之一，只差包装与传播——典型的'产品好不会红'案例。",
-      "score": 55.6,
-      "catchment": {
-        "pop_wan": 5.2,
-        "communities": 8,
-        "schools": 3,
-        "malls": 2,
-        "offices": 4,
-        "radius_m": 600
-      },
-      "type_en": "RADAR PICK",
-      "models": [
-        {
-          "key": "pickup",
-          "name": "快取外卖店",
-          "en": "PICKUP",
-          "icon": "⚡",
-          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-          "score": 63.0,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "drive",
-          "name": "车餐家庭店",
-          "en": "DRIVE-THRU",
-          "icon": "🚗",
-          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
-          "score": 60.0,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "value",
-          "name": "性价比街铺",
-          "en": "VALUE",
-          "icon": "🏪",
-          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
-          "score": 57.2,
-          "eligible": true,
-          "hard_fail": []
-        },
-        {
-          "key": "experience",
-          "name": "体验店",
-          "en": "EXPERIENCE",
-          "icon": "☕",
-          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
-          "score": 57.1,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥80",
-            "可见性 ≥70"
-          ]
-        },
-        {
-          "key": "cart",
-          "name": "推车档口",
-          "en": "CART",
-          "icon": "🛒",
-          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
-          "score": 56.8,
-          "eligible": false,
-          "hard_fail": [
-            "人流 ≥65"
-          ]
-        }
-      ],
-      "best_model": {
-        "key": "pickup",
-        "name": "快取外卖店",
-        "en": "PICKUP",
-        "icon": "⚡",
-        "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
-        "score": 63.0,
-        "eligible": true,
-        "hard_fail": []
-      },
-      "coop_proposal": {
-        "model": "pickup",
-        "mode": "外卖联营 + 系统加持"
       }
     }
   ],
@@ -2356,6 +2614,16 @@
         "name": "Level 21 Denpasar",
         "lat": -8.67,
         "lon": 115.208
+      },
+      {
+        "name": "Pentacity Balikpapan",
+        "lat": -1.242,
+        "lon": 116.86
+      },
+      {
+        "name": "Manado Town Square",
+        "lat": 1.491,
+        "lon": 124.843
       }
     ],
     "schools": [
@@ -2490,6 +2758,11 @@
         "name": "Tanjung Bunga Makassar",
         "lat": -5.137,
         "lon": 119.415
+      },
+      {
+        "name": "Batu Ampar Balikpapan",
+        "lat": -1.237,
+        "lon": 116.852
       }
     ],
     "offices": [
@@ -2760,6 +3033,21 @@
       -8.671,
       115.213,
       0.5
+    ],
+    [
+      -8.706,
+      115.18,
+      0.56
+    ],
+    [
+      -1.237,
+      116.852,
+      0.48
+    ],
+    [
+      1.4745,
+      124.842,
+      0.4
     ]
   ]
 }

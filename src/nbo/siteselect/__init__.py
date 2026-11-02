@@ -137,6 +137,16 @@ CANDIDATES = [
          catch_pop_wan=4.8, catch_communities=9, catch_schools=4, catch_malls=5, catch_offices=4, catch_radius_m=800,
          recommended_model="品牌旗舰体验点",
          reason="印尼东部门户+海滨旅游客流，可见性高、租金仍温和——东部市场形象店与单测的稀缺优质点位。"),
+    dict(id="ST-13", name="Denpasar 旅游枢纽带", area="Kuta-Seminyak", city="登巴萨", lat=-8.7060, lon=115.1800,
+         site_type="交通枢纽", foot_traffic=80, crowd_fit=72, rent_pressure=55, competition=50, visibility=80, car_traffic=62, delivery_fit=64,
+         catch_pop_wan=2.2, catch_communities=6, catch_schools=2, catch_malls=4, catch_offices=3, catch_radius_m=900,
+         recommended_model="30㎡ 快取店",
+         reason="巴厘岛游客+本地居民双客流，城镇集中度 62% 为离岛最高之一；快取店吃旅游潮汐，外卖接酒店半径。"),
+    dict(id="ST-14", name="Balikpapan 能源社区口", area="Batu Ampar", city="巴厘巴板", lat=-1.2370, lon=116.8520,
+         site_type="社区口", foot_traffic=68, crowd_fit=76, rent_pressure=36, competition=26, visibility=70, car_traffic=68, delivery_fit=50,
+         catch_pop_wan=1.8, catch_communities=8, catch_schools=3, catch_malls=2, catch_offices=6, catch_radius_m=800,
+         recommended_model="56㎡ 社区集装箱店",
+         reason="加里曼丹能源城，人均收入高、社区成建制、竞品稀少；集中度 70% 的紧凑城市，单店覆盖效率最优。"),
 ]
 
 # POI 图层（演示种子坐标，围绕雅加达核心）
@@ -160,6 +170,8 @@ POIS = {
         {"name": "Paragon Semarang", "lat": -6.9890, "lon": 110.4230},
         {"name": "OPI Mall Palembang", "lat": -2.9450, "lon": 104.7560},
         {"name": "Level 21 Denpasar", "lat": -8.6700, "lon": 115.2080},
+        {"name": "Pentacity Balikpapan", "lat": -1.2420, "lon": 116.8600},
+        {"name": "Manado Town Square", "lat": 1.4910, "lon": 124.8430},
     ],
     "schools": [
         {"name": "UI Depok", "lat": -6.3649, "lon": 106.8219},
@@ -190,6 +202,7 @@ POIS = {
         {"name": "Seturan Yogyakarta", "lat": -7.7830, "lon": 110.4100},
         {"name": "Ring Road Medan", "lat": 3.5950, "lon": 98.6720},
         {"name": "Tanjung Bunga Makassar", "lat": -5.1370, "lon": 119.4150},
+        {"name": "Batu Ampar Balikpapan", "lat": -1.2370, "lon": 116.8520},
     ],
     "offices": [
         {"name": "SCBD District", "lat": -6.2255, "lon": 106.8086},
@@ -221,6 +234,7 @@ HEAT = [
     [3.595, 98.672, 0.64], [3.562, 98.656, 0.45],
     [-5.148, 119.423, 0.6], [-5.137, 119.415, 0.48],
     [-6.967, 110.419, 0.52], [-2.976, 104.775, 0.5], [-8.671, 115.213, 0.5],
+    [-8.706, 115.18, 0.56], [-1.237, 116.852, 0.48], [1.4745, 124.842, 0.4],
 ]
 
 SITE_TYPE_LABEL = {"社区口": "COMMUNITY", "学校旁": "CAMPUS", "商场食阁": "MALL F&B",
@@ -228,19 +242,34 @@ SITE_TYPE_LABEL = {"社区口": "COMMUNITY", "学校旁": "CAMPUS", "商场食�
                    "雷达店铺": "RADAR PICK"}
 
 # ---------- 闭环：雷达发现 → 选址评估 → 合作模式匹配 ----------
-# 雷达潜力店铺无实测选址因子，按城市基准 + 店铺画像估算（演示启发式，接真实数据后替换）
+# 城市基本面库：都市圈人口(百万) / 城镇集中度(%) / 岛屿 —— 离岛点位按人口×集中度加权估算
 CITY_GEO = {
-    "雅加达": dict(lat=-6.218, lon=106.845, pop=5.2, rp=55, ct=60, df=75),
-    "万隆":   dict(lat=-6.917, lon=107.619, pop=2.4, rp=35, ct=45, df=58),
-    "泗水":   dict(lat=-7.257, lon=112.752, pop=3.1, rp=38, ct=48, df=60),
-    "日惹":   dict(lat=-7.796, lon=110.370, pop=1.9, rp=32, ct=42, df=55),
-    "棉兰":   dict(lat=3.595, lon=98.672, pop=4.1, rp=36, ct=55, df=52),
-    "望加锡": dict(lat=-5.148, lon=119.423, pop=3.3, rp=38, ct=52, df=54),
-    "三宝垄": dict(lat=-6.967, lon=110.419, pop=2.8, rp=34, ct=46, df=53),
-    "巨港":   dict(lat=-2.976, lon=104.775, pop=2.6, rp=33, ct=48, df=50),
-    "登巴萨": dict(lat=-8.671, lon=115.213, pop=1.6, rp=42, ct=50, df=56),
+    # 爪哇核心
+    "雅加达":   dict(lat=-6.218, lon=106.845, pop=5.2,  rp=55, ct=60, df=75, pop_m=31.0, urban=78),
+    "德波":     dict(lat=-6.3649, lon=106.8219, pop=9.2, rp=40, ct=45, df=66, pop_m=31.0, urban=74),
+    "南唐格朗": dict(lat=-6.2665, lon=106.7180, pop=6.8, rp=45, ct=62, df=60, pop_m=31.0, urban=72),
+    "唐格朗":   dict(lat=-6.2980, lon=106.6844, pop=8.9, rp=40, ct=60, df=58, pop_m=31.0, urban=70),
+    "勿加泗":   dict(lat=-6.2479, lon=106.9916, pop=10.6, rp=38, ct=66, df=56, pop_m=31.0, urban=71),
+    "万隆":     dict(lat=-6.917, lon=107.619, pop=2.4,  rp=35, ct=45, df=58, pop_m=8.8,  urban=76),
+    "日惹":     dict(lat=-7.796, lon=110.370, pop=1.9,  rp=32, ct=42, df=55, pop_m=4.3,  urban=68),
+    "泗水":     dict(lat=-7.257, lon=112.752, pop=3.1,  rp=38, ct=48, df=60, pop_m=10.0, urban=72),
+    "三宝垄":   dict(lat=-6.967, lon=110.419, pop=2.8,  rp=34, ct=46, df=53, pop_m=3.7,  urban=66),
+    # 离岛（人口×集中度定级，集中度低 → 单点模型降权、推车/档口优先）
+    "棉兰":     dict(lat=3.595, lon=98.672,  pop=4.1,   rp=36, ct=55, df=52, pop_m=5.2,  urban=58),
+    "巨港":     dict(lat=-2.976, lon=104.775, pop=2.6,  rp=33, ct=48, df=50, pop_m=1.9,  urban=52),
+    "望加锡":   dict(lat=-5.148, lon=119.423, pop=3.3,  rp=38, ct=52, df=54, pop_m=2.7,  urban=55),
+    "登巴萨":   dict(lat=-8.671, lon=115.213, pop=1.6,  rp=42, ct=50, df=56, pop_m=1.1,  urban=62),
+    "巴厘巴板": dict(lat=-1.237, lon=116.852, pop=0.9,  rp=37, ct=56, df=48, pop_m=0.71, urban=70),
+    "马那多":   dict(lat=1.4745, lon=124.842, pop=0.7,  rp=32, ct=44, df=46, pop_m=0.46, urban=55),
 }
 CITY_GEO_DEFAULT = CITY_GEO["雅加达"]
+
+# 城市 → 岛屿（爪哇以外自动走离岛修正）
+CITY_ISLAND = {"雅加达": "爪哇", "德波": "爪哇", "南唐格朗": "爪哇", "唐格朗": "爪哇", "勿加泗": "爪哇",
+               "万隆": "爪哇", "日惹": "爪哇", "泗水": "爪哇", "三宝垄": "爪哇",
+               "棉兰": "苏门答腊", "巨港": "苏门答腊", "巴厘巴板": "加里曼丹",
+               "望加锡": "苏拉威西", "马那多": "苏拉威西",
+               "登巴萨": "巴厘"}
 
 # 最佳匹配模型 → 建议合作模式（发现→评估→合作 闭环的最后一环）
 MODEL_COOP = {
@@ -263,24 +292,29 @@ def _radar_to_candidate(s: dict) -> dict:
     dlat, dlon = _jit(s.get("id", "x"))
     stores = int(s.get("stores", 1))
     dims = s.get("dims", {})
+    # 离岛修正：人流/外卖按都市圈人口规模 + 城镇集中度加权（集中度低 → 因子自动降权）
+    pop_boost = min(12.0, max(0.0, (g["pop_m"] - 2.0) * 2.5))
+    urban_boost = (g["urban"] - 60) * 0.25
     return dict(
         id="RD-" + s["id"], name=s["name"], area=s.get("city", ""), city=s.get("city", ""),
         lat=round(g["lat"] + dlat, 4), lon=round(g["lon"] + dlon, 4),
         site_type="雷达店铺",
-        foot_traffic=int(min(92, max(55, 60 + stores * 5 + (dims.get("viral", 70) - 70) * 0.5))),
-        crowd_fit=int(dims.get("crowd", 70)),
+        foot_traffic=int(min(93, max(52, 55 + stores * 4 + (dims.get("viral", 70) - 70) * 0.4 + pop_boost + urban_boost))),
+        crowd_fit=int(min(92, max(50, dims.get("crowd", 70) + urban_boost))),
         rent_pressure=int(min(70, max(25, g["rp"] - stores * 3))),
-        competition=int(min(65, max(20, 60 - (stores - 1) * 8))),
+        competition=int(min(65, max(15, 60 - (stores - 1) * 8 - max(0, 8 - g["pop_m"]) * 2))),
         visibility=int(dims.get("site", 65)),
         car_traffic=int(min(75, g["ct"] + stores * 3)),
-        delivery_fit=int(min(90, g["df"] + dims.get("social", 60) * 0.1)),
+        delivery_fit=int(min(90, g["df"] + dims.get("social", 60) * 0.1 + urban_boost)),
         catch_pop_wan=g["pop"], catch_communities=6 + stores * 2, catch_schools=3,
         catch_malls=2, catch_offices=4 if s.get("city") == "雅加达" else 1,
         catch_radius_m=600,
         recommended_model="", reason="",
         source_type="radar_shop",
         origin="radar", radar_score=s.get("potential_score"),
-        photo=s.get("photo"), shop_coop=s.get("coop_model"), shop_coop_note=s.get("coop_note"))
+        photo=s.get("photo"), shop_coop=s.get("coop_model"), shop_coop_note=s.get("coop_note"),
+        city_pop_m=g["pop_m"], urban_pct=g["urban"],
+        island=CITY_ISLAND.get(s.get("city"), "其他"))
 
 
 def load_radar_shops() -> list:
@@ -392,7 +426,7 @@ def build_siteselect(db_path: str | Path) -> dict:
         "demo": True,
         "source_note": "演示种子数据 · 字段对齐真实 POI 库（OSM/自采）与人流数据源",
         "model_note": "选址模型库：体验店(星巴克) / 快取外卖(瑞幸) / 车餐家庭(麦当劳) / 性价比街铺(蜜雪) / 推车档口(轻资产) —— 加权评分 + 硬条件否决",
-        "loop_note": "闭环：雷达发现潜力店 → 五业态选址模型评估 → 匹配合作模式（RD- 前缀为雷达来源，因子为城市基准估算）",
+        "loop_note": "闭环：雷达发现潜力店 → 五业态选址模型评估 → 匹配合作模式（RD- 前缀为雷达来源；离岛点位按都市圈人口×城镇集中度加权估算）",
         "models_legend": [{"key": k, "name": m["name"], "en": m["en"], "icon": m["icon"], "borrow": m["borrow"]}
                           for k, m in MODELS.items()],
         "candidates": cands,
@@ -402,7 +436,11 @@ def build_siteselect(db_path: str | Path) -> dict:
 
 
 def _enrich(c: dict) -> None:
-    """统一后处理：基准分 + 覆盖圈 + 五模型评分 + 最佳模型 + 合作模式建议。"""
+    """统一后处理：基准分 + 覆盖圈 + 五模型评分 + 最佳模型 + 合作模式建议 + 城市基本面。"""
+    g = CITY_GEO.get(c["city"], CITY_GEO_DEFAULT)
+    c["city_pop_m"] = g["pop_m"]
+    c["urban_pct"] = g["urban"]
+    c["island"] = CITY_ISLAND.get(c["city"], "其他")
     c["score"] = site_score(c)
     c["catchment"] = {"pop_wan": c.pop("catch_pop_wan"), "communities": c.pop("catch_communities"),
                       "schools": c.pop("catch_schools"), "malls": c.pop("catch_malls"),
