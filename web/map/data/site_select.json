@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02 13:15",
+  "generated_at": "2026-11-02 13:43",
   "demo": true,
   "source_note": "演示种子数据 · 字段对齐真实 POI 库（OSM/自采）与人流数据源",
   "model_note": "选址模型库：体验店(星巴克) / 快取外卖(瑞幸) / 车餐家庭(麦当劳) / 性价比街铺(蜜雪) / 推车档口(轻资产) —— 加权评分 + 硬条件否决",
@@ -140,6 +140,103 @@
       }
     },
     {
+      "id": "ST-09",
+      "name": "Bandung Dago 学生街",
+      "area": "Dago",
+      "city": "万隆",
+      "lat": -6.8765,
+      "lon": 107.612,
+      "site_type": "学校旁",
+      "foot_traffic": 85,
+      "crowd_fit": 84,
+      "rent_pressure": 35,
+      "competition": 45,
+      "visibility": 78,
+      "car_traffic": 35,
+      "delivery_fit": 68,
+      "recommended_model": "推车 / 15㎡ 档口",
+      "reason": "万隆高校最密集街区（ITB 半径内），学生客群价格敏感且 UGC 体质强；租金远低于雅加达同量级点位。",
+      "source_type": "demo_seed",
+      "score": 73.2,
+      "catchment": {
+        "pop_wan": 3.2,
+        "communities": 8,
+        "schools": 8,
+        "malls": 2,
+        "offices": 3,
+        "radius_m": 600
+      },
+      "type_en": "CAMPUS",
+      "models": [
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 76.1,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 75.8,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 75.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 70.2,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 61.6,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "value",
+        "name": "性价比街铺",
+        "en": "VALUE",
+        "icon": "🏪",
+        "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+        "score": 76.1,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "value",
+        "mode": "标准加盟 + 供应链直供"
+      }
+    },
+    {
       "id": "ST-01",
       "name": "Bintaro 九号社区口",
       "area": "Bintaro",
@@ -228,6 +325,104 @@
         "icon": "🏪",
         "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
         "score": 73.0,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "value",
+        "mode": "标准加盟 + 供应链直供"
+      }
+    },
+    {
+      "id": "ST-10",
+      "name": "Surabaya Rungkut 家庭社区轴",
+      "area": "Rungkut",
+      "city": "泗水",
+      "lat": -7.3333,
+      "lon": 112.7667,
+      "site_type": "社区口",
+      "foot_traffic": 70,
+      "crowd_fit": 82,
+      "rent_pressure": 34,
+      "competition": 30,
+      "visibility": 68,
+      "car_traffic": 66,
+      "delivery_fit": 55,
+      "recommended_model": "56㎡ 社区集装箱店",
+      "reason": "泗水东部最大社区群、覆盖 9.5 万人，家庭客群与低竞品并存——爪哇东翼复制社区店模型的首选点。",
+      "source_type": "demo_seed",
+      "score": 72.2,
+      "catchment": {
+        "pop_wan": 9.5,
+        "communities": 18,
+        "schools": 9,
+        "malls": 3,
+        "offices": 5,
+        "radius_m": 900
+      },
+      "type_en": "COMMUNITY",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 71.3,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80",
+            "可见性 ≥70"
+          ]
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 71.2,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 71.2,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 70.4,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 64.8,
+          "eligible": true,
+          "hard_fail": []
+        }
+      ],
+      "best_model": {
+        "key": "value",
+        "name": "性价比街铺",
+        "en": "VALUE",
+        "icon": "🏪",
+        "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+        "score": 71.2,
         "eligible": true,
         "hard_fail": []
       },
@@ -435,6 +630,103 @@
       "coop_proposal": {
         "model": "drive",
         "mode": "区域代理 + 车餐加盟"
+      }
+    },
+    {
+      "id": "ST-11",
+      "name": "Medan Ring Road 枢纽口",
+      "area": "Ring Road",
+      "city": "棉兰",
+      "lat": 3.5952,
+      "lon": 98.6722,
+      "site_type": "交通枢纽",
+      "foot_traffic": 82,
+      "crowd_fit": 72,
+      "rent_pressure": 40,
+      "competition": 38,
+      "visibility": 74,
+      "car_traffic": 72,
+      "delivery_fit": 52,
+      "recommended_model": "30㎡ 快取店",
+      "reason": "苏门答腊第一城 ring road 与轻轨换乘叠加，通勤车流全榜最高之一；快取店吃透枢纽流量。",
+      "source_type": "demo_seed",
+      "score": 70.1,
+      "catchment": {
+        "pop_wan": 8.2,
+        "communities": 12,
+        "schools": 5,
+        "malls": 4,
+        "offices": 6,
+        "radius_m": 900
+      },
+      "type_en": "TRANSIT",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 71.7,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 71.7,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 71.5,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 71.4,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 62.2,
+          "eligible": false,
+          "hard_fail": [
+            "外卖适配 ≥55"
+          ]
+        }
+      ],
+      "best_model": {
+        "key": "experience",
+        "name": "体验店",
+        "en": "EXPERIENCE",
+        "icon": "☕",
+        "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+        "score": 71.7,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "experience",
+        "mode": "品牌联营 / 旗舰加盟"
       }
     },
     {
@@ -747,6 +1039,105 @@
       "coop_proposal": {
         "model": "pickup",
         "mode": "外卖联营 + 系统加持"
+      }
+    },
+    {
+      "id": "ST-12",
+      "name": "Makassar 海滨旅游带",
+      "area": "Panakkukang",
+      "city": "望加锡",
+      "lat": -5.1477,
+      "lon": 119.4227,
+      "site_type": "商场食阁",
+      "foot_traffic": 78,
+      "crowd_fit": 70,
+      "rent_pressure": 48,
+      "competition": 42,
+      "visibility": 82,
+      "car_traffic": 58,
+      "delivery_fit": 60,
+      "recommended_model": "品牌旗舰体验点",
+      "reason": "印尼东部门户+海滨旅游客流，可见性高、租金仍温和——东部市场形象店与单测的稀缺优质点位。",
+      "source_type": "demo_seed",
+      "score": 65.8,
+      "catchment": {
+        "pop_wan": 4.8,
+        "communities": 9,
+        "schools": 4,
+        "malls": 5,
+        "offices": 4,
+        "radius_m": 800
+      },
+      "type_en": "MALL F&B",
+      "models": [
+        {
+          "key": "experience",
+          "name": "体验店",
+          "en": "EXPERIENCE",
+          "icon": "☕",
+          "borrow": "星巴克逻辑：第三空间锚定高质人流，可见性/展示面是硬门槛，租金承受力强（80-150㎡）",
+          "score": 70.5,
+          "eligible": false,
+          "hard_fail": [
+            "人流 ≥80"
+          ]
+        },
+        {
+          "key": "value",
+          "name": "性价比街铺",
+          "en": "VALUE",
+          "icon": "🏪",
+          "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+          "score": 68.3,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "cart",
+          "name": "推车档口",
+          "en": "CART",
+          "icon": "🛒",
+          "borrow": "轻资产逻辑：潮汐人流（校门口/通勤口/夜市）+ 接近零固定成本，验证后再固化为店",
+          "score": 66.6,
+          "eligible": true,
+          "hard_fail": []
+        },
+        {
+          "key": "drive",
+          "name": "车餐家庭店",
+          "en": "DRIVE-THRU",
+          "icon": "🚗",
+          "borrow": "麦当劳逻辑：车流 + 学校/社区家庭客群 + 早午晚夜宵全时段流量，车道与路口可见性（120㎡+）",
+          "score": 65.2,
+          "eligible": false,
+          "hard_fail": [
+            "车流 ≥60"
+          ]
+        },
+        {
+          "key": "pickup",
+          "name": "快取外卖店",
+          "en": "PICKUP",
+          "icon": "⚡",
+          "borrow": "瑞幸逻辑：外卖半径单量 + 办公密度 + 低租金小面积，数据驱动加密（15-40㎡）",
+          "score": 62.8,
+          "eligible": true,
+          "hard_fail": []
+        }
+      ],
+      "best_model": {
+        "key": "value",
+        "name": "性价比街铺",
+        "en": "VALUE",
+        "icon": "🏪",
+        "borrow": "蜜雪逻辑：人流绝对量 + 学校密度 + 极致低租金，单品打天下（20-50㎡）",
+        "score": 68.3,
+        "eligible": true,
+        "hard_fail": []
+      },
+      "coop_proposal": {
+        "model": "value",
+        "mode": "标准加盟 + 供应链直供"
       }
     },
     {
@@ -1925,6 +2316,46 @@
         "name": "Mall Kelapa Gading",
         "lat": -6.1572,
         "lon": 106.908
+      },
+      {
+        "name": "Trans Studio Bandung",
+        "lat": -6.925,
+        "lon": 107.636
+      },
+      {
+        "name": "Tunjungan Plaza Surabaya",
+        "lat": -7.2628,
+        "lon": 112.7384
+      },
+      {
+        "name": "Malioboro Mall Yogyakarta",
+        "lat": -7.793,
+        "lon": 110.365
+      },
+      {
+        "name": "Sun Plaza Medan",
+        "lat": 3.585,
+        "lon": 98.675
+      },
+      {
+        "name": "Mall Panakkukang Makassar",
+        "lat": -5.158,
+        "lon": 119.437
+      },
+      {
+        "name": "Paragon Semarang",
+        "lat": -6.989,
+        "lon": 110.423
+      },
+      {
+        "name": "OPI Mall Palembang",
+        "lat": -2.945,
+        "lon": 104.756
+      },
+      {
+        "name": "Level 21 Denpasar",
+        "lat": -8.67,
+        "lon": 115.208
       }
     ],
     "schools": [
@@ -1967,6 +2398,31 @@
         "name": "SMAN 1 Bekasi",
         "lat": -6.2455,
         "lon": 106.99
+      },
+      {
+        "name": "ITB Bandung",
+        "lat": -6.8915,
+        "lon": 107.6104
+      },
+      {
+        "name": "ITS Surabaya",
+        "lat": -7.282,
+        "lon": 112.794
+      },
+      {
+        "name": "UGM Yogyakarta",
+        "lat": -7.766,
+        "lon": 110.378
+      },
+      {
+        "name": "USU Medan",
+        "lat": 3.562,
+        "lon": 98.656
+      },
+      {
+        "name": "UNM Makassar",
+        "lat": -5.172,
+        "lon": 119.432
       }
     ],
     "communities": [
@@ -2009,6 +2465,31 @@
         "name": "Tanjung Duren",
         "lat": -6.168,
         "lon": 106.787
+      },
+      {
+        "name": "Dago Bandung",
+        "lat": -6.8765,
+        "lon": 107.612
+      },
+      {
+        "name": "Rungkut Surabaya",
+        "lat": -7.3333,
+        "lon": 112.7667
+      },
+      {
+        "name": "Seturan Yogyakarta",
+        "lat": -7.783,
+        "lon": 110.41
+      },
+      {
+        "name": "Ring Road Medan",
+        "lat": 3.595,
+        "lon": 98.672
+      },
+      {
+        "name": "Tanjung Bunga Makassar",
+        "lat": -5.137,
+        "lon": 119.415
       }
     ],
     "offices": [
@@ -2198,6 +2679,86 @@
     [
       -6.192,
       106.879,
+      0.5
+    ],
+    [
+      -6.917,
+      107.619,
+      0.66
+    ],
+    [
+      -6.8765,
+      107.612,
+      0.6
+    ],
+    [
+      -6.8915,
+      107.6104,
+      0.5
+    ],
+    [
+      -7.257,
+      112.752,
+      0.68
+    ],
+    [
+      -7.3333,
+      112.7667,
+      0.55
+    ],
+    [
+      -7.2628,
+      112.7384,
+      0.58
+    ],
+    [
+      -7.796,
+      110.37,
+      0.62
+    ],
+    [
+      -7.793,
+      110.365,
+      0.55
+    ],
+    [
+      -7.766,
+      110.378,
+      0.45
+    ],
+    [
+      3.595,
+      98.672,
+      0.64
+    ],
+    [
+      3.562,
+      98.656,
+      0.45
+    ],
+    [
+      -5.148,
+      119.423,
+      0.6
+    ],
+    [
+      -5.137,
+      119.415,
+      0.48
+    ],
+    [
+      -6.967,
+      110.419,
+      0.52
+    ],
+    [
+      -2.976,
+      104.775,
+      0.5
+    ],
+    [
+      -8.671,
+      115.213,
       0.5
     ]
   ]

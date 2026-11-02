@@ -136,7 +136,7 @@
 </div>
 
 <script>
-const map = L.map('map', { zoomControl: true }).setView([-6.35, 106.85], 11);
+const map = L.map('map', { zoomControl: true }).setView([-2.2, 117.5], 5);
 window._leaflet_map = map;
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
   maxZoom: 19, attribution: 'Esri（正式环境切 Mapbox/自托管切片）'
@@ -300,8 +300,12 @@ function buildLayers(map, d) {
     on ? circles.addTo(map) : map.removeLayer(circles);
   };
   siteLayer.addTo(map);
-  // 雷达页跳入：/map/?focus=RD-SH-02 → 定位并打开 popup（发现→评估闭环入口）
+  // 默认视野：按候选点自动适配（全国覆盖）；带 focus 参数时由跳入逻辑接管
   const focus = new URLSearchParams(location.search).get('focus');
+  if (!focus && d.candidates.length) {
+    map.fitBounds(L.latLngBounds(d.candidates.map(c => [c.lat, c.lon])).pad(0.12));
+  }
+  // 雷达页跳入：/map/?focus=RD-SH-02 → 定位并打开 popup（发现→评估闭环入口）
   if (focus && window._site_markers && window._site_markers[focus]) {
     const mk = window._site_markers[focus];
     map.flyTo(mk.getLatLng(), 15);

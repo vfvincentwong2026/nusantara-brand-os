@@ -117,6 +117,26 @@ CANDIDATES = [
          catch_pop_wan=10.6, catch_communities=21, catch_schools=9, catch_malls=4, catch_offices=6, catch_radius_m=1000,
          recommended_model="56㎡ 社区集装箱店",
          reason="卫星城最大社区群、覆盖人口 10.6 万全榜第一，竞品密度全榜最低——'人口密度换增长'的长期价值点位。"),
+    dict(id="ST-09", name="Bandung Dago 学生街", area="Dago", city="万隆", lat=-6.8765, lon=107.6120,
+         site_type="学校旁", foot_traffic=85, crowd_fit=84, rent_pressure=35, competition=45, visibility=78, car_traffic=35, delivery_fit=68,
+         catch_pop_wan=3.2, catch_communities=8, catch_schools=8, catch_malls=2, catch_offices=3, catch_radius_m=600,
+         recommended_model="推车 / 15㎡ 档口",
+         reason="万隆高校最密集街区（ITB 半径内），学生客群价格敏感且 UGC 体质强；租金远低于雅加达同量级点位。"),
+    dict(id="ST-10", name="Surabaya Rungkut 家庭社区轴", area="Rungkut", city="泗水", lat=-7.3333, lon=112.7667,
+         site_type="社区口", foot_traffic=70, crowd_fit=82, rent_pressure=34, competition=30, visibility=68, car_traffic=66, delivery_fit=55,
+         catch_pop_wan=9.5, catch_communities=18, catch_schools=9, catch_malls=3, catch_offices=5, catch_radius_m=900,
+         recommended_model="56㎡ 社区集装箱店",
+         reason="泗水东部最大社区群、覆盖 9.5 万人，家庭客群与低竞品并存——爪哇东翼复制社区店模型的首选点。"),
+    dict(id="ST-11", name="Medan Ring Road 枢纽口", area="Ring Road", city="棉兰", lat=3.5952, lon=98.6722,
+         site_type="交通枢纽", foot_traffic=82, crowd_fit=72, rent_pressure=40, competition=38, visibility=74, car_traffic=72, delivery_fit=52,
+         catch_pop_wan=8.2, catch_communities=12, catch_schools=5, catch_malls=4, catch_offices=6, catch_radius_m=900,
+         recommended_model="30㎡ 快取店",
+         reason="苏门答腊第一城 ring road 与轻轨换乘叠加，通勤车流全榜最高之一；快取店吃透枢纽流量。"),
+    dict(id="ST-12", name="Makassar 海滨旅游带", area="Panakkukang", city="望加锡", lat=-5.1477, lon=119.4227,
+         site_type="商场食阁", foot_traffic=78, crowd_fit=70, rent_pressure=48, competition=42, visibility=82, car_traffic=58, delivery_fit=60,
+         catch_pop_wan=4.8, catch_communities=9, catch_schools=4, catch_malls=5, catch_offices=4, catch_radius_m=800,
+         recommended_model="品牌旗舰体验点",
+         reason="印尼东部门户+海滨旅游客流，可见性高、租金仍温和——东部市场形象店与单测的稀缺优质点位。"),
 ]
 
 # POI 图层（演示种子坐标，围绕雅加达核心）
@@ -132,6 +152,14 @@ POIS = {
         {"name": "Summarecon Mall Bekasi", "lat": -6.2485, "lon": 106.9925},
         {"name": "Bintaro Jaya Xchange", "lat": -6.2650, "lon": 106.7190},
         {"name": "Mall Kelapa Gading", "lat": -6.1572, "lon": 106.9080},
+        {"name": "Trans Studio Bandung", "lat": -6.9250, "lon": 107.6360},
+        {"name": "Tunjungan Plaza Surabaya", "lat": -7.2628, "lon": 112.7384},
+        {"name": "Malioboro Mall Yogyakarta", "lat": -7.7930, "lon": 110.3650},
+        {"name": "Sun Plaza Medan", "lat": 3.5850, "lon": 98.6750},
+        {"name": "Mall Panakkukang Makassar", "lat": -5.1580, "lon": 119.4370},
+        {"name": "Paragon Semarang", "lat": -6.9890, "lon": 110.4230},
+        {"name": "OPI Mall Palembang", "lat": -2.9450, "lon": 104.7560},
+        {"name": "Level 21 Denpasar", "lat": -8.6700, "lon": 115.2080},
     ],
     "schools": [
         {"name": "UI Depok", "lat": -6.3649, "lon": 106.8219},
@@ -142,6 +170,11 @@ POIS = {
         {"name": "Santa Ursula", "lat": -6.1680, "lon": 106.8340},
         {"name": "UPH BSD", "lat": -6.3030, "lon": 106.6790},
         {"name": "SMAN 1 Bekasi", "lat": -6.2455, "lon": 106.9900},
+        {"name": "ITB Bandung", "lat": -6.8915, "lon": 107.6104},
+        {"name": "ITS Surabaya", "lat": -7.2820, "lon": 112.7940},
+        {"name": "UGM Yogyakarta", "lat": -7.7660, "lon": 110.3780},
+        {"name": "USU Medan", "lat": 3.5620, "lon": 98.6560},
+        {"name": "UNM Makassar", "lat": -5.1720, "lon": 119.4320},
     ],
     "communities": [
         {"name": "Bintaro Sektor 9", "lat": -6.2665, "lon": 106.7180},
@@ -152,6 +185,11 @@ POIS = {
         {"name": "Serpong Garden", "lat": -6.2950, "lon": 106.6900},
         {"name": "Bekasi Summarecon", "lat": -6.2479, "lon": 106.9916},
         {"name": "Tanjung Duren", "lat": -6.1680, "lon": 106.7870},
+        {"name": "Dago Bandung", "lat": -6.8765, "lon": 107.6120},
+        {"name": "Rungkut Surabaya", "lat": -7.3333, "lon": 112.7667},
+        {"name": "Seturan Yogyakarta", "lat": -7.7830, "lon": 110.4100},
+        {"name": "Ring Road Medan", "lat": 3.5950, "lon": 98.6720},
+        {"name": "Tanjung Bunga Makassar", "lat": -5.1370, "lon": 119.4150},
     ],
     "offices": [
         {"name": "SCBD District", "lat": -6.2255, "lon": 106.8086},
@@ -176,6 +214,13 @@ HEAT = [
     [-6.3500, 106.8850, 0.42], [-6.1680, 106.7870, 0.5], [-6.2930, 106.7970, 0.56],
     [-6.3030, 106.6790, 0.44], [-6.2950, 106.6900, 0.46], [-6.2490, 106.9880, 0.4],
     [-6.3010, 106.6810, 0.42], [-6.2455, 106.9900, 0.38], [-6.1920, 106.8790, 0.5],
+    # ── 全国主要城市热力 ──
+    [-6.917, 107.619, 0.66], [-6.8765, 107.612, 0.6], [-6.8915, 107.6104, 0.5],
+    [-7.257, 112.752, 0.68], [-7.3333, 112.7667, 0.55], [-7.2628, 112.7384, 0.58],
+    [-7.796, 110.370, 0.62], [-7.793, 110.365, 0.55], [-7.766, 110.378, 0.45],
+    [3.595, 98.672, 0.64], [3.562, 98.656, 0.45],
+    [-5.148, 119.423, 0.6], [-5.137, 119.415, 0.48],
+    [-6.967, 110.419, 0.52], [-2.976, 104.775, 0.5], [-8.671, 115.213, 0.5],
 ]
 
 SITE_TYPE_LABEL = {"社区口": "COMMUNITY", "学校旁": "CAMPUS", "商场食阁": "MALL F&B",
@@ -189,6 +234,11 @@ CITY_GEO = {
     "万隆":   dict(lat=-6.917, lon=107.619, pop=2.4, rp=35, ct=45, df=58),
     "泗水":   dict(lat=-7.257, lon=112.752, pop=3.1, rp=38, ct=48, df=60),
     "日惹":   dict(lat=-7.796, lon=110.370, pop=1.9, rp=32, ct=42, df=55),
+    "棉兰":   dict(lat=3.595, lon=98.672, pop=4.1, rp=36, ct=55, df=52),
+    "望加锡": dict(lat=-5.148, lon=119.423, pop=3.3, rp=38, ct=52, df=54),
+    "三宝垄": dict(lat=-6.967, lon=110.419, pop=2.8, rp=34, ct=46, df=53),
+    "巨港":   dict(lat=-2.976, lon=104.775, pop=2.6, rp=33, ct=48, df=50),
+    "登巴萨": dict(lat=-8.671, lon=115.213, pop=1.6, rp=42, ct=50, df=56),
 }
 CITY_GEO_DEFAULT = CITY_GEO["雅加达"]
 
@@ -308,6 +358,8 @@ def build_siteselect(db_path: str | Path) -> dict:
     conn.row_factory = sqlite3.Row
     try:
         migrate_siteselect(conn)
+        seed_siteselect(conn)  # INSERT OR REPLACE 幂等：新增候选点随构建自动入库
+        conn.commit()
         rows = [dict(r) for r in conn.execute("SELECT * FROM site_candidate")]
     finally:
         conn.close()
