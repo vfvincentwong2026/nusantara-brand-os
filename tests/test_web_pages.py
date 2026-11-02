@@ -10,7 +10,7 @@ NAV_PAGES = ["franchise", "launch", "library", "map", "trend",
              "brandkit", "assembly", "playbook", "tower"]
 CT_PAGES = ["case", "dashboard", "retail", "three", "floorplan", "store-dash"]
 
-MAIN_NAV_ANCHORS = ["热点雷达", "选品评分", "中央库", "品牌设计", "开店方案", "培训体系"]
+MAIN_NAV_ANCHORS = ["热点雷达", "选品评分", "中央库", "品牌升级", "开店方案", "培训体系"]
 CT_URL = "https://nusantara-container.pages.dev/"
 MAIN_URL = "https://nusantara-brand-os.pages.dev/"
 

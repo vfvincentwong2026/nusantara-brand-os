@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<title>品牌生成 · 输入名字，出一套可落地品牌体系 | Nusantara Brand OS</title>
+<title>品牌升级 · 本地品牌识别系统更新 / 从零生成 | Nusantara Brand OS</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { background:#ffffff; color:#111111; font-family:'Segoe UI',system-ui,'Microsoft YaHei',sans-serif; min-height:100dvh; }
@@ -80,7 +80,7 @@
   <a href="/" style="color:var(--paper);font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
   <a class="nl" data-p="trend" href="/trend/">热点雷达<span class="nle">TREND</span></a>
   <a class="nl" data-p="launch" href="/launch/">选品评分<span class="nle">SCORE</span></a>
-  <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计<span class="nle">BRAND</span></a>
+  <a class="nl" data-p="brandkit" href="/brandkit/">品牌升级<span class="nle">UPGRADE</span></a>
   <a class="nl" data-p="assembly" href="/assembly/">开店方案<span class="nle">ASSEMBLY</span></a>
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系<span class="nle">FRANCHISE</span></a>
   <a class="nl" data-p="tower" href="/tower/">控制塔<span class="nle">TOWER</span></a>
@@ -95,7 +95,7 @@
   <span style="letter-spacing:.1em;">孵化流水线</span>
   <a href="/trend/" data-s="/trend/" style="color:#767676;text-decoration:none;">① 发现 · 热点雷达</a><span>→</span>
 <a href="/launch/" data-s="/launch/" style="color:#767676;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
-<a href="/brandkit/" data-s="/brandkit/" style="color:#767676;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
+<a href="/brandkit/" data-s="/brandkit/" style="color:#767676;text-decoration:none;">③ 造物 · 品牌升级</a><span>→</span>
 <a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
 <a href="https://nusantara-container.pages.dev/store-dash/" data-s="/store-dash/" target="_blank" rel="noopener" style="color:#767676;text-decoration:none;">⑤ 验证 · 门店大屏 ↗</a><span>→</span>
 <a href="/franchise/" data-s="/franchise/" style="color:#767676;text-decoration:none;">⑥ 复制 · 加盟体系</a>
@@ -103,16 +103,25 @@
 </div>
 <div class="wrap">
   <div class="head">
-    <div class="tag">CREATE 造物 · BRAND KIT · 品牌体系生成器</div>
-    <h1>品牌生成 BRAND FORGE：<em>输入一个名字</em>，出一套能上货架的品牌体系</h1>
-    <p class="actq" style="margin:10px 0 0;color:#666;font-size:12.5px;letter-spacing:.02em;">这一幕回答：品牌长什么样、怎么被三秒识别并传播——输入名字出全套体系。</p>
-    <p>同一输入永远得到同一套方案（确定性哈希生成，可审计、可复现）。输出四件套：机制色板 · 字标搭配 · 超级符号 · 包装三层规范——对应「视觉不是解释品牌，是被三秒识别的传播机制」。</p>
+    <div class="tag">UPGRADE 焕新 · BRAND UPGRADE · 品牌升级器</div>
+    <h1>品牌升级 BRAND UPGRADE：<em>保住品牌资产</em>，换掉旧识别</h1>
+    <p class="actq" style="margin:10px 0 0;color:#666;font-size:12.5px;letter-spacing:.02em;">这一幕回答：雷达发现的本地品牌怎么焕发——名字与客群认知保留，识别系统全套更新。</p>
+    <p>两种模式：<b>本地品牌升级</b>——选一家雷达发现的潜力店，锁定品牌名与字标（资产保留），重新推导机制色板 · 字标搭配 · 超级符号 · 包装三层，输出 V2 升级方案与保留/升级对照；<b>从零生成</b>——输入名字出全新体系。同一输入永远得到同一套方案（确定性哈希，可审计、可复现）。</p>
     <div class="demo" id="demo"></div>
   </div>
 
   <div class="grid">
     <div class="panel">
       <h2>输入 INPUT</h2>
+      <div class="fld"><label>模式 MODE</label>
+        <div style="display:flex;gap:10px;font-size:13px">
+          <label><input type="radio" name="f-mode" value="upgrade" checked onchange="setMode('upgrade')"> <b>本地品牌升级</b>（推荐）</label>
+          <label><input type="radio" name="f-mode" value="create" onchange="setMode('create')"> 从零生成</label>
+        </div>
+      </div>
+      <div class="fld" id="f-brandwrap"><label>选择雷达发现的本地品牌（品牌名 / 字标将锁定为保留资产）</label>
+        <select id="f-brand" onchange="pickBrand()"><option value="">加载中…</option></select>
+      </div>
       <div class="fld"><label>品牌名（中文）</label><input id="f-name" value="赤道火山脆" maxlength="12"></div>
       <div class="fld"><label>品牌名（拉丁字标）</label><input id="f-latin" value="VOLCANO CRUNCH" maxlength="24"></div>
       <div class="fld"><label>品类</label>
@@ -134,7 +143,7 @@
           <option value="retro">复古街角</option>
         </select>
       </div>
-      <button class="gen" onclick="generate()">生成品牌体系 →</button>
+      <button class="gen" onclick="generate()">生成 / 升级品牌体系 →</button>
       <div class="note">演示工具：配色/字形取自策划池按哈希索引，超级符号为参数化几何构图。定稿前需设计师复核与商标检索（尤其印尼市场已有品牌）。生成结果可一键存入中央库 · 策划资产。</div>
     </div>
     <div id="out"></div>
@@ -175,13 +184,37 @@ const PACK_RULES=[
   ['社交层 · 被拍性','预留 UGC 打卡位（一句话文案区）；每袋一个可收集编号；色差在 TikTok 滤镜下依然成立','<i>评审：先被看见、再被理解、最后被记住</i>'],
 ];
 
+// ── 模式：本地品牌升级（雷达店铺接入）──────────────────
+let SHOPS=[], MODE='upgrade';
+fetch('/trend/data/local_brands.json').then(r=>r.ok?r.json():null).then(d=>{
+  SHOPS=(d&&d.shops)||[];
+  document.getElementById('f-brand').innerHTML='<option value="">— 选择品牌 —</option>'+
+    SHOPS.map(s=>`<option value="${s.id}">📡 ${esc(s.name)} · ${esc(s.city)} · ${esc(s.category)}（潜力 ${s.potential_score}）</option>`).join('');
+  const q=new URLSearchParams(location.search).get('brand');
+  if(q&&SHOPS.some(s=>s.id===q)){document.getElementById('f-brand').value=q;pickBrand();}
+}).catch(()=>{document.getElementById('f-brand').innerHTML='<option value="">（雷达数据未加载，可手动输入品牌名）</option>';});
+function setMode(m){
+  MODE=m;
+  document.getElementById('f-brandwrap').style.display=m==='upgrade'?'':'none';
+  if(m==='create'){window.__shop=null;
+    document.getElementById('f-name').readOnly=false;document.getElementById('f-latin').readOnly=false;}
+}
+function pickBrand(){
+  const s=SHOPS.find(x=>x.id===document.getElementById('f-brand').value);if(!s)return;
+  window.__shop=s;
+  document.getElementById('f-name').value=s.name;
+  document.getElementById('f-latin').value=s.name.toUpperCase();
+  document.getElementById('f-name').readOnly=true;document.getElementById('f-latin').readOnly=true;
+  generate();
+}
+
 function generate(preset){
   if(preset){document.getElementById('f-name').value=preset[0];document.getElementById('f-latin').value=preset[1];
     document.getElementById('f-cat').value=preset[2];document.getElementById('f-vibe').value=preset[3];}
   const name=document.getElementById('f-name').value.trim()||'未命名';
   const latin=document.getElementById('f-latin').value.trim()||name;
   const cat=document.getElementById('f-cat').value, vibe=document.getElementById('f-vibe').value;
-  const r=rng(hash(name+latin+cat+vibe));
+  const r=rng(hash(name+latin+cat+vibe+(MODE==='upgrade'?'·UPGRADE·V2':'')));
   // 色板：品类基调 ± 情绪偏移 ± 哈希抖动
   const hues=CAT_HUE[cat];
   const shift=VIBE_HUE_SHIFT[vibe];
@@ -197,7 +230,7 @@ function generate(preset){
   const font=FONTS[VIBE_FONT[vibe]];
   const symbol=SYMBOLS[(VIBE_SYMBOL[vibe]+Math.floor(r()*3))%SYMBOLS.length];
   const slogan=SLOGAN[vibe][Math.floor(r()*SLOGAN[vibe].length)];
-  const kit={name,latin,cat,vibe,primary,accent,deep,paper,font:font[0],symbol,slogan,ts:new Date().toISOString()};
+  const kit={name,latin,cat,vibe,mode:MODE,shop:window.__shop||null,primary,accent,deep,paper,font:font[0],symbol,slogan,ts:new Date().toISOString()};
   window.__kit=kit;
   render(kit,palette,font);
 }
@@ -220,6 +253,15 @@ function symbolSVG(kit,r){
 function render(kit,palette,font){
   const r=rng(hash(kit.name+'svg'));
   document.getElementById('out').innerHTML=`
+  ${kit.mode==='upgrade'?`
+  <div class="panel sec" style="border-left:4px solid #2e7d32">
+    <h3>V2 升级方案 · 保留 / 升级对照（${kit.shop?`📡 ${esc(kit.shop.name)} · ${esc(kit.shop.city)} · 潜力 ${kit.shop.potential_score}`:'手动输入品牌'}）</h3>
+    <div class="rules">
+      <div class="rule"><b>保留 KEEP · 品牌资产</b>品牌名「${esc(kit.name)}」与拉丁字标锁定不动——本地客群已建立的认知不重置；品类定位与既有门店（${kit.shop?esc(kit.shop.category):'原品类'}）延续。</div>
+      <div class="rule"><b>升级 UPGRADE · 识别系统</b>机制色板 / 字标搭配 / 超级符号 / Slogan / 包装三层全部按 V2 重推导——旧包装自然换代，系列 SKU 只换底色与编号，换装成本趋近于零。</div>
+      <div class="rule"><b>打法 HOOK · 被拍性先行</b>升级首发即 UGC 事件：新符号上架 + 收集编号体系上线，把「换包装」做成一次社交传播，而非静默更换。</div>
+    </div>
+  </div>`:''}
   <div class="brand-hero" style="background:linear-gradient(135deg,${kit.deep},${kit.surface});">
     <div>
       <div class="bn" style="font-family:${font[1]};">${esc(kit.latin)}<small>${esc(kit.name)} · ${catName(kit.cat)}</small></div>
@@ -273,7 +315,7 @@ function catName(c){return{snack:'机制型零食',tea:'新茶饮',coffee:'咖�
 function saveKit(){
   const k=window.__kit;if(!k)return;
   const l=JSON.parse(localStorage.getItem('nbo_lib_asset')||'[]');
-  l.push({id:'KIT-'+Date.now(),name:`品牌体系 · ${k.name}（${k.latin}）`,category:k.cat,
+  l.push({id:'KIT-'+Date.now(),name:`${k.mode==='upgrade'?'品牌升级 V2':'品牌体系'} · ${k.name}（${k.latin}）`,category:k.cat,
     palette:`主色 ${k.primary} · 辅助 ${k.accent}`,font:k.font,symbol:k.symbol,slogan:k.slogan});
   localStorage.setItem('nbo_lib_asset',JSON.stringify(l));
   alert(`已存入策划资产库：${k.name}`);

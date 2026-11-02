@@ -91,7 +91,7 @@
   <a href="/" style="color:var(--paper);font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
   <a class="nl" data-p="trend" href="/trend/">热点雷达<span class="nle">RADAR</span></a>
   <a class="nl" data-p="launch" href="/launch/">选品评分<span class="nle">SCORE</span></a>
-  <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计<span class="nle">BRAND</span></a>
+  <a class="nl" data-p="brandkit" href="/brandkit/">品牌升级<span class="nle">UPGRADE</span></a>
   <a class="nl" data-p="assembly" href="/assembly/">开店方案<span class="nle">ASSEMBLY</span></a>
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系<span class="nle">FRANCHISE</span></a>
   <a class="nl" data-p="tower" href="/tower/">控制塔<span class="nle">TOWER</span></a>
@@ -106,7 +106,7 @@
   <span style="letter-spacing:.1em;">孵化流水线</span>
   <a href="/trend/" data-s="/trend/" style="color:#767676;text-decoration:none;">① 发现 · 本地雷达</a><span>→</span>
 <a href="/launch/" data-s="/launch/" style="color:#767676;text-decoration:none;">② 决策 · 选品评分</a><span>→</span>
-<a href="/brandkit/" data-s="/brandkit/" style="color:#767676;text-decoration:none;">③ 造物 · 品牌设计</a><span>→</span>
+<a href="/brandkit/" data-s="/brandkit/" style="color:#767676;text-decoration:none;">③ 造物 · 品牌升级</a><span>→</span>
 <a href="/assembly/" data-s="/assembly/" style="color:#767676;text-decoration:none;">④ 验证 · 开店方案</a><span>→</span>
 <a href="https://nusantara-container.pages.dev/store-dash/" data-s="/store-dash/" target="_blank" rel="noopener" style="color:#767676;text-decoration:none;">⑤ 验证 · 门店大屏 ↗</a><span>→</span>
 <a href="/franchise/" data-s="/franchise/" style="color:#767676;text-decoration:none;">⑥ 复制 · 加盟体系</a>
@@ -267,6 +267,7 @@ function shopCard(s, i) {
     <div class="sec coop"><b>资源匹配我们能给 MATCH</b>${s.boost.map(x => `<span class="chip" style="color:#2e7d32;border-color:rgba(46,125,35,.45);margin-right:6px;">${esc(x)}</span>`).join('')}</div>
     <div class="sec coop"><b>建议合作模式：${esc(s.coop_model)}</b>${esc(s.coop_note)}</div>
     <div class="act">🗺 <a href="/map/?focus=RD-${s.id}" style="color:#111;font-weight:700">智能选址评估 → 五业态模型匹配 · 合作模式建议 SITE EVAL</a></div>
+    <div class="act">🎨 <a href="/brandkit/?brand=${s.id}" style="color:#111;font-weight:700">品牌升级 V2 → 保留品牌名 · 全套识别系统焕新 BRAND UPGRADE</a></div>
     <div style="margin-top:10px">
       <button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: s.id, name: s.name, city: s.city, category: s.category, stores: s.stores, stage: "潜力新星", potential_score: s.potential_score, coop_model: s.coop_model})})'>＋ 合作候选入库 SAVE</button>
       <a class="btn-coop" href="mailto:${s.contact}?subject=合作提案 · Nusantara Brand OS × ${encodeURIComponent(s.name)}">发起合作 →</a>

@@ -50,7 +50,7 @@
   <a href="/" style="color:var(--paper);font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
   <a class="nl" data-p="trend" href="/trend/">热点雷达<span class="nle">TREND</span></a>
   <a class="nl" data-p="launch" href="/launch/">选品评分<span class="nle">SCORE</span></a>
-  <a class="nl" data-p="brandkit" href="/brandkit/">品牌设计<span class="nle">BRAND</span></a>
+  <a class="nl" data-p="brandkit" href="/brandkit/">品牌升级<span class="nle">UPGRADE</span></a>
   <a class="nl" data-p="assembly" href="/assembly/">开店方案<span class="nle">ASSEMBLY</span></a>
   <a class="nl" data-p="franchise" href="/franchise/">加盟体系<span class="nle">FRANCHISE</span></a>
   <a class="nl" data-p="tower" href="/tower/">控制塔<span class="nle">TOWER</span></a>
@@ -65,7 +65,7 @@
   <div class="head">
     <div class="tag">CENTRAL LIBRARY · 中央资源库</div>
     <h1>中央库 LIBRARY：选品 · 供应商 · 品牌 · 选址 · 策划资产</h1>
-    <p>每日侦察后的落地工作台。热点雷达 / 选品评分 / 品牌设计的「入库」都汇聚到这里，保存在本机浏览器（演示无后端，结构可直接迁 Cloudflare D1）；支持导出 JSON 备份。</p>
+    <p>每日侦察后的落地工作台。热点雷达 / 选品评分 / 品牌升级的「入库」都汇聚到这里，保存在本机浏览器（演示无后端，结构可直接迁 Cloudflare D1）；支持导出 JSON 备份。</p>
   </div>
   <div class="search"><input id="q" placeholder="搜索库内条目：如 海苔 / 咖啡 / BSD…" oninput="render()"></div>
   <div class="tabs" id="tabs"></div>
@@ -139,7 +139,7 @@ function render() {
         .map(([k, v]) => fmtKV(k, v)).join(' · ')}</div></div>
       <button class="del" onclick="del('asset', ${load('asset').indexOf(x)})">删除</button></div>`).join('');
     el.innerHTML = kitRows + [
-      ['➕ 生成新品牌体系', '<a href="/brandkit/" style="color:#767676">品牌设计生成器</a>：输入名字 → 机制色板 · 字标搭配 · 超级符号 · 包装三层规范，一键保存回本库'],
+      ['➕ 生成新品牌体系', '<a href="/brandkit/" style="color:#767676">品牌升级器</a>：本地品牌升级（保留品牌名与客群资产）或输入名字从零生成 → 机制色板 · 字标搭配 · 超级符号 · 包装三层规范，一键保存回本库'],
       ['品牌色板（机制型零食演示 token）', '主色 #E4022B（行动/机制）· 辅助 #E8B246（等级/收集）· 成功 #34D17B · 背景 #0B0F14'],
       ['超级符号方向', '等级徽章 + 挑战标签 + 收集编号三件套；新增 SKU 低成本延展（系列延展测试）'],
       ['包装三层规范', '货架层三秒识别 / 开箱层脚本动线 / 社交层被拍性——评审硬标准见落地评分 STEP 4'],
