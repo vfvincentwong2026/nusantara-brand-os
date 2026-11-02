@@ -316,9 +316,11 @@ function saveKit(){
   const k=window.__kit;if(!k)return;
   const l=JSON.parse(localStorage.getItem('nbo_lib_asset')||'[]');
   l.push({id:'KIT-'+Date.now(),name:`${k.mode==='upgrade'?'品牌升级 V2':'品牌体系'} · ${k.name}（${k.latin}）`,category:k.cat,
-    palette:`主色 ${k.primary} · 辅助 ${k.accent}`,font:k.font,symbol:k.symbol,slogan:k.slogan});
+    palette:`主色 ${k.primary} · 辅助 ${k.accent}`,font:k.font,symbol:k.symbol,slogan:k.slogan,
+    mode:k.mode,radar_shop_id:k.shop?k.shop.id:null,radar_name:k.shop?k.shop.name:null,
+    city:k.shop?k.shop.city:null,coop_model:k.shop?k.shop.coop_model:null});
   localStorage.setItem('nbo_lib_asset',JSON.stringify(l));
-  alert(`已存入策划资产库：${k.name}`);
+  alert(`已存入策划资产库：${k.name}${k.shop?'——已关联雷达店铺，中央库可见三件套入口（选址评估 / 品牌 V2 / 合作模式）':''}`);
 }
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 document.getElementById('demo').innerHTML='一键试样：'+[
