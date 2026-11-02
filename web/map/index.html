@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<title>渠道地图 · Warung 评分与铺货清单，按数据选渠道 | Nusantara Brand OS</title>
+<title>智能选址 · 五业态模型匹配 SITE INTELLIGENCE | Nusantara Brand OS</title>
 <link rel="stylesheet" href="./leaflet.css">
 <script src="./leaflet.js"></script>
 <script src="./leaflet-heat.js"></script>
@@ -109,7 +109,7 @@
   <a href="/floorplan/" data-s="/floorplan/" style="color:#767676;text-decoration:none;">③ 平面布局</a><span>→</span>
   <a href="/three/" data-s="/three/" style="color:#767676;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
   <a href="/dashboard/" data-s="/dashboard/" style="color:#767676;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
-  <a href="/map/" data-s="/map/" style="color:#767676;text-decoration:none;">⑥ 渠道地图铺货</a>
+  <a href="/map/" data-s="/map/" style="color:#767676;text-decoration:none;">⑥ 智能选址</a>
   <script>document.querySelectorAll('.bchain a').forEach(a=>{if(location.pathname.startsWith(a.dataset.s)){a.style.color='#767676';a.style.fontWeight='700';}});</script>
 </div>
 <script>
@@ -126,60 +126,31 @@
   <label><input type="checkbox" id="poiOffice"> 办公 OFFICES</label>
   <label><input type="checkbox" id="siteToggle" checked> <b style="color:#e60023">智能选址候选</b>（评分+覆盖圈）</label>
   <hr style="border:none;border-top:1px dashed #e5e5e5;margin:6px 0">
-  <label><input type="checkbox" id="covToggle"> 竞品覆盖圈（500m）</label>
-  <label><input type="checkbox" id="gapToggle" checked> 仅显示缺口候选</label>
   <label><input type="checkbox" id="oppToggle"> <b style="color:#767676">加盟机会图层</b>（区域评分 + 保护半径）</label>
 </div>
 <div id="side">
   <h1>智能选址 SITE INTELLIGENCE：<em>人流 × 客群 × 租金 × 竞品</em></h1>
   <div class="meta" id="meta"></div>
-  <div class="kpi" id="kpis"></div>
   <h2>🏆 选址候选 TOP · SITE CANDIDATES（五业态模型匹配：星巴克/瑞幸/麦当劳/蜜雪/推车）</h2>
   <div id="sites"></div>
-  <h2 style="margin-top:18px">覆盖缺口 GAPS · 优先铺货清单</h2>
-  <div class="chips" id="cityChips"></div>
-  <div id="gaps"></div>
 </div>
 
 <script>
-const GRADE_COLOR = { gold: '#b26a00', silver: '#c0c0c0', potential: '#b26a00', normal: '#767676' };
-const COMP_COLOR = { alfamart: '#767676', indomaret: '#bc8cff' };
-const GRADE_LABEL = { gold: '黄金', silver: '白银', potential: '潜力', normal: '普通' };
-const DIM_LABEL = { location: '位置', activity: '活跃度', competition: '竞争', cooperation: '合作',
-                    digital: '数字化', owner: '店主', region: '区域' };
+const map = L.map('map', { zoomControl: true }).setView([-6.35, 106.85], 11);
+window._leaflet_map = map;
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 19, attribution: 'Esri（正式环境切 Mapbox/自托管切片）'
+}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 19
+}).addTo(map);
 
-const SOURCE_LABEL = { warungscout: 'WarungScout 真实数据', google_maps: 'Google Maps', manual: '演示种子' };
-
+// 图例：选址评分色阶 + 业态模型图标
 document.getElementById('legend').innerHTML =
-  ['gold','silver','potential','normal'].map(g => `<div><i style="background:${GRADE_COLOR[g]}"></i>Warung ${GRADE_LABEL[g]}</div>`).join('') +
-  `<div><i style="background:transparent;border:2px solid #fff;width:8px;height:8px;margin:0 8px 0 1px"></i>白圈 = WarungScout 真实数据</div>` +
-  Object.entries(COMP_COLOR).map(([t, c]) => `<div><i class="sq" style="background:${c}"></i>${t}（竞品）</div>`).join('');
-
-fetch('./data/channel_map.json').then(r => {
-  if (!r.ok) throw new Error(`channel_map.json 加载失败: ${r.status}（请先生成：python -m nbo.channel --out web/map/data/channel_map.json）`);
-  return r.json();
-}).then(d => {
-  document.getElementById('meta').textContent =
-    `生成 ${d.generated_at} · 竞品半径 ${d.params.radius_m}m · 数据模型对齐 WarungScout`;
-
-  const k = d.kpis;
-  document.getElementById('kpis').innerHTML = [
-    [k.warung_count, 'Warung 点位'], [k.gold_silver, '黄金+白银'],
-    [k.competitor_count, '现代渠道竞品'], [k.gap_count, '覆盖缺口'],
-  ].map(([v, l]) => `<div class="item"><div class="v">${v}</div><div class="l">${l}</div></div>`).join('');
-
-  const map = L.map('map', { zoomControl: true }).setView([-6.35, 106.85], 11);
-  window._leaflet_map = map;
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 19, attribution: 'Esri（正式环境切 Mapbox/自托管切片）'
-  }).addTo(map);
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 19
-  }).addTo(map);
-
-  const warungLayer = L.layerGroup().addTo(map);
-  const compLayer = L.layerGroup().addTo(map);
-  const covLayer = L.layerGroup();
+  `<div><i style="background:#2e7d32"></i>综合选址分 ≥72（优先）</div>` +
+  `<div><i style="background:#b26a00"></i>65–72（可培育）</div>` +
+  `<div><i style="background:#e60023"></i>&lt;65（谨慎）</div>` +
+  `<div><i style="background:#bc8cff"></i>商城 · <i style="background:#4da3ff;width:8px;height:8px;border-radius:50%;display:inline-block;margin:0 4px 0 1px"></i>学校 · <i style="background:#2ea043;width:8px;height:8px;border-radius:50%;display:inline-block;margin:0 4px 0 1px"></i>社区 · <i style="background:#767676;width:8px;height:8px;border-radius:50%;display:inline-block;margin:0 4px 0 1px"></i>办公</div>`;
 
   // 案例门店：Nusantara Community Store（DEMO 坐标）
   fetch('./data/case_store.json').then(r => r.ok ? r.json() : null).then(cs => {
@@ -193,87 +164,6 @@ fetch('./data/channel_map.json').then(r => {
     L.circle([cs.lat, cs.lon], { radius: cs.service_radius_m, color: '#e60023', weight: 1.5,
       fillColor: '#e60023', fillOpacity: 0.06, dashArray: '6 4' }).addTo(map);
   }).catch(() => {});
-
-  const popupHtml = p => {
-    const dims = Object.entries(p.dims || {}).map(([n, v]) =>
-      `<div class="d"><span class="n">${DIM_LABEL[n] || n}</span><span class="bar"><i style="width:${v}%"></i></span><span class="v">${v}</span></div>`
-    ).join('');
-    return `<div class="pop"><div class="t">${p.name}</div>` +
-      `<div class="s">${p.grade_label || ''} · ${p.final_score} 分 · 步骤 ${p.sales_step} · 500m 内竞品 ${p.competitors_within ?? '-'} 家 · ${SOURCE_LABEL[p.source] || p.source || '演示种子'}</div>` +
-      dims + `</div>`;
-  };
-
-  const compIcon = (type, name) => L.divIcon({
-    className: '', iconSize: [14, 14],
-    html: `<div title="${name}" style="width:14px;height:14px;background:${COMP_COLOR[type] || '#767676'};` +
-          `border:2px solid #ffffff;border-radius:3px;box-shadow:0 0 6px ${COMP_COLOR[type] || '#767676'}88"></div>`
-  });
-
-  d.points.forEach(p => {
-    if (p.type === 'warung') {
-      const isWS = p.source === 'warungscout';  // 真实数据白圈角标，演示种子按等级色圈
-      const m = L.circleMarker([p.lat, p.lon], {
-        radius: 4 + p.final_score / 9, color: isWS ? '#ffffff' : GRADE_COLOR[p.grade],
-        weight: isWS ? 3 : 2,
-        fillColor: GRADE_COLOR[p.grade], fillOpacity: isWS ? 0.5 : 0.38
-      }).bindPopup(popupHtml(p));
-      m._gapCandidate = d.gaps.some(g => g.id === p.id);
-      warungLayer.addLayer(m);
-    } else {
-      compLayer.addLayer(L.marker([p.lat, p.lon], { icon: compIcon(p.type, p.name) })
-        .bindPopup(`<b>${p.name}</b><br>现代渠道竞品（${p.type}）`));
-      L.circle([p.lat, p.lon], { radius: d.params.radius_m, color: '#767676', weight: 1,
-        fillColor: '#767676', fillOpacity: 0.05, opacity: 0.35 }).addTo(covLayer);
-    }
-  });
-
-  // 侧栏：城市过滤 chips + 缺口清单（排名 / 徽章 / 评分条 / WhatsApp CTA）
-  const cities = [...new Set(d.gaps.map(g => g.city || '未知'))];
-  let cityFilter = '全部', realFirst = false;
-  const chipsEl = document.getElementById('cityChips');
-  const renderChips = () => {
-    chipsEl.innerHTML = ['全部', ...cities].map(c =>
-      `<span class="chip ${c === cityFilter ? 'on' : ''}" data-c="${c}">${c}</span>`).join('') +
-      `<span class="chip ${realFirst ? 'on' : ''}" data-c="__real">⚡ 真实数据优先</span>`;
-    chipsEl.querySelectorAll('.chip').forEach(el => el.onclick = () => {
-      if (el.dataset.c === '__real') { realFirst = !realFirst; }
-      else { cityFilter = el.dataset.c; }
-      renderChips(); renderGaps();
-    });
-  };
-  const renderGaps = () => {
-    let list = d.gaps.map((g, i) => ({ ...g, rank: i + 1 }))
-      .filter(g => cityFilter === '全部' || (g.city || '未知') === cityFilter);
-    if (realFirst) list = list.sort((a, b) =>
-      (b.source === 'warungscout') - (a.source === 'warungscout'));  // 真实线索排前，组内保持评分序
-    document.getElementById('gaps').innerHTML = list.map(g => {
-      const wa = 'https://wa.me/620000000000?text=' +
-        encodeURIComponent(`Halo ${g.name}! Kami dari Nusantara Brand — 想为您铺设新品陈列（${g.city || ''}）`);
-      return `<div class="gap" data-lat="${g.lat}" data-lon="${g.lon}">
-        <div class="top"><span class="rank">#${g.rank}</span><span class="name">${g.name}</span>
-          ${g.source === 'warungscout' ? '<span class="badge real">真实</span>' : ''}
-          <span class="badge ${g.grade}">${GRADE_LABEL[g.grade]}</span><span class="badge step">步骤 ${g.sales_step}</span></div>
-        <div class="sub"><span style="min-width:52px">${g.final_score} 分</span><span class="bar"><i style="width:${g.final_score}%"></i></span><span>${g.city || ''}</span></div>
-        <a class="cta" href="${wa}" target="_blank" rel="noopener" onclick="event.stopPropagation()">WhatsApp 发起铺货 →</a>
-      </div>`;
-    }).join('') || '<div class="meta">该城市暂无缺口</div>';
-    document.querySelectorAll('.gap[data-lat]').forEach(el => el.onclick = () =>
-      map.flyTo([+el.dataset.lat, +el.dataset.lon], 15, { duration: 0.8 }));
-  };
-  renderChips(); renderGaps();
-
-  // 覆盖圈开关
-  document.getElementById('covToggle').onchange = e =>
-    e.target.checked ? covLayer.addTo(map) : map.removeLayer(covLayer);
-  // 仅缺口候选开关：非缺口 Warung 淡出
-  document.getElementById('gapToggle').onchange = e => {
-    const only = e.target.checked;
-    warungLayer.eachLayer(m => {
-      const on = !only || m._gapCandidate;
-      m.setStyle({ opacity: on ? 1 : 0.12, fillOpacity: on ? 0.38 : 0.05 });
-      if (on) m.bringToFront();
-    });
-  };
 
   /* ── 加盟机会图层（体系二）：区域评分热力点 + 保护半径圈 + 品牌匹配弹窗 ── */
   const OPP_COLOR = { S: '#2e7d32', A: '#767676', B: '#b26a00', C: '#767676' };
@@ -310,9 +200,6 @@ fetch('./data/channel_map.json').then(r => {
     if (!oppLayer) return;
     e.target.checked ? oppLayer.addTo(map) : map.removeLayer(oppLayer);
   };
-}).catch(e => {
-  document.getElementById('side').innerHTML = `<div style="color:#e60023;padding:20px">加载失败：${e.message}</div>`;
-});
 </script>
 <script>
 /* ═══ 智能选址图层：人流热力 + POI + 候选点位评估 ═══ */
@@ -324,6 +211,7 @@ let siteSel = null, siteLayer = null, poiLayers = {}, heatLayer = null;
 fetch('./data/site_select.json').then(r => r.ok ? r.json() : null).then(d => {
   if (!d) return;
   siteSel = d;
+  document.getElementById('meta').textContent = `生成 ${d.generated_at} · ${d.loop_note}`;
   // 侧栏候选清单（不依赖地图）
   document.getElementById('sites').innerHTML = d.candidates.map((c, i) => {
     const col = SCORE_COLOR(c.score);
