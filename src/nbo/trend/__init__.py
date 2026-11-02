@@ -103,7 +103,7 @@ SEED_SNACKS = [
          heat_signals=[" Olive Young 零食榜连续 12 周 TOP5", "TikTok 复古韩食话题播放 2.4 亿"],
          why_hot="'传统点心年轻化'叙事 + 咖啡搭配场景；低糖/无麸质改良版制造第二话题。",
          viral_format="蘸咖啡吃法 + 传统市场探店；低糖对比测评类。",
-         indo_fit=70, fit_reasons="蜂蜜油炸甜味与印尼 kue 传统高度兼容；常温长保适合 warung 渠道。",
+         indo_fit=70, fit_reasons="蜂蜜油炸甜味与印尼 kue 传统高度兼容；常温长保适合社区零售渠道。",
          adaptation="单店模型 = 现炸明档 + 咖啡档口组合（韩国药果 café 模式）；减糖 30% 适配本地甜度；外带礼盒做伴手礼。",
          compliance_note="现制需 PIRT/卫生许可；蜂蜜需 Halal 来源证明；油炸用油管理需留记录。",
          replicability="高", repl_reason="kue 油炸工艺与印尼本地高度相通，设备门槛低；差异化在口味微调与空间叙事。",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T11:28:00",
+  "generated_at": "2026-11-02T12:21:37",
   "demo": true,
   "window": "近 3 个月",
   "factors": [
@@ -42,7 +42,7 @@
       "id": "f6",
       "name": "集装箱整装适配",
       "weight": 10,
-      "desc": "常温长保 / 小空间机制剧场 / warung 渠道兼容性",
+      "desc": "常温长保 / 小空间机制剧场 / 社区零售渠道兼容性",
       "source": "品类 + 渠道"
     },
     {
@@ -338,7 +338,7 @@
       }
     ],
     "supply_chain": {
-      "local_match": "蜂蜜油炸甜味与印尼 kue 传统高度兼容；常温长保适合 warung 渠道。",
+      "local_match": "蜂蜜油炸甜味与印尼 kue 传统高度兼容；常温长保适合社区零售渠道。",
       "adaptation": "单店模型 = 现炸明档 + 咖啡档口组合（韩国药果 café 模式）；减糖 30% 适配本地甜度；外带礼盒做伴手礼。",
       "compliance": "现制需 PIRT/卫生许可；蜂蜜需 Halal 来源证明；油炸用油管理需留记录。",
       "compliance_lead": "BPOM + Halal 认证周期约 3-6 个月，与产品开发同步启动"

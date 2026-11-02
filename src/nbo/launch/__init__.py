@@ -23,7 +23,7 @@ FACTORS = [
     dict(id="f5", name="合规就绪度", weight=10,
          desc="BPOM/Halal 路径长短与宣称风险", source="compliance_note 风险词"),
     dict(id="f6", name="集装箱整装适配", weight=10,
-         desc="常温长保 / 小空间机制剧场 / warung 渠道兼容性", source="品类 + 渠道"),
+         desc="常温长保 / 小空间机制剧场 / 社区零售渠道兼容性", source="品类 + 渠道"),
     dict(id="f7", name="复购承接（大单品潜力）", weight=15,
          desc="话题款拉新之后有没有 100 分的大单品接住利润", source="品类基值"),
 ]
@@ -91,7 +91,7 @@ def _score_snack(s: dict) -> dict:
     f3 = _clamp(base["f3"] + rep + (6 if "切面" in s["why_hot"] or "截面" in s["why_hot"] else 2))
     f4 = _clamp(base["f4"] + rep + sum(b for k, b in SUPPLY_EVIDENCE if k in adapt))
     f5 = _clamp(85 + sum(p for k, p in COMPLIANCE_RISK if k in comp))
-    f6 = _clamp(base["f6"] + (8 if "warung" in adapt else 0) + (6 if "收银" in adapt else 0))
+    f6 = _clamp(base["f6"] + (8 if "社区" in adapt else 0) + (6 if "收银" in adapt else 0))
     f7 = _clamp(base["f7"] + (8 if "复购" in s["repl_reason"] else 0)
                 - (12 if s["replicability"] == "低" and "话题" in s["repl_reason"] else 0))
 

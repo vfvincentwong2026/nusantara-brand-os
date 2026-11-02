@@ -32,8 +32,6 @@ def main():
         sh([sys.executable, "-m", "nbo.db", "seed"])
         sh([sys.executable, "-m", "nbo.dashboard", "--db", "nbo.db",
             "--store", a.store, "--out", "container/dashboard/data/dashboard.json"])
-        sh([sys.executable, "-m", "nbo.channel", "--db", "nbo.db",
-            "--out", "web/map/data/channel_map.json"])
         sh([sys.executable, "-m", "nbo.opportunity", "--db", "nbo.db",
             "--out", "web/map/data/opportunity.json"])
         sh([sys.executable, "-m", "nbo.twin", "--db", "nbo.db",
@@ -71,7 +69,6 @@ def main():
     (SITE / "map/data").mkdir(parents=True)
     for f in ("index.html", "leaflet.js", "leaflet.css", "leaflet-heat.js"):
         shutil.copy(ROOT / "web/map" / f, SITE / "map")
-    shutil.copy(ROOT / "web/map/data/channel_map.json", SITE / "map/data")
     shutil.copy(ROOT / "web/map/data/case_store.json", SITE / "map/data")
     shutil.copy(ROOT / "web/map/data/opportunity.json", SITE / "map/data")
     shutil.copy(ROOT / "web/map/data/site_select.json", SITE / "map/data")

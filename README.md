@@ -102,11 +102,10 @@ graph TD
 - 认证到期预警
 - 持证人链路可视化
 
-### 2. 渠道地图
-- Warung / Alfamart / Indomaret / 商场铺货
-- 竞品密度 + 500m 覆盖圈
-- **WarungScout 评分模型融合**：7 维加权评分（位置 25% / 活跃度 20% / 竞争·配合度·数字化各 15% / 店主画像·区域各 5%）由原始信号（Google Maps 评分评论、周边设施、WA 回复率、数字支付、城市层级等）实时计算，黄金/白银/潜力/普通分级 → 覆盖缺口清单 + WhatsApp 铺货 CTA
-- 点位 schema 对齐 WarungScout `warungs` 表，未来直接消费其 D1 导出
+### 2. 智能选址地图
+- 人流热力 + 商城/学校/社区/办公 POI 图层
+- 五业态选址模型库（借鉴星巴克/瑞幸/麦当劳/蜜雪方法论）：加权评分 + 硬条件否决 → 最佳店型匹配
+- 雷达发现的潜力店铺自动进入评估（RD- 前缀），闭环输出建议合作模式
 
 ### 3. 门店数字孪生
 - 500㎡ / 2,000㎡ / 5,000㎡ 三档印尼主流门店
@@ -233,9 +232,6 @@ print([w.cert_no for w in comp.warnings(date(2026, 10, 19))])
 ```bash
 # CSV -> schema 校验 -> SQLite；模板见 data/templates/
 python -c "from nbo.importer import import_csv; print(import_csv('data/templates/sales_import.csv', 'sales', 'nbo.db', 'sales'))"
-
-# WarungScout D1 导出 -> 渠道点位（.json 数组 / .sqlite·.db 的 warungs 表 / .sql wrangler d1 export 产物；--replace 重灌）
-python -m nbo.importer.warungscout --src warungs_export.sql --db nbo.db --replace
 ```
 
 ---
