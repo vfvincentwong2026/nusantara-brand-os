@@ -330,8 +330,9 @@ fetch('./data/site_select.json').then(r => r.ok ? r.json() : null).then(d => {
     return `<div class="gap" style="margin-bottom:10px;padding:10px;border:1px solid #e5e5e5;border-radius:8px;cursor:pointer" data-lat="${c.lat}" data-lon="${c.lon}">
       <div class="name" style="font-weight:700;">${String(i + 1).padStart(2, '0')}. ${c.name}
         <b style="color:${col};float:right;font-family:Consolas,monospace;">${c.score}</b></div>
-      <div class="sub">📍 ${c.area} · ${c.city} · ${c.site_type} → ${c.best_model ? c.best_model.icon + ' ' + c.best_model.name : c.recommended_model}</div>
+      <div class="sub">${c.origin === 'radar' ? '📡 雷达发现 · ' : ''}📍 ${c.area} · ${c.city} · ${c.site_type} → ${c.best_model ? c.best_model.icon + ' ' + c.best_model.name : c.recommended_model}</div>
       <div class="sub">人流 ${c.foot_traffic} · 客群 ${c.crowd_fit} · 覆盖 ${c.catchment.pop_wan} 万人 / ${c.catchment.communities} 社区 / ${c.catchment.schools} 校</div>
+      ${c.coop_proposal ? `<div class="sub" style="color:#2e7d32">🤝 ${c.coop_proposal.mode}</div>` : ''}
     </div>`; }).join('');
   document.querySelectorAll('#sites .gap').forEach(el => el.onclick = () => {
     const m = window._leaflet_map;
@@ -388,14 +389,19 @@ function buildLayers(map, d) {
     const col = SCORE_COLOR(c.score);
     const m = L.marker([c.lat, c.lon], { icon: L.divIcon({ className: '', iconSize: [30, 30],
       html: `<div style="width:26px;height:26px;background:${col};border:2.5px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 8px ${col}88;display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);color:#fff;font:700 11px Consolas,monospace;">${Math.round(c.score)}</span></div>` }) })
-      .bindPopup(`<b style="font-size:13px;">${c.name}</b> · ${c.area}（${c.city}）<br>
-        <span style="color:#767676">${c.site_type} · ${c.type_en}</span><br>
+      .bindPopup(`${c.photo ? `<img src="${c.photo}" alt="${c.name}" style="width:100%;height:110px;object-fit:cover;border-radius:6px;margin:2px 0 4px;">` : ''}
+        <b style="font-size:13px;">${c.origin === 'radar' ? '📡 ' : ''}${c.name}</b> · ${c.area}（${c.city}）<br>
+        <span style="color:#767676">${c.site_type} · ${c.type_en}${c.radar_score ? ` · 雷达潜力 ${c.radar_score}` : ''}</span><br>
         综合选址分 <b style="color:${col};font-size:15px;">${c.score}</b><br>
         人流 ${c.foot_traffic} · 客群 ${c.crowd_fit} · 租金压力 ${c.rent_pressure} · 竞品密度 ${c.competition}<br>
         <b>覆盖范围（${c.catchment.radius_m}m）</b>：人口 ${c.catchment.pop_wan} 万 · 社区 ${c.catchment.communities} · 学校 ${c.catchment.schools} · 商城 ${c.catchment.malls} · 办公 ${c.catchment.offices}<br>
         <b>模型匹配 MODELS</b>（${d.model_note}）<br>
         ${modelLines(c)}
+        ${c.coop_proposal ? `<b>建议合作模式 COOP</b>：${c.coop_proposal.mode}<br>` : ''}
+        ${c.shop_coop ? `<span style="color:#555">店方意向：${c.shop_coop}</span><br>` : ''}
         <span style="color:#555">${c.reason}</span>`);
+    window._site_markers = window._site_markers || {};
+    window._site_markers[c.id] = m;
     L.circle([c.lat, c.lon], { radius: c.catchment.radius_m, color: col, weight: 1,
       fillColor: col, fillOpacity: 0.05, dashArray: '4 4' }).addTo(circles);
     return m;
@@ -406,6 +412,13 @@ function buildLayers(map, d) {
     on ? circles.addTo(map) : map.removeLayer(circles);
   };
   siteLayer.addTo(map);
+  // 雷达页跳入：/map/?focus=RD-SH-02 → 定位并打开 popup（发现→评估闭环入口）
+  const focus = new URLSearchParams(location.search).get('focus');
+  if (focus && window._site_markers && window._site_markers[focus]) {
+    const mk = window._site_markers[focus];
+    map.flyTo(mk.getLatLng(), 15);
+    setTimeout(() => mk.openPopup(), 800);
+  }
 }
 </script>
 <script src="/ui/interactions.js" defer></script>

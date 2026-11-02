@@ -266,6 +266,7 @@ function shopCard(s, i) {
     <div class="sec gap"><b>需提高 / 嫁接的资源 GAPS</b>${gapLines(s)}</div>
     <div class="sec coop"><b>资源匹配我们能给 MATCH</b>${s.boost.map(x => `<span class="chip" style="color:#2e7d32;border-color:rgba(46,125,35,.45);margin-right:6px;">${esc(x)}</span>`).join('')}</div>
     <div class="sec coop"><b>建议合作模式：${esc(s.coop_model)}</b>${esc(s.coop_note)}</div>
+    <div class="act">🗺 <a href="/map/?focus=RD-${s.id}" style="color:#111;font-weight:700">智能选址评估 → 五业态模型匹配 · 合作模式建议 SITE EVAL</a></div>
     <div style="margin-top:10px">
       <button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: s.id, name: s.name, city: s.city, category: s.category, stores: s.stores, stage: "潜力新星", potential_score: s.potential_score, coop_model: s.coop_model})})'>＋ 合作候选入库 SAVE</button>
       <a class="btn-coop" href="mailto:${s.contact}?subject=合作提案 · Nusantara Brand OS × ${encodeURIComponent(s.name)}">发起合作 →</a>

@@ -10,6 +10,7 @@
 数据源：演示种子（字段对齐真实 POI 库 / 人流数据源，可无缝切换）。
 """
 import json
+import hashlib
 import sqlite3
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
@@ -178,7 +179,68 @@ HEAT = [
 ]
 
 SITE_TYPE_LABEL = {"社区口": "COMMUNITY", "学校旁": "CAMPUS", "商场食阁": "MALL F&B",
-                   "办公区": "OFFICE", "交通枢纽": "TRANSIT", "夜市": "NIGHT MARKET"}
+                   "办公区": "OFFICE", "交通枢纽": "TRANSIT", "夜市": "NIGHT MARKET",
+                   "雷达店铺": "RADAR PICK"}
+
+# ---------- 闭环：雷达发现 → 选址评估 → 合作模式匹配 ----------
+# 雷达潜力店铺无实测选址因子，按城市基准 + 店铺画像估算（演示启发式，接真实数据后替换）
+CITY_GEO = {
+    "雅加达": dict(lat=-6.218, lon=106.845, pop=5.2, rp=55, ct=60, df=75),
+    "万隆":   dict(lat=-6.917, lon=107.619, pop=2.4, rp=35, ct=45, df=58),
+    "泗水":   dict(lat=-7.257, lon=112.752, pop=3.1, rp=38, ct=48, df=60),
+    "日惹":   dict(lat=-7.796, lon=110.370, pop=1.9, rp=32, ct=42, df=55),
+}
+CITY_GEO_DEFAULT = CITY_GEO["雅加达"]
+
+# 最佳匹配模型 → 建议合作模式（发现→评估→合作 闭环的最后一环）
+MODEL_COOP = {
+    "experience": "品牌联营 / 旗舰加盟",
+    "pickup": "外卖联营 + 系统加持",
+    "drive": "区域代理 + 车餐加盟",
+    "value": "标准加盟 + 供应链直供",
+    "cart": "供应链 + 推车租赁",
+}
+
+
+def _jit(seed_str: str, amp: float = 0.02) -> tuple:
+    """由 id 生成确定性坐标偏移（演示用，避免随机数导致每次构建漂移）。"""
+    h = int(hashlib.md5(seed_str.encode()).hexdigest()[:8], 16)
+    return ((h % 1000) / 1000 - 0.5) * 2 * amp, ((h // 1000 % 1000) / 1000 - 0.5) * 2 * amp
+
+
+def _radar_to_candidate(s: dict) -> dict:
+    g = CITY_GEO.get(s.get("city"), CITY_GEO_DEFAULT)
+    dlat, dlon = _jit(s.get("id", "x"))
+    stores = int(s.get("stores", 1))
+    dims = s.get("dims", {})
+    return dict(
+        id="RD-" + s["id"], name=s["name"], area=s.get("city", ""), city=s.get("city", ""),
+        lat=round(g["lat"] + dlat, 4), lon=round(g["lon"] + dlon, 4),
+        site_type="雷达店铺",
+        foot_traffic=int(min(92, max(55, 60 + stores * 5 + (dims.get("viral", 70) - 70) * 0.5))),
+        crowd_fit=int(dims.get("crowd", 70)),
+        rent_pressure=int(min(70, max(25, g["rp"] - stores * 3))),
+        competition=int(min(65, max(20, 60 - (stores - 1) * 8))),
+        visibility=int(dims.get("site", 65)),
+        car_traffic=int(min(75, g["ct"] + stores * 3)),
+        delivery_fit=int(min(90, g["df"] + dims.get("social", 60) * 0.1)),
+        catch_pop_wan=g["pop"], catch_communities=6 + stores * 2, catch_schools=3,
+        catch_malls=2, catch_offices=4 if s.get("city") == "雅加达" else 1,
+        catch_radius_m=600,
+        recommended_model="", reason="",
+        source_type="radar_shop",
+        origin="radar", radar_score=s.get("potential_score"),
+        photo=s.get("photo"), shop_coop=s.get("coop_model"), shop_coop_note=s.get("coop_note"))
+
+
+def load_radar_shops() -> list:
+    p = Path(__file__).resolve().parents[3] / "web" / "trend" / "data" / "local_brands.json"
+    if not p.exists():
+        return []
+    try:
+        return json.loads(p.read_text(encoding="utf-8")).get("shops", [])
+    except Exception:
+        return []
 
 
 def migrate_siteselect(conn: sqlite3.Connection) -> None:
@@ -259,16 +321,18 @@ def build_siteselect(db_path: str | Path) -> dict:
         finally:
             conn.close()
     cands = []
+    seen = set()
     for r in rows:
         c = dict(r)
-        c["score"] = site_score(c)
-        c["catchment"] = {"pop_wan": c.pop("catch_pop_wan"), "communities": c.pop("catch_communities"),
-                          "schools": c.pop("catch_schools"), "malls": c.pop("catch_malls"),
-                          "offices": c.pop("catch_offices"), "radius_m": c.pop("catch_radius_m")}
-        c["type_en"] = SITE_TYPE_LABEL.get(c["site_type"], c["site_type"])
-        c["models"] = model_scores(c)
-        best = next((m for m in c["models"] if m["eligible"]), None)
-        c["best_model"] = best
+        seen.add(c["id"])
+        _enrich(c)
+        cands.append(c)
+    # 雷达发现的潜力店铺 → 自动进入选址评估（闭环：发现 → 评估 → 合作匹配）
+    for s in load_radar_shops():
+        if "RD-" + s.get("id", "") in seen:
+            continue
+        c = _radar_to_candidate(s)
+        _enrich(c)
         cands.append(c)
     cands.sort(key=lambda c: c["score"], reverse=True)
     return {
@@ -276,12 +340,27 @@ def build_siteselect(db_path: str | Path) -> dict:
         "demo": True,
         "source_note": "演示种子数据 · 字段对齐真实 POI 库（OSM/自采）与人流数据源",
         "model_note": "选址模型库：体验店(星巴克) / 快取外卖(瑞幸) / 车餐家庭(麦当劳) / 性价比街铺(蜜雪) / 推车档口(轻资产) —— 加权评分 + 硬条件否决",
+        "loop_note": "闭环：雷达发现潜力店 → 五业态选址模型评估 → 匹配合作模式（RD- 前缀为雷达来源，因子为城市基准估算）",
         "models_legend": [{"key": k, "name": m["name"], "en": m["en"], "icon": m["icon"], "borrow": m["borrow"]}
                           for k, m in MODELS.items()],
         "candidates": cands,
         "pois": POIS,
         "heat": HEAT,
     }
+
+
+def _enrich(c: dict) -> None:
+    """统一后处理：基准分 + 覆盖圈 + 五模型评分 + 最佳模型 + 合作模式建议。"""
+    c["score"] = site_score(c)
+    c["catchment"] = {"pop_wan": c.pop("catch_pop_wan"), "communities": c.pop("catch_communities"),
+                      "schools": c.pop("catch_schools"), "malls": c.pop("catch_malls"),
+                      "offices": c.pop("catch_offices"), "radius_m": c.pop("catch_radius_m")}
+    c["type_en"] = SITE_TYPE_LABEL.get(c["site_type"], c["site_type"])
+    c["models"] = model_scores(c)
+    best = next((m for m in c["models"] if m["eligible"]), None)
+    c["best_model"] = best
+    c["coop_proposal"] = ({"model": best["key"], "mode": MODEL_COOP[best["key"]]}
+                          if best else None)
 
 
 def write_json(data: dict, out_path: str | Path) -> dict:
