@@ -158,6 +158,81 @@
     </div>
   </section>
 
+  <!-- Pipeline 闭环作战流程 -->
+  <style>
+  .pipe{margin:0 0 56px}
+  .pipe-track{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;position:relative}
+  @media(max-width:1080px){.pipe-track{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.pipe-track{grid-template-columns:1fr}}
+  .pipe-card{display:block;background:#fff;border:1px solid var(--hairline);border-radius:14px;padding:22px 18px 18px;position:relative;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s,border-color .35s}
+  .pipe-card:hover{transform:translateY(-4px);border-color:#111;box-shadow:0 18px 40px -18px rgba(17,17,17,.22)}
+  .pipe-num{font-size:11px;letter-spacing:.14em;color:var(--faint-warm);font-weight:600}
+  .pipe-ic{width:34px;height:34px;margin:14px 0 12px;color:#111}
+  .pipe-ic svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .pipe-card h3{font-size:16px;font-weight:700;line-height:1.25;margin:0 0 2px}
+  .pipe-en{display:block;font-size:10px;letter-spacing:.16em;color:var(--faint-warm);font-weight:600;margin-bottom:10px}
+  .pipe-card p{font-size:12.5px;color:var(--dim-warm);line-height:1.6;margin:0 0 14px}
+  .pipe-metric{display:flex;align-items:baseline;gap:8px;border-top:1px solid var(--hairline);padding-top:12px}
+  .pipe-metric b{font-size:20px;font-weight:700;letter-spacing:-.01em}
+  .pipe-metric span{font-size:10px;letter-spacing:.1em;color:var(--faint-warm)}
+  .pipe-go{margin-top:10px;font-size:11px;font-weight:600;letter-spacing:.08em}
+  .pipe-go .ar{display:inline-block;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+  .pipe-card:hover .pipe-go .ar{transform:translateX(5px)}
+  .pipe-loop{margin-top:16px;border:1px dashed var(--hairline-strong);border-radius:12px;padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--dim-warm)}
+  .pipe-loop b{color:#111;font-weight:700}
+  .pipe-loop .ic{width:18px;height:18px;flex:0 0 auto;color:#111}
+  .pipe-loop .ic svg{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  </style>
+  <section class="block pipe">
+    <div class="block-head"><h2>闭环作战流程：从全网信号到加盟网络<span style="display:block;font-size:13px;color:var(--dim-warm);font-weight:400;letter-spacing:0;margin-top:6px;">The closed loop — radar, site, brand, proposal, replication</span></h2><span class="n">00 / PIPELINE — CLOSED LOOP</span></div>
+    <div class="pipe-track">
+      <a class="pipe-card" href="./trend/">
+        <div class="pipe-num">STEP 01</div>
+        <div class="pipe-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6.5-6.5"/></svg></div>
+        <h3>全网热点雷达</h3><span class="pipe-en">DISCOVER</span>
+        <p>日韩台泰中马 3 个月热点 + 印尼本地爆红小店扫描，每一条都有真实实拍图证据。</p>
+        <div class="pipe-metric"><b>16</b><span>店雷达样本</span></div>
+        <div class="pipe-go">进入雷达 <span class="ar">→</span></div>
+      </a>
+      <a class="pipe-card" href="./map/">
+        <div class="pipe-num">STEP 02</div>
+        <div class="pipe-ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-5.6-7-11a7 7 0 0 1 14 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <h3>智能选址评估</h3><span class="pipe-en">EVALUATE</span>
+        <p>五业态选址模型加权评分 + 硬条件否决，全国 5 岛候选库一键匹配。</p>
+        <div class="pipe-metric"><b>30</b><span>选址候选</span></div>
+        <div class="pipe-go">进入选址 <span class="ar">→</span></div>
+      </a>
+      <a class="pipe-card" href="./brandkit/">
+        <div class="pipe-num">STEP 03</div>
+        <div class="pipe-ic"><svg viewBox="0 0 24 24"><path d="M4 20l1.2-4.8L16.5 4 20 7.5 8.8 19 4 20z"/><path d="M14.5 6l3.5 3.5"/></svg></div>
+        <h3>品牌升级 V2</h3><span class="pipe-en">UPGRADE</span>
+        <p>保留品牌名与客群资产，AI 生成全套识别系统，从门头到包装一次焕新。</p>
+        <div class="pipe-metric"><b>V2</b><span>全套识别方案</span></div>
+        <div class="pipe-go">进入品牌升级 <span class="ar">→</span></div>
+      </a>
+      <a class="pipe-card" href="./proposal/?shop=SH-02">
+        <div class="pipe-num">STEP 04</div>
+        <div class="pipe-ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/><path d="M9 12h7M9 16h7"/></svg></div>
+        <h3>合作提案书</h3><span class="pipe-en">PROPOSE</span>
+        <p>一页生成可打印提案：现状诊断 + 选址 + 资源嫁接 + 三阶段合作条款。</p>
+        <div class="pipe-metric"><b>1</b><span>页打印提案</span></div>
+        <div class="pipe-go">看示例提案 <span class="ar">→</span></div>
+      </a>
+      <a class="pipe-card" href="./franchise/">
+        <div class="pipe-num">STEP 05</div>
+        <div class="pipe-ic"><svg viewBox="0 0 24 24"><path d="M4 20V9l4-3 4 3 4-3 4 3v11"/><path d="M9 20v-5h6v5"/></svg></div>
+        <h3>加盟复制网络</h3><span class="pipe-en">REPLICATE</span>
+        <p>三阶段推进：诊断共建 2 周 → 90 天试点 → 6–12 月复制为多店网络。</p>
+        <div class="pipe-metric"><b>3–10</b><span>店复制区间</span></div>
+        <div class="pipe-go">进入加盟网络 <span class="ar">→</span></div>
+      </a>
+    </div>
+    <div class="pipe-loop">
+      <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 13.6-5.6L20 8.5"/><path d="M20 4v4.5h-4.5"/><path d="M20 12a8 8 0 0 1-13.6 5.6L4 15.5"/><path d="M4 20v-4.5h4.5"/></svg></span>
+      <span><b>落地数据回流</b> — 试点店的真实经营数据持续校准雷达与选址模型，闭环越转越准。<span style="color:var(--faint-warm);margin-left:6px;">LOOPBACK — FIELD DATA RETRAINS THE MODELS</span></span>
+    </div>
+  </section>
+
   <!-- Work 双体系 -->
   <section class="block">
     <div class="block-head"><h2>聚焦一个主线：品牌复刻 · 兄弟项目随行<span style="display:block;font-size:13px;color:var(--dim-warm);font-weight:400;letter-spacing:0;margin-top:6px;">One focus: brand replication — with the container retail sibling alongside</span></h2><span class="n">01 / FOCUS — BRAND REPLICATION × SIBLING RETAIL</span></div>
