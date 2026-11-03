@@ -94,6 +94,9 @@ def main():
     # 品牌设计生成器
     (SITE / "brandkit").mkdir(parents=True)
     shutil.copy(ROOT / "web/brandkit/index.html", SITE / "brandkit")
+    # 合作提案书
+    (SITE / "proposal").mkdir(parents=True)
+    shutil.copy(ROOT / "web/proposal/index.html", SITE / "proposal")
     # 装配方案对比
     (SITE / "assembly/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/assembly/index.html", SITE / "assembly")

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>合作提案书 · Partnership Proposal | Nusantara Brand OS</title>
+<link rel="stylesheet" href="/ui/tokens.css">
+<style>
+  :root { --text:#111111; --dim:#767676; --line:#e5e5e5; --accent:#2e7d32; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#f6f6f4; color:var(--text); font:14px/1.75 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
+  .sheet { max-width:820px; margin:24px auto; background:#fff; border:1px solid var(--line); padding:48px 56px; }
+  .topbar { max-width:820px; margin:0 auto; padding:14px 16px; display:flex; gap:10px; justify-content:flex-end; }
+  .btn { border:1px solid var(--line); background:#fff; padding:8px 18px; border-radius:6px; cursor:pointer; font-size:13px; text-decoration:none; color:var(--text); }
+  .btn.pri { background:var(--text); color:#fff; border-color:var(--text); }
+  h1 { font-size:26px; letter-spacing:.01em; margin:6px 0 2px; }
+  .sub { color:var(--dim); font-size:12.5px; margin-bottom:26px; }
+  .brandline { display:flex; gap:20px; align-items:flex-start; border-top:3px solid var(--text); padding-top:20px; }
+  .brandline img { width:220px; height:150px; object-fit:cover; border-radius:8px; border:1px solid var(--line); }
+  .kpis { display:flex; gap:18px; flex-wrap:wrap; margin:14px 0 0; }
+  .kpis div b { display:block; font-size:20px; }
+  .kpis div span { color:var(--dim); font-size:11.5px; }
+  h2 { font-size:16px; margin:34px 0 10px; padding-left:10px; border-left:4px solid var(--text); }
+  table { width:100%; border-collapse:collapse; margin:8px 0; }
+  th, td { border:1px solid var(--line); padding:7px 10px; text-align:left; font-size:12.5px; }
+  th { background:#fafafa; font-weight:600; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .card { border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:12.5px; }
+  .card b.t { display:block; font-size:13px; margin-bottom:4px; }
+  .ok { color:var(--accent); font-weight:700; }
+  .no { color:#e60023; }
+  .chips span { display:inline-block; border:1px solid var(--line); border-radius:20px; padding:3px 12px; margin:3px 6px 3px 0; font-size:12px; }
+  .foot { margin-top:40px; border-top:1px solid var(--line); padding-top:14px; color:var(--dim); font-size:11.5px; }
+  .sig { display:grid; grid-template-columns:1fr 1fr; gap:30px; margin-top:30px; font-size:12.5px; }
+  .sig div { border-top:1px solid var(--text); padding-top:8px; color:var(--dim); }
+  @media print { .topbar { display:none; } body { background:#fff; } .sheet { border:none; margin:0; padding:0 10px; } }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="btn" href="javascript:history.back()">← 返回</a>
+  <a class="btn" href="/trend/">热点雷达</a>
+  <a class="btn pri" href="javascript:window.print()">🖨 打印 / 存 PDF</a>
+</div>
+<div class="sheet" id="sheet"><div style="padding:80px 0;text-align:center;color:#767676">加载中…</div></div>
+<script>
+const DIM_LABEL = { site:'选址', crowd:'客群', product:'产品', social:'社交', viral:'热点' };
+const $ = s => document.getElementById(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+Promise.all([
+  fetch('/trend/data/local_brands.json').then(r => r.ok ? r.json() : null),
+  fetch('/map/data/site_select.json').then(r => r.ok ? r.json() : null),
+]).then(([lb, ss]) => {
+  const id = new URLSearchParams(location.search).get('shop') || (lb && lb.shops[0] && lb.shops[0].id);
+  const shop = (lb && lb.shops || []).find(s => s.id === id);
+  if (!shop) { $('sheet').innerHTML = '<div style="padding:60px 0;text-align:center">未找到店铺（雷达数据未加载？）<br><br><a href="/trend/" style="color:#767676">← 回热点雷达</a></div>'; return; }
+  const site = (ss && ss.candidates || []).find(c => c.id === 'RD-' + shop.id) || null;
+  const best = site && site.best_model;
+  const today = new Date().toLocaleDateString('zh-CN');
+  const dims = Object.entries(shop.dims || {});
+  const maxDim = Math.max(...dims.map(([, v]) => v));
+  const minDim = Math.min(...dims.map(([, v]) => v));
+
+  $('sheet').innerHTML = `
+  <div style="font-size:11px;letter-spacing:.15em;color:#767676">NUSANTARA BRAND OS · PARTNERSHIP PROPOSAL · 合作提案书</div>
+  <h1>${esc(shop.name)} <span style="color:#767676;font-size:15px;font-weight:400">× Nusantara Brand OS</span></h1>
+  <div class="sub">机密 CONFIDENTIAL · 演示样本 DEMO · ${today} · 来源：全网热点雷达 + 智能选址评估 + 品牌升级体系</div>
+
+  <div class="brandline">
+    ${shop.photo ? `<img src="${shop.photo}" alt="${esc(shop.name)} 实拍">` : ''}
+    <div style="flex:1">
+      <div><b>${esc(shop.city)}</b> · ${esc(shop.category)} · ${shop.stores} 家店 · 营业 ${shop.age_months} 个月</div>
+      <div class="kpis">
+        <div><b style="color:#b26a00">${shop.potential_score}</b><span>现象级潜力</span></div>
+        <div><b>${site ? site.score : '—'}</b><span>综合选址分</span></div>
+        <div><b>${best ? best.icon + ' ' + best.score : '—'}</b><span>最佳业态匹配</span></div>
+        <div><b>${site ? site.city_pop_m + 'M' : '—'}</b><span>都市圈人口</span></div>
+      </div>
+      <div style="margin-top:10px;font-size:12.5px;color:#555">${esc(shop.coop_note || '')}</div>
+    </div>
+  </div>
+
+  <h2>一、品牌现状诊断 DIAGNOSIS</h2>
+  <table><tr><th>维度</th><th>评分</th><th>诊断</th></tr>
+  ${dims.map(([k, v]) => `<tr><td>${DIM_LABEL[k] || k}</td><td><b style="color:${v >= 75 ? '#2e7d32' : v >= 60 ? '#b26a00' : '#e60023'}">${v}</b>${v === maxDim ? ' <span class="ok">长板</span>' : v === minDim ? ' <span class="no">短板</span>' : ''}</td><td>${esc((shop.opt || {})[k] || '')}</td></tr>`).join('')}
+  </table>
+
+  <h2>二、选址与城市基本面 SITE &amp; CITY</h2>
+  ${site ? `
+  <div class="cols">
+    <div class="card"><b class="t">城市基本面</b>${esc(site.island)} · 都市圈 ${site.city_pop_m} 百万人 · 城镇集中 ${site.urban_pct}%${site.island !== '爪哇' ? ' · 离岛修正已加权' : ''}<br>覆盖 ${site.catchment.pop_wan} 万人 / ${site.catchment.communities} 社区 / ${site.catchment.schools} 校 · 半径 ${site.catchment.radius_m}m</div>
+    <div class="card"><b class="t">建议业态 ★ ${esc(best.name)}（${best.score} 分）</b>建议合作模式：<b class="ok">${esc(site.coop_proposal ? site.coop_proposal.mode : '')}</b><br>店方意向：${esc(shop.coop_model || '—')}</div>
+  </div>
+  <table style="margin-top:12px"><tr><th>业态模型</th><th>得分</th><th>结论</th></tr>
+  ${site.models.map(m => `<tr><td>${m.icon} ${esc(m.name)}（${m.en}）</td><td>${m.score}</td><td>${m.eligible ? (m.key === (best && best.key) ? '<span class="ok">★ 推荐</span>' : '<span class="ok">✓ 可行</span>') : '<span class="no">✗ ' + esc(m.hard_fail.join('、')) + '</span>'}</td></tr>`).join('')}
+  </table>` : '<div class="card">该店尚未进入选址评估——<a href="/map/?focus=RD-' + shop.id + '">立即评估 →</a></div>'}
+
+  <h2>三、品牌焕新 V2 BRAND UPGRADE</h2>
+  <div class="card">保留品牌名「${esc(shop.name)}」与客群认知（资产不动），全套识别系统焕新：机制色板 · 字标搭配 · 超级符号 · 包装三层——升级首发即 UGC 事件。<br>
+  <a href="/brandkit/?brand=${shop.id}" style="color:#111;font-weight:700">打开品牌升级器（已带入本店）→</a></div>
+
+  <h2>四、资源嫁接清单 WHAT WE BRING</h2>
+  <div class="chips">${(shop.boost || []).map(b => `<span>✚ ${esc(b)}</span>`).join('')}</div>
+  <table style="margin-top:10px"><tr><th>阶段</th><th>周期</th><th>内容</th><th>目标</th></tr>
+    <tr><td>① 诊断共建</td><td>2 周</td><td>门店/数据体检 + 爆品机制设计 + 品牌 V2 方案</td><td>锁定试点 SKU 与视觉定稿</td></tr>
+    <tr><td>② 试点验证</td><td>90 天</td><td>${esc(shop.coop_model || '联营')} · 社媒矩阵代运营 · 供应链集采接入</td><td>单店日销 +50% · 话题破圈</td></tr>
+    <tr><td>③ 复制扩张</td><td>6–12 月</td><td>加盟/代理体系输出 · 选址引擎加密开店 · 零售化 SKU 进渠道</td><td>3–10 店网络 · 第二曲线</td></tr>
+  </table>
+
+  <h2>五、合作模式 COOPERATION</h2>
+  <div class="card"><b class="t">建议模式：${esc(shop.coop_model || '面议')}</b>${esc(shop.coop_note || '')}<br><span style="color:#767676">商务条款（费用/分成/区域保护）以双方正式协议为准；演示环境数据为种子样本。</span></div>
+
+  <div class="sig">
+    <div>Nusantara Brand OS · 授权代表 · 日期</div>
+    <div>${esc(shop.name)} · 授权代表 · 日期</div>
+  </div>
+  <div class="foot">本提案由 Nusantara Brand OS 引擎自动生成（雷达发现 → 选址评估 → 品牌焕新 → 合作匹配 闭环）。概念意向与演示数据，非正式商务要约。 · Generated by NBO Engine</div>`;
+});
+</script>
+</body>
+</html>
