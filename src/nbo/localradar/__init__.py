@@ -136,7 +136,53 @@ BRANDS = [
          boost=["社媒内容系统", "选址引擎", "爆品机制设计"],
          coop_model="深度孵化（供应链+社媒+策略全包）", coop_note="高增速低基数，早介入成本最低——典型的'投早投小'候选。",
          contact="partnership@demo.nbo"),
+    # ID-11 / ID-12：已列入追踪，但 X 粉丝与提及量尚未进入每日快照。不填估算数字。
+    # 本土来源只是标签，不决定是否追踪；这两家按任务标为未核实。
+    dict(id="ID-11", name="Tomoro Coffee", name_cn="Tomoro Coffee", city="未核实", category="咖啡", stage="未核实",
+         ig="@tomorocoffee.id", tiktok="", x="@TomoroCoffee_ID",
+         website="https://www.tomoro-coffee.id/",
+         origin_label="未核实", metrics_pending=True,
+         followers_wan=None, views_wan=None, likes_wan=None, shares_wan=None,
+         er=None, growth_30d=None, heat=None,
+         why_hot="官方 X 与 IG、官网已按公开品牌清单列入。粉丝、提及和热度等待每日 X 刷新，这里不填估算数字。",
+         viral_format="未核实",
+         heat_signals=["【待刷新】官方号 @TomoroCoffee_ID 已列入追踪；粉丝、发帖与近 7 天提及尚未抓取"],
+         need_supply=None, need_social=None, need_strategy=None,
+         boost=[],
+         coop_model="待评估", coop_note="已列入雷达追踪。本土来源未核实，该标签不决定是否追踪。",
+         contact=""),
+    dict(id="ID-12", name="Calais Tea", name_cn="Calais Tea", city="未核实", category="奶茶", stage="未核实",
+         ig="@calaistea", tiktok="", x="@CalaisTea",
+         website="http://www.calaistea.com",
+         origin_label="未核实", metrics_pending=True,
+         followers_wan=None, views_wan=None, likes_wan=None, shares_wan=None,
+         er=None, growth_30d=None, heat=None,
+         why_hot="官方 X 与 IG、官网已按公开品牌清单列入。粉丝、提及和热度等待每日 X 刷新，这里不填估算数字。",
+         viral_format="未核实",
+         heat_signals=["【待刷新】官方号 @CalaisTea 已列入追踪；粉丝、发帖与近 7 天提及尚未抓取"],
+         need_supply=None, need_social=None, need_strategy=None,
+         boost=[],
+         coop_model="待评估", coop_note="已列入雷达追踪。本土来源未核实，该标签不决定是否追踪。",
+         contact=""),
 ]
+
+# 已有品牌的本土标签来自 data/radar/brand_list_coffee_tea_2026-11-04.json 的 local 字段。
+# 没有对应条目的品牌不填。标签只作展示，不参与是否追踪的判断。
+_ORIGIN_FROM_BRAND_LIST = {
+    "ID-01": "本土",
+    "ID-02": "本土",
+    "ID-03": "本土",
+    "ID-04": "本土",
+    "ID-05": "本土",
+    "ID-06": "本土",
+    "ID-07": "本土",
+    "ID-08": "本土",
+    "ID-09": "本土",
+    "ID-10": "本土（Sour Sally Group 旗下，台式概念）",
+}
+for _b in BRANDS:
+    if "origin_label" not in _b and _b["id"] in _ORIGIN_FROM_BRAND_LIST:
+        _b["origin_label"] = _ORIGIN_FROM_BRAND_LIST[_b["id"]]
 
 # ---------- 潜力新星：1~3 家店的线下小店，现象级候选 ----------
 # 五维因子：选址 SITE / 客群 CROWD / 产品定位 PRODUCT / 社交属性 SOCIAL / 热点属性 VIRAL
@@ -363,8 +409,10 @@ def seed_localradar(conn: sqlite3.Connection) -> None:
              s["coop_model"], s["coop_note"], s["contact"], "demo_seed"))
 
 
-def value_score(b: dict) -> float:
-    """合作价值 = 热度×0.4 + 缺口均值×0.4 + 增速折算×0.2（0-100）"""
+def value_score(b: dict) -> float | None:
+    """合作价值 = 热度×0.4 + 缺口均值×0.4 + 增速折算×0.2（0-100）。缺任一输入则不估算。"""
+    if any(b.get(k) is None for k in ("heat", "need_supply", "need_social", "need_strategy", "growth_30d")):
+        return None
     need_avg = (b["need_supply"] + b["need_social"] + b["need_strategy"]) / 3
     growth = min(max(b["growth_30d"], 0), 100)
     return round(b["heat"] * 0.4 + need_avg * 0.4 + growth * 0.2, 1)
@@ -408,21 +456,22 @@ def build_localradar(db_path: str | Path, x_snapshot: str | Path | None = "auto"
         migrate_localradar(conn)
         rows = [dict(r) for r in conn.execute("SELECT * FROM local_brand")]
         shop_rows = [dict(r) for r in conn.execute("SELECT * FROM local_shop")]
-    finally:
-        conn.close()
-    if not rows or not shop_rows:
-        conn = sqlite3.connect(db_path)
-        conn.row_factory = sqlite3.Row
-        try:
+        expected = {b["id"] for b in BRANDS}
+        if not rows or not shop_rows or {r["id"] for r in rows} != expected:
             seed_localradar(conn)
             conn.commit()
             rows = [dict(r) for r in conn.execute("SELECT * FROM local_brand")]
             shop_rows = [dict(r) for r in conn.execute("SELECT * FROM local_shop")]
-        finally:
-            conn.close()
+    finally:
+        conn.close()
+    seed_by_id = {b["id"]: b for b in BRANDS}
     brands = []
     for r in rows:
         b = dict(r)
+        seed = seed_by_id.get(b["id"], {})
+        for key in ("origin_label", "website", "metrics_pending"):
+            if key in seed:
+                b[key] = seed[key]
         b["heat_signals"] = json.loads(b["heat_signals"] or "[]")
         b["boost"] = json.loads(b["boost"] or "[]")
         if snap:
@@ -430,15 +479,19 @@ def build_localradar(db_path: str | Path, x_snapshot: str | Path | None = "auto"
         b["value_score"] = value_score(b)
         b["photo"] = _photo_of(b["id"])
         brands.append(b)
-    brands.sort(key=lambda b: b["heat"], reverse=True)
+    brands.sort(key=lambda b: (b.get("heat") is not None, b.get("heat") if b.get("heat") is not None else -1), reverse=True)
     shops = [_shop_from_row(r) for r in shop_rows]
     shops.sort(key=lambda s: s["potential_score"], reverse=True)
     cities = sorted({b["city"] for b in brands} | {s["city"] for s in shops})
     n_real = sum(1 for b in brands if b.get("source_type") == "mixed")
+    n_pending = sum(1 for b in brands if b.get("source_type") == "pending_x")
     if snap:
         source_note = (f"X 公开数据实抓（{snap.get('fetched_at')}，{n_real}/{len(brands)} 个品牌）："
                        "热度=近7天X提及量对数分、X 官方号粉丝/发帖为实抓；"
                        "IG/TikTok、粉丝(万)/播放/赞/转发/互动率/30天增速/缺口分及潜力小店均为演示估算")
+        if n_pending:
+            source_note += (f"。另有 {n_pending} 个品牌已列入追踪，X 粉丝与近 7 天提及待下次刷新"
+                            "（不估算这些数字）")
     else:
         source_note = "演示种子数据 · 字段对齐真实 IG/TikTok/X 公开数据抓取口径（粉丝/播放/互动/增速）"
     return {
@@ -447,6 +500,7 @@ def build_localradar(db_path: str | Path, x_snapshot: str | Path | None = "auto"
         "data_mode": "x_public+demo_estimate" if snap else "demo_seed",
         "x_snapshot": ({"file": str(Path(snap_path).name), "fetched_at": snap.get("fetched_at"),
                         "x_calls_used": snap.get("x_calls_used"), "brands_with_x": n_real,
+                        "brands_pending_x": n_pending,
                         "heat_formula": "heat = 100*log10(1+近7天X提及数)/log10(1+%d)，上限100" % xs.HEAT_REF_MENTIONS_7D}
                        if snap else None),
         "window": "近3个月",

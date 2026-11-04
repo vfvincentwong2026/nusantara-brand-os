@@ -186,10 +186,41 @@ function renderTabs() {
     `<button class="${c === state.city ? 'on' : ''}" onclick="setCity('${c}')">${c}</button>`).join('');
 }
 
+function missingMetric(v) { return v === null || v === undefined || v === ''; }
+
 function gapLines(b) {
   const items = [['供应链缺口', b.need_supply], ['社媒系统缺口', b.need_social], ['策略打法缺口', b.need_strategy]];
-  return `<div class="gapline">` + items.map(([n, v]) =>
-    `<div class="g">${n} <b style="color:${NEED_COLOR(v)}">${v}</b><div class="bar"><i style="width:${v}%"></i></div></div>`).join('') + `</div>`;
+  return `<div class="gapline">` + items.map(([n, v]) => missingMetric(v)
+    ? `<div class="g">${n} <b>待评估</b></div>`
+    : `<div class="g">${n} <b style="color:${NEED_COLOR(v)}">${v}</b><div class="bar"><i style="width:${v}%"></i></div></div>`).join('') + `</div>`;
+}
+
+function heatBlock(b) {
+  if (missingMetric(b.heat)) {
+    return `<div class="heat"><div class="bar"><i style="width:0%"></i></div><span class="v">热度 待刷新 · X 指标尚未抓取</span></div>`;
+  }
+  const growth = missingMetric(b.growth_30d) ? '' : ` · 30天 +${Math.round(b.growth_30d)}%`;
+  return `<div class="heat"><div class="bar"><i style="width:${b.heat}%"></i></div><span class="v">热度 ${Math.round(b.heat)}°${growth}</span></div>`;
+}
+
+function socialNums(b) {
+  if (missingMetric(b.followers_wan)) {
+    return `<div class="sig">▸ 粉丝 / 播放 / 赞 / 转发：待刷新（不估算）</div>
+      <div class="sig">▸ 互动率与增速：待刷新</div>`;
+  }
+  const spread = b.views_wan ? (b.shares_wan / b.views_wan * 100).toFixed(1) : '—';
+  return `<div class="sig">▸ 粉丝 ${b.followers_wan} 万 · 播放 ${b.views_wan} 万 · 赞 ${b.likes_wan} 万 · 转发 ${b.shares_wan} 万</div>
+      <div class="sig">▸ 互动率 ${b.er}% · 30 天热度增速 +${b.growth_30d}%（传播率 = 转发 / 播放 ${spread}%）</div>`;
+}
+
+function valueBlock(b) {
+  if (missingMetric(b.value_score)) {
+    return `<div class="fitline"><span style="font-size:11px;color:#767676;">合作价值 VALUE</span>
+      <div class="bar"><i style="width:0%"></i></div><span class="v">待刷新</span></div>`;
+  }
+  return `<div class="fitline"><span style="font-size:11px;color:#767676;">合作价值 VALUE</span>
+      <div class="bar"><i style="width:${b.value_score}%;background:${VAL_COLOR(b.value_score)}"></i></div>
+      <span class="v" style="color:${VAL_COLOR(b.value_score)}">${b.value_score}</span></div>`;
 }
 
 function card(b, i) {
@@ -201,20 +232,19 @@ function card(b, i) {
       <span class="chip">📍 ${esc(b.city)}</span>
       <span class="chip">${esc(b.category)}</span>
       <span class="chip ${STAGE_CLS[b.stage] || ''}">${esc(b.stage)}</span>
+      ${b.origin_label ? `<span class="chip">本土来源 ${esc(b.origin_label)}</span>` : ''}
+      ${b.website ? `<span class="chip"><a href="${esc(b.website)}" style="color:inherit">官网</a></span>` : ''}
     </div>
-    <div class="heat"><div class="bar"><i style="width:${b.heat}%"></i></div><span class="v">热度 ${Math.round(b.heat)}° · 30天 +${Math.round(b.growth_30d)}%</span></div>
+    ${heatBlock(b)}
     <div class="sec hot"><b>为什么火 · WHY IT'S HOT</b>${esc(b.why_hot)}</div>
     <div class="sec"><b>病毒式玩法 VIRAL FORMAT</b>${esc(b.viral_format)}</div>
-    <div class="sec"><b>热度信号 SIGNALS</b><div class="sig">${b.heat_signals.map(esc).join('</div><div class="sig">')}</div></div>
+    <div class="sec"><b>热度信号 SIGNALS</b><div class="sig">${(b.heat_signals || []).map(esc).join('</div><div class="sig">')}</div></div>
     <div class="sec"><b>本地社媒热度 LOCAL SOCIAL（近 3 个月 · IG / TikTok / X）</b>
-      <div class="sig">▸ IG ${esc(b.ig)} · TikTok ${esc(b.tiktok)} · X ${esc(b.x)}</div>
-      <div class="sig">▸ 粉丝 ${b.followers_wan} 万 · 播放 ${b.views_wan} 万 · 赞 ${b.likes_wan} 万 · 转发 ${b.shares_wan} 万</div>
-      <div class="sig">▸ 互动率 ${b.er}% · 30 天热度增速 +${b.growth_30d}%（传播率 = 转发 / 播放 ${(b.shares_wan / b.views_wan * 100).toFixed(1)}%）</div></div>
+      <div class="sig">▸ IG ${esc(b.ig)} · TikTok ${esc(b.tiktok) || '未核实'} · X ${esc(b.x)}</div>
+      ${socialNums(b)}</div>
     <div class="sec gap"><b>缺口评估 GAPS（越高 = 越需要我们加持）</b>${gapLines(b)}</div>
-    <div class="sec coop"><b>我们能给 BOOST</b>${b.boost.map(x => `<span class="chip" style="color:#2e7d32;border-color:rgba(46,125,35,.45);margin-right:6px;">${esc(x)}</span>`).join('')}</div>
-    <div class="fitline"><span style="font-size:11px;color:#767676;">合作价值 VALUE</span>
-      <div class="bar"><i style="width:${b.value_score}%;background:${VAL_COLOR(b.value_score)}"></i></div>
-      <span class="v" style="color:${VAL_COLOR(b.value_score)}">${b.value_score}</span></div>
+    <div class="sec coop"><b>我们能给 BOOST</b>${(b.boost || []).map(x => `<span class="chip" style="color:#2e7d32;border-color:rgba(46,125,35,.45);margin-right:6px;">${esc(x)}</span>`).join('')}</div>
+    ${valueBlock(b)}
     <div class="sec coop"><b>合作模式：${esc(b.coop_model)}</b>${esc(b.coop_note)}</div>
     <div style="margin-top:10px">
       <button class="btn-pick" onclick='addPick("brand", ${JSON.stringify({id: b.id, name: b.name, name_cn: b.name_cn, city: b.city, category: b.category, stage: b.stage, heat: b.heat, value_score: b.value_score, coop_model: b.coop_model})})'>＋ 合作候选入库 SAVE</button>
@@ -229,10 +259,11 @@ function renderList() {
 }
 
 function renderSide() {
-  const top = [...state.data.brands].sort((a, b) => b.value_score - a.value_score).slice(0, 5);
+  const score = b => missingMetric(b.value_score) ? -1 : b.value_score;
+  const top = [...state.data.brands].sort((a, b) => score(b) - score(a)).slice(0, 5);
   document.getElementById('prio').innerHTML = top.map((b, i) =>
     `<div class="prio"><span class="n">${i + 1}</span><div class="t">
-       <div class="nm">${esc(b.name)} <span style="color:#767676;font-weight:400;font-size:11px;">${esc(b.city)} · ${esc(b.stage)} · 价值 ${b.value_score}</span></div>
+       <div class="nm">${esc(b.name)} <span style="color:#767676;font-weight:400;font-size:11px;">${esc(b.city)} · ${esc(b.stage)} · 价值 ${missingMetric(b.value_score) ? '待刷新' : b.value_score}</span></div>
        <div class="act">切入：${esc(b.coop_model)} —— ${esc(b.coop_note)}</div></div></div>`).join('');
   const bs = state.data.boost_system;
   document.getElementById('boosts').innerHTML = Object.values(bs).map(x =>
@@ -281,7 +312,8 @@ function renderPots() {
 }
 
 function renderCoop() {
-  const ranked = [...state.data.brands].sort((a, b) => b.value_score - a.value_score);
+  const score = b => missingMetric(b.value_score) ? -1 : b.value_score;
+  const ranked = [...state.data.brands].sort((a, b) => score(b) - score(a));
   document.getElementById('coops').innerHTML = ranked.map(card).join('');
 }
 

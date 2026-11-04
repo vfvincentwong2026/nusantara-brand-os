@@ -13,7 +13,9 @@ SNAP = Path(__file__).resolve().parents[1] / "data/radar/x_snapshot_2026-11-04.j
 def test_snapshot_file_shape():
     snap = xs.load_snapshot(SNAP)
     assert snap["platform"] == "x" and snap["fetched_at"]
-    assert set(snap["brands"]) == {b["id"] for b in BRANDS}
+    # 2026-11-04 快照只覆盖当时的 10 家。ID-11 / ID-12 等下次刷新再写入，不在这份历史文件里补数字。
+    assert set(snap["brands"]) == {f"ID-{i:02d}" for i in range(1, 11)}
+    assert {b["id"] for b in BRANDS} == {f"ID-{i:02d}" for i in range(1, 13)}
     for bid, e in snap["brands"].items():
         assert e["handle_status"] in xs.STATUS_CN
         assert isinstance(e["mentions_7d"]["total"], int)
@@ -28,8 +30,11 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
     d = build_localradar(tmp_path / "t.db", x_snapshot=SNAP)
     snap = json.loads(SNAP.read_text(encoding="utf-8"))
     assert d["demo"] is False and d["x_snapshot"]["brands_with_x"] == 10
+    assert d["x_snapshot"]["brands_pending_x"] == 2
     assert "实抓" in d["source_note"] and "演示估算" in d["source_note"]
     for b in d["brands"]:
+        if b["id"] not in snap["brands"]:
+            continue
         e = snap["brands"][b["id"]]
         assert b["source_type"] == "mixed"
         assert b["x_mentions_7d"] == e["mentions_7d"]["total"]
@@ -44,8 +49,9 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
             assert xs.STATUS_CN[e["handle_status"]] in b["x"]
         assert b["heat_signals"][0].startswith("【X 实抓")
         assert all(s.startswith(("【X 实抓", "【演示】")) for s in b["heat_signals"])
-    heats = [b["heat"] for b in d["brands"]]
+    heats = [b["heat"] for b in d["brands"] if b["heat"] is not None]
     assert heats == sorted(heats, reverse=True)
+    assert [b["id"] for b in d["brands"] if b["heat"] is None] == ["ID-11", "ID-12"]
 
 
 def test_build_without_snapshot_stays_demo(tmp_path):
@@ -91,6 +97,65 @@ def test_newly_verified_handles_keep_recorded_mentions(tmp_path):
     assert r["x"] == "@rotioindonesia" and r["x_followers"] == 397 and r["x_mentions_7d"] == 444
     assert "None" not in " ".join(r["heat_signals_x"])
     assert any("近 30 天发帖 0 · 最近发帖 2023-07-11" in s for s in j["heat_signals_x"])
+
+
+def test_new_brands_wait_for_x_refresh_without_invented_metrics(tmp_path):
+    """ID-11 / ID-12 用品牌清单里的官方号、IG 和官网；X 数字留空，等下次刷新。"""
+    listed = {b["brand"]: b for b in json.loads(
+        (SNAP.parent / "brand_list_coffee_tea_2026-11-04.json").read_text(encoding="utf-8"))["brands"]}
+    tomoro_src, calais_src = listed["Tomoro Coffee"], listed["Calais Tea"]
+    by_seed = {b["id"]: b for b in BRANDS}
+    assert by_seed["ID-11"]["x"] == "@TomoroCoffee_ID" == tomoro_src["x_handle"]
+    assert by_seed["ID-11"]["ig"] == tomoro_src["ig_handle"] == "@tomorocoffee.id"
+    assert by_seed["ID-11"]["website"] == tomoro_src["website"]
+    assert by_seed["ID-12"]["x"] == "@CalaisTea" == calais_src["x_handle"]
+    assert by_seed["ID-12"]["ig"] == calais_src["ig_handle"] == "@calaistea"
+    assert by_seed["ID-12"]["website"] == calais_src["website"]
+    for bid in ("ID-11", "ID-12"):
+        assert by_seed[bid]["origin_label"] == "未核实"
+        assert by_seed[bid]["metrics_pending"] is True
+    assert by_seed["ID-01"]["origin_label"] == "本土"
+    assert by_seed["ID-10"]["origin_label"] == "本土（Sour Sally Group 旗下，台式概念）"
+
+    d = build_localradar(tmp_path / "t.db", x_snapshot=SNAP)
+    by_id = {b["id"]: b for b in d["brands"]}
+    forbidden = ("1694", "656", "10256", "20517")
+    for bid, src in (("ID-11", tomoro_src), ("ID-12", calais_src)):
+        b = by_id[bid]
+        assert b["source_type"] == "pending_x"
+        assert b["x"] == src["x_handle"]
+        assert b["ig"] == src["ig_handle"] and b["provenance"]["ig"] == "demo_estimate"
+        assert b["website"] == src["website"] and b["origin_label"] == "未核实"
+        assert b["x_followers"] is None and b["x_mentions_7d"] is None and b["x_tweet_count"] is None
+        assert b["heat"] is None and b["value_score"] is None
+        assert b["provenance"]["x"] == "pending"
+        assert b["provenance"]["x_followers"] == "missing"
+        assert b["provenance"]["x_mentions_7d"] == "missing"
+        assert b["provenance"]["heat"] == "missing"
+        blob = json.dumps(b, ensure_ascii=False)
+        assert all(n not in blob for n in forbidden)
+        assert "待刷新" in b["heat_signals"][0]
+
+    plan = xs.refresh_plan(BRANDS, json.loads(SNAP.read_text(encoding="utf-8")))
+    pending = [p for p in plan if not p["in_snapshot"]]
+    assert [(p["id"], p["x_handle"]) for p in pending] == [
+        ("ID-11", "@TomoroCoffee_ID"),
+        ("ID-12", "@CalaisTea"),
+    ]
+    assert all(p["include_in_user_lookup"] and p["mentions_query"] is None for p in pending)
+    assert all("followers" not in p and "account" not in p for p in plan)
+    kopi = next(p for p in plan if p["id"] == "ID-01")
+    assert kopi["in_snapshot"] and kopi["x_handle"] == "@Kopikenangan_ID"
+    assert kopi["mentions_query"]
+
+    published = json.loads((SNAP.parents[2] / "web/trend/data/local_brands.json").read_text(encoding="utf-8"))
+    pub = {b["id"]: b for b in published["brands"]}
+    assert set(pub) == {b["id"] for b in BRANDS}
+    for bid in ("ID-11", "ID-12"):
+        assert pub[bid]["source_type"] == "pending_x"
+        assert pub[bid]["x_followers"] is None and pub[bid]["x_mentions_7d"] is None
+        assert pub[bid]["provenance"]["ig"] == "demo_estimate"
+        assert pub[bid]["origin_label"] == "未核实"
 
 
 def test_heat_formula():
