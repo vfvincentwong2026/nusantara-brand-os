@@ -1,0 +1,783 @@
+{
+  "meta": {
+    "version": "v1",
+    "generated": "2026-11-04 (UTC+8)",
+    "notes": "只用公开来源。supplies_radar_brands 只在有公开依据时填写。没有核实的字段留空。",
+    "visibility": "public: 不含电话/WhatsApp/邮箱"
+  },
+  "suppliers": [
+    {
+      "name": "Otten Coffee",
+      "category": "coffee_beans",
+      "sub_category": "烘焙豆/器具零售+B2B",
+      "origin": "ID",
+      "location": "Medan（官网介绍未在本次核实，留作待查）",
+      "website": "https://ottencoffee.co.id",
+      "store_links": [],
+      "scale_signals": "官网自称 La Marzocco 官方经销商（ottencoffee.co.id/brands/la-marzocco）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://ottencoffee.co.id/brands/la-marzocco"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "也列入设备类；store_links：tokopedia.com/ottencoffee 返回200但页面是JS渲染，未能确认店铺内容，暂不列"
+    },
+    {
+      "name": "Anomali Coffee",
+      "category": "coffee_beans",
+      "sub_category": "烘焙商（印尼单一产区）",
+      "origin": "ID",
+      "location": "",
+      "website": "https://anomalicoffee.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://anomalicoffee.com"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Tanamera Coffee",
+      "category": "coffee_beans",
+      "sub_category": "烘焙商",
+      "origin": "ID",
+      "location": "",
+      "website": "https://tanameracoffee.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://tanameracoffee.com"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Jabarano Coffee",
+      "category": "coffee_beans",
+      "sub_category": "烘焙商",
+      "origin": "ID",
+      "location": "",
+      "website": "https://www.jabarano.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.jabarano.com"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Indonesia Specialty Coffee (specialtycoffee.id)",
+      "category": "coffee_beans",
+      "sub_category": "生豆批发/自有品牌",
+      "origin": "ID",
+      "location": "",
+      "website": "https://specialtycoffee.id",
+      "store_links": [],
+      "scale_signals": "官网称 SCA 85+ 批次、可自有品牌、起订 50kg（WebSearch 摘要）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://specialtycoffee.id"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "PT Swarna Agro",
+      "category": "coffee_beans",
+      "sub_category": "生豆出口+代烘焙/自有品牌",
+      "origin": "ID",
+      "location": "",
+      "website": "https://swarnaagro.co.id",
+      "store_links": [],
+      "scale_signals": "官网列咖啡和茶两条产品线",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://swarnaagro.co.id/products/coffee/",
+        "https://swarnaagro.co.id/products/tea/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "同时供应茶叶"
+    },
+    {
+      "name": "PT Sumatra Jawa Soil",
+      "category": "coffee_beans",
+      "sub_category": "生豆出口商",
+      "origin": "ID",
+      "location": "",
+      "website": "https://sumatrajawasoil.com",
+      "store_links": [
+        "https://www.tradewheel.com/p/green-coffee-beans-3020168/"
+      ],
+      "scale_signals": "Tradewheel 店铺：起订 1×20尺柜（约19.2吨），FOB Belawan / Tanjung Priok",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://sumatrajawasoil.com/page/wholesale-coffee",
+        "https://www.tradewheel.com/p/green-coffee-beans-3020168/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Gangga Roastery",
+      "category": "coffee_beans",
+      "sub_category": "烘焙商（批发/代烘焙）",
+      "origin": "ID",
+      "location": "Bali",
+      "website": "https://ganggaroastery.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://ganggaroastery.com/about/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Haveltea Indonesia",
+      "category": "tea",
+      "sub_category": "茶叶 B2B/HORECA/自有品牌",
+      "origin": "ID",
+      "location": "",
+      "website": "https://haveltea.com",
+      "store_links": [],
+      "scale_signals": "官网有批发页（haveltea.com/id/pages/wholesale）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://haveltea.com/id/pages/wholesale"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "PT ANP (West Java Tea)",
+      "category": "tea",
+      "sub_category": "红茶 BOP/CTC/碎茶，30kg 散装",
+      "origin": "ID",
+      "location": "West Java",
+      "website": "https://westjavatea.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://westjavatea.com/products/black-tea"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "PT Gunung Subur Sejahtera（Kepala Djenggot）",
+      "category": "tea",
+      "sub_category": "茉莉花茶",
+      "origin": "ID",
+      "location": "",
+      "website": "https://www.gss.co.id",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.gss.co.id/fragrant-jasmine-tea/",
+        "https://www.gss.co.id/id/tentang-kami/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Pasarteh",
+      "category": "tea",
+      "sub_category": "茶叶批发（500g 起，WebSearch 摘要）",
+      "origin": "ID",
+      "location": "",
+      "website": "https://pasarteh.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://pasarteh.com/whole-sale-b2b/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Teh Tong Tji",
+      "category": "tea",
+      "sub_category": "茶叶品牌，有 HORECA 业务",
+      "origin": "ID",
+      "location": "",
+      "website": "https://www.tongtji.co.id",
+      "store_links": [],
+      "scale_signals": "LinkedIn（Tong Tji Group）提到 Tea Point / Tea House 门店，150+ 家（WebSearch 摘要，未直接打开）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.tongtji.co.id",
+        "https://linkedin.com/company/tong-tji-group"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "cs@ 是客服邮箱"
+    },
+    {
+      "name": "Chamong Tea",
+      "category": "tea",
+      "sub_category": "茶叶",
+      "origin": "ID",
+      "location": "",
+      "website": "https://chamongtea.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://chamongtea.com"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "PT Sinar Sosro",
+      "category": "tea",
+      "sub_category": "茶叶/茶饮料生产商",
+      "origin": "ID",
+      "location": "",
+      "website": "https://www.sosro.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.sosro.com"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "以瓶装茶为主，B2B 散茶供应要再确认"
+    },
+    {
+      "name": "Hunan Tianwang Tea Industry Co., Ltd.",
+      "category": "tea",
+      "sub_category": "CTC 红茶（奶茶用）",
+      "origin": "CN",
+      "location": "Hunan",
+      "website": "",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/Instant-CTC-black-tea-price-china_1924364115.html"
+      ],
+      "scale_signals": "Alibaba 商品页有阶梯价（见价格表）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.alibaba.co.uk/product-detail/Instant-CTC-black-tea-price-china_1924364115.html"
+      ],
+      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "note": ""
+    },
+    {
+      "name": "Jiangsu Huasang Food Technology Co., Ltd.",
+      "category": "tea",
+      "sub_category": "茉莉绿茶等茶饮原料",
+      "origin": "CN",
+      "location": "Jiangsu",
+      "website": "",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/Huasang-Wholesale-Cheap-Price-Jasmine-Green_1601115888418.html"
+      ],
+      "scale_signals": "Alibaba 商品页",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.alibaba.co.uk/product-detail/Huasang-Wholesale-Cheap-Price-Jasmine-Green_1601115888418.html"
+      ],
+      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "note": ""
+    },
+    {
+      "name": "YU WEI FOOD TRADING CO., LTD",
+      "category": "tea",
+      "sub_category": "茉莉绿茶（台湾）",
+      "origin": "其他(TW)",
+      "location": "Taiwan",
+      "website": "",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/Green-Tea-Leaves-Standard-Jasmine-Green_10000011545845.html"
+      ],
+      "scale_signals": "Alibaba 商品页",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.alibaba.co.uk/product-detail/Green-Tea-Leaves-Standard-Jasmine-Green_10000011545845.html"
+      ],
+      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "note": ""
+    },
+    {
+      "name": "Bobaking（PT Formosa Ingredient Factory Tbk）",
+      "category": "ingredients",
+      "sub_category": "珍珠/爆珠/果冻/糖浆/果泥/粉",
+      "origin": "ID",
+      "location": "",
+      "website": "https://bobaking.co.id",
+      "store_links": [],
+      "scale_signals": "官网称有 Halal、BPOM、ISO 22000、FSSC 22000；母公司为 Tbk（上市公司）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://bobaking.co.id/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "PT Mutiara Gemilang Indonesia (MGI)",
+      "category": "ingredients",
+      "sub_category": "饮品粉/糖浆/配料，另有设备",
+      "origin": "ID",
+      "location": "Jakarta Barat（另有 Bandung/Semarang/Surabaya 分公司）",
+      "website": "https://mutiaragemilang.id",
+      "store_links": [],
+      "scale_signals": "官网自称服务 10,000+ 客户、4 个办公室（自述）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://mutiaragemilang.id/",
+        "https://mutiaragemilang.id/pt-mutiara-gemilang-indonesia/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "也列入设备类"
+    },
+    {
+      "name": "PT Culina Gemilang Indonesia",
+      "category": "ingredients",
+      "sub_category": "Longbeach 糖浆/爆珠/果泥（官方经销商）",
+      "origin": "ID",
+      "location": "Bandung",
+      "website": "https://culinagemilangindonesia.co.id",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://culinagemilangindonesia.co.id/brand/longbeach/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Greenfields Indonesia",
+      "category": "ingredients",
+      "sub_category": "鲜奶/乳制品",
+      "origin": "ID",
+      "location": "",
+      "website": "https://greenfieldsdairy.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://greenfieldsdairy.com/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200（www.greenfields.co.id 超时）",
+      "note": "有一篇博客说 Kopi Kenangan 初期用 Greenfields，但来源不可靠，未记为供货依据"
+    },
+    {
+      "name": "PT Frisian Flag Indonesia",
+      "category": "ingredients",
+      "sub_category": "乳制品（Omela Foaming Milk Professional）",
+      "origin": "ID",
+      "location": "Jakarta",
+      "website": "https://www.frisianflag.com",
+      "store_links": [],
+      "scale_signals": "investor.id 2022-04-13：面向咖啡店推出 Omela Foaming Milk Professional",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://investor.id/business/290586/bisnis-kopi-kekinian-menjamur-frisian-flag-indonesia-hadirkanfoaming-milk-professional"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "官网只找到消费者服务邮箱，没记"
+    },
+    {
+      "name": "Pipiltin Cocoa",
+      "category": "ingredients",
+      "sub_category": "巧克力/可可",
+      "origin": "ID",
+      "location": "",
+      "website": "https://pipiltincocoa.com",
+      "store_links": [],
+      "scale_signals": "Kopi Kenangan 官方新闻（2020-10）称其为 Chocolate Series 唯一巧克力供应商",
+      "supplies_radar_brands": [
+        {
+          "brand": "Kopi Kenangan",
+          "basis": "2020-10 官方新闻：Chocolate Series 唯一巧克力供应商（现在是否还在供货未知）",
+          "source": "https://kopikenangan.com/news/7ez06qcppjmk18nt1rvxnc02zfpq1e"
+        }
+      ],
+      "sources": [
+        "https://kopikenangan.com/news/7ez06qcppjmk18nt1rvxnc02zfpq1e",
+        "https://www.thejakartapost.com/life/2020/10/22/kopi-kenangan-collaborates-with-pipiltin-cocoa-to-boost-local-products"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Guangdong Zonegoing Food Co., Ltd.",
+      "category": "ingredients",
+      "sub_category": "珍珠/糖浆/茶饮原料 OEM",
+      "origin": "CN",
+      "location": "Guangdong",
+      "website": "https://www.zonegoingfood.com",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/Wholesale-2-5kg-Strawberry-Juice-Concentrated_1601523238394.html"
+      ],
+      "scale_signals": "Alibaba 商品页（见价格表）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.zonegoingfood.com/tapioca-pearls-custom-wholesale/",
+        "https://www.alibaba.co.uk/product-detail/Wholesale-2-5kg-Strawberry-Juice-Concentrated_1601523238394.html"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Shangqiu Yinzhijian Biotechnology Co., Ltd.",
+      "category": "ingredients",
+      "sub_category": "珍珠/糖浆/粉/果酱 OEM",
+      "origin": "CN",
+      "location": "Henan Shangqiu",
+      "website": "",
+      "store_links": [
+        "https://yinzhijian.en.alibaba.com/"
+      ],
+      "scale_signals": "Alibaba 公司店铺",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://yinzhijian.en.alibaba.com/"
+      ],
+      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "note": "店铺页 200"
+    },
+    {
+      "name": "JIU ZHOU FOOD CO., LTD.",
+      "category": "ingredients",
+      "sub_category": "珍珠/浓缩糖浆（台湾）",
+      "origin": "其他(TW)",
+      "location": "Taiwan",
+      "website": "",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/Jiuzhou-Hot-Selling-Taiwan-Black-tapioca_10000010067610.html"
+      ],
+      "scale_signals": "Alibaba 商品页（见价格表）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.alibaba.co.uk/product-detail/Jiuzhou-Hot-Selling-Taiwan-Black-tapioca_10000010067610.html"
+      ],
+      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "note": ""
+    },
+    {
+      "name": "Toffin Indonesia",
+      "category": "equipment",
+      "sub_category": "咖啡机/HORECA 设备+原料分销",
+      "origin": "ID",
+      "location": "",
+      "website": "https://www.toffin.id",
+      "store_links": [],
+      "scale_signals": "官网称 2007 年成立，覆盖 19 个城市（WebSearch 摘要）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.toffin.id/about"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "tokopedia.com/toffin 返回 410，已删"
+    },
+    {
+      "name": "Otten Coffee（设备）",
+      "category": "equipment",
+      "sub_category": "咖啡机/磨豆机（自称 La Marzocco 官方经销商）",
+      "origin": "ID",
+      "location": "",
+      "website": "https://ottencoffee.co.id/brands/la-marzocco",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://ottencoffee.co.id/brands/la-marzocco"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "和咖啡豆类是同一家"
+    },
+    {
+      "name": "PT Sukanda Djaya",
+      "category": "equipment",
+      "sub_category": "La Marzocco/Casadio/Mahlkönig/Mazzer 等，另有乳制品原料",
+      "origin": "ID",
+      "location": "Jakarta",
+      "website": "https://www.sukandadjaya.com",
+      "store_links": [],
+      "scale_signals": "参展 Indonesia Coffee Expo 2026（2026-09-04~06，JICC）；18 个直营+18 个间接配送点（kompassindo 引用公司资料）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://kompassindo.com/2026/09/04/pt-sukanda-djaya-hadir-di-indonesia-coffee-expo-2026-bawa-la-marzocco-dan-casadio-untuk-dukung-bisnis-kopi/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "PT Hoshizaki Indonesia",
+      "category": "equipment",
+      "sub_category": "制冰机/冷柜（日本 Hoshizaki 子公司）",
+      "origin": "ID",
+      "location": "Jakarta Utara",
+      "website": "https://hoshizaki.co.id",
+      "store_links": [],
+      "scale_signals": "官网称 2014 年 4 月成立",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://hoshizaki.co.id/",
+        "https://www.hoshizaki-sea.com/wp-content/uploads/2025/02/Indonesia_Hoshizaki-Full-CatalogueFA_S.pdf"
+      ],
+      "link_checked": "2026-11-04 curl -L: 超时（000），保留",
+      "note": ""
+    },
+    {
+      "name": "PT Mastrada",
+      "category": "equipment",
+      "sub_category": "Hoshizaki 等厨房设备经销商",
+      "origin": "ID",
+      "location": "Jakarta Pusat",
+      "website": "https://mastrada.com",
+      "store_links": [],
+      "scale_signals": "页面自称 Hoshizaki 官方经销商（WebSearch 摘要）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://mastrada.com/id/brand-list/detail/hoshizaki.html"
+      ],
+      "link_checked": "2026-11-04 curl -L: 500（服务器错误），保留",
+      "note": ""
+    },
+    {
+      "name": "PT MGI（设备）",
+      "category": "equipment",
+      "sub_category": "Izensso 咖啡机/磨豆机、制冰机",
+      "origin": "ID",
+      "location": "Jakarta Barat",
+      "website": "https://mutiaragemilang.id",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://mutiaragemilang.id/pt-mutiara-gemilang-indonesia/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "和原料类是同一家"
+    },
+    {
+      "name": "Guangzhou Itop Kitchen Equipment Co., Ltd.",
+      "category": "equipment",
+      "sub_category": "商用磨豆机/咖啡设备",
+      "origin": "CN",
+      "location": "Guangzhou",
+      "website": "https://www.itopcafe.com",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/New-Design-Commercial-Coffee-Grinder-Professional_1601669907272.html"
+      ],
+      "scale_signals": "Alibaba 商品页（见价格表）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.itopcafe.com",
+        "https://www.alibaba.co.uk/product-detail/New-Design-Commercial-Coffee-Grinder-Professional_1601669907272.html"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Shanghai Sihao Machinery Equipment Co., Ltd.",
+      "category": "equipment",
+      "sub_category": "商用制冰机",
+      "origin": "CN",
+      "location": "Shanghai",
+      "website": "",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/Ice-Maker-50KG-Commercial-Ice-Cube_62285969586.html"
+      ],
+      "scale_signals": "Alibaba 商品页（见价格表）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.alibaba.co.uk/product-detail/Ice-Maker-50KG-Commercial-Ice-Cube_62285969586.html"
+      ],
+      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "note": ""
+    },
+    {
+      "name": "Istana Cup & Sealer",
+      "category": "packaging",
+      "sub_category": "PP/PET 杯、纸杯、封口膜（定制印刷）",
+      "origin": "ID",
+      "location": "Malang",
+      "website": "https://istanacupsealer.com",
+      "store_links": [],
+      "scale_signals": "官网称 2012 年起营业",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://istanacupsealer.com/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "WirausahaGroup（CV Wirausaha Sukses）",
+      "category": "packaging",
+      "sub_category": "封口膜（自产）",
+      "origin": "ID",
+      "location": "Sidoarjo",
+      "website": "https://www.wirausahagroup.com",
+      "store_links": [],
+      "scale_signals": "官网称 2015 年成立，月产能 100 万件；封口膜每卷 Rp560.000 起",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.wirausahagroup.com/product/lid-cup"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Ransom Berkat Cup",
+      "category": "packaging",
+      "sub_category": "PP/rPET 杯、封口膜",
+      "origin": "ID",
+      "location": "Tangerang",
+      "website": "https://www.ransomberkat.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.ransomberkat.com/cupsealer-lid"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Unique Packaging",
+      "category": "packaging",
+      "sub_category": "定制封口膜等软包装",
+      "origin": "ID",
+      "location": "Bekasi",
+      "website": "https://uniquepackaging.id",
+      "store_links": [],
+      "scale_signals": "封口膜起订 1 卷（500m）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://uniquepackaging.id/product/lid-cup-sealer/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "SEAL Indonesia",
+      "category": "packaging",
+      "sub_category": "rPET/PET/PP/纸杯、无纺布袋",
+      "origin": "ID",
+      "location": "Tangerang",
+      "website": "https://sealindonesia.com",
+      "store_links": [],
+      "scale_signals": "官网称服务 14 个咖啡/茶连锁客户（未公开名称，自述）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://sealindonesia.com/id/industries/coffee-chain"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "PT Dynaplast Tbk",
+      "category": "packaging",
+      "sub_category": "塑料包装制造商",
+      "origin": "ID",
+      "location": "",
+      "website": "https://www.dynaplast.co.id",
+      "store_links": [],
+      "scale_signals": "Tbk 上市公司",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.dynaplast.co.id"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "是否做饮品杯要再确认"
+    },
+    {
+      "name": "Guangdong Cundao Technology Co., Ltd.",
+      "category": "packaging",
+      "sub_category": "PP 杯/盖",
+      "origin": "CN",
+      "location": "Guangdong",
+      "website": "https://www.cundaoplasticcups.com",
+      "store_links": [],
+      "scale_signals": "官网称出口印尼、菲律宾、越南等（WebSearch 摘要）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.cundaoplasticcups.com/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "官网邮箱是 QQ 号码邮箱，看起来像个人邮箱，没记"
+    },
+    {
+      "name": "Foshan XINNENG Packaging",
+      "category": "packaging",
+      "sub_category": "纸杯/盖/杯套",
+      "origin": "CN",
+      "location": "Foshan",
+      "website": "https://xinnengpack.com",
+      "store_links": [],
+      "scale_signals": "官网称 2009 年起营业",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://xinnengpack.com/paper-product-solution/"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": ""
+    },
+    {
+      "name": "Mingda Packs",
+      "category": "packaging",
+      "sub_category": "纸杯出口",
+      "origin": "CN",
+      "location": "Qingdao",
+      "website": "https://www.mingdapacks.com",
+      "store_links": [],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.mingdapacks.com/product-category/paper-cups"
+      ],
+      "link_checked": "2026-11-04 curl -L: 200",
+      "note": "官网邮箱看起来像个人 gmail，没记"
+    },
+    {
+      "name": "Zhejiang KaiPuQi New Materials Technology Co., Ltd.",
+      "category": "packaging",
+      "sub_category": "PP 磨砂杯",
+      "origin": "CN",
+      "location": "Zhejiang",
+      "website": "",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/Factory-Customized-Logo-Printed-Frosted-Transparent_1601061099135.html"
+      ],
+      "scale_signals": "Alibaba 商品页（见价格表）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.alibaba.co.uk/product-detail/Factory-Customized-Logo-Printed-Frosted-Transparent_1601061099135.html"
+      ],
+      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "note": ""
+    },
+    {
+      "name": "Suzhou Wolff Packing Material Co., Ltd.",
+      "category": "packaging",
+      "sub_category": "PP/PET 杯",
+      "origin": "CN",
+      "location": "Suzhou",
+      "website": "",
+      "store_links": [
+        "https://www.alibaba.co.uk/product-detail/Hot-Sale-16oz-500ml-Bubble-Boba_1601269707007.html"
+      ],
+      "scale_signals": "Alibaba 商品页（见价格表）",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.alibaba.co.uk/product-detail/Hot-Sale-16oz-500ml-Bubble-Boba_1601269707007.html"
+      ],
+      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "note": ""
+    }
+  ]
+}
