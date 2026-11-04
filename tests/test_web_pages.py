@@ -1,5 +1,6 @@
 """Web 页面完整性测试：导航一致性、关键模块存在性、入库键约定。
 2026-11 拆分：主站(web/)与集装箱兄弟项目站(container/)各自独立导航。"""
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -92,3 +93,19 @@ def test_retail_landing_page():
 def test_case_has_no_influencer_chain():
     html = _read(CT, "case")
     assert 'class="chain"' not in html
+
+
+def test_trend_banner_uses_json_source_note():
+    """雷达顶栏展示 local_brands.json 的 source_note，不再写死「演示种子数据」。"""
+    html = _read(WEB, "trend")
+    assert "当前为演示种子数据" not in html
+    assert 'class="demo-bar" id="source-note"' in html
+    assert "数据来源说明暂缺" in html
+    start = html.index("function applySourceNote")
+    chunk = html[start:start + 400]
+    assert "textContent" in chunk
+    assert "innerHTML" not in chunk
+    assert "source_note" in chunk
+    data = json.loads((WEB / "trend" / "data" / "local_brands.json").read_text(encoding="utf-8"))
+    note = data.get("source_note")
+    assert isinstance(note, str) and note.strip()

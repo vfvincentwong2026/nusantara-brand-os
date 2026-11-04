@@ -122,7 +122,7 @@
        我们去联系合作：供应链网络加持、社交媒体系统加持、策略打法输出。不是复制者，是本土网红品牌的放大器与合伙人。</p>
     <div class="en">Scrape local heat → Identify rising local brands → Partner &amp; amplify / From viral signal to partnership</div>
   </div>
-  <div class="demo-bar">🇮🇩 数据源 DATA：印尼本地 <b>IG / TikTok / X</b> 公开数据抓取口径（粉丝 / 播放 / 赞 / 转发 / 互动率 / 30 天增速）。⚠ 当前为演示种子数据（10 个本土品牌 + 10 家潜力小店 · 近 3 个月窗口），字段与真实抓取 API 对齐，可无缝切换。</div>
+  <div class="demo-bar" id="source-note">数据来源说明暂缺</div>
   <div class="tabs" style="margin-bottom:20px;">
     <button class="on" id="vw-heat" onclick="switchView('heat')">🔥 本地热度榜 LOCAL HEAT</button>
     <button id="vw-pot" onclick="switchView('pot')">🌱 潜力新星榜 POTENTIAL</button>
@@ -287,8 +287,16 @@ function renderCoop() {
 
 function setCity(c) { state.city = c; renderTabs(); renderList(); }
 
+const SOURCE_NOTE_FALLBACK = '数据来源说明暂缺';
+function applySourceNote(data) {
+  const raw = data && typeof data.source_note === 'string' ? data.source_note.trim() : '';
+  const el = document.getElementById('source-note');
+  if (el) el.textContent = raw || SOURCE_NOTE_FALLBACK;
+}
+
 fetch('./data/local_brands.json').then(r => r.json()).then(d => {
   state.data = d;
+  applySourceNote(d);
   renderTabs(); renderList(); renderSide(); renderCoop(); renderPots();
 });
 const p = location.pathname;
