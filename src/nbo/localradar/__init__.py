@@ -2,7 +2,8 @@
 
 商业模式定位：不做复制者，做本地网红品牌的放大器——
 供应链网络加持 / 社交媒体系统加持 / 策略打法输出。
-数据源：演示种子（字段对齐真实 IG/TikTok/X 抓取口径，可无缝切换）。
+数据源：X 公开数据实抓快照（data/radar/x_snapshot_*.json，见 xsnapshot.py）叠加演示种子；
+未被实抓覆盖的字段（IG/TikTok、播放、互动率、增速、缺口分等）仍为演示估算，逐字段标注于 provenance。
 """
 import json
 import sqlite3
@@ -396,7 +397,11 @@ def _photo_of(eid: str) -> str | None:
     return f"/assets/radar/{eid}.jpg" if p.exists() else None
 
 
-def build_localradar(db_path: str | Path) -> dict:
+def build_localradar(db_path: str | Path, x_snapshot: str | Path | None = "auto") -> dict:
+    """x_snapshot: "auto"=取 data/radar 下最新快照；None=纯演示；或指定路径。"""
+    from nbo.localradar import xsnapshot as xs
+    snap_path = xs.latest_snapshot_path() if x_snapshot == "auto" else x_snapshot
+    snap = xs.load_snapshot(snap_path) if snap_path else None
     conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     try:
@@ -420,6 +425,8 @@ def build_localradar(db_path: str | Path) -> dict:
         b = dict(r)
         b["heat_signals"] = json.loads(b["heat_signals"] or "[]")
         b["boost"] = json.loads(b["boost"] or "[]")
+        if snap:
+            b = xs.apply_snapshot(b, snap)
         b["value_score"] = value_score(b)
         b["photo"] = _photo_of(b["id"])
         brands.append(b)
@@ -427,11 +434,23 @@ def build_localradar(db_path: str | Path) -> dict:
     shops = [_shop_from_row(r) for r in shop_rows]
     shops.sort(key=lambda s: s["potential_score"], reverse=True)
     cities = sorted({b["city"] for b in brands} | {s["city"] for s in shops})
+    n_real = sum(1 for b in brands if b.get("source_type") == "mixed")
+    if snap:
+        source_note = (f"X 公开数据实抓（{snap.get('fetched_at')}，{n_real}/{len(brands)} 个品牌）："
+                       "热度=近7天X提及量对数分、X 官方号粉丝/发帖为实抓；"
+                       "IG/TikTok、粉丝(万)/播放/赞/转发/互动率/30天增速/缺口分及潜力小店均为演示估算")
+    else:
+        source_note = "演示种子数据 · 字段对齐真实 IG/TikTok/X 公开数据抓取口径（粉丝/播放/互动/增速）"
     return {
         "generated_at": datetime.now(WIB).strftime("%Y-%m-%d %H:%M"),
-        "demo": True,
+        "demo": not snap,
+        "data_mode": "x_public+demo_estimate" if snap else "demo_seed",
+        "x_snapshot": ({"file": str(Path(snap_path).name), "fetched_at": snap.get("fetched_at"),
+                        "x_calls_used": snap.get("x_calls_used"), "brands_with_x": n_real,
+                        "heat_formula": "heat = 100*log10(1+近7天X提及数)/log10(1+%d)，上限100" % xs.HEAT_REF_MENTIONS_7D}
+                       if snap else None),
         "window": "近3个月",
-        "source_note": "演示种子数据 · 字段对齐真实 IG/TikTok/X 公开数据抓取口径（粉丝/播放/互动/增速）",
+        "source_note": source_note,
         "cities": cities,
         "brands": brands,
         "shops": shops,
