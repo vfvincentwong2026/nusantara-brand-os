@@ -7,14 +7,22 @@
   "x_calls_used": 30,
   "notes": [
     "只记录 X 返回的原始数值，不做任何推算；IG / TikTok 未抓取。",
-    "handle_status: ok=种子 handle 正确; replaced=种子不存在/错误，按名称明确匹配到官方号; unverified_dormant=账号存在但无法确认官方; wrong_account=种子指向无关账号; not_found=不存在; invalid=不合法 handle"
+    "handle_status: ok=种子 handle 正确; replaced=种子不存在/错误，按名称明确匹配到官方号; unverified_dormant=账号存在但无法确认官方; wrong_account=种子指向无关账号; not_found=不存在; invalid=不合法 handle",
+    "2026-11-04 ~12:36 (UTC+8)：ID-01、ID-09 的官方号经 X 公开 API 另行核实并改为 replaced（只写入已读到的粉丝与累计帖数）；mentions_7d、近 30 天发帖与其余品牌未重抓。"
   ],
   "brands": {
     "ID-01": {
       "seed_handle": "@KopiKenangan",
-      "handle_status": "unverified_dormant",
-      "resolved_handle": null,
-      "handle_note": "@KopiKenangan 存在但仅 33 粉、1 条帖、简介为空，无法确认是官方号；候选 @Kopikenanganid / @kopi_kenangan 均为 0 粉 0 帖；全网帖子检索未发现官方账号。不采用其账号指标。",
+      "handle_status": "replaced",
+      "resolved_handle": "@Kopikenangan_ID",
+      "handle_note": "@KopiKenangan 存在但仅 33 粉、1 条帖、简介为空，无法确认是官方号（见 unverified_account），不采用其指标。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @Kopikenangan_ID（显示名 Kopi Kenangan，蓝标，粉丝 12895，累计帖数 3139）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。",
+      "account": {
+        "username": "Kopikenangan_ID",
+        "name": "Kopi Kenangan",
+        "verified": true,
+        "followers_count": 12895,
+        "tweet_count": 3139
+      },
       "unverified_account": {
         "id": "3311101482",
         "username": "KopiKenangan",
@@ -595,9 +603,16 @@
     },
     "ID-09": {
       "seed_handle": "@rotiocomalang",
-      "handle_status": "not_found",
-      "resolved_handle": null,
-      "handle_note": "@rotiocomalang 在 X 不存在；候选 @rotio_id / @rotiocoffee 不存在，@Rotio 为无关个人号；未找到官方号。",
+      "handle_status": "replaced",
+      "resolved_handle": "@rotioindonesia",
+      "handle_note": "@rotiocomalang 在 X 不存在；候选 @rotio_id / @rotiocoffee 不存在，@Rotio 为无关个人号。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @rotioindonesia（显示名 Roti'O Indonesia，网站 rotio.id，粉丝 397，累计帖数 388）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。",
+      "account": {
+        "username": "rotioindonesia",
+        "name": "Roti'O Indonesia",
+        "website": "rotio.id",
+        "followers_count": 397,
+        "tweet_count": 388
+      },
       "mentions_7d": {
         "query": "(\"roti o\" OR \"roti'o\" OR rotio) lang:id -is:retweet",
         "window": "近7天（X recent counts，排除转推）",

@@ -105,9 +105,15 @@ def apply_snapshot(brand: dict, snap: dict) -> dict:
         tail = f"（{mentions['note']}）" if mentions.get("note") else ""
         real.append(f"【X 实抓 {_day(fetched)}】近 7 天全网提及 {b['x_mentions_7d']:,} 条{tail}")
     if acct:
-        last = _day(b["x_last_post_at"]) or "未知"
-        real.append(f"【X 实抓 {_day(fetched)}】官方号 {b['x']} 粉丝 {b['x_followers']:,} · "
-                    f"近 30 天发帖 {b['x_posts_30d']} · 最近发帖 {last}")
+        bits = [f"官方号 {b['x']} 粉丝 {b['x_followers']:,}"]
+        if b["x_posts_30d"] is not None:
+            bits.append(f"近 30 天发帖 {b['x_posts_30d']}")
+        elif b["x_tweet_count"] is not None:
+            bits.append(f"累计发帖 {b['x_tweet_count']:,}")
+        last = _day(b.get("x_last_post_at"))
+        if last:
+            bits.append(f"最近发帖 {last}")
+        real.append(f"【X 实抓 {_day(fetched)}】" + " · ".join(bits))
     else:
         real.append(f"【X 实抓 {_day(fetched)}】{entry.get('seed_handle')}：{STATUS_CN.get(status, status)}")
     b["heat_signals_x"] = real
