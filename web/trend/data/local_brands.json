@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04 11:30",
+  "generated_at": "2026-11-04 11:40",
   "demo": false,
   "data_mode": "x_public+demo_estimate",
   "x_snapshot": {
@@ -30,7 +30,7 @@
       "stage": "爆发期",
       "ig": "@kopikenangan.id",
       "tiktok": "@kopikenangan",
-      "x": "@KopiKenangan（账号存在但无法确认官方）",
+      "x": "@Kopikenangan_ID",
       "followers_wan": 58.2,
       "views_wan": 720.0,
       "likes_wan": 96.0,
@@ -42,7 +42,7 @@
       "viral_format": "上班族晨队实拍 + '比星巴克便宜一半' 对比梗，天然 UGC 模板",
       "heat_signals": [
         "【X 实抓 2026-11-04】近 7 天全网提及 968 条",
-        "【X 实抓 2026-11-04】@KopiKenangan：账号存在但无法确认官方",
+        "【X 实抓 2026-11-04】官方号 @Kopikenangan_ID 粉丝 12,895 · 累计发帖 3,139",
         "【演示】TikTok #kopikenangan 标签播放 4.1 亿",
         "【演示】IG Reels 单条最高 680 万播放",
         "【演示】X 雅加达通勤话题周均 2 次热搜"
@@ -59,11 +59,11 @@
       "contact": "partnership@demo.nbo",
       "source_type": "mixed",
       "x_seed_handle": "@KopiKenangan",
-      "x_handle_status": "unverified_dormant",
-      "x_handle_note": "@KopiKenangan 存在但仅 33 粉、1 条帖、简介为空，无法确认是官方号；候选 @Kopikenanganid / @kopi_kenangan 均为 0 粉 0 帖；全网帖子检索未发现官方账号。不采用其账号指标。",
+      "x_handle_status": "replaced",
+      "x_handle_note": "@KopiKenangan 存在但仅 33 粉、1 条帖、简介为空，无法确认是官方号（见 unverified_account），不采用其指标。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @Kopikenangan_ID（显示名 Kopi Kenangan，蓝标，粉丝 12895，累计帖数 3139）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。",
       "x_fetched_at": "2026-11-04T04:25:00Z",
-      "x_followers": null,
-      "x_tweet_count": null,
+      "x_followers": 12895,
+      "x_tweet_count": 3139,
       "x_posts_30d": null,
       "x_posts_30d_likes": null,
       "x_last_post_at": null,
@@ -73,7 +73,7 @@
       "heat_demo": 94.0,
       "heat_signals_x": [
         "【X 实抓 2026-11-04】近 7 天全网提及 968 条",
-        "【X 实抓 2026-11-04】@KopiKenangan：账号存在但无法确认官方"
+        "【X 实抓 2026-11-04】官方号 @Kopikenangan_ID 粉丝 12,895 · 累计发帖 3,139"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -91,9 +91,9 @@
         "tiktok": "demo_estimate",
         "heat": "x_public",
         "heat_signals": "mixed",
-        "x": "x_public_flagged",
-        "x_followers": "missing",
-        "x_tweet_count": "missing",
+        "x": "x_public",
+        "x_followers": "x_public",
+        "x_tweet_count": "x_public",
         "x_posts_30d": "missing",
         "x_posts_30d_likes": "missing",
         "x_last_post_at": "missing",
@@ -277,7 +277,7 @@
       "stage": "爆发期",
       "ig": "@rotiocomalang",
       "tiktok": "@rotiocomalang",
-      "x": "@rotiocomalang（X 上不存在）",
+      "x": "@rotioindonesia",
       "followers_wan": 41.3,
       "views_wan": 480.0,
       "likes_wan": 66.0,
@@ -289,7 +289,7 @@
       "viral_format": "出炉时刻 ASMR + 咖啡酱撕开瞬间",
       "heat_signals": [
         "【X 实抓 2026-11-04】近 7 天全网提及 444 条（'roti o' 可能命中一般面包语句，存在噪声）",
-        "【X 实抓 2026-11-04】@rotiocomalang：X 上不存在",
+        "【X 实抓 2026-11-04】官方号 @rotioindonesia 粉丝 397 · 累计发帖 388",
         "【演示】TikTok #rotio 播放 3.8 亿",
         "【演示】商场档口加盟咨询月环比 +71%",
         "【演示】X '泗水之光' 话题讨论"
@@ -306,11 +306,11 @@
       "contact": "partnership@demo.nbo",
       "source_type": "mixed",
       "x_seed_handle": "@rotiocomalang",
-      "x_handle_status": "not_found",
-      "x_handle_note": "@rotiocomalang 在 X 不存在；候选 @rotio_id / @rotiocoffee 不存在，@Rotio 为无关个人号；未找到官方号。",
+      "x_handle_status": "replaced",
+      "x_handle_note": "@rotiocomalang 在 X 不存在；候选 @rotio_id / @rotiocoffee 不存在，@Rotio 为无关个人号。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @rotioindonesia（显示名 Roti'O Indonesia，网站 rotio.id，粉丝 397，累计帖数 388）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。",
       "x_fetched_at": "2026-11-04T04:25:00Z",
-      "x_followers": null,
-      "x_tweet_count": null,
+      "x_followers": 397,
+      "x_tweet_count": 388,
       "x_posts_30d": null,
       "x_posts_30d_likes": null,
       "x_last_post_at": null,
@@ -320,7 +320,7 @@
       "heat_demo": 86.0,
       "heat_signals_x": [
         "【X 实抓 2026-11-04】近 7 天全网提及 444 条（'roti o' 可能命中一般面包语句，存在噪声）",
-        "【X 实抓 2026-11-04】@rotiocomalang：X 上不存在"
+        "【X 实抓 2026-11-04】官方号 @rotioindonesia 粉丝 397 · 累计发帖 388"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -338,9 +338,9 @@
         "tiktok": "demo_estimate",
         "heat": "x_public",
         "heat_signals": "mixed",
-        "x": "x_public_flagged",
-        "x_followers": "missing",
-        "x_tweet_count": "missing",
+        "x": "x_public",
+        "x_followers": "x_public",
+        "x_tweet_count": "x_public",
         "x_posts_30d": "missing",
         "x_posts_30d_likes": "missing",
         "x_last_post_at": "missing",

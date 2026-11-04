@@ -60,6 +60,39 @@ def test_brand_missing_from_snapshot_is_demo():
     assert out["source_type"] == "demo_seed" and out["heat"] == BRANDS[0]["heat"]
 
 
+def test_newly_verified_handles_keep_recorded_mentions(tmp_path):
+    """ID-01 / ID-09 只补已核实官方号与粉丝、累计帖数，不新造 mentions_7d 或近 30 天发帖。"""
+    snap = json.loads(SNAP.read_text(encoding="utf-8"))
+    kopi = snap["brands"]["ID-01"]
+    rotio = snap["brands"]["ID-09"]
+    assert kopi["seed_handle"] == "@KopiKenangan" and kopi["handle_status"] == "replaced"
+    assert kopi["resolved_handle"] == "@Kopikenangan_ID"
+    assert kopi["account"]["name"] == "Kopi Kenangan" and kopi["account"]["verified"] is True
+    assert kopi["account"]["followers_count"] == 12895 and kopi["account"]["tweet_count"] == 3139
+    assert "posts_30d" not in kopi and not kopi.get("last_post_at")
+    assert kopi["mentions_7d"]["total"] == 968
+    assert "12:36" in kopi["handle_note"]
+    assert rotio["seed_handle"] == "@rotiocomalang" and rotio["handle_status"] == "replaced"
+    assert rotio["resolved_handle"] == "@rotioindonesia"
+    assert rotio["account"]["name"] == "Roti'O Indonesia"
+    assert rotio["account"]["followers_count"] == 397 and rotio["account"]["tweet_count"] == 388
+    assert "posts_30d" not in rotio and not rotio.get("last_post_at")
+    assert rotio["mentions_7d"]["total"] == 444
+    assert "rotio.id" in rotio["handle_note"] and "12:36" in rotio["handle_note"]
+
+    d = build_localradar(tmp_path / "t.db", x_snapshot=SNAP)
+    by_id = {b["id"]: b for b in d["brands"]}
+    k, r, j = by_id["ID-01"], by_id["ID-09"], by_id["ID-02"]
+    assert k["x"] == "@Kopikenangan_ID" and k["x_followers"] == 12895 and k["x_tweet_count"] == 3139
+    assert k["x_posts_30d"] is None and k["provenance"]["x_posts_30d"] == "missing"
+    assert k["provenance"]["x_followers"] == "x_public" and k["x_mentions_7d"] == 968
+    assert "12,895" in k["heat_signals_x"][1] and "3,139" in k["heat_signals_x"][1]
+    assert "None" not in " ".join(k["heat_signals_x"])
+    assert r["x"] == "@rotioindonesia" and r["x_followers"] == 397 and r["x_mentions_7d"] == 444
+    assert "None" not in " ".join(r["heat_signals_x"])
+    assert any("近 30 天发帖 0 · 最近发帖 2023-07-11" in s for s in j["heat_signals_x"])
+
+
 def test_heat_formula():
     assert xs.heat_from_mentions(0) == 0.0
     assert xs.heat_from_mentions(xs.HEAT_REF_MENTIONS_7D) == 100.0
