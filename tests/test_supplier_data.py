@@ -20,7 +20,7 @@ PHONE = re.compile(
 )
 PRICE_KEYS = {"price", "unit_price", "price_tiers", "ref_idr", "price_idr", "unit_price_idr"}
 
-# 品牌候选清单里的官方 IG；只改这 5 个 handle，不增删 BRANDS。
+# 品牌候选清单里已纠正的官方 IG。追踪名单另含 ID-11 / ID-12，见 test_localradar_x。
 IG_FROM_BRAND_LIST = {
     "ID-02": "@kopijanjijiwa",      # Janji Jiwa
     "ID-04": "@haus.indonesia",     # Haus
@@ -87,10 +87,10 @@ def test_no_email_phone_or_whatsapp_link():
         assert "mailto:" not in text.lower()
 
 
-def test_five_ig_handles_match_brand_list_without_changing_membership():
+def test_five_ig_handles_match_brand_list():
     listed = {b["repo_id"]: b.get("ig_handle") for b in _load(BRAND_LIST)["brands"]}
     by_id = {b["id"]: b for b in BRANDS}
-    assert [b["id"] for b in BRANDS] == [f"ID-{i:02d}" for i in range(1, 11)]
+    assert [b["id"] for b in BRANDS] == [f"ID-{i:02d}" for i in range(1, 13)]
     published = {b["id"]: b for b in _load(PUBLISHED)["brands"]}
     for bid, handle in IG_FROM_BRAND_LIST.items():
         assert listed[bid] == handle

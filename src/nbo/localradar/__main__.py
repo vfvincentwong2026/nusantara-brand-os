@@ -5,7 +5,8 @@
 import argparse
 import json
 
-from nbo.localradar import build_localradar, write_json
+from nbo.localradar import BRANDS, build_localradar, write_json
+from nbo.localradar import xsnapshot as xs
 
 
 def main() -> None:
@@ -14,7 +15,16 @@ def main() -> None:
     ap.add_argument("--out", default=None)
     ap.add_argument("--x-snapshot", default="auto", help="X 快照路径；默认 auto=data/radar 最新一份")
     ap.add_argument("--no-x", action="store_true", help="不叠加 X 实抓数据（纯演示）")
+    ap.add_argument("--refresh-plan", action="store_true",
+                    help="打印下次 X 刷新要抓的 handle（含快照里还没有的新品牌），不写文件")
     args = ap.parse_args()
+    snap = None
+    if not args.no_x:
+        snap_path = xs.latest_snapshot_path() if args.x_snapshot == "auto" else args.x_snapshot
+        snap = xs.load_snapshot(snap_path) if snap_path else None
+    if args.refresh_plan:
+        print(json.dumps(xs.refresh_plan(BRANDS, snap), ensure_ascii=False, indent=2))
+        return
     d = build_localradar(args.db, x_snapshot=None if args.no_x else args.x_snapshot)
     if args.out:
         write_json(d, args.out)

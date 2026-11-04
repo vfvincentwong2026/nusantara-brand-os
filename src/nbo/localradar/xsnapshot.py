@@ -56,13 +56,73 @@ def _day(ts: str | None) -> str | None:
     return ts[:10] if ts else None
 
 
+def refresh_plan(brands: list[dict], snap: dict | None = None) -> list[dict]:
+    """下次每日 X 刷新要抓的名单。
+
+    已在快照里的品牌沿用 resolved_handle 与 mentions_7d.query。
+    快照里还没有的品牌用 BRANDS.x，并标成必须抓官方号；提及查询留空，不预填数字。
+    """
+    known = (snap or {}).get("brands") or {}
+    plan = []
+    for b in brands:
+        entry = known.get(b["id"])
+        if entry:
+            resolved = entry.get("resolved_handle")
+            mentions = entry.get("mentions_7d") or {}
+            plan.append({
+                "id": b["id"],
+                "name": b["name"],
+                "x_handle": resolved,
+                "include_in_user_lookup": bool(resolved),
+                "mentions_query": mentions.get("query"),
+                "in_snapshot": True,
+            })
+        else:
+            plan.append({
+                "id": b["id"],
+                "name": b["name"],
+                "x_handle": b.get("x"),
+                "include_in_user_lookup": True,
+                "mentions_query": None,
+                "in_snapshot": False,
+                "note": "快照尚无此品牌。用 x_handle 抓官方号；提及量本次现抓，不要填写估算数字。",
+            })
+    return plan
+
+
 def apply_snapshot(brand: dict, snap: dict) -> dict:
-    """返回叠加了 X 实抓数据的新 dict；快照里没有该品牌时原样返回（仍为 demo_seed）。"""
+    """返回叠加了 X 实抓数据的新 dict；快照里没有该品牌时原样返回（仍为 demo_seed）。
+
+    metrics_pending 的品牌若还不在快照里：X 粉丝与提及标为 missing，热度不估算。
+    IG handle 仍标 demo_estimate，不写入 IG 数字。
+    """
     b = dict(brand)
     prov = {f: "demo_estimate" for f in DEMO_FIELDS}
     prov.update({"heat": "demo_estimate", "heat_signals": "demo_estimate", "x": "demo_seed"})
     entry = snap["brands"].get(b["id"])
     if not entry:
+        if b.get("metrics_pending"):
+            for f in list(DEMO_FIELDS) + ["heat", "heat_signals"]:
+                if b.get(f) in (None, "", []):
+                    prov[f] = "missing"
+            if b.get("ig"):
+                prov["ig"] = "demo_estimate"
+            prov["x"] = "pending"
+            prov["heat"] = "missing"
+            prov["value_score"] = "missing"
+            for f in ("x_followers", "x_tweet_count", "x_posts_30d", "x_posts_30d_likes",
+                      "x_last_post_at", "x_mentions_7d"):
+                b[f] = None
+                prov[f] = "missing"
+            b["heat"] = None
+            handle = b.get("x") or ""
+            b["heat_signals"] = [
+                f"【待刷新】官方号 {handle} 已列入追踪；粉丝、发帖与近 7 天提及尚未抓取"
+            ]
+            prov["heat_signals"] = "pending"
+            b["provenance"] = prov
+            b["source_type"] = "pending_x"
+            return b
         b["provenance"] = prov
         b["source_type"] = "demo_seed"
         return b

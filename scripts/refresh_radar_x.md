@@ -2,25 +2,35 @@
 
 雷达（`web/trend/` → `web/trend/data/local_brands.json`）的 **热度** 与 **X 官方号指标** 来自
 `data/radar/x_snapshot_YYYY-MM-DD.json`；其余字段（IG/TikTok、粉丝(万)/播放/赞/转发/互动率/30 天增速/缺口分、潜力小店）
-仍是演示估算，每个品牌的 `provenance` 字段逐项标注（`x_public` / `demo_estimate` / `mixed` / `missing`）。
+仍是演示估算，每个品牌的 `provenance` 字段逐项标注（`x_public` / `demo_estimate` / `mixed` / `missing` / `pending`）。
+快照里还没有的追踪品牌会标成 `pending_x`，X 粉丝和提及留空，等到下一次刷新写入后再变成实抓。
 
 ## 分两步
 
 ### 1. 抓取（由 Grok Bot 用内置 X 公开读取工具完成，无 API key）
 
-每个品牌约 1–2 次调用，10 个品牌总计 ≈ 15–20 次（限额 30 次/分钟、1000 次/天）：
+每个品牌约 1–2 次调用。品牌数以 `nbo.localradar.BRANDS` 为准（当前 12）。限额 30 次/分钟、1000 次/天。
+
+先列出本次要抓的 handle，不要只抄上一份快照里已经有的 `resolved_handle`：
+
+```bash
+python -m nbo.localradar --refresh-plan
+```
+
+`in_snapshot: false` 的品牌（当前是 ID-11 Tomoro Coffee `@TomoroCoffee_ID`、ID-12 Calais Tea `@CalaisTea`）必须纳入本次抓取。`mentions_query` 为 null 时按品牌名新写查询，提及量和粉丝数只写工具返回值，不要填估算数字。
 
 | 内容 | 工具 | 参数要点 |
 | --- | --- | --- |
-| 官方号资料（粉丝、帖数） | `get_users_by_usernames` | 一次传全部已核实 handle（见上一份快照的 `resolved_handle`），`user.fields=created_at,description,public_metrics,verified,location` |
+| 官方号资料（粉丝、帖数） | `get_users_by_usernames` | 一次传入 `refresh_plan` 里 `include_in_user_lookup: true` 的全部 `x_handle`（已核实号 + 快照里还没有的新品牌），`user.fields=created_at,description,public_metrics,verified,location` |
 | 近 30 天发帖与互动 | `get_users_posts` | `id`=用户 id，`start_time`=30 天前，`exclude=retweets`，`post.fields=created_at,public_metrics`（单页最多 25 条） |
-| 近 7 天全网提及量 | `get_posts_counts_recent` | 沿用快照里每个品牌的 `mentions_7d.query`，`granularity=day`（语言过滤用 `lang:id`，不是 `lang:in`） |
+| 近 7 天全网提及量 | `get_posts_counts_recent` | 已在快照里的品牌沿用 `mentions_query`；新品牌现写查询。`granularity=day`（语言过滤用 `lang:id`，不是 `lang:in`） |
 
 规则：只写 X 返回的原始数字；handle 不存在/不合法/指向无关账号时照实写 `handle_status`，
 只有显示名与简介明确匹配时才写 `resolved_handle`。
 
 把结果按上一份快照的结构写成新文件 `data/radar/x_snapshot_<今天>.json`（字段：`fetched_at`、`x_calls_used`、
 `brands.<ID>.handle_status / resolved_handle / account / posts_30d / last_post_at / mentions_7d`）。
+新快照的 `brands` 必须覆盖 `refresh_plan` 里的每一个 id，包括目前还不在旧快照里的 ID-11、ID-12。漏掉的品牌重建后仍是 `pending_x`。
 
 ### 2. 重建 JSON（纯 Python，离线）
 
