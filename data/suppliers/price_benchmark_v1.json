@@ -1,0 +1,755 @@
+{
+  "meta": {
+    "generated": "2026-11-04 (UTC+8)",
+    "fx_reference": "参考换算：1 USD ≈ 18,509.442 IDR，取自 2026-11-04 抓取的 Alibaba 页面内 currencyRule（Alibaba 自己的显示汇率，不是官方汇率）",
+    "rule": "只记录页面上实际看到的价格；没取到的不填"
+  },
+  "not_fetched": [
+    {
+      "platform": "1688",
+      "status": "未取到",
+      "detail": "s.1688.com 搜索页跳转到登录/验证（只返回 2.5KB），按规则不登录"
+    },
+    {
+      "platform": "Tokopedia",
+      "status": "未取到",
+      "detail": "搜索页和店铺页是 JS 渲染，curl 抓不到价格；没有用浏览器登录"
+    },
+    {
+      "platform": "Shopee",
+      "status": "未取到",
+      "detail": "同上，JS 渲染/反爬，抓不到价格"
+    },
+    {
+      "platform": "alibaba.com 主域名",
+      "status": "部分反爬",
+      "detail": "返回验证页；同一商品 ID 改用 alibaba.co.uk/.fr/.co.th 镜像能取到"
+    }
+  ],
+  "items": [
+    {
+      "category": "ingredients",
+      "product": "黑珍珠 8mm",
+      "spec": "3kg/袋，6袋/箱",
+      "platform": "Alibaba.com",
+      "seller": "KAINAN FOOD CO., LTD.",
+      "price_tiers": [
+        {
+          "qty": "10-49 cartons",
+          "unit_price": 50.0,
+          "currency": "USD",
+          "ref_IDR": 925472
+        },
+        {
+          "qty": "50-99 cartons",
+          "unit_price": 31.0,
+          "currency": "USD",
+          "ref_IDR": 573793
+        },
+        {
+          "qty": "≥100 cartons",
+          "unit_price": 28.0,
+          "currency": "USD",
+          "ref_IDR": 518264
+        }
+      ],
+      "moq": "10 cartons",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Black-Tapioca-Pearls-8mm-made-in_10000023916263.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "ingredients",
+      "product": "金珍珠 0.85cm",
+      "spec": "3kg×6袋/箱",
+      "platform": "Alibaba.com",
+      "seller": "Bosmos International Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "18-49 cartons",
+          "unit_price": 27.0,
+          "currency": "USD",
+          "ref_IDR": 499755
+        },
+        {
+          "qty": "≥50 cartons",
+          "unit_price": 25.0,
+          "currency": "USD",
+          "ref_IDR": 462736
+        }
+      ],
+      "moq": "18 cartons",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Bosmos-Golden-Tapioca-Pearls-3kg-Best_10000014713651.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "ingredients",
+      "product": "黑珍珠",
+      "spec": "3kg/袋",
+      "platform": "Alibaba.com",
+      "seller": "JIU ZHOU FOOD CO., LTD.",
+      "price_tiers": [
+        {
+          "qty": "10-1,199 bags",
+          "unit_price": 4.0,
+          "currency": "USD",
+          "ref_IDR": 74038
+        },
+        {
+          "qty": "≥1,200 bags",
+          "unit_price": 3.5,
+          "currency": "USD",
+          "ref_IDR": 64783
+        }
+      ],
+      "moq": "10 bags",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Jiuzhou-Hot-Selling-Taiwan-Black-tapioca_10000010067610.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "ingredients",
+      "product": "蓝莓浓缩糖浆",
+      "spec": "2.5kg/瓶，按箱",
+      "platform": "Alibaba.com",
+      "seller": "HONG DA MA FOODS CO., LTD.",
+      "price_tiers": [
+        {
+          "qty": "≥24 cartons",
+          "unit_price": 50.0,
+          "currency": "USD",
+          "ref_IDR": 925472
+        }
+      ],
+      "moq": "24 cartons",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Blueberry-Concentrated-Fruit-Syrup-Bubble-Tea_10000012809365.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "ingredients",
+      "product": "百香果浓缩糖浆",
+      "spec": "2.5kg/瓶",
+      "platform": "Alibaba.com",
+      "seller": "JIU ZHOU FOOD CO., LTD.",
+      "price_tiers": [
+        {
+          "qty": "30-359 pieces",
+          "unit_price": 6.0,
+          "currency": "USD",
+          "ref_IDR": 111057
+        },
+        {
+          "qty": "≥360 pieces",
+          "unit_price": 5.5,
+          "currency": "USD",
+          "ref_IDR": 101802
+        }
+      ],
+      "moq": "30 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Jiuzhou-Passion-Fruit-Concentrated-Syrup2-5kg_10000011301666.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "ingredients",
+      "product": "草莓浓缩糖浆",
+      "spec": "2.5kg/桶",
+      "platform": "Alibaba.com",
+      "seller": "Guangdong Zonegoing Food Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "80-399 barrels",
+          "unit_price": 3.99,
+          "currency": "USD",
+          "ref_IDR": 73853
+        },
+        {
+          "qty": "≥400 barrels",
+          "unit_price": 3.88,
+          "currency": "USD",
+          "ref_IDR": 71817
+        }
+      ],
+      "moq": "80 barrels",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Wholesale-2-5kg-Strawberry-Juice-Concentrated_1601523238394.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "packaging",
+      "product": "PP 磨砂杯 16oz/500ml 90口径",
+      "spec": "单只",
+      "platform": "Alibaba.com",
+      "seller": "Zhejiang KaiPuQi New Materials Technology Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "10,000-99,999 pieces",
+          "unit_price": 0.05,
+          "currency": "USD",
+          "ref_IDR": 925
+        },
+        {
+          "qty": "≥100,000 pieces",
+          "unit_price": 0.04,
+          "currency": "USD",
+          "ref_IDR": 740
+        }
+      ],
+      "moq": "10,000 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Factory-Customized-Logo-Printed-Frosted-Transparent_1601061099135.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "packaging",
+      "product": "PET/PP 杯 16oz/500ml",
+      "spec": "单只",
+      "platform": "Alibaba.com",
+      "seller": "Suzhou Wolff Packing Material Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "1,000-9,999 pieces",
+          "unit_price": 0.04,
+          "currency": "USD",
+          "ref_IDR": 740
+        },
+        {
+          "qty": "10,000-99,999 pieces",
+          "unit_price": 0.03,
+          "currency": "USD",
+          "ref_IDR": 555
+        },
+        {
+          "qty": "≥100,000 pieces",
+          "unit_price": 0.01,
+          "currency": "USD",
+          "ref_IDR": 185
+        }
+      ],
+      "moq": "1,000 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Hot-Sale-16oz-500ml-Bubble-Boba_1601269707007.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "packaging",
+      "product": "PP U 形杯 16oz/500ml",
+      "spec": "单只",
+      "platform": "Alibaba.com",
+      "seller": "UDOLLAR INDUSTRY LIMITED",
+      "price_tiers": [
+        {
+          "qty": "50-999 pieces",
+          "unit_price": 0.05,
+          "currency": "USD",
+          "ref_IDR": 925
+        },
+        {
+          "qty": "1,000-2,999 pieces",
+          "unit_price": 0.04,
+          "currency": "USD",
+          "ref_IDR": 740
+        },
+        {
+          "qty": "3,000-4,999 pieces",
+          "unit_price": 0.03,
+          "currency": "USD",
+          "ref_IDR": 555
+        },
+        {
+          "qty": "≥5,000 pieces",
+          "unit_price": 0.02,
+          "currency": "USD",
+          "ref_IDR": 370
+        }
+      ],
+      "moq": "50 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Flat-Bottom-Base-500ml-16oz-Pp_1601845521837.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "packaging",
+      "product": "PP 封口膜卷 3mil",
+      "spec": "按件（页面单位 pieces，每件规格看页面）",
+      "platform": "Alibaba.com",
+      "seller": "XIEFA Group LLC",
+      "price_tiers": [
+        {
+          "qty": "100-299 pieces",
+          "unit_price": 7.0,
+          "currency": "USD",
+          "ref_IDR": 129566
+        },
+        {
+          "qty": "300-799 pieces",
+          "unit_price": 6.0,
+          "currency": "USD",
+          "ref_IDR": 111057
+        },
+        {
+          "qty": "≥800 pieces",
+          "unit_price": 5.0,
+          "currency": "USD",
+          "ref_IDR": 92547
+        }
+      ],
+      "moq": "100 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Custom-Logo-Transparent-PP-Sealing-Roll_1601809175982.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。 计价单位是 pieces，每件对应多大一卷页面没写清楚，要和卖家确认。"
+    },
+    {
+      "category": "packaging",
+      "product": "PP 封口膜（标题称一卷可封 3000 杯）",
+      "spec": "按件（pieces）",
+      "platform": "Alibaba.com",
+      "seller": "Xiamen Skma Intelligent Technology Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "1-49 pieces",
+          "unit_price": 9.0,
+          "currency": "USD",
+          "ref_IDR": 166585
+        },
+        {
+          "qty": "50-99 pieces",
+          "unit_price": 8.5,
+          "currency": "USD",
+          "ref_IDR": 157330
+        },
+        {
+          "qty": "≥100 pieces",
+          "unit_price": 8.0,
+          "currency": "USD",
+          "ref_IDR": 148076
+        }
+      ],
+      "moq": "1 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Factory-Direct-PP-Plastic-Sealing-Film_1600534353684.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。 计价单位是 pieces，每件对应多大一卷页面没写清楚，要和卖家确认。"
+    },
+    {
+      "category": "equipment",
+      "product": "商用制冰机 10–20kg/天",
+      "spec": "台",
+      "platform": "Alibaba.com",
+      "seller": "HK SIHAO TRADE CO., LIMITED",
+      "price_tiers": [
+        {
+          "qty": "1-9 sets",
+          "unit_price": 240.0,
+          "currency": "USD",
+          "ref_IDR": 4442266
+        },
+        {
+          "qty": "10-19 sets",
+          "unit_price": 230.0,
+          "currency": "USD",
+          "ref_IDR": 4257172
+        },
+        {
+          "qty": "≥20 sets",
+          "unit_price": 220.0,
+          "currency": "USD",
+          "ref_IDR": 4072077
+        }
+      ],
+      "moq": "1 sets",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Coffee-Shop-Commercial-Crushed-Ice-Maker_1601594913984.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "equipment",
+      "product": "商用制冰机 50–60kg/天",
+      "spec": "台",
+      "platform": "Alibaba.com",
+      "seller": "Shanghai Sihao Machinery Equipment Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "1-9 sets",
+          "unit_price": 266.0,
+          "currency": "USD",
+          "ref_IDR": 4923512
+        },
+        {
+          "qty": "10-19 sets",
+          "unit_price": 239.0,
+          "currency": "USD",
+          "ref_IDR": 4423757
+        },
+        {
+          "qty": "≥20 sets",
+          "unit_price": 213.0,
+          "currency": "USD",
+          "ref_IDR": 3942511
+        }
+      ],
+      "moq": "1 sets",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Ice-Maker-50KG-Commercial-Ice-Cube_62285969586.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "equipment",
+      "product": "双头半自动意式咖啡机",
+      "spec": "台",
+      "platform": "Alibaba.com",
+      "seller": "CHEF ESSENTIALS LIMITED",
+      "price_tiers": [
+        {
+          "qty": "1-9 sets",
+          "unit_price": 1150.0,
+          "currency": "USD",
+          "ref_IDR": 21285858
+        },
+        {
+          "qty": "10-49 sets",
+          "unit_price": 999.0,
+          "currency": "USD",
+          "ref_IDR": 18490933
+        },
+        {
+          "qty": "≥50 sets",
+          "unit_price": 850.0,
+          "currency": "USD",
+          "ref_IDR": 15733026
+        }
+      ],
+      "moq": "1 sets",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Chef-prosentials-2-Groups-Semi-Automatic_1600803113231.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。 卖家名 CHEF ESSENTIALS LIMITED，所在地页面未标。"
+    },
+    {
+      "category": "equipment",
+      "product": "双头意式咖啡机 G3211A",
+      "spec": "台",
+      "platform": "Alibaba.com",
+      "seller": "EVANS Newproduct INC",
+      "price_tiers": [
+        {
+          "qty": "1-99 pieces",
+          "unit_price": 1295.0,
+          "currency": "USD",
+          "ref_IDR": 23969727
+        },
+        {
+          "qty": "≥100 pieces",
+          "unit_price": 1260.0,
+          "currency": "USD",
+          "ref_IDR": 23321897
+        }
+      ],
+      "moq": "1 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/G3211A-Commercial-Espresso-Coffee-Machine-2_1601945114709.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "equipment",
+      "product": "商用磨豆机（ITOP，64mm 刀盘）",
+      "spec": "台",
+      "platform": "Alibaba.com",
+      "seller": "Guangzhou Itop Kitchen Equipment Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "1-9 pieces",
+          "unit_price": 425.0,
+          "currency": "USD",
+          "ref_IDR": 7866513
+        },
+        {
+          "qty": "10-49 pieces",
+          "unit_price": 380.0,
+          "currency": "USD",
+          "ref_IDR": 7033588
+        },
+        {
+          "qty": "50-99 pieces",
+          "unit_price": 348.0,
+          "currency": "USD",
+          "ref_IDR": 6441286
+        },
+        {
+          "qty": "≥100 pieces",
+          "unit_price": 321.0,
+          "currency": "USD",
+          "ref_IDR": 5941531
+        }
+      ],
+      "moq": "1 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/New-Design-Commercial-Coffee-Grinder-Professional_1601669907272.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "equipment",
+      "product": "商用磨豆机 64mm 平刀",
+      "spec": "台",
+      "platform": "Alibaba.com",
+      "seller": "Zhengzhou Ouye Construction Machinery Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "1-99 pieces",
+          "unit_price": 366.0,
+          "currency": "USD",
+          "ref_IDR": 6774456
+        },
+        {
+          "qty": "≥100 pieces",
+          "unit_price": 318.0,
+          "currency": "USD",
+          "ref_IDR": 5886003
+        }
+      ],
+      "moq": "1 pieces",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Electric-Commercial-Coffee-Grinder-64mm-Flat_1601862129081.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "tea",
+      "product": "CTC 红茶颗粒（越南）",
+      "spec": "1kg/袋",
+      "platform": "Alibaba.com",
+      "seller": "Bozhou Swanf Commercial And Trade Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "1-9 bags",
+          "unit_price": 20.0,
+          "currency": "USD",
+          "ref_IDR": 370189
+        },
+        {
+          "qty": "10-99 bags",
+          "unit_price": 11.9,
+          "currency": "USD",
+          "ref_IDR": 220262
+        },
+        {
+          "qty": "100-499 bags",
+          "unit_price": 3.9,
+          "currency": "USD",
+          "ref_IDR": 72187
+        },
+        {
+          "qty": "≥500 bags",
+          "unit_price": 3.2,
+          "currency": "USD",
+          "ref_IDR": 59230
+        }
+      ],
+      "moq": "1 bags",
+      "source_url": "https://www.alibaba.co.uk/product-detail/1kg-High-quality-CTC-vietnamese-black_1600471693372.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "tea",
+      "product": "CTC 红茶",
+      "spec": "kg",
+      "platform": "Alibaba.com",
+      "seller": "Hunan Tianwang Tea Industry Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "2-49 kilograms",
+          "unit_price": 2.8,
+          "currency": "USD",
+          "ref_IDR": 51826
+        },
+        {
+          "qty": "50-999 kilograms",
+          "unit_price": 2.6,
+          "currency": "USD",
+          "ref_IDR": 48125
+        },
+        {
+          "qty": "≥1,000 kilograms",
+          "unit_price": 2.0,
+          "currency": "USD",
+          "ref_IDR": 37019
+        }
+      ],
+      "moq": "2 kilograms",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Instant-CTC-black-tea-price-china_1924364115.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "tea",
+      "product": "茉莉绿茶（台湾）",
+      "spec": "按箱（500g/袋）",
+      "platform": "Alibaba.com",
+      "seller": "YU WEI FOOD TRADING CO., LTD",
+      "price_tiers": [
+        {
+          "qty": "1-5 cartons",
+          "unit_price": 144.0,
+          "currency": "USD",
+          "ref_IDR": 2665360
+        },
+        {
+          "qty": "6-20 cartons",
+          "unit_price": 138.0,
+          "currency": "USD",
+          "ref_IDR": 2554303
+        },
+        {
+          "qty": "≥21 cartons",
+          "unit_price": 128.0,
+          "currency": "USD",
+          "ref_IDR": 2369209
+        }
+      ],
+      "moq": "1 cartons",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Green-Tea-Leaves-Standard-Jasmine-Green_10000011545845.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "tea",
+      "product": "茉莉绿茶",
+      "spec": "按袋",
+      "platform": "Alibaba.com",
+      "seller": "Jiangsu Huasang Food Technology Co., Ltd.",
+      "price_tiers": [
+        {
+          "qty": "20-499 bags",
+          "unit_price": 6.8,
+          "currency": "USD",
+          "ref_IDR": 125864
+        },
+        {
+          "qty": "500-999 bags",
+          "unit_price": 6.4,
+          "currency": "USD",
+          "ref_IDR": 118460
+        },
+        {
+          "qty": "≥1,000 bags",
+          "unit_price": 6.0,
+          "currency": "USD",
+          "ref_IDR": 111057
+        }
+      ],
+      "moq": "20 bags",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Huasang-Wholesale-Cheap-Price-Jasmine-Green_1601115888418.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "coffee_beans",
+      "product": "印尼罗布斯塔咖啡豆",
+      "spec": "10–25kg 箱装，按吨计价",
+      "platform": "Alibaba.com",
+      "seller": "UD. STAR LABORATORIES",
+      "price_tiers": [
+        {
+          "qty": "≥1 tons",
+          "unit_price": 2800.0,
+          "currency": "USD",
+          "ref_IDR": 51826438
+        }
+      ],
+      "moq": "1 tons",
+      "source_url": "https://www.alibaba.co.uk/product-detail/Premium-Robusta-Coffee-Beans-Indonesia-Origin_11000008550559.html",
+      "fetched_at": "2026-11-04 14:19 (UTC+8)",
+      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+    },
+    {
+      "category": "coffee_beans",
+      "product": "Gayo 阿拉比卡生豆 G1 水洗",
+      "spec": "60kg 麻袋，按 kg 计价",
+      "platform": "Tradewheel.com",
+      "seller": "PT Sumatra Jawa Soil",
+      "price_tiers": [
+        {
+          "qty": "起订 1×20尺柜",
+          "unit_price": 8.9,
+          "currency": "USD/kg FOB Belawan"
+        }
+      ],
+      "moq": "1×20尺柜（约19.2吨）",
+      "source_url": "https://www.tradewheel.com/p/green-coffee-beans-3020168/",
+      "fetched_at": "2026-11-04 14:18 (UTC+8)",
+      "note": "不在指定的四个平台内，是 B2B 平台补充；页面只有单一价格，没有阶梯价"
+    },
+    {
+      "category": "coffee_beans",
+      "product": "Mandailing 阿拉比卡生豆 G1 湿刨",
+      "spec": "同上",
+      "platform": "Tradewheel.com",
+      "seller": "PT Sumatra Jawa Soil",
+      "price_tiers": [
+        {
+          "qty": "起订 1×20尺柜",
+          "unit_price": 8.8,
+          "currency": "USD/kg FOB Belawan"
+        }
+      ],
+      "moq": "1×20尺柜",
+      "source_url": "https://www.tradewheel.com/p/green-coffee-beans-3020168/",
+      "fetched_at": "2026-11-04 14:18 (UTC+8)",
+      "note": "同上"
+    },
+    {
+      "category": "coffee_beans",
+      "product": "Lampung 罗布斯塔生豆 G2 日晒",
+      "spec": "同上",
+      "platform": "Tradewheel.com",
+      "seller": "PT Sumatra Jawa Soil",
+      "price_tiers": [
+        {
+          "qty": "起订 1×20尺柜",
+          "unit_price": 4.1,
+          "currency": "USD/kg FOB Panjang"
+        }
+      ],
+      "moq": "1×20尺柜",
+      "source_url": "https://www.tradewheel.com/p/green-coffee-beans-3020168/",
+      "fetched_at": "2026-11-04 14:18 (UTC+8)",
+      "note": "同上"
+    },
+    {
+      "category": "coffee_beans",
+      "product": "Gayo 阿拉比卡（Premium Grade）",
+      "spec": "kg",
+      "platform": "go4WorldBusiness",
+      "seller": "CV Hariman Kian Makmur",
+      "price_tiers": [
+        {
+          "qty": "区间报价",
+          "unit_price": "11.50-11.80",
+          "currency": "USD/kg"
+        }
+      ],
+      "moq": "5 MT",
+      "source_url": "https://www.go4worldbusiness.com/pref_product/view/1908269/premium-grade-gayo-arabica-coffee-beans.html",
+      "fetched_at": "2026-11-04 14:20 (UTC+8)",
+      "note": "补充 B2B 平台；页面只给区间价"
+    },
+    {
+      "category": "packaging",
+      "product": "封口膜卷（自产）",
+      "spec": "每卷，100/500/1000m 可选",
+      "platform": "官网（非市场平台）",
+      "seller": "WirausahaGroup（CV Wirausaha Sukses）",
+      "price_tiers": [
+        {
+          "qty": "起步价",
+          "unit_price": 560000,
+          "currency": "IDR/roll（页面写「mulai dari」，即起价）"
+        }
+      ],
+      "moq": "",
+      "source_url": "https://www.wirausahagroup.com/product/lid-cup",
+      "fetched_at": "2026-11-04 14:20 (UTC+8)",
+      "note": "印尼本地价格参考；大单阶梯价页面没公布"
+    }
+  ]
+}
