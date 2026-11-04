@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T02:32:42",
+  "generated_at": "2026-11-04T12:09:49",
   "demo": true,
   "window": "近 3 个月",
   "factors": [
@@ -73,6 +73,7 @@
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "高",
+      "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=药果（蜂蜜油果子）",
@@ -98,6 +99,7 @@
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "中",
+      "coop_mode": "可代理",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=黄油树夹心饼干",
@@ -123,6 +125,7 @@
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "高",
+      "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=现烤太阳饼/老婆饼",
@@ -148,6 +151,7 @@
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "高",
+      "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=烤鱿鱼丝/酸辣鱿鱼",
@@ -173,6 +177,7 @@
       "grade": "A",
       "grade_action": "优先复制",
       "replicability": "高",
+      "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=泰式手打奶茶",
@@ -198,6 +203,7 @@
       "grade": "B",
       "grade_action": "改造后试销",
       "replicability": "高",
+      "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=鲜奶油水果三明治",
@@ -223,6 +229,7 @@
       "grade": "B",
       "grade_action": "改造后试销",
       "replicability": "中",
+      "coop_mode": "可代理",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=南洋白咖啡（现调）",
@@ -248,6 +255,7 @@
       "grade": "B",
       "grade_action": "改造后试销",
       "replicability": "中",
+      "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=现烤巴斯克芝士蛋糕",
@@ -273,6 +281,7 @@
       "grade": "B",
       "grade_action": "改造后试销",
       "replicability": "中",
+      "coop_mode": "可加盟",
       "twin": {
         "zone": "fresh",
         "floorplan": "/floorplan/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈",

@@ -131,6 +131,40 @@
 <div id="side">
   <h1>智能选址 SITE INTELLIGENCE：<em>人流 × 客群 × 租金 × 竞品</em></h1>
   <div class="meta" id="meta"></div>
+  <style>
+  .agent{border:1.5px solid #111;border-radius:10px;margin:0 0 16px;overflow:hidden;background:#fff}
+  .agent .ag-h{padding:9px 12px;font-size:12px;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:#111;color:#fff}
+  .agent .ag-h .dot{width:7px;height:7px;border-radius:50%;background:#3fb950;display:inline-block;margin-right:6px;animation:agpulse 1.6s infinite}
+  @keyframes agpulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .ag-log{padding:10px 12px;max-height:250px;overflow-y:auto;font-size:12px}
+  .ag-msg{margin-bottom:10px;line-height:1.6}
+  .ag-msg.user{text-align:right}
+  .ag-msg.user span{background:#f2f2f2;border:1px solid #e5e5e5;padding:4px 10px;border-radius:12px;display:inline-block}
+  .ag-msg .who{font-size:10px;letter-spacing:.12em;color:#767676;margin-bottom:3px}
+  .ag-parse{font-size:11px;color:#767676;border-left:2px solid #e5e5e5;padding-left:8px;margin:4px 0 8px;line-height:1.7}
+  .ag-cand{border:1px solid #e5e5e5;border-radius:8px;padding:8px 10px;margin-bottom:6px}
+  .ag-cand .nm{font-weight:700;font-size:12.5px}
+  .ag-cand .rs{color:#767676;font-size:11px;margin-top:2px;line-height:1.6}
+  .ag-cand .act{margin-top:5px;font-size:11px}
+  .ag-cand .act a{color:#111;font-weight:600;margin-right:10px;text-decoration:none;border-bottom:1px solid #111}
+  .ag-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
+  .ag-chips button{font-size:11px;border:1px solid #e5e5e5;background:#fff;border-radius:999px;padding:3px 10px;cursor:pointer;color:#767676}
+  .ag-chips button:hover{color:#111;border-color:#111}
+  .ag-in{display:flex;border-top:1px solid #e5e5e5}
+  .ag-in input{flex:1;border:none;padding:9px 12px;font-size:12.5px;outline:none;font-family:inherit}
+  .ag-in button{border:none;background:#111;color:#fff;padding:0 16px;font-size:12px;cursor:pointer}
+  </style>
+  <div class="agent">
+    <div class="ag-h"><span><span class="dot"></span>选址 AGENT · 说人话，AI 在 30 个候选里推理</span><span style="font-weight:400;opacity:.65">RULE-BASED DEMO</span></div>
+    <div class="ag-log" id="agLog"><div class="ag-msg"><div class="who">AGENT</div>你好，我是选址 Agent。直接说需求就行，比如「我想在泗水开奶茶店，学校周边人流大的」。我会解析意图 → 过滤候选 → 按因子加权，给你 TOP3 并附推荐理由。</div></div>
+    <div class="ag-chips">
+      <button onclick="askAgent(this.textContent)">学校周边人流大的店推荐</button>
+      <button onclick="askAgent(this.textContent)">离岛哪个城市优先</button>
+      <button onclick="askAgent(this.textContent)">低租金高可见度的街铺</button>
+      <button onclick="askAgent(this.textContent)">推车档口最适合去哪</button>
+    </div>
+    <div class="ag-in"><input id="agIn" placeholder="例：泗水开咖啡店，预算紧，要外卖强的" onkeydown="if(event.key==='Enter')askAgent()"><button onclick="askAgent()">发送 →</button></div>
+  </div>
   <h2>🏆 选址候选 TOP · SITE CANDIDATES（五业态模型匹配：星巴克/瑞幸/麦当劳/蜜雪/推车）</h2>
   <div id="sites"></div>
 </div>
@@ -312,6 +346,83 @@ function buildLayers(map, d) {
     map.flyTo(mk.getLatLng(), 15);
     setTimeout(() => mk.openPopup(), 800);
   }
+}
+</script>
+<script>
+/* ═══ 选址 AGENT：客户端规则引擎（意图解析 → 过滤 → 因子加权 → TOP3 + 理由） ═══ */
+function askAgent(preset) {
+  const inp = document.getElementById('agIn');
+  const q = (preset || inp.value || '').trim(); if (!q) return;
+  inp.value = '';
+  const log = document.getElementById('agLog');
+  log.innerHTML += `<div class="ag-msg user"><span>${q.replace(/</g, '&lt;')}</span></div>`;
+  log.scrollTop = log.scrollHeight;
+  setTimeout(() => {
+    log.innerHTML += `<div class="ag-msg"><div class="who">AGENT · THINKING</div>${agentReason(q)}</div>`;
+    log.scrollTop = log.scrollHeight;
+  }, 450);
+}
+function agentReason(q) {
+  const d = siteSel;
+  if (!d) return '选址数据加载中，请稍候再问一次。';
+  const cs = d.candidates;
+  const found = { city: [], island: [], models: [], prefs: [], budget: null };
+  cs.forEach(c => { if (q.includes(c.city) && !found.city.includes(c.city)) found.city.push(c.city); });
+  [...new Set(cs.map(c => c.island))].forEach(is => { if (q.includes(is)) found.island.push(is); });
+  const KW = [['推车', 'cart'], ['档口', 'cart'], ['性价比', 'value'], ['街铺', 'value'], ['低价', 'value'],
+              ['体验', 'experience'], ['旗舰', 'experience'], ['咖啡', 'experience'],
+              ['快取', 'pickup'], ['外卖', 'pickup'], ['自提', 'pickup'],
+              ['车餐', 'drive'], ['汽车', 'drive'], ['家庭', 'drive'], ['熟食', 'drive'], ['正餐', 'drive'],
+              ['奶茶', 'value'], ['茶饮', 'value']];
+  d.models_legend.forEach(m => KW.push([m.name.slice(0, 2), m.key]));
+  KW.forEach(([w, k]) => { if (q.includes(w) && !found.models.includes(k)) found.models.push(k); });
+  const PF = [['人流', 'foot_traffic', 1], ['客流', 'foot_traffic', 1], ['租金', 'rent_pressure', -1],
+              ['客群', 'crowd_fit', 1], ['竞争', 'competition', -1], ['学校', 'schools', 1],
+              ['社区', 'communities', 1], ['商城', 'malls', 1], ['外卖', 'delivery_fit', 1],
+              ['车流', 'car_traffic', 1], ['可见', 'visibility', 1], ['曝光', 'visibility', 1]];
+  PF.forEach(([w, f, dir]) => { if (q.includes(w)) found.prefs.push({ f, dir, w }); });
+  const bm = q.match(/\d+(?:\.\d+)?\s*(?:亿|万|jt|百万)?/i);
+  if (bm) found.budget = bm[0];
+  const mName = k => { const m = d.models_legend.find(x => x.key === k); return m ? m.name : k; };
+  const parseLine = `意图解析 → 城市：${found.city.join('、') || '不限'} · 业态：${found.models.map(mName).join('、') || '不限'} · 偏好：${found.prefs.map(p => p.w).join('、') || '综合分'} · 预算：${found.budget || '未提供'}`;
+  let pool = cs.map(c => ({ c, rank: c.score }));
+  if (found.city.length) pool = pool.filter(x => found.city.includes(x.c.city));
+  if (!found.city.length && found.island.length) pool = pool.filter(x => found.island.includes(x.c.island));
+  if (found.models.length) pool = pool.filter(x => x.c.best_model.key === found.models[0] || x.c.models.some(m => m.key === found.models[0]));
+  if (!pool.length) return `<div class="ag-parse">${parseLine}</div>按这个条件没有命中候选。放宽城市或业态试试，或直接说「人流大」让我综合推荐。`;
+  if (found.prefs.length) {
+    pool.forEach(x => {
+      let b = 0, n = 0;
+      found.prefs.forEach(p => {
+        let v;
+        if (p.f in x.c) v = x.c[p.f];
+        else if (x.c.catchment && p.f in x.c.catchment) v = Math.min(x.c.catchment[p.f] * 8, 100);
+        else return;
+        b += p.dir * v / found.prefs.length * 0.25; n++;
+      });
+      if (n) x.rank = x.c.score + b;
+    });
+  }
+  pool.sort((a, b) => b.rank - a.rank);
+  const top = pool.slice(0, 3);
+  const html = top.map((x, i) => {
+    const c = x.c, col = c.score >= 72 ? '#2e7d32' : c.score >= 65 ? '#b26a00' : '#e60023';
+    const why = [];
+    if (found.city.includes(c.city)) why.push('城市命中');
+    if (found.models.includes(c.best_model.key)) why.push(`业态匹配「${c.best_model.name}」`);
+    found.prefs.slice(0, 2).forEach(p => {
+      const v = p.f in c ? c[p.f] : (c.catchment || {})[p.f];
+      if (v != null) why.push(`${p.w} ${v}${p.dir > 0 ? '↑' : '↓'}`);
+    });
+    why.push(`综合选址分 ${c.score}`);
+    const prop = c.id.indexOf('RD-SH') === 0 ? ` · <a href="/proposal/?shop=${c.id.replace('RD-', '')}" target="_blank">生成合作提案 →</a>` : '';
+    return `<div class="ag-cand"><div class="nm">${i + 1}. ${c.name} <b style="color:${col};float:right">${Math.round(x.rank * 10) / 10}</b></div>
+      <div class="rs">📍 ${c.area} · ${c.city}（${c.island}） · ${c.best_model.icon} ${c.best_model.name}</div>
+      <div class="rs">${why.join(' · ')}</div>
+      <div class="act"><a href="javascript:void(0)" onclick="if(window._leaflet_map){window._leaflet_map.flyTo([${c.lat},${c.lon}],15);var m=window._site_markers&&window._site_markers['${c.id}'];if(m)setTimeout(function(){m.openPopup()},900)}">在地图上查看 →</a>${prop}</div></div>`;
+  }).join('');
+  const extra = pool.length > 3 ? `<div style="font-size:11px;color:#767676;margin-top:4px">其余 ${pool.length - 3} 个候选已按加权分排序，见下方完整榜单。</div>` : '';
+  return `<div class="ag-parse">${parseLine}<br>过滤后 ${pool.length} 个候选 → 偏好加权 → TOP3：</div>${html}${extra}`;
 }
 </script>
 <script src="/ui/interactions.js" defer></script>

@@ -101,6 +101,7 @@ def _score_snack(s: dict) -> dict:
     return {"id": s["id"], "name": s["name"], "region": s["region"], "category": s["category"],
             "heat": s["heat"], "scores": scores, "total": total, "grade": grade,
             "grade_action": action, "replicability": s["replicability"],
+            "coop_mode": s.get("coop_mode", "仅学习"),
             "twin": twin_links(s["category"], s["name"])}
 
 

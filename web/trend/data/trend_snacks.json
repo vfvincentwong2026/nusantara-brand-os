@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-04T02:32:36",
+  "generated_at": "2026-11-04T12:09:43",
   "demo": true,
   "window": "近 3 个月",
   "regions": [
@@ -33,6 +33,7 @@
       "repl_reason": "现烤工艺门槛中等（夹心+烘烤曲线），品牌溢价靠'现烤香气+切面仪式感'，不依赖产地故事。",
       "source_type": "演示",
       "store_mode": "现烤专门店 + 伴手礼双轨",
+      "coop_mode": "可代理",
       "social": {
         "views": 42000,
         "likes": 1300,
@@ -67,6 +68,7 @@
       "repl_reason": "kue 油炸工艺与印尼本地高度相通，设备门槛低；差异化在口味微调与空间叙事。",
       "source_type": "演示",
       "store_mode": "现制糕点 café（明档+外带）",
+      "coop_mode": "仅学习",
       "social": {
         "views": 24000,
         "likes": 980,
@@ -101,6 +103,7 @@
       "repl_reason": "配方可复制，明档切台是记忆点；客单价 Rp 60-120k，适合作为加盟旗舰店品类。",
       "source_type": "演示",
       "store_mode": "现烤甜品专门店",
+      "coop_mode": "仅学习",
       "social": {
         "views": 18000,
         "likes": 620,
@@ -134,6 +137,7 @@
       "repl_reason": "工艺可复制，但'排队经济学'依赖商圈选址与营销预算。",
       "source_type": "演示",
       "store_mode": "现制甜品专门店",
+      "coop_mode": "可加盟",
       "social": {
         "views": 21000,
         "likes": 950,
@@ -167,6 +171,7 @@
       "repl_reason": "操作标准化程度高，培训一周可上岗；差异化在茶底拼配与减糖技术。",
       "source_type": "演示",
       "store_mode": "现调茶饮档口店",
+      "coop_mode": "仅学习",
       "social": {
         "views": 50000,
         "likes": 2100,
@@ -201,6 +206,7 @@
       "repl_reason": "设备与工艺简单，适合作为网红店引流品而非零售 SKU。",
       "source_type": "演示",
       "store_mode": "现制烘焙专门店",
+      "coop_mode": "仅学习",
       "social": {
         "views": 9000,
         "likes": 350,
@@ -234,6 +240,7 @@
       "repl_reason": "烘焙工艺本地完全可复制，竞争点在出炉仪式感、包装设计与节庆营销。",
       "source_type": "演示",
       "store_mode": "现烤糕饼专门店 + 伴手礼",
+      "coop_mode": "仅学习",
       "social": {
         "views": 8000,
         "likes": 300,
@@ -267,6 +274,7 @@
       "repl_reason": "操作流程标准化易培训；竞争点在豆种故事与 kopitiam 空间氛围。",
       "source_type": "演示",
       "store_mode": "现调咖啡 kopitiam 档口",
+      "coop_mode": "可代理",
       "social": {
         "views": 5000,
         "likes": 200,
@@ -300,6 +308,7 @@
       "repl_reason": "原料与烤工艺本地成熟，设备仅需烤炉+排烟；差异化在蘸酱体系与调味升级。",
       "source_type": "演示",
       "store_mode": "现烤熟食档（夜市模型）",
+      "coop_mode": "仅学习",
       "social": {
         "views": 7000,
         "likes": 260,
@@ -337,6 +346,7 @@
         "repl_reason": "现烤工艺门槛中等（夹心+烘烤曲线），品牌溢价靠'现烤香气+切面仪式感'，不依赖产地故事。",
         "source_type": "演示",
         "store_mode": "现烤专门店 + 伴手礼双轨",
+        "coop_mode": "可代理",
         "social": {
           "views": 42000,
           "likes": 1300,
@@ -371,6 +381,7 @@
         "repl_reason": "配方可复制，明档切台是记忆点；客单价 Rp 60-120k，适合作为加盟旗舰店品类。",
         "source_type": "演示",
         "store_mode": "现烤甜品专门店",
+        "coop_mode": "仅学习",
         "social": {
           "views": 18000,
           "likes": 620,
@@ -404,6 +415,7 @@
         "repl_reason": "设备与工艺简单，适合作为网红店引流品而非零售 SKU。",
         "source_type": "演示",
         "store_mode": "现制烘焙专门店",
+        "coop_mode": "仅学习",
         "social": {
           "views": 9000,
           "likes": 350,
@@ -439,6 +451,7 @@
         "repl_reason": "kue 油炸工艺与印尼本地高度相通，设备门槛低；差异化在口味微调与空间叙事。",
         "source_type": "演示",
         "store_mode": "现制糕点 café（明档+外带）",
+        "coop_mode": "仅学习",
         "social": {
           "views": 24000,
           "likes": 980,
@@ -473,6 +486,7 @@
         "repl_reason": "工艺可复制，但'排队经济学'依赖商圈选址与营销预算。",
         "source_type": "演示",
         "store_mode": "现制甜品专门店",
+        "coop_mode": "可加盟",
         "social": {
           "views": 21000,
           "likes": 950,
@@ -508,6 +522,7 @@
         "repl_reason": "烘焙工艺本地完全可复制，竞争点在出炉仪式感、包装设计与节庆营销。",
         "source_type": "演示",
         "store_mode": "现烤糕饼专门店 + 伴手礼",
+        "coop_mode": "仅学习",
         "social": {
           "views": 8000,
           "likes": 300,
@@ -543,6 +558,7 @@
         "repl_reason": "操作标准化程度高，培训一周可上岗；差异化在茶底拼配与减糖技术。",
         "source_type": "演示",
         "store_mode": "现调茶饮档口店",
+        "coop_mode": "仅学习",
         "social": {
           "views": 50000,
           "likes": 2100,
@@ -577,6 +593,7 @@
         "repl_reason": "原料与烤工艺本地成熟，设备仅需烤炉+排烟；差异化在蘸酱体系与调味升级。",
         "source_type": "演示",
         "store_mode": "现烤熟食档（夜市模型）",
+        "coop_mode": "仅学习",
         "social": {
           "views": 7000,
           "likes": 260,
@@ -612,6 +629,7 @@
         "repl_reason": "操作流程标准化易培训；竞争点在豆种故事与 kopitiam 空间氛围。",
         "source_type": "演示",
         "store_mode": "现调咖啡 kopitiam 档口",
+        "coop_mode": "可代理",
         "social": {
           "views": 5000,
           "likes": 200,

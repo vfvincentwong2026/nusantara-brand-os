@@ -294,7 +294,8 @@ document.getElementById('funnel').innerHTML =
         else { st = ['滞留','st-skip']; nx = act[g]; }
         return `<div class="qrow${killed ? ' killed' : ''}">
           <span class="id">${esc(s.id)}</span>
-          <span class="nm">${esc(s.name)}<small>${esc(s.region)} · ${esc(s.category||'')}</small></span>
+          <span class="nm">${esc(s.name)}<small>${esc(s.region)} · ${esc(s.category||'')}</small>
+            <small style="display:inline-block;margin-top:3px;padding:1px 8px;border-radius:999px;border:1px solid ${({可加盟:'rgba(46,125,35,.5)',可代理:'rgba(21,101,192,.5)'})[s.coop_mode]||'#e5e5e5'};color:${({可加盟:'#2e7d32',可代理:'#1565c0'})[s.coop_mode]||'#767676'};font-size:10px;">合作模式 · ${esc(s.coop_mode||'仅学习')}</small></span>
           <span class="heat">${s.heat != null ? '🔥 ' + s.heat : '—'}</span>
           <span class="total">${r ? r.total + ' <span class="grade ' + cls + '">' + g + '</span>' : '待评分'}</span>
           <span class="nx hide-m">${esc(nx)}</span>

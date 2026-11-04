@@ -33,6 +33,10 @@
   .rankrow .r { color:#e60023; font-weight:800; font-family:Consolas,monospace; font-size:15px; }
   .rankrow .nm { font-weight:700; font-size:13px; }
   .rankrow .nm small { display:block; color:#767676; font-weight:400; font-size:10.5px; margin-top:2px; }
+  .coop-tag { display:inline-block !important; padding:2px 8px; border-radius:999px; border:1px solid #e5e5e5; margin-top:5px !important; font-weight:600 !important; }
+  .coop-tag[data-m="可加盟"] { color:#2e7d32; border-color:rgba(46,125,35,.5); background:rgba(46,125,35,.08); }
+  .coop-tag[data-m="可代理"] { color:#1565c0; border-color:rgba(21,101,192,.5); background:rgba(21,101,192,.08); }
+  .coop-tag[data-m="仅学习"] { color:#767676; }
   .cellbar { height:5px; background:#efefef; border-radius:3px; overflow:hidden; margin-top:3px; }
   .cellbar i { display:block; height:100%; border-radius:3px; }
   .cellv { font-family:Consolas,monospace; font-size:10px; color:#767676; }
@@ -140,7 +144,7 @@ fetch('./data/launch.json').then(r => r.json()).then(d => {
     const c = k => `<div class="cellbar"><i style="width:${s.scores[k]}%;background:${FC[k]}"></i></div><span class="cellv">${s.scores[k]}</span>`;
     return `<div class="rankrow">
       <span class="r">${String(i+1).padStart(2,'0')}</span>
-      <span class="nm">${esc(s.name)}<small>${esc(s.region)} · ${esc(s.category)}</small></span>
+      <span class="nm">${esc(s.name)}<small>${esc(s.region)} · ${esc(s.category)}</small><br><small class="coop-tag" data-m="${esc(s.coop_mode || '仅学习')}">${esc(s.coop_mode || '仅学习')} · ${({'可加盟':'品牌加盟体系可直接引入','可代理':'区域代理/分销引入','仅学习':'学玩法 · 自创品牌复制'})[s.coop_mode] || '学玩法 · 自创品牌复制'}</small></span>
       <span>${c('f1')}</span><span class="hide-m">${c('f2')}</span><span class="hide-m">${c('f3')}</span>
       <span>${c('f4')}</span><span class="hide-m">${c('f5')}</span><span class="hide-m">${c('f6')}</span>
       <span>${c('f7')}</span>

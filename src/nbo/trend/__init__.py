@@ -171,18 +171,26 @@ def migrate_trend(conn: sqlite3.Connection) -> None:
     cols = {r[1] for r in conn.execute("PRAGMA table_info(trend_snack)")}
     if "store_mode" not in cols:
         conn.execute("ALTER TABLE trend_snack ADD COLUMN store_mode TEXT")
+    if "coop_mode" not in cols:
+        conn.execute("ALTER TABLE trend_snack ADD COLUMN coop_mode TEXT")
+    # 存量回填：与品牌库口径一致（可加盟 / 可代理 / 仅学习）
+    COOP_MAP = {"JP-01": "可代理", "KR-02": "可加盟", "MY-02": "可代理"}
+    for _id, _m in COOP_MAP.items():
+        conn.execute("UPDATE trend_snack SET coop_mode=? WHERE id=?", (_m, _id))
+    conn.execute("UPDATE trend_snack SET coop_mode='仅学习' WHERE coop_mode IS NULL")
 
 
 def seed_trend(conn: sqlite3.Connection, snacks: list[dict] | None = None) -> None:
     migrate_trend(conn)
     for s in snacks or SEED_SNACKS:
-        conn.execute("INSERT OR REPLACE INTO trend_snack VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        conn.execute("INSERT OR REPLACE INTO trend_snack VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                      (s["id"], s["region"], s["name"], s["name_local"], s["category"],
                       s["heat"], json.dumps(s["heat_signals"], ensure_ascii=False),
                       s["why_hot"], s["viral_format"], s["indo_fit"], s["fit_reasons"],
                       s["adaptation"], s["compliance_note"], s["replicability"],
                       s["repl_reason"], s["source_type"],
-                      s.get("store_mode", "现制专门店")))
+                      s.get("store_mode", "现制专门店"),
+                      s.get("coop_mode", "仅学习")))
 
 
 def _row_to_snack(r: sqlite3.Row) -> dict:
