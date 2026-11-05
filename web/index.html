@@ -5,8 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nusantara Brand OS · Platform kopi dan teh Indonesia</title>
 <meta name="description" content="Platform dua sisi untuk merek dan pemasok kopi serta teh di Indonesia. Dioperasikan oleh PT XDirection Public Relations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%231c1916'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23070b14'/%3E%3Crect x='7' y='20' width='4' height='6' fill='%23e6b15a'/%3E%3Crect x='14' y='14' width='4' height='12' fill='%233ee0ff'/%3E%3Crect x='21' y='8' width='4' height='18' fill='%233ee0ff'/%3E%3C/svg%3E">
 </head>
 <body>
 <a class="skip" href="#main" data-i18n="skip">Langsung ke isi</a>
@@ -32,100 +35,134 @@
 <main id="main">
   <div class="wrap">
     <section class="hero">
-      <p class="kicker" data-i18n="hero.kicker">PT XDirection Public Relations</p>
-      <h1 data-i18n="hero.title">Platform dua sisi untuk kopi dan teh di Indonesia.</h1>
-      <p class="lead" data-i18n="hero.lead">Nusantara Brand OS mempertemukan merek minuman lokal dengan pemasok. Merek dapat membaca radar panas media sosial dan mengajukan perbandingan kompetitor satu halaman. Pemasok biji kopi, teh, bahan baku, peralatan, dan kemasan dapat mendaftar.</p>
-      <p class="operator" data-i18n="hero.operator">Dioperasikan oleh PT XDirection Public Relations, perusahaan Indonesia.</p>
-      <div class="actions">
-        <a class="btn primary" href="#radar" data-i18n="hero.ctaRadar">Lihat contoh radar</a>
-        <a class="btn" data-mail="compare" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="hero.ctaCompare">Ajukan perbandingan</a>
-        <a class="btn" href="#pemasok" data-i18n="hero.ctaSupplier">Daftar sebagai pemasok</a>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="kicker" data-i18n="hero.kicker">PT XDirection Public Relations</p>
+          <h1 data-i18n="hero.title">Panas kopi dan teh Indonesia, terbaca dari data publik.</h1>
+          <p class="lead" data-i18n="hero.lead">Nusantara Brand OS mempertemukan merek minuman lokal dengan pemasok. Merek dapat membaca radar panas media sosial dan mengajukan perbandingan kompetitor satu halaman. Pemasok biji kopi, teh, bahan baku, peralatan, dan kemasan dapat mendaftar.</p>
+          <p class="operator" data-i18n="hero.operator">Dioperasikan oleh PT XDirection Public Relations, perusahaan Indonesia.</p>
+          <div class="actions">
+            <a class="btn primary" data-mail="compare" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="hero.ctaCompare">Ajukan perbandingan gratis</a>
+            <a class="btn" href="#radar" data-i18n="hero.ctaRadar">Lihat contoh radar</a>
+            <a class="btn" href="#pemasok" data-i18n="hero.ctaSupplier">Daftar sebagai pemasok</a>
+          </div>
+        </div>
+        <aside class="radar-live" id="radar-live" aria-labelledby="radar-live-label">
+          <div class="live-top">
+            <span class="pulse" aria-hidden="true"></span>
+            <p class="kicker" id="radar-live-label" data-i18n="radar.liveKicker">Radar terkini</p>
+          </div>
+          <p class="live-name" id="radar-live-name"></p>
+          <p class="live-value" id="radar-live-value">—</p>
+          <p class="live-unit" data-i18n="radar.colHeat">Skor panas</p>
+          <p class="live-sub"><strong id="radar-live-mentions">—</strong> <span data-i18n="radar.colMentions">Sebutan 7 hari</span></p>
+          <ol id="radar-live-rows"></ol>
+          <p class="aside" data-i18n="radar.platforms">Instagram dan TikTok belum terhubung. Angka kedua platform tidak ditampilkan.</p>
+          <p class="tag" data-i18n="radar.sourceLabel">Catatan sumber pada berkas data</p>
+          <p id="radar-live-source" class="source"></p>
+          <p id="radar-live-updated" class="when"></p>
+        </aside>
       </div>
     </section>
 
     <section id="merek" class="block">
-      <p class="kicker" data-i18n="brand.kicker">01 — Merek</p>
-      <h2 data-i18n="brand.title">Untuk merek lokal</h2>
-      <h3 data-i18n="brand.radarTitle">Radar panas media sosial</h3>
-      <p data-i18n="brand.radarBody">Daftar merek kopi dan teh yang dilacak, dengan metrik yang diambil dari data publik X. Instagram dan TikTok belum terhubung.</p>
-      <p><a href="trend/" data-i18n="brand.radarLink">Buka radar lengkap</a></p>
-      <h3 data-i18n="brand.compareTitle">Perbandingan kompetitor satu halaman</h3>
-      <p data-i18n="brand.compareBody">Ajukan satu halaman yang membandingkan merek Anda dengan merek pembanding yang Anda sebutkan. Pengajuan ini gratis. Situs ini tidak menyimpan formulir; tautan membuka aplikasi email Anda.</p>
-      <p class="actions-tight"><a class="btn" data-mail="compare" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="brand.compareCta">Ajukan lewat email</a></p>
-      <div class="later">
-        <p class="tag" data-i18n="brand.laterKicker">Berikutnya</p>
-        <h3 data-i18n="brand.laterTitle">Belum dibuka</h3>
-        <ul>
-          <li data-i18n="brand.later1">Pengelolaan media sosial</li>
-          <li data-i18n="brand.later2">Pustaka materi</li>
-          <li data-i18n="brand.later3">Layanan pelanggan berbasis AI</li>
-        </ul>
-        <p class="note" data-i18n="brand.laterNote">Tiga layanan di atas belum menerima permintaan.</p>
+      <div class="split">
+        <article class="glass reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2"/></svg>
+          <p class="kicker" data-i18n="brand.kicker">01 — Merek</p>
+          <h2 data-i18n="brand.radarTitle">Radar panas media sosial</h2>
+          <p data-i18n="brand.radarBody">Daftar merek kopi dan teh yang dilacak, dengan metrik yang diambil dari data publik X. Instagram dan TikTok belum terhubung.</p>
+          <p><a href="trend/" data-i18n="brand.radarLink">Buka radar lengkap</a></p>
+        </article>
+        <article class="glass reveal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 4h9l3 3v13H6z"/><path d="M15 4v3h3M8 11h8M8 15h6"/></svg>
+          <p class="kicker" data-i18n="brand.laterKicker">Berikutnya</p>
+          <h2 data-i18n="brand.compareTitle">Perbandingan kompetitor satu halaman</h2>
+          <p data-i18n="brand.compareBody">Ajukan satu halaman yang membandingkan merek Anda dengan merek pembanding yang Anda sebutkan. Pengajuan ini gratis. Situs ini tidak menyimpan formulir; tautan membuka aplikasi email Anda.</p>
+          <p class="actions-tight"><a class="btn primary" data-mail="compare" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="brand.compareCta">Ajukan lewat email</a></p>
+          <div class="later">
+            <h3 data-i18n="brand.laterTitle">Belum dibuka</h3>
+            <ul>
+              <li data-i18n="brand.later1">Pengelolaan media sosial</li>
+              <li data-i18n="brand.later2">Pustaka materi</li>
+              <li data-i18n="brand.later3">Layanan pelanggan berbasis AI</li>
+            </ul>
+            <p class="note" data-i18n="brand.laterNote">Tiga layanan di atas belum menerima permintaan.</p>
+          </div>
+        </article>
       </div>
     </section>
 
     <section id="pemasok" class="block">
-      <p class="kicker" data-i18n="supplier.kicker">02 — Pemasok</p>
-      <h2 data-i18n="supplier.title">Untuk pemasok</h2>
-      <p data-i18n="supplier.lead">Pemasok dapat mengajukan diri agar masuk daftar platform.</p>
-      <h3 data-i18n="supplier.whoTitle">Yang dapat mendaftar</h3>
-      <ul>
-        <li data-i18n="supplier.item1">Biji kopi</li>
-        <li data-i18n="supplier.item2">Teh</li>
-        <li data-i18n="supplier.item3">Bahan baku</li>
-        <li data-i18n="supplier.item4">Peralatan</li>
-        <li data-i18n="supplier.item5">Kemasan</li>
-      </ul>
-      <h3 data-i18n="supplier.howTitle">Cara mendaftar</h3>
-      <p data-i18n="supplier.howBody">Kirim email dengan nama perusahaan, kategori, dan kota. Tidak ada formulir di situs ini.</p>
-      <h3 data-i18n="supplier.feeTitle">Tahap awal</h3>
-      <p data-i18n="supplier.feeBody">Pada tahap awal, pendaftaran gratis.</p>
-      <p class="actions-tight"><a class="btn primary" data-mail="supplier" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="supplier.cta">Daftar lewat email</a></p>
+      <article class="glass reveal">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8h16v10H4z"/><path d="M8 8V6a4 4 0 0 1 8 0v2"/><path d="M4 12h16"/></svg>
+        <p class="kicker" data-i18n="supplier.kicker">02 — Pemasok</p>
+        <h2 data-i18n="supplier.title">Untuk pemasok</h2>
+        <p data-i18n="supplier.lead">Pemasok dapat mengajukan diri agar masuk daftar platform.</p>
+        <h3 data-i18n="supplier.whoTitle">Yang dapat mendaftar</h3>
+        <ul class="chips">
+          <li data-i18n="supplier.item1">Biji kopi</li>
+          <li data-i18n="supplier.item2">Teh</li>
+          <li data-i18n="supplier.item3">Bahan baku</li>
+          <li data-i18n="supplier.item4">Peralatan</li>
+          <li data-i18n="supplier.item5">Kemasan</li>
+        </ul>
+        <h3 data-i18n="supplier.howTitle">Cara mendaftar</h3>
+        <p data-i18n="supplier.howBody">Kirim email dengan nama perusahaan, kategori, dan kota. Tidak ada formulir di situs ini.</p>
+        <h3 data-i18n="supplier.feeTitle">Tahap awal</h3>
+        <p data-i18n="supplier.feeBody">Pada tahap awal, pendaftaran gratis.</p>
+        <p class="actions-tight"><a class="btn primary" data-mail="supplier" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="supplier.cta">Daftar lewat email</a></p>
+      </article>
     </section>
 
     <section id="radar" class="block">
-      <p class="kicker" data-i18n="radar.kicker">03 — Radar</p>
-      <h2 id="radar-title" data-i18n="radar.title">Contoh radar</h2>
-      <p data-i18n="radar.lead">Beberapa merek teratas menurut skor panas di berkas data. Tabel hanya memuat angka yang berstatus data publik X.</p>
-      <p class="aside" data-i18n="radar.platforms">Instagram dan TikTok belum terhubung. Angka kedua platform tidak ditampilkan.</p>
-      <p class="aside" data-i18n="radar.directory">Kota dan kategori adalah label pada daftar radar, bukan angka dari X.</p>
-      <p id="radar-status" class="status" aria-live="polite" data-i18n="radar.loading">Memuat data radar…</p>
-      <p id="radar-summary" class="summary"></p>
-      <p class="tag" data-i18n="radar.sourceLabel">Catatan sumber pada berkas data</p>
-      <p id="radar-source" class="source"></p>
-      <p id="radar-updated" class="when"></p>
-      <noscript><p>Contoh radar membutuhkan JavaScript untuk membaca berkas data. Email di halaman ini tetap dapat digunakan.</p></noscript>
-      <table class="sheet" aria-labelledby="radar-title">
-        <thead>
-          <tr>
-            <th data-i18n="radar.colBrand" scope="col">Merek</th>
-            <th data-i18n="radar.colAccount" scope="col">Akun X</th>
-            <th class="num" data-i18n="radar.colFollowers" scope="col">Pengikut X</th>
-            <th class="num" data-i18n="radar.colMentions" scope="col">Sebutan 7 hari</th>
-            <th class="num" data-i18n="radar.colHeat" scope="col">Skor panas</th>
-          </tr>
-        </thead>
-        <tbody id="radar-rows"></tbody>
-      </table>
-      <p><a href="trend/" data-i18n="radar.open">Buka radar lengkap</a></p>
+      <article class="glass reveal">
+        <p class="kicker" data-i18n="radar.kicker">03 — Radar</p>
+        <h2 id="radar-title" data-i18n="radar.title">Contoh radar</h2>
+        <p data-i18n="radar.lead">Beberapa merek teratas menurut skor panas di berkas data. Tabel hanya memuat angka yang berstatus data publik X.</p>
+        <p class="aside" data-i18n="radar.directory">Kota dan kategori adalah label pada daftar radar, bukan angka dari X.</p>
+        <p id="radar-status" class="status" aria-live="polite" data-i18n="radar.loading">Memuat data radar…</p>
+        <p id="radar-summary" class="summary"></p>
+        <p class="tag" data-i18n="radar.sourceLabel">Catatan sumber pada berkas data</p>
+        <p id="radar-source" class="source"></p>
+        <p id="radar-updated" class="when"></p>
+        <noscript><p>Contoh radar membutuhkan JavaScript untuk membaca berkas data. Email di halaman ini tetap dapat digunakan.</p></noscript>
+        <table class="sheet" aria-labelledby="radar-title">
+          <thead>
+            <tr>
+              <th data-i18n="radar.colBrand" scope="col">Merek</th>
+              <th data-i18n="radar.colAccount" scope="col">Akun X</th>
+              <th class="num" data-i18n="radar.colFollowers" scope="col">Pengikut X</th>
+              <th class="num" data-i18n="radar.colMentions" scope="col">Sebutan 7 hari</th>
+              <th class="num" data-i18n="radar.colHeat" scope="col">Skor panas</th>
+            </tr>
+          </thead>
+          <tbody id="radar-rows"></tbody>
+        </table>
+        <p><a href="trend/" data-i18n="radar.open">Buka radar lengkap</a></p>
+      </article>
     </section>
 
     <section id="tentang" class="block">
-      <p class="kicker" data-i18n="about.kicker">04 — Tentang</p>
-      <h2 data-i18n="about.title">Tentang kami</h2>
-      <p data-i18n="about.body">Nusantara Brand OS dioperasikan oleh PT XDirection Public Relations, perusahaan Indonesia. Platform ini menghubungkan merek kopi dan teh di Indonesia dengan pemasok bahan, peralatan, dan kemasan.</p>
+      <article class="glass reveal">
+        <p class="kicker" data-i18n="about.kicker">04 — Tentang</p>
+        <h2 data-i18n="about.title">Tentang kami</h2>
+        <p data-i18n="about.body">Nusantara Brand OS dioperasikan oleh PT XDirection Public Relations, perusahaan Indonesia. Platform ini menghubungkan merek kopi dan teh di Indonesia dengan pemasok bahan, peralatan, dan kemasan.</p>
+      </article>
     </section>
 
     <section id="kontak" class="block">
-      <p class="kicker" data-i18n="contact.kicker">05 — Kontak</p>
-      <h2 data-i18n="contact.title">Kontak</h2>
-      <p data-i18n="contact.body">Satu-satunya saluran di situs ini adalah email. Tidak ada formulir dan tidak ada nomor telepon.</p>
-      <p class="tag" data-i18n="contact.emailLabel">Email</p>
-      <p><a class="mail" href="mailto:ptxdirectionpublicrelations@gmail.com">ptxdirectionpublicrelations@gmail.com</a></p>
-      <div class="actions">
-        <a class="btn" data-mail="compare" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="contact.compare">Ajukan perbandingan kompetitor</a>
-        <a class="btn" data-mail="supplier" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="contact.supplier">Daftar sebagai pemasok</a>
-      </div>
+      <article class="glass reveal">
+        <p class="kicker" data-i18n="contact.kicker">05 — Kontak</p>
+        <h2 data-i18n="contact.title">Kontak</h2>
+        <p data-i18n="contact.body">Satu-satunya saluran di situs ini adalah email. Tidak ada formulir dan tidak ada nomor telepon.</p>
+        <p class="tag" data-i18n="contact.emailLabel">Email</p>
+        <p><a class="mail" href="mailto:ptxdirectionpublicrelations@gmail.com">ptxdirectionpublicrelations@gmail.com</a></p>
+        <div class="actions">
+          <a class="btn primary" data-mail="compare" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="contact.compare">Ajukan perbandingan kompetitor</a>
+          <a class="btn" data-mail="supplier" href="mailto:ptxdirectionpublicrelations@gmail.com" data-i18n="contact.supplier">Daftar sebagai pemasok</a>
+        </div>
+      </article>
     </section>
   </div>
 </main>

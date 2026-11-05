@@ -25,11 +25,11 @@
       "nav.openRadar": "Buka radar",
       "nav.tools": "Alat",
       "hero.kicker": "PT XDirection Public Relations",
-      "hero.title": "Platform dua sisi untuk kopi dan teh di Indonesia.",
+      "hero.title": "Panas kopi dan teh Indonesia, terbaca dari data publik.",
       "hero.lead": "Nusantara Brand OS mempertemukan merek minuman lokal dengan pemasok. Merek dapat membaca radar panas media sosial dan mengajukan perbandingan kompetitor satu halaman. Pemasok biji kopi, teh, bahan baku, peralatan, dan kemasan dapat mendaftar.",
       "hero.operator": "Dioperasikan oleh PT XDirection Public Relations, perusahaan Indonesia.",
       "hero.ctaRadar": "Lihat contoh radar",
-      "hero.ctaCompare": "Ajukan perbandingan",
+      "hero.ctaCompare": "Ajukan perbandingan gratis",
       "hero.ctaSupplier": "Daftar sebagai pemasok",
       "brand.kicker": "01 — Merek",
       "brand.title": "Untuk merek lokal",
@@ -60,6 +60,7 @@
       "supplier.feeBody": "Pada tahap awal, pendaftaran gratis.",
       "supplier.cta": "Daftar lewat email",
       "radar.kicker": "03 — Radar",
+      "radar.liveKicker": "Radar terkini",
       "radar.title": "Contoh radar",
       "radar.lead": "Beberapa merek teratas menurut skor panas di berkas data. Tabel hanya memuat angka yang berstatus data publik X.",
       "radar.platforms": "Instagram dan TikTok belum terhubung. Angka kedua platform tidak ditampilkan.",
@@ -107,11 +108,11 @@
       "nav.openRadar": "打开雷达",
       "nav.tools": "工具",
       "hero.kicker": "PT XDirection Public Relations",
-      "hero.title": "印尼咖啡与茶饮行业的双边平台。",
+      "hero.title": "用公开数据，读印尼咖啡与茶饮的热度。",
       "hero.lead": "Nusantara Brand OS 连接本地饮品品牌与供应商。品牌可以查看社媒热度雷达，并免费申请一页纸竞品对比。咖啡豆、茶叶、原料、设备与包材供应商可以申请入驻。",
       "hero.operator": "运营主体为印尼公司 PT XDirection Public Relations。",
       "hero.ctaRadar": "查看雷达样例",
-      "hero.ctaCompare": "申请竞品对比",
+      "hero.ctaCompare": "免费申请竞品对比",
       "hero.ctaSupplier": "供应商入驻",
       "brand.kicker": "01 — 品牌",
       "brand.title": "品牌端",
@@ -142,6 +143,7 @@
       "supplier.feeBody": "起步阶段免费入驻。",
       "supplier.cta": "用邮件申请入驻",
       "radar.kicker": "03 — 雷达",
+      "radar.liveKicker": "实时雷达",
       "radar.title": "雷达样例",
       "radar.lead": "按数据文件中的热度分数列出靠前的品牌。表格只显示标记为 X 公开数据的数字。",
       "radar.platforms": "Instagram 与 TikTok 尚未接通，不展示这两个平台的数字。",
@@ -189,11 +191,11 @@
       "nav.openRadar": "Open radar",
       "nav.tools": "Tools",
       "hero.kicker": "PT XDirection Public Relations",
-      "hero.title": "A two-sided platform for coffee and tea in Indonesia.",
+      "hero.title": "Read Indonesia's coffee and tea heat from public data.",
       "hero.lead": "Nusantara Brand OS connects local beverage brands with suppliers. Brands can read a social heat radar and request a one-page competitor comparison. Suppliers of coffee beans, tea, ingredients, equipment, and packaging can apply to list.",
       "hero.operator": "Operated by PT XDirection Public Relations, an Indonesian company.",
       "hero.ctaRadar": "View the radar sample",
-      "hero.ctaCompare": "Request a comparison",
+      "hero.ctaCompare": "Request a free comparison",
       "hero.ctaSupplier": "List as a supplier",
       "brand.kicker": "01 — Brands",
       "brand.title": "For local brands",
@@ -224,6 +226,7 @@
       "supplier.feeBody": "At this early stage, listing is free of charge.",
       "supplier.cta": "Apply by email",
       "radar.kicker": "03 — Radar",
+      "radar.liveKicker": "Current radar",
       "radar.title": "Radar sample",
       "radar.lead": "The highest heat scores in the data file. The table shows only figures marked as public X data.",
       "radar.platforms": "Instagram and TikTok are not connected. Figures from those platforms are not shown.",
@@ -414,6 +417,151 @@
     return value === null ? "—" : format(value);
   }
 
+  function motionReduced() {
+    return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function animateHeat(el, reduce) {
+    if (!el.dataset.target) {
+      el.textContent = "—";
+      return;
+    }
+    var target = Number(el.dataset.target);
+    if (!isFinite(target)) {
+      el.textContent = "—";
+      return;
+    }
+    if (reduce) {
+      el.textContent = formatHeat(target);
+      return;
+    }
+    var start = performance.now();
+    function frame(now) {
+      var p = Math.min(1, (now - start) / 900);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = formatHeat(target * eased);
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = formatHeat(target);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function animateInt(el, reduce) {
+    if (!el.dataset.target) {
+      el.textContent = "—";
+      return;
+    }
+    var target = Number(el.dataset.target);
+    if (!isFinite(target)) {
+      el.textContent = "—";
+      return;
+    }
+    if (reduce) {
+      el.textContent = formatInt(target);
+      return;
+    }
+    var start = performance.now();
+    function frame(now) {
+      var p = Math.min(1, (now - start) / 900);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = formatInt(target * eased);
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = formatInt(target);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function playLive() {
+    var root = document.getElementById("radar-live");
+    if (!root) return;
+    var reduce = motionReduced();
+    function go() {
+      root.querySelectorAll(".bar-fill").forEach(function (fill) {
+        fill.style.width = (fill.dataset.width || "0") + "%";
+      });
+      var valueEl = document.getElementById("radar-live-value");
+      var mentionsEl = document.getElementById("radar-live-mentions");
+      if (valueEl) animateHeat(valueEl, reduce);
+      if (mentionsEl) animateInt(mentionsEl, reduce);
+    }
+    if (reduce || !("IntersectionObserver" in window)) {
+      go();
+      return;
+    }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        go();
+        obs.disconnect();
+      });
+    }, { threshold: 0.3 });
+    obs.observe(root);
+  }
+
+  function renderLive(rows) {
+    var list = document.getElementById("radar-live-rows");
+    var valueEl = document.getElementById("radar-live-value");
+    var nameEl = document.getElementById("radar-live-name");
+    var mentionsEl = document.getElementById("radar-live-mentions");
+    var sourceEl = document.getElementById("radar-live-source");
+    var updatedEl = document.getElementById("radar-live-updated");
+    if (!list) return;
+    list.replaceChildren();
+    if (!rows || !rows.length || !radarPayload) {
+      if (valueEl) { valueEl.textContent = "—"; valueEl.dataset.target = ""; }
+      if (nameEl) nameEl.textContent = "";
+      if (mentionsEl) { mentionsEl.textContent = "—"; mentionsEl.dataset.target = ""; }
+      if (sourceEl) sourceEl.textContent = radarFailed ? t("radar.error") : "";
+      if (updatedEl) updatedEl.textContent = "";
+      return;
+    }
+    var top = rows[0];
+    var heat = publicNumber(top, "heat");
+    var maxHeat = heat || 1;
+    var mentions = publicNumber(top, "x_mentions_7d");
+    if (nameEl) nameEl.textContent = top.name.trim();
+    if (valueEl) {
+      valueEl.textContent = heat === null ? "—" : formatHeat(heat);
+      valueEl.dataset.target = heat === null ? "" : String(heat);
+    }
+    if (mentionsEl) {
+      mentionsEl.textContent = mentions === null ? "—" : formatInt(mentions);
+      mentionsEl.dataset.target = mentions === null ? "" : String(mentions);
+    }
+    if (sourceEl) {
+      sourceEl.textContent = typeof radarPayload.source_note === "string" && radarPayload.source_note.trim()
+        ? radarPayload.source_note.trim()
+        : t("radar.noteMissing");
+    }
+    if (updatedEl) updatedEl.textContent = dateLine(radarPayload);
+    rows.forEach(function (row, index) {
+      var li = document.createElement("li");
+      var rank = document.createElement("span");
+      rank.className = "rank";
+      rank.textContent = String(index + 1);
+      var name = document.createElement("span");
+      name.className = "bar-name";
+      name.textContent = row.name.trim();
+      var track = document.createElement("span");
+      track.className = "bar-track";
+      var fill = document.createElement("span");
+      fill.className = "bar-fill";
+      var rowHeat = publicNumber(row, "heat");
+      var pct = rowHeat === null ? 0 : Math.max(8, Math.round((rowHeat / maxHeat) * 100));
+      fill.dataset.width = String(pct);
+      var score = document.createElement("span");
+      score.className = "bar-score";
+      score.textContent = rowHeat === null ? "—" : formatHeat(rowHeat);
+      track.appendChild(fill);
+      li.appendChild(rank);
+      li.appendChild(name);
+      li.appendChild(score);
+      li.appendChild(track);
+      list.appendChild(li);
+    });
+    playLive();
+  }
+
   function renderRadar() {
     var status = document.getElementById("radar-status");
     var summary = document.getElementById("radar-summary");
@@ -427,13 +575,16 @@
       summary.textContent = "";
       source.textContent = "";
       updated.textContent = "";
+      renderLive([]);
       return;
     }
     if (!radarPayload) {
       status.textContent = t("radar.loading");
+      renderLive([]);
       return;
     }
     var rows = topRows(radarPayload);
+    renderLive(rows);
     status.textContent = rows.length ? "" : t("radar.empty");
     summary.textContent = t("radar.showing").replace("{n}", String(rows.length));
     source.textContent = typeof radarPayload.source_note === "string" && radarPayload.source_note.trim()
@@ -505,10 +656,29 @@
     });
   }
 
+  function armReveal() {
+    var nodes = document.querySelectorAll(".reveal");
+    if (!nodes.length) return;
+    if (motionReduced() || !("IntersectionObserver" in window)) {
+      nodes.forEach(function (node) { node.classList.add("is-in"); });
+      return;
+    }
+    document.documentElement.classList.add("js");
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12 });
+    nodes.forEach(function (node) { obs.observe(node); });
+  }
+
   checkPacks();
   if (typeof document === "undefined") return;
 
   applyLang(readLang());
+  armReveal();
   document.querySelectorAll("[data-set-lang]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var next = btn.getAttribute("data-set-lang");
