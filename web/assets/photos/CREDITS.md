@@ -2,7 +2,7 @@
 
 These photographs are real camera images. They are not generated, and they are not taken from Pinterest. Each one may be used commercially without a required attribution under the license named below. Attribution is recorded here anyway.
 
-The files in this folder are resized, slightly darkened, warmed, and given a light grain. The underlying photograph is unchanged in subject.
+The files in this folder are resized, given a slight warm cast, and a light grain. The underlying photograph is unchanged in subject.
 
 | File | Source | Author | License |
 | --- | --- | --- | --- |
