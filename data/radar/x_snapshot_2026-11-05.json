@@ -1,0 +1,941 @@
+{
+  "schema": "nbo.radar.x_snapshot/v1",
+  "platform": "x",
+  "fetched_at": "2026-11-05T01:07:00Z",
+  "fetched_at_local": "2026-11-05 09:07-09:10 (UTC+8)",
+  "fetched_by": "Grok Bot 内置 X 公开读取工具（get_users_by_usernames / get_users_posts / get_posts_counts_recent）",
+  "x_calls_used": 23,
+  "notes": [
+    "只记录 X 返回的原始数值，不做任何推算；IG / TikTok 未抓取。",
+    "handle_status: ok=种子 handle 正确; replaced=种子不存在/错误，按名称明确匹配到官方号; unverified_dormant=账号存在但无法确认官方; wrong_account=种子指向无关账号; not_found=不存在; invalid=不合法 handle",
+    "2026-11-05 每日刷新：12 个品牌全部重抓近 7 天提及量；9 个有官方号的品牌重抓账号资料与近 30 天发帖（窗口 2026-10-06T00:00:00Z 起）。ID-11、ID-12 首次写入。",
+    "unverified_account 字段沿用 2026-11-04 快照，本次未重抓。近 30 天无发帖的账号，last_post_at 沿用上次记录（Calais Tea 为本次单独读取）。"
+  ],
+  "brands": {
+    "ID-01": {
+      "seed_handle": "@KopiKenangan",
+      "handle_status": "replaced",
+      "resolved_handle": "@Kopikenangan_ID",
+      "handle_note": "@KopiKenangan 存在但仅 33 粉、1 条帖、简介为空，无法确认是官方号（见 unverified_account），不采用其指标。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @Kopikenangan_ID（显示名 Kopi Kenangan，蓝标，粉丝 12895，累计帖数 3139）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。 2026-11-05：本次 X 返回 verified=false（11-04 记为蓝标，可能是字段口径不同，未核实）。",
+      "account": {
+        "id": "1125935612236746753",
+        "username": "Kopikenangan_ID",
+        "name": "Kopi Kenangan",
+        "description": "Recharge mood bareng Brand Ambassador, NCT HAECHAN! \nCobain PURPLE CLOUD SERIES sekarang 💜",
+        "location": null,
+        "created_at": "2019-05-08T01:29:03.000Z",
+        "verified": false,
+        "followers_count": 12886,
+        "following_count": 0,
+        "tweet_count": 3141,
+        "listed_count": 7
+      },
+      "unverified_account": {
+        "id": "3311101482",
+        "username": "KopiKenangan",
+        "name": "Kopi Kenangan",
+        "description": "",
+        "location": null,
+        "created_at": "2015-08-10T05:19:37.000Z",
+        "verified": false,
+        "followers_count": 33,
+        "following_count": 19,
+        "tweet_count": 1,
+        "listed_count": 0
+      },
+      "mentions_7d": {
+        "query": "\"kopi kenangan\" -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 1068,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:26.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 141
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 148
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 148
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 105
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 121
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 165
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 231
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:26.000Z",
+            "count": 9
+          }
+        ],
+        "noise": "low"
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 10,
+        "exclude": "retweets",
+        "likes": 23094,
+        "replies": 270,
+        "reposts": 11889,
+        "quotes": 504,
+        "impressions": 313962,
+        "note": "首次抓到近 30 天发帖：10 条，简介写品牌大使 NCT HAECHAN"
+      },
+      "last_post_at": "2026-11-04T08:00:02Z"
+    },
+    "ID-02": {
+      "seed_handle": "@janjijiwa",
+      "handle_status": "replaced",
+      "resolved_handle": "@JanjiJiwaID",
+      "handle_note": "@janjijiwa 在 X 不存在；按用户名候选查到 @JanjiJiwaID（显示名 Kopi Janji Jiwa，简介为品牌口号，2019 年注册）——名称明确匹配，采用。",
+      "account": {
+        "id": "1158941940865327105",
+        "username": "JanjiJiwaID",
+        "name": "Kopi Janji Jiwa",
+        "description": "Serving you excitement everyday! Everyone is welcome,we exist for the people Enjoy the taste of our 100% Indonesian Coffee Beans Brand of Jiwa Group",
+        "location": null,
+        "created_at": "2019-08-07T03:24:25.000Z",
+        "verified": false,
+        "followers_count": 2133,
+        "following_count": 1,
+        "tweet_count": 2913,
+        "listed_count": 4
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 0,
+        "exclude": "retweets",
+        "likes": 0,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0,
+        "impressions": 0
+      },
+      "last_post_at": "2023-07-11T09:03:03Z",
+      "mentions_7d": {
+        "query": "\"janji jiwa\" -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 458,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:28.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 57
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 42
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 53
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 102
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 57
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 87
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 56
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:28.000Z",
+            "count": 4
+          }
+        ],
+        "noise": "low"
+      }
+    },
+    "ID-03": {
+      "seed_handle": "@forecoffee",
+      "handle_status": "replaced",
+      "resolved_handle": "@ForeCoffeeID",
+      "handle_note": "@forecoffee 在 X 不存在；@ForeCoffeeID（显示名 fore.coffee，Jakarta，简介含官方客服 WA/邮箱）明确匹配，采用。",
+      "account": {
+        "id": "1165912576187719680",
+        "username": "ForeCoffeeID",
+        "name": "fore.coffee",
+        "description": "Where Indonesia’s Premium Coffee Meets Everyone ☕️ | CS WA: 081211118456 | Email: hello@fore.coffee",
+        "location": "Jakarta",
+        "created_at": "2019-08-26T09:03:38.000Z",
+        "verified": false,
+        "followers_count": 1692,
+        "following_count": 30,
+        "tweet_count": 2878,
+        "listed_count": 1
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 1,
+        "exclude": "retweets",
+        "likes": 0,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0,
+        "impressions": 153
+      },
+      "last_post_at": "2026-10-06T02:52:30Z",
+      "mentions_7d": {
+        "query": "(\"fore coffee\" OR forecoffee OR forecoffeeid) -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 593,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:29.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 41
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 37
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 22
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 13
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 14
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 425
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 40
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:29.000Z",
+            "count": 1
+          }
+        ],
+        "noise": "medium",
+        "note": "2026-11-03 单日 425 条为单日突发，高度疑似与 Arirang Jakarta 宣布 Fore 赞助 JEJAK ARIRANG 有关（未逐条核实）"
+      }
+    },
+    "ID-04": {
+      "seed_handle": "@hausindonesia",
+      "handle_status": "ok",
+      "resolved_handle": "@HausIndonesia",
+      "handle_note": "账号存在（显示名 Haus Indonesia - Official Account，Jakarta），大小写差异。",
+      "account": {
+        "id": "1620658215179657217",
+        "username": "HausIndonesia",
+        "name": "Haus Indonesia - Official Account",
+        "description": "Semua Orang Berhak Minum Enak🥤",
+        "location": "Jakarta, Indonesia",
+        "created_at": "2023-02-01T05:40:19.000Z",
+        "verified": false,
+        "followers_count": 145,
+        "following_count": 7,
+        "tweet_count": 1438,
+        "listed_count": 0
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 0,
+        "exclude": "retweets",
+        "likes": 0,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0,
+        "impressions": 0
+      },
+      "last_post_at": "2025-05-02T02:16:31Z",
+      "mentions_7d": {
+        "query": "(\"haus indonesia\" OR hausindonesia OR \"minuman haus\" OR \"es kopi haus\") -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 0,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:30.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:30.000Z",
+            "count": 0
+          }
+        ],
+        "noise": "low",
+        "note": "严格查询结果为 0；宽松查询（含通用词 haus=口渴，lang:id）为 2,999 条，噪声过大，不采用"
+      }
+    },
+    "ID-05": {
+      "seed_handle": "@richeese_factory",
+      "handle_status": "invalid",
+      "resolved_handle": null,
+      "handle_note": "种子 handle 共 16 个字符，超过 X 15 字符上限，不可能存在；候选 @richeesefactory / @richeese_id 不存在；帖子检索未发现官方账号。",
+      "mentions_7d": {
+        "query": "richeese -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 421,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:31.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 58
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 66
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 63
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 55
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 69
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 56
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 50
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:31.000Z",
+            "count": 4
+          }
+        ],
+        "noise": "low"
+      }
+    },
+    "ID-06": {
+      "seed_handle": "@estehindonesia",
+      "handle_status": "replaced",
+      "resolved_handle": "@esteh_indonesia",
+      "handle_note": "@estehindonesia 不存在；@esteh_indonesia（显示名 Esteh Indonesia，发帖内容为 Esteh 新品/周年活动）明确匹配，采用。",
+      "account": {
+        "id": "1446015062703890433",
+        "username": "esteh_indonesia",
+        "name": "Esteh Indonesia",
+        "description": "Pelopor Matcha Melati No.1 di Indonesia",
+        "location": "Bogor Barat, Indonesia",
+        "created_at": "2021-10-07T07:30:45.000Z",
+        "verified": false,
+        "followers_count": 2466,
+        "following_count": 0,
+        "tweet_count": 11377,
+        "listed_count": 0
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 0,
+        "exclude": "retweets",
+        "likes": 0,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0,
+        "impressions": 0
+      },
+      "last_post_at": "2026-09-10T02:52:53Z",
+      "mentions_7d": {
+        "query": "(\"es teh indonesia\" OR \"esteh indonesia\" OR esteh_indonesia) -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 10,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:33.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 1
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 1
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 3
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 1
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 2
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 2
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:33.000Z",
+            "count": 0
+          }
+        ],
+        "noise": "low"
+      }
+    },
+    "ID-07": {
+      "seed_handle": "@kopituku",
+      "handle_status": "wrong_account",
+      "resolved_handle": null,
+      "handle_note": "@kopituku 是个人账号（显示名 Uti，Sleman），与 Toko Kopi Tuku 无关；@tokokopituku 简介写'akun ini dijual'（账号出售），非官方；未找到官方号。",
+      "mentions_7d": {
+        "query": "(\"kopi tuku\" OR \"toko kopi tuku\") -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 131,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:34.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 19
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 18
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 14
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 12
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 12
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 30
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 25
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:34.000Z",
+            "count": 1
+          }
+        ],
+        "noise": "low"
+      }
+    },
+    "ID-08": {
+      "seed_handle": "@soursally",
+      "handle_status": "replaced",
+      "resolved_handle": "@mysoursally",
+      "handle_note": "@soursally 是粉丝号（简介：'follow @mysoursally'）；@mysoursally（显示名 Sour Sally）明确匹配，采用。注意该号最后发帖为 2010 年，已长期停更。",
+      "account": {
+        "id": "44384691",
+        "username": "mysoursally",
+        "name": "Sour Sally",
+        "description": "",
+        "location": "ÜT: -6.145249,106.893694",
+        "created_at": "2009-06-03T15:45:10.000Z",
+        "verified": false,
+        "followers_count": 7384,
+        "following_count": 6,
+        "tweet_count": 2445,
+        "listed_count": 85
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 0,
+        "exclude": "retweets",
+        "likes": 0,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0,
+        "impressions": 0
+      },
+      "last_post_at": "2010-09-22T18:03:59Z",
+      "mentions_7d": {
+        "query": "(\"sour sally\" OR soursally OR mysoursally) -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 260,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:35.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 53
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 29
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 50
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 36
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 33
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 24
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 31
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:35.000Z",
+            "count": 4
+          }
+        ],
+        "noise": "low"
+      }
+    },
+    "ID-09": {
+      "seed_handle": "@rotiocomalang",
+      "handle_status": "replaced",
+      "resolved_handle": "@rotioindonesia",
+      "handle_note": "@rotiocomalang 在 X 不存在；候选 @rotio_id / @rotiocoffee 不存在，@Rotio 为无关个人号。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @rotioindonesia（显示名 Roti'O Indonesia，网站 rotio.id，粉丝 397，累计帖数 388）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。",
+      "account": {
+        "id": "873002061268361216",
+        "username": "rotioindonesia",
+        "name": "Roti'O Indonesia",
+        "description": "Roti’O, Tasty Until The Last Bite👍🏻 More than 500 outlets in Indonesia ☎️081318999227",
+        "location": "Indonesia",
+        "created_at": "2017-06-09T02:21:25.000Z",
+        "verified": false,
+        "followers_count": 397,
+        "following_count": 0,
+        "tweet_count": 388,
+        "listed_count": 0,
+        "website": "rotio.id"
+      },
+      "mentions_7d": {
+        "query": "(\"roti o\" OR \"roti'o\" OR rotio) lang:id -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 479,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:37.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 61
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 65
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 69
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 59
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 53
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 80
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 86
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:37.000Z",
+            "count": 6
+          }
+        ],
+        "noise": "medium",
+        "note": "'roti o' 可能命中一般面包语句，存在噪声"
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 0,
+        "exclude": "retweets",
+        "likes": 0,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0,
+        "impressions": 0
+      },
+      "last_post_at": null
+    },
+    "ID-10": {
+      "seed_handle": "@gulugulu_id",
+      "handle_status": "unverified_dormant",
+      "resolved_handle": null,
+      "handle_note": "@gulugulu_id 存在（显示名 Gulu Gulu Cheese Tea）但 0 粉 0 帖，无法确认官方；不采用其账号指标。",
+      "unverified_account": {
+        "id": "1282666828896940033",
+        "username": "gulugulu_id",
+        "name": "Gulu Gulu Cheese Tea",
+        "description": "",
+        "location": null,
+        "created_at": "2020-07-13T13:23:35.000Z",
+        "verified": false,
+        "followers_count": 0,
+        "following_count": 0,
+        "tweet_count": 0,
+        "listed_count": 0
+      },
+      "mentions_7d": {
+        "query": "\"gulu gulu\" lang:id -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 91,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:38.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 9
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 17
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 7
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 7
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 6
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 32
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 13
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:38.000Z",
+            "count": 0
+          }
+        ],
+        "noise": "medium",
+        "note": "限定印尼语以排除葡语梗 'gulu gulu' 噪声"
+      }
+    },
+    "ID-11": {
+      "seed_handle": "@TomoroCoffee_ID",
+      "handle_status": "ok",
+      "resolved_handle": "@TomoroCoffee_ID",
+      "handle_note": "2026-11-05 首次抓取：显示名 TOMORO COFFEE Indonesia，简介为菜单推广（MATCHA SERIES），location Indonesia，名称明确匹配，采用。",
+      "account": {
+        "id": "1509434575503917057",
+        "username": "TomoroCoffee_ID",
+        "name": "TOMORO COFFEE Indonesia",
+        "description": "🚨 MUST TRY:  MATCHA SERIES💚🍵",
+        "location": "Indonesia",
+        "created_at": "2022-03-31T07:37:14.000Z",
+        "verified": false,
+        "followers_count": 1694,
+        "following_count": 0,
+        "tweet_count": 656,
+        "listed_count": 3
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 4,
+        "exclude": "retweets",
+        "likes": 3,
+        "replies": 3,
+        "reposts": 1,
+        "quotes": 0,
+        "impressions": 981
+      },
+      "last_post_at": "2026-10-13T03:19:54Z",
+      "mentions_7d": {
+        "query": "(\"tomoro coffee\" OR tomorocoffee OR tomorocoffee_id) -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 85,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:39.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 14
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 8
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 22
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 11
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 6
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 15
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 9
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:39.000Z",
+            "count": 0
+          }
+        ],
+        "noise": "low",
+        "note": "首次抓取，查询词按品牌名新写"
+      }
+    },
+    "ID-12": {
+      "seed_handle": "@CalaisTea",
+      "handle_status": "ok",
+      "resolved_handle": "@CalaisTea",
+      "handle_note": "2026-11-05 首次抓取：显示名 Calais Tea，简介写 Artisan Bubble Tea and Coffee 并列出 #Calaistea、Instagram Calaistea，名称明确匹配，采用。注意最后一条原创帖为 2018-07-09，已长期停更。",
+      "account": {
+        "id": "386459235",
+        "username": "CalaisTea",
+        "name": "Calais Tea",
+        "description": "Artisan Bubble Tea and Coffee - Tag your Calais drink photo with #Calaistea and #Calaiscoffee FB : Calais Tea | LINE : @Calaisteaid | Instagram : Calaistea",
+        "location": null,
+        "created_at": "2011-10-07T10:00:39.000Z",
+        "verified": false,
+        "followers_count": 10257,
+        "following_count": 198,
+        "tweet_count": 20517,
+        "listed_count": 26
+      },
+      "posts_30d": {
+        "window": {
+          "start": "2026-10-06T00:00:00Z",
+          "end": "2026-11-05T01:07:40Z"
+        },
+        "count": 0,
+        "exclude": "retweets",
+        "likes": 0,
+        "replies": 0,
+        "reposts": 0,
+        "quotes": 0,
+        "impressions": 0
+      },
+      "last_post_at": "2018-07-09T04:19:14Z",
+      "mentions_7d": {
+        "query": "(\"calais tea\" OR calaistea OR \"calais coffee\" OR calaiscoffee) -is:retweet",
+        "window": "近7天（X recent counts，排除转推）",
+        "total": 0,
+        "daily": [
+          {
+            "start": "2026-10-29T01:07:40.000Z",
+            "end": "2026-10-30T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-10-30T00:00:00.000Z",
+            "end": "2026-10-31T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-10-31T00:00:00.000Z",
+            "end": "2026-11-01T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-01T00:00:00.000Z",
+            "end": "2026-11-02T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-02T00:00:00.000Z",
+            "end": "2026-11-03T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-03T00:00:00.000Z",
+            "end": "2026-11-04T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-04T00:00:00.000Z",
+            "end": "2026-11-05T00:00:00.000Z",
+            "count": 0
+          },
+          {
+            "start": "2026-11-05T00:00:00.000Z",
+            "end": "2026-11-05T01:07:40.000Z",
+            "count": 0
+          }
+        ],
+        "noise": "medium",
+        "note": "首次抓取，查询词按品牌名新写；未加 lang 过滤，'calais' 也是法国地名，故只用组合词"
+      }
+    }
+  }
+}
