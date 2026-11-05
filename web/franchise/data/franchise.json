@@ -13,7 +13,7 @@
       "concept": "雷达 S 级概念直接上架：东亚爆款本地化 + 机制型包装",
       "store_sqm": 35.0,
       "images": [
-        "/assets/fmt-snack.jpg"
+        "assets/fmt-snack.jpg"
       ],
       "capex_rmb": 9.5,
       "capex_idr": 209000000,
@@ -46,7 +46,7 @@
       "concept": "即食档口 + 晚市加成，复购最强业态",
       "store_sqm": 12.0,
       "images": [
-        "/assets/fmt-deli.jpg"
+        "assets/fmt-deli.jpg"
       ],
       "capex_rmb": 9.0,
       "capex_idr": 198000000,
@@ -79,7 +79,7 @@
       "concept": "外带窗口 + 3 款招牌，人效最高的饮品业态",
       "store_sqm": 15.0,
       "images": [
-        "/assets/fmt-coffee.jpg"
+        "assets/fmt-coffee.jpg"
       ],
       "capex_rmb": 9.999999999999998,
       "capex_idr": 220000000,
@@ -112,7 +112,7 @@
       "concept": "加盟体系最成熟品类，培训与 SOP 现成度最高",
       "store_sqm": 10.0,
       "images": [
-        "/assets/fmt-tea.jpg"
+        "assets/fmt-tea.jpg"
       ],
       "capex_rmb": 8.8,
       "capex_idr": 193600000,
@@ -145,7 +145,7 @@
       "concept": "一支 S 级单品打穿：海苔卷/咸蛋黄鱼皮专柜模型",
       "store_sqm": 20.0,
       "images": [
-        "/assets/fmt-single.jpg"
+        "assets/fmt-single.jpg"
       ],
       "capex_rmb": 8.0,
       "capex_idr": 176000000,
@@ -178,7 +178,7 @@
       "concept": "最小单元验证：商场中岛柜 6㎡，测款后再放大",
       "store_sqm": 6.0,
       "images": [
-        "/assets/fmt-popup.jpg"
+        "assets/fmt-popup.jpg"
       ],
       "capex_rmb": 8.5,
       "capex_idr": 187000000,

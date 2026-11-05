@@ -52,6 +52,10 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
     heats = [b["heat"] for b in d["brands"] if b["heat"] is not None]
     assert heats == sorted(heats, reverse=True)
     assert [b["id"] for b in d["brands"] if b["heat"] is None] == ["ID-11", "ID-12"]
+    for row in d["brands"] + d["shops"]:
+        photo = row.get("photo")
+        if photo:
+            assert photo.startswith("assets/radar/") and not photo.startswith("/")
 
 
 def test_build_without_snapshot_stays_demo(tmp_path):

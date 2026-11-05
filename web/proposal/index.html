@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>合作提案书 · Partnership Proposal | Nusantara Brand OS</title>
 <link rel="stylesheet" href="../ui/tokens.css">
+<script src="../ui/sitepath.js"></script>
 <style>
   :root { --text:#111111; --dim:#767676; --line:#e5e5e5; --accent:#2e7d32; }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -68,7 +69,7 @@ Promise.all([
   <div class="sub">机密 CONFIDENTIAL · 演示样本 DEMO · ${today} · 来源：全网热点雷达 + 智能选址评估 + 品牌升级体系</div>
 
   <div class="brandline">
-    ${shop.photo ? `<img src="${shop.photo}" alt="${esc(shop.name)} 实拍">` : ''}
+    ${shop.photo ? `<img src="${nboSiteUrl(shop.photo)}" alt="${esc(shop.name)} 实拍">` : ''}
     <div style="flex:1">
       <div><b>${esc(shop.city)}</b> · ${esc(shop.category)} · ${shop.stores} 家店 · 营业 ${shop.age_months} 个月</div>
       <div class="kpis">

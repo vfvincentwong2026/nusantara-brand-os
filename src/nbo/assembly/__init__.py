@@ -7,6 +7,8 @@
 import json
 from pathlib import Path
 
+from nbo.webpaths import asset
+
 CNY_IDR = 2200  # 演示汇率锚
 
 DIMS = ["主体与硬装", "设备", "首批货", "证照合规", "流动资金"]
@@ -76,7 +78,7 @@ def build_assembly() -> dict:
             breakdown=breakdown, weeks=s["weeks"], permit=s["permit"],
             supply=s["supply"], pros=s["pros"], cons=s["cons"], fit=s["fit"],
             fit_budget=s["fit_budget"],
-            images=[f"/assets/asm-{s['id'].lower().replace('asm-', '')}.jpg"]))
+            images=[asset(f"assets/asm-{s['id'].lower().replace('asm-', '')}.jpg")]))
     rec = [s["id"] for s in schemes if s["fit_budget"] and s["area_sqm"] >= 15]
     return {
         "meta": {"cny_idr": CNY_IDR, "budget_wan": (8, 10),

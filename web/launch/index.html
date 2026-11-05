@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../ui/tokens.css">
+<script src="../ui/sitepath.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -150,7 +151,7 @@ fetch('./data/launch.json').then(r => r.json()).then(d => {
       <span>${c('f7')}</span>
       <span><div class="total">${s.total}</div><span class="grade g-${s.grade}">${s.grade} · ${esc(s.grade_action)}</span>
       <div style="margin-top:4px"><button class="libbtn" onclick='addPick(${JSON.stringify({id: s.id, name: s.name, region: s.region, category: s.category, heat: s.heat, total: s.total, grade: s.grade, replicability: s.replicability})})'>＋ 概念入库</button></div>
-      ${s.grade === 'S' ? `<div style="margin-top:4px;white-space:nowrap"><a href="${s.twin.floorplan}" style="color:#767676;font-size:11px">2D 视角</a> · <a href="${s.twin.three}" style="color:#767676;font-size:11px">3D 漫游</a></div>` : ''}</span>
+      ${s.grade === 'S' ? `<div style="margin-top:4px;white-space:nowrap"><a href="${nboSiteUrl(s.twin.floorplan)}" target="_blank" rel="noopener" style="color:#767676;font-size:11px">2D 视角</a> · <a href="${nboSiteUrl(s.twin.three)}" target="_blank" rel="noopener" style="color:#767676;font-size:11px">3D 漫游</a></div>` : ''}</span>
     </div>`; }).join('');
 
   const p = d.plan;
@@ -162,13 +163,13 @@ fetch('./data/launch.json').then(r => r.json()).then(d => {
       <div class="score"><div class="v">${p.concept.total}</div><div style="font-size:11px;color:#767676">落地总分 / 100</div></div>
     </div>
     <div class="panel">
-      <h2>📦 集装箱整装落地 CONTAINER FIT-OUT（<a href="${p.container.link}" style="color:#767676">案例体系</a>复用）</h2>
+      <h2>📦 集装箱整装落地 CONTAINER FIT-OUT（<a href="${nboSiteUrl(p.container.link)}" target="_blank" rel="noopener" style="color:#767676">案例体系</a>复用）</h2>
       <div class="kv"><b>推荐档位</b><span>${esc(p.container.tier)}</span></div>
       <div class="kv"><b>空间方案</b><span>${esc(p.container.space_plan)}——空间不是装修，是机制剧场：入口吸引点 → 主动线 → 机制发生区 → 打卡点 → 收银转化区</span></div>
       <div class="kv"><b>复制性</b><span>${esc(p.container.note)}</span></div>
       <div class="kv"><b>孪生视角</b><span>
-        <a href="${p.container.twin.floorplan}" style="color:#767676">2D 平面图 · 品类货架聚焦</a> ｜
-        <a href="${p.container.twin.three}" style="color:#767676">3D 漫游 · 机制剧场空间</a>
+        <a href="${nboSiteUrl(p.container.twin.floorplan)}" target="_blank" rel="noopener" style="color:#767676">2D 平面图 · 品类货架聚焦</a> ｜
+        <a href="${nboSiteUrl(p.container.twin.three)}" target="_blank" rel="noopener" style="color:#767676">3D 漫游 · 机制剧场空间</a>
         <span style="color:#767676">（自动高亮目标分区货架，其余调暗）</span></span></div>
     </div>
     <div class="panel">

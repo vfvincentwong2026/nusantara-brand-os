@@ -29,7 +29,11 @@ def test_launch_build(tmp_path):
     p = d["plan"]
     assert len(p["steps"]) == 5
     assert [s["no"] for s in p["steps"]] == [1, 2, 3, 4, 5]
-    assert p["container"]["tier"] and p["container"]["link"] == "/case/"
+    assert p["container"]["tier"]
+    assert p["container"]["link"] == "https://nusantara-container.pages.dev/case/"
+    for row in ranked:
+        assert row["twin"]["floorplan"].startswith("https://nusantara-container.pages.dev/floorplan/")
+        assert row["twin"]["three"].startswith("https://nusantara-container.pages.dev/three/")
     assert p["supply_chain"]["compliance_lead"]
     assert len(p["deliverables"]) >= 5
     # 供应链权重最高（落地的硬约束）

@@ -10,6 +10,8 @@ def test_scheme_count_and_fields():
                   "permit", "supply", "pros", "cons", "fit", "fit_budget"]:
             assert k in s, f"{s['id']} 缺少 {k}"
         assert len(s["breakdown"]) == len(DIMS)
+        assert s["images"] and all(
+            src.startswith("assets/") and not src.startswith("/") for src in s["images"])
 
 
 def test_total_is_sum_of_breakdown():

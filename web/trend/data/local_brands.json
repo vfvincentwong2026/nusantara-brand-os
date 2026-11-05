@@ -104,7 +104,7 @@
         "value_score": "mixed"
       },
       "value_score": 68.3,
-      "photo": "/assets/radar/ID-01.jpg"
+      "photo": "assets/radar/ID-01.jpg"
     },
     {
       "id": "ID-03",
@@ -187,7 +187,7 @@
         "value_score": "mixed"
       },
       "value_score": 66.0,
-      "photo": "/assets/radar/ID-03.jpg"
+      "photo": "assets/radar/ID-03.jpg"
     },
     {
       "id": "ID-09",
@@ -270,7 +270,7 @@
         "value_score": "mixed"
       },
       "value_score": 62.7,
-      "photo": "/assets/radar/ID-09.jpg"
+      "photo": "assets/radar/ID-09.jpg"
     },
     {
       "id": "ID-02",
@@ -354,7 +354,7 @@
         "value_score": "mixed"
       },
       "value_score": 64.8,
-      "photo": "/assets/radar/ID-02.jpg"
+      "photo": "assets/radar/ID-02.jpg"
     },
     {
       "id": "ID-05",
@@ -438,7 +438,7 @@
         "value_score": "mixed"
       },
       "value_score": 64.0,
-      "photo": "/assets/radar/ID-05.jpg"
+      "photo": "assets/radar/ID-05.jpg"
     },
     {
       "id": "ID-08",
@@ -521,7 +521,7 @@
         "value_score": "mixed"
       },
       "value_score": 66.9,
-      "photo": "/assets/radar/ID-08.jpg"
+      "photo": "assets/radar/ID-08.jpg"
     },
     {
       "id": "ID-07",
@@ -604,7 +604,7 @@
         "value_score": "mixed"
       },
       "value_score": 59.6,
-      "photo": "/assets/radar/ID-07.jpg"
+      "photo": "assets/radar/ID-07.jpg"
     },
     {
       "id": "ID-10",
@@ -687,7 +687,7 @@
         "value_score": "mixed"
       },
       "value_score": 63.5,
-      "photo": "/assets/radar/ID-10.jpg"
+      "photo": "assets/radar/ID-10.jpg"
     },
     {
       "id": "ID-11",
@@ -851,7 +851,7 @@
         "value_score": "mixed"
       },
       "value_score": 53.6,
-      "photo": "/assets/radar/ID-06.jpg"
+      "photo": "assets/radar/ID-06.jpg"
     },
     {
       "id": "ID-04",
@@ -934,7 +934,7 @@
         "value_score": "mixed"
       },
       "value_score": 31.7,
-      "photo": "/assets/radar/ID-04.jpg"
+      "photo": "assets/radar/ID-04.jpg"
     },
     {
       "id": "ID-12",
@@ -1051,7 +1051,7 @@
         "viral": "#seblak 话题天然高流量，本店视频被搬运 300+ 次但未挂定位"
       },
       "potential_score": 74.7,
-      "photo": "/assets/radar/SH-02.jpg"
+      "photo": "assets/radar/SH-02.jpg"
     },
     {
       "id": "SH-11",
@@ -1087,7 +1087,7 @@
         "viral": "#satelilit 话题在欧美游客间升温，官方账号未承接"
       },
       "potential_score": 74.6,
-      "photo": "/assets/radar/SH-11.jpg"
+      "photo": "assets/radar/SH-11.jpg"
     },
     {
       "id": "SH-12",
@@ -1123,7 +1123,7 @@
         "viral": "游记平台长期霸榜，短视频声量被模仿者超越"
       },
       "potential_score": 73.7,
-      "photo": "/assets/radar/SH-12.jpg"
+      "photo": "assets/radar/SH-12.jpg"
     },
     {
       "id": "SH-04",
@@ -1159,7 +1159,7 @@
         "viral": "单条搬运视频播放破 800 万，'泗水蜂蜜香蕉'已成搜索词"
       },
       "potential_score": 72.6,
-      "photo": "/assets/radar/SH-04.jpg"
+      "photo": "assets/radar/SH-04.jpg"
     },
     {
       "id": "SH-03",
@@ -1195,7 +1195,7 @@
         "viral": "本地美食号多次自发探店，未形成统一话题标签"
       },
       "potential_score": 70.9,
-      "photo": "/assets/radar/SH-03.jpg"
+      "photo": "assets/radar/SH-03.jpg"
     },
     {
       "id": "SH-06",
@@ -1230,7 +1230,7 @@
         "viral": "#kwetiauakang 话题 6000 万播放，官方未下场"
       },
       "potential_score": 70.5,
-      "photo": "/assets/radar/SH-06.jpg"
+      "photo": "assets/radar/SH-06.jpg"
     },
     {
       "id": "SH-10",
@@ -1266,7 +1266,7 @@
         "viral": "外国游客试吃反应视频多次破百万，官方零运营"
       },
       "potential_score": 69.1,
-      "photo": "/assets/radar/SH-10.jpg"
+      "photo": "assets/radar/SH-10.jpg"
     },
     {
       "id": "SH-09",
@@ -1302,7 +1302,7 @@
         "viral": "TikTok 上巨港美食话题升温，本店未承接"
       },
       "potential_score": 68.0,
-      "photo": "/assets/radar/SH-09.jpg"
+      "photo": "assets/radar/SH-09.jpg"
     },
     {
       "id": "SH-16",
@@ -1338,7 +1338,7 @@
         "viral": "健康轻食话题契合，本地 KOC 自发内容已起量"
       },
       "potential_score": 67.0,
-      "photo": "/assets/radar/SH-16.jpg"
+      "photo": "assets/radar/SH-16.jpg"
     },
     {
       "id": "SH-05",
@@ -1373,7 +1373,7 @@
         "viral": "美食纪录片常客，但短视频时代声量断层"
       },
       "potential_score": 66.6,
-      "photo": "/assets/radar/SH-05.jpg"
+      "photo": "assets/radar/SH-05.jpg"
     },
     {
       "id": "SH-01",
@@ -1409,7 +1409,7 @@
         "viral": "本地论坛有口碑但零短视频运营，TikTok 账号尚未建立"
       },
       "potential_score": 65.6,
-      "photo": "/assets/radar/SH-01.jpg"
+      "photo": "assets/radar/SH-01.jpg"
     },
     {
       "id": "SH-07",
@@ -1445,7 +1445,7 @@
         "viral": "本地美食博主零星推荐，未形成声量"
       },
       "potential_score": 65.3,
-      "photo": "/assets/radar/SH-07.jpg"
+      "photo": "assets/radar/SH-07.jpg"
     },
     {
       "id": "SH-08",
@@ -1480,7 +1480,7 @@
         "viral": "老牌网红余温尚在，近年声量下滑需再激活"
       },
       "potential_score": 65.2,
-      "photo": "/assets/radar/SH-08.jpg"
+      "photo": "assets/radar/SH-08.jpg"
     },
     {
       "id": "SH-13",
@@ -1516,7 +1516,7 @@
         "viral": "#amplangbalikpapan 本地话题稳定，未出圈"
       },
       "potential_score": 64.4,
-      "photo": "/assets/radar/SH-13.jpg"
+      "photo": "assets/radar/SH-13.jpg"
     },
     {
       "id": "SH-15",
@@ -1552,7 +1552,7 @@
         "viral": "#manadofood 在印尼侨民圈稳定热度，官方缺席"
       },
       "potential_score": 64.4,
-      "photo": "/assets/radar/SH-15.jpg"
+      "photo": "assets/radar/SH-15.jpg"
     },
     {
       "id": "SH-14",
@@ -1588,7 +1588,7 @@
         "viral": "本地美食号偶尔推荐，零官方运营"
       },
       "potential_score": 63.9,
-      "photo": "/assets/radar/SH-14.jpg"
+      "photo": "assets/radar/SH-14.jpg"
     }
   ],
   "boost_system": {

@@ -106,7 +106,7 @@
       "fit": "快速验证单店模型 / 社区节点 / 快闪先行",
       "fit_budget": true,
       "images": [
-        "/assets/asm-c1.jpg"
+        "assets/asm-c1.jpg"
       ]
     },
     {
@@ -200,7 +200,7 @@
       "fit": "验证成功后的二期放大 / 双品类合营",
       "fit_budget": false,
       "images": [
-        "/assets/asm-c2.jpg"
+        "assets/asm-c2.jpg"
       ]
     },
     {
@@ -294,7 +294,7 @@
       "fit": "复购稳定后的标准社区店 / 区域样板",
       "fit_budget": false,
       "images": [
-        "/assets/asm-l1.jpg"
+        "assets/asm-l1.jpg"
       ]
     },
     {
@@ -389,7 +389,7 @@
       "fit": "借成熟商圈测品 / 品牌进商场的第一块滩头阵地",
       "fit_budget": true,
       "images": [
-        "/assets/asm-s1.jpg"
+        "assets/asm-s1.jpg"
       ]
     }
   ]

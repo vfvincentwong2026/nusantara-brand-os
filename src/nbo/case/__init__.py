@@ -8,6 +8,8 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
+from nbo.webpaths import container
+
 ORDER_STEPS = ["新订单", "待拣货", "拣货中", "待复核", "待自提/配送", "配送中", "已完成"]
 
 CASE_DDL = """
@@ -161,7 +163,7 @@ def build_case_map(db_path: str | Path) -> dict:
             "net_size": f"约 {s.get('net_length_m')} × {s.get('net_width_m')} m（概念净尺寸，待复测）",
             "service_radius_m": s.get("service_radius_m"),
             "service_note": "服务半径为演示默认值，待试点验证",
-            "status": s.get("status"), "link": "/case/"}
+            "status": s.get("status"), "link": container("/case/")}
 
 
 def write_json(data: dict, out_path: str | Path) -> dict:

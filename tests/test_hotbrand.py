@@ -18,6 +18,7 @@ def test_hotbrand_build(tmp_path):
         assert b["social"]["views_wan"] > 0 and b["social"]["likes_wan"] > 0
         assert len(b["platforms"]) >= 2 and 0 < b["ugc"] <= 100
         assert b["remix_note"] and b["source_type"] == "演示"
+        assert b["photo"].startswith("assets/") and not b["photo"].startswith("/")
     # 按 热度×50% + 适配×100 排序
     keys = [b["social"]["views_wan"] * 0.5 + b["ido_fit"] * 100 for b in d["brands"]]
     assert keys == sorted(keys, reverse=True)

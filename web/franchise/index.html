@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../ui/tokens.css">
+<script src="../ui/sitepath.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -164,7 +165,7 @@ fetch('./data/franchise.json').then(r => r.json()).then(d => {
     `⚠ ${d.fx.note}（1 RMB = ${d.fx.rmb_to_idr.toLocaleString()} IDR）· 锚定：${d.budget_anchor}`;
   document.getElementById('formats').innerHTML = d.formats.map(f => `
     <div class="fmt">
-      ${(f.images || []).map(src => `<a href="${src}" target="_blank" rel="noopener" class="fimg"><img src="${src}" alt="${esc(f.name)} 门店参考图" loading="lazy"></a>`).join('')}
+      ${(f.images || []).map(src => `<a href="${nboSiteUrl(src)}" target="_blank" rel="noopener" class="fimg"><img src="${nboSiteUrl(src)}" alt="${esc(f.name)} 门店参考图" loading="lazy"></a>`).join('')}
       <div class="fn">${esc(f.name)} <span class="sq">${f.store_sqm}㎡ · ${f.staff} 人</span></div>
       <div class="fc">${esc(f.concept)}</div>
       <div class="capex">${esc(f.capex_display)}</div>
@@ -186,7 +187,7 @@ fetch('../cart/data/carts.json').then(r => r.json()).then(d => {
   const fmt = m => `¥${m.wan_cny[0]}–${m.wan_cny[1]} 万（Rp ${m.idr_m[0]}–${m.idr_m[1]} 百万）`;
   document.getElementById('carts').innerHTML = d.carts.map(c => `
     <div class="fmt" style="border-color:rgba(46,125,35,.25);">
-      <div class="cgal">${(c.images || []).map((src, i) => `<a href="${src}" target="_blank" rel="noopener"><img src="${src}" alt="${esc(c.name)} 意向图 ${i + 1}" loading="lazy"></a>`).join('')}</div>
+      <div class="cgal">${(c.images || []).map((src, i) => `<a href="${nboSiteUrl(src)}" target="_blank" rel="noopener"><img src="${nboSiteUrl(src)}" alt="${esc(c.name)} 意向图 ${i + 1}" loading="lazy"></a>`).join('')}</div>
       <div class="fn">${esc(c.name)} <span class="sq">${esc(c.form)}</span></div>
       <div class="capex">启动 <b style="color:#2e7d32">${fmt(c.startup)}</b>
         <div class="sub" style="font-size:10.5px;color:#767676;margin-top:3px;">押金 ${fmt(c.deposit)} · 月租 ${fmt(c.rent_mo)} · 首批货 ${fmt(c.first_stock)} · 证照 ${fmt(c.cert)}</div></div>

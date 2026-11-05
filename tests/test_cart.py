@@ -9,6 +9,9 @@ def test_three_cart_models():
     assert any("手推" in n for n in names)
     assert any("电动车" in n or "电动" in n for n in names)
     assert any("咖啡" in n for n in names)
+    for cart in d["carts"]:
+        assert cart["images"] and all(
+            src.startswith("assets/") and not src.startswith("/") for src in cart["images"])
 
 
 def test_startup_is_sum_of_parts():
