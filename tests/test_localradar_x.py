@@ -99,8 +99,42 @@ def test_newly_verified_handles_keep_recorded_mentions(tmp_path):
     assert any("近 30 天发帖 0 · 最近发帖 2023-07-11" in s for s in j["heat_signals_x"])
 
 
+def _assert_pending_x_has_no_metrics(b):
+    """pending_x 只表示还没抓到，热度、粉丝、提及必须留空。"""
+    assert b["source_type"] == "pending_x"
+    assert b["heat"] is None and b["x_followers"] is None and b["x_mentions_7d"] is None
+    assert b["provenance"]["x"] == "pending"
+    assert b["provenance"]["heat"] == "missing"
+    assert b["provenance"]["x_followers"] == "missing"
+    assert b["provenance"]["x_mentions_7d"] == "missing"
+
+
+def _assert_metrics_match_snapshot(b, entry):
+    """已进入快照的品牌，热度、粉丝、提及只能抄快照，不能另填数字。"""
+    assert b["source_type"] == "mixed"
+    assert b["x_mentions_7d"] == entry["mentions_7d"]["total"]
+    assert b["heat"] == xs.heat_from_mentions(entry["mentions_7d"]["total"])
+    assert b["provenance"]["heat"] == "x_public"
+    assert b["provenance"]["x_mentions_7d"] == "x_public"
+    if entry["handle_status"] in xs.ACCOUNT_OK:
+        assert b["x_followers"] == entry["account"]["followers_count"]
+        assert b["x_tweet_count"] == entry["account"]["tweet_count"]
+        assert b["x"] == entry["resolved_handle"]
+        assert b["provenance"]["x_followers"] == "x_public"
+        posts = entry.get("posts_30d")
+        assert b["x_posts_30d"] == (posts["count"] if posts else None)
+    else:
+        assert b["x_followers"] is None and b["x_tweet_count"] is None
+        assert b["provenance"]["x_followers"] == "missing"
+
+
 def test_new_brands_wait_for_x_refresh_without_invented_metrics(tmp_path):
-    """ID-11 / ID-12 用品牌清单里的官方号、IG 和官网；X 数字留空，等下次刷新。"""
+    """ID-11 / ID-12 用品牌清单里的官方号、IG 和官网。
+
+    只用 2026-11-04 快照重建时，这两家仍是 pending_x，不填估算数字。
+    已发布的 local_brands.json 不要求它们继续 pending：缺快照时热度/粉丝/提及为空，
+    快照里已有的数字必须与该快照一致。
+    """
     listed = {b["brand"]: b for b in json.loads(
         (SNAP.parent / "brand_list_coffee_tea_2026-11-04.json").read_text(encoding="utf-8"))["brands"]}
     tomoro_src, calais_src = listed["Tomoro Coffee"], listed["Calais Tea"]
@@ -119,19 +153,15 @@ def test_new_brands_wait_for_x_refresh_without_invented_metrics(tmp_path):
 
     d = build_localradar(tmp_path / "t.db", x_snapshot=SNAP)
     by_id = {b["id"]: b for b in d["brands"]}
-    forbidden = ("1694", "656", "10256", "20517")
+    # 这些是后来实抓到的账号数字。只用 11-04 快照时还不能出现。
+    forbidden = ("1694", "656", "10256", "10257", "20517")
     for bid, src in (("ID-11", tomoro_src), ("ID-12", calais_src)):
         b = by_id[bid]
-        assert b["source_type"] == "pending_x"
+        _assert_pending_x_has_no_metrics(b)
         assert b["x"] == src["x_handle"]
         assert b["ig"] == src["ig_handle"] and b["provenance"]["ig"] == "demo_estimate"
         assert b["website"] == src["website"] and b["origin_label"] == "未核实"
-        assert b["x_followers"] is None and b["x_mentions_7d"] is None and b["x_tweet_count"] is None
-        assert b["heat"] is None and b["value_score"] is None
-        assert b["provenance"]["x"] == "pending"
-        assert b["provenance"]["x_followers"] == "missing"
-        assert b["provenance"]["x_mentions_7d"] == "missing"
-        assert b["provenance"]["heat"] == "missing"
+        assert b["x_tweet_count"] is None and b["value_score"] is None
         blob = json.dumps(b, ensure_ascii=False)
         assert all(n not in blob for n in forbidden)
         assert "待刷新" in b["heat_signals"][0]
@@ -151,11 +181,27 @@ def test_new_brands_wait_for_x_refresh_without_invented_metrics(tmp_path):
     published = json.loads((SNAP.parents[2] / "web/trend/data/local_brands.json").read_text(encoding="utf-8"))
     pub = {b["id"]: b for b in published["brands"]}
     assert set(pub) == {b["id"] for b in BRANDS}
-    for bid in ("ID-11", "ID-12"):
-        assert pub[bid]["source_type"] == "pending_x"
-        assert pub[bid]["x_followers"] is None and pub[bid]["x_mentions_7d"] is None
-        assert pub[bid]["provenance"]["ig"] == "demo_estimate"
-        assert pub[bid]["origin_label"] == "未核实"
+    cited = json.loads((SNAP.parent / published["x_snapshot"]["file"]).read_text(encoding="utf-8"))
+    pending_ids = []
+    for b in published["brands"]:
+        entry = cited["brands"].get(b["id"])
+        if b["source_type"] == "pending_x":
+            assert entry is None
+            _assert_pending_x_has_no_metrics(b)
+            pending_ids.append(b["id"])
+            continue
+        if entry is not None:
+            _assert_metrics_match_snapshot(b, entry)
+    assert published["x_snapshot"]["brands_pending_x"] == len(pending_ids)
+    for bid, src in (("ID-11", tomoro_src), ("ID-12", calais_src)):
+        b = pub[bid]
+        assert b["ig"] == src["ig_handle"] and b["provenance"]["ig"] == "demo_estimate"
+        assert b["website"] == src["website"] and b["origin_label"] == "未核实"
+        entry = cited["brands"].get(bid)
+        if entry is None:
+            _assert_pending_x_has_no_metrics(b)
+        else:
+            _assert_metrics_match_snapshot(b, entry)
 
 
 def test_heat_formula():
