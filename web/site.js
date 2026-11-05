@@ -25,14 +25,14 @@
       "nav.openRadar": "Buka radar",
       "nav.tools": "Alat",
       "hero.kicker": "PT XDirection Public Relations",
-      "hero.title": "Platform dua sisi untuk kopi dan teh di Indonesia.",
-      "hero.lead": "Nusantara Brand OS mempertemukan merek minuman lokal dengan pemasok. Merek dapat membaca radar panas media sosial dan mengajukan perbandingan kompetitor satu halaman. Pemasok biji kopi, teh, bahan baku, peralatan, dan kemasan dapat mendaftar.",
+      "hero.title": "Catatan tentang merek kopi dan teh di Indonesia.",
+      "hero.lead": "Merek bisa membaca radar panas dari data publik X, lalu meminta satu halaman perbandingan dengan kompetitor yang mereka sebut sendiri. Pemasok biji kopi, teh, bahan baku, peralatan, dan kemasan bisa mengajukan diri untuk masuk daftar.",
       "hero.operator": "Dioperasikan oleh PT XDirection Public Relations, perusahaan Indonesia.",
       "hero.ctaRadar": "Lihat contoh radar",
       "hero.ctaCompare": "Ajukan perbandingan",
       "hero.ctaSupplier": "Daftar sebagai pemasok",
       "brand.kicker": "01 — Merek",
-      "brand.title": "Untuk merek lokal",
+      "brand.title": "Untuk merek yang sudah punya nama",
       "brand.radarTitle": "Radar panas media sosial",
       "brand.radarBody": "Daftar merek kopi dan teh yang dilacak, dengan metrik yang diambil dari data publik X. Instagram dan TikTok belum terhubung.",
       "brand.radarLink": "Buka radar lengkap",
@@ -46,8 +46,8 @@
       "brand.later3": "Layanan pelanggan berbasis AI",
       "brand.laterNote": "Tiga layanan di atas belum menerima permintaan.",
       "supplier.kicker": "02 — Pemasok",
-      "supplier.title": "Untuk pemasok",
-      "supplier.lead": "Pemasok dapat mengajukan diri agar masuk daftar platform.",
+      "supplier.title": "Untuk pemasok bahan dan peralatan",
+      "supplier.lead": "Pemasok bisa mengajukan diri agar namanya masuk daftar yang kami simpan.",
       "supplier.whoTitle": "Yang dapat mendaftar",
       "supplier.item1": "Biji kopi",
       "supplier.item2": "Teh",
@@ -80,7 +80,7 @@
       "radar.open": "Buka radar lengkap",
       "about.kicker": "04 — Tentang",
       "about.title": "Tentang kami",
-      "about.body": "Nusantara Brand OS dioperasikan oleh PT XDirection Public Relations, perusahaan Indonesia. Platform ini menghubungkan merek kopi dan teh di Indonesia dengan pemasok bahan, peralatan, dan kemasan.",
+      "about.body": "Nusantara Brand OS dijalankan oleh PT XDirection Public Relations, perusahaan di Indonesia. Kerja kami sekarang sederhana: membaca data publik tentang merek kopi dan teh, menulis perbandingan satu halaman bila diminta, dan menerima pendaftaran pemasok.",
       "contact.kicker": "05 — Kontak",
       "contact.title": "Kontak",
       "contact.body": "Satu-satunya saluran di situs ini adalah email. Tidak ada formulir dan tidak ada nomor telepon.",
@@ -92,8 +92,8 @@
       "footer.terms": "Ketentuan layanan",
       "footer.radar": "Radar",
       "footer.tools": "Alat",
-      "meta.title": "Nusantara Brand OS · Platform kopi dan teh Indonesia",
-      "meta.description": "Platform dua sisi untuk merek dan pemasok kopi serta teh di Indonesia. Dioperasikan oleh PT XDirection Public Relations."
+      "meta.title": "Nusantara Brand OS · Catatan kopi dan teh Indonesia",
+      "meta.description": "Catatan untuk merek dan pemasok kopi serta teh di Indonesia. Dioperasikan oleh PT XDirection Public Relations."
     },
     zh: {
       "skip": "跳到正文",
@@ -107,14 +107,14 @@
       "nav.openRadar": "打开雷达",
       "nav.tools": "工具",
       "hero.kicker": "PT XDirection Public Relations",
-      "hero.title": "印尼咖啡与茶饮行业的双边平台。",
-      "hero.lead": "Nusantara Brand OS 连接本地饮品品牌与供应商。品牌可以查看社媒热度雷达，并免费申请一页纸竞品对比。咖啡豆、茶叶、原料、设备与包材供应商可以申请入驻。",
+      "hero.title": "一份关于印尼咖啡与茶饮品牌的笔记。",
+      "hero.lead": "品牌可以查看来自 X 公开数据的热度，并用邮件申请一页纸，把自己和点名的竞品放在一起。咖啡豆、茶叶、原料、设备、包材的供应商可以申请列入名单。",
       "hero.operator": "运营主体为印尼公司 PT XDirection Public Relations。",
       "hero.ctaRadar": "查看雷达样例",
       "hero.ctaCompare": "申请竞品对比",
       "hero.ctaSupplier": "供应商入驻",
       "brand.kicker": "01 — 品牌",
-      "brand.title": "品牌端",
+      "brand.title": "给已经有名字的品牌",
       "brand.radarTitle": "本地品牌社媒热度雷达",
       "brand.radarBody": "展示正在追踪的咖啡与茶饮品牌，以及来自 X 公开数据的指标。Instagram 与 TikTok 尚未接通。",
       "brand.radarLink": "打开完整雷达",
@@ -128,8 +128,8 @@
       "brand.later3": "AI 客服",
       "brand.laterNote": "以上三项目前不接受委托。",
       "supplier.kicker": "02 — 供应商",
-      "supplier.title": "供应商端",
-      "supplier.lead": "供应商可以申请列入平台名单。",
+      "supplier.title": "给原料和设备的供应商",
+      "supplier.lead": "供应商可以来信，请我们把公司记进名单。",
       "supplier.whoTitle": "可入驻类别",
       "supplier.item1": "咖啡豆",
       "supplier.item2": "茶叶",
@@ -162,7 +162,7 @@
       "radar.open": "打开完整雷达",
       "about.kicker": "04 — 关于",
       "about.title": "关于我们",
-      "about.body": "Nusantara Brand OS 由印尼公司 PT XDirection Public Relations 运营。平台连接印尼的咖啡与茶饮品牌，以及原料、设备与包材供应商。",
+      "about.body": "Nusantara Brand OS 由印尼公司 PT XDirection Public Relations 运营。眼下的工作不多：读咖啡与茶饮品牌的公开数据，应要求写一页纸对比，并接收供应商的入驻来信。",
       "contact.kicker": "05 — 联系",
       "contact.title": "联系",
       "contact.body": "本站只提供电子邮件。没有表单，也没有电话号码。",
@@ -174,8 +174,8 @@
       "footer.terms": "服务条款",
       "footer.radar": "雷达",
       "footer.tools": "工具",
-      "meta.title": "Nusantara Brand OS · 印尼咖啡与茶饮双边平台",
-      "meta.description": "面向印尼咖啡与茶饮品牌和供应商的双边平台。运营主体为 PT XDirection Public Relations。"
+      "meta.title": "Nusantara Brand OS · 印尼咖啡与茶饮笔记",
+      "meta.description": "给印尼咖啡与茶饮品牌和供应商的笔记。运营主体为 PT XDirection Public Relations。"
     },
     en: {
       "skip": "Skip to content",
@@ -189,14 +189,14 @@
       "nav.openRadar": "Open radar",
       "nav.tools": "Tools",
       "hero.kicker": "PT XDirection Public Relations",
-      "hero.title": "A two-sided platform for coffee and tea in Indonesia.",
-      "hero.lead": "Nusantara Brand OS connects local beverage brands with suppliers. Brands can read a social heat radar and request a one-page competitor comparison. Suppliers of coffee beans, tea, ingredients, equipment, and packaging can apply to list.",
+      "hero.title": "Notes on coffee and tea brands in Indonesia.",
+      "hero.lead": "A brand can read a heat radar drawn from public X data, then ask by email for one page set beside competitors it names. Suppliers of coffee beans, tea, ingredients, equipment, and packaging can ask to be listed.",
       "hero.operator": "Operated by PT XDirection Public Relations, an Indonesian company.",
       "hero.ctaRadar": "View the radar sample",
       "hero.ctaCompare": "Request a comparison",
       "hero.ctaSupplier": "List as a supplier",
       "brand.kicker": "01 — Brands",
-      "brand.title": "For local brands",
+      "brand.title": "For brands that already have a name",
       "brand.radarTitle": "Social heat radar",
       "brand.radarBody": "Tracked coffee and tea brands, with figures taken from public X data. Instagram and TikTok are not connected.",
       "brand.radarLink": "Open the full radar",
@@ -210,8 +210,8 @@
       "brand.later3": "AI customer service",
       "brand.laterNote": "These three are not taking requests.",
       "supplier.kicker": "02 — Suppliers",
-      "supplier.title": "For suppliers",
-      "supplier.lead": "Suppliers can apply to be listed on the platform.",
+      "supplier.title": "For suppliers of ingredients and equipment",
+      "supplier.lead": "A supplier can write and ask us to keep the company name on the list.",
       "supplier.whoTitle": "Who can apply",
       "supplier.item1": "Coffee beans",
       "supplier.item2": "Tea",
@@ -244,7 +244,7 @@
       "radar.open": "Open the full radar",
       "about.kicker": "04 — About",
       "about.title": "About",
-      "about.body": "Nusantara Brand OS is operated by PT XDirection Public Relations, an Indonesian company. The platform connects coffee and tea brands in Indonesia with suppliers of ingredients, equipment, and packaging.",
+      "about.body": "Nusantara Brand OS is run by PT XDirection Public Relations, a company in Indonesia. The work at the moment is small: read public data on coffee and tea brands, write a one-page comparison when asked, and take letters from suppliers.",
       "contact.kicker": "05 — Contact",
       "contact.title": "Contact",
       "contact.body": "Email is the only channel on this site. There is no form and no phone number.",
@@ -256,8 +256,8 @@
       "footer.terms": "Terms of service",
       "footer.radar": "Radar",
       "footer.tools": "Tools",
-      "meta.title": "Nusantara Brand OS · Coffee and tea platform in Indonesia",
-      "meta.description": "A two-sided platform for coffee and tea brands and suppliers in Indonesia. Operated by PT XDirection Public Relations."
+      "meta.title": "Nusantara Brand OS · Notes on coffee and tea in Indonesia",
+      "meta.description": "Notes for coffee and tea brands and suppliers in Indonesia. Operated by PT XDirection Public Relations."
     }
   };
 
@@ -409,6 +409,26 @@
     return td;
   }
 
+  function heatCell(row, label) {
+    var td = document.createElement("td");
+    td.dataset.label = label;
+    td.className = "num";
+    var heat = publicNumber(row, "heat");
+    var fig = document.createElement("span");
+    fig.className = "heat-fig";
+    var num = document.createElement("span");
+    num.textContent = heat === null ? "—" : formatHeat(heat);
+    var track = document.createElement("span");
+    track.className = "rule-bar";
+    var fill = document.createElement("span");
+    if (heat !== null) fill.style.width = Math.max(6, Math.round(heat)) + "%";
+    track.appendChild(fill);
+    fig.appendChild(num);
+    fig.appendChild(track);
+    td.appendChild(fig);
+    return td;
+  }
+
   function shownNumber(row, key, format) {
     var value = publicNumber(row, key);
     return value === null ? "—" : format(value);
@@ -446,7 +466,7 @@
       tr.appendChild(textCell(publicHandle(row) || "—", t("radar.colAccount"), false));
       tr.appendChild(textCell(shownNumber(row, "x_followers", formatInt), t("radar.colFollowers"), true));
       tr.appendChild(textCell(shownNumber(row, "x_mentions_7d", formatInt), t("radar.colMentions"), true));
-      tr.appendChild(textCell(shownNumber(row, "heat", formatHeat), t("radar.colHeat"), true));
+      tr.appendChild(heatCell(row, t("radar.colHeat")));
       body.appendChild(tr);
     });
   }
