@@ -108,6 +108,14 @@ def main():
     (SITE / "cart/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/cart/data/carts.json", SITE / "cart/data")
     shutil.copy(ROOT / "web/index.html", SITE / "index.html")
+    for extra in ("site.css", "site.js", "legal.js"):
+        shutil.copy(ROOT / "web" / extra, SITE / extra)
+    for page in ("privacy", "terms"):
+        (SITE / page).mkdir(parents=True)
+        shutil.copy(ROOT / "web" / page / "index.html", SITE / page / "index.html")
+    # 原工具首页移到 /app/，工具子路径仍在站点根上
+    (SITE / "app").mkdir(parents=True)
+    shutil.copy(ROOT / "web/app/index.html", SITE / "app/index.html")
     # 已迁出页面 301 至集装箱独立站（Pages 旧部署文件仍会残留可访问）
     (SITE / "_redirects").write_text(
         "\n".join([

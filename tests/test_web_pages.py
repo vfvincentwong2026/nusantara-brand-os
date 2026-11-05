@@ -70,17 +70,18 @@ def test_library_asset_tab_wires_brandkit():
     assert "'nbo_lib_'" in html
 
 
-def test_home_links_brandkit_and_library():
-    html = (WEB / "index.html").read_text(encoding="utf-8")
-    assert "./brandkit/" in html and "./library/" in html
+def test_tool_home_links_brandkit_and_library():
+    """原工具首页在 /app/，相对链接要能回到站点根上的工具页。"""
+    html = (WEB / "app" / "index.html").read_text(encoding="utf-8")
+    assert "../brandkit/" in html and "../library/" in html
 
 
-def test_home_dual_portal_separation():
-    html = (WEB / "index.html").read_text(encoding="utf-8")
+def test_tool_home_dual_portal_separation():
+    html = (WEB / "app" / "index.html").read_text(encoding="utf-8")
     assert "品牌复刻引擎" in html
     assert "兄弟项目 · 集装箱零售" in html
     assert "聚焦主线" in html
-    assert CT_URL in html, "首页缺少集装箱独立站外链"
+    assert CT_URL in html, "工具首页缺少集装箱独立站外链"
 
 
 def test_retail_landing_page():
