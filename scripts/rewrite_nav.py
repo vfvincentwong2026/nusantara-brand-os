@@ -43,7 +43,10 @@ def rewrite(path, nav):
     print(f'OK {path}')
 
 for f in (ROOT / 'web').glob('*/index.html'):
+    # web/index.html 是对外官网；web/app/index.html 用相对路径，避免被写成根绝对链接。
+    if f.parent.name == 'app':
+        print(f'SKIP {f} (tool home keeps relative links)')
+        continue
     rewrite(f, MAIN_NAV)
-rewrite(ROOT / 'web/index.html', MAIN_NAV)
 for f in (ROOT / 'container').glob('*/index.html'):
     rewrite(f, CONTAINER_NAV)
