@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>合作提案书 · Partnership Proposal | Nusantara Brand OS</title>
-<link rel="stylesheet" href="/ui/tokens.css">
+<link rel="stylesheet" href="../ui/tokens.css">
 <style>
   :root { --text:#111111; --dim:#767676; --line:#e5e5e5; --accent:#2e7d32; }
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -39,7 +39,7 @@
 <body>
 <div class="topbar">
   <a class="btn" href="javascript:history.back()">← 返回</a>
-  <a class="btn" href="/trend/">热点雷达</a>
+  <a class="btn" href="../trend/">热点雷达</a>
   <a class="btn pri" href="javascript:window.print()">🖨 打印 / 存 PDF</a>
 </div>
 <div class="sheet" id="sheet"><div style="padding:80px 0;text-align:center;color:#767676">加载中…</div></div>
@@ -49,12 +49,12 @@ const $ = s => document.getElementById(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 Promise.all([
-  fetch('/trend/data/local_brands.json').then(r => r.ok ? r.json() : null),
-  fetch('/map/data/site_select.json').then(r => r.ok ? r.json() : null),
+  fetch('../trend/data/local_brands.json').then(r => r.ok ? r.json() : null),
+  fetch('../map/data/site_select.json').then(r => r.ok ? r.json() : null),
 ]).then(([lb, ss]) => {
   const id = new URLSearchParams(location.search).get('shop') || (lb && lb.shops[0] && lb.shops[0].id);
   const shop = (lb && lb.shops || []).find(s => s.id === id);
-  if (!shop) { $('sheet').innerHTML = '<div style="padding:60px 0;text-align:center">未找到店铺（雷达数据未加载？）<br><br><a href="/trend/" style="color:#767676">← 回热点雷达</a></div>'; return; }
+  if (!shop) { $('sheet').innerHTML = '<div style="padding:60px 0;text-align:center">未找到店铺（雷达数据未加载？）<br><br><a href="../trend/" style="color:#767676">← 回热点雷达</a></div>'; return; }
   const site = (ss && ss.candidates || []).find(c => c.id === 'RD-' + shop.id) || null;
   const best = site && site.best_model;
   const today = new Date().toLocaleDateString('zh-CN');
@@ -94,11 +94,11 @@ Promise.all([
   </div>
   <table style="margin-top:12px"><tr><th>业态模型</th><th>得分</th><th>结论</th></tr>
   ${site.models.map(m => `<tr><td>${m.icon} ${esc(m.name)}（${m.en}）</td><td>${m.score}</td><td>${m.eligible ? (m.key === (best && best.key) ? '<span class="ok">★ 推荐</span>' : '<span class="ok">✓ 可行</span>') : '<span class="no">✗ ' + esc(m.hard_fail.join('、')) + '</span>'}</td></tr>`).join('')}
-  </table>` : '<div class="card">该店尚未进入选址评估——<a href="/map/?focus=RD-' + shop.id + '">立即评估 →</a></div>'}
+  </table>` : '<div class="card">该店尚未进入选址评估——<a href="../map/?focus=RD-' + shop.id + '">立即评估 →</a></div>'}
 
   <h2>三、品牌焕新 V2 BRAND UPGRADE</h2>
   <div class="card">保留品牌名「${esc(shop.name)}」与客群认知（资产不动），全套识别系统焕新：机制色板 · 字标搭配 · 超级符号 · 包装三层——升级首发即 UGC 事件。<br>
-  <a href="/brandkit/?brand=${shop.id}" style="color:#111;font-weight:700">打开品牌升级器（已带入本店）→</a></div>
+  <a href="../brandkit/?brand=${shop.id}" style="color:#111;font-weight:700">打开品牌升级器（已带入本店）→</a></div>
 
   <h2>四、资源嫁接清单 WHAT WE BRING</h2>
   <div class="chips">${(shop.boost || []).map(b => `<span>✚ ${esc(b)}</span>`).join('')}</div>

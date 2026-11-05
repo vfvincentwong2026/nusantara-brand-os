@@ -25,7 +25,7 @@ def test_main_pages_share_full_nav():
         html = _read(WEB, p)
         for anchor in MAIN_NAV_ANCHORS:
             assert anchor in html, f"{p} 导航缺少 {anchor}"
-        assert 'href="/ui/tokens.css"' in html, f"{p} 缺少 tokens.css"
+        assert 'href="../ui/tokens.css"' in html, f"{p} 缺少 tokens.css"
         assert CT_URL in html, f"{p} 缺少集装箱兄弟项目外链"
         assert 'class="nl bline"' not in html, f"{p} 仍残留旧 bline 分组导航"
 

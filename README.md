@@ -328,7 +328,6 @@ MIT License
 
 ## 🙏 致谢
 
-- 视觉与展示范式参考：[ChargeNexus Showcase](https://github.com/vfvincentwong2026/charge-nexus-showcase)
 - 印尼市场参数参考：APPBI 行业报告、Alfamidi / Alfasupermarket / Hypermart 公开数据
 - 开源零售与供应链社区：Prophet、OR-Tools、React Three Fiber
 - 开源 AI 工具：OmniSupply、GraphRAG、supply-chain-mcp-server、Keel、ChainScope、SentinelSCM、SynthFirm、InventOpt 等
