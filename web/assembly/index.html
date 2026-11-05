@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="../ui/tokens.css">
+<script src="../ui/sitepath.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -123,7 +124,7 @@ fetch('./data/assembly.json').then(r => r.json()).then(d => {
     const maxv = Math.max(...s.breakdown.map(b => b.hi.wan_cny));
     return `<div class="card ${s.fit_budget ? 'best' : ''}">
       <h3>${s.form}<small>${s.id} · ${s.area_sqm}㎡ · ${s.weeks[0]}–${s.weeks[1]} 周</small></h3>
-      ${(s.images || []).map(src => `<a href="${src}" target="_blank" rel="noopener" class="fimg"><img src="${src}" alt="${s.form} 实景参考图" loading="lazy"></a>`).join('')}
+      ${(s.images || []).map(src => `<a href="${nboSiteUrl(src)}" target="_blank" rel="noopener" class="fimg"><img src="${nboSiteUrl(src)}" alt="${s.form} 实景参考图" loading="lazy"></a>`).join('')}
       <div class="money">¥${s.total_lo.wan_cny}–${s.total_hi.wan_cny} 万<small> ≈ Rp ${s.total_lo.idr_m}–${s.total_hi.idr_m} 百万</small></div>
       <div class="bars">${s.breakdown.map((b, i) => `<div class="bar">
         <span class="bn">${b.dim}</span>

@@ -10,6 +10,8 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
+from nbo.webpaths import container
+
 # ── 落地因子定义（权重合计 100）────────────────────────────
 FACTORS = [
     dict(id="f1", name="传播单元强度", weight=15,
@@ -73,7 +75,7 @@ CAT_TO_ZONE = lambda cat: "fresh" if cat in FRESH_CATS else "food"
 def twin_links(category: str, name: str) -> dict:
     z = CAT_TO_ZONE(category)
     q = f"?store=2000&zone={z}&label={name}"
-    return {"zone": z, "floorplan": f"/floorplan/{q}", "three": f"/three/{q}"}
+    return {"zone": z, "floorplan": container(f"/floorplan/{q}"), "three": container(f"/three/{q}")}
 
 
 def _clamp(v: float) -> float:
@@ -115,7 +117,7 @@ def _build_plan(top: dict, s: dict) -> dict:
         "concept": {"name": s["name"], "region": s["region"], "category": s["category"],
                     "total": top["total"], "grade": top["grade"], "indo_fit": fit},
         "container": {"tier": tier[0], "space_plan": tier[1],
-                      "link": "/case/", "twin": twin_links(s["category"], s["name"]),
+                      "link": container("/case/"), "twin": twin_links(s["category"], s["name"]),
                       "note": "集装箱整装四档体系直接复用；快闪模块可拆装巡回"},
         "steps": [
             dict(no=1, name="定义传播单元",

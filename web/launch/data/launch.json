@@ -76,8 +76,8 @@
       "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=药果（蜂蜜油果子）",
-        "three": "/three/?store=2000&zone=fresh&label=药果（蜂蜜油果子）"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=药果（蜂蜜油果子）",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=药果（蜂蜜油果子）"
       }
     },
     {
@@ -102,8 +102,8 @@
       "coop_mode": "可代理",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=黄油树夹心饼干",
-        "three": "/three/?store=2000&zone=fresh&label=黄油树夹心饼干"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=黄油树夹心饼干",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=黄油树夹心饼干"
       }
     },
     {
@@ -128,8 +128,8 @@
       "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=现烤太阳饼/老婆饼",
-        "three": "/three/?store=2000&zone=fresh&label=现烤太阳饼/老婆饼"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=现烤太阳饼/老婆饼",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=现烤太阳饼/老婆饼"
       }
     },
     {
@@ -154,8 +154,8 @@
       "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=烤鱿鱼丝/酸辣鱿鱼",
-        "three": "/three/?store=2000&zone=fresh&label=烤鱿鱼丝/酸辣鱿鱼"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=烤鱿鱼丝/酸辣鱿鱼",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=烤鱿鱼丝/酸辣鱿鱼"
       }
     },
     {
@@ -180,8 +180,8 @@
       "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=泰式手打奶茶",
-        "three": "/three/?store=2000&zone=fresh&label=泰式手打奶茶"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=泰式手打奶茶",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=泰式手打奶茶"
       }
     },
     {
@@ -206,8 +206,8 @@
       "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=鲜奶油水果三明治",
-        "three": "/three/?store=2000&zone=fresh&label=鲜奶油水果三明治"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=鲜奶油水果三明治",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=鲜奶油水果三明治"
       }
     },
     {
@@ -232,8 +232,8 @@
       "coop_mode": "可代理",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=南洋白咖啡（现调）",
-        "three": "/three/?store=2000&zone=fresh&label=南洋白咖啡（现调）"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=南洋白咖啡（现调）",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=南洋白咖啡（现调）"
       }
     },
     {
@@ -258,8 +258,8 @@
       "coop_mode": "仅学习",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=现烤巴斯克芝士蛋糕",
-        "three": "/three/?store=2000&zone=fresh&label=现烤巴斯克芝士蛋糕"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=现烤巴斯克芝士蛋糕",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=现烤巴斯克芝士蛋糕"
       }
     },
     {
@@ -284,8 +284,8 @@
       "coop_mode": "可加盟",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈",
-        "three": "/three/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=Knotted 奶油甜甜圈"
       }
     }
   ],
@@ -301,11 +301,11 @@
     "container": {
       "tier": "双40尺旗舰样板（56㎡）",
       "space_plan": "机制剧场全配置：挑战台+等级墙+打卡装置",
-      "link": "/case/",
+      "link": "https://nusantara-container.pages.dev/case/",
       "twin": {
         "zone": "fresh",
-        "floorplan": "/floorplan/?store=2000&zone=fresh&label=药果（蜂蜜油果子）",
-        "three": "/three/?store=2000&zone=fresh&label=药果（蜂蜜油果子）"
+        "floorplan": "https://nusantara-container.pages.dev/floorplan/?store=2000&zone=fresh&label=药果（蜂蜜油果子）",
+        "three": "https://nusantara-container.pages.dev/three/?store=2000&zone=fresh&label=药果（蜂蜜油果子）"
       },
       "note": "集装箱整装四档体系直接复用；快闪模块可拆装巡回"
     },

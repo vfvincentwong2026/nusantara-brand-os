@@ -10,6 +10,8 @@ import sqlite3
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
+from nbo.webpaths import asset
+
 WIB = timezone(timedelta(hours=7))
 
 DDL = """
@@ -442,7 +444,7 @@ def _shop_from_row(r: dict) -> dict:
 
 def _photo_of(eid: str) -> str | None:
     p = Path(__file__).resolve().parents[3] / "web/assets/radar" / f"{eid}.jpg"
-    return f"/assets/radar/{eid}.jpg" if p.exists() else None
+    return asset(f"assets/radar/{eid}.jpg") if p.exists() else None
 
 
 def build_localradar(db_path: str | Path, x_snapshot: str | Path | None = "auto") -> dict:

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../ui/tokens.css">
+<script src="../ui/sitepath.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -298,7 +299,7 @@ function buildLayers(map, d) {
     const col = SCORE_COLOR(c.score);
     const m = L.marker([c.lat, c.lon], { icon: L.divIcon({ className: '', iconSize: [30, 30],
       html: `<div style="width:26px;height:26px;background:${col};border:2.5px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 8px ${col}88;display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);color:#fff;font:700 11px Consolas,monospace;">${Math.round(c.score)}</span></div>` }) })
-      .bindPopup(`${c.photo ? `<img src="${c.photo}" alt="${c.name}" style="width:100%;height:110px;object-fit:cover;border-radius:6px;margin:2px 0 4px;">` : ''}
+      .bindPopup(`${c.photo ? `<img src="${nboSiteUrl(c.photo)}" alt="${c.name}" style="width:100%;height:110px;object-fit:cover;border-radius:6px;margin:2px 0 4px;">` : ''}
         <b style="font-size:13px;">${c.origin === 'radar' ? '📡 ' : ''}${c.name}</b> · ${c.area}（${c.city}）<br>
         <span style="color:#767676">${c.site_type} · ${c.type_en}${c.radar_score ? ` · 雷达潜力 ${c.radar_score}` : ''}</span><br>
         综合选址分 <b style="color:${col};font-size:15px;">${c.score}</b><br>

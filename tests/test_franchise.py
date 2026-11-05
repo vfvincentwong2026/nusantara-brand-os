@@ -22,6 +22,7 @@ def test_franchise_build(tmp_path):
         assert abs(f["payback_months"] - round(f["capex_idr"] / profit, 1)) < 0.15
         assert 6 <= f["payback_months"] <= 24  # 合理加盟回本区间
         assert f["source_type"] == "演示"
+        assert f["images"] and all(src.startswith("assets/") and not src.startswith("/") for src in f["images"])
         assert len(f["supply_chain"]) == 3
     # 品牌库六条，费用/投资为正且带培训与区域
     assert len(d["brands"]) == 6

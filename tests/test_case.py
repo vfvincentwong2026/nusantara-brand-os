@@ -56,7 +56,8 @@ def test_build_case_map_and_dashboard(tmp_path):
     db = tmp_path / "t.db"
     seed(db)
     m = build_case_map(db)
-    assert m["name"] and m["lat"] and m["link"] == "/case/"
+    assert m["name"] and m["lat"]
+    assert m["link"] == "https://nusantara-container.pages.dev/case/"
     assert "待复测" in m["net_size"]
     dd = build_case_dashboard(db)
     assert dd["store"]["demo"] is True

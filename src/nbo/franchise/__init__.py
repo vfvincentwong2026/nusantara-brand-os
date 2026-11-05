@@ -9,6 +9,8 @@ import sqlite3
 from datetime import datetime
 from pathlib import Path
 
+from nbo.webpaths import asset
+
 FX = 2200  # 1 RMB = 2200 IDR（演示口径）
 
 FRANCHISE_DDL = """
@@ -116,7 +118,7 @@ def build_franchise(db_path: str | Path) -> dict:
         formats, brands = [], []
         for r in conn.execute("SELECT * FROM franchise_format"):
             f = dict(r)
-            f["images"] = [f"/assets/fmt-{f['id']}.jpg"]
+            f["images"] = [asset(f"assets/fmt-{f['id']}.jpg")]
             f["supply_chain"] = json.loads(f["supply_chain"])
             capex_rmb = f["fee_rmb"] + f["equip_rmb"] + f["fitout_rmb"] + f["goods_rmb"] + f["deposit_rmb"] + f["float_rmb"]
             capex_idr = capex_rmb * 10_000 * FX
