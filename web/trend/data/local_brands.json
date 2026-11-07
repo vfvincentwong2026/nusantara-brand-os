@@ -1,17 +1,17 @@
 {
-  "generated_at": "2026-11-05 08:11",
+  "generated_at": "2026-11-07 08:10",
   "demo": false,
   "data_mode": "x_public+demo_estimate",
   "x_snapshot": {
-    "file": "x_snapshot_2026-11-05.json",
-    "fetched_at": "2026-11-05T01:07:00Z",
+    "file": "x_snapshot_2026-11-07.json",
+    "fetched_at": "2026-11-07T01:06:00Z",
     "x_calls_used": 23,
     "brands_with_x": 12,
     "brands_pending_x": 0,
     "heat_formula": "heat = 100*log10(1+近7天X提及数)/log10(1+2000)，上限100"
   },
   "window": "近3个月",
-  "source_note": "X 公开数据实抓（2026-11-05T01:07:00Z，12/12 个品牌）：热度=近7天X提及量对数分、X 官方号粉丝/发帖为实抓；IG/TikTok、粉丝(万)/播放/赞/转发/互动率/30天增速/缺口分及潜力小店均为演示估算",
+  "source_note": "X 公开数据实抓（2026-11-07T01:06:00Z，12/12 个品牌）：热度=近7天X提及量对数分、X 官方号粉丝/发帖为实抓；IG/TikTok、粉丝(万)/播放/赞/转发/互动率/30天增速/缺口分及潜力小店均为演示估算",
   "cities": [
     "万隆",
     "巴厘巴板",
@@ -43,8 +43,8 @@
       "why_hot": "便利店价格带精品咖啡：2 万盾一杯拿铁击穿雅加达通勤场景，App 会员体系把复购锁成习惯。",
       "viral_format": "上班族晨队实拍 + '比星巴克便宜一半' 对比梗，天然 UGC 模板",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 1,068 条",
-        "【X 实抓 2026-11-05】官方号 @Kopikenangan_ID 粉丝 12,886 · 近 30 天发帖 10 · 最近发帖 2026-11-04",
+        "【X 实抓 2026-11-07】近 7 天全网提及 1,068 条",
+        "【X 实抓 2026-11-07】官方号 @Kopikenangan_ID 粉丝 12,878 · 近 30 天发帖 10 · 最近发帖 2026-11-05",
         "【演示】TikTok #kopikenangan 标签播放 4.1 亿",
         "【演示】IG Reels 单条最高 680 万播放",
         "【演示】X 雅加达通勤话题周均 2 次热搜"
@@ -63,20 +63,20 @@
       "origin_label": "本土",
       "x_seed_handle": "@KopiKenangan",
       "x_handle_status": "replaced",
-      "x_handle_note": "@KopiKenangan 存在但仅 33 粉、1 条帖、简介为空，无法确认是官方号（见 unverified_account），不采用其指标。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @Kopikenangan_ID（显示名 Kopi Kenangan，蓝标，粉丝 12895，累计帖数 3139）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。 2026-11-05：本次 X 返回 verified=false（11-04 记为蓝标，可能是字段口径不同，未核实）。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
-      "x_followers": 12886,
-      "x_tweet_count": 3141,
+      "x_handle_note": "@KopiKenangan 存在但仅 33 粉、1 条帖、简介为空，无法确认是官方号（见 unverified_account），不采用其指标。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @Kopikenangan_ID（显示名 Kopi Kenangan，蓝标，粉丝 12895，累计帖数 3139）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。 2026-11-05：本次 X 返回 verified=false（11-04 记为蓝标，可能是字段口径不同，未核实）。 2026-11-06：本次 X 仍返回 verified=false（与 11-05 一致；11-04 曾记 true/蓝标）。结论：verified 字段口径不稳定，非账号状态实变。 2026-11-07：本次 X 仍返回 verified=false（与 11-05/11-06 一致；11-04 曾记 true/蓝标）。结论：verified 字段口径不稳定，非账号状态实变。",
+      "x_fetched_at": "2026-11-07T01:06:00Z",
+      "x_followers": 12878,
+      "x_tweet_count": 3142,
       "x_posts_30d": 10,
-      "x_posts_30d_likes": 23094,
-      "x_last_post_at": "2026-11-04T08:00:02Z",
+      "x_posts_30d_likes": 23446,
+      "x_last_post_at": "2026-11-05T08:33:23Z",
       "x_mentions_7d": 1068,
       "x_mentions_query": "\"kopi kenangan\" -is:retweet",
       "x_mentions_noise": "low",
       "heat_demo": 94.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 1,068 条",
-        "【X 实抓 2026-11-05】官方号 @Kopikenangan_ID 粉丝 12,886 · 近 30 天发帖 10 · 最近发帖 2026-11-04"
+        "【X 实抓 2026-11-07】近 7 天全网提及 1,068 条",
+        "【X 实抓 2026-11-07】官方号 @Kopikenangan_ID 粉丝 12,878 · 近 30 天发帖 10 · 最近发帖 2026-11-05"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -122,12 +122,12 @@
       "shares_wan": 6.1,
       "er": 6.8,
       "growth_30d": 52.0,
-      "heat": 84.0,
+      "heat": 83.4,
       "why_hot": "科技感第三空间：App 点单 + 轻食矩阵，抓住 Z 世代'办公第三地'。",
       "viral_format": "门店空间打卡 + 限定杯套收集机制",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 593 条（2026-11-03 单日 425 条为单日突发，高度疑似与 Arirang Jakarta 宣布 Fore 赞助 JEJAK ARIRANG 有关（未逐条核实））",
-        "【X 实抓 2026-11-05】官方号 @ForeCoffeeID 粉丝 1,692 · 近 30 天发帖 1 · 最近发帖 2026-10-06",
+        "【X 实抓 2026-11-07】近 7 天全网提及 567 条（2026-11-03 单日 425 条为单日突发，高度疑似与 Arirang Jakarta 宣布 Fore 赞助 JEJAK ARIRANG 有关（未逐条核实））",
+        "【X 实抓 2026-11-07】官方号 @ForeCoffeeID 粉丝 1,692 · 近 30 天发帖 0 · 最近发帖 2026-10-06",
         "【演示】IG 打卡笔记月增 2.4 万条",
         "【演示】TikTok 新品首发视频均播 120 万",
         "【演示】增速近 30 天 +52%"
@@ -147,19 +147,19 @@
       "x_seed_handle": "@forecoffee",
       "x_handle_status": "replaced",
       "x_handle_note": "@forecoffee 在 X 不存在；@ForeCoffeeID（显示名 fore.coffee，Jakarta，简介含官方客服 WA/邮箱）明确匹配，采用。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
+      "x_fetched_at": "2026-11-07T01:06:00Z",
       "x_followers": 1692,
       "x_tweet_count": 2878,
-      "x_posts_30d": 1,
+      "x_posts_30d": 0,
       "x_posts_30d_likes": 0,
       "x_last_post_at": "2026-10-06T02:52:30Z",
-      "x_mentions_7d": 593,
+      "x_mentions_7d": 567,
       "x_mentions_query": "(\"fore coffee\" OR forecoffee OR forecoffeeid) -is:retweet",
       "x_mentions_noise": "medium",
       "heat_demo": 84.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 593 条（2026-11-03 单日 425 条为单日突发，高度疑似与 Arirang Jakarta 宣布 Fore 赞助 JEJAK ARIRANG 有关（未逐条核实））",
-        "【X 实抓 2026-11-05】官方号 @ForeCoffeeID 粉丝 1,692 · 近 30 天发帖 1 · 最近发帖 2026-10-06"
+        "【X 实抓 2026-11-07】近 7 天全网提及 567 条（2026-11-03 单日 425 条为单日突发，高度疑似与 Arirang Jakarta 宣布 Fore 赞助 JEJAK ARIRANG 有关（未逐条核实））",
+        "【X 实抓 2026-11-07】官方号 @ForeCoffeeID 粉丝 1,692 · 近 30 天发帖 0 · 最近发帖 2026-10-06"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -186,7 +186,7 @@
         "x_mentions_7d": "x_public",
         "value_score": "mixed"
       },
-      "value_score": 66.0,
+      "value_score": 65.8,
       "photo": "assets/radar/ID-03.jpg"
     },
     {
@@ -205,12 +205,12 @@
       "shares_wan": 10.9,
       "er": 7.6,
       "growth_30d": 36.0,
-      "heat": 81.2,
+      "heat": 81.3,
       "why_hot": "'omo 咖啡包'单品打天下：刚出炉面包 + 咖啡酱的组合拳，商场档口模型坪效极高。",
       "viral_format": "出炉时刻 ASMR + 咖啡酱撕开瞬间",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 479 条（'roti o' 可能命中一般面包语句，存在噪声）",
-        "【X 实抓 2026-11-05】官方号 @rotioindonesia 粉丝 397 · 近 30 天发帖 0",
+        "【X 实抓 2026-11-07】近 7 天全网提及 483 条（'roti o' 可能命中一般面包语句，存在噪声）",
+        "【X 实抓 2026-11-07】官方号 @rotioindonesia 粉丝 397 · 近 30 天发帖 0",
         "【演示】TikTok #rotio 播放 3.8 亿",
         "【演示】商场档口加盟咨询月环比 +71%",
         "【演示】X '泗水之光' 话题讨论"
@@ -230,19 +230,19 @@
       "x_seed_handle": "@rotiocomalang",
       "x_handle_status": "replaced",
       "x_handle_note": "@rotiocomalang 在 X 不存在；候选 @rotio_id / @rotiocoffee 不存在，@Rotio 为无关个人号。2026-11-04 ~12:36（UTC+8）经 X 公开 API 核实官方号为 @rotioindonesia（显示名 Roti'O Indonesia，网站 rotio.id，粉丝 397，累计帖数 388）。未重抓 mentions_7d 与近 30 天发帖，沿用本快照已记录的提及量。种子 handle 有误，已更正。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
+      "x_fetched_at": "2026-11-07T01:06:00Z",
       "x_followers": 397,
       "x_tweet_count": 388,
       "x_posts_30d": 0,
       "x_posts_30d_likes": 0,
       "x_last_post_at": null,
-      "x_mentions_7d": 479,
+      "x_mentions_7d": 483,
       "x_mentions_query": "(\"roti o\" OR \"roti'o\" OR rotio) lang:id -is:retweet",
       "x_mentions_noise": "medium",
       "heat_demo": 86.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 479 条（'roti o' 可能命中一般面包语句，存在噪声）",
-        "【X 实抓 2026-11-05】官方号 @rotioindonesia 粉丝 397 · 近 30 天发帖 0"
+        "【X 实抓 2026-11-07】近 7 天全网提及 483 条（'roti o' 可能命中一般面包语句，存在噪声）",
+        "【X 实抓 2026-11-07】官方号 @rotioindonesia 粉丝 397 · 近 30 天发帖 0"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -269,7 +269,7 @@
         "x_mentions_7d": "x_public",
         "value_score": "mixed"
       },
-      "value_score": 62.7,
+      "value_score": 62.8,
       "photo": "assets/radar/ID-09.jpg"
     },
     {
@@ -288,12 +288,12 @@
       "shares_wan": 9.2,
       "er": 7.2,
       "growth_30d": 35.0,
-      "heat": 80.6,
+      "heat": 80.4,
       "why_hot": " kiosk 小店模型极致坪效：3㎡ 档口 + 外卖占比 70%，'咖啡不用坐下来喝' 心智强。",
       "viral_format": "档口出品 15 秒倒计时挑战 + 骑手取餐大军航拍",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 458 条",
-        "【X 实抓 2026-11-05】官方号 @JanjiJiwaID 粉丝 2,133 · 近 30 天发帖 0 · 最近发帖 2023-07-11",
+        "【X 实抓 2026-11-07】近 7 天全网提及 450 条",
+        "【X 实抓 2026-11-07】官方号 @JanjiJiwaID 粉丝 2,133 · 近 30 天发帖 0 · 最近发帖 2023-07-11",
         "【演示】TikTok #janjijiwa 播放 2.8 亿",
         "【演示】外卖平台月销 300 万杯",
         "【演示】加盟咨询量月环比 +58%"
@@ -314,19 +314,19 @@
       "x_seed_handle": "@janjijiwa",
       "x_handle_status": "replaced",
       "x_handle_note": "@janjijiwa 在 X 不存在；按用户名候选查到 @JanjiJiwaID（显示名 Kopi Janji Jiwa，简介为品牌口号，2019 年注册）——名称明确匹配，采用。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
+      "x_fetched_at": "2026-11-07T01:06:00Z",
       "x_followers": 2133,
       "x_tweet_count": 2913,
       "x_posts_30d": 0,
       "x_posts_30d_likes": 0,
       "x_last_post_at": "2023-07-11T09:03:03Z",
-      "x_mentions_7d": 458,
+      "x_mentions_7d": 450,
       "x_mentions_query": "\"janji jiwa\" -is:retweet",
       "x_mentions_noise": "low",
       "heat_demo": 89.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 458 条",
-        "【X 实抓 2026-11-05】官方号 @JanjiJiwaID 粉丝 2,133 · 近 30 天发帖 0 · 最近发帖 2023-07-11"
+        "【X 实抓 2026-11-07】近 7 天全网提及 450 条",
+        "【X 实抓 2026-11-07】官方号 @JanjiJiwaID 粉丝 2,133 · 近 30 天发帖 0 · 最近发帖 2023-07-11"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -372,12 +372,12 @@
       "shares_wan": 5.4,
       "er": 6.1,
       "growth_30d": 29.0,
-      "heat": 79.5,
+      "heat": 79.6,
       "why_hot": "芝士酱瀑布 + 炸鸡双王牌，'热量炸弹'视觉冲击是天然短视频素材。",
       "viral_format": "芝士拉丝慢镜头 + 瀑布酱 ASMR",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 421 条",
-        "【X 实抓 2026-11-05】@richeese_factory：handle 不合法",
+        "【X 实抓 2026-11-07】近 7 天全网提及 424 条",
+        "【X 实抓 2026-11-07】@richeese_factory：handle 不合法",
         "【演示】TikTok 拉丝挑战参与 12 万条",
         "【演示】IG 瀑布酱视频均播 90 万",
         "【演示】二级市场（马来/菲律宾）询问加盟"
@@ -398,19 +398,19 @@
       "x_seed_handle": "@richeese_factory",
       "x_handle_status": "invalid",
       "x_handle_note": "种子 handle 共 16 个字符，超过 X 15 字符上限，不可能存在；候选 @richeesefactory / @richeese_id 不存在；帖子检索未发现官方账号。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
+      "x_fetched_at": "2026-11-07T01:06:00Z",
       "x_followers": null,
       "x_tweet_count": null,
       "x_posts_30d": null,
       "x_posts_30d_likes": null,
       "x_last_post_at": null,
-      "x_mentions_7d": 421,
+      "x_mentions_7d": 424,
       "x_mentions_query": "richeese -is:retweet",
       "x_mentions_noise": "low",
       "heat_demo": 78.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 421 条",
-        "【X 实抓 2026-11-05】@richeese_factory：handle 不合法"
+        "【X 实抓 2026-11-07】近 7 天全网提及 424 条",
+        "【X 实抓 2026-11-07】@richeese_factory：handle 不合法"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -456,12 +456,12 @@
       "shares_wan": 1.2,
       "er": 6.6,
       "growth_30d": 47.0,
-      "heat": 73.2,
+      "heat": 71.5,
       "why_hot": "健康甜品定位：冻酸奶 + 新鲜水果塔，抓住中产女性下午茶场景。",
       "viral_format": "水果塔组装过程延时拍摄 + 低卡标签",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 260 条",
-        "【X 实抓 2026-11-05】官方号 @mysoursally 粉丝 7,384 · 近 30 天发帖 0 · 最近发帖 2010-09-22",
+        "【X 实抓 2026-11-07】近 7 天全网提及 228 条",
+        "【X 实抓 2026-11-07】官方号 @mysoursally 粉丝 7,382 · 近 30 天发帖 0 · 最近发帖 2010-09-22",
         "【演示】IG Reels 女性向内容互动率 9.2%",
         "【演示】TikTok #soursally 30 天播放 +47%"
       ],
@@ -481,19 +481,19 @@
       "x_seed_handle": "@soursally",
       "x_handle_status": "replaced",
       "x_handle_note": "@soursally 是粉丝号（简介：'follow @mysoursally'）；@mysoursally（显示名 Sour Sally）明确匹配，采用。注意该号最后发帖为 2010 年，已长期停更。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
-      "x_followers": 7384,
+      "x_fetched_at": "2026-11-07T01:06:00Z",
+      "x_followers": 7382,
       "x_tweet_count": 2445,
       "x_posts_30d": 0,
       "x_posts_30d_likes": 0,
       "x_last_post_at": "2010-09-22T18:03:59Z",
-      "x_mentions_7d": 260,
+      "x_mentions_7d": 228,
       "x_mentions_query": "(\"sour sally\" OR soursally OR mysoursally) -is:retweet",
       "x_mentions_noise": "low",
       "heat_demo": 63.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 260 条",
-        "【X 实抓 2026-11-05】官方号 @mysoursally 粉丝 7,384 · 近 30 天发帖 0 · 最近发帖 2010-09-22"
+        "【X 实抓 2026-11-07】近 7 天全网提及 228 条",
+        "【X 实抓 2026-11-07】官方号 @mysoursally 粉丝 7,382 · 近 30 天发帖 0 · 最近发帖 2010-09-22"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -520,7 +520,7 @@
         "x_mentions_7d": "x_public",
         "value_score": "mixed"
       },
-      "value_score": 66.9,
+      "value_score": 66.3,
       "photo": "assets/radar/ID-08.jpg"
     },
     {
@@ -539,12 +539,12 @@
       "shares_wan": 2.8,
       "er": 7.4,
       "growth_30d": 33.0,
-      "heat": 64.2,
+      "heat": 64.9,
       "why_hot": "'社区咖啡窗口店'鼻祖：只卖 4 个 SKU，把单品做到极致性价比。",
       "viral_format": "4 SKU 菜单墙打卡 + 老社区情怀叙事",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 131 条",
-        "【X 实抓 2026-11-05】@kopituku：种子 handle 指向无关账号",
+        "【X 实抓 2026-11-07】近 7 天全网提及 138 条",
+        "【X 实抓 2026-11-07】@kopituku：种子 handle 指向无关账号",
         "【演示】IG 社区探店笔记月增 8000 条",
         "【演示】TikTok 窗口店模型模仿视频 2 万条"
       ],
@@ -564,19 +564,19 @@
       "x_seed_handle": "@kopituku",
       "x_handle_status": "wrong_account",
       "x_handle_note": "@kopituku 是个人账号（显示名 Uti，Sleman），与 Toko Kopi Tuku 无关；@tokokopituku 简介写'akun ini dijual'（账号出售），非官方；未找到官方号。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
+      "x_fetched_at": "2026-11-07T01:06:00Z",
       "x_followers": null,
       "x_tweet_count": null,
       "x_posts_30d": null,
       "x_posts_30d_likes": null,
       "x_last_post_at": null,
-      "x_mentions_7d": 131,
+      "x_mentions_7d": 138,
       "x_mentions_query": "(\"kopi tuku\" OR \"toko kopi tuku\") -is:retweet",
       "x_mentions_noise": "low",
       "heat_demo": 72.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 131 条",
-        "【X 实抓 2026-11-05】@kopituku：种子 handle 指向无关账号"
+        "【X 实抓 2026-11-07】近 7 天全网提及 138 条",
+        "【X 实抓 2026-11-07】@kopituku：种子 handle 指向无关账号"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -603,91 +603,8 @@
         "x_mentions_7d": "x_public",
         "value_score": "mixed"
       },
-      "value_score": 59.6,
+      "value_score": 59.9,
       "photo": "assets/radar/ID-07.jpg"
-    },
-    {
-      "id": "ID-10",
-      "name": "Gulu Gulu",
-      "name_cn": "咕噜咕噜",
-      "city": "雅加达",
-      "category": "台式奶茶",
-      "stage": "起步期",
-      "ig": "@guluguluid",
-      "tiktok": "@gulugulu.id",
-      "x": "@gulugulu_id（账号存在但无法确认官方）",
-      "followers_wan": 5.8,
-      "views_wan": 32.0,
-      "likes_wan": 4.6,
-      "shares_wan": 0.6,
-      "er": 5.9,
-      "growth_30d": 58.0,
-      "heat": 59.5,
-      "why_hot": "黑糖珍珠鲜奶现做表演：档口现场熬糖，'看得见的制作'是核心传播点。",
-      "viral_format": "熬糖过程直播感实拍 + 珍珠挂壁镜头",
-      "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 91 条（限定印尼语以排除葡语梗 'gulu gulu' 噪声）",
-        "【X 实抓 2026-11-05】@gulugulu_id：账号存在但无法确认官方",
-        "【演示】TikTok 熬糖视频单条最高 210 万播放",
-        "【演示】30 天热度增速 +58%（低基数高斜率）"
-      ],
-      "need_supply": 66,
-      "need_social": 75,
-      "need_strategy": 70,
-      "boost": [
-        "社媒内容系统",
-        "选址引擎",
-        "爆品机制设计"
-      ],
-      "coop_model": "深度孵化（供应链+社媒+策略全包）",
-      "coop_note": "高增速低基数，早介入成本最低——典型的'投早投小'候选。",
-      "contact": "ptxdirectionpublicrelations@gmail.com",
-      "source_type": "mixed",
-      "origin_label": "本土（Sour Sally Group 旗下，台式概念）",
-      "x_seed_handle": "@gulugulu_id",
-      "x_handle_status": "unverified_dormant",
-      "x_handle_note": "@gulugulu_id 存在（显示名 Gulu Gulu Cheese Tea）但 0 粉 0 帖，无法确认官方；不采用其账号指标。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
-      "x_followers": null,
-      "x_tweet_count": null,
-      "x_posts_30d": null,
-      "x_posts_30d_likes": null,
-      "x_last_post_at": null,
-      "x_mentions_7d": 91,
-      "x_mentions_query": "\"gulu gulu\" lang:id -is:retweet",
-      "x_mentions_noise": "medium",
-      "heat_demo": 55.0,
-      "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 91 条（限定印尼语以排除葡语梗 'gulu gulu' 噪声）",
-        "【X 实抓 2026-11-05】@gulugulu_id：账号存在但无法确认官方"
-      ],
-      "provenance": {
-        "followers_wan": "demo_estimate",
-        "views_wan": "demo_estimate",
-        "likes_wan": "demo_estimate",
-        "shares_wan": "demo_estimate",
-        "er": "demo_estimate",
-        "growth_30d": "demo_estimate",
-        "why_hot": "demo_estimate",
-        "viral_format": "demo_estimate",
-        "need_supply": "demo_estimate",
-        "need_social": "demo_estimate",
-        "need_strategy": "demo_estimate",
-        "ig": "demo_estimate",
-        "tiktok": "demo_estimate",
-        "heat": "x_public",
-        "heat_signals": "mixed",
-        "x": "x_public_flagged",
-        "x_followers": "missing",
-        "x_tweet_count": "missing",
-        "x_posts_30d": "missing",
-        "x_posts_30d_likes": "missing",
-        "x_last_post_at": "missing",
-        "x_mentions_7d": "x_public",
-        "value_score": "mixed"
-      },
-      "value_score": 63.5,
-      "photo": "assets/radar/ID-10.jpg"
     },
     {
       "id": "ID-11",
@@ -709,8 +626,8 @@
       "why_hot": "官方 X 与 IG、官网已按公开品牌清单列入。粉丝、提及和热度等待每日 X 刷新，这里不填估算数字。",
       "viral_format": "未核实",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 85 条（首次抓取，查询词按品牌名新写）",
-        "【X 实抓 2026-11-05】官方号 @TomoroCoffee_ID 粉丝 1,694 · 近 30 天发帖 4 · 最近发帖 2026-10-13",
+        "【X 实抓 2026-11-07】近 7 天全网提及 85 条",
+        "【X 实抓 2026-11-07】官方号 @TomoroCoffee_ID 粉丝 1,695 · 近 30 天发帖 4 · 最近发帖 2026-10-13",
         "【演示】【待刷新】官方号 @TomoroCoffee_ID 已列入追踪；粉丝、发帖与近 7 天提及尚未抓取"
       ],
       "need_supply": null,
@@ -727,8 +644,8 @@
       "x_seed_handle": "@TomoroCoffee_ID",
       "x_handle_status": "ok",
       "x_handle_note": "2026-11-05 首次抓取：显示名 TOMORO COFFEE Indonesia，简介为菜单推广（MATCHA SERIES），location Indonesia，名称明确匹配，采用。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
-      "x_followers": 1694,
+      "x_fetched_at": "2026-11-07T01:06:00Z",
+      "x_followers": 1695,
       "x_tweet_count": 656,
       "x_posts_30d": 4,
       "x_posts_30d_likes": 3,
@@ -738,8 +655,8 @@
       "x_mentions_noise": "low",
       "heat_demo": null,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 85 条（首次抓取，查询词按品牌名新写）",
-        "【X 实抓 2026-11-05】官方号 @TomoroCoffee_ID 粉丝 1,694 · 近 30 天发帖 4 · 最近发帖 2026-10-13"
+        "【X 实抓 2026-11-07】近 7 天全网提及 85 条",
+        "【X 实抓 2026-11-07】官方号 @TomoroCoffee_ID 粉丝 1,695 · 近 30 天发帖 4 · 最近发帖 2026-10-13"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -770,6 +687,89 @@
       "photo": null
     },
     {
+      "id": "ID-10",
+      "name": "Gulu Gulu",
+      "name_cn": "咕噜咕噜",
+      "city": "雅加达",
+      "category": "台式奶茶",
+      "stage": "起步期",
+      "ig": "@guluguluid",
+      "tiktok": "@gulugulu.id",
+      "x": "@gulugulu_id（账号存在但无法确认官方）",
+      "followers_wan": 5.8,
+      "views_wan": 32.0,
+      "likes_wan": 4.6,
+      "shares_wan": 0.6,
+      "er": 5.9,
+      "growth_30d": 58.0,
+      "heat": 58.4,
+      "why_hot": "黑糖珍珠鲜奶现做表演：档口现场熬糖，'看得见的制作'是核心传播点。",
+      "viral_format": "熬糖过程直播感实拍 + 珍珠挂壁镜头",
+      "heat_signals": [
+        "【X 实抓 2026-11-07】近 7 天全网提及 84 条（限定印尼语以排除葡语梗 'gulu gulu' 噪声）",
+        "【X 实抓 2026-11-07】@gulugulu_id：账号存在但无法确认官方",
+        "【演示】TikTok 熬糖视频单条最高 210 万播放",
+        "【演示】30 天热度增速 +58%（低基数高斜率）"
+      ],
+      "need_supply": 66,
+      "need_social": 75,
+      "need_strategy": 70,
+      "boost": [
+        "社媒内容系统",
+        "选址引擎",
+        "爆品机制设计"
+      ],
+      "coop_model": "深度孵化（供应链+社媒+策略全包）",
+      "coop_note": "高增速低基数，早介入成本最低——典型的'投早投小'候选。",
+      "contact": "ptxdirectionpublicrelations@gmail.com",
+      "source_type": "mixed",
+      "origin_label": "本土（Sour Sally Group 旗下，台式概念）",
+      "x_seed_handle": "@gulugulu_id",
+      "x_handle_status": "unverified_dormant",
+      "x_handle_note": "@gulugulu_id 存在（显示名 Gulu Gulu Cheese Tea）但 0 粉 0 帖，无法确认官方；不采用其账号指标。",
+      "x_fetched_at": "2026-11-07T01:06:00Z",
+      "x_followers": null,
+      "x_tweet_count": null,
+      "x_posts_30d": null,
+      "x_posts_30d_likes": null,
+      "x_last_post_at": null,
+      "x_mentions_7d": 84,
+      "x_mentions_query": "\"gulu gulu\" lang:id -is:retweet",
+      "x_mentions_noise": "medium",
+      "heat_demo": 55.0,
+      "heat_signals_x": [
+        "【X 实抓 2026-11-07】近 7 天全网提及 84 条（限定印尼语以排除葡语梗 'gulu gulu' 噪声）",
+        "【X 实抓 2026-11-07】@gulugulu_id：账号存在但无法确认官方"
+      ],
+      "provenance": {
+        "followers_wan": "demo_estimate",
+        "views_wan": "demo_estimate",
+        "likes_wan": "demo_estimate",
+        "shares_wan": "demo_estimate",
+        "er": "demo_estimate",
+        "growth_30d": "demo_estimate",
+        "why_hot": "demo_estimate",
+        "viral_format": "demo_estimate",
+        "need_supply": "demo_estimate",
+        "need_social": "demo_estimate",
+        "need_strategy": "demo_estimate",
+        "ig": "demo_estimate",
+        "tiktok": "demo_estimate",
+        "heat": "x_public",
+        "heat_signals": "mixed",
+        "x": "x_public_flagged",
+        "x_followers": "missing",
+        "x_tweet_count": "missing",
+        "x_posts_30d": "missing",
+        "x_posts_30d_likes": "missing",
+        "x_last_post_at": "missing",
+        "x_mentions_7d": "x_public",
+        "value_score": "mixed"
+      },
+      "value_score": 63.1,
+      "photo": "assets/radar/ID-10.jpg"
+    },
+    {
       "id": "ID-06",
       "name": "Es Teh Indonesia",
       "name_cn": "印尼冰茶",
@@ -785,12 +785,12 @@
       "shares_wan": 15.6,
       "er": 8.8,
       "growth_30d": 67.0,
-      "heat": 31.5,
+      "heat": 32.7,
       "why_hot": "8 千盾一杯柠檬茶的绝对价格锚 + 校园店模型，日惹起家三个月席卷爪哇。",
       "viral_format": "'大学生第一杯品牌茶' 开学季刷屏 + 杯身方言梗包装",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 10 条",
-        "【X 实抓 2026-11-05】官方号 @esteh_indonesia 粉丝 2,466 · 近 30 天发帖 0 · 最近发帖 2026-09-10",
+        "【X 实抓 2026-11-07】近 7 天全网提及 11 条",
+        "【X 实抓 2026-11-07】官方号 @esteh_indonesia 粉丝 2,463 · 近 30 天发帖 0 · 最近发帖 2026-09-10",
         "【演示】TikTok #estehindonesia 播放 5.2 亿（30天+67%）",
         "【演示】加盟商排队视频播放破千万",
         "【演示】X 校园话题连续 5 次热搜"
@@ -811,19 +811,19 @@
       "x_seed_handle": "@estehindonesia",
       "x_handle_status": "replaced",
       "x_handle_note": "@estehindonesia 不存在；@esteh_indonesia（显示名 Esteh Indonesia，发帖内容为 Esteh 新品/周年活动）明确匹配，采用。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
-      "x_followers": 2466,
+      "x_fetched_at": "2026-11-07T01:06:00Z",
+      "x_followers": 2463,
       "x_tweet_count": 11377,
       "x_posts_30d": 0,
       "x_posts_30d_likes": 0,
       "x_last_post_at": "2026-09-10T02:52:53Z",
-      "x_mentions_7d": 10,
+      "x_mentions_7d": 11,
       "x_mentions_query": "(\"es teh indonesia\" OR \"esteh indonesia\" OR esteh_indonesia) -is:retweet",
       "x_mentions_noise": "low",
       "heat_demo": 92.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 10 条",
-        "【X 实抓 2026-11-05】官方号 @esteh_indonesia 粉丝 2,466 · 近 30 天发帖 0 · 最近发帖 2026-09-10"
+        "【X 实抓 2026-11-07】近 7 天全网提及 11 条",
+        "【X 实抓 2026-11-07】官方号 @esteh_indonesia 粉丝 2,463 · 近 30 天发帖 0 · 最近发帖 2026-09-10"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -850,7 +850,7 @@
         "x_mentions_7d": "x_public",
         "value_score": "mixed"
       },
-      "value_score": 53.6,
+      "value_score": 54.1,
       "photo": "assets/radar/ID-06.jpg"
     },
     {
@@ -873,8 +873,8 @@
       "why_hot": "全价位饮品矩阵：咖啡/奶茶/果茶一个档口全卖，'排队一次买全家的水'。",
       "viral_format": "一家人饮品分工梗 + 隐藏菜单 DIY 搭配",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 0 条（严格查询结果为 0；宽松查询（含通用词 haus=口渴，lang:id）为 2,999 条，噪声过大，不采用）",
-        "【X 实抓 2026-11-05】官方号 @HausIndonesia 粉丝 145 · 近 30 天发帖 0 · 最近发帖 2025-05-02",
+        "【X 实抓 2026-11-07】近 7 天全网提及 0 条（严格查询结果为 0；宽松查询（含通用词 haus=口渴，lang:id）为 2,999 条，噪声过大，不采用）",
+        "【X 实抓 2026-11-07】官方号 @HausIndonesia 粉丝 145 · 近 30 天发帖 0 · 最近发帖 2025-05-02",
         "【演示】TikTok #hausindonesia 播放 3.3 亿",
         "【演示】X 家庭消费话题讨论量周 +44%",
         "【演示】校园店型坪效第一"
@@ -894,7 +894,7 @@
       "x_seed_handle": "@hausindonesia",
       "x_handle_status": "ok",
       "x_handle_note": "账号存在（显示名 Haus Indonesia - Official Account，Jakarta），大小写差异。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
+      "x_fetched_at": "2026-11-07T01:06:00Z",
       "x_followers": 145,
       "x_tweet_count": 1438,
       "x_posts_30d": 0,
@@ -905,8 +905,8 @@
       "x_mentions_noise": "low",
       "heat_demo": 88.0,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 0 条（严格查询结果为 0；宽松查询（含通用词 haus=口渴，lang:id）为 2,999 条，噪声过大，不采用）",
-        "【X 实抓 2026-11-05】官方号 @HausIndonesia 粉丝 145 · 近 30 天发帖 0 · 最近发帖 2025-05-02"
+        "【X 实抓 2026-11-07】近 7 天全网提及 0 条（严格查询结果为 0；宽松查询（含通用词 haus=口渴，lang:id）为 2,999 条，噪声过大，不采用）",
+        "【X 实抓 2026-11-07】官方号 @HausIndonesia 粉丝 145 · 近 30 天发帖 0 · 最近发帖 2025-05-02"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
@@ -956,8 +956,8 @@
       "why_hot": "官方 X 与 IG、官网已按公开品牌清单列入。粉丝、提及和热度等待每日 X 刷新，这里不填估算数字。",
       "viral_format": "未核实",
       "heat_signals": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 0 条（首次抓取，查询词按品牌名新写；未加 lang 过滤，'calais' 也是法国地名，故只用组合词）",
-        "【X 实抓 2026-11-05】官方号 @CalaisTea 粉丝 10,257 · 近 30 天发帖 0 · 最近发帖 2018-07-09",
+        "【X 实抓 2026-11-07】近 7 天全网提及 0 条（查询词按品牌名；未加 lang 过滤，'calais' 也是法国地名，故只用组合词）",
+        "【X 实抓 2026-11-07】官方号 @CalaisTea 粉丝 10,255 · 近 30 天发帖 0 · 最近发帖 2018-07-09",
         "【演示】【待刷新】官方号 @CalaisTea 已列入追踪；粉丝、发帖与近 7 天提及尚未抓取"
       ],
       "need_supply": null,
@@ -974,8 +974,8 @@
       "x_seed_handle": "@CalaisTea",
       "x_handle_status": "ok",
       "x_handle_note": "2026-11-05 首次抓取：显示名 Calais Tea，简介写 Artisan Bubble Tea and Coffee 并列出 #Calaistea、Instagram Calaistea，名称明确匹配，采用。注意最后一条原创帖为 2018-07-09，已长期停更。",
-      "x_fetched_at": "2026-11-05T01:07:00Z",
-      "x_followers": 10257,
+      "x_fetched_at": "2026-11-07T01:06:00Z",
+      "x_followers": 10255,
       "x_tweet_count": 20517,
       "x_posts_30d": 0,
       "x_posts_30d_likes": 0,
@@ -985,8 +985,8 @@
       "x_mentions_noise": "medium",
       "heat_demo": null,
       "heat_signals_x": [
-        "【X 实抓 2026-11-05】近 7 天全网提及 0 条（首次抓取，查询词按品牌名新写；未加 lang 过滤，'calais' 也是法国地名，故只用组合词）",
-        "【X 实抓 2026-11-05】官方号 @CalaisTea 粉丝 10,257 · 近 30 天发帖 0 · 最近发帖 2018-07-09"
+        "【X 实抓 2026-11-07】近 7 天全网提及 0 条（查询词按品牌名；未加 lang 过滤，'calais' 也是法国地名，故只用组合词）",
+        "【X 实抓 2026-11-07】官方号 @CalaisTea 粉丝 10,255 · 近 30 天发帖 0 · 最近发帖 2018-07-09"
       ],
       "provenance": {
         "followers_wan": "demo_estimate",
