@@ -4,6 +4,8 @@
 供应链网络加持 / 社交媒体系统加持 / 策略打法输出。
 数据源：X 公开数据实抓快照（data/radar/x_snapshot_*.json，见 xsnapshot.py）叠加演示种子；
 未被实抓覆盖的字段（IG/TikTok、播放、互动率、增速、缺口分等）仍为演示估算，逐字段标注于 provenance。
+IG 采集在 igsnapshot.py：只读品牌清单里已经记下的 handle，凭证只来自环境变量。
+build_localradar 不读取 IG 快照；没有快照时，上述演示标注保持不变。
 """
 import json
 import sqlite3
