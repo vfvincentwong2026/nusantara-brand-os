@@ -9,7 +9,7 @@
 
 ### 1. 抓取（由 Grok Bot 用内置 X 公开读取工具完成，无 API key）
 
-每个品牌约 1–2 次调用。品牌数以 `nbo.localradar.BRANDS` 为准（当前 12）。限额 30 次/分钟、1000 次/天。
+每个品牌约 1–2 次调用。品牌数以 `nbo.localradar.BRANDS` 的实际条目为准（当前 17），不要写死 12。限额 30 次/分钟、1000 次/天。
 
 先列出本次要抓的 handle，不要只抄上一份快照里已经有的 `resolved_handle`：
 
@@ -17,7 +17,7 @@
 python -m nbo.localradar --refresh-plan
 ```
 
-`in_snapshot: false` 的品牌（当前是 ID-11 Tomoro Coffee `@TomoroCoffee_ID`、ID-12 Calais Tea `@CalaisTea`）必须纳入本次抓取。`mentions_query` 为 null 时按品牌名新写查询，提及量和粉丝数只写工具返回值，不要填估算数字。
+`in_snapshot: false` 的品牌必须纳入本次抓取。以本次 `--refresh-plan` 的输出为准，不要只抄上一份说明。当前最新快照还没有这 5 家：ID-13 Point Coffee `@pointcoffeeid`、ID-14 Excelso `@ExcelsoCoffee`、ID-15 Anomali Coffee `@anomalicoffee`、ID-16 Djournal Coffee `@DJOURNALcoffee`、ID-17 Maxx Coffee `@maxxcoffeeID`。`mentions_query` 为 null 时按品牌名新写查询，提及量和粉丝数只写工具返回值，不要填估算数字。
 
 | 内容 | 工具 | 参数要点 |
 | --- | --- | --- |
@@ -30,7 +30,7 @@ python -m nbo.localradar --refresh-plan
 
 把结果按上一份快照的结构写成新文件 `data/radar/x_snapshot_<今天>.json`（字段：`fetched_at`、`x_calls_used`、
 `brands.<ID>.handle_status / resolved_handle / account / posts_30d / last_post_at / mentions_7d`）。
-新快照的 `brands` 必须覆盖 `refresh_plan` 里的每一个 id，包括目前还不在旧快照里的 ID-11、ID-12。漏掉的品牌重建后仍是 `pending_x`。
+新快照的 `brands` 必须覆盖 `refresh_plan` 里的每一个 id，包括 `in_snapshot: false` 的品牌（当前是 ID-13..ID-17）。漏掉的品牌重建后仍是 `pending_x`。不要改写已有的 `x_snapshot_*.json`，也不要为还没抓到的品牌补粉丝或提及。
 
 ### 2. 重建 JSON（纯 Python，离线）
 

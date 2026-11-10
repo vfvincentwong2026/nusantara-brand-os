@@ -13,9 +13,9 @@ SNAP = Path(__file__).resolve().parents[1] / "data/radar/x_snapshot_2026-11-04.j
 def test_snapshot_file_shape():
     snap = xs.load_snapshot(SNAP)
     assert snap["platform"] == "x" and snap["fetched_at"]
-    # 2026-11-04 快照只覆盖当时的 10 家。ID-11 / ID-12 等下次刷新再写入，不在这份历史文件里补数字。
+    # 2026-11-04 快照只覆盖当时的 10 家。后来列入的品牌等下次刷新再写入，不在这份历史文件里补数字。
     assert set(snap["brands"]) == {f"ID-{i:02d}" for i in range(1, 11)}
-    assert {b["id"] for b in BRANDS} == {f"ID-{i:02d}" for i in range(1, 13)}
+    assert {b["id"] for b in BRANDS} == {f"ID-{i:02d}" for i in range(1, 18)}
     for bid, e in snap["brands"].items():
         assert e["handle_status"] in xs.STATUS_CN
         assert isinstance(e["mentions_7d"]["total"], int)
@@ -30,7 +30,7 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
     d = build_localradar(tmp_path / "t.db", x_snapshot=SNAP)
     snap = json.loads(SNAP.read_text(encoding="utf-8"))
     assert d["demo"] is False and d["x_snapshot"]["brands_with_x"] == 10
-    assert d["x_snapshot"]["brands_pending_x"] == 2
+    assert d["x_snapshot"]["brands_pending_x"] == 7
     assert "实抓" in d["source_note"] and "演示估算" in d["source_note"]
     for b in d["brands"]:
         if b["id"] not in snap["brands"]:
@@ -51,7 +51,7 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
         assert all(s.startswith(("【X 实抓", "【演示】")) for s in b["heat_signals"])
     heats = [b["heat"] for b in d["brands"] if b["heat"] is not None]
     assert heats == sorted(heats, reverse=True)
-    assert [b["id"] for b in d["brands"] if b["heat"] is None] == ["ID-11", "ID-12"]
+    assert [b["id"] for b in d["brands"] if b["heat"] is None] == [f"ID-{i:02d}" for i in range(11, 18)]
     for row in d["brands"] + d["shops"]:
         photo = row.get("photo")
         if photo:
@@ -175,6 +175,11 @@ def test_new_brands_wait_for_x_refresh_without_invented_metrics(tmp_path):
     assert [(p["id"], p["x_handle"]) for p in pending] == [
         ("ID-11", "@TomoroCoffee_ID"),
         ("ID-12", "@CalaisTea"),
+        ("ID-13", "@pointcoffeeid"),
+        ("ID-14", "@ExcelsoCoffee"),
+        ("ID-15", "@anomalicoffee"),
+        ("ID-16", "@DJOURNALcoffee"),
+        ("ID-17", "@maxxcoffeeID"),
     ]
     assert all(p["include_in_user_lookup"] and p["mentions_query"] is None for p in pending)
     assert all("followers" not in p and "account" not in p for p in plan)
@@ -206,6 +211,108 @@ def test_new_brands_wait_for_x_refresh_without_invented_metrics(tmp_path):
             _assert_pending_x_has_no_metrics(b)
         else:
             _assert_metrics_match_snapshot(b, entry)
+
+
+_NEW_COFFEE = {
+    "ID-13": {"x": "@pointcoffeeid", "ig": "@pointcoffeeid", "tiktok": "@pointcoffeeid",
+              "website": "https://pointcoffee.id"},
+    "ID-14": {"x": "@ExcelsoCoffee", "ig": "@excelsocoffee", "tiktok": "",
+              "website": "http://linktr.ee/ExcelsoCoffee"},
+    "ID-15": {"x": "@anomalicoffee", "ig": "@anomalicoffee", "tiktok": "",
+              "website": "https://anomalicoffee.com"},
+    "ID-16": {"x": "@DJOURNALcoffee", "ig": "@djournalcoffee", "tiktok": "",
+              "website": "http://thedjournalguidetocoffee.com"},
+    "ID-17": {"x": "@maxxcoffeeID", "ig": "@maxxcoffeeid", "tiktok": "",
+              "website": "https://linktr.ee/MaxxCoffee"},
+}
+_METRIC_KEYS = ("followers_wan", "views_wan", "likes_wan", "shares_wan", "er", "growth_30d",
+                "heat", "need_supply", "need_social", "need_strategy")
+# 2026-11-10 10:10 复核读到的粉丝数。种子和 pending 输出里都不能出现。
+_REVIEWED_FOLLOWERS = ("7975", "13947", "8548", "1727", "1812")
+
+
+def test_added_local_coffee_brands_stay_pending_until_refresh(tmp_path):
+    """ID-13..ID-17 的 X / IG / 官网与 2026-11-10 品牌清单一致，指标留空。
+
+    每日刷新默认用最新快照。这 5 家还不在任何历史快照里，refresh-plan 标 in_snapshot=false。
+    """
+    old = json.loads((SNAP.parent / "brand_list_coffee_tea_2026-11-04.json").read_text(encoding="utf-8"))
+    listed = json.loads((SNAP.parent / "brand_list_coffee_tea_2026-11-10.json").read_text(encoding="utf-8"))
+    assert listed["schema"] == "nbo.radar.brand_list/v1"
+    assert "2026-11-10" in listed["generated_at"] and "2026-11-10" in listed["x_source"]
+    assert [b["brand"] for b in listed["brands"]] == [b["brand"] for b in old["brands"]]
+    by_seed = {b["id"]: b for b in BRANDS}
+    by_repo = {b.get("repo_id"): b for b in listed["brands"]}
+    old_by_name = {b["brand"]: b for b in old["brands"]}
+    for bid, expect in _NEW_COFFEE.items():
+        seed = by_seed[bid]
+        src = by_repo[bid]
+        assert old_by_name[src["brand"]]["repo_id"] is None
+        assert seed["x"] == expect["x"] == src["x_handle"]
+        assert seed["ig"] == expect["ig"] == src["ig_handle"]
+        assert seed["website"] == expect["website"] == src["website"]
+        assert seed["tiktok"] == expect["tiktok"]
+        assert seed["metrics_pending"] is True
+        assert seed["origin_label"] == "本土" == src["local"]
+        assert seed["city"] == "未核实" and seed["stage"] == "未核实"
+        assert seed["boost"] == [] and seed["contact"] == ""
+        assert seed["coop_model"] == "待评估" and seed["viral_format"] == "未核实"
+        assert seed["heat_signals"][0].startswith("【待刷新】")
+        assert "不填估算数字" in seed["why_hot"]
+        for key in _METRIC_KEYS:
+            assert seed[key] is None
+        if bid == "ID-13":
+            assert src["tiktok_handle"] == "@pointcoffeeid"
+            assert src["tiktok_status"]
+            assert "tiktok.com/@pointcoffeeid" in src["tiktok_source_url"]
+        else:
+            assert "tiktok_handle" not in src and "tiktok_status" not in src
+        if bid == "ID-15":
+            assert "是否算连锁" in src["origin_note"]
+
+    for snap_path in sorted(SNAP.parent.glob("x_snapshot_*.json")):
+        historical = json.loads(snap_path.read_text(encoding="utf-8"))
+        assert set(_NEW_COFFEE).isdisjoint(historical["brands"])
+
+    latest = xs.load_snapshot(xs.latest_snapshot_path())
+    plan = xs.refresh_plan(BRANDS, latest)
+    pending = [p for p in plan if not p["in_snapshot"]]
+    assert [(p["id"], p["x_handle"]) for p in pending] == [
+        (bid, _NEW_COFFEE[bid]["x"]) for bid in _NEW_COFFEE
+    ]
+    assert all(p["include_in_user_lookup"] and p["mentions_query"] is None for p in pending)
+    for bid in ("ID-11", "ID-12"):
+        row = next(p for p in plan if p["id"] == bid)
+        assert row["in_snapshot"] is True and row["x_handle"]
+
+    for label, snap in (("old", SNAP), ("latest", xs.latest_snapshot_path())):
+        built = build_localradar(tmp_path / f"{label}.db", x_snapshot=snap)
+        by_id = {b["id"]: b for b in built["brands"]}
+        assert built["x_snapshot"]["brands_pending_x"] == (7 if label == "old" else 5)
+        for bid, expect in _NEW_COFFEE.items():
+            b = by_id[bid]
+            _assert_pending_x_has_no_metrics(b)
+            assert b["x"] == expect["x"] and b["ig"] == expect["ig"] and b["website"] == expect["website"]
+            assert b["tiktok"] == expect["tiktok"] and b["metrics_pending"] is True
+            assert b["origin_label"] == "本土" and b["value_score"] is None
+            for key in _METRIC_KEYS:
+                assert b[key] is None
+            blob = json.dumps(b, ensure_ascii=False)
+            assert all(n not in blob for n in _REVIEWED_FOLLOWERS)
+
+    published = json.loads((SNAP.parents[2] / "web/trend/data/local_brands.json").read_text(encoding="utf-8"))
+    cited = json.loads((SNAP.parent / published["x_snapshot"]["file"]).read_text(encoding="utf-8"))
+    assert set(_NEW_COFFEE).isdisjoint(cited["brands"])
+    pub = {b["id"]: b for b in published["brands"]}
+    assert published["x_snapshot"]["brands_pending_x"] == sum(
+        1 for b in published["brands"] if b["source_type"] == "pending_x")
+    for bid, expect in _NEW_COFFEE.items():
+        b = pub[bid]
+        _assert_pending_x_has_no_metrics(b)
+        assert b["x"] == expect["x"] and b["ig"] == expect["ig"] and b["website"] == expect["website"]
+        assert b["metrics_pending"] is True
+        for key in _METRIC_KEYS:
+            assert b[key] is None
 
 
 def test_heat_formula():
