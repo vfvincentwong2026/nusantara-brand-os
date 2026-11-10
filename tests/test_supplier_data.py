@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SUPPLIERS = ROOT / "data/suppliers/suppliers_v1.json"
 PRICES = ROOT / "data/suppliers/price_benchmark_v1.json"
 BRAND_LIST = ROOT / "data/radar/brand_list_coffee_tea_2026-11-04.json"
+BRAND_LIST_REVIEW = ROOT / "data/radar/brand_list_coffee_tea_2026-11-10.json"
 PUBLISHED = ROOT / "web/trend/data/local_brands.json"
 
 EMAIL = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
@@ -20,7 +21,7 @@ PHONE = re.compile(
 )
 PRICE_KEYS = {"price", "unit_price", "price_tiers", "ref_idr", "price_idr", "unit_price_idr"}
 
-# 品牌候选清单里已纠正的官方 IG。追踪名单另含 ID-11 / ID-12，见 test_localradar_x。
+# 品牌候选清单里已纠正的官方 IG。追踪名单另含 ID-11..ID-17，见 test_localradar_x。
 IG_FROM_BRAND_LIST = {
     "ID-02": "@kopijanjijiwa",      # Janji Jiwa
     "ID-04": "@haus.indonesia",     # Haus
@@ -79,7 +80,7 @@ def test_priced_entries_have_source_url_and_fetched_at():
 
 
 def test_no_email_phone_or_whatsapp_link():
-    for path in (SUPPLIERS, PRICES, BRAND_LIST):
+    for path in (SUPPLIERS, PRICES, BRAND_LIST, BRAND_LIST_REVIEW):
         text = path.read_text(encoding="utf-8")
         assert EMAIL.search(text) is None, path.name
         assert WA_LINK.search(text) is None, path.name
@@ -90,7 +91,7 @@ def test_no_email_phone_or_whatsapp_link():
 def test_five_ig_handles_match_brand_list():
     listed = {b["repo_id"]: b.get("ig_handle") for b in _load(BRAND_LIST)["brands"]}
     by_id = {b["id"]: b for b in BRANDS}
-    assert [b["id"] for b in BRANDS] == [f"ID-{i:02d}" for i in range(1, 13)]
+    assert [b["id"] for b in BRANDS] == [f"ID-{i:02d}" for i in range(1, 18)]
     published = {b["id"]: b for b in _load(PUBLISHED)["brands"]}
     for bid, handle in IG_FROM_BRAND_LIST.items():
         assert listed[bid] == handle
