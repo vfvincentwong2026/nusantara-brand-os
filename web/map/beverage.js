@@ -11,11 +11,11 @@
   const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
   const layers = document.querySelector('.layers');
   const label = document.createElement('label');
-  label.innerHTML = '<input type="checkbox" id="bevToggle" checked> <b style="color:#111">茶饮咖啡 · 价格指数</b>（城市模型）';
+  label.innerHTML = '<input type="checkbox" id="bevToggle" checked> <b style="color:#111">茶饮咖啡 · 价格指数</b>（核验点 / 候选 / 模型）';
   layers.appendChild(label);
   const sites = document.getElementById('sites');
   const panel = document.createElement('details'); panel.className = 'bev-panel'; panel.open = true;
-  panel.innerHTML = '<summary>茶饮咖啡 · 品牌热度与单品价格指数</summary><div class="bev-note">雅加达同款 SKU = 100；标记内数字为价格指数。热度沿用雷达 X 数据，— 为待接入。</div><div class="bev-filters"><button class="on" data-f="all">全部</button><button data-f="茶饮">茶饮</button><button data-f="咖啡">咖啡</button></div><div id="bevBrands"></div><div class="bev-note" id="bevMeta"></div>';
+  panel.innerHTML = '<summary>茶饮咖啡 · 品牌热度与单品价格指数</summary><div class="bev-note">雅加达同款 SKU = 100；标记内数字为价格指数。黑框仅代表 Google Maps 已核验坐标。</div><div class="bev-filters"><button class="on" data-f="all">全部</button><button data-f="茶饮">茶饮</button><button data-f="咖啡">咖啡</button></div><div id="bevBrands"></div><div class="bev-note" id="bevMeta"></div>';
   sites.parentNode.insertBefore(panel, sites.previousElementSibling);
 
   let data, group = L.layerGroup(), filter = 'all';
@@ -38,10 +38,15 @@
       if (p.price_source) { link.setAttribute('href', 'https://' + p.price_source.split('://')[1]); link.target = '_blank'; link.rel = 'noopener'; link.textContent = '价格来源 ↗'; }
       const sourceHtml = p.price_source ? `${link.outerHTML} · ${esc(p.source_date || '日期待核')}` : '无独立菜单来源';
       const placeLink = document.createElement('a');
-      if (p.location_source) { placeLink.setAttribute('href', 'https://' + p.location_source.split('://')[1]); placeLink.target = '_blank'; placeLink.rel = 'noopener'; placeLink.textContent = '地图来源 ↗'; }
-      const locationHtml = p.location_precision === 'osm_named_place' ? `公开地图命名地点：${esc(p.location_name)} · ${placeLink.outerHTML}；营业状态待复核` : '城市展示点，非门店地址';
-      const marker = L.marker([p.lat, p.lon], {icon: L.divIcon({className:'', iconSize:[32,20], iconAnchor:[16,10], html:`<div class="bev-mark" style="background:${color(p.price_index)};${p.location_precision === 'osm_named_place' ? 'outline:2px solid #111;outline-offset:2px' : ''}">${p.price_index}</div>`})})
-        .bindPopup(`<div class="bev-pop"><b>${esc(p.brand)}</b> · ${esc(p.city)}（${esc(p.island)}）<br><span style="color:#767676">${esc(p.sku)}</span><br><span class="price">${rp(p.price_idr)}</span> · 指数 <b style="color:${color(p.price_index)}">${p.price_index}</b><br>雅加达基准 ${rp(p.jakarta_price_idr)} = 100<br>口径：${esc(p.price_basis)}<br>雷达热度：${p.heat_score == null ? '待接入' : Math.round(p.heat_score)}<br>${sourceHtml}<span class="warn">${locationHtml}。价格为公开参考或模型估算，不作为实时菜单承诺。</span></div>`);
+      if (p.location_source) { placeLink.setAttribute('href', 'https://' + p.location_source.split('://')[1]); placeLink.target = '_blank'; placeLink.rel = 'noopener'; placeLink.textContent = p.location_precision === 'google_verified' ? 'Google Maps ↗' : 'OSM 来源 ↗'; }
+      const locationHtml = p.location_precision === 'google_verified'
+        ? `<b>Google Maps 已核验</b>：${esc(p.location_name)}<br>${esc(p.location_address)} · ${placeLink.outerHTML}${p.osm_distance_m == null ? '' : `<br>与原 OSM 点相距约 ${p.osm_distance_m} 米`}`
+        : p.location_precision === 'osm_candidate'
+          ? `<b>OSM 候选点</b>：${esc(p.location_address)} · ${placeLink.outerHTML}<br>待 Google 复核，不作精准点位`
+          : '城市展示点，非门店地址';
+      const outline = p.location_precision === 'google_verified' ? 'outline:2px solid #111;outline-offset:2px' : p.location_precision === 'osm_candidate' ? 'outline:2px dashed #999;outline-offset:2px' : '';
+      const marker = L.marker([p.lat, p.lon], {zIndexOffset: p.location_precision === 'google_verified' ? 1200 : p.location_precision === 'osm_candidate' ? 600 : 0, riseOnHover: true, icon: L.divIcon({className:'', iconSize:[32,20], iconAnchor:[16,10], html:`<div class="bev-mark" style="background:${color(p.price_index)};${outline}">${p.price_index}</div>`})})
+        .bindPopup(`<div class="bev-pop"><b>${esc(p.brand)}</b> · ${esc(p.city)}（${esc(p.island)}）<br><span style="color:#767676">${esc(p.sku)}</span><br><span class="price">${rp(p.price_idr)}</span> · 指数 <b style="color:${color(p.price_index)}">${p.price_index}</b><br>雅加达基准 ${rp(p.jakarta_price_idr)} = 100<br>口径：${esc(p.price_basis)}<br>雷达热度：${p.heat_score == null ? '待接入' : Math.round(p.heat_score)}<br>${sourceHtml}<span class="warn">${locationHtml}<br>价格为公开参考或模型估算，不作为实时菜单承诺。</span></div>`);
       marker.bindTooltip(`${esc(p.short)} · ${p.price_index}`, {direction:'top', offset:[0,-8]});
       marker.addTo(group);
     });
@@ -50,7 +55,7 @@
     if (!window._leaflet_map) { setTimeout(init, 300); return; }
     const map = window._leaflet_map;
     renderMarkers(); group.addTo(map); renderList();
-    document.getElementById('bevMeta').textContent = data.location_note + ' ' + data.methodology;
+    document.getElementById('bevMeta').textContent = data.data_mode + '。' + data.location_note + ' ' + data.methodology;
     document.getElementById('bevToggle').onchange = e => e.target.checked ? group.addTo(map) : map.removeLayer(group);
     document.querySelectorAll('.bev-filters button').forEach(btn => btn.onclick = () => {
       filter = btn.dataset.f;

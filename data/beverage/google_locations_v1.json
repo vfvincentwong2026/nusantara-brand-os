@@ -1,0 +1,37 @@
+{
+  "source": "Google Maps 地点页；坐标仅取 URL 中 !3d/!4d，不取 @ 视口中心",
+  "verified_at": "2026-11-12",
+  "locations": [
+    {
+      "brand_id": "mixue",
+      "city_id": "jakarta",
+      "branch_name": "Mixue Tebet Raya",
+      "address": "Jl. Tebet Raya No.55, RT.9/RW.1, Tebet Timur, Kec. Tebet, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12820",
+      "lat": -6.2282329,
+      "lon": 106.8552302,
+      "google_url": "https://www.google.com/maps/place/Mixue/data=!4m7!3m6!1s0x2e69f3b94f0453b7:0x263392a3887c962b!8m2!3d-6.2282329!4d106.8552302!16s%2Fg%2F11s42s7qgw",
+      "google_place_id": "0x2e69f3b94f0453b7:0x263392a3887c962b",
+      "google_share_url": "https://maps.app.goo.gl/fdvXGdJTq6LkbWTa8"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "jakarta",
+      "branch_name": "MOMOYO LAND CILEDUG",
+      "address": "Jl. Ciledug Raya No.10B, RT.10/RW.2, Petukangan Utara, Kec. Pesanggrahan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12260",
+      "lat": -6.2363043,
+      "lon": 106.7481741,
+      "google_url": "https://www.google.com/maps/place/MOMOYO+LAND+CILEDUG/data=!4m6!3m5!1s0x2e69f1c45dc10ae7:0x50b27f6282f7655b!8m2!3d-6.2363043!4d106.7481741!16s%2Fg%2F11ts3bv9v3",
+      "google_place_id": "0x2e69f1c45dc10ae7:0x50b27f6282f7655b"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "surabaya",
+      "branch_name": "MOMOYO BANYUURIP ICE CREAM, FRUIT TEA, COFFEE",
+      "address": "Jl. Banyu Urip No.374b, Kupang Krajan, Kec. Sawahan, Surabaya, Jawa Timur 60253",
+      "lat": -7.2681706,
+      "lon": 112.7138749,
+      "google_url": "https://www.google.com/maps/place/MOMOYO+BANYUURIP+ICE+CREAM,+FRUIT+TEA,+COFFEE/data=!4m7!3m6!1s0x2dd7ff6d22e41c41:0x2084446f2edce9c1!8m2!3d-7.2681706!4d112.7138749!16s%2Fg%2F11sjvl810v",
+      "google_place_id": "0x2dd7ff6d22e41c41:0x2084446f2edce9c1"
+    }
+  ]
+}
