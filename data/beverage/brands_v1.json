@@ -1,0 +1,26 @@
+{
+  "version": "2026-11-12.v1",
+  "location_note": "V1 为品牌×城市对比模型：坐标是城市展示点，不是门店地址。",
+  "cities": [
+    {"id":"jakarta","name":"雅加达","island":"爪哇","lat":-6.2088,"lon":106.8456,"factor":1.00},
+    {"id":"surabaya","name":"泗水","island":"爪哇","lat":-7.2575,"lon":112.7521,"factor":1.02},
+    {"id":"bandung","name":"万隆","island":"爪哇","lat":-6.9175,"lon":107.6191,"factor":1.00},
+    {"id":"medan","name":"棉兰","island":"苏门答腊","lat":3.5952,"lon":98.6722,"factor":1.08},
+    {"id":"denpasar","name":"登巴萨","island":"巴厘","lat":-8.6705,"lon":115.2126,"factor":1.06},
+    {"id":"balikpapan","name":"巴厘巴板","island":"加里曼丹","lat":-1.2379,"lon":116.8529,"factor":1.12},
+    {"id":"makassar","name":"望加锡","island":"苏拉威西","lat":-5.1477,"lon":119.4327,"factor":1.10},
+    {"id":"manado","name":"马那多","island":"苏拉威西","lat":1.4748,"lon":124.8421,"factor":1.15}
+  ],
+  "brands": [
+    {"id":"mixue","name":"MIXUE 蜜雪冰城","short":"MX","category":"茶饮","sku":"Brown Sugar Pearl Milk Tea","base_price_idr":22000,"price_basis":"公开菜单参考","source":"https://mixuemenuu.com/mixue-menu-indonesia/","source_date":"2026-09-20","featured":1},
+    {"id":"momoyo","name":"Momoyo","short":"MM","category":"茶饮","sku":"Brown Sugar Boba Milk","base_price_idr":21500,"price_basis":"区间中值估算","source":"https://www.megasyariah.co.id/id/artikel/edukasi-tips/digital-banking/7-rekomendasi-teh-susu-viral-2026","source_date":"2026-02-21","featured":2},
+    {"id":"kopi-kenangan","name":"Kopi Kenangan","short":"KK","category":"咖啡","sku":"Kopi Kenangan Mantan Regular","base_price_idr":18000,"price_basis":"公开菜单参考","source":"https://menukuliner.net/menu/381796/kopi-kenangan-central-park","source_date":"2026","radar_id":"ID-01","featured":3},
+    {"id":"point","name":"Point Coffee","short":"PC","category":"咖啡","sku":"Cappuccino","base_price_idr":20000,"price_basis":"品牌官网历史菜单参考","source":"https://pointcoffee.id/coffee-menu/","source_date":"2022-06-17","radar_id":"ID-13","featured":4},
+    {"id":"janji-jiwa","name":"Janji Jiwa","short":"JJ","category":"咖啡","sku":"Es Kopi Susu","base_price_idr":18000,"price_basis":"模型估算","source":null,"source_date":null,"radar_id":"ID-02","featured":5},
+    {"id":"fore","name":"Fore Coffee","short":"FC","category":"咖啡","sku":"Americano","base_price_idr":21000,"price_basis":"公开菜单参考","source":"https://coffeemenuz.com/fore-coffee-indonesia-menu/","source_date":"2026-08-24","radar_id":"ID-03","featured":6},
+    {"id":"tuku","name":"Kopi Tuku","short":"TK","category":"咖啡","sku":"Kopi Susu Tetangga","base_price_idr":18000,"price_basis":"模型估算","source":"https://www.tuku.coffee/id","source_date":null,"radar_id":"ID-07","featured":7},
+    {"id":"tomoro","name":"Tomoro Coffee","short":"TC","category":"咖啡","sku":"Caffe Americano Iced Small","base_price_idr":20000,"price_basis":"公开外卖菜单参考","source":"https://food.grab.com/id/id/restaurant/tomoro-coffee-ruko-u-town-delivery/6-C6E1CN6GA6CWR6","source_date":"2026-11-12","radar_id":"ID-11","featured":8},
+    {"id":"esteh","name":"Es Teh Indonesia","short":"ET","category":"茶饮","sku":"Es Teh Susu Nusantara","base_price_idr":15000,"price_basis":"区间内模型估算","source":"https://www.megasyariah.co.id/id/artikel/edukasi-tips/digital-banking/7-rekomendasi-teh-susu-viral-2026","source_date":"2026-02-21","radar_id":"ID-06","featured":9},
+    {"id":"haus","name":"Haus!","short":"HS","category":"茶饮","sku":"招牌奶茶","base_price_idr":15000,"price_basis":"模型估算","source":null,"source_date":null,"radar_id":"ID-04","featured":10}
+  ]
+}

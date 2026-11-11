@@ -52,6 +52,8 @@ def main():
             "--out", "web/trend/data/local_brands.json"])
         sh([sys.executable, "-m", "nbo.siteselect", "--db", "nbo.db",
             "--out", "web/map/data/site_select.json"])
+        sh([sys.executable, "-m", "nbo.beverage",
+            "--out", "web/map/data/beverage_index.json"])
         sh([sys.executable, "-m", "nbo.assembly", "--db", "nbo.db",
             "--out", "web/assembly/data/assembly.json"])
         sh([sys.executable, "-m", "nbo.cart", "--db", "nbo.db",
@@ -67,11 +69,12 @@ def main():
     if SITE.exists():
         shutil.rmtree(SITE)
     (SITE / "map/data").mkdir(parents=True)
-    for f in ("index.html", "leaflet.js", "leaflet.css", "leaflet-heat.js"):
+    for f in ("index.html", "leaflet.js", "leaflet.css", "leaflet-heat.js", "beverage.js"):
         shutil.copy(ROOT / "web/map" / f, SITE / "map")
     shutil.copy(ROOT / "web/map/data/case_store.json", SITE / "map/data")
     shutil.copy(ROOT / "web/map/data/opportunity.json", SITE / "map/data")
     shutil.copy(ROOT / "web/map/data/site_select.json", SITE / "map/data")
+    shutil.copy(ROOT / "web/map/data/beverage_index.json", SITE / "map/data")
     # 热点雷达
     (SITE / "trend/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/trend/index.html", SITE / "trend")
