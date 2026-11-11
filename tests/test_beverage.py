@@ -13,7 +13,9 @@ def test_beverage_dataset_and_math():
     assert d["brands"][0]["id"] == "mixue"
     assert d["brands"][1]["id"] == "momoyo"
     for p in d["points"]:
-        assert p["location_precision"] == "city_model"
+        assert p["location_precision"] in {"city_model", "osm_named_place"}
+        if p["location_precision"] == "osm_named_place":
+            assert p["location_source"] and p["location_name"]
         assert p["price_idr"] > 0 and p["jakarta_price_idr"] > 0
         assert p["price_index"] == price_index(p["price_idr"], p["jakarta_price_idr"])
         assert isinstance(p["lat"], float) and isinstance(p["lon"], float)

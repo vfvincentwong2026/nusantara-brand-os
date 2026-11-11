@@ -1,6 +1,6 @@
 {
   "version": "2026-11-12.v1",
-  "location_note": "V1 为品牌×城市对比模型：坐标是城市展示点，不是门店地址。",
+  "location_note": "黑框标记为 OpenStreetMap 可核实命名地点；其余为城市展示点，不是门店地址。",
   "cities": [
     {"id":"jakarta","name":"雅加达","island":"爪哇","lat":-6.2088,"lon":106.8456,"factor":1.00},
     {"id":"surabaya","name":"泗水","island":"爪哇","lat":-7.2575,"lon":112.7521,"factor":1.02},

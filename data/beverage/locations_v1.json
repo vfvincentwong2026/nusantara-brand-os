@@ -1,0 +1,123 @@
+{
+  "source": "OpenStreetMap contributors / Nominatim",
+  "locations": [
+    {
+      "brand_id": "mixue",
+      "city_id": "jakarta",
+      "city": "雅加达",
+      "name": "Mixue",
+      "lat": -6.228128,
+      "lon": 106.855342,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/way/482347577",
+      "display_name": "Mixue, Jalan Tebet Raya, RW 01, Tebet Timur, Tebet, Jakarta Selatan, Daerah Khusus Ibukota Jakarta, 12830, Indonesia"
+    },
+    {
+      "brand_id": "mixue",
+      "city_id": "bandung",
+      "city": "万隆",
+      "name": "Mixue",
+      "lat": -6.912739,
+      "lon": 107.652641,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/node/13742351913",
+      "display_name": "Mixue, Jalan Terusan Jakarta, Antapani Tengah, Antapani, Kota Bandung, Jawa Barat, 40291, Indonesia"
+    },
+    {
+      "brand_id": "mixue",
+      "city_id": "denpasar",
+      "city": "登巴萨",
+      "name": "Mixue",
+      "lat": -8.636452,
+      "lon": 115.192411,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/node/12317655170",
+      "display_name": "Mixue, Jalan Bypass Gatot Subroto, Galeri Indosat Ooredoo, Padangsambian, Denpasar Barat, Denpasar, Bali, 80117, Indonesia"
+    },
+    {
+      "brand_id": "mixue",
+      "city_id": "makassar",
+      "city": "望加锡",
+      "name": "Mixue",
+      "lat": -5.107637,
+      "lon": 119.520479,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/way/197759765",
+      "display_name": "Mixue, Jalan Pajaiang, Daya, Biringkanaya, Makassar, Sulawesi Selatan, 90615, Indonesia"
+    },
+    {
+      "brand_id": "mixue",
+      "city_id": "manado",
+      "city": "马那多",
+      "name": "Mixue",
+      "lat": 1.458052,
+      "lon": 124.837715,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/node/11028018281",
+      "display_name": "Mixue, Jalan Sam Ratulangi, Karombasan Utara, Wanea, Manado, Sulawesi Utara, 95115, Indonesia"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "jakarta",
+      "city": "雅加达",
+      "name": "Momoyo",
+      "lat": -6.23627,
+      "lon": 106.748208,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/node/13247890253",
+      "display_name": "Momoyo, Jalan Ciledug Raya, RW 03, Petukangan Selatan, Pesanggrahan, Jakarta Selatan, Daerah Khusus Ibukota Jakarta, 15156, Indonesia"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "surabaya",
+      "city": "泗水",
+      "name": "Momoyo",
+      "lat": -7.268123,
+      "lon": 112.713904,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/node/12284602730",
+      "display_name": "Momoyo, Jalan Simo Katrungan, RW 01, Kupang Krajan, Sawahan, Surabaya, Jawa Timur, 60263, Indonesia"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "bandung",
+      "city": "万隆",
+      "name": "Momoyo",
+      "lat": -6.915579,
+      "lon": 107.704484,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/way/1533192555",
+      "display_name": "Momoyo, Jalan Abdul Haris Nasution, Pasanggrahan, Ujungberung, Kota Bandung, Jawa Barat, 40617, Indonesia"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "medan",
+      "city": "棉兰",
+      "name": "Momoyo",
+      "lat": 3.704127,
+      "lon": 98.658929,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/node/13612208651",
+      "display_name": "Momoyo, Jalan Marelan Raya, Rengas Pulau, Medan Marelan, Kota Medan, Sumatera Utara, 20255, Indonesia"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "makassar",
+      "city": "望加锡",
+      "name": "Momoyo",
+      "lat": -5.141214,
+      "lon": 119.407792,
+      "location_precision": "osm_named_place",
+      "location_source": "https://www.openstreetmap.org/node/12753872241",
+      "display_name": "Momoyo, Jalan Somba Opu, Maloku, Ujung Pandang, Makassar, Sulawesi Selatan, 90115, Indonesia"
+    }
+  ],
+  "unverified": [
+    "mixue-surabaya",
+    "mixue-medan",
+    "mixue-balikpapan",
+    "momoyo-denpasar",
+    "momoyo-balikpapan",
+    "momoyo-manado"
+  ]
+}
