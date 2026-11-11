@@ -25,7 +25,7 @@
   function visiblePoints() { return data.points.filter(p => filter === 'all' || p.category === filter); }
   function renderList() {
     document.getElementById('bevBrands').innerHTML = data.brands.filter(b => filter === 'all' || b.category === filter).sort((a,b) => a.featured - b.featured).map(b =>
-      `<div class="bev-row" data-id="${b.id}"><span class="short">${esc(b.short)}</span><span class="nm">${esc(b.name)}</span><span class="heat">${b.heat_score == null ? '热度 —' : '热度 ' + Math.round(b.heat_score)}</span><span class="idx" style="color:${color(b.max_price_index)}">${b.max_price_index}</span></div>`).join('');
+      `<div class="bev-row" data-id="${b.id}"><span class="short">${esc(b.short)}</span><span class="nm">${esc(b.name)}</span><span class="heat">${b.google_store_count ? b.google_store_count + ' 实点' : b.heat_score == null ? '热度 —' : '热度 ' + Math.round(b.heat_score)}</span><span class="idx" style="color:${color(b.max_price_index)}">${b.max_price_index}</span></div>`).join('');
     document.querySelectorAll('.bev-row').forEach(el => el.onclick = () => {
       const p = data.points.find(x => x.brand_id === el.dataset.id && x.city === '雅加达');
       if (p && window._leaflet_map) window._leaflet_map.flyTo([p.lat, p.lon], 12);
@@ -40,7 +40,7 @@
       const placeLink = document.createElement('a');
       if (p.location_source) { placeLink.setAttribute('href', 'https://' + p.location_source.split('://')[1]); placeLink.target = '_blank'; placeLink.rel = 'noopener'; placeLink.textContent = p.location_precision === 'google_verified' ? 'Google Maps ↗' : 'OSM 来源 ↗'; }
       const locationHtml = p.location_precision === 'google_verified'
-        ? `<b>Google Maps 已核验</b>：${esc(p.location_name)}${p.business_status ? `<br><b style="color:#c00">Google 状态：${esc(p.business_status)}</b>` : ''}<br>${esc(p.location_address)} · ${placeLink.outerHTML}${p.osm_distance_m == null ? '' : `<br>与原 OSM 点相距约 ${p.osm_distance_m} 米`}`
+        ? `<b>Google Maps 已核验</b>：${esc(p.location_name)}${p.business_status ? `<br><b style="color:#c00">Google 状态：${esc(p.business_status)}</b>` : ''}<br>${p.location_address ? esc(p.location_address) + ' · ' : '详细地址见 '}${placeLink.outerHTML}${p.osm_distance_m == null ? '' : `<br>与原 OSM 点相距约 ${p.osm_distance_m} 米`}`
         : p.location_precision === 'osm_candidate'
           ? `<b>OSM 候选点</b>：${esc(p.location_address)} · ${placeLink.outerHTML}<br>待 Google 复核，不作精准点位`
           : '城市展示点，非门店地址';
