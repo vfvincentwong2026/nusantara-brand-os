@@ -227,14 +227,18 @@ _NEW_COFFEE = {
 }
 _METRIC_KEYS = ("followers_wan", "views_wan", "likes_wan", "shares_wan", "er", "growth_30d",
                 "heat", "need_supply", "need_social", "need_strategy")
-# 2026-11-10 10:10 复核读到的粉丝数。种子和 pending 输出里都不能出现。
+# 2026-11-10 10:10 复核读到的粉丝数。种子和尚未进快照的 pending 输出里都不能出现。
 _REVIEWED_FOLLOWERS = ("7975", "13947", "8548", "1727", "1812")
+# 这 5 家第一次进入每日快照的日期。更早的 x_snapshot_*.json 不得补写它们。
+_FIRST_X_CAPTURE = "2026-11-11"
 
 
-def test_added_local_coffee_brands_stay_pending_until_refresh(tmp_path):
-    """ID-13..ID-17 的 X / IG / 官网与 2026-11-10 品牌清单一致，指标留空。
+def test_added_local_coffee_brands_appear_from_2026_11_11_snapshot(tmp_path):
+    """ID-13..ID-17 的 X / IG / 官网与 2026-11-10 品牌清单一致，种子指标留空。
 
-    每日刷新默认用最新快照。这 5 家还不在任何历史快照里，refresh-plan 标 in_snapshot=false。
+    2026-11-11 之前的快照里没有这 5 家；最新快照已经写入。
+    用最新快照重建后，已发布的 local_brands.json 不再是 pending_x，数字只来自该快照。
+    只用 2026-11-04 快照重建时，它们仍是 pending_x，不填估算数字。
     """
     old = json.loads((SNAP.parent / "brand_list_coffee_tea_2026-11-04.json").read_text(encoding="utf-8"))
     listed = json.loads((SNAP.parent / "brand_list_coffee_tea_2026-11-10.json").read_text(encoding="utf-8"))
@@ -272,46 +276,70 @@ def test_added_local_coffee_brands_stay_pending_until_refresh(tmp_path):
 
     for snap_path in sorted(SNAP.parent.glob("x_snapshot_*.json")):
         historical = json.loads(snap_path.read_text(encoding="utf-8"))
-        assert set(_NEW_COFFEE).isdisjoint(historical["brands"])
+        stamp = snap_path.stem.removeprefix("x_snapshot_")
+        if stamp < _FIRST_X_CAPTURE:
+            assert set(_NEW_COFFEE).isdisjoint(historical["brands"])
 
-    latest = xs.load_snapshot(xs.latest_snapshot_path())
+    latest_path = xs.latest_snapshot_path()
+    latest = xs.load_snapshot(latest_path)
+    assert latest_path.stem.removeprefix("x_snapshot_") >= _FIRST_X_CAPTURE
+    assert set(_NEW_COFFEE) <= set(latest["brands"])
     plan = xs.refresh_plan(BRANDS, latest)
-    pending = [p for p in plan if not p["in_snapshot"]]
-    assert [(p["id"], p["x_handle"]) for p in pending] == [
-        (bid, _NEW_COFFEE[bid]["x"]) for bid in _NEW_COFFEE
-    ]
-    assert all(p["include_in_user_lookup"] and p["mentions_query"] is None for p in pending)
+    for bid, expect in _NEW_COFFEE.items():
+        row = next(p for p in plan if p["id"] == bid)
+        assert row["in_snapshot"] is True and row["x_handle"] == expect["x"]
     for bid in ("ID-11", "ID-12"):
         row = next(p for p in plan if p["id"] == bid)
         assert row["in_snapshot"] is True and row["x_handle"]
 
-    for label, snap in (("old", SNAP), ("latest", xs.latest_snapshot_path())):
+    for label, snap in (("old", SNAP), ("latest", latest_path)):
         built = build_localradar(tmp_path / f"{label}.db", x_snapshot=snap)
         by_id = {b["id"]: b for b in built["brands"]}
-        assert built["x_snapshot"]["brands_pending_x"] == (7 if label == "old" else 5)
+        snap_data = json.loads(Path(snap).read_text(encoding="utf-8"))
+        if label == "old":
+            assert set(_NEW_COFFEE).isdisjoint(snap_data["brands"])
+            assert built["x_snapshot"]["brands_pending_x"] == 7
+        else:
+            assert set(_NEW_COFFEE) <= set(snap_data["brands"])
+        assert built["x_snapshot"]["brands_pending_x"] == sum(
+            1 for b in built["brands"] if b["source_type"] == "pending_x")
         for bid, expect in _NEW_COFFEE.items():
             b = by_id[bid]
-            _assert_pending_x_has_no_metrics(b)
             assert b["x"] == expect["x"] and b["ig"] == expect["ig"] and b["website"] == expect["website"]
             assert b["tiktok"] == expect["tiktok"] and b["metrics_pending"] is True
             assert b["origin_label"] == "本土" and b["value_score"] is None
-            for key in _METRIC_KEYS:
-                assert b[key] is None
-            blob = json.dumps(b, ensure_ascii=False)
-            assert all(n not in blob for n in _REVIEWED_FOLLOWERS)
+            entry = snap_data["brands"].get(bid)
+            if entry is None:
+                _assert_pending_x_has_no_metrics(b)
+                for key in _METRIC_KEYS:
+                    assert b[key] is None
+                blob = json.dumps(b, ensure_ascii=False)
+                assert all(n not in blob for n in _REVIEWED_FOLLOWERS)
+            else:
+                assert b["source_type"] != "pending_x"
+                _assert_metrics_match_snapshot(b, entry)
+                for key in _METRIC_KEYS:
+                    if key == "heat":
+                        continue
+                    assert b[key] is None
 
     published = json.loads((SNAP.parents[2] / "web/trend/data/local_brands.json").read_text(encoding="utf-8"))
-    cited = json.loads((SNAP.parent / published["x_snapshot"]["file"]).read_text(encoding="utf-8"))
-    assert set(_NEW_COFFEE).isdisjoint(cited["brands"])
+    cited_name = published["x_snapshot"]["file"]
+    cited = json.loads((SNAP.parent / cited_name).read_text(encoding="utf-8"))
+    assert Path(cited_name).stem.removeprefix("x_snapshot_") >= _FIRST_X_CAPTURE
+    assert set(_NEW_COFFEE) <= set(cited["brands"])
     pub = {b["id"]: b for b in published["brands"]}
     assert published["x_snapshot"]["brands_pending_x"] == sum(
         1 for b in published["brands"] if b["source_type"] == "pending_x")
     for bid, expect in _NEW_COFFEE.items():
         b = pub[bid]
-        _assert_pending_x_has_no_metrics(b)
+        assert b["source_type"] != "pending_x"
+        _assert_metrics_match_snapshot(b, cited["brands"][bid])
         assert b["x"] == expect["x"] and b["ig"] == expect["ig"] and b["website"] == expect["website"]
         assert b["metrics_pending"] is True
         for key in _METRIC_KEYS:
+            if key == "heat":
+                continue
             assert b[key] is None
 
 
