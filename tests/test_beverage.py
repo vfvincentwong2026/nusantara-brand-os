@@ -12,6 +12,9 @@ def test_beverage_dataset_and_math():
     assert len(d["points"]) == len(d["brands"]) * len(d["cities"])
     assert d["brands"][0]["id"] == "mixue"
     assert d["brands"][1]["id"] == "momoyo"
+    google = [p for p in d["points"] if p["location_precision"] == "google_verified"]
+    assert len(google) == 10
+    assert next(p for p in google if p["id"] == "mixue-makassar")["business_status"] == "永久停业"
     for p in d["points"]:
         assert p["location_precision"] in {"city_model", "osm_candidate", "google_verified"}
         if p["location_precision"] == "google_verified":

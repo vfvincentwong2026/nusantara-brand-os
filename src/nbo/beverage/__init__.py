@@ -62,6 +62,8 @@ def build_beverage(seed_path=SEED, radar_path=RADAR, locations_path=LOCATIONS,
                 "location_address": google.get("address") if google else osm.get("display_name"),
                 "location_source": google["google_url"] if google else osm.get("location_source"),
                 "google_place_id": google.get("google_place_id") if google else None,
+                "business_status": google.get("business_status") if google else None,
+                "coordinate_basis": google.get("coordinate_basis", "Google Maps 地点页 !3d/!4d") if google else None,
                 "osm_source": osm.get("location_source") if google and osm else None,
                 "osm_distance_m": distance_m(google["lat"], google["lon"], osm["lat"], osm["lon"]) if google and osm else None,
                 "sku": brand["sku"],
@@ -83,7 +85,7 @@ def build_beverage(seed_path=SEED, radar_path=RADAR, locations_path=LOCATIONS,
     return {
         "generated_at": datetime.now().isoformat(timespec="seconds"), "version": seed["version"],
         "data_mode": f"Google Maps 已核验 {verified} 点 + OSM 候选 {candidates} 点 + 城市模型 {len(points) - verified - candidates} 点（非全量真实门店）",
-        "methodology": "单品价格指数 = 城市同款 SKU 价格 ÷ 雅加达同款 SKU 基准价 × 100；雅加达=100。外岛及缺少实测的城市价格由物流系数估算，实测后逐点替换。Google 坐标只取地点页 !3d/!4d，不取视口中心。",
+        "methodology": "单品价格指数 = 城市同款 SKU 价格 ÷ 雅加达同款 SKU 基准价 × 100；雅加达=100。外岛及缺少实测的城市价格由物流系数估算，实测后逐点替换。Google 坐标取地点页或嵌入地点页的门店坐标，不取视口中心。",
         "location_note": seed["location_note"], "cities": seed["cities"], "brands": brands, "points": points,
     }
 

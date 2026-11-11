@@ -1,6 +1,6 @@
 {
   "version": "2026-11-12.v1",
-  "location_note": "黑框仅代表 Google Maps 地点页已核验坐标；灰框为 OSM 候选，待 Google 复核，不作精准点位；其余为城市展示点，不是门店地址。",
+  "location_note": "10 家命名门店均已用 Google Maps 精确坐标覆盖，黑框展示；其余 70 个为城市模型，不是门店地址。营业状态以 Google 当前页面为准。",
   "cities": [
     {"id":"jakarta","name":"雅加达","island":"爪哇","lat":-6.2088,"lon":106.8456,"factor":1.00},
     {"id":"surabaya","name":"泗水","island":"爪哇","lat":-7.2575,"lon":112.7521,"factor":1.02},

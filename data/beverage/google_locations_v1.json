@@ -1,5 +1,5 @@
 {
-  "source": "Google Maps 地点页；坐标仅取 URL 中 !3d/!4d，不取 @ 视口中心",
+  "source": "Google Maps 地点页或嵌入地点页；坐标取门店 !3d/!4d（嵌入页为 !2d/!3d），不取 @ 视口中心",
   "verified_at": "2026-11-12",
   "locations": [
     {
@@ -12,6 +12,50 @@
       "google_url": "https://www.google.com/maps/place/Mixue/data=!4m7!3m6!1s0x2e69f3b94f0453b7:0x263392a3887c962b!8m2!3d-6.2282329!4d106.8552302!16s%2Fg%2F11s42s7qgw",
       "google_place_id": "0x2e69f3b94f0453b7:0x263392a3887c962b",
       "google_share_url": "https://maps.app.goo.gl/fdvXGdJTq6LkbWTa8"
+    },
+    {
+      "brand_id": "mixue",
+      "city_id": "bandung",
+      "branch_name": "Mixue",
+      "address": "Jl. Terusan Jakarta No.62, Antapani Tengah, Kec. Antapani, Kota Bandung, Jawa Barat 40291",
+      "lat": -6.9126961,
+      "lon": 107.6526738,
+      "google_url": "https://www.google.com/maps/place/Mixue/@-6.9126961,107.6526738,17z/data=!3m1!4b1!4m6!3m5!1s0x2e68e7d98f2a8219:0x4b0facad85d9e22f!8m2!3d-6.9126961!4d107.6526738!16s%2Fg%2F11lkhvhh_b?entry=tts&g_ep=EgoyMDI2MTEwOC4wIOC7DCoASAFQAw%3D%3D&skid=6200a8bb-4841-48a3-846a-ff6184b19690",
+      "google_place_id": "0x2e68e7d98f2a8219:0x4b0facad85d9e22f",
+      "google_share_url": "https://maps.app.goo.gl/iWnQuHNEYX7xTUTUA",
+      "business_status": null
+    },
+    {
+      "brand_id": "mixue",
+      "city_id": "denpasar",
+      "branch_name": "Mixue Gatsu",
+      "address": "Jl. Gatot Subroto Barat No.47 B, Padangsambian Kaja, Kec. Denpasar Bar., Kota Denpasar, Bali 80118",
+      "lat": -8.636549,
+      "lon": 115.192945,
+      "google_url": "https://www.google.com/maps/place/Mixue+Gatsu/data=!4m7!3m6!1s0x2dd23f000f2d6527:0xbcebcbdac235fcd9!8m2!3d-8.636549!4d115.192945!16s%2Fg%2F11z_z5r6q7!19sChIJJ2UtDwA_0i0R2fw1wtrL67w?authuser=0&hl=zh-CN&g_ep=EgoyMDI2MTEwOC4wIJJjKgBIAVAD&rclk=1",
+      "google_place_id": "0x2dd23f000f2d6527:0xbcebcbdac235fcd9"
+    },
+    {
+      "brand_id": "mixue",
+      "city_id": "makassar",
+      "branch_name": "Mixue Biringkanaya Makassar",
+      "address": "Jl. Pajjaiang, Sudiang Raya, Kec. Biringkanaya, Kota Makassar, Sulawesi Selatan 90242",
+      "lat": -5.1075668,
+      "lon": 119.5206745,
+      "google_url": "https://www.google.com/maps/place/Mixue+Biringkanaya+Makassar/data=!4m7!3m6!1s0x2dbefbec24f4117b:0xc62e813b1b035865!8m2!3d-5.1075668!4d119.5206745",
+      "google_place_id": "0x2dbefbec24f4117b:0xc62e813b1b035865",
+      "business_status": "永久停业",
+      "coordinate_basis": "Google Maps 嵌入地点页 !2d/!3d 与 Place ID"
+    },
+    {
+      "brand_id": "mixue",
+      "city_id": "manado",
+      "branch_name": "Mixue Sam Ratulangi Manado",
+      "address": "Jl. Sam Ratulangi No.106B, Karombasan Utara, Kec. Wanea, Kota Manado, Sulawesi Utara 95117",
+      "lat": 1.4579398,
+      "lon": 124.8376745,
+      "google_url": "https://www.google.com/maps/place/Mixue+Sam+Ratulangi+Manado/data=!4m7!3m6!1s0x3287753a70c6859d:0x56c60f79d269a9d8!8m2!3d1.4579398!4d124.8376745!16s%2Fg%2F11kpdzk497!19sChIJnYXGcDp1hzIR2Klp0nkPxlY?authuser=0&hl=zh-CN&g_ep=EgoyMDI2MTEwOC4wIJJjKgBIAVAD&rclk=1",
+      "google_place_id": "0x3287753a70c6859d:0x56c60f79d269a9d8"
     },
     {
       "brand_id": "momoyo",
@@ -32,6 +76,38 @@
       "lon": 112.7138749,
       "google_url": "https://www.google.com/maps/place/MOMOYO+BANYUURIP+ICE+CREAM,+FRUIT+TEA,+COFFEE/data=!4m7!3m6!1s0x2dd7ff6d22e41c41:0x2084446f2edce9c1!8m2!3d-7.2681706!4d112.7138749!16s%2Fg%2F11sjvl810v",
       "google_place_id": "0x2dd7ff6d22e41c41:0x2084446f2edce9c1"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "bandung",
+      "branch_name": "Momoyo Raya Ujung Berung",
+      "address": "Jl. AH. Nasution No.273/3, RT.04/RW.05, Neglasari, Pasanggrahan, Kec. Ujung Berung, Bandung Timur, Jawa Barat 40617",
+      "lat": -6.9155816,
+      "lon": 107.7044778,
+      "google_url": "https://www.google.com/maps/place/Momoyo+Raya+Ujung+Berung/data=!4m7!3m6!1s0x2e68dde4e1f5634b:0x7c824b0cf1a904a6!8m2!3d-6.9155816!4d107.7044778!16s%2Fg%2F11xv1sz0f9!19sChIJS2P14eTdaC4RpgSp8QxLgnw?authuser=0&hl=zh-CN&g_ep=EgoyMDI2MTEwOS4wIJJjKgBIAVAD&rclk=1",
+      "google_place_id": "0x2e68dde4e1f5634b:0x7c824b0cf1a904a6"
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "medan",
+      "branch_name": "Momoyo Medan Marelan",
+      "address": "PM35+MHM, Jl. Marelan Raya Ps. IV, Rengas Pulau, Kec. Medan Marelan, Kota Medan, Sumatera Utara 20255",
+      "lat": 3.7041499,
+      "lon": 98.6588781,
+      "google_url": "https://www.google.com/maps/place/Momoyo+Medan+Marelan/@3.7041499,98.6588781,17z/data=!3m1!4b1!4m6!3m5!1s0x3036d352233497cf:0x6f8fb78a4a526da2!8m2!3d3.7041499!4d98.6588781!16s%2Fg%2F11kr6p1718?entry=tts&g_ep=EgoyMDI2MTEwOC4wIOC7DCoASAFQAw%3D%3D&skid=380cfaf6-2020-468b-a369-5c1efa587041",
+      "google_place_id": "0x3036d352233497cf:0x6f8fb78a4a526da2",
+      "google_share_url": "https://maps.app.goo.gl/DPFANrLndWJBtcGR7",
+      "business_status": null
+    },
+    {
+      "brand_id": "momoyo",
+      "city_id": "makassar",
+      "branch_name": "Momoyo Penghibur",
+      "address": "Jl. Penghibur No.123, Bulo Gading, Kec. Ujung Pandang, Kota Makassar, Sulawesi Selatan 90111",
+      "lat": -5.1412403,
+      "lon": 119.4070312,
+      "google_url": "https://www.google.com/maps/place/Momoyo+Penghibur/data=!4m7!3m6!1s0x2dbf03aed20a1e87:0xa774dfb52fec7014!8m2!3d-5.1412403!4d119.4070312!16s%2Fg%2F11v67bm4t4!19sChIJhx4K0q4Dvy0RFHDsL7XfdKc?authuser=0&hl=zh-CN&g_ep=EgoyMDI2MTEwOC4wIJJjKgBIAVAD&rclk=1",
+      "google_place_id": "0x2dbf03aed20a1e87:0xa774dfb52fec7014"
     }
   ]
 }
