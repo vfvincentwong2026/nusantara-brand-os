@@ -5,8 +5,8 @@
 """
 import json
 import math
+import os
 import re
-import time
 from pathlib import Path
 from urllib.parse import quote
 
@@ -42,6 +42,41 @@ CITIES = [
     ("batam", "巴淡", "Batam", 1.0821, 104.0305, 1.08),
     ("kupang", "古邦", "Kupang", -10.1772, 123.6070, 1.15),
     ("jayapura", "查亚普拉", "Jayapura", -2.5916, 140.6690, 1.18),
+    ("surakarta", "梭罗", "Surakarta", -7.5667, 110.8167, 1.01),
+    ("mataram", "马塔兰", "Mataram", -8.5833, 116.1167, 1.10),
+    ("jambi", "占碑", "Jambi", -1.6101, 103.6131, 1.08),
+    ("bengkulu", "明古鲁", "Bengkulu", -3.8004, 102.2655, 1.10),
+    ("gorontalo", "哥伦打洛", "Gorontalo", 0.5412, 123.0595, 1.12),
+    ("palu", "帕卢", "Palu", -0.8917, 119.8707, 1.12),
+    ("kendari", "肯达里", "Kendari", -3.9985, 122.5129, 1.12),
+    ("ambon", "安汶", "Ambon", -3.6954, 128.1814, 1.18),
+    ("ternate", "特尔纳特", "Ternate", 0.7930, 127.3840, 1.18),
+    ("sorong", "索龙", "Sorong", -0.8762, 131.2558, 1.20),
+    ("tegal", "直葛", "Tegal", -6.8794, 109.1256, 1.01),
+    ("purwokerto", "普禾加多", "Purwokerto", -7.4314, 109.2478, 1.01),
+    ("madiun", "茉莉芬", "Madiun", -7.6298, 111.5239, 1.02),
+    ("probolinggo", "庞越", "Probolinggo", -7.7543, 113.2159, 1.02),
+    ("pasuruan", "岩望", "Pasuruan", -7.6453, 112.9075, 1.02),
+    ("tasikmalaya", "打横", "Tasikmalaya", -7.3506, 108.2172, 1.01),
+    ("sukabumi", "苏加武眉", "Sukabumi", -6.9277, 106.9270, 1.00),
+    ("serang", "西冷", "Serang", -6.1149, 106.1502, 1.00),
+    ("cilegon", "芝勒贡", "Cilegon", -6.0023, 106.0112, 1.00),
+    ("lubuklinggau", "卢布林高", "Lubuklinggau", -3.2967, 102.8614, 1.08),
+    ("padang-sidempuan", "巴东塞德姆普安", "Padang Sidempuan", 1.3804, 99.2684, 1.10),
+    ("pematang-siantar", "先达", "Pematangsiantar", 2.9595, 99.0687, 1.08),
+    ("banda-aceh", "班达亚齐", "Banda Aceh", 5.5483, 95.3238, 1.12),
+    ("lhokseumawe", "洛克苏马韦", "Lhokseumawe", 5.1801, 97.1507, 1.12),
+    ("tanjung-pinang", "丹戎槟榔", "Tanjung Pinang", 0.9186, 104.4554, 1.10),
+    ("singkawang", "山口洋", "Singkawang", 0.9088, 108.9846, 1.10),
+    ("palangkaraya", "帕朗卡拉亚", "Palangkaraya", -2.2096, 113.9213, 1.10),
+    ("tarakan", "打拉根", "Tarakan", 3.3000, 117.6000, 1.15),
+    ("mamuju", "马穆朱", "Mamuju", -2.6740, 118.8880, 1.12),
+    ("luwuk", "卢武克", "Luwuk", -0.9516, 122.7880, 1.15),
+    ("baubau", "包包", "Baubau", -5.4667, 122.6167, 1.15),
+    ("bima", "比马", "Bima", -8.4667, 118.7167, 1.12),
+    ("singaraja", "新加拉惹", "Singaraja", -8.1167, 115.0833, 1.08),
+    ("timika", "蒂米卡", "Timika", -4.5467, 136.8833, 1.20),
+    ("merauke", "马老奇", "Merauke", -8.4667, 140.4000, 1.20),
 ]
 
 
@@ -79,20 +114,23 @@ def main():
         "cities": [{"id": c[0], "name": c[1], "search_name": c[2], "lat": c[3], "lon": c[4], "factor": c[5]} for c in CITIES],
         "locations": [],
     }
+    known_cities = {c["id"] for c in payload["cities"]}
+    payload["cities"].extend({"id": c[0], "name": c[1], "search_name": c[2], "lat": c[3], "lon": c[4], "factor": c[5]} for c in CITIES if c[0] not in known_cities)
+    save(payload)
     original = json.loads(VERIFIED.read_text(encoding="utf-8"))["locations"]
     seen = {x["google_place_id"] for x in original} | {x["google_place_id"] for x in payload["locations"]}
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True, executable_path=CHROME)
         page = browser.new_page(viewport={"width": 1280, "height": 900}, locale="zh-CN")
-        for city_id, city, search_name, city_lat, city_lon, factor in CITIES:
+        city_offset = int(os.environ.get("CITY_OFFSET", "0"))
+        for city_id, city, search_name, city_lat, city_lon, factor in CITIES[city_offset:]:
             for brand_id, query_name in (("mixue", "Mixue"), ("momoyo", "Momoyo")):
-                before = len(payload["locations"])
                 try:
                     page.goto("https://www.google.com/maps/search/" + quote(f"{query_name} {search_name} Indonesia"), wait_until="domcontentloaded", timeout=40000)
                     page.wait_for_timeout(1300)
                     feed = page.locator("div[role='feed']")
                     if feed.count():
-                        for _ in range(2):
+                        for _ in range(3):
                             feed.evaluate("e => e.scrollBy(0, 2400)")
                             page.wait_for_timeout(650)
                     anchors = page.locator("a[href*='/maps/place/']")
@@ -110,7 +148,7 @@ def main():
                         item.update({"brand_id": brand_id, "city_id": city_id, "city": city, "business_status": None})
                         found.append(item)
                         seen.add(item["google_place_id"])
-                        if len(found) >= (12 if city_id == "jakarta" else 8):
+                        if len(found) >= (16 if city_id == "jakarta" else 12):
                             break
                     # 单一结果时直接读地点页。
                     if not found and page.locator("[data-item-id='address']").count():

@@ -1,6 +1,6 @@
 {
   "version": "2026-11-12.v1",
-  "location_note": "蜜雪与 Momoyo 已批量覆盖印尼 25 个城市的 Google Maps 实点，黑框展示；其他品牌及原有城市模型未改动。城市模型不是门店地址，价格仍为公开参考或模型估算。",
+  "location_note": "蜜雪与 Momoyo 已覆盖印尼 55 个城市的 Google Maps 实点（完成 60 城市检索），黑框展示；其他品牌及原有城市模型未改动。城市模型不是门店地址，价格仍为公开参考或模型估算。",
   "cities": [
     {"id":"jakarta","name":"雅加达","island":"爪哇","lat":-6.2088,"lon":106.8456,"factor":1.00},
     {"id":"surabaya","name":"泗水","island":"爪哇","lat":-7.2575,"lon":112.7521,"factor":1.02},

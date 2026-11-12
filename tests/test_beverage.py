@@ -9,11 +9,11 @@ ROOT = Path(__file__).resolve().parent.parent
 def test_beverage_dataset_and_math():
     d = build_beverage()
     assert len(d["brands"]) >= 10
-    assert len(d["cities"]) == 25
+    assert len(d["cities"]) == 60
     assert d["brands"][0]["id"] == "mixue"
     assert d["brands"][1]["id"] == "momoyo"
     google = [p for p in d["points"] if p["location_precision"] == "google_verified"]
-    assert len(google) >= 300
+    assert len(google) >= 1000
     assert {p["brand_id"] for p in google} == {"mixue", "momoyo"}
     assert len(d["points"]) == 70 + len(google)
     assert len({p["id"] for p in d["points"]}) == len(d["points"])
