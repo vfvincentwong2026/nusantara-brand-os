@@ -17,12 +17,17 @@ def test_beverage_dataset_and_math():
     assert "tianlala" in {b["id"] for b in d["brands"]}
     assert "kokumi" not in {b["id"] for b in d["brands"]}
     google = [p for p in d["points"] if p["location_precision"] == "google_verified"]
-    assert len(google) == 1010
-    assert {p["brand_id"] for p in google} == {"mixue", "momoyo"}
-    assert len(d["points"]) == 150 + len(google)
+    assert len(google) == 1218
+    assert {p["brand_id"] for p in google} == {"mixue", "momoyo", "tianlala"}
+    assert sum(p["brand_id"] in {"mixue", "momoyo"} for p in google) == 1010
+    tianlala = [p for p in google if p["brand_id"] == "tianlala"]
+    assert len(tianlala) == 208 and len({p["city"] for p in tianlala}) == 28
+    assert len({p["google_place_id"] for p in google}) == len(google)
+    assert len(d["points"]) == 142 + len(google)
     assert len({p["id"] for p in d["points"]}) == len(d["points"])
-    others = [p for p in d["points"] if p["brand_id"] not in {"mixue", "momoyo"}]
-    assert len(others) == 144 and all(p["location_precision"] == "city_model" for p in others)
+    others = [p for p in d["points"] if p["brand_id"] not in {"mixue", "momoyo", "tianlala"}]
+    assert len(others) == 136 and all(p["location_precision"] == "city_model" for p in others)
+    assert not any(p["brand_id"] == "tianlala" and p["location_precision"] == "city_model" for p in d["points"])
     assert next(p for p in google if p["id"] == "mixue-makassar")["business_status"] == "永久停业"
     for p in d["points"]:
         assert p["location_precision"] in {"city_model", "osm_candidate", "google_verified"}

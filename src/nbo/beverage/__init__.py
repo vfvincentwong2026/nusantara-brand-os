@@ -74,14 +74,14 @@ def build_beverage(seed_path=SEED, radar_path=RADAR, locations_path=LOCATIONS,
                 "heat_score": heat.get(brand.get("radar_id")), "featured": brand["featured"],
             })
 
-    # 仅追加 Mixue / Momoyo 真实 Google 门店；其他品牌的原始城市模型保持不变。
+    # 仅追加 Mixue / Momoyo / Tianlala 真实 Google 门店；其他品牌的原始城市模型保持不变。
     bulk = json.loads(Path(bulk_path).read_text(encoding="utf-8")) if Path(bulk_path).is_file() else {"cities": [], "locations": []}
     brand_by_id = {b["id"]: b for b in seed["brands"]}
     city_by_id = {c["id"]: c for c in seed["cities"]}
     city_by_id.update({c["id"]: c for c in bulk.get("cities", [])})
     seen_places = {p["google_place_id"] for p in points if p.get("google_place_id")}
     for item in bulk.get("locations", []):
-        if item["google_place_id"] in seen_places or item["brand_id"] not in {"mixue", "momoyo"}:
+        if item["google_place_id"] in seen_places or item["brand_id"] not in {"mixue", "momoyo", "tianlala"}:
             continue
         seen_places.add(item["google_place_id"])
         brand, city = brand_by_id[item["brand_id"]], city_by_id[item["city_id"]]
