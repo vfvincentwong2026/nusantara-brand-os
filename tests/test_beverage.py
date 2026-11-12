@@ -8,17 +8,19 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def test_beverage_dataset_and_math():
     d = build_beverage()
-    assert len(d["brands"]) >= 10
+    assert len(d["brands"]) == 20
+    assert sum(b["category"] == "奶茶" for b in d["brands"]) == 10
+    assert sum(b["category"] == "咖啡" for b in d["brands"]) == 10
     assert len(d["cities"]) == 60
     assert d["brands"][0]["id"] == "mixue"
     assert d["brands"][1]["id"] == "momoyo"
     google = [p for p in d["points"] if p["location_precision"] == "google_verified"]
-    assert len(google) >= 1000
+    assert len(google) == 1010
     assert {p["brand_id"] for p in google} == {"mixue", "momoyo"}
-    assert len(d["points"]) == 70 + len(google)
+    assert len(d["points"]) == 150 + len(google)
     assert len({p["id"] for p in d["points"]}) == len(d["points"])
     others = [p for p in d["points"] if p["brand_id"] not in {"mixue", "momoyo"}]
-    assert len(others) == 64 and all(p["location_precision"] == "city_model" for p in others)
+    assert len(others) == 144 and all(p["location_precision"] == "city_model" for p in others)
     assert next(p for p in google if p["id"] == "mixue-makassar")["business_status"] == "永久停业"
     for p in d["points"]:
         assert p["location_precision"] in {"city_model", "osm_candidate", "google_verified"}
