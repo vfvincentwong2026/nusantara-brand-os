@@ -11,17 +11,20 @@ def test_beverage_dataset_and_math():
     assert len(d["brands"]) == 20
     assert sum(b["category"] == "奶茶" for b in d["brands"]) == 10
     assert sum(b["category"] == "咖啡" for b in d["brands"]) == 10
-    assert len(d["cities"]) == 60
+    assert len(d["cities"]) == 72
     assert d["brands"][0]["id"] == "mixue"
     assert d["brands"][1]["id"] == "momoyo"
     assert "tianlala" in {b["id"] for b in d["brands"]}
     assert "kokumi" not in {b["id"] for b in d["brands"]}
     google = [p for p in d["points"] if p["location_precision"] == "google_verified"]
-    assert len(google) == 1218
+    assert len(google) == 1257
     assert {p["brand_id"] for p in google} == {"mixue", "momoyo", "tianlala"}
-    assert sum(p["brand_id"] in {"mixue", "momoyo"} for p in google) == 1010
+    assert sum(p["brand_id"] == "mixue" for p in google) == 571
+    assert sum(p["brand_id"] == "momoyo" for p in google) == 475
     tianlala = [p for p in google if p["brand_id"] == "tianlala"]
-    assert len(tianlala) == 208 and len({p["city"] for p in tianlala}) == 28
+    assert len(tianlala) == 211 and len({p["city"] for p in tianlala}) == 31
+    island_counts = {name: sum(p["island"] == name for p in google) for name in ["勿里洞岛", "龙目岛", "松巴哇岛", "松巴岛"]}
+    assert island_counts == {"勿里洞岛": 8, "龙目岛": 39, "松巴哇岛": 4, "松巴岛": 4}
     assert len({p["google_place_id"] for p in google}) == len(google)
     assert len(d["points"]) == 142 + len(google)
     assert len({p["id"] for p in d["points"]}) == len(d["points"])
