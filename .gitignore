@@ -50,3 +50,7 @@ container/case/assets/*.png
 web/map/data/case_store.json
 site/
 site-container/
+
+# 本地地图采集与浏览器验收临时产物
+tmp_gmap/
+tmp_gmapmixue.html
