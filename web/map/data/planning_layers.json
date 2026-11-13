@@ -1,0 +1,37 @@
+{
+  "generated_at": "2026-11-13",
+  "demo": true,
+  "source_note": "轨道站点与走廊为规划分析种子，坐标及连线均为近似示意；非 OSM 全量轨道数据、非政府法定规划。TOD 800 米为步行可达分析圈，不代表实际步行路网。",
+  "rail_lines": [
+    {
+      "id": "MRT-NS-DEMO",
+      "name": "雅加达 MRT 南北走廊（分析示意）",
+      "mode": "MRT",
+      "color": "#2563a9",
+      "coordinates": [[-6.2894,106.7749],[-6.2446,106.7983],[-6.2385,106.7986],[-6.2256,106.8024],[-6.2223,106.8085],[-6.2149,106.8182],[-6.2088,106.8215],[-6.2046,106.8227],[-6.1935,106.8230]]
+    },
+    {
+      "id": "KRL-CENTRAL-DEMO",
+      "name": "KRL Bogor–Jakarta Kota 走廊（分析示意）",
+      "mode": "KRL",
+      "color": "#b26a00",
+      "coordinates": [[-6.5956,106.7904],[-6.4046,106.8172],[-6.2099,106.8504],[-6.2024,106.8223],[-6.1376,106.8146]]
+    }
+  ],
+  "stations": [
+    {"name":"Lebak Bulus Grab（示意）","mode":"MRT","lat":-6.2894,"lon":106.7749,"tod_radius_m":800},
+    {"name":"Blok M BCA（示意）","mode":"MRT","lat":-6.2446,"lon":106.7983,"tod_radius_m":800},
+    {"name":"ASEAN（示意）","mode":"MRT","lat":-6.2385,"lon":106.7986,"tod_radius_m":800},
+    {"name":"Senayan Mastercard（示意）","mode":"MRT","lat":-6.2256,"lon":106.8024,"tod_radius_m":800},
+    {"name":"Istora Mandiri（示意）","mode":"MRT","lat":-6.2223,"lon":106.8085,"tod_radius_m":800},
+    {"name":"Bendungan Hilir（示意）","mode":"MRT","lat":-6.2149,"lon":106.8182,"tod_radius_m":800},
+    {"name":"Setiabudi Astra（示意）","mode":"MRT","lat":-6.2088,"lon":106.8215,"tod_radius_m":800},
+    {"name":"Dukuh Atas BNI（示意）","mode":"MRT","lat":-6.2046,"lon":106.8227,"tod_radius_m":800},
+    {"name":"Bundaran HI（示意）","mode":"MRT","lat":-6.1935,"lon":106.8230,"tod_radius_m":800},
+    {"name":"Bogor（示意）","mode":"KRL","lat":-6.5956,"lon":106.7904,"tod_radius_m":800},
+    {"name":"Depok Baru（示意）","mode":"KRL","lat":-6.4046,"lon":106.8172,"tod_radius_m":800},
+    {"name":"Manggarai（示意）","mode":"KRL","lat":-6.2099,"lon":106.8504,"tod_radius_m":800},
+    {"name":"Sudirman（示意）","mode":"KRL","lat":-6.2024,"lon":106.8223,"tod_radius_m":800},
+    {"name":"Jakarta Kota（示意）","mode":"KRL","lat":-6.1376,"lon":106.8146,"tod_radius_m":800}
+  ]
+}

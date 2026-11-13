@@ -53,16 +53,22 @@
             border-radius:8px; padding:10px 12px; font-size:12px; color:var(--dim); }
   .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; }
   .legend i.sq { border-radius:2px; }
-  .layers { position:absolute; top:12px; right:12px; z-index:1000; background:rgba(255,255,255,.92); border:1px solid var(--line);
-            border-radius:8px; padding:8px 12px; font-size:12px; color:var(--dim); }
-  .layers label { display:flex; align-items:center; gap:6px; cursor:pointer; padding:2px 0; }
-  /* 移动端：地图在上（40vh）、清单在下全宽，图例留在地图内不压列表 */
+  .layers { position:absolute; top:12px; right:12px; z-index:1000; width:232px; max-height:calc(100% - 24px); overflow-y:auto; background:rgba(255,255,255,.94); border:1px solid var(--line);
+            border-radius:8px; padding:8px 12px; font-size:12px; color:var(--dim); scrollbar-width:thin; }
+  .layers label { display:flex; align-items:flex-start; gap:6px; cursor:pointer; padding:3px 0; line-height:1.45; }
+  .layers label input { margin-top:3px; flex:none; accent-color:#111; }
+  .layer-title { margin:7px 0 4px; padding-top:6px; border-top:1px solid #e5e5e5; color:#111; font-size:10px; font-weight:800; letter-spacing:.08em; }
+  .layer-title:first-child { margin-top:0; padding-top:0; border-top:0; }
+  .base-switch { display:flex; gap:5px; padding:4px 0 2px; }
+  .base-switch button { flex:1; border:1px solid #ddd; border-radius:5px; background:#fff; color:#767676; padding:4px 5px; font-size:10.5px; cursor:pointer; }
+  .base-switch button.on { border-color:#111; color:#111; font-weight:700; }
+  /* 移动端：地图在上、清单在下全宽，控件独立滚动 */
   @media (max-width: 720px) {
     body { flex-direction:column; padding-top:60px; }
     #map { flex:none; height:42vh; min-height:280px; order:1; }
     #side { width:100%; min-width:0; order:2; border-left:none; border-top:1px solid var(--line); }
-    .legend { bottom:12px; left:8px; font-size:11px; padding:8px 10px; }
-    .layers { top:8px; right:8px; font-size:11px; padding:6px 10px; }
+    .legend { bottom:12px; left:8px; font-size:11px; padding:8px 10px; max-width:45%; }
+    .layers { top:8px; right:8px; width:210px; max-height:34vh; font-size:11px; padding:6px 10px; }
   }
   /* popup 7 维迷你条 */
   .pop { min-width:220px; font-family:inherit; }
@@ -118,16 +124,28 @@
     document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
   })();
 </script>
-<div id="map"><div class="legend" id="legend"></div></div>
-<div class="layers">
-  <label><input type="checkbox" id="heatToggle" checked> <b style="color:#e60023">人流热力</b>（商圈/枢纽强度）</label>
-  <label><input type="checkbox" id="poiMall" checked> 商城 MALLS</label>
-  <label><input type="checkbox" id="poiSchool" checked> 学校 SCHOOLS</label>
-  <label><input type="checkbox" id="poiComm" checked> 社区 COMMUNITIES</label>
-  <label><input type="checkbox" id="poiOffice"> 办公 OFFICES</label>
-  <label><input type="checkbox" id="siteToggle" checked> <b style="color:#e60023">智能选址候选</b>（评分+覆盖圈）</label>
-  <hr style="border:none;border-top:1px dashed #e5e5e5;margin:6px 0">
-  <label><input type="checkbox" id="oppToggle"> <b style="color:#767676">加盟机会图层</b>（区域评分 + 保护半径）</label>
+<div id="map">
+  <div class="legend" id="legend"></div>
+  <div class="layers">
+    <div class="layer-title">商业选址 · COMMERCIAL</div>
+    <label><input type="checkbox" id="heatToggle" checked> <span><b style="color:#e60023">人流热力</b>（商圈/枢纽强度）</span></label>
+    <label><input type="checkbox" id="planPopulation"> 人口 / 城镇（模型种子）</label>
+    <label><input type="checkbox" id="planCommercial"> 商圈（大型商业 900m）</label>
+    <label><input type="checkbox" id="poiMall" checked> 大型商业 MALLS</label>
+    <label><input type="checkbox" id="poiSchool" checked> 学校 SCHOOLS</label>
+    <label><input type="checkbox" id="poiComm" checked> 社区 COMMUNITIES</label>
+    <label><input type="checkbox" id="poiOffice"> 办公 OFFICES</label>
+    <label><input type="checkbox" id="siteToggle" checked> <span><b style="color:#e60023">智能选址候选</b>（评分+覆盖圈）</span></label>
+    <div class="layer-title">城市规划 · 分析模型</div>
+    <label><input type="checkbox" id="planDistrict"> 分析分区（非行政边界）</label>
+    <label><input type="checkbox" id="planRail" checked> 轨道走廊（示意）</label>
+    <label><input type="checkbox" id="planStation" checked> 轨道站点（分析种子）</label>
+    <label><input type="checkbox" id="planTod"> TOD 800 米分析圈</label>
+    <div class="layer-title">加盟与品牌门店</div>
+    <label><input type="checkbox" id="oppToggle"> <span><b style="color:#767676">加盟机会图层</b>（区域评分 + 保护半径）</span></label>
+    <div class="layer-title">底图 · BASEMAP</div>
+    <div class="base-switch"><button id="baseGray" class="on" type="button">灰色简图</button><button id="baseStreet" type="button">街道详图</button></div>
+  </div>
 </div>
 <div id="side">
   <h1>智能选址 SITE INTELLIGENCE：<em>人流 × 客群 × 租金 × 竞品</em></h1>
@@ -171,14 +189,31 @@
 </div>
 
 <script>
-const map = L.map('map', { zoomControl: true }).setView([-2.2, 117.5], 5);
+const map = L.map('map', { zoomControl: true, minZoom: 4, maxZoom: 19, zoomSnap: 1, zoomDelta: 1 }).setView([-2.2, 117.5], 5);
 window._leaflet_map = map;
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-  maxZoom: 19, attribution: 'Esri（正式环境切 Mapbox/自托管切片）'
-}).addTo(map);
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
-  maxZoom: 19
-}).addTo(map);
+const grayBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 19, attribution: 'Esri · 灰色简图'
+});
+const grayRef = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 });
+const streetBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 19, attribution: 'Esri · World Street Map'
+});
+grayBase.addTo(map); grayRef.addTo(map);
+let baseMode = 'gray';
+function setBaseMode(mode) {
+  if (mode === baseMode) return;
+  if (mode === 'street') {
+    map.removeLayer(grayBase); map.removeLayer(grayRef); streetBase.addTo(map);
+  } else {
+    map.removeLayer(streetBase); grayBase.addTo(map); grayRef.addTo(map);
+  }
+  baseMode = mode;
+  document.getElementById('baseGray').classList.toggle('on', mode === 'gray');
+  document.getElementById('baseStreet').classList.toggle('on', mode === 'street');
+}
+document.getElementById('baseGray').onclick = () => setBaseMode('gray');
+document.getElementById('baseStreet').onclick = () => setBaseMode('street');
+window._baseDebug = () => ({mode: baseMode, gray: map.hasLayer(grayBase), reference: map.hasLayer(grayRef), street: map.hasLayer(streetBase)});
 
 // 图例：选址评分色阶 + 业态模型图标
 document.getElementById('legend').innerHTML =
@@ -283,16 +318,26 @@ function buildLayers(map, d) {
     e.target.checked ? heatLayer.addTo(map) : map.removeLayer(heatLayer);
   heatLayer.addTo(map);
 
+  const poiIcon = kind => {
+    const size = map.getZoom() <= 7 ? 18 : 12, dot = size - 2;
+    return L.divIcon({ className: '', iconSize: [size, size], iconAnchor: [size / 2, size / 2],
+      html: `<div data-poi-kind="${kind}" style="width:${dot}px;height:${dot}px;background:${POI_COLOR[kind]};border:2px solid #fff;border-radius:${kind === 'malls' ? '3px' : '50%'};box-shadow:0 1px 6px ${POI_COLOR[kind]}88"></div>` });
+  };
   Object.entries(d.pois).forEach(([kind, pts]) => {
-    const layer = L.layerGroup(pts.map(p => L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '',
-      iconSize: [12, 12], html: `<div style="width:10px;height:10px;background:${POI_COLOR[kind]};border:2px solid #fff;border-radius:${kind === 'malls' ? '0' : '50%'};box-shadow:0 0 5px ${POI_COLOR[kind]}66"></div>` }) })
-      .bindPopup(`<b>${p.name}</b><br>${POI_LABEL[kind]}`)));
+    const layer = L.layerGroup(pts.map(p => {
+      const marker = L.marker([p.lat, p.lon], { icon: poiIcon(kind) }).bindPopup(`<b>${p.name}</b><br>${POI_LABEL[kind]}`)
+        .bindTooltip(`${POI_LABEL[kind]} · ${p.name}`, {direction:'top', offset:[0,-7]});
+      marker._poiKind = kind;
+      return marker;
+    }));
     poiLayers[kind] = layer;
     const ids = { malls: 'poiMall', schools: 'poiSchool', communities: 'poiComm', offices: 'poiOffice' };
     document.getElementById(ids[kind]).onchange = e =>
       e.target.checked ? layer.addTo(map) : map.removeLayer(layer);
     if (kind !== 'offices') layer.addTo(map);
   });
+  map.on('zoomend', () => Object.values(poiLayers).forEach(layer =>
+    layer.eachLayer(marker => marker.setIcon(poiIcon(marker._poiKind)))));
 
   const circles = L.layerGroup().addTo(map);
   siteLayer = L.layerGroup(d.candidates.map(c => {
@@ -414,6 +459,7 @@ function agentReason(q) {
 }
 </script>
 <script src="./beverage.js"></script>
+<script src="./planning.js"></script>
 <script src="../ui/interactions.js" defer></script>
 </body>
 </html>
