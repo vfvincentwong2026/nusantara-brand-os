@@ -18,14 +18,16 @@
   function buildStyle(base){
     return {version:8,sources:{
       esri:{type:'raster',tiles:[ESRI[base]],tileSize:256,attribution:'Esri'},
-      roads:{type:'vector',url:`pmtiles://${PMTILES}/roads/hotosm_idn_roads_osm.pmtiles`,maxzoom:14,attribution:'© OpenStreetMap contributors / HOT / HDX'},
-      waterways:{type:'vector',url:`pmtiles://${PMTILES}/waterways/hotosm_idn_waterways_osm.pmtiles`,maxzoom:13,attribution:'© OpenStreetMap contributors / HOT / HDX'},
-      poi:{type:'vector',url:`pmtiles://${PMTILES}/points_of_interest/hotosm_idn_points_of_interest_osm.pmtiles`,maxzoom:13,attribution:'© OpenStreetMap contributors / HOT / HDX'}
+      roads:{type:'vector',url:`pmtiles://${PMTILES}/roads/hotosm_idn_roads_osm.pmtiles`,maxzoom:13,attribution:'© OpenStreetMap contributors / HOT / HDX'},
+      waterways:{type:'vector',url:`pmtiles://${PMTILES}/waterways/hotosm_idn_waterways_osm.pmtiles`,maxzoom:12,attribution:'© OpenStreetMap contributors / HOT / HDX'},
+      poi:{type:'vector',url:`pmtiles://${PMTILES}/points_of_interest/hotosm_idn_points_of_interest_osm.pmtiles`,maxzoom:12,attribution:'© OpenStreetMap contributors / HOT / HDX'}
     },layers:[
       {id:'esri',type:'raster',source:'esri'},
       {id:'osm-major-roads',type:'line',source:'roads','source-layer':'roads',minzoom:8,filter:['match',['get','highway'],['motorway','trunk','primary'],true,false],layout:{visibility:'none'},paint:{'line-color':'#c24156','line-opacity':.72,'line-width':['interpolate',['linear'],['zoom'],8,.5,12,1.5,16,3.5]}},
       {id:'osm-waterways',type:'line',source:'waterways','source-layer':'waterways',minzoom:8,filter:['match',['get','waterway'],['river','canal'],true,false],layout:{visibility:'none'},paint:{'line-color':'#2687bd','line-opacity':.75,'line-width':['interpolate',['linear'],['zoom'],8,.6,12,1.8,16,4]}},
-      {id:'osm-complements',type:'circle',source:'poi','source-layer':'points_of_interest',minzoom:12,filter:['any',['match',['get','shop'],['convenience','bakery'],true,false],['match',['get','amenity'],['fast_food'],true,false]],layout:{visibility:'none'},paint:{'circle-radius':['interpolate',['linear'],['zoom'],12,2.5,16,5],'circle-color':['match',['get','shop'],'convenience','#287a51','bakery','#b26a00','#767676'],'circle-stroke-color':'#fff','circle-stroke-width':1,'circle-opacity':.85}}
+      {id:'osm-complements',type:'circle',source:'poi','source-layer':'points_of_interest',minzoom:12,filter:['any',['match',['get','shop'],['convenience','bakery'],true,false],['match',['get','amenity'],['fast_food'],true,false]],layout:{visibility:'none'},paint:{'circle-radius':['interpolate',['linear'],['zoom'],12,2.5,16,5],'circle-color':['match',['get','shop'],'convenience','#287a51','bakery','#b26a00','#767676'],'circle-stroke-color':'#fff','circle-stroke-width':1,'circle-opacity':.85}},
+      {id:'osm-universities',type:'circle',source:'poi','source-layer':'points_of_interest',minzoom:11,filter:['match',['get','amenity'],['university','college'],true,false],layout:{visibility:'none'},paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,3,16,7],'circle-color':'#7652aa','circle-stroke-color':'#fff','circle-stroke-width':1.2,'circle-opacity':.9}},
+      {id:'osm-malls',type:'circle',source:'poi','source-layer':'points_of_interest',minzoom:11,filter:['match',['get','shop'],['mall','department_store'],true,false],layout:{visibility:'none'},paint:{'circle-radius':['interpolate',['linear'],['zoom'],11,3,16,7],'circle-color':'#2563a9','circle-stroke-color':'#fff','circle-stroke-width':1.2,'circle-opacity':.9}}
     ]};
   }
   function syncBaseLayers(){
@@ -33,6 +35,23 @@
     const z=state.map.getZoom(),on=visible('barriers')&&z>=9,comp=visible('complements')&&z>=13;
     ['osm-major-roads','osm-waterways'].forEach(id=>{if(state.map.getLayer(id))state.map.setLayoutProperty(id,'visibility',on?'visible':'none');});
     if(state.map.getLayer('osm-complements'))state.map.setLayoutProperty('osm-complements','visibility',comp?'visible':'none');
+    const triggers=visible('poiTrigger')&&z>=11;
+    ['osm-universities','osm-malls'].forEach(id=>{if(state.map.getLayer(id))state.map.setLayoutProperty(id,'visibility',triggers?'visible':'none');});
+  }
+  function refreshLivePOIs(){
+    if(!state.ready)return;
+    const read=filter=>{
+      const bounds=state.map.getBounds(),seen=new Set(),points=[];
+      state.map.querySourceFeatures('poi',{sourceLayer:'points_of_interest',filter}).forEach(f=>{
+        let center=null,g=f.geometry;
+        if(g?.type==='Point')center=g.coordinates;
+        else if(g?.type==='Polygon'&&g.coordinates[0]?.length){const ring=g.coordinates[0];center=[ring.reduce((s,p)=>s+p[0],0)/ring.length,ring.reduce((s,p)=>s+p[1],0)/ring.length];}
+        if(!center||!bounds.contains(center))return;
+        const key=f.id||center.map(x=>x.toFixed(6)).join(',');if(seen.has(key))return;seen.add(key);
+        points.push({name:f.properties.name||'OSM POI',lon:center[0],lat:center[1],source:'OSM / HOT / HDX'});
+      });return points;
+    };
+    NBOEvidence.setLivePois({universities:read(['match',['get','amenity'],['university','college'],true,false]),malls:read(['match',['get','shop'],['mall','department_store'],true,false])});
   }
   function filteredCompetitors(){return state.beverage.points.filter(p=>(state.category==='all'||p.category===state.category)&&state.enabledBrands.has(p.brand_id));}
   function filteredGrids(){return state.queryIds?state.data.grids.filter(g=>state.queryIds.has(g.id)):state.data.grids;}
@@ -81,6 +100,9 @@
       const tasks=filteredCandidates();
       layers.push(new deck.ScatterplotLayer({id:'compliance-rings',data:tasks,getPosition:c=>[c.lon,c.lat],getRadius:145,radiusUnits:'meters',radiusMinPixels:10,radiusMaxPixels:24,getFillColor:[255,255,255,0],getLineColor:[178,106,0,255],getLineWidth:3,stroked:true,pickable:true,onClick:({object})=>object&&selectCandidate(object.id,false)}));
       layers.push(new deck.TextLayer({id:'compliance-tasks',data:tasks,getPosition:c=>[c.lon,c.lat],getText:'!',getSize:15,getColor:[178,106,0,255],getTextAnchor:'middle',getAlignmentBaseline:'center',fontWeight:700,outlineWidth:2,outlineColor:[255,255,255,255]}));
+    }
+    if(level==='micro'){
+      layers.push(new deck.ScatterplotLayer({id:'evidence-points',data:NBOEvidence.points(),getPosition:x=>[x.lon,x.lat],getRadius:55,radiusUnits:'meters',radiusMinPixels:5,radiusMaxPixels:13,getFillColor:x=>x.record_type==='survey'?[39,139,34,240]:[37,99,169,240],getLineColor:[255,255,255,255],getLineWidth:2,stroked:true,pickable:true,onClick:({object})=>{if(!object)return;if(object.candidate_id)selectCandidate(object.candidate_id,false);else new maplibregl.Popup({maxWidth:'300px'}).setLngLat([object.lon,object.lat]).setHTML(`<b>${esc(object.title)}</b><br>${object.rent_month_idr?`Rp ${object.rent_month_idr.toLocaleString('id-ID')}/月`:esc(object.notes)}<br>${esc(object.observed_at)} · ${object.location_precision==='exact'?'精确坐标':'区域参考'}`).addTo(state.map);}}));
     }
     if(level==='micro'&&visible('isochrones')&&state.osrm){
       const cells=[...state.osrm.motor,...state.osrm.walk];
@@ -141,7 +163,7 @@
     const c=state.data.candidates.find(x=>x.id===state.selected);if(!c){$('detail').classList.remove('show');return;}
     const labels={demand:'需求分',competition:'竞争分',access:'可达分',fulfillment:'履约分',cost:'成本分'};
     $('detail').classList.add('show');
-    $('detailBody').innerHTML=`<div class="detail-title">${esc(c.name)}</div><div class="detail-sub">${esc(c.city)} · ${esc(c.site_type)} · ${esc(c.category)} · 综合 ${c.suitability}</div><div class="radar-wrap">${radar(c)}<div class="factor-list">${Object.entries(labels).map(([k,l])=>`<div class="factor"><span>${l}</span><b>${c.mcda[k]}</b></div>`).join('')}</div></div><div class="insight">${insight(c)}</div><div class="detail-sub" style="margin-top:8px">租金代理 Rp ${c.rent_proxy_idr.toLocaleString('id-ID')}/月（非挂牌） · 最近大学 ${c.nearest_university_m>99999?'无 100km 内种子':(c.nearest_university_m/1000).toFixed(1)+'km'}<br>骑手友好代理 ${c.rider_proxy} · 最佳网格 ${c.best_cell}<br><span style="color:#b26a00">现场任务：Halal 认证、排烟条件、商铺证照与骑手停靠均待核验。</span></div><div class="osrm-status" id="osrmStatus">${osrmStatusText()}</div><div class="quick"><button id="osrmRetry">重新计算 OSRM</button><button id="focusBest">定位最佳网格</button></div>`;
+    $('detailBody').innerHTML=`<div class="detail-title">${esc(c.name)}</div><div class="detail-sub">${esc(c.city)} · ${esc(c.site_type)} · ${esc(c.category)} · 综合 ${c.suitability}</div><div class="radar-wrap">${radar(c)}<div class="factor-list">${Object.entries(labels).map(([k,l])=>`<div class="factor"><span>${l}</span><b>${c.mcda[k]}</b></div>`).join('')}</div></div><div class="insight">${insight(c)}</div><div class="detail-sub" style="margin-top:8px">租金代理 Rp ${c.rent_proxy_idr.toLocaleString('id-ID')}/月（非挂牌） · 最近大学 ${c.nearest_university_m>99999?'无 100km 内种子':(c.nearest_university_m/1000).toFixed(1)+'km'}<br>骑手友好代理 ${c.rider_proxy} · 最佳网格 ${c.best_cell}<br><span style="color:#b26a00">现场任务：Halal 认证、排烟条件、商铺证照与骑手停靠均待核验。</span></div>${NBOEvidence.detailHTML(c)}<div class="osrm-status" id="osrmStatus">${osrmStatusText()}</div><div class="quick"><button id="osrmRetry">重新计算 OSRM</button><button id="focusBest">定位最佳网格</button></div>`;
     $('osrmRetry').onclick=()=>runOSRM(c);$('focusBest').onclick=()=>{const g=state.data.grids.find(x=>x.id===c.best_cell);if(g)state.map.flyTo({center:g.center,zoom:16});};
   }
   function osrmStatusText(){
@@ -151,7 +173,7 @@
     return '点击候选后自动计算 OSRM；无结果时不展示伪造等时圈。';
   }
   function selectCandidate(id,fly){
-    state.selected=id;state.osrm=null;state.osrmStatus='idle';state.dynamicBarriers=new Map();renderDetail();
+    state.selected=id;state.osrm=null;state.osrmStatus='idle';state.dynamicBarriers=new Map();NBOEvidence.selectCandidate(id);renderDetail();
     const c=state.data.candidates.find(x=>x.id===id);
     if(fly&&c)state.map.flyTo({center:[c.lon,c.lat],zoom:14,duration:900});
     if(c&&visible('isochrones'))runOSRM(c);updateLayers();
@@ -207,13 +229,14 @@
     parsed.delivery=/外卖好做|外卖强|外卖友好/.test(q);parsed.street=/街边|街铺/.test(q);parsed.low_competition=/低竞争|竞争小/.test(q);return parsed;
   }
   function runQuery(){
-    const q=$('query').value.trim();if(!q)return;const p=parseQuery(q),universities=state.data.pois.filter(x=>x.university);
+    const q=$('query').value.trim();if(!q)return;const p=parseQuery(q),seedUniversities=state.data.pois.filter(x=>x.university),liveUniversities=NBOEvidence.universities();
+    const universities=[...seedUniversities,...liveUniversities];
     const excluded=p.exclude_brand?state.beverage.points.filter(x=>x.brand_id===p.exclude_brand):[];
     const candidates=new Map(state.data.candidates.map(c=>[c.id,c]));
     const matches=state.data.grids.filter(g=>{
       const c=candidates.get(g.candidate_id);
       if(p.city&&c.city!==p.city)return false;
-      if(p.rent_max&&g.rent_proxy_idr>p.rent_max)return false;
+      if(p.rent_max&&NBOEvidence.rentFor(c,g)>p.rent_max)return false;
       if(p.street&&!c.street)return false;
       if(p.delivery&&g.rider_proxy<60)return false;
       if(p.low_competition&&g.saturation>35)return false;
@@ -224,12 +247,12 @@
     state.queryIds=new Set(matches.map(g=>g.id));state.queryMatches=matches.length;state.dynamicBarriers=new Map();
     const byCandidate=new Map();matches.forEach(g=>byCandidate.set(g.candidate_id,Math.max(byCandidate.get(g.candidate_id)||0,effective(g))));
     const top=[...byCandidate.entries()].map(([id,score])=>({c:candidates.get(id),score})).sort((a,b)=>b.score-a.score).slice(0,3);
-    const sql=`WHERE ${p.city?`city='${p.city}'`: 'city=ANY'}${p.rent_max?` AND rent_proxy<=${p.rent_max}`:''}${p.university_m?` AND university_distance<=${p.university_m}m`:''}${p.exclude_brand?` AND no_${p.exclude_brand}_within=${p.exclude_radius_m}m`:''}${p.delivery?' AND rider_proxy>=60':''}${p.street?' AND street=true':''}${p.low_competition?' AND saturation<=35':''}`;
-    $('parse').classList.add('show');$('parse').textContent=`NL2GIS ${sql}\n命中 ${matches.length} 个 100m 网格 / ${byCandidate.size} 个候选；租金为代理值。`;
+    const sql=`WHERE ${p.city?`city='${p.city}'`: 'city=ANY'}${p.rent_max?` AND rent_evidence_or_proxy<=${p.rent_max}`:''}${p.university_m?` AND university_distance<=${p.university_m}m`:''}${p.exclude_brand?` AND no_${p.exclude_brand}_within=${p.exclude_radius_m}m`:''}${p.delivery?' AND rider_proxy>=60':''}${p.street?' AND street=true':''}${p.low_competition?' AND saturation<=35':''}`;
+    $('parse').classList.add('show');$('parse').textContent=`NL2GIS ${sql}\n命中 ${matches.length} 个 100m 网格 / ${byCandidate.size} 个候选；精确租金证据优先，其余用代理；大学含 ${liveUniversities.length} 个已加载 OSM 点。`;
     $('top3').innerHTML=top.length?top.map((x,i)=>`<div class="rec" data-id="${x.c.id}"><span class="score">${x.score.toFixed(1)}</span><b>${i+1}. ${esc(x.c.name)}</b><p>需求 ${x.c.mcda.demand} · 竞争 ${x.c.mcda.competition} · 可达 ${x.c.mcda.access} · 履约 ${x.c.mcda.fulfillment}</p><p>${insight(x.c)}</p></div>`).join(''):'<div class="empty">没有网格同时满足全部硬条件。可减少预算、距离或竞品限制后重算。</div>';
     $('top3').querySelectorAll('.rec').forEach(el=>el.onclick=()=>selectCandidate(el.dataset.id,true));
     if(matches.length){const bounds=new maplibregl.LngLatBounds();matches.forEach(g=>bounds.extend(g.center));state.map.fitBounds(bounds,{padding:70,maxZoom:14,duration:900});}
-    state.nlDebug={parsed:p,matches:matches.length,candidates:byCandidate.size,top3:top.map(x=>x.c.id),sql};updateLayers();
+    state.nlDebug={parsed:p,matches:matches.length,candidates:byCandidate.size,top3:top.map(x=>x.c.id),liveUniversities:liveUniversities.length,sql};updateLayers();
   }
   function resetQuery(){
     state.queryIds=null;state.queryMatches=0;state.nlDebug=null;$('parse').classList.remove('show');$('top3').innerHTML='<div class="empty">输入条件后，系统会直接过滤空间网格并返回 Top3。</div>';state.map.flyTo({center:[117.5,-2.2],zoom:4.6,duration:800});updateLayers();
@@ -251,15 +274,18 @@
   }
   async function init(){
     const [model,bev]=await Promise.all([fetch('./data/spatial_model.json').then(r=>r.json()),fetch('./data/beverage_index.json').then(r=>r.json())]);
-    state.data=model;state.beverage=bev;bev.brands.forEach(b=>state.enabledBrands.add(b.id));
+    state.data=model;state.beverage=bev;bev.brands.forEach(b=>state.enabledBrands.add(b.id));await NBOEvidence.init(model.candidates);
     const protocol=new pmtiles.Protocol();maplibregl.addProtocol('pmtiles',protocol.tile);
     const map=new maplibregl.Map({container:'map',style:buildStyle('gray'),center:[117.5,-2.2],zoom:4.6,minZoom:4,maxZoom:19,attributionControl:{compact:true}});state.map=map;
     map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-left');
-    map.on('load',()=>{state.overlay=new deck.MapboxOverlay({interleaved:false,layers:[]});map.addControl(state.overlay);state.ready=true;updateLayers();});
-    map.on('zoom',updateLayers);map.on('moveend',()=>{updateLayers();setTimeout(updateDynamicBarriers,250);});map.on('styledata',syncBaseLayers);
+    map.on('load',()=>{state.overlay=new deck.MapboxOverlay({interleaved:false,layers:[]});map.addControl(state.overlay);state.ready=true;updateLayers();setTimeout(refreshLivePOIs,800);});
+    map.on('zoom',updateLayers);map.on('moveend',()=>{updateLayers();setTimeout(updateDynamicBarriers,250);setTimeout(refreshLivePOIs,600);});map.on('styledata',syncBaseLayers);map.on('idle',refreshLivePOIs);
+    window.addEventListener('nbo-evidence-change',()=>{renderDetail();renderCandidates();updateLayers();});
     renderBrandList();renderCandidates();renderSources();bindControls();
     window._spatialDebug=()=>({ready:state.ready,zoom:state.map.getZoom(),level:state.level,metric:state.metric,cities:state.data.cities.length,candidates:state.data.candidates.length,grids:state.data.grids.length,queryMatches:state.queryMatches,selected:state.selected,brands:state.enabledBrands.size,competitors:filteredCompetitors().length,transitLines:state.data.transit_lines.length,stations:state.data.stations.length,mrtStations:state.data.stations.filter(s=>s.mode==='MRT').length,railBarriers:state.data.rail_barriers.length,dynamicBarriers:[...state.dynamicBarriers.values()].filter(Boolean).length,osrmStatus:state.osrmStatus,base:state.base});
     window._nlDebug=()=>state.nlDebug;window._osrmDebug=()=>({status:state.osrmStatus,motor:state.osrm?.motor.length||0,walk:state.osrm?.walk.length||0,stops:state.osrm?.stops.length||0,motor5:state.osrm?.motor.filter(x=>x.duration<=300).length||0,walk5:state.osrm?.walk.filter(x=>x.duration<=300).length||0});
+    window._evidenceDebug=()=>NBOEvidence.debug();
+    window._poiDebug=()=>{const features=state.map.querySourceFeatures('poi',{sourceLayer:'points_of_interest'});return {count:features.length,properties:features.slice(0,12).map(f=>f.properties),types:[...new Set(features.map(f=>f.geometry?.type))]};};
   }
   init().catch(e=>{console.error(e);$('level').innerHTML='<b>空间数据加载失败</b><span>请检查本地数据与网络</span>';});
 })();

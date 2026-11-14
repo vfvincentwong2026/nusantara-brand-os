@@ -1,0 +1,6 @@
+record_type,id,candidate_id,city,area,title,rent_year_idr,building_sqm,observed_at,source_url,lon,lat,halal_status,exhaust_status,rider_status,notes
+listing,RENT-BSD-20260618,,南唐格朗,BSD City,Ruko untuk Disewa di Pusat Tangerang Luas Bangunan 202m2,90000000,202,2026-06-18,https://www.99.co/id/sewa/ruko/area-tangerang/bsd-city,,,,,,公开挂牌快照；区域级位置；当前可用性未核验
+listing,RENT-BRAWIJAYA-20260223,,雅加达,Brawijaya,Area Strategis Disewakan di Area Brawijaya - eks Resto,350000000,,2026-02-23,https://www.99.co/id/sewa/tanah/jakarta-selatan,,,,,,一层年租；至少两年预付；区域级位置；当前可用性未核验
+listing,RENT-SUNSET-20250831,,登巴萨,Sunset Road,Ruko Area Premium Kawasan Sunset Road Luas 225m2 Disewakan,350000000,225,2025-08-31,https://www.99.co/id/sewa/ruko/bali?hlmn=7,,,,,,每单元年租；至少三年；区域级位置；当前可用性未核验
+listing,RENT-MULYOREJO-20260304,,泗水,Mulyorejo,Ruko Disewakan Lokasi Mulyorejo Surabaya Harga Spesial,128000000,324,2026-03-04,https://www.99.co/id/sewa/ruko/surabaya,,,,,,公开挂牌快照；区域级位置；当前可用性未核验
+listing,RENT-DARMO-20260612,,泗水,Raya Darmo,Disewakan Stand Raya Darmo Baru Barat,30000000,20,2026-06-12,https://www.99.co/id/sewa/ruko/area-surabaya/raya-darmo,,,,,,至少两年；小面积档口；区域级位置；当前可用性未核验

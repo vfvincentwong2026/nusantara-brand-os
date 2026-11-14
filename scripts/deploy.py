@@ -54,6 +54,7 @@ def main():
             "--out", "web/map/data/site_select.json"])
         sh([sys.executable, "-m", "nbo.beverage",
             "--out", "web/map/data/beverage_index.json"])
+        sh([sys.executable, "scripts/build_site_evidence.py"])
         sh([sys.executable, "-m", "nbo.assembly", "--db", "nbo.db",
             "--out", "web/assembly/data/assembly.json"])
         sh([sys.executable, "-m", "nbo.cart", "--db", "nbo.db",
@@ -69,11 +70,11 @@ def main():
     if SITE.exists():
         shutil.rmtree(SITE)
     (SITE / "map/data").mkdir(parents=True)
-    for f in ("index.html", "spatial.js"):
+    for f in ("index.html", "spatial.js", "evidence.js"):
         shutil.copy(ROOT / "web/map" / f, SITE / "map")
     shutil.copytree(ROOT / "web/map/vendor", SITE / "map/vendor", dirs_exist_ok=True)
     for name in ("case_store.json", "opportunity.json", "site_select.json",
-                 "beverage_index.json", "planning_layers.json", "spatial_model.json"):
+                 "beverage_index.json", "planning_layers.json", "spatial_model.json", "site_evidence.json"):
         shutil.copy(ROOT / "web/map/data" / name, SITE / "map/data")
     # 热点雷达
     (SITE / "trend/data").mkdir(parents=True)
