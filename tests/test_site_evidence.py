@@ -1,5 +1,6 @@
 import csv
 import json
+import subprocess
 from pathlib import Path
 
 from scripts.build_site_evidence import validate
@@ -59,3 +60,33 @@ def test_evidence_workflow_is_wired_and_deployed():
     assert "refreshLivePOIs" in spatial and "evidence-points" in spatial
     assert '"evidence.js"' in deploy and '"site_evidence.json"' in deploy
     assert "scripts/build_site_evidence.py" in deploy
+
+
+def test_evidence_completeness_and_confidence_demotion_behavior():
+    script = r"""
+const elements = {};
+global.window = {};
+global.localStorage = {getItem: () => null};
+global.document = {getElementById: id => elements[id] ||= {value: '', innerHTML: '', textContent: ''}};
+const candidates = ['NONE', 'RENT', 'SURVEY', 'FULL'].map(id => ({id, name: id, city: '雅加达', suitability: 80}));
+const listing = {record_type: 'listing', id: 'L1', candidate_id: 'RENT', city: '雅加达', title: '精确挂牌', observed_at: '2026-11-14', location_precision: 'exact', rent_month_idr: 8000000};
+const survey = {record_type: 'survey', id: 'S1', candidate_id: 'SURVEY', city: '雅加达', title: '现场', observed_at: '2026-11-14', location_precision: 'area', rent_month_idr: null};
+const full = {record_type: 'survey', id: 'S2', candidate_id: 'FULL', city: '雅加达', title: '完整现场', observed_at: '2026-11-14', location_precision: 'exact', rent_month_idr: 12000000};
+global.fetch = async () => ({ok: true, json: async () => ({listings: [listing], surveys: [survey, full]})});
+require('./web/map/evidence.js');
+(async () => {
+  const api = await window.NBOEvidence.init(candidates);
+  const result = candidates.map(c => ({id: c.id, quality: api.completeness(c), decision: api.decisionScore(c)}));
+  console.log(JSON.stringify(result));
+})().catch(error => {console.error(error); process.exit(1);});
+"""
+    completed = subprocess.run(["node", "-e", script], cwd=ROOT, check=True, capture_output=True, text=True)
+    result = {row["id"]: row for row in json.loads(completed.stdout)}
+    assert result["NONE"]["quality"]["score"] == 0 and result["NONE"]["decision"] == 68
+    assert result["RENT"]["quality"]["score"] == 70 and result["RENT"]["decision"] == 76.4
+    assert result["SURVEY"]["quality"]["score"] == 30 and result["SURVEY"]["decision"] == 71.6
+    assert result["FULL"]["quality"] == {
+        "score": 100, "grade": "A", "factor": 1, "hasExactRent": True,
+        "hasSurvey": True, "hasExactLocation": True, "linked": 1,
+    }
+    assert result["FULL"]["decision"] == 80

@@ -95,7 +95,7 @@
       if(metricOn)layers.push(new deck.PolygonLayer({id:'mcda-grid',data:filteredGrids(),getPolygon:g=>g.polygon,getFillColor:metricColor,getLineColor:[255,255,255,80],lineWidthMinPixels:.25,pickable:true,onClick:({object})=>object&&selectCandidate(object.candidate_id,false),updateTriggers:{getFillColor:[state.metric,state.dynamicBarriers.size,state.queryMatches]}}));
       if(visible('competitors'))layers.push(new deck.ScatterplotLayer({id:'competitors',data:filteredCompetitors(),getPosition:p=>[p.lon,p.lat],getRadius:32,radiusUnits:'meters',radiusMinPixels:2,radiusMaxPixels:9,getFillColor:p=>p.price_idr<=25000?[39,139,34,220]:p.price_idr<=45000?[178,106,0,220]:[120,82,170,220],getLineColor:[255,255,255,230],stroked:true,lineWidthMinPixels:.6,pickable:true,onClick:({object,x,y})=>object&&showCompetitor(object)}));
     }
-    if(level!=='macro'&&visible('candidates'))layers.push(new deck.ScatterplotLayer({id:'candidates',data:filteredCandidates(),getPosition:c=>[c.lon,c.lat],getRadius:100,radiusUnits:'meters',radiusMinPixels:6,radiusMaxPixels:18,getFillColor:c=>c.suitability>=70?[39,139,34,235]:c.suitability>=60?[178,106,0,235]:[230,0,35,225],getLineColor:[255,255,255,255],getLineWidth:2,stroked:true,pickable:true,onClick:({object})=>object&&selectCandidate(object.id,false)}));
+    if(level!=='macro'&&visible('candidates'))layers.push(new deck.ScatterplotLayer({id:'candidates',data:filteredCandidates(),getPosition:c=>[c.lon,c.lat],getRadius:100,radiusUnits:'meters',radiusMinPixels:6,radiusMaxPixels:18,getFillColor:c=>NBOEvidence.decisionScore(c)>=70?[39,139,34,235]:NBOEvidence.decisionScore(c)>=60?[178,106,0,235]:[230,0,35,225],getLineColor:[255,255,255,255],getLineWidth:2,stroked:true,pickable:true,onClick:({object})=>object&&selectCandidate(object.id,false)}));
     if(level!=='macro'&&visible('compliance')){
       const tasks=filteredCandidates();
       layers.push(new deck.ScatterplotLayer({id:'compliance-rings',data:tasks,getPosition:c=>[c.lon,c.lat],getRadius:145,radiusUnits:'meters',radiusMinPixels:10,radiusMaxPixels:24,getFillColor:[255,255,255,0],getLineColor:[178,106,0,255],getLineWidth:3,stroked:true,pickable:true,onClick:({object})=>object&&selectCandidate(object.id,false)}));
@@ -140,7 +140,7 @@
     $('brandList').querySelectorAll('[data-category]').forEach(el=>el.onclick=()=>{state.category=el.dataset.category;renderBrandList();updateLayers();});
   }
   function renderCandidates(){
-    $('candidateList').innerHTML=[...state.data.candidates].sort((a,b)=>b.suitability-a.suitability).map(c=>`<div class="candidate" data-id="${c.id}"><span class="v">${c.suitability}</span><b>${esc(c.name)}</b><p>${esc(c.city)} · ${esc(c.model)} · ${esc(c.category)} · 租金代理 Rp ${(c.rent_proxy_idr/1e6).toFixed(1)}jt</p></div>`).join('');
+    $('candidateList').innerHTML=[...state.data.candidates].sort((a,b)=>NBOEvidence.decisionScore(b)-NBOEvidence.decisionScore(a)).map(c=>{const q=NBOEvidence.completeness(c);return `<div class="candidate" data-id="${c.id}"><span class="v">${NBOEvidence.decisionScore(c)}</span><b>${esc(c.name)}</b><p>${esc(c.city)} · ${esc(c.model)} · ${esc(c.category)} · 证据 ${q.score}/100 ${q.grade} 级 · MCDA ${c.suitability}</p></div>`;}).join('');
     $('candidateList').querySelectorAll('.candidate').forEach(el=>el.onclick=()=>selectCandidate(el.dataset.id,true));
   }
   function radar(c){
@@ -155,7 +155,7 @@
     if(low==='competition')return '竞争生态是主要短板：同品类距离衰减辐射强，建议错开 300–500 米或更换价格带。';
     if(low==='fulfillment')return '履约是主要短板：骑手停靠与道路条件需先实测，再决定外卖占比。';
     if(low==='access')return '可达性是主要短板：需求存在，但轨道、街道可见性或割裂线削弱到店转化。';
-    if(low==='cost')return '成本是主要短板：需求可能较好，但当前租金代理不支持轻店回本假设。';
+    if(low==='cost')return '成本是主要短板：需求可能较好，需用精确租金与回本模型继续复核。';
     if(low==='demand')return '需求是主要短板：建议缩小店型，先用外卖与快取验证真实订单密度。';
     return '各因子较均衡，可进入铺位租金、Halal、排烟和停靠条件的现场核验。';
   }
@@ -163,7 +163,7 @@
     const c=state.data.candidates.find(x=>x.id===state.selected);if(!c){$('detail').classList.remove('show');return;}
     const labels={demand:'需求分',competition:'竞争分',access:'可达分',fulfillment:'履约分',cost:'成本分'};
     $('detail').classList.add('show');
-    $('detailBody').innerHTML=`<div class="detail-title">${esc(c.name)}</div><div class="detail-sub">${esc(c.city)} · ${esc(c.site_type)} · ${esc(c.category)} · 综合 ${c.suitability}</div><div class="radar-wrap">${radar(c)}<div class="factor-list">${Object.entries(labels).map(([k,l])=>`<div class="factor"><span>${l}</span><b>${c.mcda[k]}</b></div>`).join('')}</div></div><div class="insight">${insight(c)}</div><div class="detail-sub" style="margin-top:8px">租金代理 Rp ${c.rent_proxy_idr.toLocaleString('id-ID')}/月（非挂牌） · 最近大学 ${c.nearest_university_m>99999?'无 100km 内种子':(c.nearest_university_m/1000).toFixed(1)+'km'}<br>骑手友好代理 ${c.rider_proxy} · 最佳网格 ${c.best_cell}<br><span style="color:#b26a00">现场任务：Halal 认证、排烟条件、商铺证照与骑手停靠均待核验。</span></div>${NBOEvidence.detailHTML(c)}<div class="osrm-status" id="osrmStatus">${osrmStatusText()}</div><div class="quick"><button id="osrmRetry">重新计算 OSRM</button><button id="focusBest">定位最佳网格</button></div>`;
+    $('detailBody').innerHTML=`<div class="detail-title">${esc(c.name)}</div><div class="detail-sub">${esc(c.city)} · ${esc(c.site_type)} · ${esc(c.category)} · 空间 MCDA ${c.suitability} · 决策分 ${NBOEvidence.decisionScore(c)}</div><div class="radar-wrap">${radar(c)}<div class="factor-list">${Object.entries(labels).map(([k,l])=>`<div class="factor"><span>${l}</span><b>${c.mcda[k]}</b></div>`).join('')}</div></div><div class="insight">${insight(c)}</div><div class="detail-sub" style="margin-top:8px">${NBOEvidence.exactRent(c)?`硬过滤租金 Rp ${NBOEvidence.exactRent(c).rent_month_idr.toLocaleString('id-ID')}/月（精确证据） · 模型代理 Rp ${c.rent_proxy_idr.toLocaleString('id-ID')}/月`:`租金代理 Rp ${c.rent_proxy_idr.toLocaleString('id-ID')}/月（非挂牌）`} · 最近大学 ${c.nearest_university_m>99999?'无 100km 内种子':(c.nearest_university_m/1000).toFixed(1)+'km'}<br>骑手友好代理 ${c.rider_proxy} · 最佳网格 ${c.best_cell}<br><span style="color:#b26a00">现场任务：Halal 认证、排烟条件、商铺证照与骑手停靠均待核验。</span></div>${NBOEvidence.detailHTML(c)}<div class="osrm-status" id="osrmStatus">${osrmStatusText()}</div><div class="quick"><button id="osrmRetry">重新计算 OSRM</button><button id="focusBest">定位最佳网格</button></div>`;
     $('osrmRetry').onclick=()=>runOSRM(c);$('focusBest').onclick=()=>{const g=state.data.grids.find(x=>x.id===c.best_cell);if(g)state.map.flyTo({center:g.center,zoom:16});};
   }
   function osrmStatusText(){
@@ -246,13 +246,13 @@
     });
     state.queryIds=new Set(matches.map(g=>g.id));state.queryMatches=matches.length;state.dynamicBarriers=new Map();
     const byCandidate=new Map();matches.forEach(g=>byCandidate.set(g.candidate_id,Math.max(byCandidate.get(g.candidate_id)||0,effective(g))));
-    const top=[...byCandidate.entries()].map(([id,score])=>({c:candidates.get(id),score})).sort((a,b)=>b.score-a.score).slice(0,3);
+    const top=[...byCandidate.entries()].map(([id,base])=>{const c=candidates.get(id);return {c,base,quality:NBOEvidence.completeness(c),score:NBOEvidence.decisionScore(c,base)};}).sort((a,b)=>b.score-a.score).slice(0,3);
     const sql=`WHERE ${p.city?`city='${p.city}'`: 'city=ANY'}${p.rent_max?` AND rent_evidence_or_proxy<=${p.rent_max}`:''}${p.university_m?` AND university_distance<=${p.university_m}m`:''}${p.exclude_brand?` AND no_${p.exclude_brand}_within=${p.exclude_radius_m}m`:''}${p.delivery?' AND rider_proxy>=60':''}${p.street?' AND street=true':''}${p.low_competition?' AND saturation<=35':''}`;
-    $('parse').classList.add('show');$('parse').textContent=`NL2GIS ${sql}\n命中 ${matches.length} 个 100m 网格 / ${byCandidate.size} 个候选；精确租金证据优先，其余用代理；大学含 ${liveUniversities.length} 个已加载 OSM 点。`;
-    $('top3').innerHTML=top.length?top.map((x,i)=>`<div class="rec" data-id="${x.c.id}"><span class="score">${x.score.toFixed(1)}</span><b>${i+1}. ${esc(x.c.name)}</b><p>需求 ${x.c.mcda.demand} · 竞争 ${x.c.mcda.competition} · 可达 ${x.c.mcda.access} · 履约 ${x.c.mcda.fulfillment}</p><p>${insight(x.c)}</p></div>`).join(''):'<div class="empty">没有网格同时满足全部硬条件。可减少预算、距离或竞品限制后重算。</div>';
+    $('parse').classList.add('show');$('parse').textContent=`NL2GIS ${sql}\n命中 ${matches.length} 个 100m 网格 / ${byCandidate.size} 个候选；精确租金证据优先，其余用代理；Top3 按证据置信扣分后的决策分排序；大学含 ${liveUniversities.length} 个已加载 OSM 点。`;
+    $('top3').innerHTML=top.length?top.map((x,i)=>`<div class="rec" data-id="${x.c.id}"><span class="score">${x.score.toFixed(1)}</span><b>${i+1}. ${esc(x.c.name)}</b><p>空间 ${x.base.toFixed(1)} · 证据 ${x.quality.score}/100 ${x.quality.grade} 级 · 置信扣分 ${(x.base-x.score).toFixed(1)}</p><p>需求 ${x.c.mcda.demand} · 竞争 ${x.c.mcda.competition} · 可达 ${x.c.mcda.access} · 履约 ${x.c.mcda.fulfillment}</p><p>${insight(x.c)}</p></div>`).join(''):'<div class="empty">没有网格同时满足全部硬条件。可减少预算、距离或竞品限制后重算。</div>';
     $('top3').querySelectorAll('.rec').forEach(el=>el.onclick=()=>selectCandidate(el.dataset.id,true));
     if(matches.length){const bounds=new maplibregl.LngLatBounds();matches.forEach(g=>bounds.extend(g.center));state.map.fitBounds(bounds,{padding:70,maxZoom:14,duration:900});}
-    state.nlDebug={parsed:p,matches:matches.length,candidates:byCandidate.size,top3:top.map(x=>x.c.id),liveUniversities:liveUniversities.length,sql};updateLayers();
+    state.nlDebug={parsed:p,matches:matches.length,candidates:byCandidate.size,top3:top.map(x=>x.c.id),scores:top.map(x=>({id:x.c.id,base:+x.base.toFixed(1),decision:x.score,evidence:x.quality.score,grade:x.quality.grade})),liveUniversities:liveUniversities.length,sql};updateLayers();
   }
   function resetQuery(){
     state.queryIds=null;state.queryMatches=0;state.nlDebug=null;$('parse').classList.remove('show');$('top3').innerHTML='<div class="empty">输入条件后，系统会直接过滤空间网格并返回 Top3。</div>';state.map.flyTo({center:[117.5,-2.2],zoom:4.6,duration:800});updateLayers();
@@ -280,7 +280,7 @@
     map.addControl(new maplibregl.NavigationControl({showCompass:false}),'top-left');
     map.on('load',()=>{state.overlay=new deck.MapboxOverlay({interleaved:false,layers:[]});map.addControl(state.overlay);state.ready=true;updateLayers();setTimeout(refreshLivePOIs,800);});
     map.on('zoom',updateLayers);map.on('moveend',()=>{updateLayers();setTimeout(updateDynamicBarriers,250);setTimeout(refreshLivePOIs,600);});map.on('styledata',syncBaseLayers);map.on('idle',refreshLivePOIs);
-    window.addEventListener('nbo-evidence-change',()=>{renderDetail();renderCandidates();updateLayers();});
+    window.addEventListener('nbo-evidence-change',()=>{renderDetail();renderCandidates();if(state.nlDebug)runQuery();else updateLayers();});
     renderBrandList();renderCandidates();renderSources();bindControls();
     window._spatialDebug=()=>({ready:state.ready,zoom:state.map.getZoom(),level:state.level,metric:state.metric,cities:state.data.cities.length,candidates:state.data.candidates.length,grids:state.data.grids.length,queryMatches:state.queryMatches,selected:state.selected,brands:state.enabledBrands.size,competitors:filteredCompetitors().length,transitLines:state.data.transit_lines.length,stations:state.data.stations.length,mrtStations:state.data.stations.filter(s=>s.mode==='MRT').length,railBarriers:state.data.rail_barriers.length,dynamicBarriers:[...state.dynamicBarriers.values()].filter(Boolean).length,osrmStatus:state.osrmStatus,base:state.base});
     window._nlDebug=()=>state.nlDebug;window._osrmDebug=()=>({status:state.osrmStatus,motor:state.osrm?.motor.length||0,walk:state.osrm?.walk.length||0,stops:state.osrm?.stops.length||0,motor5:state.osrm?.motor.filter(x=>x.duration<=300).length||0,walk5:state.osrm?.walk.filter(x=>x.duration<=300).length||0});

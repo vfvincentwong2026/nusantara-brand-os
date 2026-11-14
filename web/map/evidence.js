@@ -58,6 +58,13 @@
   function exactRent(c) {
     return all().filter(x => x.candidate_id===c.id && x.location_precision==='exact' && x.rent_month_idr).sort((a,b)=>b.observed_at.localeCompare(a.observed_at))[0] || null;
   }
+  function completeness(c) {
+    const linked=all().filter(x=>x.candidate_id===c.id),rent=exactRent(c);
+    const hasSurvey=linked.some(x=>x.record_type==='survey'),hasExactLocation=linked.some(x=>x.location_precision==='exact');
+    const score=(rent?50:0)+(hasSurvey?30:0)+(hasExactLocation?20:0);
+    return {score,grade:score>=80?'A':score>=50?'B':score>0?'C':'D',factor:.85+.15*score/100,hasExactRent:!!rent,hasSurvey,hasExactLocation,linked:linked.length};
+  }
+  function decisionScore(c,base=c.suitability){return +(base*completeness(c).factor).toFixed(1);}
   function recordHTML(x,compact=false) {
     const rent=x.rent_month_idr?`${money(x.rent_month_idr)}/月（年租 ${money(x.rent_year_idr)}）`:'未记录租金';
     const survey=x.record_type==='survey'?`<br>Halal ${status(x.halal_status)} · 排烟 ${status(x.exhaust_status)} · 停靠 ${status(x.rider_status)}`:'';
@@ -96,14 +103,14 @@
   }
   function selectCandidate(id){selected=id;if($('surveyCandidate'))$('surveyCandidate').value=id;render();}
   function detailHTML(c){
-    const records=forCandidate(c),rent=exactRent(c);
-    return `<div class="evidence-detail"><b>真实证据 · ${records.length} 条</b>${rent?`<p>硬过滤采用精确租金证据 ${money(rent.rent_month_idr)}/月，不再使用该点租金代理。</p>`:'<p>当前无精确到铺位的租金证据，硬过滤仍使用明确标注的租金代理。</p>'}${records.length?records.slice(0,3).map(x=>recordHTML(x)).join(''):'<p>该区域尚无公开挂牌或现场记录。</p>'}</div>`;
+    const records=forCandidate(c),rent=exactRent(c),q=completeness(c),decision=decisionScore(c),yn=v=>v?'已具备':'缺失';
+    return `<div class="evidence-detail evidence-quality"><b>证据完整度 ${q.score}/100 · ${q.grade} 级</b><p>精确租金 ${yn(q.hasExactRent)} · 现场核验 ${yn(q.hasSurvey)} · 精确坐标 ${yn(q.hasExactLocation)}</p><p>空间 MCDA ${c.suitability} → 决策分 ${decision}（置信扣分 ${(c.suitability-decision).toFixed(1)}）；只调整候选排序，不改写原始空间因子；不代表 Halal 或其他合规已通过。</p></div><div class="evidence-detail"><b>真实证据 · ${records.length} 条</b>${rent?`<p>硬过滤采用精确租金证据 ${money(rent.rent_month_idr)}/月，不再使用该点租金代理。</p>`:'<p>当前无精确到铺位的租金证据，硬过滤仍使用明确标注的租金代理。</p>'}${records.length?records.slice(0,3).map(x=>recordHTML(x)).join(''):'<p>该区域尚无公开挂牌或现场记录。</p>'}</div>`;
   }
   function setLivePois(value){livePois=value;render();}
-  const api={init,selectCandidate,forCandidate,detailHTML,exactRent,setLivePois,
+  const api={init,selectCandidate,forCandidate,detailHTML,exactRent,completeness,decisionScore,setLivePois,
     rentFor:(c,g)=>exactRent(c)?.rent_month_idr || g.rent_proxy_idr,
     points:()=>all().filter(x=>x.lon!==null&&x.lat!==null),
     universities:()=>livePois.universities,
-    debug:()=>({listings:listings().length,surveys:surveys().length,local:local.length,selected,osmUniversities:livePois.universities.length,osmMalls:livePois.malls.length,points:all().filter(x=>x.lon!==null).length,exactRent:selected&&candidates.find(c=>c.id===selected)?exactRent(candidates.find(c=>c.id===selected))?.id||null:null})};
+    debug:()=>{const c=selected&&candidates.find(c=>c.id===selected);return {listings:listings().length,surveys:surveys().length,local:local.length,selected,osmUniversities:livePois.universities.length,osmMalls:livePois.malls.length,points:all().filter(x=>x.lon!==null).length,exactRent:c?exactRent(c)?.id||null:null,quality:c?completeness(c):null,decisionScore:c?decisionScore(c):null};}};
   window.NBOEvidence=api;
 })();
