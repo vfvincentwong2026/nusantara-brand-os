@@ -69,13 +69,12 @@ def main():
     if SITE.exists():
         shutil.rmtree(SITE)
     (SITE / "map/data").mkdir(parents=True)
-    for f in ("index.html", "leaflet.js", "leaflet.css", "leaflet-heat.js", "beverage.js", "planning.js"):
+    for f in ("index.html", "spatial.js"):
         shutil.copy(ROOT / "web/map" / f, SITE / "map")
-    shutil.copy(ROOT / "web/map/data/case_store.json", SITE / "map/data")
-    shutil.copy(ROOT / "web/map/data/opportunity.json", SITE / "map/data")
-    shutil.copy(ROOT / "web/map/data/site_select.json", SITE / "map/data")
-    shutil.copy(ROOT / "web/map/data/beverage_index.json", SITE / "map/data")
-    shutil.copy(ROOT / "web/map/data/planning_layers.json", SITE / "map/data")
+    shutil.copytree(ROOT / "web/map/vendor", SITE / "map/vendor", dirs_exist_ok=True)
+    for name in ("case_store.json", "opportunity.json", "site_select.json",
+                 "beverage_index.json", "planning_layers.json", "spatial_model.json"):
+        shutil.copy(ROOT / "web/map/data" / name, SITE / "map/data")
     # 热点雷达
     (SITE / "trend/data").mkdir(parents=True)
     shutil.copy(ROOT / "web/trend/index.html", SITE / "trend")

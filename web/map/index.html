@@ -7,459 +7,73 @@
 <script src="../ui/sitepath.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<title>智能选址 · 五业态模型匹配 SITE INTELLIGENCE | Nusantara Brand OS</title>
-<link rel="stylesheet" href="./leaflet.css">
-<script src="./leaflet.js"></script>
-<script src="./leaflet-heat.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>空间选址决策 · SPATIAL FUNNEL | Nusantara Brand OS</title>
+<link rel="stylesheet" href="./vendor/maplibre-gl.css">
 <style>
-  :root { --bg:#ffffff; --panel:#ffffff; --line:#2d333b; --text:#111111; --dim:#767676;
-          --gold:#b26a00; --silver:#c0c0c0; --potential:#b26a00; --normal:#767676;
-          --comp:#767676; --red:#e60023; --green:#3fb950; }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); color:var(--text); font:14px/1.6 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; display:flex; height:100dvh; padding-top:70px; }
-  #map { flex:1; background:#ffffff; position:relative; }
-  #side { width:372px; min-width:372px; overflow-y:auto; border-left:1px solid var(--line); padding:16px 16px 24px; }
-  h1 { font-size:17px; margin-bottom:2px; }
-  .meta { color:var(--dim); font-size:12px; margin-bottom:12px; }
-  .kpi { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px; }
-  .kpi .item { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 12px; }
-  .kpi .v { font-size:20px; font-weight:700; }
-  .kpi .l { color:var(--dim); font-size:12px; }
-  h2 { font-size:13px; color:var(--dim); margin:16px 0 8px; }
-  .chips { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
-  .chip { background:var(--panel); border:1px solid var(--line); color:var(--dim); border-radius:999px;
-          padding:4px 12px; font-size:12px; cursor:pointer; }
-  .chip.on { color:var(--text); border-color:var(--comp); background:rgba(88,166,255,.12); }
-  .gap { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px 12px; margin-bottom:8px; font-size:13px; cursor:pointer; }
-  .gap:hover { border-color:var(--gold); }
-  .gap .top { display:flex; align-items:center; gap:8px; margin-bottom:4px; }
-  .gap .rank { color:var(--dim); font-family:Consolas,monospace; font-size:12px; min-width:20px; }
-  .gap .badge { font-size:11px; padding:1px 8px; border-radius:999px; font-weight:600; }
-  .badge.gold { background:rgba(255,215,0,.15); color:var(--gold); }
-  .badge.silver { background:rgba(192,192,192,.15); color:var(--silver); }
-  .badge.potential { background:rgba(210,153,34,.15); color:var(--potential); }
-  .badge.normal { background:rgba(110,118,129,.2); color:var(--dim); }
-  .badge.step { background:rgba(63,185,80,.15); color:var(--green); }
-  .badge.real { background:rgba(88,166,255,.2); color:var(--comp); border:1px solid rgba(88,166,255,.4); }
-  .gap .name { font-weight:600; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .gap .sub { color:var(--dim); font-size:12px; display:flex; align-items:center; gap:8px; }
-  .bar { flex:1; height:6px; background:#21262d; border-radius:3px; overflow:hidden; }
-  .bar i { display:block; height:100%; background:linear-gradient(90deg,var(--comp),#79c0ff); }
-  .gap .cta { display:inline-block; margin-top:8px; font-size:12px; color:#3fb950; text-decoration:none;
-              border:1px solid rgba(63,185,80,.4); border-radius:6px; padding:3px 10px; }
-  .gap .cta:hover { background:rgba(63,185,80,.12); }
-  .legend { position:absolute; bottom:20px; left:12px; z-index:1000; background:rgba(255,255,255,.92); border:1px solid var(--line);
-            border-radius:8px; padding:10px 12px; font-size:12px; color:var(--dim); }
-  .legend i { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:6px; }
-  .legend i.sq { border-radius:2px; }
-  .layers { position:absolute; top:12px; right:12px; z-index:1000; width:232px; max-height:calc(100% - 24px); overflow-y:auto; background:rgba(255,255,255,.94); border:1px solid var(--line);
-            border-radius:8px; padding:8px 12px; font-size:12px; color:var(--dim); scrollbar-width:thin; }
-  .layers label { display:flex; align-items:flex-start; gap:6px; cursor:pointer; padding:3px 0; line-height:1.45; }
-  .layers label input { margin-top:3px; flex:none; accent-color:#111; }
-  .layer-title { margin:7px 0 4px; padding-top:6px; border-top:1px solid #e5e5e5; color:#111; font-size:10px; font-weight:800; letter-spacing:.08em; }
-  .layer-title:first-child { margin-top:0; padding-top:0; border-top:0; }
-  .base-switch { display:flex; gap:5px; padding:4px 0 2px; }
-  .base-switch button { flex:1; border:1px solid #ddd; border-radius:5px; background:#fff; color:#767676; padding:4px 5px; font-size:10.5px; cursor:pointer; }
-  .base-switch button.on { border-color:#111; color:#111; font-weight:700; }
-  /* 移动端：地图在上、清单在下全宽，控件独立滚动 */
-  @media (max-width: 720px) {
-    body { flex-direction:column; padding-top:60px; }
-    #map { flex:none; height:42vh; min-height:280px; order:1; }
-    #side { width:100%; min-width:0; order:2; border-left:none; border-top:1px solid var(--line); }
-    .legend { bottom:12px; left:8px; font-size:11px; padding:8px 10px; max-width:45%; }
-    .layers { top:8px; right:8px; width:210px; max-height:34vh; font-size:11px; padding:6px 10px; }
-  }
-  /* popup 7 维迷你条 */
-  .pop { min-width:220px; font-family:inherit; }
-  .pop .t { font-weight:700; margin-bottom:2px; }
-  .pop .s { color:#767676; font-size:12px; margin-bottom:6px; }
-  .pop .d { display:flex; align-items:center; gap:6px; font-size:11px; margin:2px 0; }
-  .pop .d .n { width:34px; color:#767676; }
-  .pop .d .bar { height:5px; }
-  .pop .d .v { width:22px; text-align:right; color:#111111; }
-  .leaflet-popup-content-wrapper { background:#ffffff; color:#111111; border:1px solid #2d333b; border-radius:8px; }
-  .leaflet-popup-tip { background:#ffffff; }
-  .leaflet-popup-close-button { color:#767676 !important; }
-  .leaflet-container { background:#ffffff; }
-</style>
-<style>
-  .nbo-nav { position:fixed; top:0; left:0; right:0; height:38px; z-index:10000; display:flex; align-items:center;
-    padding:0 16px; background:rgba(255,255,255,.92); backdrop-filter:blur(8px); border-bottom:1px solid #e5e5e5;
-    font:12.5px -apple-system,"Segoe UI","Microsoft YaHei",sans-serif; }
-  .nbo-nav .brand { color:#e60023; font-weight:700; letter-spacing:.18em; font-size:11px; text-decoration:none; margin-right:16px; }
-  .nbo-nav a.nl { color:#767676; text-decoration:none; padding:6px 12px; border-radius:6px; }
-  .nbo-nav a.nl:hover { color:#111111; }
-  .nbo-nav a.nl.on { color:#111111; background:rgba(230,0,35,.08); }
+:root{--ink:#111;--muted:#767676;--line:#e5e5e5;--red:#e60023;--green:#287a51;--amber:#b26a00;--blue:#2563a9;--paper:#fff}
+*{box-sizing:border-box;margin:0;padding:0}body{font:13px/1.55 Inter,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;color:var(--ink);background:#fff;height:100dvh;padding-top:58px;overflow:hidden}
+.nbo-nav{position:fixed;inset:0 0 auto;height:58px;z-index:5000;display:flex;align-items:center;gap:3px;padding:0 18px;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);white-space:nowrap;overflow-x:auto}
+.nbo-nav .brand{color:var(--red);font-size:11px;font-weight:800;letter-spacing:.16em;text-decoration:none;margin-right:16px}.nbo-nav a.nl{color:var(--muted);font-size:12px;text-decoration:none;padding:6px 10px;border-radius:5px}.nbo-nav a.nl.on{color:#111;background:#f7f7f7;font-weight:700}.nle{font-size:8px;margin-left:4px;color:#999;letter-spacing:.06em}
+#app{display:flex;height:calc(100dvh - 58px)}#mapWrap{position:relative;flex:1;min-width:0;background:#eee}#map{position:absolute;inset:0}#side{width:410px;min-width:410px;border-left:1px solid var(--line);overflow-y:auto;padding:18px 18px 36px;background:#fff}
+h1{font-size:22px;line-height:1.18;letter-spacing:-.03em}h1 span{display:block;margin-top:5px;color:var(--muted);font-size:10px;letter-spacing:.13em;font-weight:600}.lead{margin:8px 0 14px;color:var(--muted);font-size:12px}.kpis{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:14px}.kpi{padding:9px 8px;border-right:1px solid var(--line)}.kpi:last-child{border:0}.kpi b{display:block;font:700 18px/1.1 "IBM Plex Mono",monospace}.kpi span{color:var(--muted);font-size:9px}
+.card{border:1px solid var(--line);border-radius:10px;margin-bottom:14px;overflow:hidden}.card-h{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#111;color:#fff;font-size:11px;font-weight:700;letter-spacing:.03em}.card-h span{font-size:8px;font-weight:500;color:#bbb}.card-b{padding:11px 12px}.agent-input{display:flex;border:1px solid #ccc;border-radius:7px;overflow:hidden}.agent-input input{min-width:0;flex:1;border:0;padding:9px 10px;font:12px inherit;outline:0}.agent-input button{border:0;background:#111;color:#fff;padding:0 13px;cursor:pointer}.quick{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.quick button{border:1px solid var(--line);background:#fff;color:var(--muted);border-radius:99px;padding:3px 8px;font-size:10px;cursor:pointer}.quick button:hover{border-color:#111;color:#111}.parse{display:none;margin-top:9px;padding:8px;background:#f7f7f7;border-radius:6px;color:#555;font:10px/1.65 "IBM Plex Mono",monospace;white-space:normal}.parse.show{display:block}
+#top3 .rec{padding:9px 0;border-top:1px solid var(--line);cursor:pointer}#top3 .rec:first-child{border-top:0}#top3 .rec b{font-size:12px}#top3 .rec .score{float:right;color:var(--green);font:700 13px "IBM Plex Mono",monospace}#top3 .rec p{margin-top:3px;color:var(--muted);font-size:10.5px}.empty{color:var(--muted);font-size:11px;padding:5px 0}
+#level{position:absolute;left:14px;top:14px;z-index:1000;background:rgba(17,17,17,.92);color:#fff;border-radius:8px;padding:9px 12px;pointer-events:none}#level b{display:block;font-size:12px}#level span{display:block;color:#ccc;font-size:9px;letter-spacing:.08em;margin-top:2px}
+#layers{position:absolute;right:14px;top:14px;z-index:1000;width:278px;max-height:calc(100% - 28px);overflow-y:auto;background:rgba(255,255,255,.95);border:1px solid #ccc;border-radius:10px;box-shadow:0 4px 20px #0001;scrollbar-width:thin}#layers details{border-bottom:1px solid var(--line)}#layers summary{cursor:pointer;padding:9px 11px;font-size:11px;font-weight:800;list-style:none}#layers summary span{float:right;color:#999;font-size:8px;letter-spacing:.08em}.layer-body{padding:0 11px 8px}.layer-body label{display:flex;align-items:flex-start;gap:6px;padding:3px 0;color:#555;font-size:10.5px;cursor:pointer}.layer-body input{margin-top:3px;accent-color:#111}.layer-note{padding:6px 11px 9px;color:#888;font-size:9px;line-height:1.5}.brand-list{max-height:140px;overflow-y:auto;border-top:1px solid #eee;margin-top:5px;padding-top:4px}.base{display:flex;gap:5px;padding:9px 11px}.base button{flex:1;border:1px solid #ddd;background:#fff;border-radius:5px;padding:5px;font-size:10px;cursor:pointer}.base button.on{border-color:#111;font-weight:700}
+#legend{position:absolute;left:14px;bottom:18px;z-index:900;background:rgba(255,255,255,.92);border:1px solid #ddd;border-radius:7px;padding:8px 10px;color:#666;font-size:9px;line-height:1.7;pointer-events:none}.sw{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+#detail{display:none}#detail.show{display:block}.detail-title{font-size:14px;font-weight:800}.detail-sub{color:var(--muted);font-size:10.5px;margin:2px 0 8px}.radar-wrap{display:flex;gap:8px;align-items:center}#radar{width:180px;height:170px;flex:none}.factor-list{flex:1}.factor{display:flex;justify-content:space-between;border-bottom:1px solid #f0f0f0;padding:3px 0;font-size:10px}.factor b{font-family:"IBM Plex Mono",monospace}.insight{margin-top:8px;padding:8px;border-left:2px solid var(--amber);background:#fafafa;font-size:10.5px}.osrm-status{margin-top:8px;color:var(--muted);font-size:10px}.candidate-list{margin-top:6px}.candidate{padding:8px 0;border-top:1px solid var(--line);cursor:pointer}.candidate:hover{background:#fafafa}.candidate b{font-size:11px}.candidate .v{float:right;font:700 12px "IBM Plex Mono",monospace}.candidate p{color:var(--muted);font-size:10px;margin-top:2px}.source{font-size:9.5px;color:#888;line-height:1.65}.source summary{cursor:pointer;color:#555;font-weight:700;font-size:10px}.maplibregl-ctrl-attrib{font-size:9px}.maplibregl-popup-content{font:11px/1.5 Inter,"Microsoft YaHei",sans-serif;box-shadow:0 3px 15px #0002}.hidden{display:none!important}
+@media(max-width:800px){body{overflow:auto;padding-top:56px}.nbo-nav{height:56px}#app{height:auto;flex-direction:column}#mapWrap{flex:none;height:52vh;min-height:360px}#side{width:100%;min-width:0;border-left:0;border-top:1px solid var(--line);overflow:visible;padding:16px}#layers{width:236px;max-height:37vh;right:8px;top:8px}#level{left:8px;top:8px;padding:7px 9px}#legend{left:8px;bottom:10px;max-width:42%}h1{font-size:20px}}
 </style>
 </head>
 <body>
-<nav class="nbo-nav" style="display:flex;gap:4px;align-items:center;padding:10px 20px;border-bottom:1px solid var(--hairline);flex-wrap:nowrap;overflow-x:auto;font-size:13px;">
-  <a href="../" style="color:var(--paper);font-weight:600;letter-spacing:.1em;margin-right:10px;text-decoration:none;flex:0 0 auto;">NUSANTARA BRAND OS</a>
-  <a class="nl" data-p="trend" href="../trend/">热点雷达<span class="nle">TREND</span></a>
-  <a class="nl" data-p="launch" href="../launch/">选品评分<span class="nle">SCORE</span></a>
-  <a class="nl" data-p="brandkit" href="../brandkit/">品牌升级<span class="nle">UPGRADE</span></a>
-  <a class="nl" data-p="assembly" href="../assembly/">开店方案<span class="nle">ASSEMBLY</span></a>
-  <a class="nl" data-p="franchise" href="../franchise/">加盟体系<span class="nle">FRANCHISE</span></a>
-  <a class="nl" data-p="tower" href="../tower/">控制塔<span class="nle">TOWER</span></a>
-  <a class="nl" data-p="map" href="../map/">智能选址<span class="nle">SITE INTEL</span></a>
-  <span style="color:var(--faint-warm);font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">底座 FOUNDATION</span>
-  <a class="nl" data-p="playbook" href="../playbook/">培训体系<span class="nle">PLAYBOOK</span></a>
-  <a class="nl" data-p="library" href="../library/">中央库<span class="nle">LIBRARY</span></a>
-  <span style="color:var(--faint-warm);font-size:10px;letter-spacing:.08em;margin:0 4px 0 10px;white-space:nowrap;flex:0 0 auto;">兄弟项目</span>
-  <a class="nl" href="https://nusantara-container.pages.dev/" target="_blank" rel="noopener">集装箱项目<span class="nle">CONTAINER ↗</span></a>
+<nav class="nbo-nav">
+  <a class="brand" href="../">NUSANTARA BRAND OS</a>
+  <a class="nl" data-p="trend" href="../trend/">热点雷达<span class="nle">TREND</span></a><a class="nl" data-p="launch" href="../launch/">选品评分<span class="nle">SCORE</span></a>
+  <a class="nl" data-p="brandkit" href="../brandkit/">品牌升级<span class="nle">UPGRADE</span></a><a class="nl" data-p="assembly" href="../assembly/">开店方案<span class="nle">ASSEMBLY</span></a>
+  <a class="nl" data-p="franchise" href="../franchise/">加盟体系<span class="nle">FRANCHISE</span></a><a class="nl" data-p="tower" href="../tower/">控制塔<span class="nle">TOWER</span></a>
+  <a class="nl on" data-p="map" href="../map/">空间选址<span class="nle">SPATIAL</span></a><a class="nl" data-p="playbook" href="../playbook/">培训体系<span class="nle">PLAYBOOK</span></a><a class="nl" data-p="library" href="../library/">中央库<span class="nle">LIBRARY</span></a>
+  <a class="nl" href="https://nusantara-container.pages.dev/" target="_blank" rel="noopener">集装箱兄弟项目<span class="nle">CONTAINER</span></a>
 </nav>
-<div class="chain bchain" style="position:fixed;top:38px;left:0;right:0;z-index:9999;display:flex;gap:6px;align-items:center;flex-wrap:nowrap;overflow-x:auto;padding:7px 20px;font-size:11.5px;color:#767676;border-bottom:1px solid #e5e5e5;background:rgba(9,13,19,.92);backdrop-filter:blur(6px);">
-  <span style="letter-spacing:.1em;color:#767676;">B·集装箱零售链路</span>
-  <a href="https://nusantara-container.pages.dev/case/" data-s="https://nusantara-container.pages.dev/case/" target="_blank" rel="noopener" style="color:#767676;text-decoration:none;">① 集装箱店样板</a><span>→</span>
-  <a href="../assembly/" data-s="../assembly/" style="color:#767676;text-decoration:none;">② 开店方案选型</a><span>→</span>
-  <a href="https://nusantara-container.pages.dev/floorplan/" data-s="https://nusantara-container.pages.dev/floorplan/" target="_blank" rel="noopener" style="color:#767676;text-decoration:none;">③ 平面布局</a><span>→</span>
-  <a href="https://nusantara-container.pages.dev/three/" data-s="https://nusantara-container.pages.dev/three/" target="_blank" rel="noopener" style="color:#767676;text-decoration:none;">④ 3D 空间优化</a><span>→</span>
-  <a href="https://nusantara-container.pages.dev/dashboard/" data-s="https://nusantara-container.pages.dev/dashboard/" target="_blank" rel="noopener" style="color:#767676;text-decoration:none;">⑤ 库存大屏运营</a><span>→</span>
-  <a href="../map/" data-s="../map/" style="color:#767676;text-decoration:none;">⑥ 智能选址</a>
-  <script>document.querySelectorAll('.bchain a').forEach(a=>{const href=a.getAttribute('href')||'';if(/^https?:/i.test(href))return;const seg=href.replace(/^(?:\.\.\/|\.\/)+/,'').split(/[?#]/)[0].replace(/\/$/,'');if(seg&&location.pathname.endsWith('/'+seg+'/')){a.style.color='#767676';a.style.fontWeight='700';}});</script>
-</div>
-<script>
-  (() => { const p = location.pathname;
-    document.querySelectorAll('.nbo-nav a.nl').forEach(a => { if (p.includes(a.dataset.p)) a.classList.add('on'); });
-  })();
-</script>
-<div id="map">
-  <div class="legend" id="legend"></div>
-  <div class="layers">
-    <div class="layer-title">商业选址 · COMMERCIAL</div>
-    <label><input type="checkbox" id="heatToggle" checked> <span><b style="color:#e60023">人流热力</b>（商圈/枢纽强度）</span></label>
-    <label><input type="checkbox" id="planPopulation"> 人口 / 城镇（模型种子）</label>
-    <label><input type="checkbox" id="planCommercial"> 商圈（大型商业 900m）</label>
-    <label><input type="checkbox" id="poiMall" checked> 大型商业 MALLS</label>
-    <label><input type="checkbox" id="poiSchool" checked> 学校 SCHOOLS</label>
-    <label><input type="checkbox" id="poiComm" checked> 社区 COMMUNITIES</label>
-    <label><input type="checkbox" id="poiOffice"> 办公 OFFICES</label>
-    <label><input type="checkbox" id="siteToggle" checked> <span><b style="color:#e60023">智能选址候选</b>（评分+覆盖圈）</span></label>
-    <div class="layer-title">城市规划 · 分析模型</div>
-    <label><input type="checkbox" id="planDistrict"> 分析分区（非行政边界）</label>
-    <label><input type="checkbox" id="planRail" checked> 轨道走廊（示意）</label>
-    <label><input type="checkbox" id="planStation" checked> 轨道站点（分析种子）</label>
-    <label><input type="checkbox" id="planTod"> TOD 800 米分析圈</label>
-    <div class="layer-title">加盟与品牌门店</div>
-    <label><input type="checkbox" id="oppToggle"> <span><b style="color:#767676">加盟机会图层</b>（区域评分 + 保护半径）</span></label>
-    <div class="layer-title">底图 · BASEMAP</div>
-    <div class="base-switch"><button id="baseGray" class="on" type="button">灰色简图</button><button id="baseStreet" type="button">街道详图</button></div>
+<main id="app">
+<section id="mapWrap">
+  <div id="map"></div>
+  <div id="level"><b>宏观 · 城市进入</b><span>MACRO / ZOOM 1–8</span></div>
+  <div id="layers">
+    <details open><summary>需求潜力 <span>DEMAND</span></summary><div class="layer-body">
+      <label><input id="demandHeat" type="checkbox" checked>人口热力 / 城镇需求</label><label><input id="youth" type="checkbox">15–34 岁年轻客群代理</label><label><input id="middle" type="checkbox">中产聚集代理</label><label><input id="poiTrigger" type="checkbox" checked>大学 / 甲级写字楼触发 POI</label>
+    </div><div class="layer-note">年龄与中产为模型代理；大学和办公点沿用当前 POI 种子。</div></details>
+    <details open><summary>竞争生态 <span>COMPETITION</span></summary><div class="layer-body">
+      <label><input id="saturation" type="checkbox" checked>哈夫竞争饱和指数</label><label><input id="competitors" type="checkbox" checked>竞品门店（按价格带）</label><label><input id="complements" type="checkbox">快餐 / 便利店 / 烘焙（OSM）</label>
+      <details><summary>品牌独立开关 <span>20 BRANDS</span></summary><div id="brandList" class="brand-list"></div></details>
+    </div><div class="layer-note">绿＝低饱和，红＝高饱和；门店价格为原公开参考／模型口径。</div></details>
+    <details open><summary>可达与履约 <span>ACCESS</span></summary><div class="layer-body">
+      <label><input id="transitBands" type="checkbox" checked>轨道 / BRT 带状辐射区</label><label><input id="barriers" type="checkbox" checked>高速 / 铁路 / 主干道 / 河流割裂线</label><label><input id="isochrones" type="checkbox" checked>OSRM 路网等时圈与停靠候选</label>
+    </div><div class="layer-note">点击候选后计算摩托 3/5 分钟、步行 5 分钟；停靠点为道路吸附候选，非实测车位。</div></details>
+    <details><summary>成本与合规 <span>COST</span></summary><div class="layer-body">
+      <label><input id="rent" type="checkbox">商铺租金梯度代理</label><label><input id="compliance" type="checkbox">Halal / 排烟待核验任务</label>
+    </div><div class="layer-note">无官方分区时不绘制虚构边界；租金不是挂牌价，合规状态必须现场复核。</div></details>
+    <details open><summary>综合结果 <span>MCDA</span></summary><div class="layer-body">
+      <label><input id="mcdaGrid" type="checkbox" checked>100m × 100m 适宜性网格</label><label><input id="candidates" type="checkbox" checked>候选点 / 得分拆解</label>
+    </div><div class="layer-note">综合网格优先；切换单因子可查看需求、饱和或租金。</div></details>
+    <div class="base"><button id="baseGray" class="on">灰色简图</button><button id="baseStreet">街道详图</button></div>
   </div>
-</div>
-<div id="side">
-  <h1>智能选址 SITE INTELLIGENCE：<em>人流 × 客群 × 租金 × 竞品</em></h1>
-  <div class="meta" id="meta"></div>
-  <style>
-  .agent{border:1.5px solid #111;border-radius:10px;margin:0 0 16px;overflow:hidden;background:#fff}
-  .agent .ag-h{padding:9px 12px;font-size:12px;font-weight:700;display:flex;justify-content:space-between;align-items:center;background:#111;color:#fff}
-  .agent .ag-h .dot{width:7px;height:7px;border-radius:50%;background:#3fb950;display:inline-block;margin-right:6px;animation:agpulse 1.6s infinite}
-  @keyframes agpulse{0%,100%{opacity:1}50%{opacity:.35}}
-  .ag-log{padding:10px 12px;max-height:250px;overflow-y:auto;font-size:12px}
-  .ag-msg{margin-bottom:10px;line-height:1.6}
-  .ag-msg.user{text-align:right}
-  .ag-msg.user span{background:#f2f2f2;border:1px solid #e5e5e5;padding:4px 10px;border-radius:12px;display:inline-block}
-  .ag-msg .who{font-size:10px;letter-spacing:.12em;color:#767676;margin-bottom:3px}
-  .ag-parse{font-size:11px;color:#767676;border-left:2px solid #e5e5e5;padding-left:8px;margin:4px 0 8px;line-height:1.7}
-  .ag-cand{border:1px solid #e5e5e5;border-radius:8px;padding:8px 10px;margin-bottom:6px}
-  .ag-cand .nm{font-weight:700;font-size:12.5px}
-  .ag-cand .rs{color:#767676;font-size:11px;margin-top:2px;line-height:1.6}
-  .ag-cand .act{margin-top:5px;font-size:11px}
-  .ag-cand .act a{color:#111;font-weight:600;margin-right:10px;text-decoration:none;border-bottom:1px solid #111}
-  .ag-chips{display:flex;gap:6px;flex-wrap:wrap;padding:0 12px 8px}
-  .ag-chips button{font-size:11px;border:1px solid #e5e5e5;background:#fff;border-radius:999px;padding:3px 10px;cursor:pointer;color:#767676}
-  .ag-chips button:hover{color:#111;border-color:#111}
-  .ag-in{display:flex;border-top:1px solid #e5e5e5}
-  .ag-in input{flex:1;border:none;padding:9px 12px;font-size:12.5px;outline:none;font-family:inherit}
-  .ag-in button{border:none;background:#111;color:#fff;padding:0 16px;font-size:12px;cursor:pointer}
-  </style>
-  <div class="agent">
-    <div class="ag-h"><span><span class="dot"></span>选址 AGENT · 说人话，AI 在 30 个候选里推理</span><span style="font-weight:400;opacity:.65">RULE-BASED DEMO</span></div>
-    <div class="ag-log" id="agLog"><div class="ag-msg"><div class="who">AGENT</div>你好，我是选址 Agent。直接说需求就行，比如「我想在泗水开奶茶店，学校周边人流大的」。我会解析意图 → 过滤候选 → 按因子加权，给你 TOP3 并附推荐理由。</div></div>
-    <div class="ag-chips">
-      <button onclick="askAgent(this.textContent)">学校周边人流大的店推荐</button>
-      <button onclick="askAgent(this.textContent)">离岛哪个城市优先</button>
-      <button onclick="askAgent(this.textContent)">低租金高可见度的街铺</button>
-      <button onclick="askAgent(this.textContent)">推车档口最适合去哪</button>
-    </div>
-    <div class="ag-in"><input id="agIn" placeholder="例：泗水开咖啡店，预算紧，要外卖强的" onkeydown="if(event.key==='Enter')askAgent()"><button onclick="askAgent()">发送 →</button></div>
-  </div>
-  <h2>🏆 选址候选 TOP · SITE CANDIDATES（五业态模型匹配：星巴克/瑞幸/麦当劳/蜜雪/推车）</h2>
-  <div id="sites"></div>
-</div>
-
-<script>
-const map = L.map('map', { zoomControl: true, minZoom: 4, maxZoom: 19, zoomSnap: 1, zoomDelta: 1 }).setView([-2.2, 117.5], 5);
-window._leaflet_map = map;
-const grayBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-  maxZoom: 19, attribution: 'Esri · 灰色简图'
-});
-const grayRef = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19 });
-const streetBase = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
-  maxZoom: 19, attribution: 'Esri · World Street Map'
-});
-grayBase.addTo(map); grayRef.addTo(map);
-let baseMode = 'gray';
-function setBaseMode(mode) {
-  if (mode === baseMode) return;
-  if (mode === 'street') {
-    map.removeLayer(grayBase); map.removeLayer(grayRef); streetBase.addTo(map);
-  } else {
-    map.removeLayer(streetBase); grayBase.addTo(map); grayRef.addTo(map);
-  }
-  baseMode = mode;
-  document.getElementById('baseGray').classList.toggle('on', mode === 'gray');
-  document.getElementById('baseStreet').classList.toggle('on', mode === 'street');
-}
-document.getElementById('baseGray').onclick = () => setBaseMode('gray');
-document.getElementById('baseStreet').onclick = () => setBaseMode('street');
-window._baseDebug = () => ({mode: baseMode, gray: map.hasLayer(grayBase), reference: map.hasLayer(grayRef), street: map.hasLayer(streetBase)});
-
-// 图例：选址评分色阶 + 业态模型图标
-document.getElementById('legend').innerHTML =
-  `<div><i style="background:#2e7d32"></i>综合选址分 ≥72（优先）</div>` +
-  `<div><i style="background:#b26a00"></i>65–72（可培育）</div>` +
-  `<div><i style="background:#e60023"></i>&lt;65（谨慎）</div>` +
-  `<div><i style="background:#bc8cff"></i>商城 · <i style="background:#4da3ff;width:8px;height:8px;border-radius:50%;display:inline-block;margin:0 4px 0 1px"></i>学校 · <i style="background:#2ea043;width:8px;height:8px;border-radius:50%;display:inline-block;margin:0 4px 0 1px"></i>社区 · <i style="background:#767676;width:8px;height:8px;border-radius:50%;display:inline-block;margin:0 4px 0 1px"></i>办公</div>`;
-
-  /* ── 加盟机会图层（体系二）：区域评分热力点 + 保护半径圈 + 品牌匹配弹窗 ── */
-  const OPP_COLOR = { S: '#2e7d32', A: '#767676', B: '#b26a00', C: '#767676' };
-  let oppLayer = null, oppLoaded = false;
-  const jt = n => 'Rp ' + (n / 1e6).toLocaleString('id-ID', { maximumFractionDigits: 0 }) + ' jt';
-  document.getElementById('oppToggle').onchange = async e => {
-    if (e.target.checked && !oppLoaded) {
-      const d = await (await fetch('./data/opportunity.json')).json();
-      oppLayer = L.layerGroup();
-      // 保护半径圈（已开业加盟店 + 案例样板）
-      d.protection.forEach(p => {
-        L.circle([p.lat, p.lon], { radius: p.radius_m, color: '#e60023', weight: 1.2, dashArray: '4 4',
-          fillColor: '#e60023', fillOpacity: 0.05 }).addTo(oppLayer)
-          .bindPopup(`<b>${p.name}</b><br>${p.kind} · ${p.opened_at} 开业<br>保护半径 ${p.radius_m}m`);
-        L.marker([p.lat, p.lon], { icon: L.divIcon({ className: '', iconSize: [14, 14],
-          html: '<div style="width:12px;height:12px;background:#e60023;border:2px solid #fff;border-radius:3px;transform:rotate(45deg)"></div>' }) })
-          .addTo(oppLayer).bindPopup(`<b>${p.name}</b><br>${p.kind} · 保护半径 ${p.radius_m}m`);
-      });
-      // 机会分区（按评分着色，S 级脉动大件）
-      d.zones.forEach(z => {
-        const c = OPP_COLOR[z.grade] || '#767676';
-        L.circleMarker([z.lat, z.lon], { radius: 8 + z.score / 8, color: '#fff', weight: 1,
-          fillColor: c, fillOpacity: 0.55 })
-          .addTo(oppLayer)
-          .bindPopup(`<b>${z.name}</b> · ${z.city}<br>
-            机会分 <b style="color:${c}">${z.score}</b>（${z.grade} 级）<br>
-            人口 ${z.population_k}k · 商圈 ${z.mall_grade}/5 · 竞品 ${z.competitor_count}<br>
-            <span style="color:#767676">建议引入：${z.suggested_brand.name || '—'}</span>
-            <span style="color:#767676">（加盟费 ${jt(z.suggested_brand.fee_idr || 0)} / 总投 ${jt(z.suggested_brand.invest_idr || 0)}）</span><br>
-            <a href="../franchise/" style="color:#767676">查看加盟业态 →</a>`);
-      });
-      oppLoaded = true;
-    }
-    if (!oppLayer) return;
-    e.target.checked ? oppLayer.addTo(map) : map.removeLayer(oppLayer);
-  };
-</script>
-<script>
-/* ═══ 智能选址图层：人流热力 + POI + 候选点位评估 ═══ */
-const POI_COLOR = { malls: '#bc8cff', schools: '#4da3ff', communities: '#2ea043', offices: '#767676' };
-const POI_LABEL = { malls: '商城', schools: '学校', communities: '社区', offices: '办公' };
-const SCORE_COLOR = v => v >= 72 ? '#2e7d32' : v >= 65 ? '#b26a00' : '#e60023';
-let siteSel = null, siteLayer = null, poiLayers = {}, heatLayer = null;
-
-fetch('./data/site_select.json').then(r => r.ok ? r.json() : null).then(d => {
-  if (!d) return;
-  siteSel = d;
-  document.getElementById('meta').textContent = `生成 ${d.generated_at} · ${d.loop_note}`;
-  // 侧栏候选清单（不依赖地图）
-  document.getElementById('sites').innerHTML = d.candidates.map((c, i) => {
-    const col = SCORE_COLOR(c.score);
-    return `<div class="gap" style="margin-bottom:10px;padding:10px;border:1px solid #e5e5e5;border-radius:8px;cursor:pointer" data-lat="${c.lat}" data-lon="${c.lon}">
-      <div class="name" style="font-weight:700;">${String(i + 1).padStart(2, '0')}. ${c.name}
-        <b style="color:${col};float:right;font-family:Consolas,monospace;">${c.score}</b></div>
-      <div class="sub">${c.origin === 'radar' ? '📡 雷达发现 · ' : ''}📍 ${c.area} · ${c.city} · ${c.site_type} → ${c.best_model ? c.best_model.icon + ' ' + c.best_model.name : c.recommended_model}</div>
-      <div class="sub">人流 ${c.foot_traffic} · 客群 ${c.crowd_fit} · 覆盖 ${c.catchment.pop_wan} 万人 / ${c.catchment.communities} 社区 / ${c.catchment.schools} 校</div>
-      ${c.coop_proposal ? `<div class="sub" style="color:#2e7d32">🤝 ${c.coop_proposal.mode}</div>` : ''}
-    </div>`; }).join('');
-  document.querySelectorAll('#sites .gap').forEach(el => el.onclick = () => {
-    const m = window._leaflet_map;
-    if (m) m.flyTo([+el.dataset.lat, +el.dataset.lon], 15);
-  });
-  // 模型库说明（折叠）
-  const lg = document.createElement('details');
-  lg.style.cssText = 'margin-top:10px;font-size:12px;color:#767676';
-  lg.innerHTML = `<summary style="cursor:pointer;font-weight:700;color:#111">选址模型库 · 5 业态借鉴说明</summary>` +
-    d.models_legend.map(m => `<div style="margin:8px 0 0;line-height:1.5"><b style="color:#111">${m.icon} ${m.name} · ${m.en}</b><br>${m.borrow}</div>`).join('') +
-    `<div style="margin-top:8px">评分 = 因子加权；✗ = 硬条件否决</div>`;
-  document.getElementById('sites').appendChild(lg);
-  // 等主图初始化完成后建图层
-  const init = () => {
-    const map = window._leaflet_map;
-    if (!map) { setTimeout(init, 300); return; }
-    buildLayers(map, d);
-  };
-  init();
-}).catch(() => {});
-
-function modelLines(c) {
-  const bestKey = c.best_model && c.best_model.key;
-  return c.models.map(m => {
-    const mark = m.eligible ? '✓' : '✗';
-    const fail = m.hard_fail.length ? `<span style="color:#e60023">（${m.hard_fail.join('、')} 未达标）</span>` : '';
-    const star = m.key === bestKey ? ' <b style="color:#2e7d32">★ 推荐</b>' : '';
-    return `<div style="display:flex;justify-content:space-between;gap:8px;"><span>${mark} ${m.icon} ${m.name}${star} ${fail}</span><b style="font-family:Consolas,monospace;">${m.score}</b></div>`;
-  }).join('');
-}
-
-function buildLayers(map, d) {
-
-  heatLayer = L.heatLayer(d.heat.map(h => [h[0], h[1], h[2]]), {
-    radius: 28, blur: 22, maxZoom: 14,
-    gradient: { 0.2: '#ffd6dd', 0.5: '#ff8fa3', 0.8: '#e60023' } });
-  document.getElementById('heatToggle').onchange = e =>
-    e.target.checked ? heatLayer.addTo(map) : map.removeLayer(heatLayer);
-  heatLayer.addTo(map);
-
-  const poiIcon = kind => {
-    const size = map.getZoom() <= 7 ? 18 : 12, dot = size - 2;
-    return L.divIcon({ className: '', iconSize: [size, size], iconAnchor: [size / 2, size / 2],
-      html: `<div data-poi-kind="${kind}" style="width:${dot}px;height:${dot}px;background:${POI_COLOR[kind]};border:2px solid #fff;border-radius:${kind === 'malls' ? '3px' : '50%'};box-shadow:0 1px 6px ${POI_COLOR[kind]}88"></div>` });
-  };
-  Object.entries(d.pois).forEach(([kind, pts]) => {
-    const layer = L.layerGroup(pts.map(p => {
-      const marker = L.marker([p.lat, p.lon], { icon: poiIcon(kind) }).bindPopup(`<b>${p.name}</b><br>${POI_LABEL[kind]}`)
-        .bindTooltip(`${POI_LABEL[kind]} · ${p.name}`, {direction:'top', offset:[0,-7]});
-      marker._poiKind = kind;
-      return marker;
-    }));
-    poiLayers[kind] = layer;
-    const ids = { malls: 'poiMall', schools: 'poiSchool', communities: 'poiComm', offices: 'poiOffice' };
-    document.getElementById(ids[kind]).onchange = e =>
-      e.target.checked ? layer.addTo(map) : map.removeLayer(layer);
-    if (kind !== 'offices') layer.addTo(map);
-  });
-  map.on('zoomend', () => Object.values(poiLayers).forEach(layer =>
-    layer.eachLayer(marker => marker.setIcon(poiIcon(marker._poiKind)))));
-
-  const circles = L.layerGroup().addTo(map);
-  siteLayer = L.layerGroup(d.candidates.map(c => {
-    const col = SCORE_COLOR(c.score);
-    const m = L.marker([c.lat, c.lon], { icon: L.divIcon({ className: '', iconSize: [30, 30],
-      html: `<div style="width:26px;height:26px;background:${col};border:2.5px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 8px ${col}88;display:flex;align-items:center;justify-content:center;"><span style="transform:rotate(45deg);color:#fff;font:700 11px Consolas,monospace;">${Math.round(c.score)}</span></div>` }) })
-      .bindPopup(`${c.photo ? `<img src="${nboSiteUrl(c.photo)}" alt="${c.name}" style="width:100%;height:110px;object-fit:cover;border-radius:6px;margin:2px 0 4px;">` : ''}
-        <b style="font-size:13px;">${c.origin === 'radar' ? '📡 ' : ''}${c.name}</b> · ${c.area}（${c.city}）<br>
-        <span style="color:#767676">${c.site_type} · ${c.type_en}${c.radar_score ? ` · 雷达潜力 ${c.radar_score}` : ''}</span><br>
-        综合选址分 <b style="color:${col};font-size:15px;">${c.score}</b><br>
-        城市基本面 <b>${c.island}</b> · 都市圈 ${c.city_pop_m} 百万人 · 城镇集中 ${c.urban_pct}%${c.island !== '爪哇' ? ' · <span style="color:#b26a00">离岛修正</span>' : ''}<br>
-        人流 ${c.foot_traffic} · 客群 ${c.crowd_fit} · 租金压力 ${c.rent_pressure} · 竞品密度 ${c.competition}<br>
-        <b>覆盖范围（${c.catchment.radius_m}m）</b>：人口 ${c.catchment.pop_wan} 万 · 社区 ${c.catchment.communities} · 学校 ${c.catchment.schools} · 商城 ${c.catchment.malls} · 办公 ${c.catchment.offices}<br>
-        <b>模型匹配 MODELS</b>（${d.model_note}）<br>
-        ${modelLines(c)}
-        ${c.coop_proposal ? `<b>建议合作模式 COOP</b>：${c.coop_proposal.mode}<br>` : ''}
-        ${c.shop_coop ? `<span style="color:#555">店方意向：${c.shop_coop}</span><br>` : ''}
-        <span style="color:#555">${c.reason}</span>`);
-    window._site_markers = window._site_markers || {};
-    window._site_markers[c.id] = m;
-    L.circle([c.lat, c.lon], { radius: c.catchment.radius_m, color: col, weight: 1,
-      fillColor: col, fillOpacity: 0.05, dashArray: '4 4' }).addTo(circles);
-    return m;
-  }));
-  document.getElementById('siteToggle').onchange = e => {
-    const on = e.target.checked;
-    on ? siteLayer.addTo(map) : map.removeLayer(siteLayer);
-    on ? circles.addTo(map) : map.removeLayer(circles);
-  };
-  siteLayer.addTo(map);
-  // 默认视野：按候选点自动适配（全国覆盖）；带 focus 参数时由跳入逻辑接管
-  const focus = new URLSearchParams(location.search).get('focus');
-  if (!focus && d.candidates.length) {
-    map.fitBounds(L.latLngBounds(d.candidates.map(c => [c.lat, c.lon])).pad(0.12));
-  }
-  // 雷达页跳入：/map/?focus=RD-SH-02 → 定位并打开 popup（发现→评估闭环入口）
-  if (focus && window._site_markers && window._site_markers[focus]) {
-    const mk = window._site_markers[focus];
-    map.flyTo(mk.getLatLng(), 15);
-    setTimeout(() => mk.openPopup(), 800);
-  }
-}
-</script>
-<script>
-/* ═══ 选址 AGENT：客户端规则引擎（意图解析 → 过滤 → 因子加权 → TOP3 + 理由） ═══ */
-function askAgent(preset) {
-  const inp = document.getElementById('agIn');
-  const q = (preset || inp.value || '').trim(); if (!q) return;
-  inp.value = '';
-  const log = document.getElementById('agLog');
-  log.innerHTML += `<div class="ag-msg user"><span>${q.replace(/</g, '&lt;')}</span></div>`;
-  log.scrollTop = log.scrollHeight;
-  setTimeout(() => {
-    log.innerHTML += `<div class="ag-msg"><div class="who">AGENT · THINKING</div>${agentReason(q)}</div>`;
-    log.scrollTop = log.scrollHeight;
-  }, 450);
-}
-function agentReason(q) {
-  const d = siteSel;
-  if (!d) return '选址数据加载中，请稍候再问一次。';
-  const cs = d.candidates;
-  const found = { city: [], island: [], models: [], prefs: [], budget: null };
-  cs.forEach(c => { if (q.includes(c.city) && !found.city.includes(c.city)) found.city.push(c.city); });
-  [...new Set(cs.map(c => c.island))].forEach(is => { if (q.includes(is)) found.island.push(is); });
-  const KW = [['推车', 'cart'], ['档口', 'cart'], ['性价比', 'value'], ['街铺', 'value'], ['低价', 'value'],
-              ['体验', 'experience'], ['旗舰', 'experience'], ['咖啡', 'experience'],
-              ['快取', 'pickup'], ['外卖', 'pickup'], ['自提', 'pickup'],
-              ['车餐', 'drive'], ['汽车', 'drive'], ['家庭', 'drive'], ['熟食', 'drive'], ['正餐', 'drive'],
-              ['奶茶', 'value'], ['茶饮', 'value']];
-  d.models_legend.forEach(m => KW.push([m.name.slice(0, 2), m.key]));
-  KW.forEach(([w, k]) => { if (q.includes(w) && !found.models.includes(k)) found.models.push(k); });
-  const PF = [['人流', 'foot_traffic', 1], ['客流', 'foot_traffic', 1], ['租金', 'rent_pressure', -1],
-              ['客群', 'crowd_fit', 1], ['竞争', 'competition', -1], ['学校', 'schools', 1],
-              ['社区', 'communities', 1], ['商城', 'malls', 1], ['外卖', 'delivery_fit', 1],
-              ['车流', 'car_traffic', 1], ['可见', 'visibility', 1], ['曝光', 'visibility', 1]];
-  PF.forEach(([w, f, dir]) => { if (q.includes(w)) found.prefs.push({ f, dir, w }); });
-  const bm = q.match(/\d+(?:\.\d+)?\s*(?:亿|万|jt|百万)?/i);
-  if (bm) found.budget = bm[0];
-  const mName = k => { const m = d.models_legend.find(x => x.key === k); return m ? m.name : k; };
-  const parseLine = `意图解析 → 城市：${found.city.join('、') || '不限'} · 业态：${found.models.map(mName).join('、') || '不限'} · 偏好：${found.prefs.map(p => p.w).join('、') || '综合分'} · 预算：${found.budget || '未提供'}`;
-  let pool = cs.map(c => ({ c, rank: c.score }));
-  if (found.city.length) pool = pool.filter(x => found.city.includes(x.c.city));
-  if (!found.city.length && found.island.length) pool = pool.filter(x => found.island.includes(x.c.island));
-  if (found.models.length) pool = pool.filter(x => x.c.best_model.key === found.models[0] || x.c.models.some(m => m.key === found.models[0]));
-  if (!pool.length) return `<div class="ag-parse">${parseLine}</div>按这个条件没有命中候选。放宽城市或业态试试，或直接说「人流大」让我综合推荐。`;
-  if (found.prefs.length) {
-    pool.forEach(x => {
-      let b = 0, n = 0;
-      found.prefs.forEach(p => {
-        let v;
-        if (p.f in x.c) v = x.c[p.f];
-        else if (x.c.catchment && p.f in x.c.catchment) v = Math.min(x.c.catchment[p.f] * 8, 100);
-        else return;
-        b += p.dir * v / found.prefs.length * 0.25; n++;
-      });
-      if (n) x.rank = x.c.score + b;
-    });
-  }
-  pool.sort((a, b) => b.rank - a.rank);
-  const top = pool.slice(0, 3);
-  const html = top.map((x, i) => {
-    const c = x.c, col = c.score >= 72 ? '#2e7d32' : c.score >= 65 ? '#b26a00' : '#e60023';
-    const why = [];
-    if (found.city.includes(c.city)) why.push('城市命中');
-    if (found.models.includes(c.best_model.key)) why.push(`业态匹配「${c.best_model.name}」`);
-    found.prefs.slice(0, 2).forEach(p => {
-      const v = p.f in c ? c[p.f] : (c.catchment || {})[p.f];
-      if (v != null) why.push(`${p.w} ${v}${p.dir > 0 ? '↑' : '↓'}`);
-    });
-    why.push(`综合选址分 ${c.score}`);
-    const prop = c.id.indexOf('RD-SH') === 0 ? ` · <a href="../proposal/?shop=${c.id.replace('RD-', '')}" target="_blank">生成合作提案 →</a>` : '';
-    return `<div class="ag-cand"><div class="nm">${i + 1}. ${c.name} <b style="color:${col};float:right">${Math.round(x.rank * 10) / 10}</b></div>
-      <div class="rs">📍 ${c.area} · ${c.city}（${c.island}） · ${c.best_model.icon} ${c.best_model.name}</div>
-      <div class="rs">${why.join(' · ')}</div>
-      <div class="act"><a href="javascript:void(0)" onclick="if(window._leaflet_map){window._leaflet_map.flyTo([${c.lat},${c.lon}],15);var m=window._site_markers&&window._site_markers['${c.id}'];if(m)setTimeout(function(){m.openPopup()},900)}">在地图上查看 →</a>${prop}</div></div>`;
-  }).join('');
-  const extra = pool.length > 3 ? `<div style="font-size:11px;color:#767676;margin-top:4px">其余 ${pool.length - 3} 个候选已按加权分排序，见下方完整榜单。</div>` : '';
-  return `<div class="ag-parse">${parseLine}<br>过滤后 ${pool.length} 个候选 → 偏好加权 → TOP3：</div>${html}${extra}`;
-}
-</script>
-<script src="./beverage.js"></script>
-<script src="./planning.js"></script>
-<script src="../ui/interactions.js" defer></script>
+  <div id="legend"></div>
+</section>
+<aside id="side">
+  <h1>印尼茶饮咖啡 · 空间选址<span>SPATIAL FUNNEL / NL2GIS / MCDA</span></h1>
+  <p class="lead">宏观选城市，中观选商圈，微观选 100 米网格与铺位。</p>
+  <div class="kpis"><div class="kpi"><b>13</b><span>进入城市</span></div><div class="kpi"><b>30</b><span>候选锚点</span></div><div class="kpi"><b>1,470</b><span>百米网格</span></div><div class="kpi"><b>2,129</b><span>竞品点位</span></div></div>
+  <section class="card"><div class="card-h">选址 AGENT · NL2GIS <span>SPATIAL FILTER</span></div><div class="card-b">
+    <div class="agent-input"><input id="query" value="在泗水找月租2000万印尼盾以内、周边3公里内有大学、500米内无蜜雪冰城、外卖好做的街边铺位" aria-label="自然语言选址条件"><button id="runQuery">计算 →</button></div>
+    <div class="quick"><button data-q="雅加达大学城周边，月租4500万以内，500米内无蜜雪冰城">雅加达大学圈</button><button data-q="泗水低竞争的街边铺位">泗水低竞争店</button><button data-q="万隆3公里内有大学，月租1500万以内">万隆学生店</button><button id="resetQuery">重置全图</button></div>
+    <div id="parse" class="parse"></div><div id="top3"><div class="empty">输入条件后，系统会直接过滤空间网格并返回 Top3。</div></div>
+  </div></section>
+  <section id="detail" class="card"><div class="card-h">候选下钻 · 因子拆解 <span>OSRM + MCDA</span></div><div class="card-b" id="detailBody"></div></section>
+  <section class="card"><div class="card-h">候选榜单 <span>CLICK TO DRILL DOWN</span></div><div class="card-b"><div id="candidateList" class="candidate-list"></div></div></section>
+  <details class="source"><summary>数据来源与模型边界</summary><div id="sourceNote" style="margin-top:8px"></div></details>
+</aside>
+</main>
+<script src="./vendor/maplibre-gl.js"></script><script src="./vendor/pmtiles.js"></script><script src="./vendor/deck.gl.min.js"></script><script src="./spatial.js"></script>
 </body>
 </html>

@@ -23,7 +23,8 @@ PATH_CHARS = re.compile(r"[A-Za-z0-9._~%/-]+")
 
 def _sources():
     for path in WEB.rglob("*"):
-        if path.is_file() and path.suffix in {".html", ".js"}:
+        # Minified third-party bundles contain generated URL code, not site links.
+        if path.is_file() and path.suffix in {".html", ".js"} and "vendor" not in path.parts:
             yield path
 
 
