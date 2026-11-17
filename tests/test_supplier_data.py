@@ -91,7 +91,7 @@ def test_no_email_phone_or_whatsapp_link():
 def test_five_ig_handles_match_brand_list():
     listed = {b["repo_id"]: b.get("ig_handle") for b in _load(BRAND_LIST)["brands"]}
     by_id = {b["id"]: b for b in BRANDS}
-    assert [b["id"] for b in BRANDS] == [f"ID-{i:02d}" for i in range(1, 18)]
+    assert [b["id"] for b in BRANDS] == [f"ID-{i:02d}" for i in range(1, 23)]
     published = {b["id"]: b for b in _load(PUBLISHED)["brands"]}
     for bid, handle in IG_FROM_BRAND_LIST.items():
         assert listed[bid] == handle
