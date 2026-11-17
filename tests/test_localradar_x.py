@@ -15,7 +15,7 @@ def test_snapshot_file_shape():
     assert snap["platform"] == "x" and snap["fetched_at"]
     # 2026-11-04 快照只覆盖当时的 10 家。后来列入的品牌等下次刷新再写入，不在这份历史文件里补数字。
     assert set(snap["brands"]) == {f"ID-{i:02d}" for i in range(1, 11)}
-    assert {b["id"] for b in BRANDS} == {f"ID-{i:02d}" for i in range(1, 18)}
+    assert {b["id"] for b in BRANDS} == {f"ID-{i:02d}" for i in range(1, 23)}
     for bid, e in snap["brands"].items():
         assert e["handle_status"] in xs.STATUS_CN
         assert isinstance(e["mentions_7d"]["total"], int)
@@ -30,7 +30,7 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
     d = build_localradar(tmp_path / "t.db", x_snapshot=SNAP)
     snap = json.loads(SNAP.read_text(encoding="utf-8"))
     assert d["demo"] is False and d["x_snapshot"]["brands_with_x"] == 10
-    assert d["x_snapshot"]["brands_pending_x"] == 7
+    assert d["x_snapshot"]["brands_pending_x"] == 12
     assert "实抓" in d["source_note"] and "演示估算" in d["source_note"]
     for b in d["brands"]:
         if b["id"] not in snap["brands"]:
@@ -51,7 +51,7 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
         assert all(s.startswith(("【X 实抓", "【演示】")) for s in b["heat_signals"])
     heats = [b["heat"] for b in d["brands"] if b["heat"] is not None]
     assert heats == sorted(heats, reverse=True)
-    assert [b["id"] for b in d["brands"] if b["heat"] is None] == [f"ID-{i:02d}" for i in range(11, 18)]
+    assert [b["id"] for b in d["brands"] if b["heat"] is None] == [f"ID-{i:02d}" for i in range(11, 23)]
     for row in d["brands"] + d["shops"]:
         photo = row.get("photo")
         if photo:
@@ -180,6 +180,11 @@ def test_new_brands_wait_for_x_refresh_without_invented_metrics(tmp_path):
         ("ID-15", "@anomalicoffee"),
         ("ID-16", "@DJOURNALcoffee"),
         ("ID-17", "@maxxcoffeeID"),
+        ("ID-18", "@teguk_indonesia"),
+        ("ID-19", "@kopilainhati"),
+        ("ID-20", "@kopi_nako"),
+        ("ID-21", "@ChatimeIndo"),
+        ("ID-22", "@MIXUE_idn"),
     ]
     assert all(p["include_in_user_lookup"] and p["mentions_query"] is None for p in pending)
     assert all("followers" not in p and "account" not in p for p in plan)
@@ -298,7 +303,7 @@ def test_added_local_coffee_brands_appear_from_2026_11_11_snapshot(tmp_path):
         snap_data = json.loads(Path(snap).read_text(encoding="utf-8"))
         if label == "old":
             assert set(_NEW_COFFEE).isdisjoint(snap_data["brands"])
-            assert built["x_snapshot"]["brands_pending_x"] == 7
+            assert built["x_snapshot"]["brands_pending_x"] == 12
         else:
             assert set(_NEW_COFFEE) <= set(snap_data["brands"])
         assert built["x_snapshot"]["brands_pending_x"] == sum(
