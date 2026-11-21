@@ -1,14 +1,14 @@
 {
  "schema": "nbo.radar.x_snapshot/v1",
  "platform": "x",
- "fetched_at": "2026-11-21T01:30:00Z",
- "fetched_at_local": "2026-11-21 09:26-09:32 CST",
+ "fetched_at": "2026-11-21T01:25:00Z",
+ "fetched_at_local": "2026-11-21 09:25-09:26 CST",
  "fetched_by": "grok-bot-builtin-x-public",
  "x_calls_used": 26,
  "notes": [
   "只记录 X 返回的原始数值，不做任何推算；IG / TikTok 未抓取。",
   "handle_status: ok=种子 handle 正确; replaced=种子不存在/错误，按名称明确匹配到官方号; unverified_dormant=账号存在但无法确认官方; wrong_account=种子指向无关账号; not_found=不存在; invalid=不合法 handle",
-  "2026-11-21 每日刷新（09:26–09:32 北京时间，26 次 X 调用）：1 次 get_users_by_usernames（19 个已核实官方 handle）+ 22 次 get_posts_counts_recent（沿用 refresh_plan 的 mentions_query）+ 3 次 get_users_posts（Kopi Kenangan 11 条、Point Coffee 20 条、Tomoro 0 条；窗口 2026-10-22T01:30:00Z 起）。与 11-20 对比（相隔一天，无缺失日期）。其余品牌 posts_30d 与未核实号沿用旧值。",
+  "2026-11-21 每日刷新（09:25–09:26 北京时间，26 次 X 调用）：1 次 get_users_by_usernames（19 个已核实官方 handle）+ 22 次 get_posts_counts_recent（沿用 refresh_plan 的 mentions_query）+ 3 次 get_users_posts（Kopi Kenangan 11 条、Point Coffee 20 条、Tomoro 0 条；窗口 2026-10-22T01:25:00Z 起）。与 11-20 对比（相隔一天，无缺失日期）。其余品牌 posts_30d 与未核实号沿用旧值。",
   "与 11-20 对比：Sour Sally 397→234（−41%，且逐日分布被回溯下修：11-16 53→24、11-17 47→18、11-18 80→27，疑似垃圾/重复帖被清理或 X 计数修订，不是单纯窗口滚动；官方号资料正常）；Point Coffee 801→685（−14%，仍居第 2，各日小幅回落）；Janji Jiwa 197→225（+14%，11-20 单日 53）；Chatime 393→342（−13%）；Mixue 528→477（−10%）；Kopi Kenangan 899→878（−2%，仍居首）；其余变动小，无新冒头，19 个官方号全部返回资料。",
   "数据质量-同值核对：Haus! 0→0、Calais Tea 0→0 为全窗为 0；Tomoro 41→41、Excelso 28→28 总数相同但逐日分布不同（Tomoro [1,7,1,11,6,9,6,0]→[6,1,11,6,9,6,2,0]，Excelso [1,3,5,2,3,4,8,2]→[3,5,2,3,4,7,4,0]，窗口左移一格且个别日有回溯小修订，11-20 新增 2 / 4 条），属真巧合，非缓存；抓取间隔约 24 小时。verified/verified_type 与 11-20 一致，无变化。Tomoro 近 30 天发帖仍返回 0 条，last_post_at 沿用旧值。"
  ],
@@ -102,8 +102,8 @@
     "replies": 257,
     "reposts": 12072,
     "window": {
-     "start": "2026-10-22T01:30:00Z",
-     "end": "2026-11-21T01:30:00Z"
+     "start": "2026-10-22T01:25:00Z",
+     "end": "2026-11-21T01:25:00Z"
     }
    },
    "last_post_at": "2026-11-19T05:00:01Z"
@@ -1031,8 +1031,8 @@
     "replies": 232,
     "reposts": 117,
     "window": {
-     "start": "2026-10-22T01:30:00Z",
-     "end": "2026-11-21T01:30:00Z"
+     "start": "2026-10-22T01:25:00Z",
+     "end": "2026-11-21T01:25:00Z"
     }
    }
   },
