@@ -15,7 +15,7 @@ def test_snapshot_file_shape():
     assert snap["platform"] == "x" and snap["fetched_at"]
     # 2026-11-04 快照只覆盖当时的 10 家。后来列入的品牌等下次刷新再写入，不在这份历史文件里补数字。
     assert set(snap["brands"]) == {f"ID-{i:02d}" for i in range(1, 11)}
-    assert {b["id"] for b in BRANDS} == {f"ID-{i:02d}" for i in range(1, 23)}
+    assert {b["id"] for b in BRANDS} == {f"ID-{i:02d}" for i in range(1, 28)}
     for bid, e in snap["brands"].items():
         assert e["handle_status"] in xs.STATUS_CN
         assert isinstance(e["mentions_7d"]["total"], int)
@@ -30,7 +30,7 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
     d = build_localradar(tmp_path / "t.db", x_snapshot=SNAP)
     snap = json.loads(SNAP.read_text(encoding="utf-8"))
     assert d["demo"] is False and d["x_snapshot"]["brands_with_x"] == 10
-    assert d["x_snapshot"]["brands_pending_x"] == 12
+    assert d["x_snapshot"]["brands_pending_x"] == 17
     assert "实抓" in d["source_note"] and "演示估算" in d["source_note"]
     for b in d["brands"]:
         if b["id"] not in snap["brands"]:
@@ -51,7 +51,7 @@ def test_build_with_snapshot_uses_real_values(tmp_path):
         assert all(s.startswith(("【X 实抓", "【演示】")) for s in b["heat_signals"])
     heats = [b["heat"] for b in d["brands"] if b["heat"] is not None]
     assert heats == sorted(heats, reverse=True)
-    assert [b["id"] for b in d["brands"] if b["heat"] is None] == [f"ID-{i:02d}" for i in range(11, 23)]
+    assert [b["id"] for b in d["brands"] if b["heat"] is None] == [f"ID-{i:02d}" for i in range(11, 28)]
     for row in d["brands"] + d["shops"]:
         photo = row.get("photo")
         if photo:
@@ -185,6 +185,11 @@ def test_new_brands_wait_for_x_refresh_without_invented_metrics(tmp_path):
         ("ID-20", "@kopi_nako"),
         ("ID-21", "@ChatimeIndo"),
         ("ID-22", "@MIXUE_idn"),
+        ("ID-23", "@CoffeeToffeeIDN"),
+        ("ID-24", "@BangJagokopi"),
+        ("ID-25", "@tanameracoffee"),
+        ("ID-26", "@Foresthree_id"),
+        ("ID-27", "@Estehpoci"),
     ]
     assert all(p["include_in_user_lookup"] and p["mentions_query"] is None for p in pending)
     assert all("followers" not in p and "account" not in p for p in plan)
@@ -303,7 +308,7 @@ def test_added_local_coffee_brands_appear_from_2026_11_11_snapshot(tmp_path):
         snap_data = json.loads(Path(snap).read_text(encoding="utf-8"))
         if label == "old":
             assert set(_NEW_COFFEE).isdisjoint(snap_data["brands"])
-            assert built["x_snapshot"]["brands_pending_x"] == 12
+            assert built["x_snapshot"]["brands_pending_x"] == 17
         else:
             assert set(_NEW_COFFEE) <= set(snap_data["brands"])
         assert built["x_snapshot"]["brands_pending_x"] == sum(
@@ -346,6 +351,159 @@ def test_added_local_coffee_brands_appear_from_2026_11_11_snapshot(tmp_path):
             if key == "heat":
                 continue
             assert b[key] is None
+
+
+_EXPANSION_2026_11_24 = {
+    "ID-23": {"brand": "Coffee Toffee", "x": "@CoffeeToffeeIDN", "ig": "", "tiktok": "",
+              "website": "http://www.coffeetoffee.co.id", "category": "咖啡",
+              "x_followers": 6281, "x_posts": 17207, "x_user_id": "129688323"},
+    "ID-24": {"brand": "Jago Coffee", "x": "@BangJagokopi", "ig": "@jagoid", "tiktok": "@bangjagokopi",
+              "website": "https://www.jagocoffee.com/", "category": "咖啡",
+              "x_followers": 127, "x_posts": 2156, "x_user_id": "1669203796877271040"},
+    "ID-25": {"brand": "Tanamera Coffee", "x": "@tanameracoffee", "ig": "@tanameracoffee", "tiktok": "",
+              "website": "https://www.tanameracoffee.co.id/", "category": "咖啡",
+              "x_followers": 985, "x_posts": 1457, "x_user_id": "2213857339"},
+    "ID-26": {"brand": "Foresthree Coffee", "x": "@Foresthree_id", "ig": "@foresthreecoffeeofficial",
+              "tiktok": "@foresthreecoffeeofficial", "website": "https://foresthree.co.id/",
+              "category": "咖啡", "x_followers": 354, "x_posts": 127, "x_user_id": "1186859719018696704"},
+    "ID-27": {"brand": "Es Teh Poci", "x": "@Estehpoci", "ig": "", "tiktok": "",
+              "website": "https://estehpoci.id/", "category": "茶饮",
+              "x_followers": 337, "x_posts": 108, "x_user_id": "1424446154"},
+}
+# 清单里记下的核实读数。种子和 pending 输出里不能出现这些粉丝/帖数/用户 id。
+_EXPANSION_LIST_ONLY_NUMBERS = (
+    "6281", "17207", "2156", "1457", "985", "354", "337", "108",
+    "129688323", "1669203796877271040", "2213857339", "1186859719018696704", "1424446154",
+)
+
+
+def test_weekly_expansion_2026_11_24_stays_pending_until_next_refresh(tmp_path):
+    """ID-23..ID-27 的种子与 2026-11-24 清单一致，指标留空。
+
+    历史快照和最新快照都不含这 5 家，要等下一次每日刷新才写入。
+    用 2026-11-04 或最新快照重建时它们都是 pending_x，不填估算数字。
+    已发布的 local_brands.json 覆盖全部 BRANDS，这 5 家在 11-24 快照里不存在，故为 pending_x。
+    """
+    prev = json.loads((SNAP.parent / "brand_list_coffee_tea_2026-11-17.json").read_text(encoding="utf-8"))
+    listed = json.loads((SNAP.parent / "brand_list_coffee_tea_2026-11-24.json").read_text(encoding="utf-8"))
+    assert listed["schema"] == "nbo.radar.brand_list/v1"
+    assert "2026-11-24" in listed["generated_at"] and "2026-11-24" in listed["x_source"]
+    assert "getUsersByUsernames" in listed["x_source"] and "getUsersPosts" in listed["x_source"]
+    assert "共 9 次调用" in listed["x_source"]
+    assert any("ID-23" in n and "ID-27" in n and "Titik Koma" in n and "repo_id" in n for n in listed["notes"])
+    assert len(prev["brands"]) == 29
+    assert len(listed["brands"]) == len(prev["brands"]) + 6
+    for old, new in zip(prev["brands"], listed["brands"][:len(prev["brands"])]):
+        assert old["brand"] == new["brand"]
+        old_rest = {k: v for k, v in old.items() if k != "repo_id"}
+        new_rest = {k: v for k, v in new.items() if k != "repo_id"}
+        assert old_rest == new_rest
+        if old["brand"] == "Tomoro Coffee":
+            assert old["repo_id"] is None and new["repo_id"] == "ID-11"
+        elif old["brand"] == "Calais Tea":
+            assert old["repo_id"] is None and new["repo_id"] == "ID-12"
+        else:
+            assert old["repo_id"] == new["repo_id"]
+
+    by_seed = {b["id"]: b for b in BRANDS}
+    by_repo = {b.get("repo_id"): b for b in listed["brands"]}
+    assert by_seed["ID-11"]["origin_label"] == "未核实"
+    assert by_seed["ID-12"]["origin_label"] == "未核实"
+    assert all(b["name"] != "Kopi Titik Koma" for b in BRANDS)
+    titik = listed["brands"][-1]
+    assert titik["brand"] == "Kopi Titik Koma"
+    assert titik["repo_id"] is None and titik["x_status"] == "未核实" and titik["x_handle"] is None
+    assert titik["ig_handle"] == "@kopititikkoma" and titik["ig_status"] == "待 IG 接通后读取"
+    assert titik["mentions_7d"] is None and "tiktok_handle" not in titik
+    assert titik["tiktok_status"] == "未核实"
+    for bid, expect in _EXPANSION_2026_11_24.items():
+        seed = by_seed[bid]
+        src = by_repo[bid]
+        assert src["brand"] == expect["brand"]
+        assert src["category"] == expect["category"] == seed["category"]
+        assert src["local"] == "本土" == seed["origin_label"]
+        assert src["track"] == "在赛道"
+        assert src["x_handle"] == expect["x"] == seed["x"]
+        assert src["x_status"] == "已核实"
+        assert src["x_followers"] == expect["x_followers"]
+        assert src["x_posts"] == expect["x_posts"]
+        assert src["x_user_id"] == expect["x_user_id"]
+        assert src["x_blue_check"] is False
+        assert src["mentions_7d"] is None
+        assert src["website"] == expect["website"] == seed["website"]
+        assert (src.get("ig_handle") or "") == expect["ig"] == seed["ig"]
+        assert (src.get("tiktok_handle") or "") == expect["tiktok"] == seed["tiktok"]
+        if expect["tiktok"]:
+            assert src["tiktok_status"] == "待 TikTok 接通后读取"
+            assert "tiktok.com/" in src["tiktok_source_url"]
+        else:
+            assert "tiktok_handle" not in src
+            assert src.get("tiktok_status") == "未核实"
+        if expect["ig"]:
+            assert src["ig_status"] == "待 IG 接通后读取"
+            assert src["ig_source_url"]
+        else:
+            assert src["ig_handle"] is None and src["ig_status"] == "未核实"
+        assert seed["metrics_pending"] is True
+        assert seed["city"] == "未核实" and seed["stage"] == "未核实"
+        assert seed["viral_format"] == "未核实" and seed["boost"] == [] and seed["contact"] == ""
+        assert seed["coop_model"] == "待评估"
+        assert seed["heat_signals"][0] == f"【待刷新】官方号 {expect['x']} 已列入追踪；粉丝、发帖与近 7 天提及尚未抓取"
+        assert "不填估算数字" in seed["why_hot"]
+        for key in _METRIC_KEYS:
+            assert seed[key] is None
+        if bid == "ID-24":
+            assert seed["coop_note"] == "已列入雷达追踪；业态为移动餐车网络，不是传统门店连锁。"
+        else:
+            assert seed["coop_note"] == "已列入雷达追踪。本土标签只作展示，不决定是否追踪。"
+        blob_seed = json.dumps(seed, ensure_ascii=False)
+        assert all(n not in blob_seed for n in _EXPANSION_LIST_ONLY_NUMBERS)
+
+    for snap_path in sorted(SNAP.parent.glob("x_snapshot_*.json")):
+        historical = json.loads(snap_path.read_text(encoding="utf-8"))
+        assert set(_EXPANSION_2026_11_24).isdisjoint(historical["brands"])
+
+    latest_path = xs.latest_snapshot_path()
+    latest = xs.load_snapshot(latest_path)
+    assert latest_path.name == "x_snapshot_2026-11-24.json"
+    assert set(_EXPANSION_2026_11_24).isdisjoint(latest["brands"])
+    plan = xs.refresh_plan(BRANDS, latest)
+    for bid, expect in _EXPANSION_2026_11_24.items():
+        row = next(p for p in plan if p["id"] == bid)
+        assert row["in_snapshot"] is False and row["x_handle"] == expect["x"]
+        assert row["include_in_user_lookup"] is True and row["mentions_query"] is None
+
+    for label, snap in (("old", SNAP), ("latest", latest_path)):
+        built = build_localradar(tmp_path / f"exp-{label}.db", x_snapshot=snap)
+        by_id = {b["id"]: b for b in built["brands"]}
+        snap_data = json.loads(Path(snap).read_text(encoding="utf-8"))
+        assert set(_EXPANSION_2026_11_24).isdisjoint(snap_data["brands"])
+        for bid, expect in _EXPANSION_2026_11_24.items():
+            b = by_id[bid]
+            _assert_pending_x_has_no_metrics(b)
+            assert b["x"] == expect["x"] and b["ig"] == expect["ig"] and b["tiktok"] == expect["tiktok"]
+            assert b["website"] == expect["website"] and b["origin_label"] == "本土"
+            assert b["metrics_pending"] is True and b["value_score"] is None
+            for key in _METRIC_KEYS:
+                assert b[key] is None
+            blob = json.dumps(b, ensure_ascii=False)
+            assert all(n not in blob for n in _EXPANSION_LIST_ONLY_NUMBERS)
+
+    published = json.loads((SNAP.parents[2] / "web/trend/data/local_brands.json").read_text(encoding="utf-8"))
+    pub = {b["id"]: b for b in published["brands"]}
+    assert set(pub) == {b["id"] for b in BRANDS}
+    cited = json.loads((SNAP.parent / published["x_snapshot"]["file"]).read_text(encoding="utf-8"))
+    assert set(_EXPANSION_2026_11_24).isdisjoint(cited["brands"])
+    for bid, expect in _EXPANSION_2026_11_24.items():
+        b = pub[bid]
+        assert cited["brands"].get(bid) is None
+        _assert_pending_x_has_no_metrics(b)
+        assert b["x"] == expect["x"] and b["website"] == expect["website"]
+        assert b["ig"] == expect["ig"] and b["tiktok"] == expect["tiktok"]
+        for key in _METRIC_KEYS:
+            assert b[key] is None
+        blob = json.dumps(b, ensure_ascii=False)
+        assert all(n not in blob for n in _EXPANSION_LIST_ONLY_NUMBERS)
 
 
 def test_heat_formula():
