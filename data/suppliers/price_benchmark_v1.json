@@ -1,29 +1,29 @@
 {
   "meta": {
-    "generated": "2026-11-04 (UTC+8)",
-    "fx_reference": "参考换算：1 USD ≈ 18,509.442 IDR，取自 2026-11-04 抓取的 Alibaba 页面内 currencyRule（Alibaba 自己的显示汇率，不是官方汇率）",
-    "rule": "只记录页面上实际看到的价格；没取到的不填"
+    "generated": "2026-11-26 (UTC+8)",
+    "fx_reference": "参考换算：1 USD ≈ 18,509.442 IDR，取自 2026-11-04 抓取的 Alibaba 页面内 currencyRule（Alibaba 自己的显示汇率，不是官方汇率）。2026-11-26 复核时 Alibaba.co.uk 页面 currencyRule只给出 USD→CNY rate 6.6225，未再显示 IDR，因此未变价条目的 ref_IDR 仍按 11-04 汇率保留；变价或新条目若页面未显示 IDR 则不填 ref_IDR。原价以页面币种为准，IDR 列只是参考。",
+    "rule": "只记录页面上实际看到的价格；没取到的不填。起步价（「起」/「mulai dari」）按起步价记录，不编造完整阶梯。"
   },
   "not_fetched": [
     {
       "platform": "1688",
-      "status": "未取到",
-      "detail": "s.1688.com 搜索页跳转到登录/验证（只返回 2.5KB），按规则不登录"
+      "status": "部分取到",
+      "detail": "2026-11-26：curl 访问 s.1688.com 搜索页仍跳转 captcha/punish（约 2.5KB），按规则不登录。浏览器未登录在公开搜索和商品页看到 2 条封口膜起步价，已写入 items；部分 SKU 和额外优惠显示「登录查看」，未打开、未记录。"
     },
     {
       "platform": "Tokopedia",
-      "status": "未取到",
-      "detail": "搜索页和店铺页是 JS 渲染，curl 抓不到价格；没有用浏览器登录"
+      "status": "部分取到",
+      "detail": "2026-11-26：浏览器未登录即可看到商品价，已写入 3 条（珍珠 3kg、16oz PP 杯、Temanggung 罗布斯塔生豆 1kg）。封口膜只在搜索卡上看到标价，未打开商品页，故未写入 items。"
     },
     {
       "platform": "Shopee",
       "status": "未取到",
-      "detail": "同上，JS 渲染/反爬，抓不到价格"
+      "detail": "2026-11-26：浏览器打开 shopee.co.id 搜索即进入 /verify/traffic/error，页面写「Masuk Diperlukan」。返回首页后出现 /verify/captcha 滑块验证。按规则未点 Log In、未完成验证，仍未取到价格。"
     },
     {
       "platform": "alibaba.com 主域名",
       "status": "部分反爬",
-      "detail": "返回验证页；同一商品 ID 改用 alibaba.co.uk/.fr/.co.th 镜像能取到"
+      "detail": "与 11-04 相同：主域名易返回验证页；同一商品 ID 用 alibaba.co.uk 镜像可取到。2026-11-26 仍用该镜像复核。"
     }
   ],
   "items": [
@@ -55,8 +55,8 @@
       ],
       "moq": "10 cartons",
       "source_url": "https://www.alibaba.co.uk/product-detail/Black-Tapioca-Pearls-8mm-made-in_10000023916263.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "ingredients",
@@ -80,8 +80,8 @@
       ],
       "moq": "18 cartons",
       "source_url": "https://www.alibaba.co.uk/product-detail/Bosmos-Golden-Tapioca-Pearls-3kg-Best_10000014713651.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "ingredients",
@@ -105,8 +105,8 @@
       ],
       "moq": "10 bags",
       "source_url": "https://www.alibaba.co.uk/product-detail/Jiuzhou-Hot-Selling-Taiwan-Black-tapioca_10000010067610.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "ingredients",
@@ -124,8 +124,8 @@
       ],
       "moq": "24 cartons",
       "source_url": "https://www.alibaba.co.uk/product-detail/Blueberry-Concentrated-Fruit-Syrup-Bubble-Tea_10000012809365.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "ingredients",
@@ -149,8 +149,8 @@
       ],
       "moq": "30 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/Jiuzhou-Passion-Fruit-Concentrated-Syrup2-5kg_10000011301666.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "ingredients",
@@ -174,8 +174,8 @@
       ],
       "moq": "80 barrels",
       "source_url": "https://www.alibaba.co.uk/product-detail/Wholesale-2-5kg-Strawberry-Juice-Concentrated_1601523238394.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "packaging",
@@ -199,8 +199,8 @@
       ],
       "moq": "10,000 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/Factory-Customized-Logo-Printed-Frosted-Transparent_1601061099135.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "packaging",
@@ -230,8 +230,8 @@
       ],
       "moq": "1,000 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/Hot-Sale-16oz-500ml-Bubble-Boba_1601269707007.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "packaging",
@@ -267,8 +267,8 @@
       ],
       "moq": "50 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/Flat-Bottom-Base-500ml-16oz-Pp_1601845521837.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "packaging",
@@ -298,8 +298,8 @@
       ],
       "moq": "100 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/Custom-Logo-Transparent-PP-Sealing-Roll_1601809175982.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。 计价单位是 pieces，每件对应多大一卷页面没写清楚，要和卖家确认。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。 计价单位是 pieces，每件对应多大一卷页面没写清楚，要和卖家确认。"
     },
     {
       "category": "packaging",
@@ -329,8 +329,8 @@
       ],
       "moq": "1 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/Factory-Direct-PP-Plastic-Sealing-Film_1600534353684.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。 计价单位是 pieces，每件对应多大一卷页面没写清楚，要和卖家确认。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。 计价单位是 pieces，每件对应多大一卷页面没写清楚，要和卖家确认。"
     },
     {
       "category": "equipment",
@@ -360,8 +360,8 @@
       ],
       "moq": "1 sets",
       "source_url": "https://www.alibaba.co.uk/product-detail/Coffee-Shop-Commercial-Crushed-Ice-Maker_1601594913984.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "equipment",
@@ -391,8 +391,8 @@
       ],
       "moq": "1 sets",
       "source_url": "https://www.alibaba.co.uk/product-detail/Ice-Maker-50KG-Commercial-Ice-Cube_62285969586.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "equipment",
@@ -422,8 +422,8 @@
       ],
       "moq": "1 sets",
       "source_url": "https://www.alibaba.co.uk/product-detail/Chef-prosentials-2-Groups-Semi-Automatic_1600803113231.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。 卖家名 CHEF ESSENTIALS LIMITED，所在地页面未标。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。 卖家名 CHEF ESSENTIALS LIMITED，所在地页面未标。"
     },
     {
       "category": "equipment",
@@ -447,8 +447,8 @@
       ],
       "moq": "1 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/G3211A-Commercial-Espresso-Coffee-Machine-2_1601945114709.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "equipment",
@@ -484,8 +484,8 @@
       ],
       "moq": "1 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/New-Design-Commercial-Coffee-Grinder-Professional_1601669907272.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "equipment",
@@ -509,8 +509,8 @@
       ],
       "moq": "1 pieces",
       "source_url": "https://www.alibaba.co.uk/product-detail/Electric-Commercial-Coffee-Grinder-64mm-Flat_1601862129081.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "tea",
@@ -546,8 +546,8 @@
       ],
       "moq": "1 bags",
       "source_url": "https://www.alibaba.co.uk/product-detail/1kg-High-quality-CTC-vietnamese-black_1600471693372.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "tea",
@@ -557,28 +557,30 @@
       "seller": "Hunan Tianwang Tea Industry Co., Ltd.",
       "price_tiers": [
         {
-          "qty": "2-49 kilograms",
-          "unit_price": 2.8,
-          "currency": "USD",
-          "ref_IDR": 51826
+          "qty": "25-99 kilograms",
+          "unit_price": 2.5,
+          "currency": "USD"
         },
         {
-          "qty": "50-999 kilograms",
-          "unit_price": 2.6,
-          "currency": "USD",
-          "ref_IDR": 48125
+          "qty": "100-999 kilograms",
+          "unit_price": 2.2,
+          "currency": "USD"
         },
         {
-          "qty": "≥1,000 kilograms",
+          "qty": "1,000-9,999 kilograms",
           "unit_price": 2.0,
-          "currency": "USD",
-          "ref_IDR": 37019
+          "currency": "USD"
+        },
+        {
+          "qty": "≥10,000 kilograms",
+          "unit_price": 1.8,
+          "currency": "USD"
         }
       ],
-      "moq": "2 kilograms",
+      "moq": "25 kilograms",
       "source_url": "https://www.alibaba.co.uk/product-detail/Instant-CTC-black-tea-price-china_1924364115.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价和起订量已变。原先为 2-49 kilograms $2.8、50-999 kilograms $2.6、≥1,000 kilograms $2.0，MOQ 2 kilograms；现为 25-99 $2.5、100-999 $2.2、1,000-9,999 $2.0、≥10,000 $1.8，MOQ 25 kilograms。本次页面 currencyRule 只给出 USD→CNY 6.6225，未显示 IDR，故本条不填 ref_IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "tea",
@@ -608,8 +610,8 @@
       ],
       "moq": "1 cartons",
       "source_url": "https://www.alibaba.co.uk/product-detail/Green-Tea-Leaves-Standard-Jasmine-Green_10000011545845.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "tea",
@@ -639,8 +641,8 @@
       ],
       "moq": "20 bags",
       "source_url": "https://www.alibaba.co.uk/product-detail/Huasang-Wholesale-Cheap-Price-Jasmine-Green_1601115888418.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "coffee_beans",
@@ -658,8 +660,8 @@
       ],
       "moq": "1 tons",
       "source_url": "https://www.alibaba.co.uk/product-detail/Premium-Robusta-Coffee-Beans-Indonesia-Origin_11000008550559.html",
-      "fetched_at": "2026-11-04 14:19 (UTC+8)",
-      "note": "价格取自页面内嵌的 productLadderPrices 数据（和页面显示的阶梯价一致）。alibaba.com 主域名触发反爬，改用 alibaba.co.uk 镜像抓取（同一商品 ID）。运费另议。"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "2026-11-26 复核：USD 阶梯价未变；ref_IDR 仍按 2026-11-04 Alibaba 页面显示汇率 1 USD ≈ 18,509.442 IDR。价格取自页面内嵌的 productLadderPrices（与页面显示阶梯一致）。alibaba.com 主域名仍反爬，改用 alibaba.co.uk 镜像（同一商品 ID）。运费另议。"
     },
     {
       "category": "coffee_beans",
@@ -676,8 +678,8 @@
       ],
       "moq": "1×20尺柜（约19.2吨）",
       "source_url": "https://www.tradewheel.com/p/green-coffee-beans-3020168/",
-      "fetched_at": "2026-11-04 14:18 (UTC+8)",
-      "note": "不在指定的四个平台内，是 B2B 平台补充；页面只有单一价格，没有阶梯价"
+      "fetched_at": "2026-11-26 10:30 (UTC+8)",
+      "note": "不在指定的四个优先平台内，是 B2B 平台补充；页面只有单一价格，没有阶梯价。2026-11-26 浏览器过 Cloudflare 后页面仍在，三条既有报价（Gayo 8.90、Mandailing 8.80、Lampung 4.10 USD/kg）未变，MOQ 仍为 1×20尺柜（约 19.2 吨）。未点询盘。"
     },
     {
       "category": "coffee_beans",
@@ -694,8 +696,8 @@
       ],
       "moq": "1×20尺柜",
       "source_url": "https://www.tradewheel.com/p/green-coffee-beans-3020168/",
-      "fetched_at": "2026-11-04 14:18 (UTC+8)",
-      "note": "同上"
+      "fetched_at": "2026-11-26 10:30 (UTC+8)",
+      "note": "不在指定的四个优先平台内，是 B2B 平台补充；页面只有单一价格，没有阶梯价。2026-11-26 浏览器过 Cloudflare 后页面仍在，三条既有报价（Gayo 8.90、Mandailing 8.80、Lampung 4.10 USD/kg）未变，MOQ 仍为 1×20尺柜（约 19.2 吨）。未点询盘。"
     },
     {
       "category": "coffee_beans",
@@ -712,8 +714,8 @@
       ],
       "moq": "1×20尺柜",
       "source_url": "https://www.tradewheel.com/p/green-coffee-beans-3020168/",
-      "fetched_at": "2026-11-04 14:18 (UTC+8)",
-      "note": "同上"
+      "fetched_at": "2026-11-26 10:30 (UTC+8)",
+      "note": "不在指定的四个优先平台内，是 B2B 平台补充；页面只有单一价格，没有阶梯价。2026-11-26 浏览器过 Cloudflare 后页面仍在，三条既有报价（Gayo 8.90、Mandailing 8.80、Lampung 4.10 USD/kg）未变，MOQ 仍为 1×20尺柜（约 19.2 吨）。未点询盘。"
     },
     {
       "category": "coffee_beans",
@@ -730,8 +732,8 @@
       ],
       "moq": "5 MT",
       "source_url": "https://www.go4worldbusiness.com/pref_product/view/1908269/premium-grade-gayo-arabica-coffee-beans.html",
-      "fetched_at": "2026-11-04 14:20 (UTC+8)",
-      "note": "补充 B2B 平台；页面只给区间价"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "补充 B2B 平台；页面只给区间价。2026-11-26 复核：页面仍显示 $11.50 - $11.80 / Kilogram，Incoterms FOB，价格未变。"
     },
     {
       "category": "packaging",
@@ -748,8 +750,98 @@
       ],
       "moq": "",
       "source_url": "https://www.wirausahagroup.com/product/lid-cup",
-      "fetched_at": "2026-11-04 14:20 (UTC+8)",
-      "note": "印尼本地价格参考；大单阶梯价页面没公布"
+      "fetched_at": "2026-11-26 10:20 (UTC+8)",
+      "note": "印尼本地价格参考；大单阶梯价页面没公布。2026-11-26 复核：页面仍写「mulai dari Rp560.000 per roll」，起步价未变。"
+    },
+    {
+      "category": "ingredients",
+      "product": "珍珠（Tapioca Pearl / Bubble，台湾进口标）",
+      "spec": "3kg/袋；ComeFood；页面写 1 箱 6 袋、约 120 杯/袋，已有 BPOM",
+      "platform": "Tokopedia",
+      "seller": "CHAZONE-STM（Jakarta Utara）",
+      "price_tiers": [
+        {
+          "qty": "1袋起步",
+          "unit_price": 105000,
+          "currency": "IDR"
+        }
+      ],
+      "moq": "1袋（页面默认数量 1，未另标更高起订）",
+      "source_url": "https://www.tokopedia.com/chazone-stm/bubble-impor-taiwan-aslitapioca-pearl-bubble3kgbag",
+      "fetched_at": "2026-11-26 10:30 (UTC+8)",
+      "note": "2026-11-26 浏览器未登录在商品页看到 Rp105.000/袋。搜索卡片另有划线价 Rp130.000 和「Hemat s.d 8% Pakai Bonus」，未把优惠价当作已核实成交价。未点聊天或立即购买。"
+    },
+    {
+      "category": "packaging",
+      "product": "PP 椭圆杯 / U 形杯 16oz 90口径",
+      "spec": "16oz，上口直径 9cm（90mm），高 12cm，7g，50只/包，仅杯不含盖",
+      "platform": "Tokopedia",
+      "seller": "JS PLAST（Jakarta Barat）",
+      "price_tiers": [
+        {
+          "qty": "2包起（每包50只）",
+          "unit_price": 23300,
+          "currency": "IDR"
+        }
+      ],
+      "moq": "2包（页面 Min. pembelian 2 pcs）",
+      "source_url": "https://www.tokopedia.com/jsplast/isi-50pcs-gelas-oval-12oz-14oz-16oz-gelas-plastik-oval-u-cup-12oz-14oz-16oz-1729546909352168415",
+      "fetched_at": "2026-11-26 10:30 (UTC+8)",
+      "note": "2026-11-26 浏览器未登录看到 16OZ 规格 Rp23.300/包；因最低买 2 包，页面小计 Rp46.600。未点聊天或立即购买。"
+    },
+    {
+      "category": "coffee_beans",
+      "product": "Temanggung 罗布斯塔生豆 Grade 1",
+      "spec": "1000g，日晒，缺陷≤5%，含水率≤12%，豆径≥6mm，海拔 800–1000 masl，未烘焙",
+      "platform": "Tokopedia",
+      "seller": "Imela Jaya（Jakarta Utara）",
+      "price_tiers": [
+        {
+          "qty": "1袋（1000g）",
+          "unit_price": 47750,
+          "currency": "IDR"
+        }
+      ],
+      "moq": "1袋（页面 Min. Beli: 1 Buah）",
+      "source_url": "https://www.tokopedia.com/imela-jaya/green-bean-robusta-grade-1-1000gr-1734589618978391882",
+      "fetched_at": "2026-11-26 10:30 (UTC+8)",
+      "note": "2026-11-26 浏览器未登录看到现价 Rp47.750，页面同时写划线价 Rp75.000（36% off）。记录的是当时页面显示的现价。未点聊天或立即购买。"
+    },
+    {
+      "category": "packaging",
+      "product": "奶茶杯封口膜 90/95口径",
+      "spec": "约 2000–2200 张/卷，材质 CPP+PET，厚度页面写 0.05mm，90/95口径，多个印刷/透明 SKU",
+      "platform": "1688",
+      "seller": "广州市红凯塑料制品有限公司",
+      "price_tiers": [
+        {
+          "qty": "起步价（页面写「起」，未公开完整阶梯）",
+          "unit_price": 20.0,
+          "currency": "CNY"
+        }
+      ],
+      "moq": "公开商品页未清楚标明起订卷数",
+      "source_url": "https://detail.1688.com/offer/526918654420.html",
+      "fetched_at": "2026-11-26 10:30 (UTC+8)",
+      "note": "2026-11-26 浏览器未登录在商品页看到 ¥20.00 起。搜索卡片曾显示 ¥37（3500+件），因卡片价与详情起步价不一致，本条只记详情页起步价。部分 SKU/优惠需登录才显示，未登录、未点询盘，故不编完整阶梯。"
+    },
+    {
+      "category": "packaging",
+      "product": "奶茶杯封口膜 90/95口径（约2700杯/卷）",
+      "spec": "90/95口径，小纸芯，页面写约 2700 杯/卷，塑料杯/纸杯共用膜，多图案",
+      "platform": "1688",
+      "seller": "广东益彬包装有限公司",
+      "price_tiers": [
+        {
+          "qty": "起步价（页面写「起」，未公开完整阶梯）",
+          "unit_price": 10.5,
+          "currency": "CNY"
+        }
+      ],
+      "moq": "公开商品页未清楚标明起订卷数",
+      "source_url": "https://detail.1688.com/offer/984828775440.html",
+      "fetched_at": "2026-11-26 10:30 (UTC+8)",
+      "note": "2026-11-26 浏览器未登录在商品页看到 ¥10.50 起。搜索卡片曾显示 ¥32.8，因与详情起步价不一致，本条只记详情页起步价。部分 SKU/优惠需登录才显示，未登录、未点询盘，故不编完整阶梯。"
     }
   ]
 }
