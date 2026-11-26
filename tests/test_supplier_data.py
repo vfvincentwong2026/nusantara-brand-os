@@ -65,7 +65,7 @@ def test_supplier_files_load():
     prices = _load(PRICES)
     assert suppliers["suppliers"]
     assert prices["items"]
-    assert prices["meta"]["generated"].startswith("2026-11-04")
+    assert prices["meta"]["generated"].startswith("2026-11-26")
 
 
 def test_priced_entries_have_source_url_and_fetched_at():
@@ -78,7 +78,7 @@ def test_priced_entries_have_source_url_and_fetched_at():
             label = entry.get("product") or entry.get("name") or entry
             assert isinstance(entry.get("source_url"), str) and entry["source_url"].startswith("http"), label
             assert isinstance(entry.get("fetched_at"), str) and entry["fetched_at"].strip(), label
-    assert priced == 27
+    assert priced == 32
 
 
 def test_no_email_phone_or_whatsapp_link():

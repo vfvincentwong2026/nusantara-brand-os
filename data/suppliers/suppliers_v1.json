@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "v1",
-    "generated": "2026-11-04 (UTC+8)",
-    "notes": "只用公开来源。supplies_radar_brands 只在有公开依据时填写。没有核实的字段留空。",
+    "generated": "2026-11-26 (UTC+8)",
+    "notes": "只用公开来源。supplies_radar_brands 只在有公开依据时填写。没有核实的字段留空。 2026-11-26 复查了全部公开链接：失效或迁移的已在对应条目注明；新补 3 家印尼 Tokopedia 店铺和 2 家 1688 包材厂，只放店铺/商品链接。",
     "visibility": "public: 不含电话/WhatsApp/邮箱"
   },
   "suppliers": [
@@ -19,7 +19,7 @@
       "sources": [
         "https://ottencoffee.co.id/brands/la-marzocco"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 官网 200。既有备注仍有效：tokopedia 店铺页为 JS 渲染，暂不列 store_links。",
       "note": "也列入设备类；store_links：tokopedia.com/ottencoffee 返回200但页面是JS渲染，未能确认店铺内容，暂不列"
     },
     {
@@ -35,7 +35,7 @@
       "sources": [
         "https://anomalicoffee.com"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -51,7 +51,7 @@
       "sources": [
         "https://tanameracoffee.com"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -67,7 +67,7 @@
       "sources": [
         "https://www.jabarano.com"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -83,7 +83,7 @@
       "sources": [
         "https://specialtycoffee.id"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -100,7 +100,7 @@
         "https://swarnaagro.co.id/products/coffee/",
         "https://swarnaagro.co.id/products/tea/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "同时供应茶叶"
     },
     {
@@ -119,7 +119,7 @@
         "https://sumatrajawasoil.com/page/wholesale-coffee",
         "https://www.tradewheel.com/p/green-coffee-beans-3020168/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -135,7 +135,7 @@
       "sources": [
         "https://ganggaroastery.com/about/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -151,7 +151,7 @@
       "sources": [
         "https://haveltea.com/id/pages/wholesale"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -167,7 +167,7 @@
       "sources": [
         "https://westjavatea.com/products/black-tea"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -184,7 +184,7 @@
         "https://www.gss.co.id/fragrant-jasmine-tea/",
         "https://www.gss.co.id/id/tentang-kami/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -200,7 +200,7 @@
       "sources": [
         "https://pasarteh.com/whole-sale-b2b/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -209,7 +209,7 @@
       "sub_category": "茶叶品牌，有 HORECA 业务",
       "origin": "ID",
       "location": "",
-      "website": "https://www.tongtji.co.id",
+      "website": "https://tongtji.com",
       "store_links": [],
       "scale_signals": "LinkedIn（Tong Tji Group）提到 Tea Point / Tea House 门店，150+ 家（WebSearch 摘要，未直接打开）",
       "supplies_radar_brands": [],
@@ -217,7 +217,7 @@
         "https://www.tongtji.co.id",
         "https://linkedin.com/company/tong-tji-group"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 原网址 https://www.tongtji.co.id 200 并跳转到 https://tongtji.com/（标题 Tong Tji Indonesia）。来源 linkedin.com/company/tong-tji-group 返回 451（反爬），不把它当作官网失效。",
       "note": "cs@ 是客服邮箱"
     },
     {
@@ -233,24 +233,24 @@
       "sources": [
         "https://chamongtea.com"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
-      "name": "PT Sinar Sosro",
+      "name": "PT Sinar Sosro Gunung Slamat",
       "category": "tea",
       "sub_category": "茶叶/茶饮料生产商",
       "origin": "ID",
       "location": "",
-      "website": "https://www.sosro.com",
+      "website": "https://www.sinarsosrogunungslamat.id",
       "store_links": [],
       "scale_signals": "",
       "supplies_radar_brands": [],
       "sources": [
-        "https://www.sosro.com"
+        "https://www.sinarsosrogunungslamat.id"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
-      "note": "以瓶装茶为主，B2B 散茶供应要再确认"
+      "link_checked": "2026-11-26 curl: https://www.sosro.com SSL 证书为自签名；关闭校验后跳转到 https://www.sinarsosrogunungslamat.id/ （200，标题 Beranda | Sinar Sosro Gunung Slamat）。 https://sinarsosro.id/ 同样跳到该新站。",
+      "note": "2024-12-01 PT Sinar Sosro 与 PT Gunung Slamat 合并为 PT Sinar Sosro Gunung Slamat（来源：新官网自我介绍）。以瓶装茶为主，B2B 散茶供应要再确认。公开仓库不收录官网上的联系电话、WhatsApp 或邮箱。"
     },
     {
       "name": "Hunan Tianwang Tea Industry Co., Ltd.",
@@ -267,7 +267,7 @@
       "sources": [
         "https://www.alibaba.co.uk/product-detail/Instant-CTC-black-tea-price-china_1924364115.html"
       ],
-      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "link_checked": "2026-11-26 curl: Alibaba 商品页 200（alibaba.com 主域名仍可能触发反爬验证，改用 alibaba.co.uk 镜像核实）",
       "note": ""
     },
     {
@@ -285,7 +285,7 @@
       "sources": [
         "https://www.alibaba.co.uk/product-detail/Huasang-Wholesale-Cheap-Price-Jasmine-Green_1601115888418.html"
       ],
-      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "link_checked": "2026-11-26 curl: Alibaba 商品页 200（alibaba.com 主域名仍可能触发反爬验证，改用 alibaba.co.uk 镜像核实）",
       "note": ""
     },
     {
@@ -303,7 +303,7 @@
       "sources": [
         "https://www.alibaba.co.uk/product-detail/Green-Tea-Leaves-Standard-Jasmine-Green_10000011545845.html"
       ],
-      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "link_checked": "2026-11-26 curl: Alibaba 商品页 200（alibaba.com 主域名仍可能触发反爬验证，改用 alibaba.co.uk 镜像核实）",
       "note": ""
     },
     {
@@ -319,7 +319,7 @@
       "sources": [
         "https://bobaking.co.id/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -336,7 +336,7 @@
         "https://mutiaragemilang.id/",
         "https://mutiaragemilang.id/pt-mutiara-gemilang-indonesia/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "也列入设备类"
     },
     {
@@ -352,7 +352,7 @@
       "sources": [
         "https://culinagemilangindonesia.co.id/brand/longbeach/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -368,7 +368,7 @@
       "sources": [
         "https://greenfieldsdairy.com/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200（www.greenfields.co.id 超时）",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "有一篇博客说 Kopi Kenangan 初期用 Greenfields，但来源不可靠，未记为供货依据"
     },
     {
@@ -384,7 +384,7 @@
       "sources": [
         "https://investor.id/business/290586/bisnis-kopi-kekinian-menjamur-frisian-flag-indonesia-hadirkanfoaming-milk-professional"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "官网只找到消费者服务邮箱，没记"
     },
     {
@@ -407,7 +407,7 @@
         "https://kopikenangan.com/news/7ez06qcppjmk18nt1rvxnc02zfpq1e",
         "https://www.thejakartapost.com/life/2020/10/22/kopi-kenangan-collaborates-with-pipiltin-cocoa-to-boost-local-products"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 官网 https://pipiltincocoa.com 200；The Jakarta Post 2020 报道仍为 200；原 kopikenangan.com/news/… 会跳到 https://kenanganglobal.com/id/discover/7ez06qcppjmk18nt1rvxnc02zfpq1e（返回的是 JS 壳，本次未用浏览器打开确认正文是否还在）。",
       "note": ""
     },
     {
@@ -426,7 +426,7 @@
         "https://www.zonegoingfood.com/tapioca-pearls-custom-wholesale/",
         "https://www.alibaba.co.uk/product-detail/Wholesale-2-5kg-Strawberry-Juice-Concentrated_1601523238394.html"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -444,7 +444,7 @@
       "sources": [
         "https://yinzhijian.en.alibaba.com/"
       ],
-      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "link_checked": "2026-11-26 curl: Alibaba 商品页 200（alibaba.com 主域名仍可能触发反爬验证，改用 alibaba.co.uk 镜像核实）",
       "note": "店铺页 200"
     },
     {
@@ -462,7 +462,7 @@
       "sources": [
         "https://www.alibaba.co.uk/product-detail/Jiuzhou-Hot-Selling-Taiwan-Black-tapioca_10000010067610.html"
       ],
-      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "link_checked": "2026-11-26 curl: Alibaba 商品页 200（alibaba.com 主域名仍可能触发反爬验证，改用 alibaba.co.uk 镜像核实）",
       "note": ""
     },
     {
@@ -478,7 +478,7 @@
       "sources": [
         "https://www.toffin.id/about"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "tokopedia.com/toffin 返回 410，已删"
     },
     {
@@ -494,7 +494,7 @@
       "sources": [
         "https://ottencoffee.co.id/brands/la-marzocco"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "和咖啡豆类是同一家"
     },
     {
@@ -510,7 +510,7 @@
       "sources": [
         "https://kompassindo.com/2026/09/04/pt-sukanda-djaya-hadir-di-indonesia-coffee-expo-2026-bawa-la-marzocco-dan-casadio-untuk-dukung-bisnis-kopi/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -527,7 +527,7 @@
         "https://hoshizaki.co.id/",
         "https://www.hoshizaki-sea.com/wp-content/uploads/2025/02/Indonesia_Hoshizaki-Full-CatalogueFA_S.pdf"
       ],
-      "link_checked": "2026-11-04 curl -L: 超时（000），保留",
+      "link_checked": "2026-11-26 浏览器: https://hoshizaki.co.id 与 www 均为 ERR_CONNECTION_CLOSED；http 返回 500。https://www.hoshizaki-sea.com 上的印尼产品目录 PDF 仍为 200。curl 对官网同样是 SSL EOF，与 11-04 无法打开的情况一致，条目保留。",
       "note": ""
     },
     {
@@ -543,7 +543,7 @@
       "sources": [
         "https://mastrada.com/id/brand-list/detail/hoshizaki.html"
       ],
-      "link_checked": "2026-11-04 curl -L: 500（服务器错误），保留",
+      "link_checked": "2026-11-26 curl -L: 200（官网已从 2026-11-04 的 HTTP 500 恢复，含 https://mastrada.com/id/brand-list/detail/hoshizaki.html）",
       "note": ""
     },
     {
@@ -559,7 +559,7 @@
       "sources": [
         "https://mutiaragemilang.id/pt-mutiara-gemilang-indonesia/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "和原料类是同一家"
     },
     {
@@ -578,7 +578,7 @@
         "https://www.itopcafe.com",
         "https://www.alibaba.co.uk/product-detail/New-Design-Commercial-Coffee-Grinder-Professional_1601669907272.html"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl 对官网 https://www.itopcafe.com 为 Cloudflare 403；浏览器可打开（200，标题 Commercial Coffee Equipment Supplier | ITOP Café），官网无公开批发价、需询价（未点询价）。Alibaba 商品页仍为 200，阶梯价未变。",
       "note": ""
     },
     {
@@ -596,7 +596,7 @@
       "sources": [
         "https://www.alibaba.co.uk/product-detail/Ice-Maker-50KG-Commercial-Ice-Cube_62285969586.html"
       ],
-      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "link_checked": "2026-11-26 curl: Alibaba 商品页 200（alibaba.com 主域名仍可能触发反爬验证，改用 alibaba.co.uk 镜像核实）",
       "note": ""
     },
     {
@@ -612,7 +612,7 @@
       "sources": [
         "https://istanacupsealer.com/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -628,7 +628,7 @@
       "sources": [
         "https://www.wirausahagroup.com/product/lid-cup"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -644,7 +644,7 @@
       "sources": [
         "https://www.ransomberkat.com/cupsealer-lid"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -660,7 +660,7 @@
       "sources": [
         "https://uniquepackaging.id/product/lid-cup-sealer/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -676,24 +676,24 @@
       "sources": [
         "https://sealindonesia.com/id/industries/coffee-chain"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
-      "name": "PT Dynaplast Tbk",
+      "name": "PT Dynaplast（Dynapack Asia）",
       "category": "packaging",
       "sub_category": "塑料包装制造商",
       "origin": "ID",
       "location": "",
-      "website": "https://www.dynaplast.co.id",
+      "website": "https://www.dynapackasia.com",
       "store_links": [],
-      "scale_signals": "Tbk 上市公司",
+      "scale_signals": "Dynapack Asia 集团成员（公开资料称 PT Dynaplast 为集团前身/子公司）。是否仍为 Tbk 上市公司本次未核实，已不再把 Tbk 当作已核实状态。",
       "supplies_radar_brands": [],
       "sources": [
-        "https://www.dynaplast.co.id"
+        "https://www.dynapackasia.com"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
-      "note": "是否做饮品杯要再确认"
+      "link_checked": "2026-11-26 curl: https://www.dynaplast.co.id 返回 200 但页面是 Apache「Index of /」，仅剩 cgi-bin/（目录日期 2025-07-02），原官网已失效。https://www.dynapackasia.com 本地 curl SSL 链验证失败；关闭校验后 200、标题 Dynapack Asia，页面提到 beverage/food 包装。",
+      "note": "是否做饮品杯要再确认。公开仓库不收录集团官网上的电话和邮箱。"
     },
     {
       "name": "Guangdong Cundao Technology Co., Ltd.",
@@ -708,7 +708,7 @@
       "sources": [
         "https://www.cundaoplasticcups.com/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "官网邮箱是 QQ 号码邮箱，看起来像个人邮箱，没记"
     },
     {
@@ -724,7 +724,7 @@
       "sources": [
         "https://xinnengpack.com/paper-product-solution/"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": ""
     },
     {
@@ -740,7 +740,7 @@
       "sources": [
         "https://www.mingdapacks.com/product-category/paper-cups"
       ],
-      "link_checked": "2026-11-04 curl -L: 200",
+      "link_checked": "2026-11-26 curl -L: 200",
       "note": "官网邮箱看起来像个人 gmail，没记"
     },
     {
@@ -758,7 +758,7 @@
       "sources": [
         "https://www.alibaba.co.uk/product-detail/Factory-Customized-Logo-Printed-Frosted-Transparent_1601061099135.html"
       ],
-      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "link_checked": "2026-11-26 curl: Alibaba 商品页 200（alibaba.com 主域名仍可能触发反爬验证，改用 alibaba.co.uk 镜像核实）",
       "note": ""
     },
     {
@@ -776,8 +776,98 @@
       "sources": [
         "https://www.alibaba.co.uk/product-detail/Hot-Sale-16oz-500ml-Bubble-Boba_1601269707007.html"
       ],
-      "link_checked": "2026-11-04 curl: Alibaba 商品页 200（alibaba.com 主域名触发反爬验证，改用 alibaba.co.uk 镜像核实）",
+      "link_checked": "2026-11-26 curl: Alibaba 商品页 200（alibaba.com 主域名仍可能触发反爬验证，改用 alibaba.co.uk 镜像核实）",
       "note": ""
+    },
+    {
+      "name": "CHAZONE-STM",
+      "category": "ingredients",
+      "sub_category": "珍珠等饮品原料（Tokopedia 店铺）",
+      "origin": "ID",
+      "location": "Jakarta Utara",
+      "website": "",
+      "store_links": [
+        "https://www.tokopedia.com/chazone-stm"
+      ],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.tokopedia.com/chazone-stm/bubble-impor-taiwan-aslitapioca-pearl-bubble3kgbag"
+      ],
+      "link_checked": "2026-11-26 浏览器未登录打开商品页 200，价格可见",
+      "note": "只有公开店铺链接，没有独立官网。本次未收录任何电话或邮箱。"
+    },
+    {
+      "name": "JS PLAST",
+      "category": "packaging",
+      "sub_category": "塑料杯等包材（Tokopedia 店铺）",
+      "origin": "ID",
+      "location": "Jakarta Barat",
+      "website": "",
+      "store_links": [
+        "https://www.tokopedia.com/jsplast"
+      ],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.tokopedia.com/jsplast/isi-50pcs-gelas-oval-12oz-14oz-16oz-gelas-plastik-oval-u-cup-12oz-14oz-16oz-1729546909352168415"
+      ],
+      "link_checked": "2026-11-26 浏览器未登录打开商品页 200，价格可见",
+      "note": "只有公开店铺链接，没有独立官网。本次未收录任何电话或邮箱。"
+    },
+    {
+      "name": "Imela Jaya",
+      "category": "coffee_beans",
+      "sub_category": "生豆零售/小批发（Tokopedia 店铺）",
+      "origin": "ID",
+      "location": "Jakarta Utara",
+      "website": "",
+      "store_links": [
+        "https://www.tokopedia.com/imela-jaya"
+      ],
+      "scale_signals": "",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://www.tokopedia.com/imela-jaya/green-bean-robusta-grade-1-1000gr-1734589618978391882"
+      ],
+      "link_checked": "2026-11-26 浏览器未登录打开商品页 200，价格可见",
+      "note": "只有公开店铺链接，没有独立官网。本次未收录任何电话或邮箱。"
+    },
+    {
+      "name": "广州市红凯塑料制品有限公司",
+      "category": "packaging",
+      "sub_category": "奶茶杯封口膜",
+      "origin": "CN",
+      "location": "Guangdong",
+      "website": "",
+      "store_links": [
+        "https://detail.1688.com/offer/526918654420.html"
+      ],
+      "scale_signals": "1688 页面写入住 17 年",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://detail.1688.com/offer/526918654420.html"
+      ],
+      "link_checked": "2026-11-26 浏览器未登录打开 1688 商品页，可见起步价",
+      "note": "只有 1688 商品链接。未登录查看完整阶梯，未点询盘。"
+    },
+    {
+      "name": "广东益彬包装有限公司",
+      "category": "packaging",
+      "sub_category": "奶茶杯封口膜",
+      "origin": "CN",
+      "location": "Chaozhou, Guangdong",
+      "website": "",
+      "store_links": [
+        "https://detail.1688.com/offer/984828775440.html"
+      ],
+      "scale_signals": "1688 页面写入住 7 年",
+      "supplies_radar_brands": [],
+      "sources": [
+        "https://detail.1688.com/offer/984828775440.html"
+      ],
+      "link_checked": "2026-11-26 浏览器未登录打开 1688 商品页，可见起步价",
+      "note": "只有 1688 商品链接。未登录查看完整阶梯，未点询盘。"
     }
   ]
 }
